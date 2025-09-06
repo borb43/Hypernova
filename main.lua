@@ -11,3 +11,6 @@ SMODS.Atlas {
     px = 71,
     py = 95
 }
+
+assert(SMODS.load_file("items/rare.lua"))()
+assert(SMODS.load_file("items/back.lua"))()

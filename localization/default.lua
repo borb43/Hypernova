@@ -1,6 +1,14 @@
 return {
     descriptions = {
-        Back={},
+        Back={
+            b_hpr_sealed = {
+                name = "Sealed Deck",
+                text = {
+                    "All Aces in starting deck",
+                    "start with different seals"
+                }
+            }
+        },
         Blind={},
         Edition={},
         Enhanced={},
