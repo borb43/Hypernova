@@ -14,3 +14,4 @@ SMODS.Atlas {
 
 assert(SMODS.load_file("items/rare.lua"))()
 assert(SMODS.load_file("items/back.lua"))()
+assert(SMODS.load_file("items/voucher.lua"))()

@@ -4,8 +4,8 @@ return {
             b_hpr_sealed = {
                 name = "Sealed Deck",
                 text = {
-                    "All Aces in starting deck",
-                    "start with different seals"
+                    "All {C:attention}Aces{} in starting deck",
+                    "start with different {C:attention}seals{}"
                 }
             }
         },
@@ -28,7 +28,23 @@ return {
         Stake={},
         Tag={},
         Tarot={},
-        Voucher={},
+        Voucher={
+            v_hpr_stacking = {
+                name = "Stacking",
+                text = {
+                    "Playing cards have a chance",
+                    "to appear with random",
+                    "{C:attention}permanent bonuses"
+                }
+            },
+            v_hpr_massprod = {
+                name = "Mass Production",
+                text = {
+                    "Playing cards are {C:attention}#1#X{} as likely",
+                    "to appear with any {C:attention}permanent bonus"
+                }
+            }
+        },
     },
     misc = {
         achievement_descriptions={},
