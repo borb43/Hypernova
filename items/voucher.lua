@@ -1,4 +1,4 @@
-SMODS.Voucher {
+SMODS.Voucher { --stacking, gives cards a chance to spawn with perma bonuses
     key = "stacking",
     atlas = "placeholder",
     pos = { x = 3, y = 1 },
@@ -8,7 +8,7 @@ SMODS.Voucher {
     end
 }
 
-local create_card_ref = create_card
+local create_card_ref = create_card --hook for applying perma bonuses to cards
 create_card = function(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
     local ret_card = create_card_ref(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
     if ret_card.ability.set == "Default" or ret_card.ability.set == "Enhanced" then
@@ -29,7 +29,7 @@ create_card = function(_type, area, legendary, _rarity, skip_materialize, soulab
     return ret_card
 end
 
-SMODS.Voucher {
+SMODS.Voucher { --mass production, increases perma bonus rate
     key = "massprod",
     atlas = "placeholder",
     pos = { x = 4, y = 1 },

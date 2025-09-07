@@ -20,6 +20,13 @@ return {
                     "other joker effects by {C:attention}#1#X{}",
                     "Increases by {C:attention}#2#X{} at the end of round"
                 }
+            },
+            j_hpr_fusion = {
+                name = "Fusion Reactor",
+                text = {
+                    "Balances {C:chips}Chips{} and {C:mult}Mult{}",
+                    "before scoring"
+                }
             }
         },
         Other={},

@@ -1,4 +1,4 @@
-SMODS.Back {
+SMODS.Back { --sealed deck, starting aces have seals
     key = "sealed",
     atlas = "placeholder",
     pos = { x = 4, y = 2 },
