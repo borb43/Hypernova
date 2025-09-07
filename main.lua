@@ -1,4 +1,5 @@
 HPR = {}
+HPR.base_values = {}
 
 to_big = to_big or function(x) return x end
 loc_colour()
@@ -13,10 +14,6 @@ SMODS.Atlas {
     px = 71,
     py = 95
 }
-
-function hpr_force_scale(multiplier, table)
-    
-end
 
 assert(SMODS.load_file("items/rare.lua"))()
 assert(SMODS.load_file("items/back.lua"))()
