@@ -14,7 +14,7 @@ SMODS.Joker { --growth, increases potency of other joker effects
             local other_ret = context.other_ret.jokers or {}
             local upgrade
             for k, v in pairs(other_ret) do
-                if type(v) == "number" then
+                if type(v) == "number" and k ~= "numerator" and k ~= "denominator" and k ~= "level_up" then
                     v = v * card.ability.extra.eff_mod
                     upgrade = true
                 end
