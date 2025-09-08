@@ -18,7 +18,8 @@ return {
                 text = {
                     "Increase potency of most",
                     "other joker effects by {C:attention}#1#X{}",
-                    "Increases by {C:attention}#2#X{} at the end of round"
+                    "Increases by {C:attention}#2#X{} at the end of round",
+                    "{C:inactive}(Note: might be a bit weird at times)"
                 }
             },
             j_hpr_fusion = {
@@ -26,6 +27,13 @@ return {
                 text = {
                     "Balances {C:chips}Chips{} and {C:mult}Mult{}",
                     "before scoring"
+                }
+            },
+            j_hpr_scales = {
+                name = "Tipped Scales",
+                text = {
+                    "Increases all {C:attention}listed {C:green}numerators",
+                    "and {C:green}denominators{} by {C:green}#1#"
                 }
             }
         },
