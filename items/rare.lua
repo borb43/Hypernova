@@ -25,7 +25,7 @@ SMODS.Joker { --growth, increases potency of other joker effects
                 }
             end
         end
-        if context.end_of_round and context.main_eval and not context.blueprint then
+        if (context.end_of_round and context.main_eval and not context.blueprint) or context.forcetrigger then
             SMODS.scale_card(card, {
                 ref_table = card.ability.extra,
                 ref_value = "eff_mod",

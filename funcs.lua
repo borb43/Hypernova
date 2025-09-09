@@ -1,7 +1,7 @@
 HPR.generate_compat_msg = function(card, other_card, compat_flag, args) --generate blueprint type compat ui. message keys refer to a localization key in dictionary, colours are the background colours
     if not args then args = {} end
     compat_flag = compat_flag or "blueprint_compat"
-    local compatible = other_card and other_card ~= card and other_card.config.center[compat_flag]
+    local compatible = (other_card and other_card ~= card and other_card.config.center[compat_flag]) or compat_flag == true
     return {
         {
             n = G.UIT.C,
