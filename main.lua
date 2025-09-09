@@ -14,6 +14,8 @@ SMODS.Atlas {
     py = 95
 }
 
+assert(SMODS.load_file("funcs.lua"))()
+
 assert(SMODS.load_file("items/common.lua"))()
 assert(SMODS.load_file("items/uncommon.lua"))()
 assert(SMODS.load_file("items/rare.lua"))()
