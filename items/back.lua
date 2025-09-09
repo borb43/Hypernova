@@ -21,6 +21,7 @@ SMODS.Back { --sealed deck, starting aces have seals
                         end
                     end
                 end
+                return true
             end
         }))
     end

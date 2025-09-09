@@ -3,13 +3,13 @@ SMODS.Joker { --growth, increases potency of other joker effects
     atlas = "placeholder",
     pos = { x = 2, y = 0 },
     config = { extra = { eff_mod = 1, scale = 0.2 } },
-    loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra.eff_mod, card.abilit.extra.scale } }
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.eff_mod, card.ability.extra.scale } }
     end,
     rarity = 3,
     cost = 10,
     perishable_compat = false,
-    calculate = function (self, card, context)
+    calculate = function(self, card, context)
         if context.post_trigger and not context.blueprint then
             local other_ret = context.other_ret.jokers or {}
             local upgrade
@@ -17,6 +17,7 @@ SMODS.Joker { --growth, increases potency of other joker effects
                 if type(v) == "number" and k ~= "numerator" and k ~= "denominator" and k ~= "level_up" then
                     v = v * card.ability.extra.eff_mod
                     upgrade = true
+                elseif type(v) == "table" then HPR.growth_recursive(card, v)
                 end
             end
             if upgrade then
@@ -43,3 +44,13 @@ SMODS.Joker { --growth, increases potency of other joker effects
         end
     end
 }
+
+HPR.growth_recursive = function(card, table)
+    for k, v in pairs(table) do
+        if type(v) == "number" and k ~= "numerator" and k ~= "denominator" and k ~= "level_up" then
+            v = v * card.ability.extra.eff_mod
+            upgrade = true
+        elseif type(v) == "table" then HPR.growth_recursive(card, v)
+        end
+    end
+end
