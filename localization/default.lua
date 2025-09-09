@@ -41,6 +41,22 @@ return {
         Planet={},
         Spectral={},
         Stake={},
+        Sleeve={
+            sleeve_hpr_sealed = {
+                name = "Sealed Sleeve",
+                text = {
+                    "All {C:attention}Aces{} in starting deck",
+                    "start with different {C:attention}seals{}"
+                }
+            },
+            sleeve_hpr_sealed_alt = {
+                name = "Sealed Sleeve",
+                text = {
+                    "Start with an additional",
+                    "4 {C:attention}Aces{} in your starting deck"
+                }
+            }
+        },
         Tag={},
         Tarot={},
         Voucher={

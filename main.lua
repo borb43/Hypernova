@@ -14,6 +14,15 @@ SMODS.Atlas {
     py = 95
 }
 
+if CardSleeves then
+    SMODS.Atlas { --placeholder at 0,0
+        key = "sleeve",
+        path = "sleeve.png",
+        px = 73, --did you really have to be 2 pixels wider man
+        py = 95
+    }
+end
+
 assert(SMODS.load_file("funcs.lua"))()
 
 assert(SMODS.load_file("items/common.lua"))()
