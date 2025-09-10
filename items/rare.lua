@@ -48,10 +48,10 @@ SMODS.Joker { --growth, increases potency of other joker effects
 
 HPR.growth_recursive = function(card, table)
     for k, v in pairs(table) do
-        if type(table[k]) == "number" and k ~= "numerator" and k ~= "denominator" and k ~= "level_up" then
+        if type(table[k]) == "number" and k ~= "numerator" and k ~= "denominator" and k ~= "level_up" and type(k) ~= "number" then
             table[k] = table[k] * card.ability.extra.eff_mod
             upgrade = true
-        elseif type(v) == "table" and not v.config then HPR.growth_recursive(card, v)
+        elseif type(v) == "table" and not v.config and type(k) ~= "number" then HPR.growth_recursive(card, v)
         end
     end
 end
