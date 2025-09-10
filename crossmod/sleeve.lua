@@ -66,9 +66,9 @@ CardSleeves.Sleeve {
     end,
     apply = function (self, sleeve)
         if self.get_current_deck_key == "b_hpr_pink" then
-            SMODS.change_voucher_limit(sleeve.ability.extra.slots)
+            SMODS.change_voucher_limit(self.config.extra.slots)
         else
-            SMODS.change_booster_limit(sleeve.ability.extra.slots)
+            SMODS.change_booster_limit(self.config.extra.slots)
         end
     end
 }

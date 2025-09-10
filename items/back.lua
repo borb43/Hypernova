@@ -36,6 +36,6 @@ SMODS.Back {
         return { vars = { self.config.extra.slots } }
     end,
     apply = function (self, back)
-        SMODS.change_booster_limit(back.ability.extra.slots)
+        SMODS.change_booster_limit(self.config.extra.slots)
     end
 }
