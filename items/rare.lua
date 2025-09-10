@@ -1,3 +1,4 @@
+--[[ --disabled because i cant fucking get this to work?
 SMODS.Joker { --growth, increases potency of other joker effects
     key = "growth",
     atlas = "placeholder",
@@ -14,8 +15,8 @@ SMODS.Joker { --growth, increases potency of other joker effects
             local other_ret = context.other_ret.jokers or {}
             local upgrade
             for k, v in pairs(other_ret) do
-                if type(v) == "number" and k ~= "numerator" and k ~= "denominator" and k ~= "level_up" then
-                    v = v * card.ability.extra.eff_mod
+                if type(other_ret[k]) == "number" and k ~= "numerator" and k ~= "denominator" and k ~= "level_up" then
+                    other_ret[k] = other_ret[k] * card.ability.extra.eff_mod
                     upgrade = true
                 elseif type(v) == "table" then HPR.growth_recursive(card, v)
                 end
@@ -47,10 +48,11 @@ SMODS.Joker { --growth, increases potency of other joker effects
 
 HPR.growth_recursive = function(card, table)
     for k, v in pairs(table) do
-        if type(v) == "number" and k ~= "numerator" and k ~= "denominator" and k ~= "level_up" then
-            v = v * card.ability.extra.eff_mod
+        if type(table[k]) == "number" and k ~= "numerator" and k ~= "denominator" and k ~= "level_up" then
+            table[k] = table[k] * card.ability.extra.eff_mod
             upgrade = true
         elseif type(v) == "table" then HPR.growth_recursive(card, v)
         end
     end
 end
+]]
