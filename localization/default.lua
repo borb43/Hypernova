@@ -63,16 +63,15 @@ return {
             v_hpr_stacking = {
                 name = "Stacking",
                 text = {
-                    "Playing cards have a chance",
-                    "to appear with random",
-                    "{C:attention}permanent bonuses"
+                    "Playing cards may appear with random",
+                    "permanent {C:chips}Chips{} or {C:mult}Mult{} bonuses"
                 }
             },
             v_hpr_massprod = {
                 name = "Mass Production",
                 text = {
-                    "Playing cards are {C:attention}#1#X{} as likely",
-                    "to appear with any {C:attention}permanent bonus"
+                    "Playing cards may appear with random",
+                    "permanent {X:chips,C:white}XChips{} or {X:mult,C:white}XMult{} bonuses"
                 }
             }
         },
