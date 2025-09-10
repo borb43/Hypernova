@@ -26,3 +26,16 @@ SMODS.Back { --sealed deck, starting aces have seals
         }))
     end
 }
+
+SMODS.Back {
+    key = "pink",
+    atlas = "back",
+    pos = { x = 0, y = 0 },
+    config = { extra = { slots = 1 } },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.slots } }
+    end,
+    apply = function (self, back)
+        SMODS.change_booster_limit(back.ability.extra.slots)
+    end
+}

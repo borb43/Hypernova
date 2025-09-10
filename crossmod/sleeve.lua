@@ -51,3 +51,24 @@ CardSleeves.Sleeve {
         return { key = key }
     end
 }
+
+CardSleeves.Sleeve {
+    key = "pink",
+    atlas = "sleeve",
+    pos = { x = 1, y = 0 },
+    config = { extra = { slots = 1 } },
+    loc_vars = function (self, sleeve)
+        key = self.key
+        if self.get_current_deck_key() == "b_hpr_pink" then
+            key = self.key .. "_alt"
+        end
+        return { vars = { sleeve.ability.extra.slots }, key = key }
+    end,
+    apply = function (self, sleeve)
+        if self.get_current_deck_key == "b_hpr_pink" then
+            SMODS.change_voucher_limit(sleeve.ability.extra.slots)
+        else
+            SMODS.change_booster_limit(sleeve.ability.extra.slots)
+        end
+    end
+}

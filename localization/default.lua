@@ -7,6 +7,12 @@ return {
                     "All {C:attention}Aces{} in starting deck",
                     "start with different {C:attention}seals{}"
                 }
+            },
+            b_hpr_pink = {
+                name = "Pink Deck",
+                text = {
+                    "{C:attention}+#1#{} Booster Pack in each shop"
+                }
             }
         },
         Blind={},
@@ -44,16 +50,23 @@ return {
         Sleeve={
             sleeve_hpr_sealed = {
                 name = "Sealed Sleeve",
-                text = {
-                    "All {C:attention}Aces{} in starting deck",
-                    "start with different {C:attention}seals{}"
-                }
+                text = G.localization.descriptions.Back["b_hpr_sealed"].text
             },
             sleeve_hpr_sealed_alt = {
                 name = "Sealed Sleeve",
                 text = {
                     "Start with an additional",
                     "4 {C:attention}Aces{} in your starting deck"
+                }
+            },
+            sleeve_hpr_pink = {
+                name = "Pink Sleeve",
+                text = G.localization.descriptions.Back["b_hpr_pink"].text
+            },
+            sleeve_hpr_pink_alt = {
+                name = "Pink Sleeve",
+                text = {
+                    "{C:attention}+#1#{} Voucher in each shop"
                 }
             }
         },

@@ -14,6 +14,13 @@ SMODS.Atlas {
     py = 95
 }
 
+SMODS.Atlas {
+    key = "back",
+    path = "back.png",
+    px = 71,
+    py = 95
+}
+
 if CardSleeves then
     SMODS.Atlas { --placeholder at 0,0
         key = "sleeve",
@@ -30,3 +37,7 @@ assert(SMODS.load_file("items/uncommon.lua"))()
 assert(SMODS.load_file("items/rare.lua"))()
 assert(SMODS.load_file("items/back.lua"))()
 assert(SMODS.load_file("items/voucher.lua"))()
+
+if CardSleeves then
+    assert(SMODS.load_file("crossmod/sleeve.lua"))()
+end
