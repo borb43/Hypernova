@@ -41,6 +41,14 @@ return {
                     "Increases all {C:attention}listed {C:green}numerators",
                     "and {C:green}denominators{} by {C:green}#1#"
                 }
+            },
+            j_hpr_solar = {
+                name = "Solar Flare",
+                text = {
+                    "If played hand is {C:attention}not your most played,",
+                    "{C:attention}upgrade{} it and {C:red}destroy {C:attention}#1#{} played cards",
+                    "{s:0.8,C:dark_edition,E:1}Art and idea by Codifyd"
+                }
             }
         },
         Other={},

@@ -1,4 +1,3 @@
-
 SMODS.Joker { --growth, increases potency of other joker effects
     key = "growth",
     atlas = "placeholder",
@@ -21,7 +20,8 @@ SMODS.Joker { --growth, increases potency of other joker effects
                         other_ret[k] = math.floor(other_ret[k])
                     end
                     upgrade = true
-                elseif type(v) == "table" and not v.config then HPR.growth_recursive(card, v)
+                elseif type(v) == "table" and not v.config then
+                    HPR.growth_recursive(card, v)
                 end
             end
             if upgrade then
@@ -57,7 +57,59 @@ HPR.growth_recursive = function(card, table)
                 table[k] = math.floor(table[k])
             end
             upgrade = true
-        elseif type(v) == "table" and not v.config and type(k) ~= "number" then HPR.growth_recursive(card, v)
+        elseif type(v) == "table" and not v.config and type(k) ~= "number" then
+            HPR.growth_recursive(card, v)
         end
     end
 end
+
+SMODS.Joker {
+    key = "solar",
+    atlas = "joker",
+    pos = { x = 0, y = 0 },
+    config = { extra = { destroyed = 2 } },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.destroyed } }
+    end,
+    rarity = 3,
+    cost = 10,
+    blueprint_compat = true,
+    calculate = function(self, card, context)
+        if context.before then
+            local _handname, _played = 'High Card', -1
+            for hand_key, hand in pairs(G.GAME.hands) do
+                if hand.played > _played then
+                    _played = hand.played
+                    _handname = hand_key
+                end
+            end
+            if context.scoring_name ~= _handname then
+                return {
+                    level_up = 1,
+                    message = localize("k_upgrade_ex"),
+                    colour = G.C.GREEN
+                }
+            end
+        end
+        if context.after and not context.blueprint then
+            local _handname, _played = 'High Card', -1
+            for hand_key, hand in pairs(G.GAME.hands) do
+                if hand.played > _played then
+                    _played = hand.played
+                    _handname = hand_key
+                end
+            end
+            if context.scoring_name ~= _handname then
+                local destroy = {}
+                for i = 1, math.min(card.ability.extra.destroyed, #context.full_hand) do
+                    local eligible = true
+                    for _, card in ipairs(destroy) do
+                        if card == context.full_hand[i] then eligible = false end
+                    end
+                    if eligible then destroy[#destroy+1] = context.full_hand[i] end
+                end
+                SMODS.destroy_cards(destroy)
+            end
+        end
+    end
+}
