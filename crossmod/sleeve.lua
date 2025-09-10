@@ -62,7 +62,7 @@ CardSleeves.Sleeve {
         if self.get_current_deck_key() == "b_hpr_pink" then
             key = self.key .. "_alt"
         end
-        return { vars = { sleeve.ability.extra.slots }, key = key }
+        return { vars = { self.config.extra.slots }, key = key }
     end,
     apply = function (self, sleeve)
         if self.get_current_deck_key == "b_hpr_pink" then

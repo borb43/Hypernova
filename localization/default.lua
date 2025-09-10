@@ -50,7 +50,10 @@ return {
         Sleeve={
             sleeve_hpr_sealed = {
                 name = "Sealed Sleeve",
-                text = G.localization.descriptions.Back["b_hpr_sealed"].text
+                text = {
+                    "All {C:attention}Aces{} in starting deck",
+                    "start with different {C:attention}seals{}"
+                }
             },
             sleeve_hpr_sealed_alt = {
                 name = "Sealed Sleeve",
@@ -61,7 +64,9 @@ return {
             },
             sleeve_hpr_pink = {
                 name = "Pink Sleeve",
-                text = G.localization.descriptions.Back["b_hpr_pink"].text
+                text = {
+                    "{C:attention}+#1#{} Booster Pack in each shop"
+                }
             },
             sleeve_hpr_pink_alt = {
                 name = "Pink Sleeve",
