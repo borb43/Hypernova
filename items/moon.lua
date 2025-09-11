@@ -34,6 +34,9 @@ SMODS.Consumable {
         if context.before and context.scoring_name == card.ability.extra.hand_type then
             card.ability.extra.copies = card.ability.extra.copies + card.ability.extra.per_charge
             SMODS.smart_level_up_hand(card, card.ability.extra.hand_type, nil, -1)
+            return {
+                message = localize("k_upgrade_ex")
+            }
         end
     end,
     use = function(self, card, area, copier)

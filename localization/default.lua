@@ -1,6 +1,6 @@
 local moon_drain_txt = {
     "Drains levels from played",
-    "#1# to gain {C:attention}charge{}"
+    "{C:attention}#1# to gain {C:attention}charge{}"
 }
 
 return {
@@ -56,7 +56,16 @@ return {
                 }
             }
         },
-        Other={},
+        Other={
+            p_hpr_lunar_pack = {
+                name = "Lunar Pack",
+                text = {
+                    "Select {C:attention}#1# of up to",
+                    "{C:attention}#2# {C:hpr_moons}Moon{} cards to add",
+                    "to your consumables"
+                }
+            }
+        },
         Planet={},
         Spectral={},
         Stake={},
@@ -127,7 +136,8 @@ return {
         collabs={},
         dictionary={
             b_hpr_moons_cards = "Moon Cards",
-            k_hpr_moons = "Moon"
+            k_hpr_moons = "Moon",
+            k_lunar_pack = "Lunar Pack"
         },
         high_scores={},
         labels={

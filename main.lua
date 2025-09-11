@@ -40,6 +40,7 @@ end
 assert(SMODS.load_file("funcs.lua"))()
 
 assert(SMODS.load_file("items/moon.lua"))()
+assert(SMODS.load_file("items/booster.lua"))()
 assert(SMODS.load_file("items/common.lua"))()
 assert(SMODS.load_file("items/uncommon.lua"))()
 assert(SMODS.load_file("items/rare.lua"))()

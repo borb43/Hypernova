@@ -1,0 +1,46 @@
+SMODS.Booster {
+    key = "lunar_normal_1",
+    weight = 0.3,
+    kind = "hpr_lunar",
+    cost = 4,
+    atlas = "placeholder",
+    pos = { x = 0, y = 3 },
+    config = { extra = 2, choose = 1 },
+    group_key = "k_lunar_pack",
+    select_card = "consumeables",
+    loc_vars = function(self, info_queue, card)
+        local cfg = (card and card.ability) or self.config or {} --only here because vscode is being an annoying little piece of shit about "need check nil" like what the fuck do you think `or` is meant to do you dumb fuck
+        return {
+            vars = { cfg.choose, cfg.extra },
+            key = "p_hpr_lunar_pack"
+        }
+    end,
+    ease_background_colour = function (self)
+        ease_colour(G.C.DYN_UI.MAIN, G.C.SET.hpr_moons)
+        ease_background_colour({ new_colour = G.C.SET.hpr_moons, special_colour = G.C.BLACK, contrast = 2 })
+    end,
+    particles = function(self)
+        G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
+            timer = 0.015,
+            scale = 0.1,
+            initialize = true,
+            lifespan = 3,
+            speed = 0.2,
+            padding = -1,
+            attach = G.ROOM_ATTACH,
+            colours = { G.C.BLUE, G.C.GREY },
+            fill = true
+        })
+        G.booster_pack_sparkles.fade_alpha = 1
+        G.booster_pack_sparkles:fade(1, 0)
+    end,
+    create_card = function (self, card, i)
+        return {
+            set = "hpr_moons",
+            area = G.pack_cards,
+            skip_materialize = true,
+            soulable = true,
+            key_append = "hpr_lunar_pack"
+        }
+    end
+}
