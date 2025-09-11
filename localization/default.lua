@@ -137,8 +137,19 @@ return {
                 text = {
                     moon_drain_txt,
                     {
-                        "Creates {C:attention}#2#{} copies of {C:attention}1{} selected card",
+                        "Creates {C:attention}#2#{} copies of {C:attention}#4#{} selected card",
                         "Increase copies by {C:attention}#3#{} for each charge"
+                    }
+                }
+            },
+            c_hpr_deimos = {
+                name = "Deimos",
+                text = {
+                    moon_drain_txt,
+                    {
+                        "Permanently adds {C:mult}+#2#{} Mult to",
+                        "up to {C:attention}#4#{} selected cards",
+                        "Increases by #3# for each charge"
                     }
                 }
             }
