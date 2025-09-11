@@ -152,6 +152,17 @@ return {
                         "Increases by #3# for each charge"
                     }
                 }
+            },
+            c_hpr_io = {
+                name = "Io",
+                text = {
+                    moon_drain_txt,
+                    {
+                        "Applies random enhancements",
+                        "to up to #2# selected cards",
+                        "Increases by #3# per charge"
+                    }
+                }
             }
         }
     },
