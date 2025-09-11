@@ -32,11 +32,7 @@ SMODS.Consumable {
     end,
     calculate = function(self, card, context)
         if context.before and context.scoring_name == card.ability.extra.hand_type then
-            SMODS.scale_card(card, {
-                ref_table = card.ability.extra,
-                ref_value = "copies",
-                scalar_value = "per_charge"
-            })
+            card.ability.extra.copies = card.ability.extra.copies + card.ability.extra.per_charge
             SMODS.smart_level_up_hand(card, card.ability.extra.hand_type, nil, -1)
         end
     end,
