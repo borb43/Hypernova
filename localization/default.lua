@@ -149,7 +149,7 @@ return {
                     {
                         "Permanently adds {C:mult}+#2#{} Mult to",
                         "up to {C:attention}#4#{} selected cards",
-                        "Increases by #3# for each charge"
+                        "Increases by {c:attention}#3#{} for each charge"
                     }
                 }
             },
@@ -159,7 +159,17 @@ return {
                     moon_drain_txt,
                     {
                         "Applies random enhancements",
-                        "to up to #2# selected cards",
+                        "to up to {C:attention}#2#{} selected cards",
+                        "Increases by {C:attention}#3#{} per charge"
+                    }
+                }
+            },
+            c_hpr_moon = {
+                name = "Luna",
+                text = {
+                    moon_drain_txt,
+                    {
+                        "Creates #2# random joker cards",
                         "Increases by #3# per charge"
                     }
                 }
