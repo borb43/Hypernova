@@ -64,6 +64,22 @@ return {
                     "{C:attention}#2# {C:hpr_moons}Moon{} cards to add",
                     "to your consumables"
                 }
+            },
+            p_hpr_lunar_pack_jumbo = {
+                name = "Jumbo Lunar Pack",
+                text = {
+                    "Select {C:attention}#1# of up to",
+                    "{C:attention}#2# {C:hpr_moons}Moon{} cards to add",
+                    "to your consumables"
+                }
+            },
+            p_hpr_lunar_pack_mega = {
+                name = "Mega Lunar Pack",
+                text = {
+                    "Select {C:attention}#1# of up to",
+                    "{C:attention}#2# {C:hpr_moons}Moon{} cards to add",
+                    "to your consumables"
+                }
             }
         },
         Planet={},
