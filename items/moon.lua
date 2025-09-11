@@ -1,6 +1,6 @@
 SMODS.ConsumableType {
     key = "hpr_moons",
-    default = "c_hpr_styx",
+    default = "c_hpr_deimos",
     primary_colour = HEX("5d15d1"),
     secondary_colour = HEX("707b8c")
 }
@@ -68,7 +68,7 @@ SMODS.Consumable {
 --two pair moon here
 
 --strush moon here
-
+--[[ --temp removed for reworking
 SMODS.Consumable {
     key = "styx",
     set = "hpr_moons",
@@ -112,7 +112,7 @@ SMODS.Consumable {
         return card.ability.extra.copies > 0 and #G.hand.highlighted > 0  and #G.hand.highlighted < card.ability.extra.max_highlighted
     end
 }
-
+]]
 --5oak moon here
 
 --flouse moon here
