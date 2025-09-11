@@ -1,3 +1,8 @@
+local moon_drain_txt = {
+    "Drains levels from played",
+    "#1# to gain {C:attention}charge{}"
+}
+
 return {
     descriptions = {
         Back={
@@ -101,6 +106,18 @@ return {
                 }
             }
         },
+        hpr_moons = {
+            c_hpr_styx = {
+                name = "Styx",
+                text = {
+                    moon_drain_txt,
+                    {
+                        "Creates {C:attention}#2#{} copies of {C:attention}1{} selected card",
+                        "Increase copies by {C:attention}#3#{} for each charge"
+                    }
+                }
+            }
+        }
     },
     misc = {
         achievement_descriptions={},
@@ -108,9 +125,14 @@ return {
         blind_states={},
         challenge_names={},
         collabs={},
-        dictionary={},
+        dictionary={
+            b_hpr_moons_cards = "Moon Cards",
+            k_hpr_moons = "Moon"
+        },
         high_scores={},
-        labels={},
+        labels={
+            hpr_moons = "Moon"
+        },
         poker_hand_descriptions={},
         poker_hands={},
         quips={},
