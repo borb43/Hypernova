@@ -137,8 +137,8 @@ return {
                 text = {
                     moon_drain_txt,
                     {
-                        "Creates {C:attention}#2#{} copies of {C:attention}#4#{} selected card",
-                        "Increase copies by {C:attention}#3#{} for each charge"
+                        "Instantly earn {C:money}$#2#",
+                        "Increases by {C:attention}#3#{} for each charge"
                     }
                 }
             },
