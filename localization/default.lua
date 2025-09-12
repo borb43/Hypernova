@@ -173,6 +173,19 @@ return {
                         "Increases by #3# per charge"
                     }
                 }
+            },
+            c_hpr_europa = {
+                name = "Europa",
+                text = {
+                    moon_drain_txt,
+                    {
+                        "Converts up to {c:attention}#2#{} selected",
+                        "cards to {V:1}#4#",
+                        "{C:attention}+#3#{} selected card per charge",
+                        "changes suit to that of the",
+                        "last drained {C:attention}#1#"
+                    }
+                }
             }
         }
     },

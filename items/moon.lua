@@ -21,7 +21,7 @@ SMODS.Consumable { --Pair moon, perma mult stuff
                 ref_value = "mult",
                 scalar_value = "per_charge"
             })
-            SMODS.smart_level_up_hand(card, card.ability.extra.hand_type, nil, -1)
+            SMODS.smart_level_up_hand(card, context.scoring_name, nil, -1)
         end
     end,
     use = function(self, card, area, copier)
@@ -77,7 +77,7 @@ SMODS.Consumable { --3oak moon, applies random enhancements
                 scalar_table = card.ability.extra,
                 scalar_value = "per_charge"
             })
-            SMODS.smart_level_up_hand(card, card.ability.extra.hand_type, nil, -1)
+            SMODS.smart_level_up_hand(card, context.scoring_name, nil, -1)
         end
     end,
     use = function(self, card, area, copier)
@@ -155,7 +155,7 @@ SMODS.Consumable {
                 ref_value = "jokers",
                 scalar_value = "per_charge"
             })
-            SMODS.smart_level_up_hand(card, card.ability.extra.hand_type, nil, -1)
+            SMODS.smart_level_up_hand(card, context.scoring_name, nil, -1)
         end
     end,
     use = function (self, card, area, copier)
@@ -183,7 +183,34 @@ SMODS.Consumable {
 
 --4oak moon here
 
---flush moon here
+SMODS.Consumable {
+    key = "europa",
+    set = "hpr_moons",
+    atlas = "placeholder",
+    pos = { x = 3, y = 2 },
+    config = { extra = { hand_type = "Flush", per_charge = 1 }, max_highlighted = 0, suit_conv = "Spades" },
+    loc_vars = function (self, info_queue, card)
+        return {vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.max_highlighted, card.ability.extra.per_charge, localize(card.ability.suit_conv, "suits_plural") }, colours = { G.C.SUITS[card.ability.suit_conv]}}
+    end,
+    calculate = function (self, card, context)
+        if context.before and context.scoring_name == card.ability.extra.hand_type then
+            SMODS.scale_card(card, {
+                ref_table = card.ability,
+                ref_value = "max_highlighted",
+                scalar_table = card.ability.extra,
+                scalar_value = "per_charge"
+            })
+            local suits = {}
+            for _, playing_card in ipairs(context.full_hand) do
+                if not SMODS.has_no_suit(playing_card) then
+                    suits[#suits+1] = playing_card.base.suit
+                end
+            end
+            card.ability.suit_conv = pseudorandom_element(suits) or "Spades"
+            SMODS.smart_level_up_hand(card, context.scoring_name, nil, -1)
+        end
+    end
+}
 
 --straight moon here
 
@@ -207,7 +234,7 @@ SMODS.Consumable { --High Card moon, gives money
                 ref_value = "dollars",
                 scalar_value = "per_charge"
             })
-            SMODS.smart_level_up_hand(card, card.ability.extra.hand_type, nil, -1)
+            SMODS.smart_level_up_hand(card, context.scoring_name, nil, -1)
         end
     end,
     use = function(self, card, area, copier)
