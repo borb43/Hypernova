@@ -208,6 +208,19 @@ return {
                         "Increases by {C:attention}#3#{} per charge"
                     }
                 }
+            },
+            c_hpr_nibiru = {
+                name = "Nibiru",
+                text = {
+                    moon_drain_txt,
+                    {
+                        "Converts up to {c:attention}#2#{} selected",
+                        "cards to {C:attention}#4#s",
+                        "{C:attention}+#3#{} selected card per charge",
+                        "changes rank to that of the",
+                        "last drained {C:attention}#1#"
+                    }
+                }
             }
         }
     },
