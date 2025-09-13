@@ -231,6 +231,19 @@ return {
                         "Increases by {C:attention}#3#{} per charge"
                     }
                 }
+            },
+            c_hpr_dysnomia = {
+                name = "Dysnomia",
+                text = {
+                    moon_drain_txt,
+                    {
+                        "Converts up to #4# selected",
+                        "cards to {C:attention}#2#{}s of {V:1}#3#",
+                        "+#5# selected card per charge",
+                        "changes rank and suit to that",
+                        "of the last drained {C:attention}#1#"
+                    }
+                }
             }
         }
     },

@@ -351,7 +351,7 @@ SMODS.Consumable {
     pos = { x = 3, y = 2 },
     config = { extra = { hand_type = "Five of a Kind", rank_conv = "Ace", per_charge = 1 }, max_highlighted = 0 },
     loc_vars = function(self, info_queue, card)
-        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.extra.rank_conv, card.ability.max_highlighted } }
+        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), localize(card.ability.extra.rank_conv, "ranks"), card.ability.max_highlighted } }
     end,
     calculate = function(self, card, context)
         if context.before and context.scoring_name == card.ability.extra.hand_type then
@@ -368,6 +368,7 @@ SMODS.Consumable {
                 end
             end
             card.ability.extra.rank_conv = pseudorandom_element(ranks) or "Ace"
+            SMODS.smart_level_up_hand(card, context.scoring_name, nil, -1)
         end
     end,
     use = function(self, card, area, copier)
@@ -484,4 +485,101 @@ SMODS.Consumable {
     end,
 }
 
---flush 5 moon here
+SMODS.Consumable {
+    key = "dysnomia",
+    set = "hpr_moons",
+    atlas = "placeholder",
+    pos = { x = 3, y = 2 },
+    config = { extra = { hand_type = "Flush Five", rank_conv = "Ace", suit_conv = "Spades", per_charge = 1 }, max_highlighted = 0 },
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = { localize(card.ability.extra.hand_type, "poker_hands"), localize(card.ability.extra.rank_conv, "ranks"), localize(card.ability.extra.suit_conv, "suits_plural"), card.ability.max_highlighted, card.ability.extra.per_charge },
+            colours = { G.C.SUITS[card.ability.extra.suit_conv] }
+        }
+    end,
+    calculate = function(self, card, context)
+        if context.before and context.scoring_name == card.ability.extra.hand_type then
+            SMODS.scale_card(card, {
+                ref_table = card.ability,
+                ref_value = "max_highlighted",
+                scalar_table = card.ability.extra,
+                scalar_value = "per_charge"
+            })
+            local ranks = {}
+            for _, playing_card in ipairs(context.full_hand) do
+                if not SMODS.has_no_rank(playing_card) then
+                    ranks[#ranks + 1] = playing_card.base.value
+                end
+            end
+            card.ability.extra.rank_conv = pseudorandom_element(ranks) or "Ace"
+            local suits = {}
+            for _, playing_card in ipairs(context.full_hand) do
+                if not SMODS.has_no_suit(playing_card) then
+                    suits[#suits + 1] = playing_card.base.suit
+                end
+            end
+            card.ability.extra.suit_conv = pseudorandom_element(suits) or "Spades"
+            SMODS.smart_level_up_hand(card, context.scoring_name, nil, -1)
+        end
+    end,
+    use = function (self, card, area, copier)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+        for i = 1, #G.hand.highlighted do
+            local percent = 1.15 - (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.15,
+                func = function()
+                    G.hand.highlighted[i]:flip()
+                    play_sound('card1', percent)
+                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
+                    return true
+                end
+            }))
+        end
+        delay(0.2)
+        for i = 1, #G.hand.highlighted do
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.1,
+                func = function()
+                    assert(SMODS.change_base(G.hand.highlighted[i], card.ability.extra.suit_conv, card.ability.extra.rank_conv))
+                    return true
+                end
+            }))
+        end
+        for i = 1, #G.hand.highlighted do
+            local percent = 0.85 + (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.15,
+                func = function()
+                    G.hand.highlighted[i]:flip()
+                    play_sound('tarot2', percent, 0.6)
+                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
+                    return true
+                end
+            }))
+        end
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
+        delay(0.5)
+    end,
+    in_pool = function (self, args)
+        return G.GAME.hands["Flush Five"].played > 0
+    end
+}
