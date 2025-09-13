@@ -244,6 +244,17 @@ return {
                         "of the last drained {C:attention}#1#"
                     }
                 }
+            },
+            c_hpr_titania = {
+                name = "Titania",
+                text = {
+                    moon_drain_txt,
+                    {
+                        "Creates the specified",
+                        "{C:uncommon}Uncommon{} Joker",
+                        "{C:attention}Rerolls{} when charged"
+                    }
+                }
             }
         }
     },

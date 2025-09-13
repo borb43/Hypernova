@@ -269,7 +269,61 @@ SMODS.Consumable { --flush moon, suit conv stuff
 
 --straight moon here
 
---two pair moon here
+SMODS.Consumable {
+    key = "titania",
+    set = "hpr_moons",
+    atlas = "placeholder",
+    pos = { x = 3, y = 2 },
+    config = { extra = { hand_type = "Two Pair", current_joker = nil }},
+    loc_vars = function (self, info_queue, card)
+        local joker = card.ability.extra.current_joker and G.P_CENTERS[card.ability.extra.current_joker] or nil
+        local joker_name = joker and localize { type = "name_text", key = joker.key, set = joker.set} or localize("k_none")
+        local colour = not joker and G.C.RED or G.C.GREEN
+
+        if joker then
+            info_queue[#info_queue+1] = joker
+        end
+
+        local main_end = {
+            {
+                n = G.UIT.C,
+                config = { align = "bm", colour = colour, padding = 0.02 },
+                nodes = {
+                    { n = G.UIT.T, config = { text = " "..joker_name.." ", colour = G.C.UI.TEXT_LIGHT, scale = 0.3, shadow = true }}
+                }
+            }
+        }
+        return { main_end = main_end }
+    end,
+    calculate = function (self, card, context)
+        if context.before and context.scoring_name == card.ability.extra.hand_type then
+            local uncommons = {}
+            for _, joker in pairs(G.P_CENTER_POOLS.Joker) do
+                if joker.rarity == 2 and type(joker.in_pool) == "function" and joker:in_pool() then
+                    uncommons[#uncommons+1] = joker.key
+                end
+            end
+            card.ability.extra.current_joker = pseudorandom_element(uncommons)
+            SMODS.smart_level_up_hand(card, card.ability.extra.hand_type, nil, -1)
+        end
+    end,
+    use = function (self, card, area, copier)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('timpani')
+                SMODS.add_card({ key = card.ability.extra.current_joker or "j_joker" })
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+        delay(0.6)
+    end,
+    can_use = function (self, card)
+        return card.ability.extra.current_joker ~= nil
+    end
+}
 
 SMODS.Consumable {
     key = "Triton",
