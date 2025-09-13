@@ -232,8 +232,9 @@ SMODS.Consumable { --4oak moon, perma xmult stuff
             end
         }))
     end,
-    can_use = function (self, card)
-        return card.ability.extra.mult ~= 0 and #G.hand.highlighted <= card.ability.extra.max_highlighted and #G.hand.highlighted ~= 0
+    can_use = function(self, card)
+        return card.ability.extra.mult ~= 0 and #G.hand.highlighted <= card.ability.extra.max_highlighted and
+            #G.hand.highlighted ~= 0
     end
 }
 
@@ -276,10 +277,10 @@ SMODS.Consumable {
     atlas = "placeholder",
     pos = { x = 3, y = 2 },
     config = { extra = { hand_type = "Straight Flush", per_charge = 1 }, max_highlighted = 0 },
-    loc_vars = function (self, info_queue, card)
-        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.max_highlighted, card.ability.extra.per_charge}}
+    loc_vars = function(self, info_queue, card)
+        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.max_highlighted, card.ability.extra.per_charge } }
     end,
-    calculate = function (self, card, context)
+    calculate = function(self, card, context)
         if context.before and context.scoring_name == card.ability.extra.hand_type then
             SMODS.scale_card(card, {
                 ref_table = card.ability,
@@ -289,12 +290,12 @@ SMODS.Consumable {
             })
         end
     end,
-    use = function (self, card, area, copier)
+    use = function(self, card, area, copier)
         for i = 1, #G.hand.highlighted do
             G.E_MANAGER:add_event(Event({
                 trigger = "after",
                 delay = 0.15,
-                func = function ()
+                func = function()
                     local target = G.hand.highlighted[i]
                     local edition = poll_edition("hpr_trition", nil, true, true)
                     target:set_edition(edition, true)
@@ -349,10 +350,10 @@ SMODS.Consumable {
     atlas = "placeholder",
     pos = { x = 3, y = 2 },
     config = { extra = { hand_type = "Five of a Kind", rank_conv = "Ace", per_charge = 1 }, max_highlighted = 0 },
-    loc_vars = function (self, info_queue, card)
-        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.extra.rank_conv, card.ability.max_highlighted}}
+    loc_vars = function(self, info_queue, card)
+        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.extra.rank_conv, card.ability.max_highlighted } }
     end,
-    calculate = function (self, card, context)
+    calculate = function(self, card, context)
         if context.before and context.scoring_name == card.ability.extra.hand_type then
             SMODS.scale_card(card, {
                 ref_table = card.ability,
@@ -363,13 +364,13 @@ SMODS.Consumable {
             local ranks = {}
             for _, playing_card in ipairs(context.full_hand) do
                 if not SMODS.has_no_rank(playing_card) then
-                    ranks[#ranks+1] = playing_card.base.value
+                    ranks[#ranks + 1] = playing_card.base.value
                 end
             end
             card.ability.extra.rank_conv = pseudorandom_element(ranks) or "Ace"
         end
     end,
-    use = function (self, card, area, copier)
+    use = function(self, card, area, copier)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.4,
@@ -425,9 +426,62 @@ SMODS.Consumable {
             end
         }))
         delay(0.5)
+    end,
+    set_card_type_badge = function(self, card, badges)
+        badges[#badges + 1] = create_badge(localize("k_hpr_moon_q"),
+            get_type_colour(card.config.center or card.config, card), SMODS.ConsumableTypes.hpr_moons.text_colour, 1.2)
+    end,
+    in_pool = function(self, args)
+        return G.GAME and G.GAME.hands["Five of a Kind"].played > 0
     end
 }
 
---flouse moon here
+SMODS.Consumable {
+    key = "asteroid",
+    set = "hpr_moons",
+    atlas = "placeholder",
+    pos = { x = 3, y = 2 },
+    config = { extra = { hand_type = "Flush House", tags = 0, per_charge = 1 } },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.extra.tags, card.ability.extra.per_charge } }
+    end,
+    calculate = function(self, card, context)
+        if context.before and context.scoring_name == card.ability.extra.hand_type then
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "tags",
+                scalar_value = "per_charge"
+            })
+            SMODS.smart_level_up_hand(card, card.ability.extra.hand_type, nil, -1)
+        end
+    end,
+    use = function(self, card, area, copier)
+        for i = 1, card.ability.extra.tags do
+            G.E_MANAGER:add_event(Event({
+                trigger = "after",
+                delay = "0.1",
+                func = function()
+                    local tag_pool = get_current_pool("Tag")
+                    for k, v in pairs(tag_pool) do
+                        if v == "UNAVAILABLE" then tag_pool[k] = nil end
+                    end
+                    local new_tag = pseudorandom_element(tag_pool, "hpr_asteroid") or "tag_double"
+                    new_tag:set_ability()
+                    add_tag(Tag(new_tag, false, "Small"))
+                end
+            }))
+        end
+    end,
+    can_use = function(self, card)
+        return card.ability.extra.tags > 0
+    end,
+    in_pool = function(self, args)
+        return G.GAME and G.GAME.hands["Flush House"].played > 0
+    end,
+    set_card_type_badge = function(self, card, badges)
+        badges[#badges + 1] = create_badge(localize("k_hpr_moon_q"),
+            get_type_colour(card.config.center or card.config, card), SMODS.ConsumableTypes.hpr_moons.text_colour, 1.2)
+    end,
+}
 
 --flush 5 moon here

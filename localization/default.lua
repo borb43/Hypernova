@@ -221,6 +221,16 @@ return {
                         "last drained {C:attention}#1#"
                     }
                 }
+            },
+            c_hpr_asteroid = {
+                name = "Asteroid",
+                text = {
+                    moon_drain_txt,
+                    {
+                        "Creates {C:attention}#2#{} random tags",
+                        "Increases by {C:attention}#3#{} per charge"
+                    }
+                }
             }
         }
     },
@@ -233,7 +243,8 @@ return {
         dictionary={
             b_hpr_moons_cards = "Moon Cards",
             k_hpr_moons = "Moon",
-            k_lunar_pack = "Lunar Pack"
+            k_lunar_pack = "Lunar Pack",
+            k_hpr_moon_q = "Moon?"
         },
         high_scores={},
         labels={
