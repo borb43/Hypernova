@@ -2,7 +2,8 @@ SMODS.ConsumableType {
     key = "hpr_moons",
     default = "c_hpr_deimos",
     primary_colour = HEX("5d15d1"),
-    secondary_colour = HEX("707b8c")
+    secondary_colour = HEX("707b8c"),
+    text_colour = HEX("5d15d1")
 }
 
 SMODS.Consumable { --Pair moon, perma mult stuff
