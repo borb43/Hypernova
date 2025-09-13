@@ -246,7 +246,7 @@ SMODS.Consumable { --flush moon, suit conv stuff
     pos = { x = 3, y = 2 },
     config = { extra = { hand_type = "Flush", per_charge = 1 }, max_highlighted = 0, suit_conv = "Spades" },
     loc_vars = function(self, info_queue, card)
-        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.max_highlighted, card.ability.extra.per_charge, localize(card.ability.suit_conv, "suits_plural"), card.ability.max_highlighted ~= 1 and "s" or "" }, colours = { G.C.SUITS[card.ability.suit_conv] } }
+        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.max_highlighted, card.ability.extra.per_charge, localize(card.ability.suit_conv, "suits_plural"), card.ability.max_highlighted ~= 1 and "s" or "" , colours = { G.C.SUITS[card.ability.suit_conv]} } }
     end,
     calculate = function(self, card, context)
         if context.before and context.scoring_name == card.ability.extra.hand_type then
@@ -584,8 +584,8 @@ SMODS.Consumable {
     config = { extra = { hand_type = "Flush Five", rank_conv = "Ace", suit_conv = "Spades", per_charge = 1 }, max_highlighted = 0 },
     loc_vars = function(self, info_queue, card)
         return {
-            vars = { localize(card.ability.extra.hand_type, "poker_hands"), localize(card.ability.extra.rank_conv, "ranks"), localize(card.ability.extra.suit_conv, "suits_plural"), card.ability.max_highlighted, card.ability.extra.per_charge, card.ability.max_highlighted ~= 1 and "s" or "" },
-            colours = { G.C.SUITS[card.ability.extra.suit_conv] }
+            vars = { localize(card.ability.extra.hand_type, "poker_hands"), localize(card.ability.extra.rank_conv, "ranks"), localize(card.ability.extra.suit_conv, "suits_plural"), card.ability.max_highlighted, card.ability.extra.per_charge, card.ability.max_highlighted ~= 1 and "s" or "" ,
+            colours = { G.C.SUITS[card.ability.extra.suit_conv] } }
         }
     end,
     calculate = function(self, card, context)
