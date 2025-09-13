@@ -159,7 +159,7 @@ return {
                     moon_drain_txt,
                     {
                         "Applies random enhancements",
-                        "to up to {C:attention}#2#{} selected cards",
+                        "to up to {C:attention}#2#{} selected card#4#",
                         "Increases by {C:attention}#3#{} per charge"
                     }
                 }
@@ -169,7 +169,7 @@ return {
                 text = {
                     moon_drain_txt,
                     {
-                        "Creates #2# random joker cards",
+                        "Creates #2# random joker card#4#",
                         "Increases by #3# per charge"
                     }
                 }
@@ -180,8 +180,8 @@ return {
                     moon_drain_txt,
                     {
                         "Converts up to {c:attention}#2#{} selected",
-                        "cards to {V:1}#4#",
-                        "{C:attention}+#3#{} selected card per charge",
+                        "card#4# to {V:1}#4#",
+                        "{C:attention}+#3#{} selected cards per charge",
                         "changes suit to that of the",
                         "last drained {C:attention}#1#"
                     }
@@ -204,7 +204,7 @@ return {
                     moon_drain_txt,
                     {
                         "Applies a random {C:dark_edition}edition{} to",
-                        "up to {C:attention}#2#{} selected cards",
+                        "up to {C:attention}#2#{} selected card#4#",
                         "Increases by {C:attention}#3#{} per charge"
                     }
                 }
@@ -215,7 +215,7 @@ return {
                     moon_drain_txt,
                     {
                         "Converts up to {c:attention}#2#{} selected",
-                        "cards to {C:attention}#4#s",
+                        "card#4# to {C:attention}#4#s",
                         "{C:attention}+#3#{} selected card per charge",
                         "changes rank to that of the",
                         "last drained {C:attention}#1#"
@@ -227,7 +227,7 @@ return {
                 text = {
                     moon_drain_txt,
                     {
-                        "Creates {C:attention}#2#{} random tags",
+                        "Creates {C:attention}#2#{} random tag#4#",
                         "Increases by {C:attention}#3#{} per charge"
                     }
                 }
@@ -238,7 +238,7 @@ return {
                     moon_drain_txt,
                     {
                         "Converts up to #4# selected",
-                        "cards to {C:attention}#2#{}s of {V:1}#3#",
+                        "card#6# to {C:attention}#2#{}s of {V:1}#3#",
                         "+#5# selected card per charge",
                         "changes rank and suit to that",
                         "of the last drained {C:attention}#1#"
@@ -253,6 +253,17 @@ return {
                         "Creates the specified",
                         "{C:uncommon}Uncommon{} Joker",
                         "{C:attention}Rerolls{} when charged"
+                    }
+                }
+            },
+            c_hpr_hyperion = {
+                name = "Hyperion",
+                text = {
+                    moon_drain_txt,
+                    {
+                        "Adds {C:attention}#2#{} Booster Pack#4#",
+                        "to the current shop",
+                        "Increases by {C:attention}#3#{} per charge"
                     }
                 }
             }

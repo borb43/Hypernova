@@ -68,7 +68,7 @@ SMODS.Consumable { --3oak moon, applies random enhancements
     pos = { x = 3, y = 2 },
     config = { extra = { hand_type = "Three of a Kind", per_charge = 1 }, max_highlighted = 0 },
     loc_vars = function(self, info_queue, card)
-        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.max_highlighted, card.ability.extra.per_charge } }
+        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.max_highlighted, card.ability.extra.per_charge, card.ability.max_highlighted ~= 1 and "s" or "" } }
     end,
     calculate = function(self, card, context)
         if context.before and context.scoring_name == card.ability.extra.hand_type then
@@ -147,7 +147,7 @@ SMODS.Consumable { --full house moon, creates jokers
     pos = { x = 3, y = 2 },
     config = { extra = { hand_type = "Full House", jokers = 0, per_charge = 1 } },
     loc_vars = function(self, info_queue, card)
-        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.extra.jokers, card.ability.extra.per_charge } }
+        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.extra.jokers, card.ability.extra.per_charge, card.ability.extra.jokers ~= 1 and "s" or "" } }
     end,
     calculate = function(self, card, context)
         if context.before and context.scoring_name == card.ability.extra.hand_type then
@@ -245,7 +245,7 @@ SMODS.Consumable { --flush moon, suit conv stuff
     pos = { x = 3, y = 2 },
     config = { extra = { hand_type = "Flush", per_charge = 1 }, max_highlighted = 0, suit_conv = "Spades" },
     loc_vars = function(self, info_queue, card)
-        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.max_highlighted, card.ability.extra.per_charge, localize(card.ability.suit_conv, "suits_plural") }, colours = { G.C.SUITS[card.ability.suit_conv] } }
+        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.max_highlighted, card.ability.extra.per_charge, localize(card.ability.suit_conv, "suits_plural"), card.ability.max_highlighted ~= 1 and "s" or "" }, colours = { G.C.SUITS[card.ability.suit_conv] } }
     end,
     calculate = function(self, card, context)
         if context.before and context.scoring_name == card.ability.extra.hand_type then
@@ -267,7 +267,43 @@ SMODS.Consumable { --flush moon, suit conv stuff
     end
 }
 
---straight moon here
+SMODS.Consumable {
+    key = "hyperion",
+    set = "hpr_moons",
+    atlas = "placeholder",
+    pos = { x = 3, y = 2 },
+    config = { extra = { hand_type = "Straight", boosters = 0, per_charge = 1 } },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { localize(card.ability.extra.hand_type), card.ability.extra.boosters, card.ability.extra.per_charge, card.ability.extra.boosters ~= 1 and "s" or ""}}
+    end,
+    calculate = function (self, card, context)
+        if context.before and context.scoring_name == card.ability.extra.hand_type then
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "boosters",
+                scalar_value = "per_charge"
+            })
+            SMODS.smart_level_up_hand(card, context.scoring_name, nil, -1)
+        end
+    end,
+    use = function (self, card, area, copier)
+        for _ = 1, card.ability.extra.boosters do
+            G.E_MANAGER:add_event(Event({
+                trigger = "after",
+                delay = 0.2,
+                func = function ()
+                    SMODS.add_card({
+                        set = 'Booster', --i hope this works?
+                        area = G.shop_booster
+                    })
+                end
+            }))
+        end
+    end,
+    can_use = function (self, card)
+        return G.STATE == G.STATES.SHOP and card.ability.extra.boosters > 0
+    end
+}
 
 SMODS.Consumable {
     key = "titania",
@@ -332,7 +368,7 @@ SMODS.Consumable {
     pos = { x = 3, y = 2 },
     config = { extra = { hand_type = "Straight Flush", per_charge = 1 }, max_highlighted = 0 },
     loc_vars = function(self, info_queue, card)
-        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.max_highlighted, card.ability.extra.per_charge } }
+        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.max_highlighted, card.ability.extra.per_charge, card.ability.max_highlighted ~= 1 and "s" or "" } }
     end,
     calculate = function(self, card, context)
         if context.before and context.scoring_name == card.ability.extra.hand_type then
@@ -351,7 +387,7 @@ SMODS.Consumable {
                 delay = 0.15,
                 func = function()
                     local target = G.hand.highlighted[i]
-                    local edition = poll_edition("hpr_trition", nil, true, true)
+                    local edition = poll_edition("hpr_triton", nil, true, true)
                     target:set_edition(edition, true)
                     card:juice_up(0.3, 0.5)
                     return true
@@ -405,7 +441,7 @@ SMODS.Consumable {
     pos = { x = 3, y = 2 },
     config = { extra = { hand_type = "Five of a Kind", rank_conv = "Ace", per_charge = 1 }, max_highlighted = 0 },
     loc_vars = function(self, info_queue, card)
-        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), localize(card.ability.extra.rank_conv, "ranks"), card.ability.max_highlighted } }
+        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), localize(card.ability.extra.rank_conv, "ranks"), card.ability.max_highlighted, card.ability.max_highlighted ~= 1 and "s" or "" } }
     end,
     calculate = function(self, card, context)
         if context.before and context.scoring_name == card.ability.extra.hand_type then
@@ -498,7 +534,7 @@ SMODS.Consumable {
     pos = { x = 3, y = 2 },
     config = { extra = { hand_type = "Flush House", tags = 0, per_charge = 1 } },
     loc_vars = function(self, info_queue, card)
-        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.extra.tags, card.ability.extra.per_charge } }
+        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.extra.tags, card.ability.extra.per_charge, card.ability.extra.tags ~= 1 and "s" or "" } }
     end,
     calculate = function(self, card, context)
         if context.before and context.scoring_name == card.ability.extra.hand_type then
@@ -547,7 +583,7 @@ SMODS.Consumable {
     config = { extra = { hand_type = "Flush Five", rank_conv = "Ace", suit_conv = "Spades", per_charge = 1 }, max_highlighted = 0 },
     loc_vars = function(self, info_queue, card)
         return {
-            vars = { localize(card.ability.extra.hand_type, "poker_hands"), localize(card.ability.extra.rank_conv, "ranks"), localize(card.ability.extra.suit_conv, "suits_plural"), card.ability.max_highlighted, card.ability.extra.per_charge },
+            vars = { localize(card.ability.extra.hand_type, "poker_hands"), localize(card.ability.extra.rank_conv, "ranks"), localize(card.ability.extra.suit_conv, "suits_plural"), card.ability.max_highlighted, card.ability.extra.per_charge, card.ability.max_highlighted ~= 1 and "s" or "" },
             colours = { G.C.SUITS[card.ability.extra.suit_conv] }
         }
     end,
