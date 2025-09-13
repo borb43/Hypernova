@@ -28,15 +28,16 @@ CardSleeves.Sleeve {
                     if card:get_id() == 14 then
                         if card:is_suit("Diamonds") then
                             card:set_seal("Gold", true, true)
-                        end
-                        if card:is_suit("Hearts") then
+                        elseif card:is_suit("Hearts") then
                             card:set_seal("Red", true, true)
-                        end
-                        if card:is_suit("Clubs") then
+                        elseif card:is_suit("Clubs") then
                             card:set_seal("Blue", true, true)
-                        end
-                        if card:is_suit("Spades") then
+                        elseif card:is_suit("Spades") then
                             card:set_seal("Purple", true, true)
+                        else
+                            card:set_seal(SMODS.poll_seal({
+                                guaranteed = true
+                            }), true, true)
                         end
                     end
                 end
