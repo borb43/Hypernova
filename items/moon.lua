@@ -246,7 +246,7 @@ SMODS.Consumable { --flush moon, suit conv stuff
     pos = { x = 3, y = 2 },
     config = { extra = { hand_type = "Flush", per_charge = 1 }, max_highlighted = 0, suit_conv = "Spades" },
     loc_vars = function(self, info_queue, card)
-        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.max_highlighted, card.ability.extra.per_charge, localize(card.ability.suit_conv, "suits_plural"), card.ability.max_highlighted ~= 1 and "s" or "" , colours = { G.C.SUITS[card.ability.suit_conv]} } }
+        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.max_highlighted, card.ability.extra.per_charge, localize(card.ability.suit_conv, "suits_plural"), card.ability.max_highlighted ~= 1 and "s" or "", colours = { G.C.SUITS[card.ability.suit_conv] } } }
     end,
     calculate = function(self, card, context)
         if context.before and context.scoring_name == card.ability.extra.hand_type then
@@ -274,10 +274,10 @@ SMODS.Consumable {
     atlas = "placeholder",
     pos = { x = 3, y = 2 },
     config = { extra = { hand_type = "Straight", boosters = 0, per_charge = 1 } },
-    loc_vars = function (self, info_queue, card)
-        return { vars = { localize(card.ability.extra.hand_type), card.ability.extra.boosters, card.ability.extra.per_charge, card.ability.extra.boosters ~= 1 and "s" or ""}}
+    loc_vars = function(self, info_queue, card)
+        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.extra.boosters, card.ability.extra.per_charge, card.ability.extra.boosters ~= 1 and "s" or "" } }
     end,
-    calculate = function (self, card, context)
+    calculate = function(self, card, context)
         if context.before and context.scoring_name == card.ability.extra.hand_type then
             SMODS.scale_card(card, {
                 ref_table = card.ability.extra,
@@ -287,12 +287,12 @@ SMODS.Consumable {
             SMODS.smart_level_up_hand(card, context.scoring_name, nil, -1)
         end
     end,
-    use = function (self, card, area, copier)
+    use = function(self, card, area, copier)
         for _ = 1, card.ability.extra.boosters do
             G.E_MANAGER:add_event(Event({
                 trigger = "after",
                 delay = 0.2,
-                func = function ()
+                func = function()
                     SMODS.add_card({
                         set = 'Booster', --i hope this works?
                         area = G.shop_booster
@@ -301,7 +301,7 @@ SMODS.Consumable {
             }))
         end
     end,
-    can_use = function (self, card)
+    can_use = function(self, card)
         return G.STATE == G.STATES.SHOP and card.ability.extra.boosters > 0
     end
 }
@@ -311,40 +311,45 @@ SMODS.Consumable {
     set = "hpr_moons",
     atlas = "placeholder",
     pos = { x = 3, y = 2 },
-    config = { extra = { hand_type = "Two Pair", current_joker = nil }},
-    loc_vars = function (self, info_queue, card)
+    config = { extra = { hand_type = "Two Pair", current_joker = nil } },
+    loc_vars = function(self, info_queue, card)
         local joker = card.ability.extra.current_joker and G.P_CENTERS[card.ability.extra.current_joker] or nil
-        local joker_name = joker and localize { type = "name_text", key = joker.key, set = joker.set} or localize("k_none")
+        local joker_name = joker and localize { type = "name_text", key = joker.key, set = joker.set } or
+        localize("k_none")
         local colour = not joker and G.C.RED or G.C.GREEN
 
         if joker then
-            info_queue[#info_queue+1] = joker
+            info_queue[#info_queue + 1] = joker
         end
 
         local main_end = {
             {
                 n = G.UIT.C,
-                config = { align = "bm", colour = colour, padding = 0.02 },
+                config = { align = "bm", padding = 0.02 },
                 nodes = {
-                    { n = G.UIT.T, config = { text = " "..joker_name.." ", colour = G.C.UI.TEXT_LIGHT, scale = 0.3, shadow = true }}
+                    {
+                        n = G.UIT.C,
+                        config = { aling = "m", colour = colour, r = 0.05, padding = 0.05 },
+                        nodes = { n = G.UIT.T, config = { text = ' ' .. joker_name .. ' ', colour = G.C.UI.TEXT_LIGHT, scale = 0.3, shadow = true } }
+                    }
                 }
             }
         }
-        return { main_end = main_end }
+        return { vars = { localize(card.ability.extra.hand_type, "poker_hands") }, main_end = main_end }
     end,
-    calculate = function (self, card, context)
+    calculate = function(self, card, context)
         if context.before and context.scoring_name == card.ability.extra.hand_type then
             local uncommons = {}
             for _, joker in pairs(G.P_CENTER_POOLS.Joker) do
                 if joker.rarity == 2 and type(joker.in_pool) == "function" and joker:in_pool() then
-                    uncommons[#uncommons+1] = joker.key
+                    uncommons[#uncommons + 1] = joker.key
                 end
             end
             card.ability.extra.current_joker = pseudorandom_element(uncommons)
             SMODS.smart_level_up_hand(card, card.ability.extra.hand_type, nil, -1)
         end
     end,
-    use = function (self, card, area, copier)
+    use = function(self, card, area, copier)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.4,
@@ -357,13 +362,13 @@ SMODS.Consumable {
         }))
         delay(0.6)
     end,
-    can_use = function (self, card)
+    can_use = function(self, card)
         return card.ability.extra.current_joker ~= nil
     end
 }
 
 SMODS.Consumable {
-    key = "Triton",
+    key = "triton",
     set = "hpr_moons",
     atlas = "placeholder",
     pos = { x = 3, y = 2 },
@@ -436,7 +441,7 @@ SMODS.Consumable { --High Card moon, gives money
 }
 
 SMODS.Consumable {
-    key = "Nibiru",
+    key = "nibiru",
     set = "hpr_moons",
     atlas = "placeholder",
     pos = { x = 3, y = 2 },
@@ -584,8 +589,15 @@ SMODS.Consumable {
     config = { extra = { hand_type = "Flush Five", rank_conv = "Ace", suit_conv = "Spades", per_charge = 1 }, max_highlighted = 0 },
     loc_vars = function(self, info_queue, card)
         return {
-            vars = { localize(card.ability.extra.hand_type, "poker_hands"), localize(card.ability.extra.rank_conv, "ranks"), localize(card.ability.extra.suit_conv, "suits_plural"), card.ability.max_highlighted, card.ability.extra.per_charge, card.ability.max_highlighted ~= 1 and "s" or "" ,
-            colours = { G.C.SUITS[card.ability.extra.suit_conv] } }
+            vars = {
+                localize(card.ability.extra.hand_type, "poker_hands"),
+                localize(card.ability.extra.rank_conv, "ranks"),
+                localize(card.ability.extra.suit_conv, "suits_plural"),
+                card.ability.max_highlighted,
+                card.ability.extra.per_charge,
+                card.ability.max_highlighted ~= 1 and "s" or "",
+                colours = { G.C.SUITS[card.ability.extra.suit_conv] }
+            }
         }
     end,
     calculate = function(self, card, context)
@@ -613,7 +625,7 @@ SMODS.Consumable {
             SMODS.smart_level_up_hand(card, context.scoring_name, nil, -1)
         end
     end,
-    use = function (self, card, area, copier)
+    use = function(self, card, area, copier)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.4,
@@ -642,7 +654,8 @@ SMODS.Consumable {
                 trigger = 'after',
                 delay = 0.1,
                 func = function()
-                    assert(SMODS.change_base(G.hand.highlighted[i], card.ability.extra.suit_conv, card.ability.extra.rank_conv))
+                    assert(SMODS.change_base(G.hand.highlighted[i], card.ability.extra.suit_conv,
+                        card.ability.extra.rank_conv))
                     return true
                 end
             }))
@@ -670,7 +683,7 @@ SMODS.Consumable {
         }))
         delay(0.5)
     end,
-    in_pool = function (self, args)
+    in_pool = function(self, args)
         return G.GAME.hands["Flush Five"].played > 0
     end
 }
