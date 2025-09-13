@@ -38,7 +38,7 @@ SMODS.Consumable { --Pair moon, perma mult stuff
             G.E_MANAGER:add_event(Event({
                 trigger = "after",
                 delay = 0.1,
-                func = function ()
+                func = function()
                     _card:juice_up()
                     return true
                 end
@@ -54,8 +54,9 @@ SMODS.Consumable { --Pair moon, perma mult stuff
             end
         }))
     end,
-    can_use = function (self, card)
-        return card.ability.extra.mult ~= 0 and #G.hand.highlighted > 0 and #G.hand.highlighted < card.ability.extra.max_highlighted
+    can_use = function(self, card)
+        return card.ability.extra.mult ~= 0 and #G.hand.highlighted > 0 and
+            #G.hand.highlighted < card.ability.extra.max_highlighted
     end
 }
 
@@ -66,10 +67,10 @@ SMODS.Consumable { --3oak moon, applies random enhancements
     atlas = "placeholder",
     pos = { x = 3, y = 2 },
     config = { extra = { hand_type = "Three of a Kind", per_charge = 1 }, max_highlighted = 0 },
-    loc_vars = function (self, info_queue, card)
-        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.max_highlighted, card.ability.extra.per_charge }}
+    loc_vars = function(self, info_queue, card)
+        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.max_highlighted, card.ability.extra.per_charge } }
     end,
-    calculate = function (self, card, context)
+    calculate = function(self, card, context)
         if context.before and context.scoring_name == card.ability.extra.hand_type then
             SMODS.scale_card(card, {
                 ref_table = card.ability,
@@ -139,16 +140,16 @@ SMODS.Consumable { --3oak moon, applies random enhancements
     end,
 }
 
-SMODS.Consumable {
+SMODS.Consumable { --full house moon, creates jokers
     key = "moon",
     set = "hpr_moons",
     atlas = "placeholder",
     pos = { x = 3, y = 2 },
     config = { extra = { hand_type = "Full House", jokers = 0, per_charge = 1 } },
-    loc_vars = function (self, info_queue, card)
+    loc_vars = function(self, info_queue, card)
         return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.extra.jokers, card.ability.extra.per_charge } }
     end,
-    calculate = function (self, card, context)
+    calculate = function(self, card, context)
         if context.before and context.scoring_name == card.ability.extra.hand_type then
             SMODS.scale_card(card, {
                 ref_table = card.ability.extra,
@@ -158,11 +159,12 @@ SMODS.Consumable {
             SMODS.smart_level_up_hand(card, context.scoring_name, nil, -1)
         end
     end,
-    use = function (self, card, area, copier)
-        local joker_amount = math.min(card.ability.extra.jokers, G.jokers.config.card_limit - (#G.jokers.cards + G.GAME.joker_buffer))
+    use = function(self, card, area, copier)
+        local joker_amount = math.min(card.ability.extra.jokers,
+            G.jokers.config.card_limit - (#G.jokers.cards + G.GAME.joker_buffer))
         G.GAME.joker_buffer = G.GAME.joker_buffer + joker_amount
         G.E_MANAGER:add_event(Event({
-            func = function ()
+            func = function()
                 play_sound("timpani")
                 for _ = 1, joker_amount do
                     SMODS.add_card({
@@ -176,23 +178,75 @@ SMODS.Consumable {
             end
         }))
     end,
-    can_use = function (self, card)
+    can_use = function(self, card)
         return G.jokers and #G.jokers.cards < G.jokers.config.card_limit
     end
 }
 
---4oak moon here
+SMODS.Consumable { --4oak moon, perma xmult stuff
+    key = "phobos",
+    set = "hpr_moons",
+    atlas = "placeholder",
+    pos = { x = 3, y = 2 },
+    config = { extra = { hand_type = "Four of a Kind", max_highlighted = 4, mult = 0, per_charge = 0.1 } },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.extra.max_highlighted, card.ability.extra.mult, card.ability.extra.per_charge } }
+    end,
+    calculate = function(self, card, context)
+        if context.before and context.scoring_name == card.ability.extra.hand_type then
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "mult",
+                scalar_value = "per_charge"
+            })
+            SMODS.smart_level_up_hand(card, context.scoring_name, nil, -1)
+        end
+    end,
+    use = function(self, card, area, copier)
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                play_sound("tarot1")
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+        for i = 1, #G.hand.highlighted do
+            local _card = G.hand.highlighted[i]
+            _card.ability.perma_x_mult = (_card.ability.perma_x_mult or 1) + card.ability.extra.mult
+            G.E_MANAGER:add_event(Event({
+                trigger = "after",
+                delay = 0.1,
+                func = function()
+                    _card:juice_up()
+                    return true
+                end
+            }))
+        end
+        delay(0.5)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
+    end,
+    can_use = function (self, card)
+        return card.ability.extra.mult ~= 0 and #G.hand.highlighted <= card.ability.extra.max_highlighted and #G.hand.highlighted ~= 0
+    end
+}
 
-SMODS.Consumable {
+SMODS.Consumable { --flush moon, suit conv stuff
     key = "europa",
     set = "hpr_moons",
     atlas = "placeholder",
     pos = { x = 3, y = 2 },
     config = { extra = { hand_type = "Flush", per_charge = 1 }, max_highlighted = 0, suit_conv = "Spades" },
-    loc_vars = function (self, info_queue, card)
-        return {vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.max_highlighted, card.ability.extra.per_charge, localize(card.ability.suit_conv, "suits_plural") }, colours = { G.C.SUITS[card.ability.suit_conv]}}
+    loc_vars = function(self, info_queue, card)
+        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.max_highlighted, card.ability.extra.per_charge, localize(card.ability.suit_conv, "suits_plural") }, colours = { G.C.SUITS[card.ability.suit_conv] } }
     end,
-    calculate = function (self, card, context)
+    calculate = function(self, card, context)
         if context.before and context.scoring_name == card.ability.extra.hand_type then
             SMODS.scale_card(card, {
                 ref_table = card.ability,
@@ -203,7 +257,7 @@ SMODS.Consumable {
             local suits = {}
             for _, playing_card in ipairs(context.full_hand) do
                 if not SMODS.has_no_suit(playing_card) then
-                    suits[#suits+1] = playing_card.base.suit
+                    suits[#suits + 1] = playing_card.base.suit
                 end
             end
             card.ability.suit_conv = pseudorandom_element(suits) or "Spades"

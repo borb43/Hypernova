@@ -186,6 +186,17 @@ return {
                         "last drained {C:attention}#1#"
                     }
                 }
+            },
+            c_hpr_phobos = {
+                name = "Phobos",
+                text = {
+                    moon_drain_txt,
+                    {
+                        "Adds {X:mult,C:white}X#3#{} Mult to up to",
+                        "{C:attention}#2#{} selected cards",
+                        "Increases by {X:mult,C:white}X#4#{} per charge"
+                    }
+                }
             }
         }
     },
