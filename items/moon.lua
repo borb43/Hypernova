@@ -270,7 +270,41 @@ SMODS.Consumable { --flush moon, suit conv stuff
 
 --two pair moon here
 
---strush moon here
+SMODS.Consumable {
+    key = "Triton",
+    set = "hpr_moons",
+    atlas = "placeholder",
+    pos = { x = 3, y = 2 },
+    config = { extra = { hand_type = "Straight Flush", per_charge = 1 }, max_highlighted = 0 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.max_highlighted, card.ability.extra.per_charge}}
+    end,
+    calculate = function (self, card, context)
+        if context.before and context.scoring_name == card.ability.extra.hand_type then
+            SMODS.scale_card(card, {
+                ref_table = card.ability,
+                ref_value = "max_highlighted",
+                scalar_table = card.ability.extra,
+                scalar_value = "per_charge"
+            })
+        end
+    end,
+    use = function (self, card, area, copier)
+        for i = 1, #G.hand.highlighted do
+            G.E_MANAGER:add_event(Event({
+                trigger = "after",
+                delay = 0.15,
+                func = function ()
+                    local target = G.hand.highlighted[i]
+                    local edition = poll_edition("hpr_trition", nil, true, true)
+                    target:set_edition(edition, true)
+                    card:juice_up(0.3, 0.5)
+                    return true
+                end
+            }))
+        end
+    end
+}
 
 SMODS.Consumable { --High Card moon, gives money
     key = "styx",
@@ -309,7 +343,90 @@ SMODS.Consumable { --High Card moon, gives money
     end
 }
 
---5oak moon here
+SMODS.Consumable {
+    key = "Nibiru",
+    set = "hpr_moons",
+    atlas = "placeholder",
+    pos = { x = 3, y = 2 },
+    config = { extra = { hand_type = "Five of a Kind", rank_conv = "Ace", per_charge = 1 }, max_highlighted = 0 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.extra.rank_conv, card.ability.max_highlighted}}
+    end,
+    calculate = function (self, card, context)
+        if context.before and context.scoring_name == card.ability.extra.hand_type then
+            SMODS.scale_card(card, {
+                ref_table = card.ability,
+                ref_value = "max_highlighted",
+                scalar_table = card.ability.extra,
+                scalar_value = "per_charge"
+            })
+            local ranks = {}
+            for _, playing_card in ipairs(context.full_hand) do
+                if not SMODS.has_no_rank(playing_card) then
+                    ranks[#ranks+1] = playing_card.base.value
+                end
+            end
+            card.ability.extra.rank_conv = pseudorandom_element(ranks) or "Ace"
+        end
+    end,
+    use = function (self, card, area, copier)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+        for i = 1, #G.hand.highlighted do
+            local percent = 1.15 - (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.15,
+                func = function()
+                    G.hand.highlighted[i]:flip()
+                    play_sound('card1', percent)
+                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
+                    return true
+                end
+            }))
+        end
+        delay(0.2)
+        for i = 1, #G.hand.highlighted do
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.1,
+                func = function()
+                    assert(SMODS.change_base(G.hand.highlighted[i], nil, card.ability.extra.rank_conv))
+                    return true
+                end
+            }))
+        end
+        for i = 1, #G.hand.highlighted do
+            local percent = 0.85 + (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.15,
+                func = function()
+                    G.hand.highlighted[i]:flip()
+                    play_sound('tarot2', percent, 0.6)
+                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
+                    return true
+                end
+            }))
+        end
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
+        delay(0.5)
+    end
+}
 
 --flouse moon here
 

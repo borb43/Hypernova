@@ -197,6 +197,17 @@ return {
                         "Increases by {X:mult,C:white}X#4#{} per charge"
                     }
                 }
+            },
+            c_hpr_triton = {
+                name = "Triton",
+                text = {
+                    moon_drain_txt,
+                    {
+                        "Applies a random {C:dark_edition}edition{} to",
+                        "up to {C:attention}#2#{} selected cards",
+                        "Increases by {C:attention}#3#{} per charge"
+                    }
+                }
             }
         }
     },
