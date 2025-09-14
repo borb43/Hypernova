@@ -268,7 +268,7 @@ SMODS.Consumable { --flush moon, suit conv stuff
     end
 }
 
-SMODS.Consumable {
+SMODS.Consumable { -- straight moon, adds boosters
     key = "hyperion",
     set = "hpr_moons",
     atlas = "placeholder",
@@ -306,7 +306,7 @@ SMODS.Consumable {
     end
 }
 
-SMODS.Consumable {
+SMODS.Consumable { --two pair moon, rerolling uncommon joker
     key = "titania",
     set = "hpr_moons",
     atlas = "placeholder",
@@ -367,7 +367,7 @@ SMODS.Consumable {
     end
 }
 
-SMODS.Consumable {
+SMODS.Consumable { --strush moon, its just aura again
     key = "triton",
     set = "hpr_moons",
     atlas = "placeholder",
@@ -440,7 +440,7 @@ SMODS.Consumable { --High Card moon, gives money
     end
 }
 
-SMODS.Consumable {
+SMODS.Consumable { --5oak moon, rank conv stuff
     key = "nibiru",
     set = "hpr_moons",
     atlas = "placeholder",
@@ -533,7 +533,7 @@ SMODS.Consumable {
     end
 }
 
-SMODS.Consumable {
+SMODS.Consumable { --flouse moon, creates tags
     key = "asteroid",
     set = "hpr_moons",
     atlas = "placeholder",
@@ -581,7 +581,7 @@ SMODS.Consumable {
     end,
 }
 
-SMODS.Consumable {
+SMODS.Consumable { --flush 5 moon, rank and suit conv stuff
     key = "dysnomia",
     set = "hpr_moons",
     atlas = "placeholder",
