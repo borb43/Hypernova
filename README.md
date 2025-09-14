@@ -11,4 +11,5 @@ The mod currently adds:
     - 2 Rare
 - 2 Vouchers
 - 2 Decks
+- 12 Moon Cards - Like an evil and twisted version of planets that level down hands in exchange for benefits!
 - 2 Sleeves (Crossmod with [CardSleeves](https://github.com/larswijn/CardSleeves/releases/latest))
