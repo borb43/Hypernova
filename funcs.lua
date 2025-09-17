@@ -18,3 +18,15 @@ HPR.generate_compat_msg = function(card, other_card, compat_flag, args) --genera
         }
     }
 end
+
+HPR.valid_sets = {
+    "Playing Card",
+    "Joker",
+    "Voucher",
+    "Consumeables"
+}
+
+HPR.poll_set = function(options, seed)
+    options = options or HPR.valid_sets
+    return pseudorandom_element(options, seed)
+end

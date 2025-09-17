@@ -27,10 +27,9 @@ return {
             j_hpr_growth = {
                 name = "Growth",
                 text = {
-                    "Increase potency of most",
-                    "other joker effects by {C:attention}#1#X{}",
-                    "Increases by {C:attention}#2#X{} at the end of round",
-                    "{C:inactive}(Note: might be a bit weird at times)"
+                    "Multiplies the scoring, money and",
+                    "scaling of other jokers by #1#X",
+                    "Increases by #2#X at the end of round"
                 }
             },
             j_hpr_fusion = {
