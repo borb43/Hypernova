@@ -89,6 +89,27 @@ return {
                     "{C:attention}#2# {C:hpr_moons}Moon{} cards to add",
                     "to your consumables"
                 }
+            },
+            p_hpr_erratic_pack = {
+                name = "Erratic Pack",
+                text = {
+                    "Select {V:1}#1#{} of up to",
+                    "{V:1}#2#{} random cards"
+                }
+            },
+            p_hpr_erratic_pack_jumbo = {
+                name = "#3# Erratic Pack",
+                text = {
+                    "Select {V:1}#1#{} of up to",
+                    "{V:1}#2#{} random cards"
+                }
+            },
+            p_hpr_erratic_pack_mega = {
+                name = "#3# Erratic Pack",
+                text = {
+                    "Select {V:1}#1#{} of up to",
+                    "{V:1}#2#{} random cards"
+                }
             }
         },
         Planet={},
@@ -288,7 +309,23 @@ return {
             b_hpr_moons_cards = "Moon Cards",
             k_hpr_moons = "Moon",
             k_lunar_pack = "Lunar Pack",
-            k_hpr_moon_q = "Moon?"
+            k_hpr_moon_q = "Moon?",
+            --#region jumbo erratics
+            k_big = "Big",
+            k_sizable = "Sizable",
+            k_large = "Large",
+            k_jumbo = "Jumbo",
+            k_wumbo = "Wumbo",
+            k_very = "Very",
+            --#endregion
+            --#region mega erratics
+            k_mega = "Mega",
+            k_giga = "Giga",
+            k_giant = "Giant",
+            k_massive = "Massive",
+            k_extremely = "Extremely",
+            k_huge = "Huge"
+            --#endregion
         },
         high_scores={},
         labels={

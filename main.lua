@@ -1,5 +1,29 @@
 HPR = {}
 
+HPR.erratic_colours = {
+    G.C.RED,
+    G.C.BLUE,
+    G.C.FILTER
+}
+
+HPR.erratic_jumbos = {
+    "k_large",
+    "k_jumbo",
+    "k_sizable",
+    "k_big",
+    "k_wumbo",
+    "k_very"
+}
+
+HPR.erratic_megas = {
+    "k_mega",
+    "k_giga",
+    "k_giant",
+    "k_massive",
+    "k_extremely",
+    "k_huge"
+}
+
 to_big = to_big or function(x) return x end
 loc_colour()
 
