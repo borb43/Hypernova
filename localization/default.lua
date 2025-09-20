@@ -73,6 +73,15 @@ return {
                     "{C:green}numerator{} when a {C:green}probability{} rolls",
                     "When eaten, creates a {C:dark_edition}Negative {C:tarot}Tarot{} card"
                 }
+            },
+            j_hpr_eris = {
+                name = "{C:edition,E:1,s:1.1}Eris",
+                text = {
+                    "Retrigger all stone cards",
+                    "#3# times. Upgrades all stone",
+                    "cards in your deck at end of round",
+                    "({C:chips}+#1#{} Chips, {X:mult,C:white}X#2#{} Mult)"
+                }
             }
         },
         Other={
