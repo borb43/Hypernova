@@ -61,7 +61,7 @@ if CardSleeves then
     }
 end
 
-assert(SMODS.load_file("funcs.lua"))()
+assert(SMODS.load_file("lib/funcs.lua"))()
 
 assert(SMODS.load_file("items/moon.lua"))()
 assert(SMODS.load_file("items/booster.lua"))()
