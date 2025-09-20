@@ -6,7 +6,7 @@ SMODS.Joker { --fusion reactor, balances before scoring
     cost = 7,
     blueprint_compat = true,
     demicoloncompat = true,
-    calculate = function (self, card, context)
+    calculate = function(self, card, context)
         if context.initial_scoring_step or context.forcetrigger then
             return {
                 balance = true
@@ -19,14 +19,16 @@ SMODS.Joker { --fusion reactor, balances before scoring
 SMODS.Joker {
     key = "gambler",
     atlas = "placeholder",
-    pos = { x = 0, y = 0 },
-    config = { extra = { chips = 0, mult = 0, multiplier = 1 }},
-    loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra.chips, card.ability.extra.mult }}
+    pos = { x = 1, y = 0 },
+    config = { extra = { chips = 0, mult = 0, multiplier = 1 } },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.chips, card.ability.extra.mult } }
     end,
     rarity = 2,
-    cost = 4,
-    calculate = function (self, card, context)
+    cost = 7,
+    blueprint_compat = true,
+    demicoloncompat = true,
+    calculate = function(self, card, context)
         if context.pseudorandom_result then
             if not context.result then
                 SMODS.scale_card(card, {
@@ -34,7 +36,7 @@ SMODS.Joker {
                     ref_value = "chips",
                     scalar_value = "multiplier",
                     operation = function(ref_table, ref_value, initial, change)
-                        ref_table[ref_value] = initial + change*context.numerator*context.denominator
+                        ref_table[ref_value] = initial + change * context.numerator * context.denominator
                     end,
                     message = {
                         colour = G.C.CHIPS,
@@ -47,7 +49,7 @@ SMODS.Joker {
                     ref_value = "mult",
                     scalar_value = "multiplier",
                     operation = function(ref_table, ref_value, initial, change)
-                        ref_table[ref_value] = initial + change*context.denominator
+                        ref_table[ref_value] = initial + change * context.denominator
                     end,
                     message = {
                         colour = G.C.MULT,
@@ -56,11 +58,42 @@ SMODS.Joker {
                 })
             end
         end
-        if context.joker_main then
+        if context.joker_main or context.forcetrigger then
             return {
                 chips = card.ability.extra.chips,
                 mult = card.ability.extra.mult
             }
         end
+    end
+}
+
+SMODS.Joker {
+    key = "fortune",
+    atlas = "placeholder",
+    pos = { x = 1, y = 0 },
+    config = { extra = 50 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra } }
+    end,
+    rarity = 2,
+    cost = 6,
+    demicoloncompat = true,
+    blueprint_compat = true,
+    pools = { ["Food"] = true },
+    calculate = function(self, card, context)
+        if context.mod_probability and not context.blueprint then
+            local increase = math.min(context.denominator - context.numerator, card.ability.extra)
+            if context.from_roll then
+                card.ability.extra = math.max(card.ability.extra - increase, 0)
+                if card.ability.extra <= 0 then
+                    SMODS.add_card { set = 'Tarot', edition = 'e_negative' }
+                    SMODS.destroy_cards(card, nil, nil, true)
+                end
+            end
+            return {
+                numerator = context.numerator + increase
+            }
+        end
+        if context.forcetrigger then SMODS.add_card { set = 'Tarot', edition = 'e_negative' } end
     end
 }
