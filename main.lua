@@ -1,4 +1,4 @@
-HPR = {}
+HPR = SMODS.current_mod
 
 HPR.erratic_colours = {
     G.C.RED,
@@ -61,6 +61,7 @@ if CardSleeves then
     }
 end
 
+assert(SMODS.load_file("lib/extra_tabs.lua"))()
 assert(SMODS.load_file("lib/funcs.lua"))()
 
 assert(SMODS.load_file("items/moon.lua"))()
