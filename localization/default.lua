@@ -67,11 +67,10 @@ return {
             j_hpr_fortune = {
                 name = "Fortune Cookie",
                 text = {
-                    "All {C:attention}listed {C:green}probabilities{} are",
-                    "guaranteed (Max {C:attention}+#1# {C:green}numerator{})",
-                    "Reduces equal to the increase to the",
-                    "{C:green}numerator{} when a {C:green}probability{} rolls",
-                    "When eaten, creates a {C:dark_edition}Negative {C:tarot}Tarot{} card"
+                    "The next {C:attention}#1# listed",
+                    "{C:green,E:1}probabilities{} are guaranteed",
+                    "Creates a {C:dark_edition}Negative {C:Tarot}Tarot{} card",
+                    "when destroyed"
                 }
             },
             j_hpr_eris = {

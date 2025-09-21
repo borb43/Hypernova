@@ -71,7 +71,7 @@ SMODS.Joker {
     key = "fortune",
     atlas = "placeholder",
     pos = { x = 1, y = 0 },
-    config = { extra = 50 },
+    config = { extra = 6 },
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra } }
     end,
@@ -82,16 +82,15 @@ SMODS.Joker {
     pools = { ["Food"] = true },
     calculate = function(self, card, context)
         if context.mod_probability and not context.blueprint then
-            local increase = math.min(context.denominator - context.numerator, card.ability.extra)
             if context.from_roll then
-                card.ability.extra = math.max(card.ability.extra - increase, 0)
+                card.ability.extra = card.ability.extra - 1
                 if card.ability.extra <= 0 then
                     SMODS.add_card { set = 'Tarot', edition = 'e_negative' }
                     SMODS.destroy_cards(card, nil, nil, true)
                 end
             end
             return {
-                numerator = context.numerator + increase
+                numerator = context.denominator
             }
         end
         if context.forcetrigger then SMODS.add_card { set = 'Tarot', edition = 'e_negative' } end
