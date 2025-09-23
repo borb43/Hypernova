@@ -17,3 +17,25 @@ SMODS.Joker { --tipping scales, increases numerator and denominator of probabili
         end
     end
 }
+
+SMODS.Joker {
+    key = "british",
+    atlas = "placeholder",
+    pos = { x = 0, y = 0 },
+    config = { extra = 45 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra }}
+    end,
+    rarity = 1,
+    cost = 2,
+    blueprint_compat = true,
+    demicoloncompat = true,
+    calculate = function (self, card, context)
+        if context.joker_main or context.forcetrigger then
+            return {
+                chips = card.ability.extra,
+                message = localize { type = "variable", key = "a_crisps", vars = { card.ability.extra }}
+            }
+        end
+    end
+}

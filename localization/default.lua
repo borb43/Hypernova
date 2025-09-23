@@ -81,6 +81,12 @@ return {
                     "cards in your deck at end of round",
                     "({C:chips}+#1#{} Chips, {X:mult,C:white}X#2#{} Mult)"
                 }
+            },
+            j_hpr_british = {
+                name = "British Buffoon",
+                text = {
+                    "{C:chips}Plus forty-five{} Crisps"
+                }
             }
         },
         Other={
@@ -342,8 +348,9 @@ return {
             k_giant = "Giant",
             k_massive = "Massive",
             k_extremely = "Extremely",
-            k_huge = "Huge"
+            k_huge = "Huge",
             --#endregion
+            a_crisps = "+#1# Crisps"
         },
         high_scores={},
         labels={
