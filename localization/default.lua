@@ -59,8 +59,8 @@ return {
                 text = {
                     "When a {C:attention}listed {C:green}probability{} succeeds,",
                     "gains {C:mult}Mult{} equal to {C:green}denominator",
-                    "When a {C:attention}listed {C:green}probability{} fails, gains",
-                    "{C:chips}Chips equal to {C:green}numerator * denominator",
+                    "When a {C:attention}listed {C:green}probability{} fails,",
+                    "gains {C:chips}Chips equal to {C:green}denominator",
                     "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#2#{C:inactive} Mult)"
                 }
             },

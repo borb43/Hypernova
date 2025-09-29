@@ -36,7 +36,7 @@ SMODS.Joker {
                     ref_value = "chips",
                     scalar_value = "multiplier",
                     operation = function(ref_table, ref_value, initial, change)
-                        ref_table[ref_value] = initial + change * context.numerator * context.denominator
+                        ref_table[ref_value] = initial + change * context.denominator
                     end,
                     message = {
                         colour = G.C.CHIPS,

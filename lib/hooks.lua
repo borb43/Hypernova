@@ -17,14 +17,3 @@ create_card = function(_type, area, legendary, _rarity, skip_materialize, soulab
     end
     return ret_card
 end
-
-local gameboy_advance = get_blind_amount --decimal and negative ante stuff for future shenanigans
-get_blind_amount = function(ante)
-    if not ante then return gameboy_advance(ante) end
-    if ante < 0 then ante = math.abs(ante)/2 end
-    if ante%1 == 0 or ante > 8 then
-        return gameboy_advance(ante)
-    elseif ante > 0 and ante%1 ~= 0 then
-        return (gameboy_advance(math.floor(ante))+gameboy_advance(math.ceil(ante)))/2
-    end
-end
