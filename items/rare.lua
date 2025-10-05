@@ -12,23 +12,7 @@ SMODS.Joker { --growth, increases potency of other joker effects
     calculate = function(self, card, context)
         if context.post_trigger and not context.blueprint then
             local other_ret = context.other_ret.jokers or {}
-            local upgrade
-            for k, v in pairs(other_ret) do
-                if type(other_ret[k]) == "number" and k ~= "numerator" and k ~= "denominator" and k ~= "level_up" then
-                    other_ret[k] = other_ret[k] * card.ability.extra.eff_mod
-                    if k == "dollars" or k == "p_dollars" or k == "h_dollars" then
-                        other_ret[k] = math.floor(other_ret[k])
-                    end
-                    upgrade = true
-                elseif type(v) == "table" and not v.config then
-                    HPR.growth_recursive(card, v)
-                end
-            end
-            if upgrade then
-                return {
-                    message = localize("k_upgrade_ex")
-                }
-            end
+            HPR.manipulate_ret(other_ret, card.ability.extra.eff_mod)
         end
         if (context.end_of_round and context.main_eval and not context.blueprint) or context.forcetrigger then
             SMODS.scale_card(card, {
@@ -49,19 +33,6 @@ SMODS.Joker { --growth, increases potency of other joker effects
     end
 }
 
-HPR.growth_recursive = function(card, table)
-    for k, v in pairs(table) do
-        if type(table[k]) == "number" and k ~= "numerator" and k ~= "denominator" and type(k) ~= "number" and k ~= "level_up" then
-            table[k] = table[k] * card.ability.extra.eff_mod
-            if k == "dollars" or k == "p_dollars" or k == "h_dollars" then
-                table[k] = math.floor(table[k])
-            end
-            upgrade = true
-        elseif type(v) == "table" and not v.config and type(k) ~= "number" then
-            HPR.growth_recursive(card, v)
-        end
-    end
-end
 
 SMODS.Joker {
     key = "solar",

@@ -78,6 +78,7 @@ if CardSleeves then
 end
 
 assert(SMODS.load_file("lib/extra_tabs.lua"))()
+assert(SMODS.load_file("manipulate.lua"))()
 assert(SMODS.load_file("lib/funcs.lua"))()
 
 assert(SMODS.load_file("items/moon.lua"))()
