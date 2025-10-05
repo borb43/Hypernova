@@ -350,7 +350,8 @@ return {
             k_extremely = "Extremely",
             k_huge = "Huge",
             --#endregion
-            a_crisps = "+#1# Crisps"
+            a_crisps = "+#1# Crisps",
+            k_hpr_disable_arrow_manip = "Disable Talisman hyperop arrow manipulation (requires restart)"
         },
         high_scores={},
         labels={

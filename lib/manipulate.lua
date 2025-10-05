@@ -2,7 +2,7 @@ HPR.manipulate_blacklist = {
     numerator = true,
     denominator = true,
     cards_to_draw = true,
-    arrows = true,
+    arrows = HPR.config.disable_arrow_manip,
     colour = true,
     card = true
 }
