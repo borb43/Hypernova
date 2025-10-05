@@ -7,7 +7,7 @@ HPR.manipulate_blacklist = {
     card = true
 }
 
-HPR.manipulate_ret = function(table, mod)
+HPR.manipulate_ret = function(table, mod) -- multiplies values in a table by `mod`. intended for joker returns in context.post_trigger
     for k, v in pairs(table) do
         if type(table[k]) == "number" and not HPR.manipulate_blacklist[k] then
             if k == "level_up" and table[k] == true then table[k] = 1 end
