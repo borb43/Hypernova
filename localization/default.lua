@@ -134,6 +134,11 @@ return {
                     "Select {V:1}#1#{} of up to",
                     "{V:1}#2#{} random cards"
                 }
+            },
+            card_extra_eff_mod = {
+                text = {
+                    "{C:attention}X#1#{} Joker effects from this card"
+                }
             }
         },
         Planet={},

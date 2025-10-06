@@ -17,3 +17,11 @@ create_card = function(_type, area, legendary, _rarity, skip_materialize, soulab
     end
     return ret_card
 end
+
+local loc_perma_bonus_ref = SMODS.localize_perma_bonuses
+SMODS.localize_perma_bonuses = function (specific_vars, desc_nodes)
+    loc_perma_bonus_ref(specific_vars, desc_nodes)
+    if specific_vars and specific_vars.bonus_eff_mod then
+        localize{type = "other", key = "card_extra_eff_mod", nodes = desc_nodes, vars = {specific_vars.bonus_eff_mod}}
+    end
+end

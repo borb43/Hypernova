@@ -1,0 +1,26 @@
+[manifest]
+version = "1.0.0" # i cba to update this
+dump_lua = true
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "bonus_chips = bonus_chips ~= 0 and bonus_chips or nil,"
+position = "after"
+payload = '''
+bonus_eff_mod = self.ability.perma_eff_mod ~= 0 and (self.ability.perma_eff_mod + 1) or nil,
+'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "perma_repetitions = self.ability and self.ability.perma_repetitions or 0,"
+position = "after"
+payload = '''
+perma_eff_mod = self.ability and self.ability.perma_eff_mod or 0,
+'''
+match_indent = true
+times = 1
