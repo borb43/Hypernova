@@ -16,7 +16,7 @@ HPR.manipulate_ret = function(table, mod) -- multiplies values in a table by `mo
             if k == "dollars" or k == "p_dollars" or k == "h_dollars" or k == "level_up" or k == "arrows" then
                 table[k] = math.floor(table[k])
             end
-        elseif type(v) == "table" and not v.config and not HPR.manipulate_blacklist[k] then
+        elseif type(v) == "table" and not v.area and not HPR.manipulate_blacklist[k] then
             HPR.manipulate_ret(v, mod)
         end
     end
@@ -39,7 +39,7 @@ HPR.misprint_ret = function(table, mod, seed) -- multiplies by a random value in
             else
                 table[k] = HPR.round(table[k], 2)
             end
-        elseif type(v) == "table" and not v.config and not HPR.manipulate_blacklist[k] then
+        elseif type(v) == "table" and not v.area and not HPR.manipulate_blacklist[k] then
             HPR.misprint_ret(v, mod, seed..k)
         end
     end
