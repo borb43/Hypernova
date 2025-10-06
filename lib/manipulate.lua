@@ -4,7 +4,8 @@ HPR.manipulate_blacklist = {
     cards_to_draw = true,
     arrows = HPR.config.disable_arrow_manip,
     colour = true,
-    card = true
+    card = true,
+    message_card = true
 }
 
 HPR.manipulate_ret = function(table, mod) -- multiplies values in a table by `mod`. intended for joker returns in context.post_trigger
