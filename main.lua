@@ -5,7 +5,7 @@ HPR.calculate = function(self, context)
         if context.other_card or context.card then
             local other_ret = context.other_ret.jokers
             local trigger_card = (context.other_context.other_card or context.other_context.card)
-            if trigger_card then
+            if trigger_card and trigger_card:get_hpr_eff_mod() then
                 HPR.manipulate_ret(other_ret, trigger_card:get_hpr_eff_mod())
             end
         end
