@@ -1,5 +1,17 @@
 HPR = SMODS.current_mod
 
+HPR.calculate = function(self, context)
+    if context.post_trigger then
+        if context.other_card or context.card then
+            local other_ret = context.other_ret.jokers
+            local trigger_card = (context.other_context.other_card or context.other_context.card)
+            if trigger_card and trigger_card:get_hpr_eff_mod() then
+                HPR.manipulate_ret(other_ret, trigger_card:get_hpr_eff_mod())
+            end
+        end
+    end
+end
+
 HPR.erratic_colours = {
     G.C.RED,
     G.C.BLUE,
