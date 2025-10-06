@@ -85,14 +85,24 @@ SMODS.Joker {
             if context.from_roll then
                 card.ability.extra = card.ability.extra - 1
                 if card.ability.extra <= 0 then
-                    SMODS.add_card { set = 'Tarot', edition = 'e_negative' }
-                    SMODS.destroy_cards(card, nil, nil, true)
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            SMODS.add_card { set = 'Tarot', edition = 'e_negative' }
+                            SMODS.destroy_cards(card, nil, nil, true)
+                        end
+                    }))
                 end
             end
             return {
                 numerator = context.denominator
             }
         end
-        if context.forcetrigger then SMODS.add_card { set = 'Tarot', edition = 'e_negative' } end
+        if context.forcetrigger then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    SMODS.add_card { set = 'Tarot', edition = 'e_negative' }
+                end
+            }))
+        end
     end
 }
