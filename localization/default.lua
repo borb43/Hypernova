@@ -82,12 +82,6 @@ return {
                     "({C:chips}+#1#{} Chips, {X:mult,C:white}X#2#{} Mult)"
                 }
             },
-            j_hpr_british = {
-                name = "British Buffoon",
-                text = {
-                    "{C:chips}Plus forty-five{} Crisps"
-                }
-            }
         },
         Other={
             p_hpr_lunar_pack = {
@@ -355,7 +349,6 @@ return {
             k_extremely = "Extremely",
             k_huge = "Huge",
             --#endregion
-            a_crisps = "+#1# Crisps",
             k_hpr_disable_arrow_manip = "Disable Talisman hyperop arrow manipulation (requires restart)"
         },
         high_scores={},

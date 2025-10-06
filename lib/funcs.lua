@@ -20,5 +20,9 @@ HPR.generate_compat_msg = function(card, other_card, compat_flag, args) --genera
 end
 
 Card.get_hpr_eff_mod = function (self)
-    return (self and self.ability and (self.ability.eff_mod or 1) * (self.ability.perma_eff_mod or 1))
+    local base_eff_mod = self.ability.eff_mod and self.ability.eff_mod ~= 0 and self.ability.eff_mod + 1 or nil
+    local extra_eff_mod = self.ability.perma_eff_mod ~= 0 and self.ability.perma_eff_mod + 1 or nil
+    if base_eff_mod or extra_eff_mod then
+        return (base_eff_mod or 1) * (extra_eff_mod or 1)
+    end
 end
