@@ -1,3 +1,3 @@
 return {
-    ["disable_arrow_manip"] = true
+    ["enable_janky_manips"] = false
 }

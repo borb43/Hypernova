@@ -349,7 +349,7 @@ return {
             k_extremely = "Extremely",
             k_huge = "Huge",
             --#endregion
-            k_hpr_disable_arrow_manip = "Disable Talisman hyperop arrow manipulation (requires restart)"
+            k_hpr_enable_janky_manips = "Enables janky values for joker effect maniulation"
         },
         high_scores={},
         labels={
