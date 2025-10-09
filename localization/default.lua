@@ -74,7 +74,7 @@ return {
                 }
             },
             j_hpr_eris = {
-                name = "{C:edition,E:1,s:1.1}Eris",
+                name = "Eris",
                 text = {
                     "Retrigger all stone cards",
                     "#3# times. Upgrades all stone",

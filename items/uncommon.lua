@@ -89,6 +89,7 @@ SMODS.Joker {
                         func = function()
                             SMODS.add_card { set = 'Tarot', edition = 'e_negative' }
                             SMODS.destroy_cards(card, nil, nil, true)
+                            return true
                         end
                     }))
                 end
