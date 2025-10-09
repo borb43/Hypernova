@@ -339,13 +339,10 @@ SMODS.Consumable { --two pair moon, rerolling uncommon joker
     end,
     calculate = function(self, card, context)
         if context.before and context.scoring_name == card.ability.extra.hand_type then
-            local uncommons = {}
-            for _, joker in pairs(G.P_CENTER_POOLS.Joker) do
-                if joker.rarity == 2 and type(joker.in_pool) == "function" and joker:in_pool() then
-                    uncommons[#uncommons + 1] = joker.key
-                end
-            end
-            card.ability.extra.current_joker = pseudorandom_element(uncommons)
+            local uncommons = get_current_pool("Joker", 2, nil, "hpr_titania")
+            repeat
+                card.ability.extra.current_joker = pseudorandom_element(uncommons, "hpr_titania_card")
+            until card.ability.extra.current_joker ~= "UNAVAILABLE"
             SMODS.smart_level_up_hand(card, card.ability.extra.hand_type, nil, -1)
         end
     end,
