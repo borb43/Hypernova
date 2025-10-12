@@ -57,7 +57,8 @@ SMODS.Consumable { --Pair moon, perma mult stuff
     can_use = function(self, card)
         return card.ability.extra.mult ~= 0 and #G.hand.highlighted > 0 and
             #G.hand.highlighted < card.ability.extra.max_highlighted
-    end
+    end,
+    pronouns = "he_him"
 }
 
 
@@ -138,6 +139,7 @@ SMODS.Consumable { --3oak moon, applies random enhancements
         }))
         delay(0.5)
     end,
+    pronouns = "she_her"
 }
 
 SMODS.Consumable { --full house moon, creates jokers
@@ -180,7 +182,8 @@ SMODS.Consumable { --full house moon, creates jokers
     end,
     can_use = function(self, card)
         return G.jokers and #G.jokers.cards < G.jokers.config.card_limit
-    end
+    end,
+    pronouns = "she_her"
 }
 
 SMODS.Consumable { --4oak moon, perma xmult stuff
@@ -235,7 +238,8 @@ SMODS.Consumable { --4oak moon, perma xmult stuff
     can_use = function(self, card)
         return card.ability.extra.mult ~= 0 and #G.hand.highlighted <= card.ability.extra.max_highlighted and
             #G.hand.highlighted ~= 0
-    end
+    end,
+    pronouns = "he_him"
 }
 
 SMODS.Consumable { --flush moon, suit conv stuff
@@ -264,7 +268,8 @@ SMODS.Consumable { --flush moon, suit conv stuff
             card.ability.suit_conv = pseudorandom_element(suits) or "Spades"
             SMODS.smart_level_up_hand(card, context.scoring_name, nil, -1)
         end
-    end
+    end,
+    pronouns = "she_her"
 }
 
 SMODS.Consumable { -- straight moon, adds boosters
@@ -302,7 +307,8 @@ SMODS.Consumable { -- straight moon, adds boosters
     end,
     can_use = function(self, card)
         return G.STATE == G.STATES.SHOP and card.ability.extra.boosters > 0
-    end
+    end,
+    pronouns = "he_him"
 }
 
 SMODS.Consumable { --two pair moon, rerolling uncommon joker
@@ -360,7 +366,8 @@ SMODS.Consumable { --two pair moon, rerolling uncommon joker
     end,
     can_use = function(self, card)
         return card.ability.extra.current_joker ~= nil
-    end
+    end,
+    pronouns = "they_them"
 }
 
 SMODS.Consumable { --strush moon, its just aura again
@@ -396,7 +403,8 @@ SMODS.Consumable { --strush moon, its just aura again
                 end
             }))
         end
-    end
+    end,
+    pronouns = "he_him"
 }
 
 SMODS.Consumable { --High Card moon, gives money
@@ -433,7 +441,8 @@ SMODS.Consumable { --High Card moon, gives money
     end,
     can_use = function(self, card)
         return card.ability.extra.dollars > 0
-    end
+    end,
+    pronouns = "she_her"
 }
 
 SMODS.Consumable { --5oak moon, rank conv stuff
@@ -526,7 +535,8 @@ SMODS.Consumable { --5oak moon, rank conv stuff
     end,
     in_pool = function(self, args)
         return G.GAME and G.GAME.hands["Five of a Kind"].played > 0
-    end
+    end,
+    pronouns = "it_its"
 }
 
 SMODS.Consumable { --flouse moon, creates tags
@@ -575,6 +585,7 @@ SMODS.Consumable { --flouse moon, creates tags
         badges[#badges + 1] = create_badge(localize("k_hpr_moon_q"),
             get_type_colour(card.config.center or card.config, card), SMODS.ConsumableTypes.hpr_moons.text_colour, 1.2)
     end,
+    pronouns = "it_its"
 }
 
 SMODS.Consumable { --flush 5 moon, rank and suit conv stuff
@@ -681,5 +692,6 @@ SMODS.Consumable { --flush 5 moon, rank and suit conv stuff
     end,
     in_pool = function(self, args)
         return G.GAME.hands["Flush Five"].played > 0
-    end
+    end,
+    pronouns = "he_they"
 }

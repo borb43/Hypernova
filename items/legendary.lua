@@ -26,5 +26,6 @@ SMODS.Joker {
                 end
             end
         end
-    end
+    end,
+    pronouns = "any_all"
 }

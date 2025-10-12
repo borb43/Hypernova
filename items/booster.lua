@@ -233,7 +233,8 @@ SMODS.Booster {
             soulable = true,
             key_append = "hpr_erratic_card"
         }
-    end
+    end,
+    pronouns = "any_all"
 }
 
 SMODS.Booster {
@@ -281,7 +282,8 @@ SMODS.Booster {
             soulable = true,
             key_append = "hpr_erratic_card"
         }
-    end
+    end,
+    pronouns = "any_all"
 }
 
 SMODS.Booster {
@@ -329,7 +331,8 @@ SMODS.Booster {
             soulable = true,
             key_append = "hpr_erratic_card"
         }
-    end
+    end,
+    pronouns = "any_all"
 }
 
 SMODS.Booster {
@@ -377,5 +380,6 @@ SMODS.Booster {
             soulable = true,
             key_append = "hpr_erratic_card"
         }
-    end
+    end,
+    pronouns = "any_all"
 }
