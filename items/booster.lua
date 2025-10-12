@@ -195,7 +195,7 @@ SMODS.Booster {
     cost = 4,
     atlas = "placeholder",
     pos = { x = 0, y = 3 },
-    config = { extra = 4, choose = 1 },
+    config = { extra = 3, choose = 1 },
     group_key = "k_erratic_pack",
     loc_vars = function (self, info_queue, card)
         local cfg = (card and card.ability) or self.config or {}
@@ -244,7 +244,7 @@ SMODS.Booster {
     cost = 4,
     atlas = "placeholder",
     pos = { x = 0, y = 3 },
-    config = { extra = 4, choose = 1 },
+    config = { extra = 3, choose = 1 },
     group_key = "k_erratic_pack",
     loc_vars = function (self, info_queue, card)
         local cfg = (card and card.ability) or self.config or {}
@@ -293,7 +293,7 @@ SMODS.Booster {
     cost = 6,
     atlas = "placeholder",
     pos = { x = 1, y = 3 },
-    config = { extra = 7, choose = 1 },
+    config = { extra = 5, choose = 1 },
     group_key = "k_erratic_pack",
     loc_vars = function (self, info_queue, card)
         local cfg = (card and card.ability) or self.config or {}
@@ -342,7 +342,7 @@ SMODS.Booster {
     cost = 4,
     atlas = "placeholder",
     pos = { x = 2, y = 3 },
-    config = { extra = 7, choose = 2 },
+    config = { extra = 5, choose = 2 },
     group_key = "k_erratic_pack",
     loc_vars = function (self, info_queue, card)
         local cfg = (card and card.ability) or self.config or {}
