@@ -55,6 +55,15 @@ SMODS.Joker {
                 end
             end
             if context.scoring_name ~= _handname then
+                local options = {}
+                for _, c in ipairs(G.play.cards) do
+                    if not SMODS.is_eternal(c) then options[#options+1] = c end
+                end
+                for _ = 1, math.min(card.ability.extra.destroyed, #options) do
+                    local roll, pos = pseudorandom_element(options, "hpr_solar")
+                    roll.hpr_solar_destroy = true
+                    table.remove(options, pos)
+                end
                 return {
                     level_up = 1,
                     message = localize("k_upgrade_ex"),
@@ -62,7 +71,7 @@ SMODS.Joker {
                 }
             end
         end
-        if context.after and not context.blueprint then
+        if context.destroy_card and not context.blueprint then
             local _handname, _played = 'High Card', -1
             for hand_key, hand in pairs(G.GAME.hands) do
                 if hand.played > _played then
@@ -70,16 +79,8 @@ SMODS.Joker {
                     _handname = hand_key
                 end
             end
-            if context.scoring_name ~= _handname then
-                local destroy = {}
-                for i = 1, math.min(card.ability.extra.destroyed, #context.full_hand) do
-                    local eligible = true
-                    for _, card in ipairs(destroy) do
-                        if card == context.full_hand[i] then eligible = false end
-                    end
-                    if eligible then destroy[#destroy+1] = context.full_hand[i] end
-                end
-                SMODS.destroy_cards(destroy)
+            if context.scoring_name ~= _handname and context.destroy_card.hpr_solar_destroy then
+                return { remove = true }
             end
         end
     end
