@@ -2,7 +2,7 @@ SMODS.Joker { --growth, increases potency of other joker effects
     key = "growth",
     atlas = "placeholder",
     pos = { x = 2, y = 0 },
-    config = { extra = { eff_mod = 1, scale = 0.2 } },
+    config = { extra = { eff_mod = 1, scale = 0.1 } },
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.eff_mod, card.ability.extra.scale } }
     end,
@@ -21,15 +21,6 @@ SMODS.Joker { --growth, increases potency of other joker effects
                 scalar_value = "scale"
             })
         end
-    end,
-    calc_scaling = function(self, card, other_card, scaling_value, scalar_value, args)
-        if card ~= other_card then
-            return {
-                override_scalar_value = {
-                    value = scalar_value * card.ability.extra.eff_mod
-                }
-            }
-        end
     end
 }
 
@@ -46,7 +37,7 @@ SMODS.Joker {
     cost = 10,
     blueprint_compat = true,
     calculate = function(self, card, context)
-        if context.before then
+        if context.before and G.GAME.current_round.hands_played == 0 then
             local _handname, _played = 'High Card', -1
             for hand_key, hand in pairs(G.GAME.hands) do
                 if hand.played > _played then
@@ -71,7 +62,7 @@ SMODS.Joker {
                 }
             end
         end
-        if context.destroy_card and not context.blueprint then
+        if context.destroy_card and not context.blueprint and G.GAME.current_round.hands_played == 0 then
             local _handname, _played = 'High Card', -1
             for hand_key, hand in pairs(G.GAME.hands) do
                 if hand.played > _played then

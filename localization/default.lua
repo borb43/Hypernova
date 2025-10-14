@@ -27,9 +27,9 @@ return {
             j_hpr_growth = {
                 name = "Growth",
                 text = {
-                    "Multiplies the scoring, money and",
-                    "scaling of other jokers by #1#X",
-                    "Increases by #2#X at the end of round"
+                    "Multiplies most effects",
+                    "of other jokers by {C:attention}#1#X",
+                    "Increases by {C:attention}#2#X{} at the end of round"
                 }
             },
             j_hpr_fusion = {
@@ -49,7 +49,7 @@ return {
             j_hpr_solar = {
                 name = "Solar Flare",
                 text = {
-                    "If played hand is {C:attention}not your most played,",
+                    "If first hand of round {C:attention}not your most played,",
                     "{C:attention}upgrade{} it and {C:red}destroy {C:attention}#1#{} played cards",
                     "{s:0.8,C:dark_edition,E:1}Art and idea by Codifyd"
                 }
