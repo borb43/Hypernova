@@ -27,11 +27,45 @@ Card.get_hpr_eff_mod = function(self)
     end
 end
 
-HPR.trigger_consumable_effect = function(card)
-    if card.ability.consumeable and card.ability.consumeable.max_highlighted or card.ability.max_highlighted then --autocompat stuff here
-        local cards = card.ability.consumeable and card.ability.consumeable.max_highlighted or card.ability.max_highlighted
-        local suit = card.ability.consumeable and card.ability.consumeable.suit_conv or card.ability.suit_conv
-        local mod = card.ability.consumeable and card.ability.consumeable.mod_conv or card.ability.mod_conv
+HPR.trigger_consumable_effect = function(card, seed)
+    if not seed then seed = "force_use_generic" end
+    local cac = card.ability.consumeable
+    local ca = card.ability
+    if (cac and (cac.max_highlighted and (cac.mod_conv or cac.suit_conv) or cac.hand_type)) or
+    ca.max_highlighted and (ca.mod_conv or ca.suit_conv) or ca.hand_type or ca.hand_types then --autocompat stuff here
+        local cards = cac and cac.max_highlighted or ca.max_highlighted
+        local suit = cac and cac.suit_conv or ca.suit_conv
+        local mod = cac and cac.mod_conv or ca.mod_conv
+        local hand_type = cac and cac.hand_type or ca.hand_type
+        local cry_hand_types = ca.hand_types
+        if G.hand and G.hand.cards[1] and (suit or mod) then
+            local options = {}
+            for i = 1, #G.hand.cards do
+                options[#options+1] = G.hand.cards[i]
+            end
+            for _ = 1, cards do
+                local target, index = pseudorandom_element(options, seed)
+                table.remove(options, index)
+                G.E_MANAGER:add_event(Event({
+                    func = function ()
+                        if suit then
+                            SMODS.change_base(target, suit)
+                        end
+                        if mod then
+                            target:set_ability(mod)
+                        end
+                    end
+                }))
+            end
+        end
+        if hand_type then
+            SMODS.smart_level_up_hand(card, hand_type)
+        end
+        if cry_hand_types and type(cry_hand_types) == "table" and next(cry_hand_types) then
+            for _, hand in ipairs(cry_hand_types) do
+                SMODS.smart_level_up_hand(card, hand)
+            end
+        end
     elseif not card.config.center.mod then
         --vanilla stuff here
     else
