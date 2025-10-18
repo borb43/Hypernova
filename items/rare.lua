@@ -10,7 +10,7 @@ SMODS.Joker { --growth, increases potency of other joker effects
     cost = 10,
     perishable_compat = false,
     calculate = function(self, card, context)
-        if context.post_trigger and not context.blueprint then
+        if context.post_trigger and not context.blueprint and context.other_card.ability.set == "Joker" then
             local other_ret = context.other_ret.jokers or {}
             HPR.manipulate_ret(other_ret, card.ability.extra.eff_mod)
         end

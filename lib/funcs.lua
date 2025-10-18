@@ -1,7 +1,8 @@
 HPR.generate_compat_msg = function(card, other_card, compat_flag, args) --generate blueprint type compat ui. `args.compat_message_key` and `args.incompat_message_key` both refer to localization keys for the incompat message, defaulting to the standard blueprint messages
     if not args then args = {} end
     compat_flag = compat_flag or "blueprint_compat"
-    local compatible = (other_card and other_card ~= card and other_card.config.center[compat_flag]) or compat_flag == true
+    local compatible = (other_card and other_card ~= card and other_card.config.center[compat_flag]) or
+    compat_flag == true
     return {
         {
             n = G.UIT.C,
@@ -19,9 +20,25 @@ HPR.generate_compat_msg = function(card, other_card, compat_flag, args) --genera
     }
 end
 
-Card.get_hpr_eff_mod = function (self)
+Card.get_hpr_eff_mod = function(self)
     local extra_eff_mod = self.ability.perma_eff_mod ~= 0 and self.ability.perma_eff_mod + 1 or nil
     if extra_eff_mod then
         return (extra_eff_mod or 1)
+    end
+end
+
+HPR.trigger_consumable_effect = function(card)
+    if card.ability.consumeable and card.ability.consumeable.max_highlighted or card.ability.max_highlighted then --autocompat stuff here
+        local cards = card.ability.consumeable and card.ability.consumeable.max_highlighted or card.ability.max_highlighted
+        local suit = card.ability.consumeable and card.ability.consumeable.suit_conv or card.ability.suit_conv
+        local mod = card.ability.consumeable and card.ability.consumeable.mod_conv or card.ability.mod_conv
+    elseif not card.config.center.mod then
+        --vanilla stuff here
+    else
+        if card.config.center.hpr_trigger_effect then
+            card.config.center:hpr_trigger_effect(card, card.area)
+        elseif card.config.center.force_use then
+            card.config.center:force_use(card, card.area)
+        end
     end
 end
