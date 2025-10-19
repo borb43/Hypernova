@@ -77,6 +77,15 @@ HPR.custom_upgrade_hand = function (card, _hand, t)
                 return true end }))
         end
     end
+    if t.balance then
+        delay(1)
+        local tot = hand.chips + hand.mult
+        hand.chips = tot/2
+        hand.mult = tot/2
+        update_hand_text({delay = 0}, {chips = hand.chips, mult = hand.mult})
+        HPR.event_presets.balance_display(card)
+        delay(0.6)
+    end
     if t.levels then
         hand.level = hand.level + t.levels
         G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.9, func = function()
