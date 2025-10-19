@@ -349,7 +349,8 @@ local misc = {
         k_extremely = "Extremely",
         k_huge = "Huge",
         --#endregion
-        k_hpr_enable_janky_manips = "Enables janky values for joker effect maniulation"
+        k_hpr_enable_janky_manips = "Enables janky values for joker effect maniulation",
+        k_level_stats = "per level"
     },
     high_scores = {},
     labels = {
