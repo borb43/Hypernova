@@ -10,19 +10,9 @@ SMODS.Consumable { --Pair moon, perma mult stuff
     set = "hpr_moons",
     atlas = "placeholder",
     pos = { x = 3, y = 2 },
-    config = { extra = { hand_type = "Pair", mult = 0, per_charge = 8, max_highlighted = 2 } },
+    config = { extra = { mult = 8 }, max_highlighted = 2 },
     loc_vars = function(self, info_queue, card)
-        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.extra.mult, card.ability.extra.per_charge, card.ability.extra.max_highlighted } }
-    end,
-    calculate = function(self, card, context)
-        if context.before and context.scoring_name == card.ability.extra.hand_type then
-            SMODS.scale_card(card, {
-                ref_table = card.ability.extra,
-                ref_value = "mult",
-                scalar_value = "per_charge"
-            })
-            SMODS.smart_level_up_hand(card, context.scoring_name, nil, -1)
-        end
+        return { vars = { card.ability.extra.mult, card.ability.extra.max_highlighted } }
     end,
     use = function(self, card, area, copier)
         G.E_MANAGER:add_event(Event({
@@ -53,10 +43,6 @@ SMODS.Consumable { --Pair moon, perma mult stuff
                 return true
             end
         }))
-    end,
-    can_use = function(self, card)
-        return card.ability.extra.mult ~= 0 and #G.hand.highlighted > 0 and
-            #G.hand.highlighted < card.ability.extra.max_highlighted
     end,
     pronouns = "he_him"
 }

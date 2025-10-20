@@ -198,12 +198,8 @@ local descriptions = {
         c_hpr_deimos = {
             name = "Deimos",
             text = {
-                moon_drain_txt,
-                {
-                    "Permanently adds {C:mult}+#2#{} Mult to",
-                    "up to {C:attention}#4#{} selected cards",
-                    "Increases by {c:attention}#3#{} for each charge"
-                }
+                "Permanently adds {C:mult}+#1#{} Mult to",
+                "up to {C:attention}#2#{} selected cards",
             }
         },
         c_hpr_io = {
