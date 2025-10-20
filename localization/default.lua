@@ -28,8 +28,8 @@ local descriptions = {
             name = "Growth",
             text = {
                 "Multiplies most effects",
-                "of other jokers by {C:attention}#1#X",
-                "Increases by {C:attention}#2#X{} at the end of round"
+                "of other jokers by {X:dark_edition,C:white}#1#X",
+                "Increases by {X:dark_edition,C:white}#2#X{} at the end of round"
             }
         },
         j_hpr_fusion = {
