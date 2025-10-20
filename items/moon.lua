@@ -121,3 +121,19 @@ HPR.moon {
         return { vars = { card.ability.moon_p_dollars, card.ability.max_highlighted }}
     end
 }
+
+HPR.moon {
+    key = "asteroid",
+    config = { moon_repetitions = 1, max_highlighted = 1 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.moon_repetitions, card.ability.max_highlighted }}
+    end
+}
+
+HPR.moon {
+    key = "dysnomia",
+    config = { moon_eff_mod = 0.2, max_highlighted = 1 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.moon_eff_mod, card.ability.max_highlighted }}
+    end
+}

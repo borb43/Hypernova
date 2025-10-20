@@ -131,7 +131,7 @@ local descriptions = {
         },
         card_extra_eff_mod = {
             text = {
-                "{C:attention}X#1#{} Joker effects from this card"
+                "{X:dark_edition,C:white}X#1#{} Joker effects from this card"
             }
         }
     },
@@ -188,8 +188,8 @@ local descriptions = {
         c_hpr_styx = {
             name = "Styx",
             text = {
-                "Permanently adds {C:money}$#1#{} at the end of round",
-                "to up to {C:attention}#2#{} selected cards"
+                "Permanently adds {C:money}$#1#{} at the end of",
+                "round to {C:attention}#2#{} selected card"
             }
         },
         c_hpr_deimos = {
@@ -237,31 +237,22 @@ local descriptions = {
         c_hpr_nibiru = {
             name = "Nibiru",
             text = {
-                "Permanently adds {C:money}$#1#{} to up to",
-                "{C:attention}#2#{} selected cards"
+                "Permanently adds {C:money}$#1#{} to",
+                "{C:attention}#2#{} selected card"
             }
         },
         c_hpr_asteroid = {
             name = "Asteroid",
             text = {
-                moon_drain_txt,
-                {
-                    "Creates {C:attention}#2#{} random tag#4#",
-                    "Increases by {C:attention}#3#{} per charge"
-                }
+                "Permanently adds {C:attention}#1#{} retrigger",
+                "to {C:attention}#2#{} selected card"
             }
         },
         c_hpr_dysnomia = {
             name = "Dysnomia",
             text = {
-                moon_drain_txt,
-                {
-                    "Converts up to #4# selected",
-                    "card#6# to {C:attention}#2#{}s of {V:1}#3#",
-                    "+#5# selected card per charge",
-                    "changes rank and suit to that",
-                    "of the last drained {C:attention}#1#"
-                }
+                "Permanently adds {X:dark_edition,C:white}X#1#{} Joker",
+                "effects to #2# selected card"
             }
         },
         c_hpr_titania = {
