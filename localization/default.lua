@@ -205,12 +205,8 @@ local descriptions = {
         c_hpr_io = {
             name = "Io",
             text = {
-                moon_drain_txt,
-                {
-                    "Applies random enhancements",
-                    "to up to {C:attention}#2#{} selected card#4#",
-                    "Increases by {C:attention}#3#{} per charge"
-                }
+                "Permanently adds {C:chips}+#1#{} Chips to",
+                "up to {C:attention}#2#{} selected cards"
             }
         },
         c_hpr_moon = {

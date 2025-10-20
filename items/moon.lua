@@ -5,7 +5,7 @@ SMODS.ConsumableType {
     secondary_colour = HEX("707b8c"),
 }
 
-SMODS.Consumable { --Pair moon, perma mult stuff
+SMODS.Consumable { --Pair moon, perma mult
     key = "deimos",
     set = "hpr_moons",
     atlas = "placeholder",
@@ -48,73 +48,36 @@ SMODS.Consumable { --Pair moon, perma mult stuff
 }
 
 
-SMODS.Consumable { --3oak moon, applies random enhancements
+SMODS.Consumable { --3oak moon, perma chips
     key = "io",
     set = "hpr_moons",
     atlas = "placeholder",
     pos = { x = 3, y = 2 },
-    config = { extra = { hand_type = "Three of a Kind", per_charge = 1 }, max_highlighted = 0 },
+    config = { extra = { chips = 60 }, max_highlighted = 2 },
     loc_vars = function(self, info_queue, card)
-        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.max_highlighted, card.ability.extra.per_charge, card.ability.max_highlighted ~= 1 and "s" or "" } }
-    end,
-    calculate = function(self, card, context)
-        if context.before and context.scoring_name == card.ability.extra.hand_type then
-            SMODS.scale_card(card, {
-                ref_table = card.ability,
-                ref_value = "max_highlighted",
-                scalar_table = card.ability.extra,
-                scalar_value = "per_charge"
-            })
-            SMODS.smart_level_up_hand(card, context.scoring_name, nil, -1)
-        end
+        return { vars = { card.ability.extra.chips, card.ability.max_highlighted } }
     end,
     use = function(self, card, area, copier)
         G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            delay = 0.4,
             func = function()
-                play_sound('tarot1')
+                play_sound("tarot1")
                 card:juice_up(0.3, 0.5)
                 return true
             end
         }))
         for i = 1, #G.hand.highlighted do
-            local percent = 1.15 - (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
+            local _card = G.hand.highlighted[i]
+            _card.ability.perma_bonus = (_card.ability.perma_bonus or 0) + card.ability.extra.chips
             G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 0.15,
-                func = function()
-                    G.hand.highlighted[i]:flip()
-                    play_sound('card1', percent)
-                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
-                    return true
-                end
-            }))
-        end
-        delay(0.2)
-        for i = 1, #G.hand.highlighted do
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after',
+                trigger = "after",
                 delay = 0.1,
                 func = function()
-                    G.hand.highlighted[i]:set_ability(G.P_CENTERS[SMODS.poll_enhancement({ guaranteed = true })])
+                    _card:juice_up()
                     return true
                 end
             }))
         end
-        for i = 1, #G.hand.highlighted do
-            local percent = 0.85 + (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 0.15,
-                func = function()
-                    G.hand.highlighted[i]:flip()
-                    play_sound('tarot2', percent, 0.6)
-                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
-                    return true
-                end
-            }))
-        end
+        delay(0.5)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.2,
@@ -123,7 +86,6 @@ SMODS.Consumable { --3oak moon, applies random enhancements
                 return true
             end
         }))
-        delay(0.5)
     end,
     pronouns = "she_her"
 }
