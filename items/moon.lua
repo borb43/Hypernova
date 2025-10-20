@@ -20,18 +20,7 @@ HPR.moon = SMODS.Consumable:extend({
         }))
         for i = 1, #G.hand.highlighted do
             local _card = G.hand.highlighted[i]
-            _card.ability.perma_bonus = _card.ability.perma_bonus + (card.ability.moon_bonus or 0)
-            _card.ability.perma_h_chips = _card.ability.perma_h_chips + (card.ability.moon_h_chips or 0)
-            _card.ability.perma_mult = _card.ability.perma_mult + (card.ability.moon_mult or 0)
-            _card.ability.perma_h_mult = _card.ability.perma_h_mult + (card.ability.moon_h_mult or 0)
-            _card.ability.perma_x_chips = _card.ability.perma_x_chips + (card.ability.moon_x_chips or 0)
-            _card.ability.perma_h_x_chips = _card.ability.perma_h_x_chips + (card.ability.moon_h_x_chips or 0)
-            _card.ability.perma_x_mult = _card.ability.perma_x_mult + (card.ability.moon_x_mult or 0)
-            _card.ability.perma_h_x_mult = _card.ability.perma_h_x_mult + (card.ability.moon_h_x_mult or 0)
-            _card.ability.perma_p_dollars = _card.ability.perma_p_dollars + (card.ability.moon_p_dollars or 0)
-            _card.ability.perma_h_dollars = _card.ability.perma_h_dollars + (card.ability.moon_h_dollars or 0)
-            _card.ability.perma_repetitions = _card.ability.perma_repetitions + (card.ability.moon_repetitions or 0)
-            _card.ability.perma_eff_mod = _card.ability.perma_eff_mod + (card.ability.moon_eff_mod or 0)
+            HPR.apply_moon_bonus(_card, card)
             G.E_MANAGER:add_event(Event({
                 trigger = "after",
                 delay = 0.1,
