@@ -8,7 +8,6 @@ SMODS.Booster {
     pos = { x = 0, y = 3 },
     config = { extra = 2, choose = 1 },
     group_key = "k_lunar_pack",
-    select_card = "consumeables",
     loc_vars = function(self, info_queue, card)
         local cfg = (card and card.ability) or self.config or {} --only here because vscode is being an annoying little piece of shit about "need check nil" like what the fuck do you think `or` is meant to do you dumb fuck
         return {
@@ -43,7 +42,8 @@ SMODS.Booster {
             soulable = true,
             key_append = "hpr_lunar_pack"
         }
-    end
+    end,
+    draw_hand = true
 }
 
 SMODS.Booster {
@@ -55,7 +55,6 @@ SMODS.Booster {
     pos = { x = 0, y = 3 },
     config = { extra = 2, choose = 1 },
     group_key = "k_lunar_pack",
-    select_card = "consumeables",
     loc_vars = function(self, info_queue, card)
         local cfg = (card and card.ability) or self.config or {} --only here because vscode is being an annoying little piece of shit about "need check nil" like what the fuck do you think `or` is meant to do you dumb fuck
         return {
@@ -90,7 +89,8 @@ SMODS.Booster {
             soulable = true,
             key_append = "hpr_lunar_pack"
         }
-    end
+    end,
+    draw_hand = true
 }
 
 SMODS.Booster {
@@ -102,7 +102,6 @@ SMODS.Booster {
     pos = { x = 1, y = 3 },
     config = { extra = 4, choose = 1 },
     group_key = "k_lunar_pack",
-    select_card = "consumeables",
     loc_vars = function(self, info_queue, card)
         local cfg = (card and card.ability) or self.config or {} --only here because vscode is being an annoying little piece of shit about "need check nil" like what the fuck do you think `or` is meant to do you dumb fuck
         return {
@@ -137,7 +136,8 @@ SMODS.Booster {
             soulable = true,
             key_append = "hpr_lunar_pack"
         }
-    end
+    end,
+    draw_hand = true
 }
 
 SMODS.Booster {
@@ -149,7 +149,6 @@ SMODS.Booster {
     pos = { x = 0, y = 3 },
     config = { extra = 4, choose = 2 },
     group_key = "k_lunar_pack",
-    select_card = "consumeables",
     loc_vars = function(self, info_queue, card)
         local cfg = (card and card.ability) or self.config or {} --only here because vscode is being an annoying little piece of shit about "need check nil" like what the fuck do you think `or` is meant to do you dumb fuck
         return {
@@ -184,7 +183,8 @@ SMODS.Booster {
             soulable = true,
             key_append = "hpr_lunar_pack"
         }
-    end
+    end,
+    draw_hand = true
 }
 -- #endregion
 
