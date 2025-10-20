@@ -212,11 +212,8 @@ local descriptions = {
         c_hpr_moon = {
             name = "Luna",
             text = {
-                moon_drain_txt,
-                {
-                    "Creates #2# random joker card#4#",
-                    "Increases by #3# per charge"
-                }
+                "Permanently adds {C:chips}+#1#{} held in hand",
+                "Chips to up to {C:attention}#2#{} selected cards"
             }
         },
         c_hpr_europa = {

@@ -5,6 +5,53 @@ SMODS.ConsumableType {
     secondary_colour = HEX("707b8c"),
 }
 
+HPR.moon = SMODS.Consumable:extend({
+    set = "hpr_moons",
+    atlas = "placeholder", --default atlas, change later
+    pos = { x = 3, y = 2 },
+    use = function (self, card, area, copier)
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                play_sound("tarot1")
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+        for i = 1, #G.hand.highlighted do
+            local _card = G.hand.highlighted[i]
+            _card.ability.perma_bonus = _card.ability.perma_bonus + (card.ability.moon_bonus or 0)
+            _card.ability.perma_h_chips = _card.ability.perma_h_chips + (card.ability.moon_h_chips or 0)
+            _card.ability.perma_mult = _card.ability.perma_mult + (card.ability.moon_mult or 0)
+            _card.ability.perma_h_mult = _card.ability.perma_h_mult + (card.ability.moon_h_mult or 0)
+            _card.ability.perma_x_chips = _card.ability.perma_x_chips + (card.ability.moon_x_chips or 0)
+            _card.ability.perma_h_x_chips = _card.ability.perma_h_x_chips + (card.ability.moon_h_x_chips or 0)
+            _card.ability.perma_x_mult = _card.ability.perma_x_mult + (card.ability.moon_x_mult or 0)
+            _card.ability.perma_h_x_mult = _card.ability.perma_h_x_mult + (card.ability.moon_h_x_mult or 0)
+            _card.ability.perma_p_dollars = _card.ability.perma_p_dollars + (card.ability.moon_p_dollars or 0)
+            _card.ability.perma_h_dollars = _card.ability.perma_h_dollars + (card.ability.moon_h_dollars or 0)
+            _card.ability.perma_repetitions = _card.ability.perma_repetitions + (card.ability.moon_repetitions or 0)
+            _card.ability.perma_eff_mod = _card.ability.perma_eff_mod + (card.ability.moon_eff_mod or 0)
+            G.E_MANAGER:add_event(Event({
+                trigger = "after",
+                delay = 0.1,
+                func = function()
+                    _card:juice_up()
+                    return true
+                end
+            }))
+        end
+        delay(0.5)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
+    end
+})
+
 SMODS.Consumable { --Pair moon, perma mult
     key = "deimos",
     set = "hpr_moons",
@@ -95,41 +142,39 @@ SMODS.Consumable { --full house moon, creates jokers
     set = "hpr_moons",
     atlas = "placeholder",
     pos = { x = 3, y = 2 },
-    config = { extra = { hand_type = "Full House", jokers = 0, per_charge = 1 } },
+    config = { extra = { h_chips = 60 }, max_highlighted = 3 },
     loc_vars = function(self, info_queue, card)
-        return { vars = { localize(card.ability.extra.hand_type, "poker_hands"), card.ability.extra.jokers, card.ability.extra.per_charge, card.ability.extra.jokers ~= 1 and "s" or "" } }
-    end,
-    calculate = function(self, card, context)
-        if context.before and context.scoring_name == card.ability.extra.hand_type then
-            SMODS.scale_card(card, {
-                ref_table = card.ability.extra,
-                ref_value = "jokers",
-                scalar_value = "per_charge"
-            })
-            SMODS.smart_level_up_hand(card, context.scoring_name, nil, -1)
-        end
+        return { vars = { card.ability.extra.h_chips, card.ability.max_highlighted } }
     end,
     use = function(self, card, area, copier)
-        local joker_amount = math.min(card.ability.extra.jokers,
-            G.jokers.config.card_limit - (#G.jokers.cards + G.GAME.joker_buffer))
-        G.GAME.joker_buffer = G.GAME.joker_buffer + joker_amount
         G.E_MANAGER:add_event(Event({
             func = function()
-                play_sound("timpani")
-                for _ = 1, joker_amount do
-                    SMODS.add_card({
-                        set = "Joker",
-                        key_append = "c_hpr_moon"
-                    })
-                end
+                play_sound("tarot1")
                 card:juice_up(0.3, 0.5)
-                G.GAME.joker_buffer = 0
                 return true
             end
         }))
-    end,
-    can_use = function(self, card)
-        return G.jokers and #G.jokers.cards < G.jokers.config.card_limit
+        for i = 1, #G.hand.highlighted do
+            local _card = G.hand.highlighted[i]
+            _card.ability.perma_h_chips = (_card.ability.perma_h_chips or 0) + card.ability.extra.h_chips
+            G.E_MANAGER:add_event(Event({
+                trigger = "after",
+                delay = 0.1,
+                func = function()
+                    _card:juice_up()
+                    return true
+                end
+            }))
+        end
+        delay(0.5)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
     end,
     pronouns = "she_her"
 }
