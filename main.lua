@@ -12,6 +12,14 @@ HPR.calculate = function(self, context)
     end
 end
 
+HPR.set_ability_reset_keys = function ()
+    return {
+        "moon_bonus", "moon_h_chips", "moon_mult", "moon_h_mult",
+        "moon_x_chips", "moon_h_x_chips", "moon_x_mult", "moon_h_x_mult",
+        "moon_p_dollars", "moon_h_dollars", "moon_repetitions", "moon_eff_mod"
+    }
+end
+
 HPR.erratic_colours = {
     G.C.RED,
     G.C.BLUE,

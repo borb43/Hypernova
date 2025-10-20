@@ -219,14 +219,8 @@ local descriptions = {
         c_hpr_europa = {
             name = "Europa",
             text = {
-                moon_drain_txt,
-                {
-                    "Converts up to {c:attention}#2#{} selected",
-                    "card#4# to {V:1}#4#",
-                    "{C:attention}+#3#{} selected cards per charge",
-                    "changes suit to that of the",
-                    "last drained {C:attention}#1#"
-                }
+                "Permanently adds {C:mult}+#1#{} held in hand",
+                "Mult to up to {C:attention}#2#{} selected cards"
             }
         },
         c_hpr_phobos = {
