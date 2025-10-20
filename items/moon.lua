@@ -67,9 +67,25 @@ HPR.moon {
 }
 
 HPR.moon {
-    key = "europa",
+    key = "phobos",
     config = { moon_h_mult = 8, max_highlighted = 3 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_h_mult, card.ability.max_highlighted }}
+    end
+}
+
+HPR.moon {
+    key = "europa",
+    config = { moon_x_mult = 0.2, max_highlighted = 1 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.moon_x_mult, card.ability.max_highlighted }}
+    end
+}
+
+HPR.moon {
+    key = "hyperion",
+    config = { moon_x_chips = 0.2, max_highlighted = 1 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.moon_x_chips, card.ability.max_highlighted }}
     end
 }

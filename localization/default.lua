@@ -219,19 +219,15 @@ local descriptions = {
         c_hpr_europa = {
             name = "Europa",
             text = {
-                "Permanently adds {C:mult}+#1#{} held in hand",
-                "Mult to up to {C:attention}#2#{} selected cards"
+                "Permanently adds {X:mult,C:white}X#1#{} Mult",
+                "to up to {C:attention}#2#{} selected cards"
             }
         },
         c_hpr_phobos = {
             name = "Phobos",
             text = {
-                moon_drain_txt,
-                {
-                    "Adds {X:mult,C:white}X#3#{} Mult to up to",
-                    "{C:attention}#2#{} selected cards",
-                    "Increases by {X:mult,C:white}X#4#{} per charge"
-                }
+                "Permanently adds {C:mult}+#1#{} held in hand",
+                "Mult to up to {C:attention}#2#{} selected cards"
             }
         },
         c_hpr_triton = {
@@ -295,12 +291,8 @@ local descriptions = {
         c_hpr_hyperion = {
             name = "Hyperion",
             text = {
-                moon_drain_txt,
-                {
-                    "Adds {C:attention}#2#{} Booster Pack#4#",
-                    "to the current shop",
-                    "Increases by {C:attention}#3#{} per charge"
-                }
+                "Permanently adds {X:chips,C:white}X#1#{} Chips",
+                "to up to {C:attention}#2#{} selected cards"
             }
         }
     }
