@@ -233,12 +233,8 @@ local descriptions = {
         c_hpr_triton = {
             name = "Triton",
             text = {
-                moon_drain_txt,
-                {
-                    "Applies a random {C:dark_edition}edition{} to",
-                    "up to {C:attention}#2#{} selected card#4#",
-                    "Increases by {C:attention}#3#{} per charge"
-                }
+                "Permanently adds {X:chips,C:white}X#1#{} held in hand",
+                "Chips to up to {C:attention}#2#{} selected cards"
             }
         },
         c_hpr_nibiru = {
@@ -280,12 +276,8 @@ local descriptions = {
         c_hpr_titania = {
             name = "Titania",
             text = {
-                moon_drain_txt,
-                {
-                    "Creates the specified",
-                    "{C:uncommon}Uncommon{} Joker",
-                    "{C:attention}Rerolls{} when charged"
-                }
+                "Permanently adds {X:mult,C:white}X#1#{} held in hand",
+                "Mult to up to {C:attention}#2#{} selected cards"
             }
         },
         c_hpr_hyperion = {

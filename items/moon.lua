@@ -89,3 +89,19 @@ HPR.moon {
         return { vars = { card.ability.moon_x_chips, card.ability.max_highlighted }}
     end
 }
+
+HPR.moon {
+    key = "titania",
+    config = { moon_h_x_mult = 0.2, max_highlighted = 2 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.moon_h_x_mult, card.ability.max_highlighted }}
+    end
+}
+
+HPR.moon {
+    key = "triton",
+    config = { moon_h_x_chips = 0.2, max_highlighted = 2 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.moon_h_x_chips, card.ability.max_highlighted }}
+    end
+}
