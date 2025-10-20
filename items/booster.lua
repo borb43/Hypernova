@@ -1,4 +1,17 @@
 -- #region lunar
+local lunar_hallucinations_compat = {
+    colour = HEX("5d15d1"),
+    loc_key = "hpr_plus_moon",
+    create = function ()
+        SMODS.add_card{
+            set = "hpr_moons",
+            area = G.consumeables,
+            key_append = "diha",
+            edition = 'e_negative'
+        }
+    end
+}
+
 SMODS.Booster {
     key = "lunar_normal_1",
     weight = 0.3,
@@ -43,7 +56,8 @@ SMODS.Booster {
             key_append = "hpr_lunar_pack"
         }
     end,
-    draw_hand = true
+    draw_hand = true,
+    cry_digital_hallucinations = lunar_hallucinations_compat
 }
 
 SMODS.Booster {
@@ -90,7 +104,8 @@ SMODS.Booster {
             key_append = "hpr_lunar_pack"
         }
     end,
-    draw_hand = true
+    draw_hand = true,
+    cry_digital_hallucinations = lunar_hallucinations_compat
 }
 
 SMODS.Booster {
@@ -137,7 +152,8 @@ SMODS.Booster {
             key_append = "hpr_lunar_pack"
         }
     end,
-    draw_hand = true
+    draw_hand = true,
+    cry_digital_hallucinations = lunar_hallucinations_compat
 }
 
 SMODS.Booster {
@@ -184,9 +200,36 @@ SMODS.Booster {
             key_append = "hpr_lunar_pack"
         }
     end,
-    draw_hand = true
+    draw_hand = true,
+    cry_digital_hallucinations = lunar_hallucinations_compat
 }
 -- #endregion
+SMODS.Gradient {
+    key = "erratic_col",
+    colours = {
+        HEX("FDA200"),
+        HEX("FE5F55"),
+        HEX("009CFD")
+    }
+}
+
+local erratic_hallucinations_compat = {
+    colour = SMODS.Gradients.hpr_erratic_col,
+    loc_key = "hpr_plus_q",
+    create = function ()
+        local pool_roll = pseudorandom_element({"Joker", "Playing Card", "Consumeables"}, "hpr_erratic_diha") --idk where to put vouchers so they arent here
+        local area
+        if pool_roll == "Joker" then area = G.jokers end
+        if pool_roll == "Consumeables" then area = G.consumeables end
+        if pool_roll == "Playing Card" then area = G.deck end
+        SMODS.add_card{
+            set = pool_roll,
+            area = area,
+            edition = 'e_negative',
+            key_append = "diha"
+        }
+    end
+}
 
 SMODS.Booster {
     key = "erratic_normal_1",
@@ -200,15 +243,13 @@ SMODS.Booster {
     loc_vars = function (self, info_queue, card)
         local cfg = (card and card.ability) or self.config or {}
         return {
-            vars = { cfg.extra, cfg.choose, colours = { HPR.erratic_colours[math.random(1, #HPR.erratic_colours)] } },
+            vars = { cfg.extra, cfg.choose },
             key = "p_hpr_erratic_pack"
         }
     end,
     ease_background_colour = function (self)
-        local uicol = HPR.erratic_colours[math.random(1, #HPR.erratic_colours)]
-        local bgcol = HPR.erratic_colours[math.random(1, #HPR.erratic_colours)]
-        ease_colour(G.C.DYN_UI.MAIN, uicol)
-        ease_background_colour({ new_colour = bgcol, special_colour = G.C.BLACK, contrast = 1 + math.random()*2 })
+        ease_colour(G.C.DYN_UI.MAIN, SMODS.Gradients.hpr_erratic_col)
+        ease_background_colour({ new_colour = SMODS.Gradients.hpr_erratic_col, special_colour = G.C.BLACK, contrast = 1 + math.random()*2 })
     end,
     particles = function(self)
         G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
@@ -234,7 +275,8 @@ SMODS.Booster {
             key_append = "hpr_erratic_card"
         }
     end,
-    pronouns = "any_all"
+    pronouns = "any_all",
+    cry_digital_hallucinations = erratic_hallucinations_compat
 }
 
 SMODS.Booster {
@@ -249,15 +291,13 @@ SMODS.Booster {
     loc_vars = function (self, info_queue, card)
         local cfg = (card and card.ability) or self.config or {}
         return {
-            vars = { cfg.extra, cfg.choose, colours = { HPR.erratic_colours[math.random(1, #HPR.erratic_colours)] } },
+            vars = { cfg.extra, cfg.choose },
             key = "p_hpr_erratic_pack"
         }
     end,
     ease_background_colour = function (self)
-        local uicol = HPR.erratic_colours[math.random(1, #HPR.erratic_colours)]
-        local bgcol = HPR.erratic_colours[math.random(1, #HPR.erratic_colours)]
-        ease_colour(G.C.DYN_UI.MAIN, uicol)
-        ease_background_colour({ new_colour = bgcol, special_colour = G.C.BLACK, contrast = 1 + math.random()*2 })
+        ease_colour(G.C.DYN_UI.MAIN, SMODS.Gradients.hpr_erratic_col)
+        ease_background_colour({ new_colour = SMODS.Gradients.hpr_erratic_col, special_colour = G.C.BLACK, contrast = 1 + math.random()*2 })
     end,
     particles = function(self)
         G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
@@ -283,7 +323,8 @@ SMODS.Booster {
             key_append = "hpr_erratic_card"
         }
     end,
-    pronouns = "any_all"
+    pronouns = "any_all",
+    cry_digital_hallucinations = erratic_hallucinations_compat
 }
 
 SMODS.Booster {
@@ -298,15 +339,13 @@ SMODS.Booster {
     loc_vars = function (self, info_queue, card)
         local cfg = (card and card.ability) or self.config or {}
         return {
-            vars = { cfg.extra, cfg.choose, localize(HPR.erratic_jumbos[math.random(1, #HPR.erratic_jumbos)]), colours = { HPR.erratic_colours[math.random(1, #HPR.erratic_colours)] } },
+            vars = { cfg.extra, cfg.choose, localize(HPR.erratic_jumbos[math.random(1, #HPR.erratic_jumbos)]) },
             key = "p_hpr_erratic_pack_jumbo"
         }
     end,
     ease_background_colour = function (self)
-        local uicol = HPR.erratic_colours[math.random(1, #HPR.erratic_colours)]
-        local bgcol = HPR.erratic_colours[math.random(1, #HPR.erratic_colours)]
-        ease_colour(G.C.DYN_UI.MAIN, uicol)
-        ease_background_colour({ new_colour = bgcol, special_colour = G.C.BLACK, contrast = 1 + math.random()*2 })
+        ease_colour(G.C.DYN_UI.MAIN, SMODS.Gradients.hpr_erratic_col)
+        ease_background_colour({ new_colour = SMODS.Gradients.hpr_erratic_col, special_colour = G.C.BLACK, contrast = 1 + math.random()*2 })
     end,
     particles = function(self)
         G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
@@ -332,7 +371,8 @@ SMODS.Booster {
             key_append = "hpr_erratic_card"
         }
     end,
-    pronouns = "any_all"
+    pronouns = "any_all",
+    cry_digital_hallucinations = erratic_hallucinations_compat
 }
 
 SMODS.Booster {
@@ -347,15 +387,13 @@ SMODS.Booster {
     loc_vars = function (self, info_queue, card)
         local cfg = (card and card.ability) or self.config or {}
         return {
-            vars = { cfg.extra, cfg.choose, localize(HPR.erratic_megas[math.random(1, #HPR.erratic_jumbos)]), colours = { HPR.erratic_colours[math.random(1, #HPR.erratic_colours)] } },
+            vars = { cfg.extra, cfg.choose, localize(HPR.erratic_megas[math.random(1, #HPR.erratic_jumbos)]) },
             key = "p_hpr_erratic_pack_mega"
         }
     end,
     ease_background_colour = function (self)
-        local uicol = HPR.erratic_colours[math.random(1, #HPR.erratic_colours)]
-        local bgcol = HPR.erratic_colours[math.random(1, #HPR.erratic_colours)]
-        ease_colour(G.C.DYN_UI.MAIN, uicol)
-        ease_background_colour({ new_colour = bgcol, special_colour = G.C.BLACK, contrast = 1 + math.random()*2 })
+        ease_colour(G.C.DYN_UI.MAIN, SMODS.Gradients.hpr_erratic_col)
+        ease_background_colour({ new_colour = SMODS.Gradients.hpr_erratic_col, special_colour = G.C.BLACK, contrast = 1 + math.random()*2 })
     end,
     particles = function(self)
         G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
@@ -381,5 +419,6 @@ SMODS.Booster {
             key_append = "hpr_erratic_card"
         }
     end,
-    pronouns = "any_all"
+    pronouns = "any_all",
+    cry_digital_hallucinations = erratic_hallucinations_compat
 }

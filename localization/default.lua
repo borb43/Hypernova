@@ -111,22 +111,22 @@ local descriptions = {
         p_hpr_erratic_pack = {
             name = "Erratic Pack",
             text = {
-                "Select {V:1}#1#{} of up to",
-                "{V:1}#2#{} random cards"
+                "Select {C:hpr_erratic_col}#1#{} of up to",
+                "{C:hpr_erratic_col}#2#{} random cards"
             }
         },
         p_hpr_erratic_pack_jumbo = {
             name = "#3# Erratic Pack",
             text = {
-                "Select {V:1}#1#{} of up to",
-                "{V:1}#2#{} random cards"
+                "Select {C:hpr_erratic_col}#1#{} of up to",
+                "{C:hpr_erratic_col}#2#{} random cards"
             }
         },
         p_hpr_erratic_pack_mega = {
             name = "#3# Erratic Pack",
             text = {
-                "Select {V:1}#1#{} of up to",
-                "{V:1}#2#{} random cards"
+                "Select {C:hpr_erratic_col}#1#{} of up to",
+                "{C:hpr_erratic_col}#2#{} random cards"
             }
         },
         card_extra_eff_mod = {
@@ -299,7 +299,9 @@ local misc = {
         k_huge = "Huge",
         --#endregion
         k_hpr_enable_janky_manips = "Enables janky values for joker effect maniulation",
-        k_level_stats = "per level"
+        k_level_stats = "per level",
+        hpr_plus_moon = "+1 Moon",
+        hpr_plus_q = "+1 ???"
     },
     high_scores = {},
     labels = {

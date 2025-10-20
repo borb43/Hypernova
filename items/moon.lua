@@ -1,8 +1,8 @@
 SMODS.ConsumableType {
     key = "hpr_moons",
     default = "c_hpr_deimos",
-    primary_colour = HEX("5d15d1"),
-    secondary_colour = HEX("707b8c"),
+    primary_colour = HEX("707b8c"),
+    secondary_colour = HEX("5d15d1"),
 }
 
 HPR.moon = SMODS.Consumable:extend({
