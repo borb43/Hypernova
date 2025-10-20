@@ -188,11 +188,8 @@ local descriptions = {
         c_hpr_styx = {
             name = "Styx",
             text = {
-                moon_drain_txt,
-                {
-                    "Instantly earn {C:money}$#2#",
-                    "Increases by {C:attention}#3#{} for each charge"
-                }
+                "Permanently adds {C:money}$#1#{} at the end of round",
+                "to up to {C:attention}#2#{} selected cards"
             }
         },
         c_hpr_deimos = {
@@ -240,14 +237,8 @@ local descriptions = {
         c_hpr_nibiru = {
             name = "Nibiru",
             text = {
-                moon_drain_txt,
-                {
-                    "Converts up to {c:attention}#2#{} selected",
-                    "card#4# to {C:attention}#4#s",
-                    "{C:attention}+#3#{} selected card per charge",
-                    "changes rank to that of the",
-                    "last drained {C:attention}#1#"
-                }
+                "Permanently adds {C:money}$#1#{} to up to",
+                "{C:attention}#2#{} selected cards"
             }
         },
         c_hpr_asteroid = {

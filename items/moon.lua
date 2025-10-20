@@ -105,3 +105,19 @@ HPR.moon {
         return { vars = { card.ability.moon_h_x_chips, card.ability.max_highlighted }}
     end
 }
+
+HPR.moon {
+    key = "styx",
+    config = { moon_h_dollars = 2, max_highlighted = 1 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.moon_h_dollars, card.ability.max_highlighted }}
+    end
+}
+
+HPR.moon {
+    key = "nibiru",
+    config = { moon_p_dollars = 1, max_highlighted = 1 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.moon_p_dollars, card.ability.max_highlighted }}
+    end
+}
