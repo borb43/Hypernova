@@ -7,7 +7,7 @@ SMODS.ConsumableType {
 
 HPR.moon = SMODS.Consumable:extend({
     set = "hpr_moons",
-    atlas = "placeholder", --default atlas, change later
+    atlas = "hpr_placeholder", --default atlas, change later
     pos = { x = 3, y = 2 },
     cost = 4,
     use = function (self, card, area, copier)
