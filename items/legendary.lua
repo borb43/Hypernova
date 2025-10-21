@@ -32,5 +32,8 @@ SMODS.Joker {
             end
         end
     end,
-    pronouns = "any_all"
+    pronouns = "any_all",
+    hpr_credits = {
+        code = "Eris"
+    }
 }

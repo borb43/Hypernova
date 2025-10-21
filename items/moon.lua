@@ -149,7 +149,7 @@ HPR.moon {
 
 HPR.moon {
     key = "europa",
-    config = { moon_x_mult = 0.25, max_highlighted = 1 },
+    config = { moon_x_mult = 0.5, max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_x_mult, card.ability.max_highlighted }}
     end,
@@ -158,7 +158,7 @@ HPR.moon {
 
 HPR.moon {
     key = "hyperion",
-    config = { moon_x_chips = 0.25, max_highlighted = 1 },
+    config = { moon_x_chips = 0.5, max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_x_chips, card.ability.max_highlighted }}
     end,
@@ -167,7 +167,7 @@ HPR.moon {
 
 HPR.moon {
     key = "titania",
-    config = { moon_h_x_mult = 0.25, max_highlighted = 2 },
+    config = { moon_h_x_mult = 0.5, max_highlighted = 2 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_h_x_mult, card.ability.max_highlighted }}
     end,
@@ -176,7 +176,7 @@ HPR.moon {
 
 HPR.moon {
     key = "triton",
-    config = { moon_h_x_chips = 0.25, max_highlighted = 2 },
+    config = { moon_h_x_chips = 0.5, max_highlighted = 2 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_h_x_chips, card.ability.max_highlighted }}
     end,
