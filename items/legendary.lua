@@ -15,6 +15,7 @@ SMODS.Joker {
                         set = "hpr_moons",
                         edition = 'e_negative'
                     })
+                    return true
                 end
             }))
         end

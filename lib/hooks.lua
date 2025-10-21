@@ -70,7 +70,7 @@ function SMODS.create_mod_badges(obj, badges)
 						n = G.UIT.R,
 						config = {
 							align = "cm",
-							colour = HEX("FF0000"),
+							colour = HPR.badge_colour,
 							r = 0.1,
 							minw = 2 / min_scale_fac,
 							minh = 0.36,

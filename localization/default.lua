@@ -307,7 +307,8 @@ local misc = {
         k_hpr_enable_janky_manips = "Enables janky values for joker effect maniulation",
         k_level_stats = "per level",
         hpr_plus_moon = "+1 Moon",
-        hpr_plus_q = "+1 ???"
+        hpr_plus_q = "+1 ???",
+        k_erratic_pack = "Erratic Pack"
     },
     high_scores = {},
     labels = {

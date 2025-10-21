@@ -233,7 +233,7 @@ local erratic_hallucinations_compat = {
 
 SMODS.Booster {
     key = "erratic_normal_1",
-    weight = 1,
+    weight = 0.5,
     kind = "hpr_erratic",
     cost = 4,
     atlas = "placeholder",
@@ -276,12 +276,13 @@ SMODS.Booster {
         }
     end,
     pronouns = "any_all",
-    cry_digital_hallucinations = erratic_hallucinations_compat
+    cry_digital_hallucinations = erratic_hallucinations_compat,
+    draw_hand = true
 }
 
 SMODS.Booster {
     key = "erratic_normal_2",
-    weight = 1,
+    weight = 0.5,
     kind = "hpr_erratic",
     cost = 4,
     atlas = "placeholder",
@@ -324,12 +325,13 @@ SMODS.Booster {
         }
     end,
     pronouns = "any_all",
-    cry_digital_hallucinations = erratic_hallucinations_compat
+    cry_digital_hallucinations = erratic_hallucinations_compat,
+    draw_hand = true
 }
 
 SMODS.Booster {
     key = "erratic_jumbo_1",
-    weight = 1,
+    weight = 0.5,
     kind = "hpr_erratic",
     cost = 6,
     atlas = "placeholder",
@@ -372,12 +374,13 @@ SMODS.Booster {
         }
     end,
     pronouns = "any_all",
-    cry_digital_hallucinations = erratic_hallucinations_compat
+    cry_digital_hallucinations = erratic_hallucinations_compat,
+    draw_hand = true
 }
 
 SMODS.Booster {
     key = "erratic_mega_1",
-    weight = 0.25,
+    weight = 0.1,
     kind = "hpr_erratic",
     cost = 4,
     atlas = "placeholder",
@@ -420,5 +423,6 @@ SMODS.Booster {
         }
     end,
     pronouns = "any_all",
-    cry_digital_hallucinations = erratic_hallucinations_compat
+    cry_digital_hallucinations = erratic_hallucinations_compat,
+    draw_hand = true
 }
