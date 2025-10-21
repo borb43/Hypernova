@@ -136,7 +136,15 @@ local descriptions = {
         }
     },
     Planet = {},
-    Spectral = {},
+    Spectral = {
+        c_hpr_pulsar = {
+            name = "Pulsar",
+            text = {
+                "Applies {C:dark_edition}Negative{} edition",
+                "to {C:attention}#1#{} selected card"
+            }
+        }
+    },
     Stake = {},
     Sleeve = {
         sleeve_hpr_sealed = {

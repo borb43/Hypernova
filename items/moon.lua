@@ -197,3 +197,77 @@ HPR.moon {
     end,
     pos = { x = 5, y = 1 }
 }
+
+SMODS.Consumable {
+    key = "pulsar",
+    set = "Spectral",
+    atlas = "moons",
+    pos = { x = 6, y = 0 },
+    cost = 4,
+    config = { max_highlighted = 1 },
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_CENTERS.e_negative
+        return { vars = { card.ability.max_highlighted }}
+    end,
+    use = function (self, card, area, copier)
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                play_sound("tarot1")
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+        for i = 1, #G.hand.highlighted do
+            local _card = G.hand.highlighted[i]
+            G.E_MANAGER:add_event(Event({
+                trigger = "after",
+                delay = 0.1,
+                func = function()
+                    _card:set_edition("e_negative")
+                    _card:juice_up()
+                    return true
+                end
+            }))
+        end
+        delay(0.5)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
+    end,
+    force_use = function (self, card, area)
+        local cards = Cryptid and Cryptid.get_highlighted_cards({ G.hand }, card, 1, card.ability.max_highlighted, function(card) return not card.edition and not card.will_be_editioned end )
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                play_sound("tarot1")
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+        for i = 1, #cards do
+            local _card = cards[i]
+            G.E_MANAGER:add_event(Event({
+                trigger = "after",
+                delay = 0.1,
+                func = function()
+                    _card:set_edition("e_negative")
+                    _card:juice_up()
+                    return true
+                end
+            }))
+        end
+        delay(0.5)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
+    end
+}
