@@ -121,7 +121,12 @@ HPR.moon {
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_mult, card.ability.max_highlighted }}
     end,
-    pos = { x = 0, y = 0 }
+    pos = { x = 0, y = 0 },
+    hpr_credits = {
+        idea = "Eris",
+        code = "Eris",
+        art = "LFMoth"
+    }
 }
 
 HPR.moon {
@@ -148,7 +153,12 @@ HPR.moon {
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_h_mult, card.ability.max_highlighted }}
     end,
-    pos = { x = 3, y = 0 }
+    pos = { x = 3, y = 0 },
+    hpr_credits = {
+        idea = "Eris",
+        code = "Eris",
+        art = "LFMoth"
+    }
 }
 
 HPR.moon {
@@ -157,7 +167,12 @@ HPR.moon {
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_x_mult, card.ability.max_highlighted }}
     end,
-    pos = { x = 4, y = 0 }
+    pos = { x = 4, y = 0 },
+    hpr_credits = {
+        idea = "Eris",
+        code = "Eris",
+        art = "LFMoth"
+    }
 }
 
 HPR.moon {
