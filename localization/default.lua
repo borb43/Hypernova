@@ -76,10 +76,9 @@ local descriptions = {
         j_hpr_eris = {
             name = "Eris",
             text = {
-                "Retrigger all stone cards",
-                "#3# times. Upgrades all stone",
-                "cards in your deck at end of round",
-                "({C:chips}+#1#{} Chips, {X:mult,C:white}X#2#{} Mult)"
+                "Creates a {C:dark_edition}Negative {C:hpr_moons}Moon{} card",
+                "when blind is selected",
+                "Held {C:hpr_moons}Moons{} trigger their effects"
             }
         },
     },

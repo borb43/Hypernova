@@ -23,6 +23,12 @@ HPR.set_ability_reset_keys = function ()
     }
 end
 
+HPR.reset_game_globals = function (run_start)
+    if run_start then
+        G.GAME.hpr_moons_mult = 1
+    end
+end
+
 HPR.erratic_colours = {
     G.C.RED,
     G.C.BLUE,
