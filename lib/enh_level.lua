@@ -1,4 +1,6 @@
 --this fucking sucks so im coming back to this later
+do return end
+
 HPR.level_enhancement = function (enh_key, amt)
     G.GAME.hpr_enh_levels = G.GAME.hpr_enh_levels or {}
     G.GAME.hpr_enh_levels[enh_key] = (G.GAME.hpr_enh_levels[enh_key] or 0) + amt

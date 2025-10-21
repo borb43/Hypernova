@@ -23,6 +23,8 @@ HPR.set_ability_reset_keys = function ()
     }
 end
 
+local mod_path = HPR.path
+
 HPR.reset_game_globals = function (run_start)
     if run_start then
         G.GAME.hpr_moons_mult = 1
@@ -113,10 +115,16 @@ if CardSleeves then
     }
 end
 
-assert(SMODS.load_file("lib/extra_tabs.lua"))()
-assert(SMODS.load_file("lib/manipulate.lua"))()
-assert(SMODS.load_file("lib/funcs.lua"))()
-assert(SMODS.load_file("lib/event_presets.lua"))
+--Load Library Files
+local files = NFS.getDirectoryItems(mod_path .. "lib")
+for _, file in ipairs(files) do
+	print("[HYPERNOVA] Loading library file " .. file)
+	local f, err = SMODS.load_file("lib/" .. file)
+	if err then
+		error(err) --Steamodded actually does a really good job of displaying this info! So we don't need to do anything else.
+	end
+	f()
+end
 
 assert(SMODS.load_file("items/moon.lua"))()
 assert(SMODS.load_file("items/booster.lua"))()
