@@ -237,7 +237,7 @@ SMODS.Consumable {
     cost = 4,
     config = { max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
-        info_queue[#info_queue+1] = G.P_CENTERS.e_negative
+        info_queue[#info_queue+1] = { key = "e_negative_playing_card", set = "Edition", config = { extra = 1 }}
         return { vars = { card.ability.max_highlighted }}
     end,
     use = function (self, card, area, copier)
@@ -300,5 +300,7 @@ SMODS.Consumable {
                 return true
             end
         }))
-    end
+    end,
+    hidden = true,
+    soul_set = "hpr_moons"
 }
