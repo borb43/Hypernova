@@ -2,12 +2,12 @@
 	"id": "hypernova",
 	"name": "Hypernova",
 	"display_name": "Hypernova",
-	"author": [ "Eris" ],
+	"author": [ "Eris", "& more" ],
 	"description": "cool funny stuff mod lmao",
 	"prefix": "hpr",
 	"main_file": "main.lua",
 	"priority": 0,
 	"badge_colour": "C09ED9",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"dependencies": ["Steamodded (>=1.0.0~BETA-0827)"]
 }
