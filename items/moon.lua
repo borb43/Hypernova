@@ -113,7 +113,7 @@ HPR.moon = SMODS.Consumable:extend({
 
 HPR.moon {
     key = "deimos",
-    config = { moon_mult = 8, max_highlighted = 2 },
+    config = { moon_mult = 12, max_highlighted = 2 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_mult, card.ability.max_highlighted }}
     end,
@@ -122,7 +122,7 @@ HPR.moon {
 
 HPR.moon {
     key = "io",
-    config = { moon_bonus = 60, max_highlighted = 2 },
+    config = { moon_bonus = 90, max_highlighted = 2 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_bonus, card.ability.max_highlighted }}
     end,
@@ -131,7 +131,7 @@ HPR.moon {
 
 HPR.moon {
     key = "moon",
-    config = { moon_h_chips = 60, max_highlighted = 3 },
+    config = { moon_h_chips = 90, max_highlighted = 3 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_h_chips, card.ability.max_highlighted }}
     end,
@@ -140,7 +140,7 @@ HPR.moon {
 
 HPR.moon {
     key = "phobos",
-    config = { moon_h_mult = 8, max_highlighted = 3 },
+    config = { moon_h_mult = 12, max_highlighted = 3 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_h_mult, card.ability.max_highlighted }}
     end,
@@ -149,7 +149,7 @@ HPR.moon {
 
 HPR.moon {
     key = "europa",
-    config = { moon_x_mult = 0.2, max_highlighted = 1 },
+    config = { moon_x_mult = 0.25, max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_x_mult, card.ability.max_highlighted }}
     end,
@@ -158,7 +158,7 @@ HPR.moon {
 
 HPR.moon {
     key = "hyperion",
-    config = { moon_x_chips = 0.2, max_highlighted = 1 },
+    config = { moon_x_chips = 0.25, max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_x_chips, card.ability.max_highlighted }}
     end,
@@ -167,7 +167,7 @@ HPR.moon {
 
 HPR.moon {
     key = "titania",
-    config = { moon_h_x_mult = 0.2, max_highlighted = 2 },
+    config = { moon_h_x_mult = 0.25, max_highlighted = 2 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_h_x_mult, card.ability.max_highlighted }}
     end,
@@ -176,7 +176,7 @@ HPR.moon {
 
 HPR.moon {
     key = "triton",
-    config = { moon_h_x_chips = 0.2, max_highlighted = 2 },
+    config = { moon_h_x_chips = 0.25, max_highlighted = 2 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_h_x_chips, card.ability.max_highlighted }}
     end,
@@ -185,7 +185,7 @@ HPR.moon {
 
 HPR.moon {
     key = "styx",
-    config = { moon_h_dollars = 2, max_highlighted = 1 },
+    config = { moon_h_dollars = 3, max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_h_dollars, card.ability.max_highlighted }}
     end,
@@ -194,7 +194,7 @@ HPR.moon {
 
 HPR.moon {
     key = "nibiru",
-    config = { moon_p_dollars = 1, max_highlighted = 1 },
+    config = { moon_p_dollars = 3, max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_p_dollars, card.ability.max_highlighted }}
     end,
@@ -222,7 +222,7 @@ HPR.moon {
 
 HPR.moon {
     key = "dysnomia",
-    config = { moon_eff_mod = 0.2, max_highlighted = 1 },
+    config = { moon_eff_mod = 0.25, max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_eff_mod, card.ability.max_highlighted }}
     end,
