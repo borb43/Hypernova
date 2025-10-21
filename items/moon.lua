@@ -77,6 +77,37 @@ HPR.moon = SMODS.Consumable:extend({
                 return true
             end
         }))
+    end,
+    force_use = function (self, card, area)
+        local cards = Cryptid and Cryptid.get_highlighted_cards({ G.hand }, card, 1, card.ability.max_highlighted, function(card) return not card.edition and not card.will_be_editioned end )
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                play_sound("tarot1")
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+        for i = 1, #cards do
+            local _card = cards[i]
+            HPR.apply_moon_bonus(_card, card)
+            G.E_MANAGER:add_event(Event({
+                trigger = "after",
+                delay = 0.1,
+                func = function()
+                    _card:juice_up()
+                    return true
+                end
+            }))
+        end
+        delay(0.5)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
     end
 })
 
