@@ -167,7 +167,12 @@ HPR.moon {
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_p_dollars, card.ability.max_highlighted }}
     end,
-    pos = { x = 3, y = 1 }
+    pos = { x = 3, y = 1 },
+    set_card_type_badge = function (self, card, badges)
+        badges[#badges+1] = create_badge(localize("k_hpr_moon_q"),
+        get_type_colour(card.config.center or card.config, card), SMODS.ConsumableTypes.hpr_moons.text_colour,
+        1.2)
+    end
 }
 
 HPR.moon {
@@ -176,7 +181,12 @@ HPR.moon {
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_repetitions, card.ability.max_highlighted }}
     end,
-    pos = { x = 4, y = 1 }
+    pos = { x = 4, y = 1 },
+    set_card_type_badge = function (self, card, badges)
+        badges[#badges+1] = create_badge(localize("k_hpr_moon_q"),
+        get_type_colour(card.config.center or card.config, card), SMODS.ConsumableTypes.hpr_moons.text_colour,
+        1.2)
+    end
 }
 
 HPR.moon {
