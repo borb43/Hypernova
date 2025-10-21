@@ -129,7 +129,6 @@ end
 assert(SMODS.load_file("items/moon.lua"))()
 assert(SMODS.load_file("items/booster.lua"))()
 assert(SMODS.load_file("items/misc_joker.lua"))()
-assert(SMODS.load_file("items/probability_joker.lua"))()
 assert(SMODS.load_file("items/legendary.lua"))()
 assert(SMODS.load_file("items/back.lua"))()
 assert(SMODS.load_file("items/voucher.lua"))()
