@@ -5,6 +5,12 @@ SMODS.ConsumableType {
     secondary_colour = HEX("5d15d1"),
 }
 
+SMODS.UndiscoveredSprite {
+    key = "hpr_moons",
+    atlas = "moons",
+    pos = { x = 6, y = 1 }
+}
+
 HPR.moon = SMODS.Consumable:extend({
     set = "hpr_moons",
     atlas = "hpr_moons", --default atlas, change later
