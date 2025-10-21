@@ -39,6 +39,38 @@ HPR.moon = SMODS.Consumable:extend({
                 return true
             end
         }))
+    end,
+    bulk_use = function (self, card, area, copier, number)
+        G.E_MANAGER:add_event(Event({
+            func = function ()
+                play_sound("tarot1")
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+        for i = 1, #G.hand.highlighted do
+            local _card = G.hand.highlighted[i]
+            for _ = 1, number do
+                HPR.apply_moon_bonus(_card, card)
+            end
+            G.E_MANAGER:add_event(Event({
+                trigger = "after",
+                delay = 0.1,
+                func = function ()
+                    _card:juice_up()
+                    return true
+                end
+            }))
+        end
+        delay(0.5)
+        G.E_MANAGER:add_event(Event({
+            trigger = "after",
+            delay = 0.2,
+            func = function ()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
     end
 })
 
