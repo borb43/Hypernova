@@ -321,7 +321,11 @@ local misc = {
     suits_plural = {},
     suits_singular = {},
     tutorial = {},
-    v_dictionary = {},
+    v_dictionary = {
+        hpr_credits_idea = { "Idea: #1#" },
+        hpr_credits_art = { "Art: #1#" },
+        hpr_credits_code = { "Code: #1#" }
+    },
     v_text = {},
 }
 
