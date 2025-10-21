@@ -123,7 +123,7 @@ SMODS.Joker { --gambling addict, scales from probability rolls
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips, card.ability.extra.mult } }
     end,
-    rarity = 2,
+    rarity = 3,
     cost = 7,
     blueprint_compat = true,
     demicoloncompat = true,

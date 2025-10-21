@@ -78,7 +78,6 @@ local descriptions = {
             text = {
                 "Creates a {C:dark_edition}Negative {C:hpr_moons}Moon{} card",
                 "when blind is selected",
-                "Held {C:hpr_moons}Moons{} trigger their effects"
             }
         },
     },
