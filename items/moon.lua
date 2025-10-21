@@ -108,7 +108,11 @@ HPR.moon = SMODS.Consumable:extend({
                 return true
             end
         }))
-    end
+    end,
+    hpr_credits = {
+        code = "Eris",
+        idea = "Eris"
+    }
 })
 
 HPR.moon {

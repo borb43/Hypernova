@@ -12,7 +12,10 @@ SMODS.Joker { --fusion reactor, balances before scoring
                 balance = true
             }
         end
-    end
+    end,
+    hpr_credits = {
+        code = "Eris"
+    }
 }
 
 SMODS.Joker { --growth, increases potency of other joker effects
@@ -38,7 +41,11 @@ SMODS.Joker { --growth, increases potency of other joker effects
                 scalar_value = "scale"
             })
         end
-    end
+    end,
+    hpr_credits = {
+        code = "Eris",
+        idea = "Eris"
+    }
 }
 
 
@@ -91,7 +98,12 @@ SMODS.Joker { -- solar flare, levels up not most played hands and destroys some 
                 return { remove = true }
             end
         end
-    end
+    end,
+    hpr_credits = {
+        art = "Codifyd",
+        code = "Eris",
+        idea = "Codifyd"
+    }
 }
 
 SMODS.Joker { --tipping scales, increases numerator and denominator of probabilities
@@ -111,7 +123,11 @@ SMODS.Joker { --tipping scales, increases numerator and denominator of probabili
                 denominator = context.denominator + card.ability.extra.mod
             }
         end
-    end
+    end,
+    hpr_credits = {
+        code = "Eris",
+        idea = "Eris"
+    }
 }
 
 
@@ -163,7 +179,11 @@ SMODS.Joker { --gambling addict, scales from probability rolls
                 mult = card.ability.extra.mult
             }
         end
-    end
+    end,
+    hpr_credits = {
+        code = "Eris",
+        idea = "Eris"
+    }
 }
 
 SMODS.Joker { --fortune cookie, guarantees 6 probabilities and then creates a negative tarot
@@ -204,5 +224,9 @@ SMODS.Joker { --fortune cookie, guarantees 6 probabilities and then creates a ne
                 end
             }))
         end
-    end
+    end,
+    hpr_credits = {
+        code = "Eris",
+        idea = "Eris"
+    }
 }
