@@ -7,8 +7,8 @@ SMODS.ConsumableType {
 
 HPR.moon = SMODS.Consumable:extend({
     set = "hpr_moons",
-    atlas = "hpr_placeholder", --default atlas, change later
-    pos = { x = 3, y = 2 },
+    atlas = "hpr_moons", --default atlas, change later
+    pos = { x = 0, y = 0 },
     cost = 4,
     use = function (self, card, area, copier)
         G.E_MANAGER:add_event(Event({
@@ -79,7 +79,8 @@ HPR.moon {
     config = { moon_mult = 8, max_highlighted = 2 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_mult, card.ability.max_highlighted }}
-    end
+    end,
+    pos = { x = 0, y = 0 }
 }
 
 HPR.moon {
@@ -87,7 +88,8 @@ HPR.moon {
     config = { moon_bonus = 60, max_highlighted = 2 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_bonus, card.ability.max_highlighted }}
-    end
+    end,
+    pos = { x = 1, y = 0 }
 }
 
 HPR.moon {
@@ -95,7 +97,8 @@ HPR.moon {
     config = { moon_h_chips = 60, max_highlighted = 3 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_h_chips, card.ability.max_highlighted }}
-    end
+    end,
+    pos = { x = 2, y = 0 }
 }
 
 HPR.moon {
@@ -103,7 +106,8 @@ HPR.moon {
     config = { moon_h_mult = 8, max_highlighted = 3 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_h_mult, card.ability.max_highlighted }}
-    end
+    end,
+    pos = { x = 3, y = 0 }
 }
 
 HPR.moon {
@@ -111,7 +115,8 @@ HPR.moon {
     config = { moon_x_mult = 0.2, max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_x_mult, card.ability.max_highlighted }}
-    end
+    end,
+    pos = { x = 4, y = 0 }
 }
 
 HPR.moon {
@@ -119,7 +124,8 @@ HPR.moon {
     config = { moon_x_chips = 0.2, max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_x_chips, card.ability.max_highlighted }}
-    end
+    end,
+    pos = { x = 5, y = 0 }
 }
 
 HPR.moon {
@@ -127,7 +133,8 @@ HPR.moon {
     config = { moon_h_x_mult = 0.2, max_highlighted = 2 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_h_x_mult, card.ability.max_highlighted }}
-    end
+    end,
+    pos = { x = 0, y = 1 }
 }
 
 HPR.moon {
@@ -135,7 +142,8 @@ HPR.moon {
     config = { moon_h_x_chips = 0.2, max_highlighted = 2 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_h_x_chips, card.ability.max_highlighted }}
-    end
+    end,
+    pos = { x = 1, y = 1 }
 }
 
 HPR.moon {
@@ -143,7 +151,8 @@ HPR.moon {
     config = { moon_h_dollars = 2, max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_h_dollars, card.ability.max_highlighted }}
-    end
+    end,
+    pos = { x = 2, y = 1 }
 }
 
 HPR.moon {
@@ -151,7 +160,8 @@ HPR.moon {
     config = { moon_p_dollars = 1, max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_p_dollars, card.ability.max_highlighted }}
-    end
+    end,
+    pos = { x = 3, y = 1 }
 }
 
 HPR.moon {
@@ -159,7 +169,8 @@ HPR.moon {
     config = { moon_repetitions = 1, max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_repetitions, card.ability.max_highlighted }}
-    end
+    end,
+    pos = { x = 4, y = 1 }
 }
 
 HPR.moon {
@@ -167,5 +178,6 @@ HPR.moon {
     config = { moon_eff_mod = 0.2, max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_eff_mod, card.ability.max_highlighted }}
-    end
+    end,
+    pos = { x = 5, y = 1 }
 }
