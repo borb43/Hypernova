@@ -1,4 +1,4 @@
--- #region lunar
+--#region lunar
 local lunar_hallucinations_compat = {
     colour = HEX("5d15d1"),
     loc_key = "hpr_plus_moon",
@@ -203,7 +203,8 @@ SMODS.Booster {
     draw_hand = true,
     cry_digital_hallucinations = lunar_hallucinations_compat
 }
--- #endregion
+--#endregion
+--#region erratic packs
 SMODS.Gradient {
     key = "erratic_col",
     colours = {
@@ -212,6 +213,16 @@ SMODS.Gradient {
         HEX("009CFD")
     }
 }
+
+HPR.erratic_sets = {
+    "Joker", "Playing Card", "Consumeables", "Voucher"
+}
+if next(SMODS.find_mod("entr")) then
+    HPR.erratic_sets[#HPR.erratic_sets+1] = "Back"
+    if next(SMODS.find_mod("CardSleeves")) then
+        HPR.erratic_sets[#HPR.erratic_sets+1] = "Sleeve"
+    end
+end
 
 local erratic_hallucinations_compat = {
     colour = SMODS.Gradients.hpr_erratic_col,
@@ -267,12 +278,15 @@ SMODS.Booster {
         G.booster_pack_sparkles:fade(1, 0)
     end,
     create_card = function (self, card, i)
+        local pool = pseudorandom_element(HPR.erratic_sets, "hpr_erratic")
         return {
-            set = pseudorandom_element({"Joker", "Voucher", "Playing Card", "Consumeables"}, "hpr_erratic"),
+            set = pool,
             area = G.pack_cards,
             skip_materialize = true,
             soulable = true,
-            key_append = "hpr_erratic_card"
+            key_append = "hpr_erratic_card",
+            seal = pool == "Playing Card" and SMODS.poll_seal({key = "hpr_erratic_seal"}),
+            edition = pool == "Playing Card" and SMODS.poll_edition({key = "hpr_erratic_edition"})
         }
     end,
     pronouns = "any_all",
@@ -316,12 +330,15 @@ SMODS.Booster {
         G.booster_pack_sparkles:fade(1, 0)
     end,
     create_card = function (self, card, i)
+        local pool = pseudorandom_element(HPR.erratic_sets, "hpr_erratic")
         return {
-            set = pseudorandom_element({"Joker", "Voucher", "Playing Card", "Consumeables"}, "hpr_erratic"),
+            set = pool,
             area = G.pack_cards,
             skip_materialize = true,
             soulable = true,
-            key_append = "hpr_erratic_card"
+            key_append = "hpr_erratic_card",
+            seal = pool == "Playing Card" and SMODS.poll_seal({key = "hpr_erratic_seal"}),
+            edition = pool == "Playing Card" and SMODS.poll_edition({key = "hpr_erratic_edition"})
         }
     end,
     pronouns = "any_all",
@@ -365,12 +382,15 @@ SMODS.Booster {
         G.booster_pack_sparkles:fade(1, 0)
     end,
     create_card = function (self, card, i)
+        local pool = pseudorandom_element(HPR.erratic_sets, "hpr_erratic")
         return {
-            set = pseudorandom_element({"Joker", "Voucher", "Playing Card", "Consumeables"}, "hpr_erratic"),
+            set = pool,
             area = G.pack_cards,
             skip_materialize = true,
             soulable = true,
-            key_append = "hpr_erratic_card"
+            key_append = "hpr_erratic_card",
+            seal = pool == "Playing Card" and SMODS.poll_seal({key = "hpr_erratic_seal"}),
+            edition = pool == "Playing Card" and SMODS.poll_edition({key = "hpr_erratic_edition"})
         }
     end,
     pronouns = "any_all",
@@ -414,15 +434,19 @@ SMODS.Booster {
         G.booster_pack_sparkles:fade(1, 0)
     end,
     create_card = function (self, card, i)
+        local pool = pseudorandom_element(HPR.erratic_sets, "hpr_erratic")
         return {
-            set = pseudorandom_element({"Joker", "Voucher", "Playing Card", "Consumeables"}, "hpr_erratic"),
+            set = pool,
             area = G.pack_cards,
             skip_materialize = true,
             soulable = true,
-            key_append = "hpr_erratic_card"
+            key_append = "hpr_erratic_card",
+            seal = pool == "Playing Card" and SMODS.poll_seal({key = "hpr_erratic_seal"}),
+            edition = pool == "Playing Card" and SMODS.poll_edition({key = "hpr_erratic_edition"})
         }
     end,
     pronouns = "any_all",
     cry_digital_hallucinations = erratic_hallucinations_compat,
     draw_hand = true
 }
+--#endregion
