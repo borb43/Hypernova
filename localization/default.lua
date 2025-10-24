@@ -85,25 +85,25 @@ local descriptions = {
         p_hpr_lunar_pack = {
             name = "Lunar Pack",
             text = {
-                "Select {C:attention}#1# of up to",
-                "{C:attention}#2# {C:hpr_moons}Moon{} cards to add",
-                "to your consumables"
+                "Select {C:attention}#1#{} of up to",
+                "{C:attention}#2# {C:hpr_moons}Moon{} cards to",
+                "be used immediately"
             }
         },
         p_hpr_lunar_pack_jumbo = {
             name = "Jumbo Lunar Pack",
             text = {
-                "Select {C:attention}#1# of up to",
-                "{C:attention}#2# {C:hpr_moons}Moon{} cards to add",
-                "to your consumables"
+                "Select {C:attention}#1#{} of up to",
+                "{C:attention}#2# {C:hpr_moons}Moon{} cards to",
+                "be used immediately"
             }
         },
         p_hpr_lunar_pack_mega = {
             name = "Mega Lunar Pack",
             text = {
-                "Select {C:attention}#1# of up to",
-                "{C:attention}#2# {C:hpr_moons}Moon{} cards to add",
-                "to your consumables"
+                "Select {C:attention}#1#{} of up to",
+                "{C:attention}#2# {C:hpr_moons}Moon{} cards to",
+                "be used immediately"
             }
         },
         p_hpr_erratic_pack = {

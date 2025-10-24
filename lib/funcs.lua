@@ -54,3 +54,32 @@ HPR.apply_moon_bonus = function(card, moon_card) --applies the moon bonus to a c
         card.ability.akyrs_perma_h_score = card.ability.akyrs_perma_h_score + (moon_card.ability.akyrs_moon_h_score or 0)*mult
     end
 end
+
+function HPR.poll_erratic_set(seed) --returns a random set, along with additional information if applicable (`set` always, `seal` and `edition` if playing card)
+    seed = seed or "hpr_erratic"
+    if pseudorandom(seed) < 0.9 then
+        local set = pseudorandom_element({"Joker", "Consumeables", "Playing Card"}, seed)
+        local seal, edition, area
+        if set == "Playing Card" then
+            seal = SMODS.poll_seal({key = seed.."_seal"})
+            edition = SMODS.poll_edition({key = seed.."_edition", no_negative = true})
+        end
+        return {
+            set = set or "Joker",
+            seal = seal,
+            edition = edition
+        }
+    else
+        local options = {"Voucher"}
+        if next(SMODS.find_mod("entr")) then
+            options[#options+1] = "Back"
+            if next(SMODS.find_mod("CardSleeves")) then
+                options[#options+1] = "Sleeve"
+            end
+        end
+        local set = pseudorandom_element(options, seed)
+        return {
+            set = set or "Voucher"
+        }
+    end
+end

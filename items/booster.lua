@@ -162,7 +162,7 @@ SMODS.Booster {
     kind = "hpr_lunar",
     cost = 8,
     atlas = "placeholder",
-    pos = { x = 0, y = 3 },
+    pos = { x = 2, y = 3 },
     config = { extra = 4, choose = 2 },
     group_key = "k_lunar_pack",
     loc_vars = function(self, info_queue, card)
@@ -278,15 +278,15 @@ SMODS.Booster {
         G.booster_pack_sparkles:fade(1, 0)
     end,
     create_card = function (self, card, i)
-        local pool = pseudorandom_element(HPR.erratic_sets, "hpr_erratic")
+        local pool = HPR.poll_erratic_set("hpr_erratic")
         return {
-            set = pool,
+            set = pool.set,
             area = G.pack_cards,
             skip_materialize = true,
             soulable = true,
             key_append = "hpr_erratic_card",
-            seal = pool == "Playing Card" and SMODS.poll_seal({key = "hpr_erratic_seal"}),
-            edition = pool == "Playing Card" and SMODS.poll_edition({key = "hpr_erratic_edition"})
+            seal = pool.seal,
+            edition = pool.edition
         }
     end,
     pronouns = "any_all",
@@ -330,15 +330,15 @@ SMODS.Booster {
         G.booster_pack_sparkles:fade(1, 0)
     end,
     create_card = function (self, card, i)
-        local pool = pseudorandom_element(HPR.erratic_sets, "hpr_erratic")
+        local pool = HPR.poll_erratic_set("hpr_erratic")
         return {
-            set = pool,
+            set = pool.set,
             area = G.pack_cards,
             skip_materialize = true,
             soulable = true,
             key_append = "hpr_erratic_card",
-            seal = pool == "Playing Card" and SMODS.poll_seal({key = "hpr_erratic_seal"}),
-            edition = pool == "Playing Card" and SMODS.poll_edition({key = "hpr_erratic_edition"})
+            seal = pool.seal,
+            edition = pool.edition
         }
     end,
     pronouns = "any_all",
@@ -382,15 +382,15 @@ SMODS.Booster {
         G.booster_pack_sparkles:fade(1, 0)
     end,
     create_card = function (self, card, i)
-        local pool = pseudorandom_element(HPR.erratic_sets, "hpr_erratic")
+        local pool = HPR.poll_erratic_set("hpr_erratic")
         return {
-            set = pool,
+            set = pool.set,
             area = G.pack_cards,
             skip_materialize = true,
             soulable = true,
             key_append = "hpr_erratic_card",
-            seal = pool == "Playing Card" and SMODS.poll_seal({key = "hpr_erratic_seal"}),
-            edition = pool == "Playing Card" and SMODS.poll_edition({key = "hpr_erratic_edition"})
+            seal = pool.seal,
+            edition = pool.edition
         }
     end,
     pronouns = "any_all",
@@ -402,7 +402,7 @@ SMODS.Booster {
     key = "erratic_mega_1",
     weight = 0.1,
     kind = "hpr_erratic",
-    cost = 4,
+    cost = 8,
     atlas = "placeholder",
     pos = { x = 2, y = 3 },
     config = { extra = 5, choose = 2 },
@@ -434,15 +434,15 @@ SMODS.Booster {
         G.booster_pack_sparkles:fade(1, 0)
     end,
     create_card = function (self, card, i)
-        local pool = pseudorandom_element(HPR.erratic_sets, "hpr_erratic")
+        local pool = HPR.poll_erratic_set("hpr_erratic")
         return {
-            set = pool,
+            set = pool.set,
             area = G.pack_cards,
             skip_materialize = true,
             soulable = true,
             key_append = "hpr_erratic_card",
-            seal = pool == "Playing Card" and SMODS.poll_seal({key = "hpr_erratic_seal"}),
-            edition = pool == "Playing Card" and SMODS.poll_edition({key = "hpr_erratic_edition"})
+            seal = pool.seal,
+            edition = pool.edition
         }
     end,
     pronouns = "any_all",

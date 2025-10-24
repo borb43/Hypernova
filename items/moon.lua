@@ -13,7 +13,7 @@ SMODS.UndiscoveredSprite {
 
 HPR.moon = SMODS.Consumable:extend({
     set = "hpr_moons",
-    atlas = "hpr_moons", --default atlas, change later
+    atlas = "hpr_moons",
     pos = { x = 0, y = 0 },
     cost = 4,
     use = function (self, card, area, copier)
@@ -204,7 +204,7 @@ HPR.moon {
 
 HPR.moon {
     key = "styx",
-    config = { moon_h_dollars = 3, max_highlighted = 1 },
+    config = { moon_h_dollars = 2, max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_h_dollars, card.ability.max_highlighted }}
     end,
@@ -213,7 +213,7 @@ HPR.moon {
 
 HPR.moon {
     key = "nibiru",
-    config = { moon_p_dollars = 3, max_highlighted = 1 },
+    config = { moon_p_dollars = 2, max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_p_dollars, card.ability.max_highlighted }}
     end,
@@ -321,5 +321,9 @@ SMODS.Consumable {
         }))
     end,
     hidden = true,
-    soul_set = "hpr_moons"
+    soul_set = "hpr_moons",
+    hpr_credits = {
+        idea = "Eris",
+        code = "Eris"
+    }
 }
