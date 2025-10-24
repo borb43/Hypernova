@@ -246,7 +246,7 @@ SMODS.Joker {
             G.E_MANAGER:add_event(Event({
                 func = function ()
                     if _card.juice_up then _card:juice_up() end
-                    if _card.set_sprites then _card:set_sprites(card.config.center, card.config.card) end
+                    if _card.set_sprites then _card:set_sprites(_card.config.center, _card.config.card) end
                     return true
                 end
             }))
