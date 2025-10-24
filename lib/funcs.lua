@@ -72,7 +72,7 @@ function HPR.poll_erratic_set(seed) --returns a random set, along with additiona
     else
         local options = {"Voucher"}
         if next(SMODS.find_mod("entr")) then
-            options[#options+1] = "Back"
+            options[#options+1] = "RedeemableBacks"
             if next(SMODS.find_mod("CardSleeves")) then
                 options[#options+1] = "Sleeve"
             end

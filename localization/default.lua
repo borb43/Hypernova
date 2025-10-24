@@ -131,6 +131,15 @@ local descriptions = {
             text = {
                 "{X:dark_edition,C:white}X#1#{} Joker effects from this card"
             }
+        },
+        undiscovered_hpr_moons = {
+            name = "Not Discovered",
+            text = {
+                "Purchase or use",
+                "this card in an",
+                "unseeded run to",
+                "learn what it does"
+            }
         }
     },
     Planet = {},
