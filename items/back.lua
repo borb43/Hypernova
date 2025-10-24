@@ -38,5 +38,6 @@ SMODS.Back {
     end,
     apply = function (self, back)
         SMODS.change_booster_limit(self.config.extra.slots)
-    end
+    end,
+    pools = { RedeemableBacks = true }
 }
