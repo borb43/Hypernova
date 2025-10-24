@@ -261,8 +261,8 @@ SMODS.Joker {
 SMODS.Joker {
     key = "cavepaint",
     atlas = "placeholder",
-    pos = { x = 0, y = 0 },
-    rarity = 1,
+    pos = { x = 1, y = 0 },
+    rarity = 2,
     cost = 5,
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.m_stone

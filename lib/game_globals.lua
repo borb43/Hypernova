@@ -2,7 +2,7 @@ local function reset_hpr_cavepaint()
     G.GAME.current_round.hpr_cavepaint_card = {}
     local valid_cards = {}
     for _, card in ipairs(G.playing_cards) do
-        if not SMODS.has_no_rank(card) and not SMODS.has_no_suit(card) then
+        if not SMODS.has_no_rank(card) and not SMODS.has_no_suit(card) and not SMODS.has_enhancement(card, "m_stone") then
             valid_cards[#valid_cards+1] = card
         end
     end
