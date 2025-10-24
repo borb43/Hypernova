@@ -80,6 +80,14 @@ local descriptions = {
                 "when blind is selected",
             }
         },
+        j_hpr_bungus = {
+            name = "Bustling Fungus",
+            text = {
+                "Increases the {C:attention}rank{} of a",
+                "random card in hand",
+                "after every hand"
+            }
+        }
     },
     Other = {
         p_hpr_lunar_pack = {
