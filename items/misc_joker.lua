@@ -257,3 +257,24 @@ SMODS.Joker {
         idea = "Eris"
     }
 }
+
+SMODS.Joker {
+    key = "cavepaint",
+    atlas = "placeholder",
+    pos = { x = 0, y = 0 },
+    rarity = 1,
+    cost = 5,
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_CENTERS.m_stone
+        local c = G.GAME.current_round.hpr_cavepaint_card
+        if c and c.suit and c.rank and c.id then
+            return { vars = { localize(c.rank, "ranks"), localize(c.suit, "suits_plural"), colours = { G.C.SUITS[c.suit] }}}
+        else
+            return { key = self.key .. "_none" }
+        end
+    end,
+    hpr_credits = {
+        code = "Eris",
+        idea = "Eris"
+    }
+}

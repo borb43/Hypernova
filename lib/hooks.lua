@@ -109,3 +109,41 @@ function SMODS.create_mod_badges(obj, badges)
 		end
 	end
 end
+
+local get_id_ref = Card.get_id
+function Card:get_id()
+	local old_id = self.base.id
+	if next(SMODS.find_card("j_hpr_cavepaint")) and (G.GAME.current_round.hpr_cavepaint_card or {}).id and SMODS.has_enhancement(self, "m_stone") then
+		self.base.id = G.GAME.current_round.hpr_cavepaint_card.id
+	end
+	local ret = get_id_ref(self)
+	self.base.id = old_id
+	return ret
+end
+
+local is_suit_ref = Card.is_suit
+function Card:is_suit(suit, bypass_debuff, flush_calc)
+	local old_suit = self.base.suit
+	if next(SMODS.find_card("j_hpr_cavepaint")) and (G.GAME.current_round.hpr_cavepaint_card or {}).suit then
+		self.base.suit = G.GAME.current_round.hpr_cavepaint_card.suit
+	end
+	local ret = is_suit_ref(self, suit, bypass_debuff, flush_calc)
+	self.base.suit = old_suit
+	return ret
+end
+
+local no_rank_ref = SMODS.has_no_rank
+function SMODS.has_no_rank(card)
+	if next(SMODS.find_card("j_hpr_cavepaint")) and (G.GAME.current_round.hpr_cavepaint_card or {}).id and SMODS.has_enhancement(card, "m_stone") then
+		return false
+	end
+	return no_rank_ref(card)
+end
+
+local no_suit_ref = SMODS.has_no_suit
+function SMODS.has_no_suit(card)
+	if next(SMODS.find_card("j_hpr_cavepaint")) and (G.GAME.current_round.hpr_cavepaint_card or {}).suit and SMODS.has_enhancement(card, "m_stone") then
+		return false
+	end
+	return no_suit_ref(card)
+end
