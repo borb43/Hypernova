@@ -160,6 +160,8 @@ function Game:main_menu(change_context)
 	--card display stuff
 	card.T.w = card.T.w * 1.1 * 1.2
 	card.T.h = card.T.h * 1.1 * 1.2
+	card.children.floating_sprite.T.w = card.children.floating_sprite.T.w * 1.1 * 1.2
+	card.children.floating_sprite.T.h = card.children.floating_sprite.T.h * 1.1 * 1.2
 	card.no_ui = true
 	card.states.visible = false
 
