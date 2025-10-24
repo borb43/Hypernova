@@ -1,7 +1,7 @@
 SMODS.Voucher { --stacking, gives cards a chance to spawn with perma chips and mult effects
     key = "stacking",
-    atlas = "placeholder",
-    pos = { x = 3, y = 1 },
+    atlas = "voucher",
+    pos = { x = 0, y = 0 },
     hpr_credits = {
         code = "Eris",
         idea = "Eris"
@@ -21,8 +21,8 @@ SMODS.Voucher { --mass production, lets xmult and xchip bonuses spawn
 
 SMODS.Voucher {
     key = "shrine",
-    atlas = "placeholder",
-    pos = { x = 3, y = 1 },
+    atlas = "voucher",
+    pos = { x = 1, y = 0 },
     config = { extra = {mod = 1.5} },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.mod }}

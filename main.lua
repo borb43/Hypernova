@@ -106,6 +106,13 @@ SMODS.Atlas {
     py = 95
 }
 
+SMODS.Atlas {
+    key = "voucher",
+    path = "voucher.png",
+    px = 71,
+    py = 95
+}
+
 if CardSleeves then
     SMODS.Atlas { --placeholder at 0,0
         key = "sleeve",
