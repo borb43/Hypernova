@@ -22,7 +22,7 @@ SMODS.Booster {
     config = { extra = 2, choose = 1 },
     group_key = "k_lunar_pack",
     loc_vars = function(self, info_queue, card)
-        local cfg = (card and card.ability) or self.config or {} --only here because vscode is being an annoying little piece of shit about "need check nil" like what the fuck do you think `or` is meant to do you dumb fuck
+        local cfg = (card and card.ability) or self.config or {}
         return {
             vars = { cfg.choose, cfg.extra },
             key = "p_hpr_lunar_pack"
@@ -70,7 +70,7 @@ SMODS.Booster {
     config = { extra = 2, choose = 1 },
     group_key = "k_lunar_pack",
     loc_vars = function(self, info_queue, card)
-        local cfg = (card and card.ability) or self.config or {} --only here because vscode is being an annoying little piece of shit about "need check nil" like what the fuck do you think `or` is meant to do you dumb fuck
+        local cfg = (card and card.ability) or self.config or {}
         return {
             vars = { cfg.choose, cfg.extra },
             key = "p_hpr_lunar_pack"
@@ -118,7 +118,7 @@ SMODS.Booster {
     config = { extra = 4, choose = 1 },
     group_key = "k_lunar_pack",
     loc_vars = function(self, info_queue, card)
-        local cfg = (card and card.ability) or self.config or {} --only here because vscode is being an annoying little piece of shit about "need check nil" like what the fuck do you think `or` is meant to do you dumb fuck
+        local cfg = (card and card.ability) or self.config or {}
         return {
             vars = { cfg.choose, cfg.extra },
             key = "p_hpr_lunar_pack_jumbo"
@@ -166,7 +166,7 @@ SMODS.Booster {
     config = { extra = 4, choose = 2 },
     group_key = "k_lunar_pack",
     loc_vars = function(self, info_queue, card)
-        local cfg = (card and card.ability) or self.config or {} --only here because vscode is being an annoying little piece of shit about "need check nil" like what the fuck do you think `or` is meant to do you dumb fuck
+        local cfg = (card and card.ability) or self.config or {}
         return {
             vars = { cfg.choose, cfg.extra },
             key = "p_hpr_lunar_pack_mega"

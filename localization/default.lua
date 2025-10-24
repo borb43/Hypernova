@@ -188,6 +188,18 @@ local descriptions = {
                 "Playing cards may appear with random",
                 "permanent {X:chips,C:white}XChips{} or {X:mult,C:white}XMult{} bonuses"
             }
+        },
+        v_hpr_shrine = {
+            name = "Shrine",
+            text = {
+                "{C:hpr_moons}Moon{} cards have {C:attention}X#1#{} effects"
+            }
+        },
+        v_hpr_blessing = {
+            name = "Lunar Blessing",
+            text = {
+                "{C:hpr_moons}Moon{} cards may appear in the shop"
+            }
         }
     },
     hpr_moons = {
