@@ -49,9 +49,9 @@ local descriptions = {
         j_hpr_solar = {
             name = "Solar Flare",
             text = {
-                "If first hand of round {C:attention}not your most played,",
+                "If first hand of round {C:attention}not{} your most played,",
                 "{C:attention}upgrade{} it and {C:red}destroy {C:attention}#1#{} played cards",
-                "{s:0.8,C:dark_edition,E:1}Art and idea by Codifyd"
+                --shouldnt be needed due to actual credits system
             }
         },
         j_hpr_gambler = {
@@ -60,7 +60,7 @@ local descriptions = {
                 "When a {C:attention}listed {C:green}probability{} succeeds,",
                 "gains {C:mult}Mult{} equal to {C:green}denominator",
                 "When a {C:attention}listed {C:green}probability{} fails,",
-                "gains {C:chips}Chips equal to {C:green}denominator",
+                "gains {C:chips}Chips{} equal to {C:green}denominator",
                 "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#2#{C:inactive} Mult)"
             }
         },
