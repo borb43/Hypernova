@@ -227,7 +227,7 @@ local descriptions = {
         v_hpr_shrine = {
             name = "Shrine",
             text = {
-                "{C:hpr_moons}Moon{} cards have {C:attention}X#1#{} effects"
+                "{C:hpr_moons}Lunar Packs{} appear {C:attention}X#1#{} as often"
             }
         },
         v_hpr_blessing = {

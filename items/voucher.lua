@@ -23,15 +23,15 @@ SMODS.Voucher {
     key = "shrine",
     atlas = "voucher",
     pos = { x = 1, y = 0 },
-    config = { extra = {mod = 1.5} },
+    config = { extra = {mod = 2} },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.mod }}
     end,
     redeem = function (self, voucher)
-        G.GAME.hpr_moons_mult = (G.GAME.hpr_moons_mult or 1) * voucher.ability.extra.mod
+        G.GAME.hpr_packs_mod = (G.GAME.hpr_packs_mod or 1) * voucher.ability.extra.mod
     end,
     unredeem = function (self, voucher)
-        G.GAME.hpr_moons_mult = (G.GAME.hpr_moons_mult or 1) / voucher.ability.extra.mod
+        G.GAME.hpr_packs_mod = (G.GAME.hpr_packs_mod or 1) / voucher.ability.extra.mod
     end,
     hpr_credits = {
         code = "Eris",

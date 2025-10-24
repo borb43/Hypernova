@@ -57,7 +57,10 @@ SMODS.Booster {
         }
     end,
     draw_hand = true,
-    cry_digital_hallucinations = lunar_hallucinations_compat
+    cry_digital_hallucinations = lunar_hallucinations_compat,
+    get_weight = function (self)
+        return self.weight * (G.GAME.hpr_packs_mod or 1)
+    end
 }
 
 SMODS.Booster {
@@ -105,7 +108,10 @@ SMODS.Booster {
         }
     end,
     draw_hand = true,
-    cry_digital_hallucinations = lunar_hallucinations_compat
+    cry_digital_hallucinations = lunar_hallucinations_compat,
+    get_weight = function (self)
+        return self.weight * (G.GAME.hpr_packs_mod or 1)
+    end
 }
 
 SMODS.Booster {
@@ -153,7 +159,10 @@ SMODS.Booster {
         }
     end,
     draw_hand = true,
-    cry_digital_hallucinations = lunar_hallucinations_compat
+    cry_digital_hallucinations = lunar_hallucinations_compat,
+    get_weight = function (self)
+        return self.weight * (G.GAME.hpr_packs_mod or 1)
+    end
 }
 
 SMODS.Booster {
@@ -201,7 +210,10 @@ SMODS.Booster {
         }
     end,
     draw_hand = true,
-    cry_digital_hallucinations = lunar_hallucinations_compat
+    cry_digital_hallucinations = lunar_hallucinations_compat,
+    get_weight = function (self)
+        return self.weight * (G.GAME.hpr_packs_mod or 1)
+    end
 }
 --#endregion
 --#region erratic packs
