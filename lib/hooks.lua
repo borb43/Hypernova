@@ -147,3 +147,39 @@ function SMODS.has_no_suit(card)
 	end
 	return no_suit_ref(card)
 end
+
+local main_menu_ref = Game.main_menu
+function Game:main_menu(change_context)
+	local ret = main_menu_ref(self, change_context)
+	--create the funny card
+	local card = create_card_ref("Spectral", G.title_top, nil, nil, true, nil, "c_hpr_pulsar")
+	--realign stuff
+	G.title_top.T.w = G.title_top.T.w * 1.7675
+	G.title_top.T.x = G.title_top.T.x - 0.8
+	G.title_top:emplace(card)
+	--card display stuff
+	card.T.w = card.T.w * 1.1 * 1.2
+	card.T.h = card.T.h * 1.1 * 1.2
+	card.no_ui = true
+	card.states.visible = false
+
+	--materialize
+	G.E_MANAGER:add_event(Event({
+		trigger = "after",
+		delay = 0,
+		blockable = false,
+		blocking = false,
+		func = function ()
+			if change_context == "splash" then
+				card.states.visible = true
+				card:start_materialize({G.C.WHITE, HPR.badge_colour}, true, 2.5)
+			else
+				card.states.visible = true
+				card:start_materialize({G.C.WHITE, HPR.badge_colour}, nil, 1.2)
+			end
+			return true
+		end
+	}))
+
+	return ret
+end
