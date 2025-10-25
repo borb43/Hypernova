@@ -223,18 +223,10 @@ SMODS.Gradient {
         HEX("FDA200"),
         HEX("FE5F55"),
         HEX("009CFD")
-    }
+    },
+    interpolation = "linear"
 }
 
-HPR.erratic_sets = {
-    "Joker", "Playing Card", "Consumeables", "Voucher"
-}
-if next(SMODS.find_mod("entr")) then
-    HPR.erratic_sets[#HPR.erratic_sets+1] = "Back"
-    if next(SMODS.find_mod("CardSleeves")) then
-        HPR.erratic_sets[#HPR.erratic_sets+1] = "Sleeve"
-    end
-end
 
 local erratic_hallucinations_compat = {
     colour = SMODS.Gradients.hpr_erratic_col,
@@ -272,7 +264,7 @@ SMODS.Booster {
     end,
     ease_background_colour = function (self)
         ease_colour(G.C.DYN_UI.MAIN, SMODS.Gradients.hpr_erratic_col)
-        ease_background_colour({ new_colour = SMODS.Gradients.hpr_erratic_col, special_colour = G.C.BLACK, contrast = 1 + math.random()*2 })
+        ease_background_colour({ new_colour = SMODS.Gradients.hpr_erratic_col, special_colour = G.C.BLACK, contrast = 2 })
     end,
     particles = function(self)
         G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
@@ -324,7 +316,7 @@ SMODS.Booster {
     end,
     ease_background_colour = function (self)
         ease_colour(G.C.DYN_UI.MAIN, SMODS.Gradients.hpr_erratic_col)
-        ease_background_colour({ new_colour = SMODS.Gradients.hpr_erratic_col, special_colour = G.C.BLACK, contrast = 1 + math.random()*2 })
+        ease_background_colour({ new_colour = SMODS.Gradients.hpr_erratic_col, special_colour = G.C.BLACK, contrast = 2 })
     end,
     particles = function(self)
         G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
@@ -376,7 +368,7 @@ SMODS.Booster {
     end,
     ease_background_colour = function (self)
         ease_colour(G.C.DYN_UI.MAIN, SMODS.Gradients.hpr_erratic_col)
-        ease_background_colour({ new_colour = SMODS.Gradients.hpr_erratic_col, special_colour = G.C.BLACK, contrast = 1 + math.random()*2 })
+        ease_background_colour({ new_colour = SMODS.Gradients.hpr_erratic_col, special_colour = G.C.BLACK, contrast = 2 })
     end,
     particles = function(self)
         G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
@@ -428,7 +420,7 @@ SMODS.Booster {
     end,
     ease_background_colour = function (self)
         ease_colour(G.C.DYN_UI.MAIN, SMODS.Gradients.hpr_erratic_col)
-        ease_background_colour({ new_colour = SMODS.Gradients.hpr_erratic_col, special_colour = G.C.BLACK, contrast = 1 + math.random()*2 })
+        ease_background_colour({ new_colour = SMODS.Gradients.hpr_erratic_col, special_colour = G.C.BLACK, contrast = 2 })
     end,
     particles = function(self)
         G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
