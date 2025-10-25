@@ -166,6 +166,12 @@ local descriptions = {
                 "unseeded run to",
                 "learn what it does"
             }
+        },
+        p_hpr_diy = {
+            name = "DIY Deck",
+            text = {
+                "do it youself"
+            }
         }
     },
     Planet = {},
@@ -321,6 +327,14 @@ local descriptions = {
                 "Permanently adds {X:chips,C:white}X#1#{} Chips",
                 "to up to {C:attention}#2#{} selected cards"
             }
+        },
+        hpr_diy = {
+            c_hpr_garbage = {
+                name = "Garbage",
+                text = {
+                    "{C:red}+#1#{} discard"
+                }
+            }
         }
     }
 }
@@ -357,7 +371,8 @@ local misc = {
         hpr_plus_q = "+1 ???",
         k_erratic_pack = "Erratic Pack",
         k_hpr_diy = "diy",
-        b_hpr_diy_cards = "diy cards"
+        b_hpr_diy_cards = "diy cards",
+        k_hpr_diy_pack = "Build your deck!"
     },
     high_scores = {},
     labels = {

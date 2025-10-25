@@ -1,7 +1,7 @@
 
 SMODS.ConsumableType {
     key = "hpr_diy",
-    default = "c_fool", --TEMP
+    default = "c_hpr_garbage", --TEMP
     primary_colour = HEX("a86e3e"),
     secondary_colour = HEX("b3533b")
 }
@@ -17,7 +17,7 @@ SMODS.Booster {
     atlas = "placeholder",
     pos = { x = 4, y = 2 },
     config = { extra = 5, choose = 2 },
-    group_key = "k_hpr_diy",
+    group_key = "k_hpr_diy_pack",
     loc_vars = function (self, info_queue, card)
         local cfg = (card and card.ability) or self.config or {}
         return { vars = { cfg.extra, cfg.choose }}
@@ -51,4 +51,23 @@ SMODS.Booster {
         }
     end,
     --no_collection = true,
+}
+
+HPR.DIYCard = SMODS.Consumable:extend({
+    set = "hpr_diy",
+    atlas = "hpr_placeholder",
+    pos = { x = 0, y = 2},
+    cost = 4
+})
+
+HPR.DIYCard {
+    key = "garbage",
+    config = { extra = 1 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {  card.ability.extra }}
+    end,
+    use = function (self, card, area, copier)
+        ease_discard(card.ability.extra)
+        G.GAME.round_resets.discards = G.GAME.round_resets.discards + card.ability.extra
+    end
 }

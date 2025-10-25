@@ -133,6 +133,7 @@ assert(SMODS.load_file("items/misc_joker.lua"))()
 assert(SMODS.load_file("items/legendary.lua"))()
 assert(SMODS.load_file("items/back.lua"))()
 assert(SMODS.load_file("items/voucher.lua"))()
+assert(SMODS.load_file("items/diy.lua"))
 
 if CardSleeves then
     assert(SMODS.load_file("crossmod/sleeve.lua"))()
