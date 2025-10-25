@@ -355,11 +355,14 @@ local misc = {
         k_level_stats = "per level",
         hpr_plus_moon = "+1 Moon",
         hpr_plus_q = "+1 ???",
-        k_erratic_pack = "Erratic Pack"
+        k_erratic_pack = "Erratic Pack",
+        k_hpr_diy = "diy",
+        b_hpr_diy_cards = "diy cards"
     },
     high_scores = {},
     labels = {
-        hpr_moons = "Moon"
+        hpr_moons = "Moon",
+        hpr_diy = "DIY"
     },
     poker_hand_descriptions = {},
     poker_hands = {},
