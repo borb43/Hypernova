@@ -17,7 +17,7 @@ create_card = function(_type, area, legendary, _rarity, skip_materialize, soulab
     end
     return ret_card
 end
-
+--#region card credits
 local smcmb = SMODS.create_mod_badges
 function SMODS.create_mod_badges(obj, badges)
 	smcmb(obj, badges)
@@ -109,7 +109,8 @@ function SMODS.create_mod_badges(obj, badges)
 		end
 	end
 end
-
+--#endregion
+--#region cave painting hooks
 local get_id_ref = Card.get_id
 function Card:get_id()
 	local old_id = self.base.id
@@ -147,6 +148,7 @@ function SMODS.has_no_suit(card)
 	end
 	return no_suit_ref(card)
 end
+--#endregion
 
 local main_menu_ref = Game.main_menu
 function Game:main_menu(change_context)
@@ -184,4 +186,18 @@ function Game:main_menu(change_context)
 	}))
 
 	return ret
+end
+
+local level_up_handref = level_up_hand
+function level_up_hand(card, hand, instant, amount)
+	level_up_handref(card, hand, instant, amount)
+	SMODS.calculate_context({
+		hpr_level_up_hand = true,
+		other_card = card,
+		hand_type = hand,
+		instant = instant,
+		chips = G.GAME.hands[hand].l_chips * amount,
+		mult = G.GAME.hands[hand].l_mult * amount,
+		levels = amount
+	})
 end
