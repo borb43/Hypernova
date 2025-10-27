@@ -201,3 +201,16 @@ function level_up_hand(card, hand, instant, amount)
 		levels = amount
 	})
 end
+
+if Entropy and Entropy.ReversePlanetUse then
+	local level_up_ascref = Entropy.ReversePlanetUse
+	function Entropy.ReversePlanetUse(handname, card, amt)
+		level_up_ascref(handname, card, amt)
+		SMODS.calculate_context({
+			hpr_level_up_asc = true,
+			other_card = card or nil,
+			hand_type = handname,
+			asc_amount = amt
+		})
+	end
+end
