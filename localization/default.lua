@@ -1,8 +1,3 @@
-local moon_drain_txt = {
-    "Drains levels from played",
-    "{C:attention}#1# to gain {C:attention}charge{}"
-}
-
 
 local descriptions = {
     Back = {
@@ -372,12 +367,14 @@ local misc = {
         k_erratic_pack = "Erratic Pack",
         k_hpr_diy = "diy",
         b_hpr_diy_cards = "diy cards",
-        k_hpr_diy_pack = "Build your deck!"
+        k_hpr_diy_pack = "Build your deck!",
+        k_hpr_stellar = "Stellar"
     },
     high_scores = {},
     labels = {
         hpr_moons = "Moon",
-        hpr_diy = "DIY"
+        hpr_diy = "DIY",
+        hpr_stellar = "Stellar"
     },
     poker_hand_descriptions = {},
     poker_hands = {},
