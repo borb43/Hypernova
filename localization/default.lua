@@ -394,5 +394,9 @@ local misc = {
     v_text = {},
 }
 
+if next(SMODS.find_mod("Cryptid")) then
+    descriptions.joker.j_hpr_gambler[#descriptions.joker.j_hpr_gambler+1] = "{C:inactive}(Currently X#3# Scaling){}"
+end
+
 
 return {descriptions = descriptions, misc = misc}
