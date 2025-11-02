@@ -191,6 +191,7 @@ end
 local level_up_handref = level_up_hand
 function level_up_hand(card, hand, instant, amount)
 	level_up_handref(card, hand, instant, amount)
+	amount = amount or 1
 	SMODS.calculate_context({
 		hpr_level_up_hand = true,
 		other_card = card,
