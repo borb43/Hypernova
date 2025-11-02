@@ -412,7 +412,7 @@ if next(SMODS.find_mod("Entropy")) then
         "When a hand's {C:gold}Ascension Power{} is",
         "leveled up, upgrade this joker",
         "and all cards in your deck",
-        "by the same amount",
+        "by one fifth of the amount",
         "{C:inactive}(Currently {C:gold}+#3#{C:inactive} Ascension Power)"
     }
 end
