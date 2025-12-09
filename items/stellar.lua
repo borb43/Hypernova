@@ -37,16 +37,6 @@ SMODS.Joker {
                 }
             end
         end
-        if context.hpr_level_up_asc then
-            card.ability.extra.asc = card.ability.extra.asc + context.asc_amount/5
-            for _, c in pairs(G.playing_cards) do
-                c.ability.entr_perma_plus_asc = c.ability.entr_perma_plus_asc + context.asc_amount/5
-            end
-            return {
-                message = localize("k_upgrade_ex"),
-                colour = G.C.GOLD
-            }
-        end
         if context.joker_main or context.forcetrigger then
             return {
                 chips = card.ability.extra.chips,

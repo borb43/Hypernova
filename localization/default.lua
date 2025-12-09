@@ -104,13 +104,11 @@ local descriptions = {
         j_hpr_observatorium = {
             name = "S-001 OBSERVATORIUM",
             text = {
-                {
-                    "When a hand is {C:attention}leveled up,",
-                    "level up this joker and",
-                    "all cards in your deck",
-                    "by the same amount",
-                    "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#1#{C:inactive} Mult)"
-                }
+                "When a hand is {C:attention}leveled up,",
+                "level up this joker and",
+                "all cards in your deck",
+                "by the same amount",
+                "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#1#{C:inactive} Mult)"
             }
         }
     },
@@ -405,16 +403,6 @@ local misc = {
 
 if next(SMODS.find_mod("Cryptid")) then
     descriptions.Joker.j_hpr_gambler.text[#descriptions.Joker.j_hpr_gambler.text+1] = "{C:inactive}(Currently X#3# Scaling){}"
-end
-
-if next(SMODS.find_mod("Entropy")) then
-    descriptions.Joker.j_hpr_observatorium.text[#descriptions.Joker.j_hpr_observatorium.text+1] = {
-        "When a hand's {C:gold}Ascension Power{} is",
-        "leveled up, upgrade this joker",
-        "and all cards in your deck",
-        "by one fifth of the amount",
-        "{C:inactive}(Currently {C:gold}+#3#{C:inactive} Ascension Power)"
-    }
 end
 
 return {descriptions = descriptions, misc = misc}
