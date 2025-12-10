@@ -110,6 +110,12 @@ local descriptions = {
                 "by the same amount",
                 "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#2#{C:inactive} Mult)"
             }
+        },
+        j_hpr_error = {
+            name = "S??? ?Err??or",
+            text = {
+                ""
+            }
         }
     },
     Other = {

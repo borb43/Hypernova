@@ -21,3 +21,20 @@ HPR.reset_game_globals = function (run_start)
     end
     reset_hpr_cavepaint()
 end
+
+HPR.stellar_gradient = SMODS.Gradient {
+    key = "stellar",
+    colours = {
+        HEX("010052"),
+        HEX("520052")
+    }
+}
+
+HPR.gay = SMODS.Gradient {
+    key = "gay",
+    colours = {
+        G.C.MULT,
+        G.C.GREEN,
+        G.C.CHIPS
+    }
+}
