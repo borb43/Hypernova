@@ -187,6 +187,13 @@ local descriptions = {
                 "Applies {C:dark_edition}Negative{} edition",
                 "to {C:attention}#1#{} selected card"
             }
+        },
+        c_hpr_ascender = {
+            name = "name tbd ascension card",
+            text = {
+                "{C:hpr_stellar}Ascends{} one eligible {C:attention}Joker{} to",
+                "its {C:hpr_stellar}Stellar{} counterpart"
+            }
         }
     },
     Stake = {},
