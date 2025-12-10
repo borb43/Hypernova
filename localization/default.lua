@@ -102,7 +102,7 @@ local descriptions = {
             }
         },
         j_hpr_observatorium = {
-            name = "S-001 OBSERVATORIUM",
+            name = "S001 OBSERVATORIUM",
             text = {
                 "When a hand is {C:attention}leveled up,",
                 "level up this joker and",
