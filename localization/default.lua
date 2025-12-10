@@ -111,8 +111,8 @@ local descriptions = {
                 "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#2#{C:inactive} Mult)"
             }
         },
-        j_hpr_error = {
-            name = "S??? ?Err??or",
+        j_hpr_missing = {
+            name = "S{C:hpr_alt_gay}??? ?{}Err{C:hpr_alt_gay}??{}or",
             text = {
                 ""
             }

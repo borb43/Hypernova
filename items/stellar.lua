@@ -60,11 +60,11 @@ HPR.vanilla_ascensions = {
     j_supernova = "j_hpr_observatorium",
     j_constellation = "j_hpr_observatorium",
     j_space = "j_hpr_observatorium",
-    j_misprint = "j_hpr_error"
+    j_misprint = "j_hpr_missing"
 }
 
 HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'ln', 'log', 'sin', 'cos', 'tan' }
-HPR.error_numbers = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '21', '41', '61', '67', '69', '84', '404', '420', 'nan', 'inf', 'i', 'e', 'pi', 'huge', '666', '999', '-1', '23' }
+HPR.error_numbers = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '21', '41', '61', '67', '69', '84', '404', '420', 'nan', 'inf', 'i', 'e', 'pi', 'huge', '666', '999', '-1', '23', '80085' }
 HPR.error_other = {
     { string = "Chips", colour = G.C.CHIPS },
     { string = "Mult", colour = G.C.MULT },

@@ -38,3 +38,12 @@ HPR.gay = SMODS.Gradient {
         G.C.CHIPS
     }
 }
+
+HPR.alt_gay = SMODS.Gradient {
+    key = "alt_gay",
+    colours = {
+        HEX('009cfd'),
+        G.C.MONEY,
+        G.C.PURPLE
+    }
+}
