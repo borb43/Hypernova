@@ -11,6 +11,14 @@ SMODS.Rarity {
     key = "stellar"
 }
 
+HPR.StellarJoker = SMODS.Joker:extend({
+    atlas = "hpr_placeholder",
+    pos = { x = 0, y = 1 },
+    soul_pos = { x = 1, y = 1 },
+    rarity = "hpr_stellar",
+    cost = 30
+})
+
 SMODS.Consumable {
     key = "ascender",
     atlas = "placeholder",
@@ -61,14 +69,9 @@ HPR.vanilla_ascensions = {
     j_space = "j_hpr_observatorium"
 }
 
-SMODS.Joker {
+HPR.StellarJoker {
     key = "observatorium",
-    atlas = "placeholder",
-    pos = { x = 0, y = 1 },
-    soul_pos = { x = 1, y = 1 },
     config = { extra = { chips = 0, mult = 0 }},
-    rarity = "hpr_stellar",
-    cost = 30,
     blueprint_compat = true,
     demicoloncompat = true,
     perishable_compat = false,
@@ -95,5 +98,5 @@ SMODS.Joker {
     end,
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.chips, card.ability.extra.mult, card.ability.extra.asc }}
-    end
+    end,
 }
