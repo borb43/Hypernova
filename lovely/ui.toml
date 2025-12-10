@@ -1,0 +1,23 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+[[patches]]
+[patches.pattern]
+match_indent = true
+pattern = "for _, v in ipairs(info_queue) do"
+position = 'before'
+target = 'functions/common_events.lua'
+payload = '''
+    if next(SMODS.find_card('c_hpr_ascender') then
+        local asc = HPR.get_ascension(_c)
+        if asc and G.P_CENTERS[asc] then
+            if true then --replace with actual discovery condition
+                info_queue[#info_queue+1] = G.P_CENTERS[asc]
+            else
+                info_queue[#info_queue+1] = { key = "hpr_undiscovered_stellar", set = 'Other' }
+            end
+        end
+    end
+'''

@@ -84,8 +84,9 @@ function HPR.poll_erratic_set(seed) --returns a random set, along with additiona
 end
 
 function HPR.get_ascension(card)
-    if card and card.config and card.config.center then
-        return HPR.vanilla_ascensions[card.config.center.key] or card.config.center.hpr_ascension_key or nil
+    local center = card.config and card.config.center or card
+    if center.key then
+        return HPR.vanilla_ascensions[center.key] or center.hpr_ascension_key or nil
     end
     return nil
 end

@@ -172,10 +172,12 @@ local descriptions = {
                 "learn what it does"
             }
         },
-        p_hpr_diy = {
-            name = "DIY Deck",
+        hpr_undiscovered_stellar = {
+            name = "Not Discovered",
             text = {
-                "do it youself"
+                "Obtain this {C:hpr_stellar}Ascension{}",
+                "in an unseeded run",
+                "to learn what it does"
             }
         }
     },

@@ -1,5 +1,5 @@
 [manifest]
-version = "1.0.0" # i cba to update this
+version = "1.0.0"
 dump_lua = true
 priority = 0
 
