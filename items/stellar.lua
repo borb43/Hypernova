@@ -56,7 +56,9 @@ SMODS.Consumable {
 }
 
 HPR.vanilla_ascensions = {
-    j_supernova = "j_hpr_observatorium"
+    j_supernova = "j_hpr_observatorium",
+    j_constellation = "j_hpr_observatorium",
+    j_space = "j_hpr_observatorium"
 }
 
 SMODS.Joker {
