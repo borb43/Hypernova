@@ -10,7 +10,7 @@ pattern = "for _, v in ipairs(info_queue) do"
 position = 'before'
 target = 'functions/common_events.lua'
 payload = '''
-    if next(SMODS.find_card('c_hpr_ascender') then
+    if next(SMODS.find_card('c_hpr_ascender')) then
         local asc = HPR.get_ascension(_c)
         if asc and G.P_CENTERS[asc] then
             if true then --replace with actual discovery condition
