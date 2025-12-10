@@ -108,7 +108,7 @@ local descriptions = {
                 "level up this joker and",
                 "all cards in your deck",
                 "by the same amount",
-                "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#1#{C:inactive} Mult)"
+                "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#2#{C:inactive} Mult)"
             }
         }
     },
