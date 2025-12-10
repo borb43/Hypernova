@@ -46,7 +46,6 @@ local descriptions = {
             text = {
                 "If first hand of round {C:attention}not{} your most played,",
                 "{C:attention}upgrade{} it and {C:red}destroy {C:attention}#1#{} played cards",
-                --shouldnt be needed due to actual credits system
             }
         },
         j_hpr_gambler = {
@@ -72,7 +71,8 @@ local descriptions = {
             name = "Eris",
             text = {
                 "Creates a {C:dark_edition}Negative {C:hpr_moons}Moon{} card",
-                "when blind is selected",
+                "if played hand is exactly {C:attention}1{}",
+                "rankless or suitless card"
             }
         },
         j_hpr_bungus = {
