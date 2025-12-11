@@ -223,6 +223,20 @@ HPR.StellarJoker {
             G.GAME.round_resets.temp_handsize = (G.GAME.round_resets.temp_handsize or 0) + h
             return { message = localize("hpr_generic_q")}
         end
+        if context.individual and context.cardarea == G.play then
+            local res = pseudorandom("hpr_error_individual",1,6)
+            if res == 1 then return { chips = pseudorandom("hpr_error_individual_effect",5,75) } end
+            if res == 2 then return { xchips = pseudorandom("hpr_error_individual_effect",10,15)/10 } end
+            if res == 3 then return { mult = pseudorandom("hpr_error_individual_effect",1,25) } end
+            if res == 4 then return { xmult = pseudorandom("hpr_error_individual_effect",10,15)/10 } end
+            if res == 5 then return { dollars = pseudorandom("hpr_error_individual_effect",0,4)} end
+            if res == 6 then return { swap = true } end
+        end
+        if context.joker_main then
+            return {
+                xmult = pseudorandom("hpr_error_j_main", 7, 47)/10
+            }
+        end
     end
 }
 
