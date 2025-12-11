@@ -112,7 +112,7 @@ local descriptions = {
             }
         },
         j_hpr_missing = {
-            name = "S{C:hpr_alt_gay}??? ?{}Err{C:hpr_alt_gay}??{}or",
+            name = "S{C:hpr_alt_gay}??? ?{}ERR{C:hpr_alt_gay}??{}OR",
             text = {
                 ""
             }
