@@ -215,6 +215,14 @@ HPR.StellarJoker {
                 return { level_up = true, message = localize("k_level_up_ex") }
             end
         end
+        if context.setting_blind then
+            ease_discard(pseudorandom("hpr_error_discard", -2, 4))
+            ease_hands_played(pseudorandom("hpr_error_hands", -2, 4))
+            local h = pseudorandom("hpr_error_h_size", -1, 2)
+            G.hand:change_size(h)
+            G.GAME.round_resets.temp_handsize = (G.GAME.round_resets.temp_handsize or 0) + h
+            return { message = localize("hpr_generic_q")}
+        end
     end
 }
 

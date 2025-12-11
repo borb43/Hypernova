@@ -393,7 +393,8 @@ local misc = {
         k_hpr_diy = "diy",
         b_hpr_diy_cards = "diy cards",
         k_hpr_diy_pack = "Build your deck!",
-        k_hpr_stellar = "Stellar"
+        k_hpr_stellar = "Stellar",
+        hpr_generic_q = "?????"
     },
     high_scores = {},
     labels = {
