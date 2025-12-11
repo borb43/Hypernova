@@ -149,7 +149,7 @@ function SMODS.has_no_suit(card)
 	return no_suit_ref(card)
 end
 --#endregion
-
+--[[ menu card, disabled temporarily
 local main_menu_ref = Game.main_menu
 function Game:main_menu(change_context)
 	local ret = main_menu_ref(self, change_context)
@@ -187,7 +187,7 @@ function Game:main_menu(change_context)
 
 	return ret
 end
-
+]]
 local level_up_handref = level_up_hand
 function level_up_hand(card, hand, instant, amount)
 	level_up_handref(card, hand, instant, amount)
