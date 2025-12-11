@@ -48,3 +48,12 @@ HPR.event_presets.balance_display = function (card)
             end)
         }))
 end
+
+HPR.event_presets.juice = function (card)
+    G.E_MANAGER:add_event(Event{
+        func = function ()
+            card:juice_up()
+            return true
+        end
+    })
+end
