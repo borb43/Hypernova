@@ -192,29 +192,6 @@ HPR.StellarJoker {
         return pseudorandom("hpr_error_cashout",-4,11)
     end,
     calculate = function (self, card, context)
-        if context.before then
-            local res = pseudorandom("hpr_error_before",1,4)
-            if res == 1 then
-                for _,c in ipairs(context.full_hand) do
-                    c:set_ability(SMODS.poll_enhancement{ guaranteed = true, type_key = "hpr_error_before_effect" }, nil, true)
-                    HPR.event_presets.juice(c)
-                end
-                return { message = localize("k_upgrade_ex") }
-            elseif res == 2 then
-                for _,c in ipairs(context.full_hand) do
-                    c:set_seal(SMODS.poll_seal{ guaranteed = true, type_key = "hpr_error_before_effect" }, nil, true)
-                    HPR.event_presets.juice(c)
-                end
-                return { message = localize("k_upgrade_ex") }
-            elseif res == 3 then
-                for _,c in ipairs(context.full_hand) do
-                    c:set_edition(SMODS.poll_edition{ guaranteed = true, type_key = "hpr_error_before_effect", no_negative = true },nil,nil,true)
-                end
-                return { message = localize("k_upgrade_ex") }
-            elseif res == 4 then
-                return { level_up = true, message = localize("k_level_up_ex") }
-            end
-        end
         if context.setting_blind then
             ease_discard(pseudorandom("hpr_error_discard", -2, 4))
             ease_hands_played(pseudorandom("hpr_error_hands", -2, 4))
