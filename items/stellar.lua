@@ -261,7 +261,8 @@ HPR.StellarJoker {
                             SMODS.add_card{
                                 set = 'Consumeables',
                                 key_append = "hpr_master",
-                                edition = "e_negative"
+                                edition = "e_negative",
+                                area = G.consumeables
                             }
                             return true
                         end
@@ -272,6 +273,16 @@ HPR.StellarJoker {
             })
             return nil, true
         end
+    end,
+    add_to_deck = function (self, card, from_debuff)
+        G.E_MANAGER:add_event(Event{
+            func = function ()
+                for _,v in pairs(G.I.CARD) do
+                    if v.set_cost then v:set_cost() end
+                end
+                return true
+            end
+        })
     end
 }
 
