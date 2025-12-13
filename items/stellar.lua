@@ -111,7 +111,6 @@ HPR.error_context = {
 HPR.StellarJoker {
     key = "missing",
     blueprint_compat = true,
-    demicoloncompat = true,
     loc_vars = function (self, info_queue, card)
         return {
             main_start = {
@@ -248,3 +247,49 @@ HPR.StellarJoker {
         return { vars = { card.ability.extra.chips, card.ability.extra.mult, card.ability.extra.asc }}
     end,
 }
+
+HPR.StellarJoker {
+    key = "master",
+    blueprint_compat = true,
+    demicoloncompat = true,
+    calculate = function (self, card, context)
+        if context.setting_blind or context.forcetrigger then
+            G.E_MANAGER:add_event(Event{
+                func = function ()
+                    G.E_MANAGER:add_event(Event{
+                        func = function ()
+                            SMODS.add_card{
+                                set = 'Consumeables',
+                                key_append = "hpr_master",
+                                edition = "e_negative"
+                            }
+                            return true
+                        end
+                    })
+                    SMODS.calculate_effect({ message = localize("k_plus_q"), colour = G.C.DARK_EDITION }, context.blueprint_card or card)
+                    return true
+                end
+            })
+            return nil, true
+        end
+    end
+}
+
+local set_cost_ref = Card.set_cost
+function Card:set_cost()
+    set_cost_ref(self)
+    if next(SMODS.find_card("j_hpr_master")) then
+        local y = false
+        y = self.ability.set == "Booster"
+        if not y then
+            for _, center in ipairs(G.P_CENTER_POOLS.Consumeables) do
+                if center.key == self.config.center.key then y = true end
+            end
+        end
+        if y then
+            self.cost = 0
+            self.sell_cost = math.max(1, math.floor(self.cost / 2)) + (self.ability.extra_value or 0)
+            self.sell_cost_label = self.facing == 'back' and '?' or self.sell_cost
+        end
+    end
+end

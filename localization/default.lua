@@ -116,6 +116,15 @@ local descriptions = {
             text = {
                 ""
             }
+        },
+        j_hpr_master = {
+            name = "S002 MASTER",
+            text = {
+                "All {C:attention}consumables{} and {C:attention}Booster",
+                "{C:attention}Packs{} in the shop are {C:attention}free",
+                "Creates a {C:dark_edition}Negative {C:attention}Consumable",
+                "when blind is selected"
+            }
         }
     },
     Other = {
