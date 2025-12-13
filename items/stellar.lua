@@ -175,7 +175,7 @@ HPR.StellarJoker {
                     config = {
                         object = DynaText({
                             string = HPR.error_context,
-                            colours = { HPR.alt_gay },
+                            colours = { G.C.FILTER },
                             pop_in_rate = 9999999,
                             silent = true,
                             random_element = true,
