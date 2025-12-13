@@ -60,7 +60,9 @@ HPR.vanilla_ascensions = {
     j_supernova = "j_hpr_observatorium",
     j_constellation = "j_hpr_observatorium",
     j_space = "j_hpr_observatorium",
-    j_misprint = "j_hpr_missing"
+    j_misprint = "j_hpr_missing",
+    j_cartomancer = "j_hpr_master",
+    j_astronomer = "j_hpr_master"
 }
 
 HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'ln', 'log', 'sin', 'cos', 'tan' }
