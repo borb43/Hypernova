@@ -287,3 +287,19 @@ HPR.StellarJoker {
         })
     end
 }
+
+HPR.StellarJoker {
+    key = "potassium",
+    blueprint_compat = true,
+    --demicoloncompat = true,
+    config = { extra = { xmult = 3, odds1 = 4, odds2 = 6 }},
+    loc_vars = function (self, info_queue, card)
+        local e = card.ability.extra
+        local numerator, denominator = SMODS.get_probability_vars(card, 1, e.odds1, self.key)
+        local numerator2, denominator2 = SMODS.get_probability_vars(card, 1, e.odds2, self.key.."2")
+        return { vars = { e.xmult, numerator, denominator, numerator2, denominator2 }}
+    end,
+    calculate = function (self, card, context)
+        
+    end
+}
