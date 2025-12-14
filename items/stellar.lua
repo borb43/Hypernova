@@ -311,10 +311,14 @@ HPR.StellarJoker {
             if card.area[card.rank-1] and SMODS.pseudorandom_probability(card, self.key.."2", 1, card.ability.extra.odds2) then
                 G.GAME.banned_keys[card.area[card.rank-1].config.center.key] = true
                 SMODS.calculate_effect({ message_card = card.area[card.rank-1], message = localize("k_extinct_ex")}, card)
+            else
+                SMODS.calculate_effect({ message_card = card.area[card.rank-1], message = localize("k_safe_ex")}, card)
             end
             if card.area[card.rank+1] and SMODS.pseudorandom_probability(card, self.key.."2", 1, card.ability.extra.odds2) then
                 G.GAME.banned_keys[card.area[card.rank+1].config.center.key] = true
                 SMODS.calculate_effect({ message_card = card.area[card.rank+1], message = localize("k_extinct_ex")}, card)
+            else
+                SMODS.calculate_effect({ message_card = card.area[card.rank+1], message = localize("k_safe_ex")}, card)
             end
         end
     end
