@@ -300,6 +300,22 @@ HPR.StellarJoker {
         return { vars = { e.xmult, numerator, denominator, numerator2, denominator2 }}
     end,
     calculate = function (self, card, context)
-        
+        if context.individual and context.cardarea == G.play then
+            return { xmult = card.ability.extra.xmult }
+        end
+        if context.destroy_card and context.cardarea == G.play and SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds1) then
+            G.GAME.banned_keys[context.destroy_card.config.center.key] = true
+            return { remove = true }
+        end
+        if context.end_of_round and card.area and card.rank then
+            if card.area[card.rank-1] and SMODS.pseudorandom_probability(card, self.key.."2", 1, card.ability.extra.odds2) then
+                G.GAME.banned_keys[card.area[card.rank-1].config.center.key] = true
+                SMODS.calculate_effect({ message_card = card.area[card.rank-1], message = localize("k_extinct_ex")}, card)
+            end
+            if card.area[card.rank+1] and SMODS.pseudorandom_probability(card, self.key.."2", 1, card.ability.extra.odds2) then
+                G.GAME.banned_keys[card.area[card.rank+1].config.center.key] = true
+                SMODS.calculate_effect({ message_card = card.area[card.rank+1], message = localize("k_extinct_ex")}, card)
+            end
+        end
     end
 }
