@@ -193,7 +193,8 @@ local descriptions = {
         },
         card_extra_eff_mod = {
             text = {
-                "{X:dark_edition,C:white}X#1#{} Joker effects from this card"
+                "{X:dark_edition,C:white}X#1#{} {C:chips}Chips{} and {C:mult}Mult{} effects",
+                "from this card"
             }
         },
         undiscovered_hpr_moons = {
@@ -357,8 +358,8 @@ local descriptions = {
         c_hpr_dysnomia = {
             name = "Dysnomia",
             text = {
-                "Permanently adds {X:dark_edition,C:white}X#1#{} Joker",
-                "effects to #2# selected card"
+                "Permanently boosts the {C:chips}Chips{} and {C:mult}Mult{}",
+                "effects of {C:attention}#2#{} selected card by {X:dark_edition,C:white}X#1#{}"
             }
         },
         c_hpr_titania = {
