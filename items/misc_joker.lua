@@ -130,7 +130,7 @@ SMODS.Joker { --tipping scales, increases numerator and denominator of probabili
 SMODS.Joker { --gambling addict, scales from probability rolls
     key = "gambler",
     atlas = "placeholder",
-    pos = { x = 1, y = 0 },
+    pos = { x = 2, y = 0 },
     config = { extra = { chips = 0, mult = 0, multiplier = 1 } },
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips, card.ability.extra.mult, card.ability.extra.multiplier } }
