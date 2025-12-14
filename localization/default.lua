@@ -152,6 +152,13 @@ local descriptions = {
                 "in played hand",
                 "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips)"
             }
+        },
+        j_hpr_storm = {
+            name = "S006 STORM",
+            text = {
+                "All {C:attention}played{} and {C:attention}held{} cards score",
+                "{C:attention}Retrigger{} all scored cards"
+            }
         }
     },
     Other = {

@@ -74,7 +74,9 @@ HPR.vanilla_ascensions = {
     j_wily = "j_hpr_crafty",
     j_clever = "j_hpr_crafty",
     j_devious = "j_hpr_crafty",
-    j_crafty = "j_hpr_crafty"
+    j_crafty = "j_hpr_crafty",
+    j_splash = "j_hpr_storm",
+    j_selzer = "j_hpr_storm"
 }
 
 HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'ln', 'log', 'sin', 'cos', 'tan' }
@@ -395,6 +397,18 @@ HPR.StellarJoker {
         end
         if context.joker_main or context.forcetrigger then
             return { chips = card.ability.extra.chips }
+        end
+    end
+}
+
+HPR.StellarJoker {
+    key = "storm",
+    calculate = function (self, card, context)
+        if context.modify_scoring_hand and not context.blueprint then
+            return { add_to_hand = true }
+        end
+        if context.repetition and context.cardarea == G.play then
+            return { repetitions = 1 }
         end
     end
 }
