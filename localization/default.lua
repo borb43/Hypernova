@@ -22,8 +22,8 @@ local descriptions = {
         j_hpr_growth = {
             name = "Growth",
             text = {
-                "Multiplies most effects",
-                "of other jokers by {X:dark_edition,C:white}#1#X",
+                "Multiplies all {C:chips}Chips{} and",
+                "{C:mult}Mult{} effects by {X:dark_edition,C:white}#1#X",
                 "Increases by {X:dark_edition,C:white}#2#X{} at the end of round"
             }
         },
