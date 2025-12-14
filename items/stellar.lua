@@ -64,7 +64,12 @@ HPR.vanilla_ascensions = {
     j_cartomancer = "j_hpr_master",
     j_astronomer = "j_hpr_master",
     j_gros_michel = "j_hpr_potassium",
-    j_cavendish = "j_hpr_potassium"
+    j_cavendish = "j_hpr_potassium",
+    j_jolly = "j_hpr_crazy",
+    j_zany = "j_hpr_crazy",
+    j_mad = "j_hpr_crazy",
+    j_crazy = "j_hpr_crazy",
+    j_droll = "j_hpr_crazy"
 }
 
 HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'ln', 'log', 'sin', 'cos', 'tan' }
