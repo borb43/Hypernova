@@ -69,7 +69,12 @@ HPR.vanilla_ascensions = {
     j_zany = "j_hpr_crazy",
     j_mad = "j_hpr_crazy",
     j_crazy = "j_hpr_crazy",
-    j_droll = "j_hpr_crazy"
+    j_droll = "j_hpr_crazy",
+    j_sly = "j_hpr_crafty",
+    j_wily = "j_hpr_crafty",
+    j_clever = "j_hpr_crafty",
+    j_devious = "j_hpr_crafty",
+    j_crafty = "j_hpr_crafty"
 }
 
 HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'ln', 'log', 'sin', 'cos', 'tan' }
@@ -357,8 +362,39 @@ HPR.StellarJoker {
                 })
             end
         end
-        if context.joker_main then
+        if context.joker_main or context.forcetrigger then
             return { mult = card.ability.extra.mult }
+        end
+    end
+}
+
+HPR.StellarJoker {
+    key = "crafty",
+    blueprint_compat = true,
+    demicoloncompat = true,
+    config = { extra = { chips = 0, scale = 30 }},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.chips, card.ability.extra.scale }}
+    end,
+    calculate = function (self, card, context)
+        if context.before then
+            local hands = 0
+            for _, hand in pairs(context.poker_hands) do
+                hands = hands + #hand
+            end
+            if hands > 0 then
+                SMODS.scale_card(card, {
+                    ref_table = card.ability.extra,
+                    ref_value = "chips",
+                    scalar_value = "scale",
+                    operation = function (ref_table, ref_value, initial, change)
+                        ref_table[ref_value] = initial + change * hands
+                    end,
+                })
+            end
+        end
+        if context.joker_main or context.forcetrigger then
+            return { chips = card.ability.extra.chips }
         end
     end
 }
