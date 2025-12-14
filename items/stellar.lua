@@ -302,7 +302,7 @@ HPR.StellarJoker {
         return { vars = { e.xmult, numerator, denominator, numerator2, denominator2 }}
     end,
     calculate = function (self, card, context)
-        if context.individual and context.cardarea == G.play then
+        if context.individual and context.cardarea == G.play or context.forcetrigger then
             return { xmult = card.ability.extra.xmult }
         end
         if context.destroy_card and context.cardarea == G.play and SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds1) then
@@ -322,6 +322,38 @@ HPR.StellarJoker {
             else
                 SMODS.calculate_effect({ message_card = card.area[card.rank+1], message = localize("k_safe_ex")}, card)
             end
+            return nil, true
+        end
+    end
+}
+
+HPR.StellarJoker {
+    key = "crazy",
+    blueprint_compat = true,
+    demicoloncompat = true,
+    config = { extra = { mult = 0, scale = 5 }},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.mult, card.ability.extra.scale }}
+    end,
+    calculate = function (self, card, context)
+        if context.before then
+            local hands = 0
+            for _, hand in pairs(context.poker_hands) do
+                hands = hands + #hand
+            end
+            if hands > 0 then
+                SMODS.scale_card(card, {
+                    ref_table = card.ability.extra,
+                    ref_value = "mult",
+                    scalar_value = "scale",
+                    operation = function (ref_table, ref_value, initial, change)
+                        ref_table[ref_value] = initial + change * hands
+                    end,
+                })
+            end
+        end
+        if context.joker_main then
+            return { mult = card.ability.extra.mult }
         end
     end
 }

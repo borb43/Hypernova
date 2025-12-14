@@ -134,6 +134,15 @@ local descriptions = {
                 "Adjacent jokers have a {C:green}#4# in #5#{} chance",
                 "to be {C:red}banished{} at the end of round"
             }
+        },
+        j_hpr_crazy = {
+            name = "S004 CRAZY",
+            text = {
+                "This joker gains {C:mult}+5{} Mult for",
+                "every poker hand contained",
+                "in played hand",
+                "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
+            }
         }
     },
     Other = {
