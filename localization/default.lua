@@ -147,7 +147,7 @@ local descriptions = {
         j_hpr_crafty = {
             name = "S005 CRAFTY",
             text = {
-                "This joker gains {C:chips+#2#{} Chips for",
+                "This joker gains {C:chips}+#2#{} Chips for",
                 "every {C:attention}poker hand{} contained",
                 "in played hand",
                 "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips)"
