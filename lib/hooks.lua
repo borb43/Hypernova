@@ -202,3 +202,22 @@ function level_up_hand(card, hand, instant, amount)
 		levels = amount
 	})
 end
+
+local set_cost_ref = Card.set_cost
+function Card:set_cost()
+    set_cost_ref(self)
+    if next(SMODS.find_card("j_hpr_master")) then
+        local y = false
+        y = self.ability.set == "Booster"
+        if not y then
+            for _, center in ipairs(G.P_CENTER_POOLS.Consumeables) do
+                if center.key == self.config.center.key then y = true end
+            end
+        end
+        if y then
+            self.cost = 0
+            self.sell_cost = math.max(1, math.floor(self.cost / 2)) + (self.ability.extra_value or 0)
+            self.sell_cost_label = self.facing == 'back' and '?' or self.sell_cost
+        end
+    end
+end
