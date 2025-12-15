@@ -200,6 +200,35 @@ local descriptions = {
                 {"{C:attention}Straights{} may have gaps of {C:attention}1",
                 "card and may {C:attention}wrap around"}
             }
+        },
+        j_hpr_diamond = {
+            name = "S011 DIAMOND",
+            text = {
+                "{C:diamonds}Diamond{} cards {C:attention}permanently{} gain",
+                "{C:mult}+#1#{} Mult and {C:money}$#2#{} when scored"
+            }
+        },
+        j_hpr_heart = {
+            name = "S012 HEART",
+            text = {
+                "{C:hearts}Heart{} cards give {X:mult,C:white}X1.5{} Mult and",
+                "{C:attention}permanently{} gain {C:mult}+3{} Mult when scored"
+            }
+        },
+        j_hpr_spade = {
+            name = "S013 SPADE",
+            text = {
+                "{C:spades}Spade{} cards {C:attention}permanently{} gain",
+                "{C:mult}+#1#{} Mult and {C:chips}+#2#{} chips when scored"
+            }
+        },
+        j_hpr_club = {
+            name = "S014 CLUB",
+            text = {
+                "{C:clubs}Club{} cards permanently gain",
+                "{C:mult}Mult{} equal to {X:mult,C:white}2X{} their base",
+                "{C:chips}Chips{} when scored"
+            }
         }
     },
     Other = {

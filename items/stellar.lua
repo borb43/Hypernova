@@ -532,3 +532,76 @@ HPR.StellarJoker {
 HPR.StellarJoker { --literally everything this does is a hook lmfao
     key = "shorthand"
 }
+
+HPR.StellarJoker {
+    key = "diamond",
+    config = { extra = { mult = 3, dollars = 1 }},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.mult, card.ability.extra.dollars }}
+    end,
+    calculate = function (self, card, context)
+        if context.individual and context.cardarea == G.play and context.other_card:is_suit("Diamonds") then
+            context.other_card.ability.perma_mult = context.other_card.ability.perma_mult + card.ability.extra.mult
+            context.other_card.ability.perma_p_dollars = context.other_card.ability.perma_p_dollars + card.ability.extra.dollars
+            return {
+                message = localize("k_upgrade_ex")
+            }
+        end
+    end
+}
+
+HPR.StellarJoker {
+    key = "heart",
+    config = { extra = { mult = 3, xmult = 1.5 }},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.mult, card.ability.extra.xmult }}
+    end,
+    calculate = function (self, card, context)
+        if context.individual and context.cardarea == G.play and context.other_card:is_suit("Hearts") then
+            context.other_card.ability.perma_mult = context.other_card.ability.perma_mult + card.ability.extra.mult
+            return {
+                message = localize("k_upgrade_ex"),
+                colour = G.C.MULT,
+                xmult = card.ability.extra.xmult
+            }
+        end
+    end
+}
+
+HPR.StellarJoker {
+    key = "spade",
+    config = { extra = { mult = 3, chips = 50 }},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.mult, card.ability.extra.chips }}
+    end,
+    calculate = function (self, card, context)
+        if context.individual and context.cardarea == G.play and context.other_card:is_suit("Spades") then
+            context.other_card.ability.perma_mult = context.other_card.ability.perma_mult + card.ability.extra.mult
+            context.other_card.ability.perma_bonus = context.other_card.ability.perma_bonus + card.ability.extra.chips
+            return {
+                message = localize("k_upgrade_ex")
+            }
+        end
+    end
+}
+
+HPR.StellarJoker {
+    key = "club",
+    config = { extra = { multiplier = 2 }},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.multiplier }}
+    end,
+    calculate = function (self, card, context)
+        if context.individual and context.cardarea == G.play and context.other_card:is_suit("Clubs") then
+            local base_chips = 1
+            if not SMODS.has_no_rank(context.other_card) then
+                base_chips = context.other_card.base.nominal
+            end
+            context.other_card.ability.perma_mult = context.other_card.ability.perma_mult + card.ability.extra.multiplier * base_chips
+            return {
+                message = localize("k_upgrade_ex"),
+                colour = G.C.MULT
+            }
+        end
+    end
+}
