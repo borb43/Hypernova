@@ -560,8 +560,6 @@ HPR.StellarJoker {
         if context.individual and context.cardarea == G.play and context.other_card:is_suit("Hearts") then
             context.other_card.ability.perma_mult = context.other_card.ability.perma_mult + card.ability.extra.mult
             return {
-                message = localize("k_upgrade_ex"),
-                colour = G.C.MULT,
                 xmult = card.ability.extra.xmult
             }
         end
@@ -593,7 +591,7 @@ HPR.StellarJoker {
     end,
     calculate = function (self, card, context)
         if context.individual and context.cardarea == G.play and context.other_card:is_suit("Clubs") then
-            local base_chips = 1
+            local base_chips = 0
             if not SMODS.has_no_rank(context.other_card) then
                 base_chips = context.other_card.base.nominal
             end
