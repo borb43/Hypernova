@@ -432,7 +432,7 @@ HPR.StellarJoker {
                 ref_table = card.ability.extra,
                 ref_value = "xmult",
                 scalar_value = "gain",
-                message = {
+                scaling_message = {
                     colour = G.C.MULT,
                     message_key = "a_xmult",
                 }
@@ -452,4 +452,13 @@ HPR.StellarJoker {
             return { xmult = card.ability.extra.xmult }
         end
     end
+}
+
+HPR.StellarJoker {
+    key = "void",
+    config = { extra = { xmult_per = 1 }},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.xmult_per }}
+    end,
+
 }
