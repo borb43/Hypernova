@@ -432,10 +432,8 @@ HPR.StellarJoker {
                 ref_table = card.ability.extra,
                 ref_value = "xmult",
                 scalar_value = "gain",
-                scaling_message = {
-                    colour = G.C.MULT,
-                    message_key = "a_xmult",
-                }
+                message_key = "a_xmult",
+                message_colour = G.C.MULT
             })
             G.E_MANAGER:add_event(Event{
                 func = function ()
