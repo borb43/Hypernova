@@ -179,6 +179,16 @@ local descriptions = {
                 "per unused {C:attention}discard limit",
                 "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)"
             }
+        },
+        j_hpr_nimbus = {
+            name = "S009 NIMBUS",
+            text = {
+                "Scored and held in hand {C:attention}9s{} gain",
+                "{C:money}$#1#{} respective to their {C:attention}area{}",
+                "Earn the {C:money}net value{} of all {C:attention}9s{} in",
+                "your {C:attention}full deck{} at the end of round",
+                "{C:inactive}(Currently {C:money}$#2#{C:inactive})"
+            }
         }
     },
     Other = {

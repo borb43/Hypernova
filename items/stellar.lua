@@ -81,7 +81,8 @@ HPR.vanilla_ascensions = {
     j_superposition = "j_hpr_straightaway",
     j_seance = "j_hpr_straightaway",
     j_half = "j_hpr_void",
-    j_stencil = "j_hpr_void"
+    j_stencil = "j_hpr_void",
+    j_cloud_9 = "j_hpr_nimbus"
 }
 
 HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'ln', 'log', 'sin', 'cos', 'tan' }
@@ -491,5 +492,37 @@ HPR.StellarJoker {
             })
             return nil, true
         end
+    end
+}
+
+HPR.StellarJoker {
+    key = "nimbus",
+    config = { extra = { dollars = 1 }},
+    loc_vars = function (self, info_queue, card)
+        local total = 0
+        for _, c in ipairs(G.playing_cards or {}) do
+            if c:get_id() == 9 then total = total + c:get_p_dollars() + c:get_h_dollars() end
+        end
+        return { vars = { card.ability.extra.dollars, total }}
+    end,
+    calculate = function (self, card, context)
+        if context.individual and not context.end_of_round and context.other_card:get_id() == 9 then
+            if context.cardarea == G.play then
+                context.other_card.ability.perma_p_dollars = context.other_card.ability.perma_p_dollars + card.ability.extra.dollars
+            elseif context.cardarea == G.hand then
+                context.other_card.ability.perma_h_dollars = context.other_card.ability.perma_h_dollars + card.ability.extra.dollars
+            end
+            return {
+                message = localize("k_upgrade_ex"),
+                colour = G.C.MONEY
+            }
+        end
+    end,
+    calc_dollar_bonus = function (self, card)
+        local total = 0
+        for _, c in ipairs(G.playing_cards) do
+            if c:get_id() == 9 then total = total + c:get_p_dollars() + c:get_h_dollars() end
+        end
+        return total
     end
 }
