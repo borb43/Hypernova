@@ -76,7 +76,10 @@ HPR.vanilla_ascensions = {
     j_devious = "j_hpr_crafty",
     j_crafty = "j_hpr_crafty",
     j_splash = "j_hpr_storm",
-    j_selzer = "j_hpr_storm"
+    j_selzer = "j_hpr_storm",
+    j_runner = "j_hpr_straightaway",
+    j_superposition = "j_hpr_straightaway",
+    j_seance = "j_hpr_straightaway"
 }
 
 HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'ln', 'log', 'sin', 'cos', 'tan' }
@@ -431,7 +434,7 @@ HPR.StellarJoker {
                 scalar_value = "gain",
                 message = {
                     colour = G.C.MULT,
-                    message_key = "a_xmult"
+                    message_key = "a_xmult",
                 }
             })
             G.E_MANAGER:add_event(Event{
