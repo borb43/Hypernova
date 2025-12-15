@@ -56,7 +56,7 @@ SMODS.Consumable {
     end
 }
 
-HPR.vanilla_ascensions = {
+HPR.vanilla_ascensions = { --ASCENSION LIST
     j_supernova = "j_hpr_observatorium",
     j_constellation = "j_hpr_observatorium",
     j_space = "j_hpr_observatorium",
@@ -82,7 +82,9 @@ HPR.vanilla_ascensions = {
     j_seance = "j_hpr_straightaway",
     j_half = "j_hpr_void",
     j_stencil = "j_hpr_void",
-    j_cloud_9 = "j_hpr_nimbus"
+    j_cloud_9 = "j_hpr_nimbus",
+    j_four_fingers = "j_hpr_shorthand",
+    j_shortcut = "j_hpr_shorthand"
 }
 
 HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'ln', 'log', 'sin', 'cos', 'tan' }
@@ -525,4 +527,8 @@ HPR.StellarJoker {
         end
         return total
     end
+}
+
+HPR.StellarJoker { --literally everything this does is a hook lmfao
+    key = "shorthand"
 }

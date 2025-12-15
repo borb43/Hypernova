@@ -189,6 +189,17 @@ local descriptions = {
                 "your {C:attention}full deck{} at the end of round",
                 "{C:inactive}(Currently {C:money}$#2#{C:inactive})"
             }
+        },
+        j_hpr_shorthand = {
+            name = "S010 SHORTHAND",
+            text = {
+                {"All {C:attention}Flushes{} and {C:attention}Straights{}",
+                "can be made with {C:attention}3{} cards"},
+                {"{C:attention}Pairs{} and {C:attention}X of a Kind{} hands",
+                "can be made with {C:attention}1{} fewer card"},
+                {"{C:attention}Straights{} may have gaps of {C:attention}1",
+                "card and may {C:attention}wrap around"}
+            }
         }
     },
     Other = {

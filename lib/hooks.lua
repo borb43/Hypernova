@@ -247,3 +247,29 @@ function SMODS.score_card(card, context)
 	end
 	return score_card_ref(card, context)
 end
+
+local fingies_ref = SMODS.four_fingers
+function SMODS.four_fingers(hand_type)
+	if next(SMODS.find_card("j_hpr_shorthand")) then
+		return math.min(3, fingies_ref(hand_type))
+	end
+	return fingies_ref(hand_type)
+end
+
+local x_same_ref = get_X_same
+function get_X_same(num, hand, or_more)
+	num = num - #SMODS.find_card("j_hpr_shorthand")
+	return x_same_ref(num, hand, or_more)
+end
+
+local shortcut_ref = SMODS.shortcut
+function SMODS.shortcut()
+	if next(SMODS.find_card("j_hpr_shorthand")) then return true end
+	return shortcut_ref()
+end
+
+local wrap_ref = SMODS.wrap_around_straight
+function SMODS.wrap_around_straight()
+	if next(SMODS.find_card("j_hpr_shorthand")) then return true end
+	return wrap_ref()
+end
