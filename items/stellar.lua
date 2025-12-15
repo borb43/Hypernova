@@ -420,7 +420,7 @@ HPR.StellarJoker {
     key = "straightaway",
     config = { extra = { xmult = 1, gain = 0.15 }},
     loc_vars = function (self, info_queue, card)
-        info_queue[#info_queue+1] = G.P_CENTERS.e_negative
+        info_queue[#info_queue + 1] = { key = 'e_negative_consumable', set = 'Edition', config = { extra = 1 } }
         return { vars = { card.ability.extra.xmult, card.ability.extra.gain }}
     end,
     calculate = function (self, card, context)
@@ -429,6 +429,10 @@ HPR.StellarJoker {
                 ref_table = card.ability.extra,
                 ref_value = "xmult",
                 scalar_value = "gain",
+                message = {
+                    colour = G.C.MULT,
+                    message_key = "a_xmult"
+                }
             })
             G.E_MANAGER:add_event(Event{
                 func = function ()
