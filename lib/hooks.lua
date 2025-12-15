@@ -228,9 +228,10 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
 		for _, c in ipairs(SMODS.find_card("j_hpr_growth")) do
 			amount = amount * c.ability.extra.eff_mod
 		end
-		if scored_card.ability.perma_eff_mod ~= 0 then
-			amount = amount * (scored_card.ability.perma_eff_mod + 1)
-		end
+	end
+	if string.find(key:lower(), "chip") or string.find(key:lower(), "mult") or string.find(key:lower(), "dollars") then
+		amount = amount * scored_card:get_hpr_eff_mod()
+		if string.find(key:lower(), "dollars") then amount = math.floor(amount) end
 	end
 	return scie(effect, scored_card, key, amount, from_edition)
 end
