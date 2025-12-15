@@ -239,7 +239,7 @@ HPR.StellarJoker {
     demicoloncompat = true,
     perishable_compat = false,
     calculate = function (self, card, context)
-        if context.hpr_level_up_hand then
+        if context.hpr_level_up_hand and not context.blueprint then
             card.ability.extra.chips = card.ability.extra.chips + context.chips
             card.ability.extra.mult = card.ability.extra.mult + context.mult
             for _, c in pairs(G.playing_cards) do
@@ -320,11 +320,11 @@ HPR.StellarJoker {
         if context.individual and context.cardarea == G.play or context.forcetrigger then
             return { xmult = card.ability.extra.xmult }
         end
-        if context.destroy_card and context.cardarea == G.play and SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds1) then
+        if context.destroy_card and not context.blueprint and context.cardarea == G.play and SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds1) then
             G.GAME.banned_keys[context.destroy_card.config.center.key] = true
             return { remove = true }
         end
-        if context.end_of_round and card.area and card.rank then
+        if context.end_of_round and card.area and card.rank and not context.blueprint then
             if card.area[card.rank-1] and SMODS.pseudorandom_probability(card, self.key.."2", 1, card.ability.extra.odds2) then
                 G.GAME.banned_keys[card.area[card.rank-1].config.center.key] = true
                 SMODS.calculate_effect({ message_card = card.area[card.rank-1], message = localize("k_extinct_ex")}, card)
@@ -351,7 +351,7 @@ HPR.StellarJoker {
         return { vars = { card.ability.extra.mult, card.ability.extra.scale }}
     end,
     calculate = function (self, card, context)
-        if context.before then
+        if context.before and not context.blueprint then
             local hands = 0
             for _, hand in pairs(context.poker_hands) do
                 if next(hand) then hands = hands + 1 end
@@ -382,7 +382,7 @@ HPR.StellarJoker {
         return { vars = { card.ability.extra.chips, card.ability.extra.scale }}
     end,
     calculate = function (self, card, context)
-        if context.before then
+        if context.before and not context.blueprint then
             local hands = 0
             for _, hand in pairs(context.poker_hands) do
                 if next(hand) then hands = hands + 1 end
