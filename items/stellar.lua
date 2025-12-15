@@ -412,3 +412,29 @@ HPR.StellarJoker {
         end
     end
 }
+
+HPR.StellarJoker {
+    key = "straightaway",
+    config = { extra = { xmult = 0, gain = 0.15 }},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.xmult, card.ability.extra.gain }}
+    end,
+    calculate = function (self, card, context)
+        if context.before and next(context.poker_hands["Straight"]) then
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "mult",
+                scalar_value = "gain",
+            })
+            G.E_MANAGER:add_event(Event{
+                func = function ()
+                    SMODS.add_card({
+                        set = "Spectral",
+                        edition = "e_negative"
+                    })
+                end
+            })
+            return { message = localize("k_plus_spectral") }
+        end
+    end
+}

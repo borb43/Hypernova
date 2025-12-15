@@ -159,6 +159,15 @@ local descriptions = {
                 "All {C:attention}played{} and {C:attention}held{} cards score",
                 "{C:attention}Retrigger{} all scored cards"
             }
+        },
+        j_hpr_straightaway = {
+            name = "S007 STRAIGHTAWAY",
+            text = {
+                "If played hand contains a {C:attention}Straight",
+                "this Joker gains {X:mult,C:white}X#2#{} Mult and",
+                "creates a {C:dark_edition}Negative {C:spectral}Spectral{} card",
+                "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
+            }
         }
     },
     Other = {
