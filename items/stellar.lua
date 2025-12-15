@@ -351,7 +351,7 @@ HPR.StellarJoker {
         if context.before then
             local hands = 0
             for _, hand in pairs(context.poker_hands) do
-                hands = hands + #hand
+                if next(hand) then hands = hands + 1 end
             end
             if hands > 0 then
                 SMODS.scale_card(card, {
@@ -382,7 +382,7 @@ HPR.StellarJoker {
         if context.before then
             local hands = 0
             for _, hand in pairs(context.poker_hands) do
-                hands = hands + #hand
+                if next(hand) then hands = hands + 1 end
             end
             if hands > 0 then
                 SMODS.scale_card(card, {

@@ -139,7 +139,7 @@ local descriptions = {
             name = "S004 CRAZY",
             text = {
                 "This joker gains {C:mult}+#2#{} Mult for",
-                "every {C:attention}poker hand{} contained",
+                "every {C:attention}unique poker hand{} contained",
                 "in played hand",
                 "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
             }
@@ -148,7 +148,7 @@ local descriptions = {
             name = "S005 CRAFTY",
             text = {
                 "This joker gains {C:chips}+#2#{} Chips for",
-                "every {C:attention}poker hand{} contained",
+                "every {C:attention}unique poker hand{} contained",
                 "in played hand",
                 "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips)"
             }
