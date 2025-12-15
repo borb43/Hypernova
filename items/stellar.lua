@@ -427,7 +427,7 @@ HPR.StellarJoker {
         if context.before and next(context.poker_hands["Straight"]) then
             SMODS.scale_card(card, {
                 ref_table = card.ability.extra,
-                ref_value = "mult",
+                ref_value = "xmult",
                 scalar_value = "gain",
             })
             G.E_MANAGER:add_event(Event{
