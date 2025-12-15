@@ -79,7 +79,9 @@ HPR.vanilla_ascensions = {
     j_selzer = "j_hpr_storm",
     j_runner = "j_hpr_straightaway",
     j_superposition = "j_hpr_straightaway",
-    j_seance = "j_hpr_straightaway"
+    j_seance = "j_hpr_straightaway",
+    j_half = "j_hpr_void",
+    j_stencil = "j_hpr_void"
 }
 
 HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'ln', 'log', 'sin', 'cos', 'tan' }
@@ -454,7 +456,7 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "void",
-    config = { extra = { xmult_per = 1 }},
+    config = { extra = { xmult_per = 0, gain_per = 0.05 }},
     loc_vars = function (self, info_queue, card)
         local amt = 0
         if G.hand and G.consumeables and G.jokers then
@@ -465,7 +467,7 @@ HPR.StellarJoker {
         else
             amt = 1
         end
-        return { vars = { card.ability.extra.xmult_per, amt*card.ability.extra.xmult_per }}
+        return { vars = { card.ability.extra.xmult_per, amt*card.ability.extra.xmult_per, card.ability.extra.gain_per }}
     end,
     calculate = function (self, card, context)
         if context.joker_main then
@@ -473,7 +475,21 @@ HPR.StellarJoker {
             amt = amt + G.GAME.starting_params.play_limit-#context.full_hand
             amt = amt + (G.jokers.config.card_limit - #G.jokers.cards)
             amt = amt + (G.consumeables.config.card_limit - #G.consumeables.cards)
-            return { xmult = amt * card.ability.extra.xmult_per }
+            return { xmult = math.max(amt * card.ability.extra.xmult_per,1) }
+        end
+        if context.pre_discard and not context.blueprint then
+            local amt = G.GAME.starting_params.discard_limit-#context.full_hand
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "xmult_per",
+                scalar_value = "gain_per",
+                message_key = "a_xmult",
+                message_colour = G.C.MULT,
+                operation = function (ref_table, ref_value, initial, change)
+                    ref_table[ref_value] = initial + amt*change
+                end
+            })
+            return nil, true
         end
     end
 }

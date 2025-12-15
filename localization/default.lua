@@ -168,6 +168,17 @@ local descriptions = {
                 "creates a {C:dark_edition}Negative {C:spectral}Spectral{} card",
                 "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
             }
+        },
+        j_hpr_void = {
+            name = "S008 VOID",
+            text = {
+                "{X:mult,C:white}X#1#{} Mult for every unused slot in",
+                "{C:attention}Joker{} slots, {C:attention}Consumable{} slots and",
+                "{C:attention}played{} hand",
+                "Increases by {X:mult,C:white}X#3#{} on {C:attention}discard",
+                "per unused {C:attention}discard limit",
+                "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)"
+            }
         }
     },
     Other = {
