@@ -418,7 +418,7 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "straightaway",
-    config = { extra = { xmult = 0, gain = 0.15 }},
+    config = { extra = { xmult = 1, gain = 0.15 }},
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.e_negative
         return { vars = { card.ability.extra.xmult, card.ability.extra.gain }}
@@ -436,9 +436,13 @@ HPR.StellarJoker {
                         set = "Spectral",
                         edition = "e_negative"
                     })
+                    return true
                 end
             })
             return { message = localize("k_plus_spectral") }
+        end
+        if context.joker_main then
+            return { xmult = card.ability.extra.xmult }
         end
     end
 }
