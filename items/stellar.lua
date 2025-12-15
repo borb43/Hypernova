@@ -458,7 +458,24 @@ HPR.StellarJoker {
     key = "void",
     config = { extra = { xmult_per = 1 }},
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra.xmult_per }}
+        local amt = 0
+        if G.hand and G.consumeables and G.jokers then
+            local hand = G.STATE == G.STATES.HAND_PLAYED and G.play.cards or G.hand.highlighted
+            amt = amt + G.GAME.starting_params.play_limit-#hand
+            amt = amt + (G.jokers.config.card_limit - #G.jokers.cards)
+            amt = amt + (G.consumeables.config.card_limit - #G.consumeables.cards)
+        else
+            amt = 1
+        end
+        return { vars = { card.ability.extra.xmult_per, amt*card.ability.extra.xmult_per }}
     end,
-
+    calculate = function (self, card, context)
+        if context.joker_main then
+            local amt = 0
+            amt = amt + G.GAME.starting_params.play_limit-#context.full_hand
+            amt = amt + (G.jokers.config.card_limit - #G.jokers.cards)
+            amt = amt + (G.consumeables.config.card_limit - #G.consumeables.cards)
+            return { xmult = amt * card.ability.extra.xmult_per }
+        end
+    end
 }
