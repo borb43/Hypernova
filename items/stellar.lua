@@ -299,6 +299,9 @@ HPR.StellarJoker {
                 return true
             end
         })
+    end,
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_CENTERS.e_negative
     end
 }
 
@@ -417,6 +420,7 @@ HPR.StellarJoker {
     key = "straightaway",
     config = { extra = { xmult = 0, gain = 0.15 }},
     loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_CENTERS.e_negative
         return { vars = { card.ability.extra.xmult, card.ability.extra.gain }}
     end,
     calculate = function (self, card, context)
