@@ -269,6 +269,13 @@ local descriptions = {
                 "Creates a {C:spectral}#1#{} when",
                 "{C:attention}Boss Blind{} is defeated"
             }
+        },
+        j_hpr_takeout_box = {
+            name = "Takeout Box",
+            text = {
+                "Creates a {C:dark_edition}Negative{C:attention} Food Joker",
+                "when {C:attention}Boss Blind{} is defeated"
+            }
         }
     },
     Other = {

@@ -400,7 +400,7 @@ SMODS.Joker {
         return { vars = { localize { type = 'name_text', set = 'Tag', key = 'tag_ethereal' } } }
     end,
     calculate = function (self, card, context)
-        if context.end_of_round and context.beat_boss then
+        if context.end_of_round and context.beat_boss and context.main_eval then
             G.E_MANAGER:add_event(Event({
                 func = (function()
                     add_tag(Tag('tag_ethereal'))
@@ -410,6 +410,31 @@ SMODS.Joker {
                 end)
             }))
             return nil, true
+        end
+    end
+}
+
+SMODS.Joker {
+    key = "takeout_box",
+    atlas = "placeholder",
+    pos = { x = 0, y = 0 },
+    rarity = 1,
+    cost = 5,
+    blueprint_compat = true,
+    demicoloncompat = true,
+    eternal_compat = false,
+    calculate = function (self, card, context)
+        if context.end_of_round and context.main_eval and context.beat_boss then
+            G.E_MANAGER:add_event(Event{
+                func = function ()
+                    SMODS.add_card{
+                        set = "Food",
+                        edition = "e_negative",
+                        area = G.jokers
+                    }
+                end
+            })
+            return { message = localize("k_plus_joker")}
         end
     end
 }
