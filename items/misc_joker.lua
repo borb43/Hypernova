@@ -332,7 +332,11 @@ SMODS.Joker {
                 }
             end
         end
-    end
+    end,
+    hpr_credits = {
+        code = "Eris",
+        idea = "Eris"
+    }
 }
 
 SMODS.Joker {
@@ -384,7 +388,11 @@ SMODS.Joker {
             })
             return nil, true
         end
-    end
+    end,
+    hpr_credits = {
+        code = "Eris",
+        idea = "Eris"
+    }
 }
 
 SMODS.Joker {
@@ -411,7 +419,11 @@ SMODS.Joker {
             }))
             return nil, true
         end
-    end
+    end,
+    hpr_credits = {
+        code = "Eris",
+        idea = "Eris"
+    }
 }
 
 SMODS.Joker {
@@ -439,5 +451,9 @@ SMODS.Joker {
     end,
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.e_negative
-    end
+    end,
+    hpr_credits = {
+        code = "Eris",
+        idea = "Eris"
+    }
 }
