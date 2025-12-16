@@ -226,8 +226,8 @@ local descriptions = {
             name = "S014 CLUB",
             text = {
                 "{C:clubs}Club{} cards permanently gain",
-                "{C:mult}Mult{} equal to {X:mult,C:white}2X{} their base",
-                "{C:chips}Chips{} when scored"
+                "{C:mult}Mult{} equal to {X:mult,C:white}#1#X{} their {C:attention}rank's",
+                "base {C:chips}Chips{} when scored"
             }
         }
     },
