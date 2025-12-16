@@ -371,18 +371,6 @@ local descriptions = {
                 "permanent {X:chips,C:white}XChips{} or {X:mult,C:white}XMult{} bonuses"
             }
         },
-        v_hpr_shrine = {
-            name = "Shrine",
-            text = {
-                "{C:hpr_moons}Lunar Packs{} appear {C:attention}X#1#{} as often"
-            }
-        },
-        v_hpr_blessing = {
-            name = "Lunar Blessing",
-            text = {
-                "{C:hpr_moons}Moon{} cards may appear in the shop"
-            }
-        }
     },
     hpr_moons = {
         c_hpr_styx = {

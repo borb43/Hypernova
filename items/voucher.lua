@@ -18,39 +18,3 @@ SMODS.Voucher { --mass production, lets xmult and xchip bonuses spawn
         idea = "Eris"
     }
 }
-
-SMODS.Voucher {
-    key = "shrine",
-    atlas = "voucher",
-    pos = { x = 1, y = 0 },
-    config = { extra = {mod = 2} },
-    loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra.mod }}
-    end,
-    redeem = function (self, voucher)
-        G.GAME.hpr_packs_mod = (G.GAME.hpr_packs_mod or 1) * voucher.ability.extra.mod
-    end,
-    unredeem = function (self, voucher)
-        G.GAME.hpr_packs_mod = (G.GAME.hpr_packs_mod or 1) / voucher.ability.extra.mod
-    end,
-    hpr_credits = {
-        code = "Eris",
-        idea = "Eris"
-    }
-}
-
-SMODS.Voucher {
-    key = "blessing",
-    atlas = "placeholder",
-    pos = { x = 4, y = 1 },
-    redeem = function (self, voucher)
-        G.GAME.hpr_moons_rate = 2
-    end,
-    unredeem = function ()
-        G.GAME.hpr_moons_rate = 0
-    end,
-    hpr_credits = {
-        code = "Eris",
-        idea = "Eris"
-    }
-}
