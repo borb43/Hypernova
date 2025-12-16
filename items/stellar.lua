@@ -325,7 +325,7 @@ HPR.StellarJoker {
     key = "potassium",
     blueprint_compat = true,
     --demicoloncompat = true,
-    config = { extra = { xmult = 3, odds1 = 4, odds2 = 6 }},
+    config = { extra = { xmult = 3, odds1 = 3, odds2 = 6 }},
     loc_vars = function (self, info_queue, card)
         local e = card.ability.extra
         local numerator, denominator = SMODS.get_probability_vars(card, 1, e.odds1, self.key)
@@ -467,18 +467,19 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "void",
-    config = { extra = { xmult_per = 0, gain_per = 0.05 }},
+    config = { extra = { xmult_per = 0.5 }},
     loc_vars = function (self, info_queue, card)
         local amt = 0
-        if G.hand and G.consumeables and G.jokers then
+        if G.hand and G.consumeables and G.jokers and G.deck then
             local hand = G.STATE == G.STATES.HAND_PLAYED and G.play.cards or G.hand.highlighted
             amt = amt + G.GAME.starting_params.play_limit-#hand
             amt = amt + (G.jokers.config.card_limit - #G.jokers.cards)
             amt = amt + (G.consumeables.config.card_limit - #G.consumeables.cards)
+            amt = amt * math.max(1, G.GAME.starting_deck_size - #G.playing_cards)
         else
             amt = 1
         end
-        return { vars = { card.ability.extra.xmult_per, amt*card.ability.extra.xmult_per, card.ability.extra.gain_per }}
+        return { vars = { card.ability.extra.xmult_per, amt*card.ability.extra.xmult_per, G.GAME.starting_deck_size or 52 }}
     end,
     calculate = function (self, card, context)
         if context.joker_main then
@@ -486,21 +487,8 @@ HPR.StellarJoker {
             amt = amt + G.GAME.starting_params.play_limit-#context.full_hand
             amt = amt + (G.jokers.config.card_limit - #G.jokers.cards)
             amt = amt + (G.consumeables.config.card_limit - #G.consumeables.cards)
+            amt = amt * math.max(1, G.GAME.starting_deck_size - #G.playing_cards)
             return { xmult = math.max(amt * card.ability.extra.xmult_per,1) }
-        end
-        if context.pre_discard and not context.blueprint then
-            local amt = G.GAME.starting_params.discard_limit-#context.full_hand
-            SMODS.scale_card(card, {
-                ref_table = card.ability.extra,
-                ref_value = "xmult_per",
-                scalar_value = "gain_per",
-                message_key = "a_xmult",
-                message_colour = G.C.MULT,
-                operation = function (ref_table, ref_value, initial, change)
-                    ref_table[ref_value] = initial + amt*change
-                end
-            })
-            return nil, true
         end
     end
 }

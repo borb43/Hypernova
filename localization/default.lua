@@ -172,11 +172,11 @@ local descriptions = {
         j_hpr_void = {
             name = "S008 VOID",
             text = {
-                "{X:mult,C:white}X#1#{} Mult for every unused slot in",
+                "{X:mult,C:white}X#1#{} Mult for each {C:attention}unused space{} in",
                 "{C:attention}Joker{} slots, {C:attention}Consumable{} slots and",
-                "{C:attention}played{} hand",
-                "Increases by {X:mult,C:white}X#3#{} on {C:attention}discard",
-                "per unused {C:attention}discard limit",
+                "{C:attention}played{} hand, {C:attention}multiplied{} by the",
+                "amount of cards below {C:attention}#3#{} in",
+                "your {C:attention}full deck",
                 "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)"
             }
         },
