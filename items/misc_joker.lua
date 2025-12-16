@@ -314,12 +314,12 @@ SMODS.Joker {
                         message = localize('k_plus_spectral'),
                         colour = G.C.SECONDARY_SET.Spectral,
                         message_card = card,
-                        func = function() -- This is for timing purposes, everything here runs after the message
+                        func = function()
                             G.E_MANAGER:add_event(Event({
                                 func = (function()
                                     SMODS.add_card {
                                         set = 'Spectral',
-                                        key_append = 'hpr_7_ball' -- Optional, useful for manipulating the random seed and checking the source of the creation in `in_pool`.
+                                        key_append = 'hpr_7_ball'
                                     }
                                     G.GAME.consumeable_buffer = 0
                                     return true
