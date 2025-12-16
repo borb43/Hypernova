@@ -442,7 +442,7 @@ local descriptions = {
         c_hpr_asteroid = {
             name = "Asteroid",
             text = {
-                "Permanently adds {C:attention}#1#{} retrigger",
+                "Permanently adds {C:green}+#1#{} numerator",
                 "to {C:attention}#2#{} selected card"
             }
         },
@@ -467,14 +467,6 @@ local descriptions = {
                 "to up to {C:attention}#2#{} selected cards"
             }
         },
-        hpr_diy = {
-            c_hpr_garbage = {
-                name = "Garbage",
-                text = {
-                    "{C:red}+#1#{} discard"
-                }
-            }
-        }
     }
 }
 local misc = {

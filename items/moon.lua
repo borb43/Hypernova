@@ -227,9 +227,9 @@ HPR.moon {
 
 HPR.moon {
     key = "asteroid",
-    config = { moon_repetitions = 1, max_highlighted = 1 },
+    config = { moon_numerator = 1, max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.moon_repetitions, card.ability.max_highlighted }}
+        return { vars = { card.ability.moon_numerator, card.ability.max_highlighted }}
     end,
     pos = { x = 4, y = 1 },
     set_card_type_badge = function (self, card, badges)
