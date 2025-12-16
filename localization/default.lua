@@ -252,6 +252,16 @@ local descriptions = {
                 "Each played card {C:attention}permanently{} gains",
                 "{C:chips}#1#-#2#{} Chips and {C:mult}#3#-#4#{} Mult when scored"
             }
+        },
+        j_hpr_green_card = {
+            name = "Green Card",
+            text = {
+                "Increases all {C:attention}listed {C:green}numerators",
+                "and {C:green}denominators{} by {C:green}0",
+                "Increases by {C:green}0.25{} when a",
+                "{C:attention}Booster Pack{} is skipped",
+                "{C:inactive}(e.g. {C:green}1 in 3{C:inactive} -> {C:green}#3# in #4#{C:inactive})"
+            }
         }
     },
     Other = {

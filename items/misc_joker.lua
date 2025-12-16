@@ -353,3 +353,32 @@ SMODS.Joker {
         end
     end
 }
+
+SMODS.Joker {
+    key = "green_card",
+    atlas = "placeholder",
+    pos = { x = 2, y = 0 },
+    rarity = 3,
+    cost = 8,
+    config = { extra = { bonus = 0, gain = 0.25 }},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.bonus, card.ability.extra.gain, 1+card.ability.extra.bonus, 3+card.ability.extra.bonus }}
+    end,
+    calculate = function (self, card, context)
+        if context.mod_probability and not context.blueprint then
+            return {
+                numerator = context.numerator + card.ability.extra.bonus,
+                denominator = context.denominator + card.ability.extra.bonus
+            }
+        end
+        if context.skipping_booster and not context.blueprint then
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "bonus",
+                scalar_value = "gain",
+                message_colour = G.C.GREEN
+            })
+            return nil, true
+        end
+    end
+}
