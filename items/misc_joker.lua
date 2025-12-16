@@ -139,6 +139,7 @@ SMODS.Joker { --gambling addict, scales from probability rolls
     cost = 10,
     blueprint_compat = true,
     demicoloncompat = true,
+    perishable_compat = false,
     calculate = function(self, card, context)
         if context.pseudorandom_result then
             if not context.result then
@@ -193,7 +194,7 @@ SMODS.Joker { --fortune cookie, guarantees 6 probabilities and then creates a ne
     rarity = 2,
     cost = 6,
     demicoloncompat = true,
-    blueprint_compat = true,
+    eternal_compat = false,
     pools = { ["Food"] = true },
     calculate = function(self, card, context)
         if context.mod_probability and not context.blueprint then
@@ -299,6 +300,7 @@ SMODS.Joker {
     pos = { x = 1, y = 0 },
     rarity = 2,
     cost = 7,
+    blueprint_compat = true,
     config = { extra = 7 },
     loc_vars = function (self, info_queue, card)
         local n, d = SMODS.get_probability_vars(card, 1, card.ability.extra, "hpr_7_ball")
@@ -339,6 +341,7 @@ SMODS.Joker {
     pos = { x = 2, y = 0 },
     rarity = 3,
     cost = 9,
+    blueprint_compat = true,
     config = { extra = { chip_min = 1, chip_max = 20, mult_min = 1, mult_max = 6 }},
     loc_vars = function (self, info_queue, card)
         local e = card.ability.extra
@@ -360,6 +363,7 @@ SMODS.Joker {
     pos = { x = 2, y = 0 },
     rarity = 3,
     cost = 8,
+    perishable_compat = false,
     config = { extra = { bonus = 0, gain = 0.25 }},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.bonus, card.ability.extra.gain, 1+card.ability.extra.bonus, 3+card.ability.extra.bonus }}
