@@ -436,5 +436,8 @@ SMODS.Joker {
             })
             return { message = localize("k_plus_joker")}
         end
+    end,
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_CENTERS.e_negative
     end
 }
