@@ -273,3 +273,12 @@ function SMODS.wrap_around_straight()
 	if next(SMODS.find_card("j_hpr_shorthand")) then return true end
 	return wrap_ref()
 end
+
+local prob_vars_ref = SMODS.get_probability_vars
+function SMODS.get_probability_vars(trigger_obj, base_numerator, base_denominator, identifier, from_roll, no_mod)
+	if trigger_obj.ability and not no_mod then
+		base_numerator = base_numerator + (trigger_obj.ability.hpr_num_bonus or 0)
+		base_denominator = base_denominator + (trigger_obj.ability.hpr_denom_bonus or 0)
+	end
+	return prob_vars_ref(trigger_obj, base_numerator, base_denominator, identifier, from_roll, no_mod)
+end

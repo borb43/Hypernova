@@ -241,7 +241,7 @@ HPR.moon {
 
 HPR.moon {
     key = "dysnomia",
-    config = { moon_eff_mod = 0.1, max_highlighted = 1 },
+    config = { moon_eff_mod = 0.2, max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_eff_mod, card.ability.max_highlighted }}
     end,

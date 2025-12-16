@@ -306,6 +306,16 @@ local descriptions = {
                 "in an unseeded run",
                 "to learn what it does"
             }
+        },
+        hpr_num_bonus = {
+            text = {
+                "Permanent {C:green}+#1#{} numerator"
+            }
+        },
+        hpr_denom_bonus = {
+            text = {
+                "Permanent {C:green}+#1#{} denominator"
+            }
         }
     },
     Planet = {},

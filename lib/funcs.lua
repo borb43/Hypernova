@@ -40,6 +40,8 @@ HPR.apply_moon_bonus = function(card, moon_card) --applies the moon bonus to a c
     card.ability.perma_h_dollars = card.ability.perma_h_dollars + (moon_card.ability.moon_h_dollars or 0)
     card.ability.perma_repetitions = card.ability.perma_repetitions + (moon_card.ability.moon_repetitions or 0)
     card.ability.perma_eff_mod = card.ability.perma_eff_mod + (moon_card.ability.moon_eff_mod or 0)
+    card.ability.hpr_num_bonus = card.ability.perma_num_bonus + (moon_card.ability.moon_numerator or 0)
+    card.ability.hpr_denom_bonus = card.ability.hpr_denom_bonus + (moon_card.ability.moon_denominator or 0)
     if next(SMODS.find_mod("entr")) then
         card.ability.entr_perma_plus_asc = card.ability.entr_perma_plus_asc + (moon_card.ability.moon_entr_plus_asc or 0)
         card.ability.entr_perma_h_plus_asc = card.ability.entr_perma_h_plus_asc + (moon_card.ability.moon_entr_h_plus_asc or 0)
