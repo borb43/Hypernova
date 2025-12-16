@@ -292,3 +292,42 @@ SMODS.Joker {
         idea = "Eris"
     }
 }
+
+SMODS.Joker {
+    key = "7_ball",
+    atlas = "placeholder",
+    pos = { x = 1, y = 0 },
+    rarity = 2,
+    cost = 7,
+    config = { extra = 7 },
+    loc_vars = function (self, info_queue, card)
+        local n, d = SMODS.get_probability_vars(card, 1, card.ability.extra, "hpr_7_ball")
+        return { vars = { n, d }}
+    end,
+    calculate = function (self, card, context)
+        if context.individual and context.cardarea == G.play and
+            #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+            if (context.other_card:get_id() == 7) and SMODS.pseudorandom_probability(card, 'hpr_7_ball', 1, card.ability.extra) then
+                G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+                return {
+                    extra = {
+                        message = localize('k_plus_spectral'),
+                        message_card = card,
+                        func = function() -- This is for timing purposes, everything here runs after the message
+                            G.E_MANAGER:add_event(Event({
+                                func = (function()
+                                    SMODS.add_card {
+                                        set = 'Spectral',
+                                        key_append = 'hpr_7_ball' -- Optional, useful for manipulating the random seed and checking the source of the creation in `in_pool`.
+                                    }
+                                    G.GAME.consumeable_buffer = 0
+                                    return true
+                                end)
+                            }))
+                        end
+                    },
+                }
+            end
+        end
+    end
+}

@@ -236,6 +236,15 @@ local descriptions = {
                 "Choose {C:attention}any{} number of cards",
                 "from {C:attention}Booster Packs"
             }
+        },
+        j_hpr_7_ball = {
+            name = "7 Ball",
+            text = {
+                "{C:green}#1# in #2#{} chance for each",
+                "played {C:attention}7{} to create a",
+                "{C:spectral}Spectral{} card when scored",
+                "{C:inactive}(Must have room)",
+            }
         }
     },
     Other = {
