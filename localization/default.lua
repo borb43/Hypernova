@@ -229,6 +229,13 @@ local descriptions = {
                 "{C:mult}Mult{} equal to {X:mult,C:white}#1#X{} their {C:attention}rank's",
                 "base {C:chips}Chips{} when scored"
             }
+        },
+        j_hpr_executive_card = {
+            name = "Executive Card",
+            text = {
+                "Choose {C:attention}any{} number of cards",
+                "from {C:attention}Booster Packs"
+            }
         }
     },
     Other = {

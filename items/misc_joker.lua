@@ -14,7 +14,7 @@ SMODS.Joker { --fusion reactor, balances before scoring
         end
     end,
     hpr_credits = {
-        code = "Eris"
+        idea = "Eris"
     }
 }
 
@@ -268,6 +268,24 @@ SMODS.Joker {
         else
             return { key = self.key .. "_none" }
         end
+    end,
+    hpr_credits = {
+        code = "Eris",
+        idea = "Eris"
+    }
+}
+
+SMODS.Joker {
+    key = "executive_card",
+    atlas = "placeholder",
+    pos = { x = 2, y = 0 },
+    rarity = 3,
+    cost = 10,
+    add_to_deck = function (self, card, from_debuff)
+        G.GAME.modifiers.booster_choice_mod = G.GAME.booster_choice_mod + 1000
+    end,
+    remove_from_deck = function (self, card, from_debuff)
+        G.GAME.modifiers.booster_choice_mod = G.GAME.booster_choice_mod - 1000
     end,
     hpr_credits = {
         code = "Eris",
