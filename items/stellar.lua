@@ -84,7 +84,15 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_stencil = "j_hpr_void",
     j_cloud_9 = "j_hpr_nimbus",
     j_four_fingers = "j_hpr_shorthand",
-    j_shortcut = "j_hpr_shorthand"
+    j_shortcut = "j_hpr_shorthand",
+    j_greedy_joker = "j_hpr_diamond",
+    j_rough_gem = "j_hpr_diamond",
+    j_lusty_joker = "j_hpr_heart",
+    j_bloodstone = "j_hpr_heart",
+    j_wrathful_joker = "j_hpr_spade",
+    j_arrowhead = "j_hpr_spade",
+    j_gluttenous_joker = "j_hpr_club",
+    j_onyx_agate = "j_hpr_club"
 }
 
 HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'ln', 'log', 'sin', 'cos', 'tan' }
