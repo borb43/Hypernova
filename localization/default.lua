@@ -245,6 +245,13 @@ local descriptions = {
                 "{C:spectral}Spectral{} card when scored",
                 "{C:inactive}(Must have room)",
             }
+        },
+        j_hpr_double_dice = {
+            name = "Double Dice",
+            text = {
+                "Each played card {C:attention}permanently{} gains",
+                "{C:chips}#1#-#2#{} Chips and {C:mult}#3#-#4#{} Mult when scored"
+            }
         }
     },
     Other = {

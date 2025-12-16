@@ -331,3 +331,24 @@ SMODS.Joker {
         end
     end
 }
+
+SMODS.Joker {
+    key = "double_dice",
+    atlas = "placeholder",
+    pos = { x = 2, y = 0 },
+    rarity = 3,
+    cost = 9,
+    config = { extra = { chip_min = 1, chip_max = 20, mult_min = 1, mult_max = 6 }},
+    loc_vars = function (self, info_queue, card)
+        local e = card.ability.extra
+        return { vars = { e.chip_min, e.chip_max, e.mult_min, e.mult_max }}
+    end,
+    calculate = function (self, card, context)
+        if context.individual and context.cardarea == G.play then
+            local e = card.ability.extra
+            context.other_card.ability.perma_bonus = context.other_card.ability.perma_bonus + pseudorandom("hpr_dice", e.chip_min, e.chip_max)
+            context.other_card.ability.perma_mult = context.other_card.ability.perma_mult + pseudorandom("hpr_dice", e.mult_min, e.mult_max)
+            return { message = localize("k_upgrade_ex")}
+        end
+    end
+}
