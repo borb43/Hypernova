@@ -312,6 +312,7 @@ SMODS.Joker {
                 return {
                     extra = {
                         message = localize('k_plus_spectral'),
+                        colour = G.C.SECONDARY_SET.Spectral,
                         message_card = card,
                         func = function() -- This is for timing purposes, everything here runs after the message
                             G.E_MANAGER:add_event(Event({
