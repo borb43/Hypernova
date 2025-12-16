@@ -262,6 +262,13 @@ local descriptions = {
                 "{C:attention}Booster Pack{} is skipped",
                 "{C:inactive}(e.g. {C:green}1 in 3{C:inactive} -> {C:green}#3# in #4#{C:inactive})"
             }
+        },
+        j_hpr_ghost = {
+            name = "Ghost Joker",
+            text = {
+                "Creates a {C:spectral}#1#{} when",
+                "{C:attention}Boss Blind{} is defeated"
+            }
         }
     },
     Other = {
