@@ -92,7 +92,8 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_wrathful_joker = "j_hpr_spade",
     j_arrowhead = "j_hpr_spade",
     j_gluttenous_joker = "j_hpr_club",
-    j_onyx_agate = "j_hpr_club"
+    j_onyx_agate = "j_hpr_club",
+    j_erosion = "j_hpr_void"
 }
 
 HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'ln', 'log', 'sin', 'cos', 'tan' }
