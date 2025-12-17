@@ -26,7 +26,7 @@ HPR.moon = SMODS.Consumable:extend({
         }))
         for i = 1, #G.hand.highlighted do
             local _card = G.hand.highlighted[i]
-            HPR.apply_moon_bonus(_card, card)
+            if self.apply_bonus then self:apply_bonus(card, _card) end
             G.E_MANAGER:add_event(Event({
                 trigger = "after",
                 delay = 0.1,
@@ -126,7 +126,10 @@ HPR.moon {
         idea = "Eris",
         code = "Eris",
         art = "LFMoth"
-    }
+    },
+    apply_bonus = function (self, card, other_card)
+        other_card.ability.perma_mult = other_card.ability.perma_mult + card.ability.moon_mult
+    end
 }
 
 HPR.moon {
@@ -135,7 +138,10 @@ HPR.moon {
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_bonus, card.ability.max_highlighted }}
     end,
-    pos = { x = 1, y = 0 }
+    pos = { x = 1, y = 0 },
+    apply_bonus = function (self, card, other_card)
+        other_card.ability.perma_bonus = other_card.ability.perma_bonus + card.ability.moon_bonus
+    end
 }
 
 HPR.moon {
@@ -144,7 +150,10 @@ HPR.moon {
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_h_chips, card.ability.max_highlighted }}
     end,
-    pos = { x = 2, y = 0 }
+    pos = { x = 2, y = 0 },
+    apply_bonus = function (self, card, other_card)
+        other_card.ability.perma_h_chips = other_card.ability.perma_h_chips + card.ability.moon_h_chips
+    end
 }
 
 HPR.moon {
@@ -158,7 +167,10 @@ HPR.moon {
         idea = "Eris",
         code = "Eris",
         art = "LFMoth"
-    }
+    },
+    apply_bonus = function (self, card, other_card)
+        other_card.ability.perma_h_mult = other_card.ability.perma_h_mult + card.ability.moon_h_mult
+    end
 }
 
 HPR.moon {
@@ -172,7 +184,10 @@ HPR.moon {
         idea = "Eris",
         code = "Eris",
         art = "LFMoth"
-    }
+    },
+    apply_bonus = function (self, card, other_card)
+        other_card.ability.perma_x_mult = other_card.ability.perma_x_mult + card.ability.moon_x_mult
+    end
 }
 
 HPR.moon {
@@ -181,7 +196,10 @@ HPR.moon {
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_x_chips, card.ability.max_highlighted }}
     end,
-    pos = { x = 5, y = 0 }
+    pos = { x = 5, y = 0 },
+    apply_bonus = function (self, card, other_card)
+        other_card.ability.perma_x_chips = other_card.ability.perma_x_chips + card.ability.moon_x_chips
+    end
 }
 
 HPR.moon {
@@ -190,7 +208,10 @@ HPR.moon {
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_h_x_mult, card.ability.max_highlighted }}
     end,
-    pos = { x = 0, y = 1 }
+    pos = { x = 0, y = 1 },
+    apply_bonus = function (self, card, other_card)
+        other_card.ability.perma_h_x_mult = other_card.ability.perma_h_x_mult + card.ability.moon_h_x_mult
+    end
 }
 
 HPR.moon {
@@ -199,7 +220,10 @@ HPR.moon {
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_h_x_chips, card.ability.max_highlighted }}
     end,
-    pos = { x = 1, y = 1 }
+    pos = { x = 1, y = 1 },
+    apply_bonus = function (self, card, other_card)
+        other_card.ability.perma_h_x_chips = other_card.ability.perma_h_x_chips + card.ability.moon_h_x_chips
+    end
 }
 
 HPR.moon {
@@ -208,7 +232,10 @@ HPR.moon {
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_h_dollars, card.ability.max_highlighted }}
     end,
-    pos = { x = 2, y = 1 }
+    pos = { x = 2, y = 1 },
+    apply_bonus = function (self, card, other_card)
+        other_card.ability.perma_h_dollars = other_card.ability.perma_h_dollars + card.ability.moon_h_dollars
+    end
 }
 
 HPR.moon {
@@ -222,6 +249,9 @@ HPR.moon {
         badges[#badges+1] = create_badge(localize("k_hpr_moon_q"),
         get_type_colour(card.config.center or card.config, card), SMODS.ConsumableTypes.hpr_moons.text_colour,
         1.2)
+    end,
+    apply_bonus = function (self, card, other_card)
+        other_card.ability.perma_p_dollars = other_card.ability.perma_p_dollars + card.ability.moon_p_dollars
     end
 }
 
@@ -236,6 +266,9 @@ HPR.moon {
         badges[#badges+1] = create_badge(localize("k_hpr_moon_q"),
         get_type_colour(card.config.center or card.config, card), SMODS.ConsumableTypes.hpr_moons.text_colour,
         1.2)
+    end,
+    apply_bonus = function (self, card, other_card)
+        other_card.ability.hpr_num_bonus = other_card.ability.hpr_num_bonus + card.ability.moon_numerator
     end
 }
 
@@ -245,7 +278,10 @@ HPR.moon {
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.moon_eff_mod, card.ability.max_highlighted }}
     end,
-    pos = { x = 5, y = 1 }
+    pos = { x = 5, y = 1 },
+    apply_bonus = function (self, card, other_card)
+        other_card.ability.perma_eff_mod = other_card.ability.perma_eff_mod + card.ability.moon_eff_mod
+    end
 }
 
 SMODS.Consumable {
