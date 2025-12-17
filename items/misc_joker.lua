@@ -283,10 +283,10 @@ SMODS.Joker {
     rarity = 3,
     cost = 10,
     add_to_deck = function (self, card, from_debuff)
-        G.GAME.modifiers.booster_choice_mod = (G.GAME.booster_choice_mod or 0) + 1000
+        G.GAME.modifiers.booster_choice_mod = (G.GAME.modifiers.booster_choice_mod or 0) + 1000
     end,
     remove_from_deck = function (self, card, from_debuff)
-        G.GAME.modifiers.booster_choice_mod = (G.GAME.booster_choice_mod or 0) - 1000
+        G.GAME.modifiers.booster_choice_mod = (G.GAME.modifiers.booster_choice_mod or 0) - 1000
     end,
     hpr_credits = {
         code = "Eris",
@@ -444,6 +444,7 @@ SMODS.Joker {
                         edition = "e_negative",
                         area = G.jokers
                     }
+                    return true
                 end
             })
             return { message = localize("k_plus_joker")}
