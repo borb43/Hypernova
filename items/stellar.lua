@@ -99,8 +99,8 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_flower_pot = "j_hpr_wild"
 }
 
-HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'ln', 'log', 'sin', 'cos', 'tan' }
-HPR.error_numbers = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '21', '41', '61', '67', '69', '84', '404', '420', 'nan', 'inf', 'i', 'e', 'pi', 'huge', '666', '999', '-1', '23', '80085' }
+HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'log', 'sin', 'cos', 'tan' }
+HPR.error_numbers = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '21', '41', '61', '67', '69', '84', '404', '420', 'nan', 'inf', 'i', 'e', 'pi', '666', '999', '-1', '23', '80085' }
 HPR.error_other = {
     { string = "Chips", colour = G.C.CHIPS },
     { string = "Mult", colour = G.C.MULT },
