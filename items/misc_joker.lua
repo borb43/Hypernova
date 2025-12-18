@@ -240,13 +240,18 @@ SMODS.Joker {
         if (context.after or context.forcetrigger) and #G.hand.cards > 0 then
             local _card = pseudorandom_element(G.hand.cards, "hpr_bungus") or {}
             assert(SMODS.modify_rank(_card, 1, true))
-            G.E_MANAGER:add_event(Event({
+            return {
+                message = localize("k_upgrade_ex"),
                 func = function ()
-                    if _card.juice_up then _card:juice_up() end
-                    if _card.set_sprites then _card:set_sprites(_card.config.center, _card.config.card) end
-                    return true
+                    G.E_MANAGER:add_event(Event({
+                        func = function ()
+                            if _card.juice_up then _card:juice_up() end
+                            if _card.set_sprites then _card:set_sprites(_card.config.center, _card.config.card) end
+                            return true
+                        end
+                    }))
                 end
-            }))
+            }
         end
     end,
     hpr_credits = {
