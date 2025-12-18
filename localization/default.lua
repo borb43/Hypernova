@@ -13,6 +13,13 @@ local descriptions = {
             text = {
                 "{C:attention}+#1#{} Booster Pack in each shop"
             }
+        },
+        b_hpr_cosmic = {
+            name = "Cosmic Deck",
+            text = {
+                "Start the run with",
+                "an {T:c_hpr_ascender,C:spectral}#1#{} card"
+            }
         }
     },
     Blind = {},
@@ -399,7 +406,7 @@ local descriptions = {
             }
         },
         c_hpr_ascender = {
-            name = "name tbd ascension card",
+            name = "Ascension",
             text = {
                 "{C:hpr_stellar}Ascends{} one eligible {C:attention}Joker{} to",
                 "its {C:hpr_stellar}Stellar{} counterpart"
