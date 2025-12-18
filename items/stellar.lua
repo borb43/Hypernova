@@ -600,3 +600,27 @@ HPR.StellarJoker {
         end
     end
 }
+
+HPR.StellarJoker {
+    key = "wild",
+    config = { extra = 2 },
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_CENTERS.m_wild
+        info_queue[#info_queue+1] = G.P_CENTERS.e_polychrome
+        local suit = (G.GAME.current_round.ancient_card or {}).suit or "Spades"
+        return { vars = { card.ability.extra, localize(suit, "suits_singular"), colours = {G.C.SUITS[suit]}}}
+    end,
+    calculate = function (self, card, context)
+        if context.before then
+            for _, c in ipairs(context.full_hand) do
+                if c:is_suit(G.GAME.current_round.ancient_card.suit) then
+                    c:set_ability("m_wild", nil, true)
+                    c:set_edition("e_polychrome", nil, nil, true)
+                end
+            end
+        end
+        if context.individual and context.cardarea == G.play and context.other_card:is_suit(G.GAME.current_round.ancient_card.suit) then
+            return { xmult = card.ability.extra }
+        end
+    end
+}

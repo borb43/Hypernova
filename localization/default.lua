@@ -276,6 +276,14 @@ local descriptions = {
                 "Creates a {C:dark_edition}Negative{C:attention} Food Joker",
                 "when {C:attention}Boss Blind{} is defeated"
             }
+        },
+        j_hpr_wild = {
+            name = "S015 WILD",
+            text = {
+                "Each played {V:1}#2#{} card becomes",
+                "{C:attention}Wild{} and {C:dark_edition}Polychrome{} and gives",
+                "{X:mult,C:white}X#1#{} Mult when scored"
+            }
         }
     },
     Other = {

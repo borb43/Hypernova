@@ -92,3 +92,16 @@ function HPR.get_ascension(card)
     end
     return nil
 end
+
+function HPR.get_unique_suits(cards)
+    local suits = {}
+    for _, c in ipairs(cards) do
+        for s, _ in ipairs(SMODS.Suits) do
+            if not suits[s] and c.is_suit and c:is_suit(s) then
+                suits[s] = true
+                break
+            end
+        end
+    end
+    return #suits, suits
+end
