@@ -98,7 +98,9 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_seeing_double = "j_hpr_wild",
     j_flower_pot = "j_hpr_wild",
     j_marble = "j_hpr_stone",
-    j_stone = "j_hpr_stone"
+    j_stone = "j_hpr_stone",
+    j_hologram = "j_hpr_conjurer",
+    j_certificate = "j_hpr_conjurer"
 }
 
 HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'log', 'sin', 'cos', 'tan' }
@@ -689,6 +691,45 @@ HPR.StellarJoker {
                 if SMODS.has_enhancement(c, "m_stone") then stones = stones + 1 end
             end
             return { xchips = 1+card.ability.extra*stones}
+        end
+    end
+}
+
+HPR.StellarJoker {
+    key = "conjurer",
+    config = { extra = { xmult = 1, gain = 0.5, packs = 2 }},
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_CENTERS.p_standard_mega_1
+        return { vars = { card.ability.extra.xmult, card.ability.extra.gain, card.ability.extra.packs }}
+    end,
+    calculate = function (self, card, context)
+        if context.starting_shop then
+            G.E_MANAGER:add_event(Event{
+                func = function ()
+                    for i = 1, card.ability.extra.packs do
+                        local c = SMODS.add_booster_to_shop("p_standard_mega_"..pseudorandom("hpr_conjurer"..i,1,2))
+                        c.ability.couponed = true
+                        c:set_cost()
+                    end
+                    return true
+                end
+            })
+        end
+        if context.playing_card_added then
+            local amt = #context.cards
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "xmult",
+                scalar_value = "gain",
+                operation = function (ref_table, ref_value, initial, change)
+                    ref_table[ref_value] = initial + change * amt
+                end
+            })
+        end
+        if context.joker_main then
+            return {
+                xmult = card.ability.extra.xmult
+            }
         end
     end
 }

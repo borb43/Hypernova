@@ -298,6 +298,15 @@ local descriptions = {
                 "card in your {C:attention}full deck",
                 "{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)"}
             }
+        },
+        j_hpr_conjurer = {
+            name = "S017 CONJURER",
+            text = {
+                "Adds {C:attention}#3# free Mega Standard Packs{} to each shop",
+                "This Joker gains {X:mult,C:white}X#2#{} Mult when",
+                "a {C:attention}playing card{} is added to your deck",
+                "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
+            }
         }
     },
     Other = {
