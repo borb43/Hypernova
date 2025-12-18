@@ -47,7 +47,9 @@ SMODS.Consumable {
             trigger = 'after',
             delay = 0.15,
             func = function ()
+                G.jokers.highlighted[1]:remove_from_deck()
                 G.jokers.highlighted[1]:set_ability(HPR.get_ascension(G.jokers.highlighted[1]))
+                G.jokers.highlighted[1]:add_to_deck()
                 G.jokers.highlighted[1]:flip()
                 return true
             end
