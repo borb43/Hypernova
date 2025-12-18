@@ -284,6 +284,19 @@ local descriptions = {
                 "{C:attention}Wild{} and {C:dark_edition}Polychrome{} and gives",
                 "{X:mult,C:white}X#1#{} Mult when scored"
             }
+        },
+        j_hpr_stone = {
+            name = "S016 STONE",
+            text = {
+                {"Creates a {C:attention}Stone{} card and converts",
+                "a random card in deck to {C:attention}Stone",
+                "when blind is selected"},
+                {"Played {C:attention}Stone{} cards gain a",
+                "random {C:attention}Seal{} and {C:dark_edition}Edition"},
+                {"{X:chips,C:white}X#2#{} Chips for each {C:attention}Stone{}",
+                "card in your {C:attention}full deck",
+                "{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)"}
+            }
         }
     },
     Other = {

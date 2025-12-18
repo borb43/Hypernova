@@ -627,3 +627,66 @@ HPR.StellarJoker {
         end
     end
 }
+
+HPR.StellarJoker {
+    key = "stone",
+    config = { extra = 0.25 },
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_CENTERS.m_stone
+        local stones = 0
+        if G.playing_cards then
+            for _, c in ipairs(G.playing_cards) do
+                if SMODS.has_enhancement(c, "m_stone") then stones = stones + 1 end
+            end
+        end
+        return { vars = { 1 + card.ability.extra*stones, card.ability.extra }}
+    end,
+    calculate = function (self, card, context)
+        if context.setting_blind then
+            local c = pseudorandom_element(G.deck.cards, "hpr_stone", { in_pool = function (v, args) return not SMODS.has_enhancement(v, "m_stone") end})
+            if c then
+                c:set_ability("m_stone")
+            end
+
+            local stone_card = SMODS.create_card { set = "Base", enhancement = "m_stone", area = G.discard }
+            G.playing_card = (G.playing_card and G.playing_card + 1) or 1
+            stone_card.playing_card = G.playing_card
+            table.insert(G.playing_cards, stone_card)
+
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    stone_card:start_materialize({ G.C.SECONDARY_SET.Enhanced })
+                    G.play:emplace(stone_card)
+                    return true
+                end
+            }))
+            return {
+                message = localize('k_plus_stone'),
+                colour = G.C.SECONDARY_SET.Enhanced,
+                func = function() -- This is for timing purposes, everything here runs after the message
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            G.deck.config.card_limit = G.deck.config.card_limit + 1
+                            return true
+                        end
+                    }))
+                    draw_card(G.play, G.deck, 90, 'up')
+                    SMODS.calculate_context({ playing_card_added = true, cards = { stone_card } })
+                end
+            }
+        end
+        if context.before then
+            for _, c in ipairs(context.full_hand) do
+                if not c.seal then c:set_seal(SMODS.poll_seal{guaranteed=true}) end
+                if not c.edition then c:set_edition(SMODS.poll_edition{guaranteed=true,no_negative=true}, nil, nil, true) end
+            end
+        end
+        if context.joker_main then
+            local stones = 0
+            for _,c in ipairs(G.playing_cards) do
+                if SMODS.has_enhancement(c, "m_stone") then stones = stones + 1 end
+            end
+            return { xchips = 1+card.ability.extra*stones}
+        end
+    end
+}
