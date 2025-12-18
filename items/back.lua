@@ -1,7 +1,7 @@
 SMODS.Back { --sealed deck, starting aces have seals
     key = "sealed",
-    atlas = "placeholder",
-    pos = { x = 4, y = 2 },
+    atlas = "back",
+    pos = { x = 1, y = 0 },
     apply = function (self, back)
         G.E_MANAGER:add_event(Event({
             func = function ()

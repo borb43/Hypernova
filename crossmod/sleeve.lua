@@ -1,7 +1,7 @@
 CardSleeves.Sleeve {
     key = "sealed",
     atlas = "sleeve",
-    pos = { x = 0, y = 0 },
+    pos = { x = 2, y = 0 },
     --unlock_condition = { deck = "b_hpr_sealed", stake = "stake_green" },
     --unlocked = false,
     apply = function(self, sleeve)
