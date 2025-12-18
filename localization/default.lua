@@ -282,7 +282,8 @@ local descriptions = {
             text = {
                 "Each played {V:1}#2#{} card becomes",
                 "{C:attention}Wild{} and {C:dark_edition}Polychrome{} and gives",
-                "{X:mult,C:white}X#1#{} Mult when scored"
+                "{X:mult,C:white}X#1#{} Mult when scored",
+                "{s:0.8}suit changes at end of round",
             }
         },
         j_hpr_stone = {
