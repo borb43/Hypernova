@@ -463,3 +463,41 @@ SMODS.Joker {
         idea = "Eris"
     }
 }
+
+SMODS.Joker {
+    key = "slot_machine",
+    atlas = "placeholder",
+    pos = { x = 0, y = 0 },
+    rarity = 1,
+    cost = 5,
+    blueprint_compat = true, --why would you even want this?
+    demicoloncompat = true,
+    config = { extra = { loss = 2, dollars = 5, funny = 67 }},
+    loc_vars = function (self, info_queue, card)
+        local num, denom = SMODS.get_probability_vars(card, 1, card.ability.extra.funny, "hpr_slot_machine")
+        return { vars = { card.ability.extra.loss, card.ability.extra.dollars, card.ability.extra.funny, num, denom}}
+    end,
+    calculate = function (self, card, context)
+        if context.before then
+            G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra.loss
+            return {
+                dollars = -card.ability.extra.loss,
+                func = function() -- This is for timing purposes, it runs after the dollar manipulation
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            G.GAME.dollar_buffer = 0
+                            return true
+                        end
+                    }))
+                end
+            }
+        end
+    end,
+    calc_dollar_bonus = function (self, card)
+        local amt = card.ability.extra.dollars
+        if SMODS.pseudorandom_probability(card, "hpr_slot_machine", 1, card.ability.extra.funny) then
+            amt = amt*card.ability.extra.funny
+        end
+        return amt
+    end
+}

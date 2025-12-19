@@ -314,6 +314,16 @@ local descriptions = {
                 "a {C:attention}playing card{} is added to your deck",
                 "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
             }
+        },
+        j_hpr_slot_machine = {
+            name = "#3# Slot Machine",
+            text = {
+                "Lose {C:red}$#1#{} when hand is played",
+                "Earn {C:money}$#2#{} at the end of round",
+                "{C:green}#4# in #5#{} chance to earn",
+                "{X:money,C:white}67X{} the amount",
+                "{s:0.8,C:inactive}Sponsored by {s:0.8,C:gold}Gold Stake"
+            }
         }
     },
     Other = {
