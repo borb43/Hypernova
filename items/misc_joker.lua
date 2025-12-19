@@ -301,8 +301,8 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "7_ball",
-    atlas = "placeholder",
-    pos = { x = 1, y = 0 },
+    atlas = "joker",
+    pos = { x = 2, y = 0 },
     rarity = 2,
     cost = 7,
     blueprint_compat = true,
@@ -368,8 +368,8 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "green_card",
-    atlas = "placeholder",
-    pos = { x = 2, y = 0 },
+    atlas = "joker",
+    pos = { x = 1, y = 0 },
     rarity = 3,
     cost = 8,
     perishable_compat = false,
