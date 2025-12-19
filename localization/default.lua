@@ -342,6 +342,14 @@ local descriptions = {
                 "in played hand",
                 "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
             }
+        },
+        j_hpr_derivative = {
+            name = "Derivative",
+            text = {
+                "The first {X:mult,C:white}XMult{} effect",
+                "each hand becomes {C:mult}+Mult{}",
+                "with {C:attention}#1#X{} the amount"
+            }
         }
     },
     Other = {

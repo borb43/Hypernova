@@ -105,3 +105,11 @@ function HPR.get_unique_suits(cards)
     end
     return #suits, suits
 end
+
+function HPR.findany(str, ...)
+    if str then
+        for _, p in ipairs({...}) do
+            if string.find(str, p) then return true end
+        end
+    end
+end

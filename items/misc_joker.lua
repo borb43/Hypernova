@@ -501,3 +501,20 @@ SMODS.Joker {
         return amt
     end
 }
+
+SMODS.Joker {
+    key = "derivative",
+    atlas = "placeholder",
+    pos = { x = 0, y = 0 },
+    rarity = 1,
+    cost = 5,
+    config = { extra = { multiplier = 10, active = true }},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.multiplier }}
+    end,
+    calculate = function (self, card, context)
+        if context.before or context.after then
+            card.ability.extra.active = true
+        end
+    end
+}
