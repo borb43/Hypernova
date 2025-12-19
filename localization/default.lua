@@ -357,6 +357,16 @@ local descriptions = {
                 "All {C:mult}+Mult{} effects become",
                 "{X:mult,C:white}XMult{} with {C:attention}1+#1#X{} the amount"
             }
+        },
+        j_hpr_new_meme = {
+            name = "#1#-#2# New Meme",
+            text = {
+                "If scoring hand contains a",
+                "{C:attention}#1#{} and a {C:attention}#2#{}, creates a",
+                "random {C:spectral}Spectral{} card,",
+                "{s:0.8}ranks change each round",
+                "{C:inactive}(Must have room)"
+            }
         }
     },
     Other = {

@@ -530,3 +530,56 @@ SMODS.Joker {
         return { vars = { card.ability.extra }}
     end
 }
+
+SMODS.Joker {
+    key = "new_meme",
+    atlas = "placeholder",
+    pos = { x = 0, y = 0 },
+    rarity = 1,
+    cost = 6,
+    config = { extra = { rank1 = "6", rank2 = "7" }},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { localize(card.ability.extra.rank1, "ranks"), localize(card.ability.extra.rank2, "ranks")}}
+    end,
+    set_ability = function (self, card, initial, delay_sprites)
+        if initial then
+            card.ability.extra.rank1 = pseudorandom_element(SMODS.Ranks, "hpr_meme_rank1").key
+            card.ability.extra.rank2 = pseudorandom_element(SMODS.Ranks, "hpr_meme_rank2").key
+        end
+    end,
+    calculate = function (self, card, context)
+        if context.before then
+            local rank1, rank2
+            for _, c in ipairs(context.full_hand) do
+                if c:get_id() == SMODS.Ranks[card.ability.extra.rank1].id then rank1 = true end
+                if c:get_id() == SMODS.Ranks[card.ability.extra.rank2].id then rank2 = true end
+            end
+            if rank1 and rank2 and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+                G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+                G.E_MANAGER:add_event(Event({
+                    func = (function()
+                        G.E_MANAGER:add_event(Event({
+                            func = function()
+                                SMODS.add_card {
+                                    set = 'Spectral',
+                                    key_append = 'hpr_new_meme' -- Optional, useful for manipulating the random seed and checking the source of the creation in `in_pool`.
+                                }
+                                G.GAME.consumeable_buffer = 0
+                                return true
+                            end
+                        }))
+                        SMODS.calculate_effect({ message = localize('k_plus_tarot'), colour = G.C.PURPLE },
+                            context.blueprint_card or card)
+                        return true
+                    end)
+                }))
+                return nil, true
+            end
+        end
+        if context.end_of_round and context.main_eval then
+            card.ability.extra.rank1 = pseudorandom_element(SMODS.Ranks, "hpr_meme_rank1").key
+            card.ability.extra.rank2 = pseudorandom_element(SMODS.Ranks, "hpr_meme_rank2").key
+            return { message = localize("k_reset")}
+        end
+    end
+}
