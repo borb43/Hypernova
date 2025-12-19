@@ -107,7 +107,12 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_juggler = "j_hpr_circus",
     j_drunkard = "j_hpr_circus",
     j_merry_andy = "j_hpr_circus",
-    j_troubadour = "j_hpr_circus"
+    j_troubadour = "j_hpr_circus",
+    j_duo = "j_hpr_unity",
+    j_trio = "j_hpr_unity",
+    j_family = "j_hpr_unity",
+    j_order = "j_hpr_unity",
+    j_tribe = "j_hpr_unity"
 }
 
 HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'log', 'sin', 'cos', 'tan' }
@@ -764,5 +769,36 @@ HPR.StellarJoker {
         G.hand:change_size(-card.ability.extra.h_c); G.consumeables:change_size(-card.ability.extra.h_c)
         SMODS.change_play_limit(-card.ability.extra.csl)
         SMODS.change_discard_limit(-card.ability.extra.csl)
+    end
+}
+
+HPR.StellarJoker {
+    key = "unity",
+    config = { extra = { xmult = 1, scale = 0.1}},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.xmult, card.ability.extra.scale }}
+    end,
+    blueprint_compat = true,
+    demicoloncompat = true,
+    calculate = function (self, card, context)
+        if context.before and not context.blueprint then
+            local hands = 0
+            for _, hand in pairs(context.poker_hands) do
+                if next(hand) then hands = hands + 1 end
+            end
+            if hands > 0 then
+                SMODS.scale_card(card, {
+                    ref_table = card.ability.extra,
+                    ref_value = "xmult",
+                    scalar_value = "scale",
+                    operation = function (ref_table, ref_value, initial, change)
+                        ref_table[ref_value] = initial + change * hands
+                    end,
+                })
+            end
+        end
+        if context.joker_main or context.forcetrigger then
+            return { xmult = card.ability.extra.xmult }
+        end
     end
 }

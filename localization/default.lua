@@ -333,6 +333,15 @@ local descriptions = {
                 "Consumable Slots",
                 "{C:attention}+#3#{} Card Selection Limit"
             }
+        },
+        j_hpr_unity = {
+            name = "S019 UNITY",
+            text = {
+                "This joker gains {X:mult,C:white}X#2#{} Mult for",
+                "every {C:attention}unique poker hand{} contained",
+                "in played hand",
+                "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
+            }
         }
     },
     Other = {
