@@ -350,6 +350,13 @@ local descriptions = {
                 "each hand becomes {C:mult}+Mult{}",
                 "with {C:attention}#1#X{} the amount"
             }
+        },
+        j_hpr_antiderivative = {
+            name = "Antiderivative",
+            text = {
+                "All {C:mult}+Mult{} effects become",
+                "{X:mult,C:white}XMult{} with {C:attention}1+#1#X{} the amount"
+            }
         }
     },
     Other = {

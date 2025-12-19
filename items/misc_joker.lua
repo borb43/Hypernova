@@ -518,3 +518,15 @@ SMODS.Joker {
         end
     end
 }
+
+SMODS.Joker {
+    key = "antiderivative",
+    atlas = "placeholder",
+    pos = { x = 1, y = 0 },
+    rarity = 2,
+    cost = 6,
+    config = { extra = 0.1 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra }}
+    end
+}
