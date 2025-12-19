@@ -554,17 +554,17 @@ SMODS.Joker {
                 if c:get_id() == SMODS.Ranks[card.ability.extra.rank1].id then rank1 = true end
                 if c:get_id() == SMODS.Ranks[card.ability.extra.rank2].id then rank2 = true end
             end
-            if rank1 and rank2 and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
-                G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+            if rank1 and rank2 and #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+                G.GAME.joker_buffer = G.GAME.joker_buffer + 1
                 G.E_MANAGER:add_event(Event({
                     func = (function()
                         G.E_MANAGER:add_event(Event({
                             func = function()
                                 SMODS.add_card {
-                                    set = 'Spectral',
-                                    key_append = 'hpr_new_meme' -- Optional, useful for manipulating the random seed and checking the source of the creation in `in_pool`.
+                                    set = 'Joker',
+                                    key_append = 'hpr_new_meme'
                                 }
-                                G.GAME.consumeable_buffer = 0
+                                G.GAME.joker_buffer = 0
                                 return true
                             end
                         }))
