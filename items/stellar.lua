@@ -774,7 +774,7 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "unity",
-    config = { extra = { xmult = 1, scale = 0.1}},
+    config = { extra = { xmult = 1, scale = 0.2}},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.xmult, card.ability.extra.scale }}
     end,
