@@ -324,6 +324,15 @@ local descriptions = {
                 "{X:money,C:white}67X{} the amount",
                 "{s:0.8,C:inactive}Sponsored by {s:0.8,C:gold}Gold Stake"
             }
+        },
+        j_hpr_circus = {
+            name = "S018 CIRCUS",
+            text = {
+                "{C:attention}+#1#{} Hands and Discards",
+                "{C:attention}+#2#{} Hand Size and",
+                "Consumable Slots",
+                "{C:attention}+#3#{} Card Selection Limit"
+            }
         }
     },
     Other = {

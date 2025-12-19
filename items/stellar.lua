@@ -103,7 +103,11 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_marble = "j_hpr_stone",
     j_stone = "j_hpr_stone",
     j_hologram = "j_hpr_conjurer",
-    j_certificate = "j_hpr_conjurer"
+    j_certificate = "j_hpr_conjurer",
+    j_juggler = "j_hpr_circus",
+    j_drunkard = "j_hpr_circus",
+    j_merry_andy = "j_hpr_circus",
+    j_troubadour = "j_hpr_circus"
 }
 
 HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'log', 'sin', 'cos', 'tan' }
@@ -734,5 +738,31 @@ HPR.StellarJoker {
                 xmult = card.ability.extra.xmult
             }
         end
+    end
+}
+
+HPR.StellarJoker {
+    key = "circus",
+    config = { extra = { h_d = 3, h_c = 2, csl = 1 }},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.h_d, card.ability.extra.h_c, card.ability.extra.csl}}
+    end,
+    add_to_deck = function (self, card, from_debuff)
+        ease_hands_played(card.ability.extra.h_d)
+        ease_discard(card.ability.extra.h_d)
+        G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.h_d
+        G.GAME.round_resets.discards = G.GAME.round_resets.discards + card.ability.extra.h_d
+        G.hand:change_size(card.ability.extra.h_c); G.consumeables:change_size(card.ability.extra.h_c)
+        SMODS.change_play_limit(card.ability.extra.csl)
+        SMODS.change_discard_limit(card.ability.extra.csl)
+    end,
+    remove_from_deck = function (self, card, from_debuff)
+        ease_hands_played(-card.ability.extra.h_d)
+        ease_discard(-card.ability.extra.h_d)
+        G.GAME.round_resets.hands = G.GAME.round_resets.hands - card.ability.extra.h_d
+        G.GAME.round_resets.discards = G.GAME.round_resets.discards - card.ability.extra.h_d
+        G.hand:change_size(-card.ability.extra.h_c); G.consumeables:change_size(-card.ability.extra.h_c)
+        SMODS.change_play_limit(-card.ability.extra.csl)
+        SMODS.change_discard_limit(-card.ability.extra.csl)
     end
 }
