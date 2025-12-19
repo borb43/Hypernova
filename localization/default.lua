@@ -371,8 +371,8 @@ local descriptions = {
         j_hpr_tiny_chad = {
             name = "Tiny Hanging Chad",
             text = {
-                "First {C:attention}2{} used in scoring",
-                "gains {C:attention}1{} permanent retrigger"
+                "First scoring {C:attention}2{} gains",
+                "{C:attention}1{} permanent retrigger"
             }
         },
         j_hpr_hype_moments = {
