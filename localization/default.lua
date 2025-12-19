@@ -363,7 +363,7 @@ local descriptions = {
             text = {
                 "If scoring hand contains a",
                 "{C:attention}#1#{} and a {C:attention}#2#{}, creates a",
-                "random {C:spectral}Spectral{} card,",
+                "random {C:attention}Joker{} card,",
                 "{s:0.8}ranks change each round",
                 "{C:inactive}(Must have room)"
             }
