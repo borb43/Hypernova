@@ -639,3 +639,43 @@ SMODS.Joker {
         return { vars = { localize{ type = "name_text", key = "c_aura", set = "Spectral"}}}
     end
 }
+
+SMODS.Joker {
+    key = "plarva",
+    atlas = "placeholder",
+    pos = { x = 1, y = 0 },
+    rarity = 2,
+    cost = 6,
+    calculate = function (self, card, context)
+        if context.game_over and not context.blueprint and context.main_eval then
+            local all_eternal = true
+            for _, c in ipairs(G.consumeables.cards) do
+                if not SMODS.is_eternal(c) then all_eternal = false end
+            end
+            if all_eternal and #G.consumeables.cards >= G.consumeables.config.card_limit then return end
+            SMODS.destroy_cards(G.consumeables.cards)
+            G.E_MANAGER:add_event(Event{
+                func = function ()
+                    for _ = 1, G.consumeables.config.card_limit - #G.consumeables.cards - G.GAME.consumeable_buffer do
+                        SMODS.add_card{
+                            set = "Spectral",
+                            stickers = {"eternal"},
+                            key_append = "hpr_plarva",
+                            force_stickers = true
+                        }
+                    end
+                    card:start_dissolve({G.C.HPR_STLR})
+                    return true
+                end
+            })
+            return {
+                message = localize("k_saved_q"),
+                saved = "ph_hpr_plarva",
+                colour = G.C.HPR_STLR
+            }
+        end
+    end,
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = { key = "eternal", set = "Other"}
+    end
+}

@@ -59,3 +59,5 @@ HPR.super_gay = SMODS.Gradient {
         G.C.PURPLE
     }
 }
+
+G.C.HPR_STLR = HEX("1F0D35")

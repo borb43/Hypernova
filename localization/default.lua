@@ -382,6 +382,16 @@ local descriptions = {
                 "{C:attention}Boss Blind{} is defeated",
                 "in only {C:attention}1{} hand"
             }
+        },
+        j_hpr_plarva = {
+            name = "Pluripotent Larva",
+            text = {
+                "{C:attention}Prevents death{} and {C:attention}destroys{} all held",
+                "{C:attention}Consumables{}, then fills Consumable",
+                "slots with {C:attention}Eternal {C:spectral}Spectral{} cards",
+                "{C:red}Must have room to activate",
+                "{C:red}self destructs"
+            }
         }
     },
     Other = {
@@ -652,7 +662,9 @@ local misc = {
         k_hpr_diy_pack = "Build your deck!",
         k_hpr_stellar = "Stellar",
         hpr_generic_q = "?????",
-        k_plus_aura = "+1 Aura"
+        k_plus_aura = "+1 Aura",
+        k_saved_q = "Saved?",
+        ph_hpr_plarva = "Saved by Pluripotent Larva"
     },
     high_scores = {},
     labels = {
