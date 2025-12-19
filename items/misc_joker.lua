@@ -583,3 +583,21 @@ SMODS.Joker {
         end
     end
 }
+
+SMODS.Joker {
+    key = "tiny_chad",
+    pos = { x = 9, y = 6 },
+    display_size = { w = 71 * 0.7, h = 95 * 0.7 },
+    rarity = 3,
+    cost = 9,
+    calculate = function (self, card, context)
+        if context.before then
+            for _, c in ipairs(context.scoring_hand) do
+                if c:get_id() == 2 then
+                    c.ability.perma_repetitions = c.ability.perma_repetitions + 1
+                    return { message = localize("k_upgrade_ex"), colour = G.C.FILTER, message_card = c }
+                end
+            end
+        end
+    end
+}

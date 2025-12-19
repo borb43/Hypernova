@@ -367,6 +367,13 @@ local descriptions = {
                 "{s:0.8}ranks change each round",
                 "{C:inactive}(Must have room)"
             }
+        },
+        j_hpr_tiny_chad = {
+            name = "Tiny Hanging Chad",
+            text = {
+                "First {C:attention}2{} used in scoring",
+                "gains {C:attention}1{} permanent retrigger"
+            }
         }
     },
     Other = {
