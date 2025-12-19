@@ -374,6 +374,14 @@ local descriptions = {
                 "First {C:attention}2{} used in scoring",
                 "gains {C:attention}1{} permanent retrigger"
             }
+        },
+        j_hpr_hype_moments = {
+            name = "Hype Moments and Aura",
+            text = {
+                "Creates an {C:spectral}#1#{} card when",
+                "{C:attention}Boss Blind{} is defeated",
+                "in only {C:attention}1{} hand"
+            }
         }
     },
     Other = {
@@ -643,7 +651,8 @@ local misc = {
         b_hpr_diy_cards = "diy cards",
         k_hpr_diy_pack = "Build your deck!",
         k_hpr_stellar = "Stellar",
-        hpr_generic_q = "?????"
+        hpr_generic_q = "?????",
+        k_plus_aura = "+1 Aura"
     },
     high_scores = {},
     labels = {

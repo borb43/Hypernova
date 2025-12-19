@@ -590,6 +590,7 @@ SMODS.Joker {
     display_size = { w = 71 * 0.7, h = 95 * 0.7 },
     rarity = 3,
     cost = 9,
+    blueprint_compat = true,
     calculate = function (self, card, context)
         if context.before then
             for _, c in ipairs(context.scoring_hand) do
@@ -599,5 +600,42 @@ SMODS.Joker {
                 end
             end
         end
+    end
+}
+
+SMODS.Joker {
+    key = "hype_moments",
+    atlas = "placeholder",
+    pos = { x = 1, y = 0 },
+    rarity = 2,
+    cost = 7,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+        if context.end_of_round and context.main_eval and context.beat_boss and SMODS.last_hand_oneshot then
+            G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+            G.E_MANAGER:add_event(Event({
+                func = (function()
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            SMODS.add_card {
+                                set = 'Spectral',
+                                key_append = 'hpr_hyper_moments',
+                                key = "c_aura"
+                            }
+                            G.GAME.consumeable_buffer = 0
+                            return true
+                        end
+                    }))
+                    SMODS.calculate_effect({ message = localize('k_plus_aura'), colour = G.C.SECONDARY_SET.Spectral },
+                        context.blueprint_card or card)
+                    return true
+                end)
+            }))
+            return nil, true
+        end
+    end,
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_CENTERS.c_aura
+        return { vars = { localize{ type = "name_text", key = "c_aura", set = "Spectral"}}}
     end
 }
