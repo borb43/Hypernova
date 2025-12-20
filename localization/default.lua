@@ -428,6 +428,13 @@ local descriptions = {
                 "to this Joker's {X:mult,C:white}XMult",
                 "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
             }
+        },
+        j_hpr_ascendant = {
+            name = "S024 ASCENDANT",
+            text = {
+                "All {C:attention}played{} and {C:attention}held in hand{} cards gain",
+                "{X:mult,C:white}X#1#{} Mult respective to their {C:attention}area"
+            }
         }
     },
     Other = {

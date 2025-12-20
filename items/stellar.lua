@@ -123,7 +123,10 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_satellite = "j_hpr_payload",
     j_odd_todd = "j_hpr_numeric",
     j_even_steven = "j_hpr_numeric",
-    j_scholar = "j_hpr_numeric"
+    j_scholar = "j_hpr_numeric",
+    j_ceremonial = "j_hpr_destroyer",
+    j_madness = "j_hpr_destroyer",
+    j_hiker = "j_hpr_ascendant"
 }
 
 HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'log', 'sin', 'cos', 'tan' }
@@ -909,6 +912,25 @@ HPR.StellarJoker {
         end
         if context.joker_main and card.ability.extra.xmult ~= 1 then
             return { xmult = card.ability.extra.xmult }
+        end
+    end
+}
+
+HPR.StellarJoker {
+    key = "ascendant",
+    blueprint_compat = true,
+    config = { extra = 0.05 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra }}
+    end,
+    calculate = function (self, card, context)
+        if context.individual and not context.end_of_round then
+            if context.cardarea == G.play or context.cardarea == 'unscored' then
+                context.other_card.ability.perma_x_mult = context.other_card.ability.perma_x_mult + card.ability.extra
+            end
+            if context.cardarea == G.hand then
+                context.other_card.ability.perma_h_x_mult = context.other_card.ability.perma_h_x_mult + card.ability.extra
+            end
         end
     end
 }
