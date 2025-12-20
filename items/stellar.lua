@@ -868,7 +868,8 @@ HPR.StellarJoker {
         SMODS.scale_card(card, {
             ref_table = card.ability.extra,
             ref_value = "cap",
-            scalar_value = "scale"
+            scalar_value = "scale",
+            message_colour = G.C.MONEY
         })
         if amt > 0 then return amt end
     end,
