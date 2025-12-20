@@ -113,3 +113,14 @@ function HPR.findany(str, ...)
         end
     end
 end
+
+function HPR.get_base_chips(card)
+    local id = card:get_id()
+    local chips
+    for _, rank in pairs(SMODS.Ranks) do
+        if id == rank.id then
+            chips = rank.nominal
+        end
+    end
+    return chips
+end

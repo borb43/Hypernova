@@ -400,6 +400,15 @@ local descriptions = {
                 "{X:mult,C:white}X#1#{} Mult, {C:chips}+#2#{} Chips or {C:money}$#3#{} when scored",
                 "Retriggers all {C:attention}face{} cards"
             }
+        },
+        j_hpr_numeric = {
+            name = "S021 NUMERIC",
+            text = {
+                "When any non-{C:attention}face{} card is scored",
+                "all other {C:attention}played{} cards permanently",
+                "gain {C:chips}Chips{} and {C:mult}Mult{} equal to the",
+                "scored card's {C:attention}base {C:chips}Chips"
+            }
         }
     },
     Other = {

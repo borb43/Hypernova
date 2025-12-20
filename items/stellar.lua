@@ -833,3 +833,21 @@ HPR.StellarJoker {
         end
     end
 }
+
+HPR.StellarJoker {
+    key = "numeric",
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+        if context.individual and context.cardarea == G.play and not context.other_card:is_face() and not SMODS.has_no_rank(context.other_card) then
+            local base_chips = HPR.get_base_chips(context.other_card)
+            for _, c in ipairs(context.full_hand) do
+                if c ~= context.other_card and base_chips then
+                    c.ability.perma_bonus = c.ability.perma_bonus + base_chips
+                    c.ability.perma_mult = c.ability.perma_mult + base_chips
+                    SMODS.calculate_effect({ message = localize("k_upgrade_ex"), message_card = c }, card)
+                end
+            end
+            return nil, true
+        end
+    end
+}
