@@ -126,7 +126,10 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_scholar = "j_hpr_numeric",
     j_ceremonial = "j_hpr_destroyer",
     j_madness = "j_hpr_destroyer",
-    j_hiker = "j_hpr_ascendant"
+    j_hiker = "j_hpr_ascendant",
+    j_invisible = "j_hpr_mimic",
+    j_blueprint = "j_hpr_mimic",
+    j_brainstorm = "j_hpr_mimic"
 }
 
 HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'log', 'sin', 'cos', 'tan' }
@@ -930,6 +933,17 @@ HPR.StellarJoker {
             end
             if context.cardarea == G.hand then
                 context.other_card.ability.perma_h_x_mult = context.other_card.ability.perma_h_x_mult + card.ability.extra
+            end
+        end
+    end
+}
+
+HPR.StellarJoker {
+    key = "mimic",
+    calculate = function (self, card, context)
+        if context.retriggger_joker_check and not context.retrigger_joker and card.area and card.rank then
+            if context.other_card == card.area.cards[card.rank+1] or context.other_card == card.area.cards[card.rank-1] then
+                return { repetitions = 1 }
             end
         end
     end

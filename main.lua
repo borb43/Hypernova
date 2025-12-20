@@ -69,7 +69,8 @@ SMODS.ObjectType {
 }
 
 SMODS.current_mod.optional_features = {
-    post_trigger = true
+    post_trigger = true,
+    retrigger_joker = true
 }
 
 SMODS.Atlas {

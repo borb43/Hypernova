@@ -435,6 +435,12 @@ local descriptions = {
                 "All {C:attention}played{} and {C:attention}held in hand{} cards gain",
                 "{X:mult,C:white}X#1#{} Mult respective to their {C:attention}area"
             }
+        },
+        j_hpr_mimic = {
+            name = "S025 MIMIC",
+            text = {
+                "{C:attention}Retriggers{} adjacent jokers"
+            }
         }
     },
     Other = {
