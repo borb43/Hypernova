@@ -124,7 +124,7 @@ assert(SMODS.load_file("items/legendary.lua"))()
 assert(SMODS.load_file("items/stellar.lua"))()
 assert(SMODS.load_file("items/back.lua"))()
 assert(SMODS.load_file("items/voucher.lua"))()
-assert(SMODS.load_file("xmod_moons.lua"))()
+assert(SMODS.load_file("items/xmod_moons.lua"))()
 
 if CardSleeves then
     assert(SMODS.load_file("crossmod/sleeve.lua"))()
