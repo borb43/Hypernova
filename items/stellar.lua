@@ -372,17 +372,17 @@ HPR.StellarJoker {
             return { remove = true }
         end
         if context.end_of_round and card.area and card.rank and not context.blueprint then
-            if card.area[card.rank-1] and SMODS.pseudorandom_probability(card, self.key.."2", 1, card.ability.extra.odds2) then
-                G.GAME.banned_keys[card.area[card.rank-1].config.center.key] = true
-                SMODS.calculate_effect({ message_card = card.area[card.rank-1], message = localize("k_extinct_ex")}, card)
+            if card.area.cards[card.rank-1] and SMODS.pseudorandom_probability(card, self.key.."2", 1, card.ability.extra.odds2) then
+                G.GAME.banned_keys[card.area.cards[card.rank-1].config.center.key] = true
+                SMODS.calculate_effect({ message_card = card.area.cards[card.rank-1], message = localize("k_extinct_ex")}, card)
             else
-                SMODS.calculate_effect({ message_card = card.area[card.rank-1], message = localize("k_safe_ex")}, card)
+                SMODS.calculate_effect({ message_card = card.area.cards[card.rank-1], message = localize("k_safe_ex")}, card)
             end
-            if card.area[card.rank+1] and SMODS.pseudorandom_probability(card, self.key.."2", 1, card.ability.extra.odds2) then
-                G.GAME.banned_keys[card.area[card.rank+1].config.center.key] = true
-                SMODS.calculate_effect({ message_card = card.area[card.rank+1], message = localize("k_extinct_ex")}, card)
+            if card.area.cards[card.rank+1] and SMODS.pseudorandom_probability(card, self.key.."2", 1, card.ability.extra.odds2) then
+                G.GAME.banned_keys[card.area.cards[card.rank+1].config.center.key] = true
+                SMODS.calculate_effect({ message_card = card.area.cards[card.rank+1], message = localize("k_extinct_ex")}, card)
             else
-                SMODS.calculate_effect({ message_card = card.area[card.rank+1], message = localize("k_safe_ex")}, card)
+                SMODS.calculate_effect({ message_card = card.area.cards[card.rank+1], message = localize("k_safe_ex")}, card)
             end
             return nil, true
         end
@@ -875,5 +875,40 @@ HPR.StellarJoker {
     end,
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.cap, card.ability.extra.per, card.ability.extra.scale }}
+    end
+}
+
+HPR.StellarJoker {
+    key = "destroyer",
+    blueprint_compat = true,
+    config = { extra = { xmult = 1 }},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.xmult  }}
+    end,
+    calculate = function (self, card, context)
+        if context.setting_blind and not context.blueprint and card.area and card.rank and card.area.cards[card.rank+1] and not SMODS.is_eternal(card.area.cards[card.rank+1], card) and not card.area.cards[card.rank+1].getting_sliced then
+            local target = card.area.cards[card.rank+1]
+            target.getting_sliced = true
+            G.GAME.joker_buffer = G.GAME.joker_buffer - 1
+            G.E_MANAGER:add_event(Event{
+                func = function ()
+                    G.GAME.joker_buffer = 0
+                    SMODS.scale_card(card, {
+                        ref_table = card.ability.extra,
+                        ref_value = "xmult",
+                        scalar_table = target,
+                        scalar_value = "sell_cost",
+                        message_key = "a_xmult",
+                        message_colour = G.C.MULT
+                    })
+                    target:start_dissolve({G.C.HPR_STLR}, nil, 1.6)
+                    return true
+                end
+            })
+            return nil, true
+        end
+        if context.joker_main and card.ability.extra.xmult ~= 1 then
+            return { xmult = card.ability.extra.xmult }
+        end
     end
 }

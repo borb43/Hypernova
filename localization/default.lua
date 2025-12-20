@@ -418,6 +418,16 @@ local descriptions = {
                 "a maximum of {C:money}$#1#{}, then increase",
                 "this limit by {C:money}$#3#"
             }
+        },
+        j_hpr_destroyer = {
+            name = "S023 DESTROYER",
+            text = {
+                "When {C:attention}Blind{} is selected,",
+                "destroy joker to the right",
+                "and add its sell value",
+                "to this Joker's {X:mult,C:white}XMult",
+                "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
+            }
         }
     },
     Other = {
