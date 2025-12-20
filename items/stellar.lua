@@ -294,8 +294,8 @@ HPR.StellarJoker {
         end
         if context.joker_main or context.forcetrigger then
             return {
-                chips = card.ability.extra.chips,
-                mult = card.ability.extra.chips
+                chips = card.ability.extra.chips ~= 0 and card.ability.extra.chips or nil,
+                mult = card.ability.extra.mult ~= 0 and card.ability.extra.mult or nil
             }
         end
     end,
@@ -483,7 +483,7 @@ HPR.StellarJoker {
             })
             return { message = localize("k_plus_spectral") }
         end
-        if context.joker_main then
+        if context.joker_main and card.ability.extra.xmult ~= 1 then
             return { xmult = card.ability.extra.xmult }
         end
     end
@@ -512,7 +512,7 @@ HPR.StellarJoker {
             amt = amt + (G.jokers.config.card_limit - #G.jokers.cards)
             amt = amt + (G.consumeables.config.card_limit - #G.consumeables.cards)
             amt = amt * math.max(1, G.GAME.starting_deck_size - #G.playing_cards)
-            return { xmult = math.max(amt * card.ability.extra.xmult_per,1) }
+            if amt > 1 then return { xmult = math.max(amt * card.ability.extra.xmult_per,1) } end
         end
     end
 }
@@ -706,7 +706,7 @@ HPR.StellarJoker {
             for _,c in ipairs(G.playing_cards) do
                 if SMODS.has_enhancement(c, "m_stone") then stones = stones + 1 end
             end
-            return { xchips = 1+card.ability.extra*stones}
+            if stones ~= 0 then return { xchips = 1+card.ability.extra*stones} end
         end
     end
 }
@@ -742,7 +742,7 @@ HPR.StellarJoker {
                 end
             })
         end
-        if context.joker_main then
+        if context.joker_main and card.ability.extra.xmult ~= 1 then
             return {
                 xmult = card.ability.extra.xmult
             }
@@ -801,7 +801,7 @@ HPR.StellarJoker {
                 })
             end
         end
-        if context.joker_main or context.forcetrigger then
+        if (context.joker_main or context.forcetrigger) and card.ability.extra.xmult ~= 1 then
             return { xmult = card.ability.extra.xmult }
         end
     end

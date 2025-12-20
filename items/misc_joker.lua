@@ -172,8 +172,8 @@ SMODS.Joker { --gambling addict, scales from probability rolls
         end
         if context.joker_main or context.forcetrigger then
             return {
-                chips = card.ability.extra.chips,
-                mult = card.ability.extra.mult
+                chips = card.ability.extra.chips ~= 0 and card.ability.extra.chips or nil,
+                mult = card.ability.extra.mult ~= 0  and card.ability.extra.mult or nil
             }
         end
     end,
