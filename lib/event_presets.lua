@@ -57,3 +57,12 @@ HPR.event_presets.juice = function (card)
         end
     })
 end
+
+HPR.event_presets.reset_dollar_buffer = function ()
+    G.E_MANAGER:add_event(Event{
+        func = function ()
+            G.GAME.dollar_buffer = 0
+            return true
+        end
+    })
+end

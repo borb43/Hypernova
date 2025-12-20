@@ -392,6 +392,14 @@ local descriptions = {
                 "{C:red}Must have room to activate",
                 "{C:red}self destructs"
             }
+        },
+        j_hpr_mask = {
+            name = "S020 MASK",
+            text = {
+                "Played {C:attention}face{} cards randomly give",
+                "{X:mult,C:white}X#1#{} Mult, {C:chips}+#2#{} Chips or {C:money}$#3#{} when scored",
+                "Retriggers all {C:attention}face{} cards"
+            }
         }
     },
     Other = {

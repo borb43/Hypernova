@@ -112,7 +112,11 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_trio = "j_hpr_unity",
     j_family = "j_hpr_unity",
     j_order = "j_hpr_unity",
-    j_tribe = "j_hpr_unity"
+    j_tribe = "j_hpr_unity",
+    j_photograph = "j_hpr_mask",
+    j_scary_face = "j_hpr_mask",
+    j_smiley = "j_hpr_mask",
+    j_sock_and_buskin = "j_hpr_mask"
 }
 
 HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'log', 'sin', 'cos', 'tan' }
@@ -799,6 +803,33 @@ HPR.StellarJoker {
         end
         if context.joker_main or context.forcetrigger then
             return { xmult = card.ability.extra.xmult }
+        end
+    end
+}
+
+HPR.StellarJoker {
+    key = "mask",
+    config = { extra = { xmult = 2, chips = 100, dollar = 4 }},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.xmult, card.ability.extra.chips, card.ability.extra.dollar }}
+    end,
+    blueprint_compat = true,
+    demicoloncompat = true,
+    calculate = function (self, card, context)
+        if context.repetition and context.other_card:is_face() then
+            return { repetitions = 1 }
+        end
+        if context.individual and context.cardarea == G.play and context.other_card:is_face() then
+            local res = pseudorandom("hpr_mask_effect",1,3)
+            if res == 1 then return { xmult = card.ability.extra.xmult } end
+            if res == 2 then return { chips = card.ability.extra.chips } end
+            if res == 3 then
+                G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra.dollar
+                return {
+                    dollars = card.ability.extra.dollar,
+                    func = HPR.event_presets.reset_dollar_buffer
+                }
+            end
         end
     end
 }
