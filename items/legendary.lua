@@ -7,17 +7,46 @@ SMODS.Joker {
     cost = 20,
     blueprint_compat = true,
     demicoloncompat = true,
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'e_negative_consumable', set = 'Edition', config = { extra = 1 } }
+    end,
     calculate = function (self, card, context)
-        if context.after and #context.full_hand == 1 and (SMODS.has_no_rank(context.full_hand[1]) or SMODS.has_no_suit(context.full_hand[1])) then
-            G.E_MANAGER:add_event(Event({
-                func = function ()
-                    SMODS.add_card({
-                        set = "hpr_moons",
-                        edition = 'e_negative'
-                    })
-                    return true
+        if context.setting_blind then
+            local planets = {}
+            for _, c in ipairs(G.consumeables.cards) do
+                if c.ability.set == "Planet" and not SMODS.is_eternal(c, card) then planets[#planets+1] = c end
+            end
+            if next(planets) then
+                SMODS.destroy_cards(pseudorandom_element(planets))
+                G.E_MANAGER:add_event(Event{
+                    func = function ()
+                        SMODS.add_card{
+                            editon = "e_negative",
+                            key_append = "hpr_eris",
+                            set = "hpr_moons"
+                        }
+                        return true
+                    end
+                })
+            end
+        end
+        if context.before then
+            local moon
+            for _, c in ipairs(G.consumeables.cards) do
+                if c.ability.set == "hpr_moons" and not SMODS.is_eternal(c, card) then
+                    moon = c
+                    break
                 end
-            }))
+            end
+            if moon then
+                for _, c in ipairs(context.full_hand) do
+                    if moon.config.center.apply_bonus then 
+                        moon.config.center:apply_bonus(moon, c)
+                        SMODS.calculate_effect({ message = localize("k_upgrade_ex"), message_card = c })
+                    end
+                end
+                SMODS.destroy_cards(moon)
+            end
         end
     end,
     pronouns = "any_all",

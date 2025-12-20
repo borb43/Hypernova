@@ -77,9 +77,16 @@ local descriptions = {
         j_hpr_eris = {
             name = "Eris",
             text = {
-                "Creates a {C:dark_edition}Negative {C:hpr_moons}Moon{} card",
-                "if played hand is exactly {C:attention}1{}",
-                "rankless or suitless card"
+                {
+                    "When {C:attention}Blind{} is selected, {C:attention}destroys",
+                    "a random held {C:planet}Planet{} card to",
+                    "create a {C:dark_edition}Negative {C:hpr_moons}Moon{} card"
+                },
+                {
+                    "When hand is played, {C:attention}destroys",
+                    "leftmost held {C:hpr_moons}Moon{} to apply its",
+                    "effects to all {C:attention}played{} cards"
+                }
             }
         },
         j_hpr_bungus = {
