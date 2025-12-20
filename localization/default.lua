@@ -694,6 +694,20 @@ local descriptions = {
                 "to up to {C:attention}#2#{} selected cards"
             }
         },
+        c_hpr_greip = {
+            name = "Greip",
+            text = {
+                "Permanently adds {C:glop}+#1#{} Glop",
+                "to up to {C:attention}#2#{} selected cards"
+            }
+        },
+        c_hpr_gerd = {
+            name = "Gerd",
+            text = {
+                "Permanently adds {C:glop}+#1#{} held in hand",
+                "Glop to up to {C:attention}#2#{} selected cards"
+            }
+        }
     }
 }
 local misc = {
