@@ -57,7 +57,7 @@ HPR.moon = SMODS.Consumable:extend({
         for i = 1, #G.hand.highlighted do
             local _card = G.hand.highlighted[i]
             for _ = 1, number do
-                HPR.apply_moon_bonus(_card, card)
+                if self.apply_bonus then self:apply_bonus(card, _card) end
             end
             G.E_MANAGER:add_event(Event({
                 trigger = "after",
@@ -89,7 +89,7 @@ HPR.moon = SMODS.Consumable:extend({
         }))
         for i = 1, #cards do
             local _card = cards[i]
-            HPR.apply_moon_bonus(_card, card)
+            if self.apply_bonus then self:apply_bonus(card, _card) end
             G.E_MANAGER:add_event(Event({
                 trigger = "after",
                 delay = 0.1,
@@ -117,9 +117,9 @@ HPR.moon = SMODS.Consumable:extend({
 
 HPR.moon {
     key = "deimos",
-    config = { moon_mult = 8, max_highlighted = 2 },
+    config = { extra = 8, max_highlighted = 2 },
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.moon_mult, card.ability.max_highlighted }}
+        return { vars = { card.ability.extra, card.ability.max_highlighted }}
     end,
     pos = { x = 0, y = 0 },
     hpr_credits = {
@@ -128,39 +128,39 @@ HPR.moon {
         art = "LFMoth"
     },
     apply_bonus = function (self, card, other_card)
-        other_card.ability.perma_mult = other_card.ability.perma_mult + card.ability.moon_mult
+        other_card.ability.perma_mult = other_card.ability.perma_mult + card.ability.extra
     end
 }
 
 HPR.moon {
     key = "io",
-    config = { moon_bonus = 45, max_highlighted = 2 },
+    config = { extra = 45, max_highlighted = 2 },
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.moon_bonus, card.ability.max_highlighted }}
+        return { vars = { card.ability.extra, card.ability.max_highlighted }}
     end,
     pos = { x = 1, y = 0 },
     apply_bonus = function (self, card, other_card)
-        other_card.ability.perma_bonus = other_card.ability.perma_bonus + card.ability.moon_bonus
+        other_card.ability.perma_bonus = other_card.ability.perma_bonus + card.ability.extra
     end
 }
 
 HPR.moon {
     key = "moon",
-    config = { moon_h_chips = 45, max_highlighted = 3 },
+    config = { extra = 45, max_highlighted = 3 },
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.moon_h_chips, card.ability.max_highlighted }}
+        return { vars = { card.ability.extra, card.ability.max_highlighted }}
     end,
     pos = { x = 2, y = 0 },
     apply_bonus = function (self, card, other_card)
-        other_card.ability.perma_h_chips = other_card.ability.perma_h_chips + card.ability.moon_h_chips
+        other_card.ability.perma_h_chips = other_card.ability.perma_h_chips + card.ability.extra
     end
 }
 
 HPR.moon {
     key = "phobos",
-    config = { moon_h_mult = 8, max_highlighted = 3 },
+    config = { extra = 8, max_highlighted = 3 },
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.moon_h_mult, card.ability.max_highlighted }}
+        return { vars = { card.ability.extra, card.ability.max_highlighted }}
     end,
     pos = { x = 3, y = 0 },
     hpr_credits = {
@@ -169,15 +169,15 @@ HPR.moon {
         art = "LFMoth"
     },
     apply_bonus = function (self, card, other_card)
-        other_card.ability.perma_h_mult = other_card.ability.perma_h_mult + card.ability.moon_h_mult
+        other_card.ability.perma_h_mult = other_card.ability.perma_h_mult + card.ability.extra
     end
 }
 
 HPR.moon {
     key = "europa",
-    config = { moon_x_mult = 0.25, max_highlighted = 1 },
+    config = { extra = 0.25, max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.moon_x_mult, card.ability.max_highlighted }}
+        return { vars = { card.ability.extra, card.ability.max_highlighted }}
     end,
     pos = { x = 4, y = 0 },
     hpr_credits = {
@@ -186,63 +186,63 @@ HPR.moon {
         art = "LFMoth"
     },
     apply_bonus = function (self, card, other_card)
-        other_card.ability.perma_x_mult = other_card.ability.perma_x_mult + card.ability.moon_x_mult
+        other_card.ability.perma_x_mult = other_card.ability.perma_x_mult + card.ability.extra
     end
 }
 
 HPR.moon {
     key = "hyperion",
-    config = { moon_x_chips = 0.25, max_highlighted = 1 },
+    config = { extra = 0.25, max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.moon_x_chips, card.ability.max_highlighted }}
+        return { vars = { card.ability.extra, card.ability.max_highlighted }}
     end,
     pos = { x = 5, y = 0 },
     apply_bonus = function (self, card, other_card)
-        other_card.ability.perma_x_chips = other_card.ability.perma_x_chips + card.ability.moon_x_chips
+        other_card.ability.perma_x_chips = other_card.ability.perma_x_chips + card.ability.extra
     end
 }
 
 HPR.moon {
     key = "titania",
-    config = { moon_h_x_mult = 0.25, max_highlighted = 2 },
+    config = { extra = 0.25, max_highlighted = 2 },
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.moon_h_x_mult, card.ability.max_highlighted }}
+        return { vars = { card.ability.extra, card.ability.max_highlighted }}
     end,
     pos = { x = 0, y = 1 },
     apply_bonus = function (self, card, other_card)
-        other_card.ability.perma_h_x_mult = other_card.ability.perma_h_x_mult + card.ability.moon_h_x_mult
+        other_card.ability.perma_h_x_mult = other_card.ability.perma_h_x_mult + card.ability.extra
     end
 }
 
 HPR.moon {
     key = "triton",
-    config = { moon_h_x_chips = 0.25, max_highlighted = 2 },
+    config = { extra = 0.25, max_highlighted = 2 },
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.moon_h_x_chips, card.ability.max_highlighted }}
+        return { vars = { card.ability.extra, card.ability.max_highlighted }}
     end,
     pos = { x = 1, y = 1 },
     apply_bonus = function (self, card, other_card)
-        other_card.ability.perma_h_x_chips = other_card.ability.perma_h_x_chips + card.ability.moon_h_x_chips
+        other_card.ability.perma_h_x_chips = other_card.ability.perma_h_x_chips + card.ability.extra
     end
 }
 
 HPR.moon {
     key = "styx",
-    config = { moon_h_dollars = 2, max_highlighted = 1 },
+    config = { extra = 2, max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.moon_h_dollars, card.ability.max_highlighted }}
+        return { vars = { card.ability.extra, card.ability.max_highlighted }}
     end,
     pos = { x = 2, y = 1 },
     apply_bonus = function (self, card, other_card)
-        other_card.ability.perma_h_dollars = other_card.ability.perma_h_dollars + card.ability.moon_h_dollars
+        other_card.ability.perma_h_dollars = other_card.ability.perma_h_dollars + card.ability.extra
     end
 }
 
 HPR.moon {
     key = "nibiru",
-    config = { moon_p_dollars = 1, max_highlighted = 1 },
+    config = { extra = 1, max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.moon_p_dollars, card.ability.max_highlighted }}
+        return { vars = { card.ability.extra, card.ability.max_highlighted }}
     end,
     pos = { x = 3, y = 1 },
     set_card_type_badge = function (self, card, badges)
@@ -251,15 +251,15 @@ HPR.moon {
         1.2)
     end,
     apply_bonus = function (self, card, other_card)
-        other_card.ability.perma_p_dollars = other_card.ability.perma_p_dollars + card.ability.moon_p_dollars
+        other_card.ability.perma_p_dollars = other_card.ability.perma_p_dollars + card.ability.extra
     end
 }
 
 HPR.moon {
     key = "asteroid",
-    config = { moon_numerator = 1, max_highlighted = 1 },
+    config = { extra = 1, max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.moon_numerator, card.ability.max_highlighted }}
+        return { vars = { card.ability.extra, card.ability.max_highlighted }}
     end,
     pos = { x = 4, y = 1 },
     set_card_type_badge = function (self, card, badges)
@@ -268,19 +268,19 @@ HPR.moon {
         1.2)
     end,
     apply_bonus = function (self, card, other_card)
-        other_card.ability.hpr_num_bonus = other_card.ability.hpr_num_bonus + card.ability.moon_numerator
+        other_card.ability.hpr_num_bonus = other_card.ability.hpr_num_bonus + card.ability.extra
     end
 }
 
 HPR.moon {
     key = "dysnomia",
-    config = { moon_eff_mod = 0.2, max_highlighted = 1 },
+    config = { extra = 0.2, max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.moon_eff_mod, card.ability.max_highlighted }}
+        return { vars = { card.ability.extra, card.ability.max_highlighted }}
     end,
     pos = { x = 5, y = 1 },
     apply_bonus = function (self, card, other_card)
-        other_card.ability.perma_eff_mod = other_card.ability.perma_eff_mod + card.ability.moon_eff_mod
+        other_card.ability.perma_eff_mod = other_card.ability.perma_eff_mod + card.ability.extra
     end
 }
 

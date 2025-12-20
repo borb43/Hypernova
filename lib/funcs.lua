@@ -27,35 +27,6 @@ Card.get_hpr_eff_mod = function(self)
     end
 end
 
-HPR.apply_moon_bonus = function(card, moon_card) --applies the moon bonus to a card
-    card.ability.perma_bonus = card.ability.perma_bonus + (moon_card.ability.moon_bonus or 0)
-    card.ability.perma_h_chips = card.ability.perma_h_chips + (moon_card.ability.moon_h_chips or 0)
-    card.ability.perma_mult = card.ability.perma_mult + (moon_card.ability.moon_mult or 0)
-    card.ability.perma_h_mult = card.ability.perma_h_mult + (moon_card.ability.moon_h_mult or 0)
-    card.ability.perma_x_chips = card.ability.perma_x_chips + (moon_card.ability.moon_x_chips or 0)
-    card.ability.perma_h_x_chips = card.ability.perma_h_x_chips + (moon_card.ability.moon_h_x_chips or 0)
-    card.ability.perma_x_mult = card.ability.perma_x_mult + (moon_card.ability.moon_x_mult or 0)
-    card.ability.perma_h_x_mult = card.ability.perma_h_x_mult + (moon_card.ability.moon_h_x_mult or 0)
-    card.ability.perma_p_dollars = card.ability.perma_p_dollars + (moon_card.ability.moon_p_dollars or 0)
-    card.ability.perma_h_dollars = card.ability.perma_h_dollars + (moon_card.ability.moon_h_dollars or 0)
-    card.ability.perma_repetitions = card.ability.perma_repetitions + (moon_card.ability.moon_repetitions or 0)
-    card.ability.perma_eff_mod = card.ability.perma_eff_mod + (moon_card.ability.moon_eff_mod or 0)
-    card.ability.hpr_num_bonus = card.ability.perma_num_bonus + (moon_card.ability.moon_numerator or 0)
-    card.ability.hpr_denom_bonus = card.ability.hpr_denom_bonus + (moon_card.ability.moon_denominator or 0)
-    if next(SMODS.find_mod("entr")) then
-        card.ability.entr_perma_plus_asc = card.ability.entr_perma_plus_asc + (moon_card.ability.moon_entr_plus_asc or 0)
-        card.ability.entr_perma_h_plus_asc = card.ability.entr_perma_h_plus_asc + (moon_card.ability.moon_entr_h_plus_asc or 0)
-        card.ability.entr_perma_asc = card.ability.entr_perma_asc + (moon_card.ability.moon_entr_asc or 0)
-        card.ability.entr_perma_h_asc = card.ability.entr_perma_h_asc + (moon_card.ability.moon_entr_h_asc or 0)
-        card.ability.entr_perma_exp_asc = card.ability.entr_perma_exp_asc + (moon_card.ability.moon_entr_exp_asc or 0)
-        card.ability.entr_perma_h_exp_asc = card.ability.entr_perma_h_exp_asc + (moon_card.ability.moon_entr_h_exp_asc or 0)
-    end
-    if next(SMODS.find_mod("aikoyorisshenanigans")) then
-        card.ability.akyrs_perma_score = card.ability.akyrs_perma_score + (moon_card.ability.akyrs_moon_score or 0)
-        card.ability.akyrs_perma_h_score = card.ability.akyrs_perma_h_score + (moon_card.ability.akyrs_moon_h_score or 0)
-    end
-end
-
 function HPR.poll_erratic_set(seed) --returns a random set, along with additional information if applicable (`set` always, `seal` and `edition` if playing card)
     seed = seed or "hpr_erratic"
     if pseudorandom(seed) < 0.9 then

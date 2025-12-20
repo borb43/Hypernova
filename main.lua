@@ -12,17 +12,6 @@ HPR.calculate = function(self, context)
     end
 end
 
-HPR.set_ability_reset_keys = function ()
-    return {
-        "moon_bonus", "moon_h_chips", "moon_mult", "moon_h_mult",
-        "moon_x_chips", "moon_h_x_chips", "moon_x_mult", "moon_h_x_mult",
-        "moon_p_dollars", "moon_h_dollars", "moon_repetitions", "moon_eff_mod",
-        "moon_entr_plus_asc", "moon_entr_asc", "moon_entr_exp_asc",
-        "moon_entr_h_plus_asc", "moon_entr_h_asc", "moon_entr_h_exp_asc",
-        "akyrs_moon_score", "akyrs_moon_h_score", "moon_numerator", "moon_denominator"
-    }
-end
-
 local mod_path = HPR.path
 
 HPR.erratic_colours = {
