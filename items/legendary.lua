@@ -21,7 +21,7 @@ SMODS.Joker {
                 G.E_MANAGER:add_event(Event{
                     func = function ()
                         SMODS.add_card{
-                            editon = "e_negative",
+                            edition = "e_negative",
                             key_append = "hpr_eris",
                             set = "hpr_moons"
                         }
