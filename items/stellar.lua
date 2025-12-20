@@ -129,7 +129,8 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_hiker = "j_hpr_ascendant",
     j_invisible = "j_hpr_mimic",
     j_blueprint = "j_hpr_mimic",
-    j_brainstorm = "j_hpr_mimic"
+    j_brainstorm = "j_hpr_mimic",
+    j_oops = "j_hpr_lucky"
 }
 
 HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'log', 'sin', 'cos', 'tan' }
@@ -946,6 +947,33 @@ HPR.StellarJoker {
             if context.other_card == card.area.cards[card.rank+1] or context.other_card == card.area.cards[card.rank-1] then
                 return { repetitions = 1 }
             end
+        end
+    end
+}
+
+HPR.StellarJoker {
+    key = "lucky",
+    calculate = function (self, card, context)
+        if context.mod_probability and not context.blueprint then
+            if context.trigger_obj and context.trigger_obj.config and context.trigger_obj.config.blind then
+                return { numerator = 0 }
+            else
+                return { numerator = context.numerator * 3 }
+            end
+        end
+    end,
+    add_to_deck = function (self, card, from_debuff)
+        G.GAME.common_mod = (G.GAME.common_mod or 1) * 0.5
+        G.GAME.rare_mod = (G.GAME.rare_mod or 1) * 2
+        if next(SMODS.find_mod("entr")) and G.GAME.modifiers.entr_meteorite then
+            G.GAME.modifiers.entr_meteorite = G.GAME.modifiers.entr_meteorite / 3
+        end
+    end,
+    remove_from_deck = function (self, card, from_debuff)
+        G.GAME.common_mod = (G.GAME.common_mod or 1) / 0.5
+        G.GAME.rare_mod = (G.GAME.rare_mod or 1) / 2
+        if next(SMODS.find_mod("entr")) and G.GAME.modifiers.entr_meteorite then
+            G.GAME.modifiers.entr_meteorite = G.GAME.modifiers.entr_meteorite * 3
         end
     end
 }

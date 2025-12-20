@@ -441,6 +441,14 @@ local descriptions = {
             text = {
                 "{C:attention}Retriggers{} adjacent jokers"
             }
+        },
+        j_hpr_lucky = {
+            name = "S026 LUCKY",
+            text = {
+                "{C:green,E:1}Probabilities{} on {C:attention}Blinds{} are {C:attention}nullified",
+                "All other {E:1,C:green}probabilties{} are {C:attention}tripled",
+                "{s:1.2,C:hpr_super_gay,E:1}Luck is on your side"
+            }
         }
     },
     Other = {

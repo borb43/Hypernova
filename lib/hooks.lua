@@ -307,3 +307,10 @@ function SMODS.is_eternal(card, trigger)
 	if card.ability.consumeable and card.ability.eternal then return true end
 	return is_eternal_ref(card, trigger)
 end
+
+local poll_ed_ref = poll_edition
+function poll_edition(_key, _mod, _no_neg, _guaranteed, _options)
+	_mod = _mod or 1
+	mod = mod * (3^#SMODS.find_card("j_hpr_fortune"))
+	return poll_ed_ref(_key, _mod, _no_neg, _guaranteed, _options)
+end
