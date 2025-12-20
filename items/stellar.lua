@@ -940,6 +940,7 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "mimic",
+    blueprint_compat = true,
     calculate = function (self, card, context)
         if context.retriggger_joker_check and not context.retrigger_joker and card.area and card.rank then
             if context.other_card == card.area.cards[card.rank+1] or context.other_card == card.area.cards[card.rank-1] then
