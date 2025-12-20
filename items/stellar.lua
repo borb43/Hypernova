@@ -116,7 +116,14 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_photograph = "j_hpr_mask",
     j_scary_face = "j_hpr_mask",
     j_smiley = "j_hpr_mask",
-    j_sock_and_buskin = "j_hpr_mask"
+    j_sock_and_buskin = "j_hpr_mask",
+    j_golden = "j_hpr_payload",
+    j_rocket = "j_hpr_payload",
+    j_to_the_moon = "j_hpr_payload",
+    j_satellite = "j_hpr_payload",
+    j_odd_todd = "j_hpr_numeric",
+    j_even_steven = "j_hpr_numeric",
+    j_scholar = "j_hpr_numeric"
 }
 
 HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'log', 'sin', 'cos', 'tan' }
@@ -849,5 +856,23 @@ HPR.StellarJoker {
             end
             return nil, true
         end
+    end
+}
+
+HPR.StellarJoker {
+    key = "payload",
+    config = { extra = { cap = 5, per = 5, scale = 1 } },
+    calc_dollar_bonus = function (self, card)
+        local amt = math.floor(G.GAME.dollars/card.ability.extra.per)
+        amt = math.min(amt, card.ability.extra.cap)
+        SMODS.scale_card(card, {
+            ref_table = card.ability.extra,
+            ref_value = "cap",
+            scalar_value = "scale"
+        })
+        if amt > 0 then return amt end
+    end,
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.cap, card.ability.extra.per, card.ability.extra.scale }}
     end
 }

@@ -409,6 +409,15 @@ local descriptions = {
                 "gain {C:chips}Chips{} and {C:mult}Mult{} equal to the",
                 "scored card's {C:attention}base {C:chips}Chips"
             }
+        },
+        j_hpr_payload = {
+            name = "S022 PAYLOAD",
+            text = {
+                "Earn {C:money}$1{} at the end of round",
+                "for every {C:money}$#2#{} you have, up to",
+                "a maximum of {C:money}$#1#{}, then increase",
+                "this limit by {C:money}$#3#"
+            }
         }
     },
     Other = {
