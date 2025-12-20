@@ -449,6 +449,13 @@ local descriptions = {
                 "All other {E:1,C:green}probabilties{} are {C:attention}tripled",
                 "{s:1.2,C:hpr_super_gay,E:1}Luck is on your side"
             }
+        },
+        j_hpr_diamond_shape_with_a_dot_inside = {
+            name = "Diamond Shape with a Dot Inside",
+            text = {
+                "Each played {C:diamonds}Diamond{} card",
+                "gives {X:mult,C:white}X#1#{} Mult when scored"
+            }
         }
     },
     Other = {

@@ -679,3 +679,22 @@ SMODS.Joker {
         info_queue[#info_queue+1] = { key = "eternal", set = "Other"}
     end
 }
+
+SMODS.Joker {
+    key = "diamond_shape_with_a_dot_inside",
+    atlas = "placeholder",
+    pos = { x = 0, y = 0 },
+    rarity = 1,
+    cost = 6,
+    config = { extra = 1.2 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra }}
+    end,
+    calculate = function (self, card, context)
+        if context.individual and context.other_card:is_suit("Diamonds") and context.cardarea == G.play then
+            return {
+                xmult = card.ability.extra
+            }
+        end
+    end
+}
