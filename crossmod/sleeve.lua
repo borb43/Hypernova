@@ -60,7 +60,7 @@ CardSleeves.Sleeve {
     pos = { x = 1, y = 0 },
     config = { extra = { slots = 1 } },
     loc_vars = function (self, sleeve)
-        key = self.key
+        local key = self.key
         if self.get_current_deck_key() == "b_hpr_pink" then
             key = self.key .. "_alt"
         end
@@ -71,6 +71,31 @@ CardSleeves.Sleeve {
             SMODS.change_voucher_limit(self.config.extra.slots)
         else
             SMODS.change_booster_limit(self.config.extra.slots)
+        end
+    end
+}
+
+CardSleeves.Sleeve {
+    key = "cosmic",
+    atlas = "sleeve",
+    pos = { x = 0, y = 0 },
+    loc_vars = function (self, sleeve)
+        local key = self.key
+        if self.get_current_deck_key() == "b_hpr_cosmic" then
+            key = key .. "_alt"
+        end
+        return { key = key, vars = { localize { type = 'name_text', key = "c_hpr_ascender", set = 'Spectral' } } }
+    end,
+    apply = function (self, sleeve)
+        if self.get_current_deck_key() == "b_hpr_cosmic" then
+            G.GAME.modifiers.hpr_stellar_in_shop = true
+        else
+            G.E_MANAGER:add_event(Event{
+                func = function ()
+                    SMODS.add_card{ key = "c_hpr_ascender" }
+                    return true
+                end
+            })
         end
     end
 }

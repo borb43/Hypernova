@@ -1,7 +1,11 @@
 
 SMODS.Rarity {
     badge_colour = HPR.stellar_gradient,
-    key = "stellar"
+    key = "stellar",
+    get_weight = function (self, weight, object_type)
+        return G.GAME.modifiers.hpr_stellar_in_shop and 0.7 or 0
+    end,
+    default_weight = 0
 }
 
 HPR.StellarJoker = SMODS.Joker:extend({
@@ -9,7 +13,7 @@ HPR.StellarJoker = SMODS.Joker:extend({
     pos = { x = 0, y = 1 },
     soul_pos = { x = 1, y = 1 },
     rarity = "hpr_stellar",
-    cost = 30
+    cost = 30,
 })
 
 SMODS.Consumable {

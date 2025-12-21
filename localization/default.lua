@@ -589,6 +589,19 @@ local descriptions = {
             text = {
                 "{C:attention}+#1#{} Voucher in each shop"
             }
+        },
+        sleeve_hpr_cosmic = {
+            name = "Cosmic Sleeve",
+            text = {
+                "Start the run with",
+                "an {T:c_hpr_ascender,C:spectral}#1#{} card"
+            }
+        },
+        sleeve_hpr_cosmic_alt = {
+            name = "Cosmic Sleeve",
+            text = {
+                "{E:1,C:hpr_stellar}Stellar{} Jokers may appear naturally",
+            }
         }
     },
     Tag = {},
