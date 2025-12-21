@@ -293,17 +293,19 @@ HPR.StellarJoker {
     demicoloncompat = true,
     perishable_compat = false,
     calculate = function (self, card, context)
-        if context.hpr_level_up_hand and not context.blueprint then
-            card.ability.extra.chips = card.ability.extra.chips + context.chips
-            card.ability.extra.mult = card.ability.extra.mult + context.mult
+        if context.hpr_level_up_hand and not context.blueprint and (context.chips > 0 or context.mult > 0) then
+            card.ability.extra.chips = card.ability.extra.chips + math.max(context.chips, 0)
+            card.ability.extra.mult = card.ability.extra.mult + math.max(context.mult, 0)
             for _, c in pairs(G.playing_cards) do
-                c.ability.perma_bonus = c.ability.perma_bonus + context.chips
-                c.ability.perma_mult = c.ability.perma_mult + context.mult
+                c.ability.perma_bonus = c.ability.perma_bonus + math.max(context.chips, 0)
+                c.ability.perma_mult = c.ability.perma_mult + math.max(context.mult, 0)
             end
             if not context.instant then
                 return {
                     message = localize("k_upgrade_ex")
                 }
+            else
+                return nil, true
             end
         end
         if context.joker_main or context.forcetrigger then
