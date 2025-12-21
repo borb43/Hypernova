@@ -118,10 +118,10 @@ local descriptions = {
         j_hpr_observatorium = {
             name = "S001 OBSERVATORIUM",
             text = {
-                "When a hand is {C:attention}leveled up,",
-                "level up this joker and",
-                "all cards in your deck",
-                "by the same amount",
+                "When a hand's {C:chips}Chips{} or {C:mult}Mult",
+                "are {C:attention}leveled up{}, upgrade this",
+                "Joker and all cards in your",
+                "{C:attention}full deck{} by the same amount",
                 "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#2#{C:inactive} Mult)"
             }
         },
