@@ -558,7 +558,7 @@ local descriptions = {
             name = "Ascension",
             text = {
                 "{C:hpr_stellar}Ascends{} one eligible {C:attention}Joker{} to",
-                "its {C:hpr_stellar}Stellar{} counterpart"
+                "its {C:hpr_stellar,E:1}Stellar{} counterpart"
             }
         }
     },
