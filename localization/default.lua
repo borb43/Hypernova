@@ -471,6 +471,14 @@ local descriptions = {
                 "{C:attention}Rerolls{} all {C:attention}listed {C:green,E:1}probabilities",
                 "{C:attention}2{} times on the {C:attention}first hand{} of round"
             }
+        },
+        j_hpr_joker_versus = {
+            name = "Joker Versus",
+            text = {
+                "First scoring {C:attention}3",
+                "gives {X:mult,C:white}X#1#{} Mult",
+                "when scored"
+            }
         }
     },
     Other = {
