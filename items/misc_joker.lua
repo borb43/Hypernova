@@ -698,3 +698,21 @@ SMODS.Joker {
         end
     end
 }
+
+SMODS.Joker {
+    key = "ult_meal",
+    atlas = "placeholder",
+    pos = { x = 2, y = 0 },
+    rarity = 3,
+    cost = 8,
+    config = { extra = 2 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra }}
+    end,
+    calculate = function (self, card, context)
+        if context.hpr_retrigger_probability and G.GAME.blind.in_blind and G.GAME.current_round.hands_played == 0 then
+            return { hpr_retriggers = card.ability.extra }
+        end
+    end,
+    hpr_ascension_key = "j_hpr_lucky",
+}

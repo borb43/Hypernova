@@ -317,3 +317,24 @@ function poll_edition(_key, _mod, _no_neg, _guaranteed, _options)
 	_mod = _mod * (3^#SMODS.find_card("j_hpr_fortune"))
 	return poll_ed_ref(_key, _mod, _no_neg, _guaranteed, _options)
 end
+
+local prob_ref = SMODS.pseudorandom_probability
+function SMODS.pseudorandom_probability(trigger_obj, seed, base_numerator, base_denominator, identifier, no_mod)
+	local res = prob_ref(trigger_obj, seed, base_numerator, base_denominator, identifier, no_mod)
+	local reps = 0
+	local effects = {}
+	SMODS.calculate_context({
+		trigger_obj = trigger_obj,
+		identifier = identifier or seed,
+		hpr_retrigger_probability = true
+	}, effects)
+	for i = 1, #effects do
+		reps = reps + (effects[i] and effects[i].jokers and math.floor(effects[i].jokers.hpr_retriggers or 0))
+	end
+	for _ = 1, reps do
+		local new_res = prob_ref(trigger_obj, seed, base_numerator, base_denominator, identifier, no_mod)
+		card_eval_status_text(trigger_obj, "extra", nil, nil, nil, { message = localize("k_again_ex"), colour = G.C.GREEN })
+		res = res or new_res
+	end
+	return res
+end

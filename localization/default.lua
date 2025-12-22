@@ -463,6 +463,13 @@ local descriptions = {
                 "Each played {C:diamonds}Diamond{} card",
                 "gives {X:mult,C:white}X#1#{} Mult when scored"
             }
+        },
+        j_hpr_ult_meal = {
+            name = "Ultimate Meal",
+            text = {
+                "{C:attention}Retriggers{} all {C:attention}listed {C:green,E:1}probabilities",
+                "{C:attention}2{} times on the {C:attention}first hand{} of round"
+            }
         }
     },
     Other = {
