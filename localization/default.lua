@@ -453,7 +453,8 @@ local descriptions = {
             name = "S026 LUCKY",
             text = {
                 "{C:green,E:1}Probabilities{} on {C:attention}Blinds{} are {C:attention}nullified",
-                "All other {E:1,C:green}probabilties{} are {C:attention}tripled",
+                "All other {C:attention}listed {C:green,E:1}Probabilities",
+                "are retriggered {C:attention}#1#{} times",
                 "{s:1.2,C:hpr_super_gay,E:1}Luck is on your side"
             }
         },

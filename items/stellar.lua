@@ -960,13 +960,18 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "lucky",
+    config = { extra = 4 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra }}
+    end,
     calculate = function (self, card, context)
         if context.mod_probability and not context.blueprint then
             if context.trigger_obj and context.trigger_obj.config and context.trigger_obj.config.blind then
                 return { numerator = 0 }
-            else
-                return { numerator = context.numerator * 3 }
             end
+        end
+        if context.hpr_retrigger_probability and not (context.trigger_obj and context.trigger_obj.config and context.trigger_obj.config.blind) then
+            return { hpr_retriggers = card.ability.extra }
         end
     end,
     add_to_deck = function (self, card, from_debuff)
