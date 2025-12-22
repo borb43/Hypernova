@@ -454,7 +454,7 @@ local descriptions = {
             text = {
                 "{C:green,E:1}Probabilities{} on {C:attention}Blinds{} are {C:attention}nullified",
                 "All other {C:attention}listed {C:green,E:1}Probabilities",
-                "are retriggered {C:attention}#1#{} times",
+                "are rerolled {C:attention}#1#{} times",
                 "{s:1.2,C:hpr_super_gay,E:1}Luck is on your side"
             }
         },
@@ -468,7 +468,7 @@ local descriptions = {
         j_hpr_ult_meal = {
             name = "Ultimate Meal",
             text = {
-                "{C:attention}Retriggers{} all {C:attention}listed {C:green,E:1}probabilities",
+                "{C:attention}Rerolls{} all {C:attention}listed {C:green,E:1}probabilities",
                 "{C:attention}2{} times on the {C:attention}first hand{} of round"
             }
         }
