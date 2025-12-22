@@ -329,7 +329,7 @@ function SMODS.pseudorandom_probability(trigger_obj, seed, base_numerator, base_
 		hpr_retrigger_probability = true
 	}, effects)
 	for i = 1, #effects do
-		reps = reps + (effects[i] and effects[i].jokers and math.floor(effects[i].jokers.hpr_retriggers or 0))
+		reps = reps + math.floor(effects[i] and effects[i].jokers and effects[i].jokers.hpr_retriggers or 0)
 	end
 	for _ = 1, reps do
 		local new_res = prob_ref(trigger_obj, seed, base_numerator, base_denominator, identifier, no_mod)

@@ -18,6 +18,7 @@ CardSleeves.Sleeve {
                             rank = "Ace"
                         })
                     end
+                    G.GAME.starting_deck_size = G.GAME.starting_deck_size + 4
                     return true
                 end
             }))
