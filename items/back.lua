@@ -25,7 +25,8 @@ SMODS.Back { --sealed deck, starting aces have seals
                 return true
             end
         }))
-    end
+    end,
+    pools = { RedeemableBacks = true }
 }
 
 SMODS.Back {
@@ -49,7 +50,8 @@ SMODS.Back {
     config = { consumables = { "c_hpr_ascender" }},
     loc_vars = function (self, info_queue, card)
         return { vars = { localize { type = 'name_text', key = self.config.consumables[1], set = 'Spectral' } }}
-    end
+    end,
+    pools = { RedeemableBacks = true }
 }
 
 SMODS.Back {
@@ -63,7 +65,8 @@ SMODS.Back {
     apply = function (self, back)
         G.GAME.starting_params.dollars = G.GAME.starting_params.dollars + self.config.extra
         G.GAME.bankrupt_at = G.GAME.bankrupt_at + self.config.extra
-    end
+    end,
+    pools = { RedeemableBacks = true }
 }
 
 SMODS.Back {
@@ -73,5 +76,6 @@ SMODS.Back {
     config = { extra = 0.1 },
     apply = function (self, back)
         G.GAME.modifiers.hpr_neg_consumable_rate = self.config.extra
-    end
+    end,
+    pools = { RedeemableBacks = true }
 }
