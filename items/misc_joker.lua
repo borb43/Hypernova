@@ -749,7 +749,7 @@ SMODS.Joker {
     cost = 10,
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.e_negative
-        info_queue[#info_queue+1] = { set = 'Other', key = 'perishable', config = { G.GAME.perishable_rounds, G.GAME.perishable_rounds }, vars = { G.GAME.perishable_rounds, G.GAME.perishable_rounds }}
+        info_queue[#info_queue+1] = { set = 'Other', key = 'perishable', vars = { G.GAME.perishable_rounds, G.GAME.perishable_rounds }}
     end,
     calculate = function (self, card, context)
         if context.end_of_round and context.main_eval and context.beat_boss then
@@ -767,6 +767,37 @@ SMODS.Joker {
                 })
                 return { message = localize("k_duplicated_ex") }
             end
+        end
+    end
+}
+
+SMODS.Joker {
+    key = "rent",
+    atlas = "placeholder",
+    pos = { x = 1, y = 0 },
+    rarity = 2,
+    cost = 7,
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = { set = "Other", key = "perishable", vars = { G.GAME.perishable_rounds, G.GAME.perishable_rounds }}
+        info_queue[#info_queue+1] = { set = "Other", key = "rental", vars = { G.GAME.rental_rate }}
+    end,
+    calculate = function (self, card, context)
+        if context.selling_self and (#G.jokers.cards + G.GAME.joker_buffer) < G.jokers.config.card_limit then
+            G.GAME.joker_buffer = (G.GAME.joker_buffer or 0) + 1
+            G.E_MANAGER:add_event(Event{
+                func = function ()
+                    SMODS.add_card{
+                        rarity = "Rare",
+                        set = "Joker",
+                        stickers = {"rental", "perishable"},
+                        force_stickers = true,
+                        key_append = "hpr_rent_joker"
+                    }
+                    G.GAME.joker_buffer = 0
+                    return true
+                end
+            })
+            return { message = localize("k_plus_joker"), colour = G.C.RARITY[3] }
         end
     end
 }

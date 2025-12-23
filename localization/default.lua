@@ -496,6 +496,14 @@ local descriptions = {
                 "{C:attention}Boss Blind{} is defeated",
                 "{C:inactive}(Photocopier excluded)"
             }
+        },
+        j_hpr_rent = {
+            name = "Rent-a-Joker",
+            text = {
+                "Sell this card to create a",
+                "{C:attention}Rental Perishable {C:red}Rare {C:attention}Joker",
+                "{C:inactive}(Must have room)"
+            }
         }
     },
     Other = {
