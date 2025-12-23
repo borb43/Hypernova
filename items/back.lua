@@ -65,3 +65,13 @@ SMODS.Back {
         G.GAME.bankrupt_at = G.GAME.bankrupt_at + self.config.extra
     end
 }
+
+SMODS.Back {
+    key = "inverted",
+    atlas = "placeholder",
+    pos = { x = 4, y = 2 },
+    config = { extra = 0.1 },
+    apply = function (self, back)
+        G.GAME.modifiers.hpr_neg_consumable_rate = self.config.extra
+    end
+}

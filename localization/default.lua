@@ -27,6 +27,13 @@ local descriptions = {
                 "Start with an extra {C:money}$#1#",
                 "You cannot spend below {C:money}$#1#",
             }
+        },
+        b_hpr_inverted = {
+            name = "Inverted Deck",
+            text = {
+                "{C:attention}Consumable{} cards",
+                "may be {C:dark_edition}Negative"
+            }
         }
     },
     Blind = {},
