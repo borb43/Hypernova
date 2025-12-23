@@ -117,6 +117,7 @@ for _, file in ipairs(files) do
 	f()
 end
 
+assert(SMODS.load_file("items/spectral.lua"))()
 assert(SMODS.load_file("items/moon.lua"))()
 assert(SMODS.load_file("items/booster.lua"))()
 assert(SMODS.load_file("items/misc_joker.lua"))()

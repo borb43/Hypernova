@@ -608,6 +608,16 @@ local descriptions = {
                 "{C:hpr_stellar}Ascends{} one eligible {C:attention}Joker{} to",
                 "its {C:hpr_stellar,E:1}Stellar{} counterpart"
             }
+        },
+        c_hpr_tome = {
+            name = "Tome",
+            text = {
+                "Creates a {C:attention}Rental{} copy",
+                "of a random {C:attention}Joker",
+                "Permanently {C:red}doubles",
+                "{C:attention}Rental{} costs",
+                "{C:inactive}(Must have room)"
+            }
         }
     },
     Stake = {},
