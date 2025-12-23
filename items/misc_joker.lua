@@ -740,3 +740,33 @@ SMODS.Joker {
         end
     end
 }
+
+SMODS.Joker {
+    key = "copier",
+    atlas = "placeholder",
+    pos = { x = 2, y = 0 },
+    rarity = 3,
+    cost = 10,
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_CENTERS.e_negative
+        info_queue[#info_queue+1] = { set = 'Other', key = 'perishable', config = { G.GAME.perishable_rounds, G.GAME.perishable_rounds }, vars = { G.GAME.perishable_rounds, G.GAME.perishable_rounds }}
+    end,
+    calculate = function (self, card, context)
+        if context.end_of_round and context.main_eval and context.beat_boss then
+            local c = G.jokers.cards[#G.jokers.cards]
+            if c and c.config.center.key ~= "j_hpr_copier" then
+                G.E_MANAGER:add_event(Event{
+                    func = function ()
+                        local copy = copy_card(c)
+                        copy:set_edition('e_negative', true)
+                        copy:add_sticker('perishable', true)
+                        copy:add_to_deck()
+                        G.jokers:emplace(copy)
+                        return true
+                    end
+                })
+                return { message = localize("k_duplicated_ex") }
+            end
+        end
+    end
+}

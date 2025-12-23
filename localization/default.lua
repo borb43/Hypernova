@@ -479,6 +479,16 @@ local descriptions = {
                 "gives {X:mult,C:white}X#1#{} Mult",
                 "when scored"
             }
+        },
+        j_hpr_copier = {
+            name = "Photocopier",
+            text = {
+                "Creates a {C:attention}Perishable",
+                "{C:dark_edition}Negative{} copy of the",
+                "rightmost joker when",
+                "{C:attention}Boss Blind{} is defeated",
+                "{C:inactive}(Photocopier excluded)"
+            }
         }
     },
     Other = {
