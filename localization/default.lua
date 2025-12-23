@@ -20,6 +20,13 @@ local descriptions = {
                 "Start the run with",
                 "an {T:c_hpr_ascender,C:spectral}#1#{} card"
             }
+        },
+        b_hpr_treasury = {
+            name = "Treasury Deck",
+            text = {
+                "Start with an extra {C:money}$#1#",
+                "You cannot spend below {C:money}$#1#",
+            }
         }
     },
     Blind = {},

@@ -51,3 +51,17 @@ SMODS.Back {
         return { vars = { localize { type = 'name_text', key = self.config.consumables[1], set = 'Spectral' } }}
     end
 }
+
+SMODS.Back {
+    key = "treasury",
+    atlas = "placeholder",
+    pos = { x = 4, y = 2 },
+    config = { extra = 25 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { self.config.extra }}
+    end,
+    apply = function (self, back)
+        G.GAME.starting_params.dollars = G.GAME.starting_params.dollars + self.config.extra
+        G.GAME.bankrupt_at = G.GAME.bankrupt_at + self.config.extra
+    end
+}
