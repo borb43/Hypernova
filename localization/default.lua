@@ -615,7 +615,7 @@ local descriptions = {
                 "Creates a {C:attention}Rental{} copy",
                 "of a random {C:attention}Joker",
                 "Permanently {C:red}doubles",
-                "{C:attention}Rental{} costs",
+                "{C:attention}Rental{} cost rate",
                 "{C:inactive}(Must have room)"
             }
         }
