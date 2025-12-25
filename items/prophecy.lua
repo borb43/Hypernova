@@ -24,6 +24,7 @@ SMODS.DrawStep {
     conditions = { vortex = false, facing = "front" }
 }
 
+--#region normal cards
 HPR.prophecy { --tome, reverse ectoplasm
     key = "tome",
     loc_vars = function (self, info_queue, card)
@@ -60,7 +61,7 @@ HPR.prophecy { --tome, reverse ectoplasm
         G.GAME.rental_rate = G.GAME.rental_rate * 2
     end
 }
-
+--#endregion
 --#region hidden consumables
 HPR.prophecy { --ascension, reverse the soul
     key = "ascender",
