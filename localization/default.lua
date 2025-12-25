@@ -591,6 +591,15 @@ local descriptions = {
             text = {
                 "Permanent {C:green}+#1#{} denominator"
             }
+        },
+        undiscovered_hpr_prophecy = {
+            name = "Not Discovered",
+            text = {
+                "Purchase or use",
+                "this card in an",
+                "unseeded run to",
+                "learn what it does"
+            }
         }
     },
     Planet = {},
@@ -778,6 +787,14 @@ local descriptions = {
                 "Permanently {C:red}doubles",
                 "{C:attention}Rental{} cost rate",
                 "{C:inactive}(Must have room)"
+            }
+        },
+        c_hpr_ignorance = {
+            name = "Ignorance",
+            text = {
+                "Creates the last",
+                "used {C:spectral}Spectral{} or",
+                "{C:hpr_prophecy}Corrupted{} Card"
             }
         }
     }
