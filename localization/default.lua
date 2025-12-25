@@ -594,32 +594,7 @@ local descriptions = {
         }
     },
     Planet = {},
-    Spectral = {
-        c_hpr_pulsar = {
-            name = "Pulsar",
-            text = {
-                "Applies {C:dark_edition}Negative{} edition",
-                "to {C:attention}#1#{} selected card"
-            }
-        },
-        c_hpr_ascender = {
-            name = "Ascension",
-            text = {
-                "{C:hpr_stellar}Ascends{} one eligible {C:attention}Joker{} to",
-                "its {C:hpr_stellar,E:1}Stellar{} counterpart"
-            }
-        },
-        c_hpr_tome = {
-            name = "Tome",
-            text = {
-                "Creates a {C:attention}Rental{} copy",
-                "of a random {C:attention}Joker",
-                "Permanently {C:red}doubles",
-                "{C:attention}Rental{} cost rate",
-                "{C:inactive}(Must have room)"
-            }
-        }
-    },
+    Spectral = {},
     Stake = {},
     Sleeve = {
         sleeve_hpr_sealed = {
@@ -779,6 +754,32 @@ local descriptions = {
                 "Glop to up to {C:attention}#2#{} selected cards"
             }
         }
+    },
+    hpr_prophecy = {
+        c_hpr_pulsar = {
+            name = "Pulsar",
+            text = {
+                "Applies {C:dark_edition}Negative{} edition",
+                "to {C:attention}#1#{} selected card"
+            }
+        },
+        c_hpr_ascender = {
+            name = "Ascension",
+            text = {
+                "{C:hpr_stellar}Ascends{} one eligible {C:attention}Joker{} to",
+                "its {C:hpr_stellar,E:1}Stellar{} counterpart"
+            }
+        },
+        c_hpr_tome = {
+            name = "Tome",
+            text = {
+                "Creates a {C:attention}Rental{} copy",
+                "of a random {C:attention}Joker",
+                "Permanently {C:red}doubles",
+                "{C:attention}Rental{} cost rate",
+                "{C:inactive}(Must have room)"
+            }
+        }
     }
 }
 local misc = {
@@ -808,7 +809,6 @@ local misc = {
         k_extremely = "Extremely",
         k_huge = "Huge",
         --#endregion
-        k_hpr_enable_janky_manips = "Enables janky values for joker effect maniulation",
         k_level_stats = "per level",
         hpr_plus_moon = "+1 Moon",
         hpr_plus_q = "+1 ???",
@@ -820,13 +820,17 @@ local misc = {
         hpr_generic_q = "?????",
         k_plus_aura = "+1 Aura",
         k_saved_q = "Saved?",
-        ph_hpr_plarva = "Saved by Pluripotent Larva"
+        ph_hpr_plarva = "Saved by Pluripotent Larva",
+        b_hpr_prophecy_cards = "Corrupted Cards",
+        k_hpr_prophecy = "Corrupted"
+
     },
     high_scores = {},
     labels = {
         hpr_moons = "Moon",
         hpr_diy = "DIY",
-        hpr_stellar = "Stellar"
+        hpr_stellar = "Stellar",
+        hpr_prophecy = "Corrupted"
     },
     poker_hand_descriptions = {},
     poker_hands = {},
