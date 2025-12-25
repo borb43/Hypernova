@@ -2,15 +2,30 @@ SMODS.ConsumableType {
     key = "hpr_prophecy",
     primary_colour = G.C.BOOSTER,
     secondary_colour = HEX("060d40"),
-    default = "c_hpr_tome"
+    default = "c_hpr_tome",
+    collection_rows = { 5, 5 }
 }
 
-SMODS.Consumable { --tome, reverse ectoplasm
-    key = "tome",
+HPR.prophecy = SMODS.Consumable:extend{
     set = "hpr_prophecy",
-    atlas = "placeholder",
-    pos = { x = 2, y = 2 },
-    cost = 2,
+    cost = 4,
+    atlas = "hpr_placeholder",
+    pos = { x = 3, y = 3 }
+}
+
+SMODS.DrawStep {
+    key = "prophecy_shine",
+    order = 11,
+    func = function (self)
+        if self.ability.set == "hpr_prophecy" and self:should_draw_base_shader() then
+            self.children.center:draw_shader('booster', nil, self.ARGS.send_to_shader)
+        end
+    end,
+    conditions = { vortex = false, facing = "front" }
+}
+
+HPR.prophecy { --tome, reverse ectoplasm
+    key = "tome",
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = { set = "Other", key = "rental", vars = { G.GAME.rental_rate }}
         local main_end = {}
@@ -47,13 +62,8 @@ SMODS.Consumable { --tome, reverse ectoplasm
 }
 
 --#region hidden consumables
-SMODS.Consumable { --ascension, reverse the soul
+HPR.prophecy { --ascension, reverse the soul
     key = "ascender",
-    atlas = "placeholder",
-    pos = { x = 2, y = 2 },
-    --soul_pos,
-    set = "hpr_prophecy",
-    cost = 4,
     hidden = true,
     can_use = function (self, card)
         return G.jokers and #G.jokers.highlighted == 1 and HPR.get_ascension(G.jokers.highlighted[1])
@@ -94,13 +104,11 @@ SMODS.Consumable { --ascension, reverse the soul
     end
 }
 
-SMODS.Consumable { --pulsar, reverse black hole
+HPR.prophecy { --pulsar, reverse black hole
     key = "pulsar",
-    set = "hpr_prophecy",
     atlas = "moons",
     pos = { x = 6, y = 0 },
     soul_pos = { x= 7, y = 0 },
-    cost = 4,
     config = { max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = { key = "e_negative_playing_card", set = "Edition", config = { extra = 1 }}
