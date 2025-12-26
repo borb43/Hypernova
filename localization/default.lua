@@ -792,9 +792,10 @@ local descriptions = {
         c_hpr_ignorance = {
             name = "Ignorance",
             text = {
-                "Creates the last",
-                "used {C:spectral}Spectral{} or",
-                "{C:hpr_prophecy}Corrupted{} Card"
+                "Creates an {C:attention}Eternal",
+                "{C:attention}Consumable{} of the last",
+                "used {C:attention}Consumable Type",
+                "{C:inactive}Currently: {V:1}#1#"
             }
         }
     }

@@ -1,8 +1,13 @@
 HPR = SMODS.current_mod
 
 HPR.calculate = function(self, context)
-    if context.using_consumeable and (context.consumeable.ability.set == "Spectral" or context.consumeable.ability.set == "hpr_prophecy") then
-        G.GAME.hpr_ignorance_card = context.consumeable.config.center.key
+    if context.using_consumeable then
+        G.E_MANAGER:add_event(Event{
+            func = function ()
+                G.GAME.hpr_ignorance_card = context.consumeable.ability.set
+                return true
+            end
+        })
     end
 end
 
