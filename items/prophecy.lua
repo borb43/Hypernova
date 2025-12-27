@@ -28,6 +28,7 @@ SMODS.DrawStep {
 HPR.prophecy {
     key = "ignorance",
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue+1] = { set = "Other", key = "eternal" }
         local set = G.GAME.hpr_ignorance_card
         local loc = set and localize(("k_"..set):lower()) or localize("k_none")
         local colour = set and G.C.SECONDARY_SET[set] or G.C.UI.TEXT_INACTIVE
