@@ -61,6 +61,42 @@ HPR.prophecy { --ignorance, reverse the fool
     end
 }
 
+HPR.prophecy {
+    key = "blessing",
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_CENTERS.m_hpr_lunar
+        return { vars = { localize{ type = "name_text", set = "Enhanced", key = "m_hpr_lunar" }}}
+    end,
+    can_use = function ()
+        return G.hand and #G.hand.cards > 0
+    end,
+    use = function (self, card, area, copier)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+
+        G.E_MANAGER:add_event(Event{
+            trigger = "after",
+            delay = 0.7,
+            func = function ()
+                local c = SMODS.add_card{
+                    area = G.hand,
+                    set = "Enhanced",
+                    key = "m_hpr_lunar"
+                }
+                SMODS.calculate_context({playing_card_added = true, cards = {c}})
+                return true
+            end
+        })
+    end
+}
+
 HPR.prophecy { --tome, reverse ankh
     key = "tome",
     loc_vars = function (self, info_queue, card)

@@ -100,7 +100,7 @@ local descriptions = {
         m_hpr_lunar = {
             name = "Lunar Card",
             text = {
-                "1 in 2 chance to level",
+                "{C:green}#1# in #2#{} chance to level",
                 "up hand when played"
             }
         }
@@ -862,6 +862,13 @@ local descriptions = {
                 "{C:attention}Consumable{} of the last",
                 "used {C:attention}Consumable Type",
                 "{C:inactive}Currently: {V:1}#1#"
+            }
+        },
+        c_hpr_blessing = {
+            name = "Blessing",
+            text = {
+                "Creates a {C:attention}#1#",
+                "in your hand"
             }
         }
     }
