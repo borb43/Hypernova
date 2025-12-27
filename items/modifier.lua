@@ -17,7 +17,8 @@ SMODS.Enhancement {
             end
             return nil, true
         end
-    end
+    end,
+    weight = 2
 }
 
 SMODS.Enhancement {
@@ -38,5 +39,6 @@ SMODS.Enhancement {
             end
             return nil, true
         end
-    end
+    end,
+    weight = 2
 }
