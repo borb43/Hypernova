@@ -98,6 +98,51 @@ HPR.prophecy {
 }
 
 HPR.prophecy {
+    key = "divide",
+    can_use = function ()
+        return G.jokers and #G.jokers.cards > 0
+    end,
+    use = function (self, card, area, copier)
+        G.E_MANAGER:add_event(Event{
+            func = function ()
+                for _, c in ipairs(G.jokers.cards) do
+                    if c.ability.perishable and c.ability.perish_tally > 1 and not c.debuff then
+                        c.ability.perish_tally = 1
+                        c:calculate_perishable()
+                    end
+                end
+                return true
+            end,
+            trigger = "after",
+            delay = 0.4
+        })
+        G.E_MANAGER:add_event(Event{
+            trigger = "after",
+            delay = 0.7,
+            func = function ()
+                local copies = {}
+                for _, c in ipairs(G.jokers.cards) do
+                    if not c.ability.perishable then
+                        local copy = copy_card(c)
+                        copy:start_materialize()
+                        copy:add_to_deck()
+                        copy:set_edition("e_negative")
+                        copy:add_sticker("perishable", true)
+                        copies[#copies+1] = copy
+                    end
+                end
+                for _, c in ipairs(copies) do G.jokers:emplace(c) end
+                return true
+            end
+        })
+    end,
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = { set = "Other", key = "perishable", vars = { G.GAME.perishable_rounds, G.GAME.perishable_rounds }}
+        info_queue[#info_queue+1] = G.P_CENTERS.e_negative
+    end
+}
+
+HPR.prophecy {
     key = "tome",
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = { set = "Other", key = "rental", vars = { G.GAME.rental_rate }}

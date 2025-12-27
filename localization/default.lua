@@ -884,6 +884,16 @@ local descriptions = {
                 "Creates a {C:attention}#1#",
                 "in your hand"
             }
+        },
+        c_hpr_divide = {
+            name = "Divide",
+            text = {
+                "All {C:attention}Perishable Jokers",
+                "immediately {C:red}perish",
+                "Creates {C:dark_edition}Negative {C:attention}Perishable",
+                "copies of all your non-",
+                "{C:attention}Perishable{} Jokers"
+            }
         }
     }
 }
