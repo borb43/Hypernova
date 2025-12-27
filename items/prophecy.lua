@@ -25,7 +25,7 @@ SMODS.DrawStep {
 }
 
 --#region normal cards
-HPR.prophecy { --ignorance, reverse the fool
+HPR.prophecy {
     key = "ignorance",
     loc_vars = function(self, info_queue, card)
         local set = G.GAME.hpr_ignorance_card
@@ -97,7 +97,7 @@ HPR.prophecy {
     end
 }
 
-HPR.prophecy { --tome, reverse ankh
+HPR.prophecy {
     key = "tome",
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = { set = "Other", key = "rental", vars = { G.GAME.rental_rate }}
@@ -135,7 +135,7 @@ HPR.prophecy { --tome, reverse ankh
 }
 --#endregion
 --#region hidden consumables
-HPR.prophecy { --ascension, reverse the soul
+HPR.prophecy {
     key = "ascender",
     hidden = true,
     can_use = function (self, card)
@@ -174,10 +174,11 @@ HPR.prophecy { --ascension, reverse the soul
             end
         })
         delay(0.5)
-    end
+    end,
+    soul_set = "Spectral"
 }
 
-HPR.prophecy { --pulsar, reverse black hole
+HPR.prophecy {
     key = "pulsar",
     atlas = "moons",
     pos = { x = 6, y = 0 },

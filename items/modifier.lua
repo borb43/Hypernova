@@ -148,3 +148,32 @@ SMODS.Enhancement {
         end
     end
 }
+
+SMODS.Seal {
+    key = "negative",
+    pos = { x = 4, y = 4 },
+    badge_colour = G.C.L_BLACK,
+    calculate = function (self, card, context)
+        if context.main_scoring and context.cardarea == G.play then
+            G.E_MANAGER:add_event(Event{
+                func = function ()
+                    G.GAME.round_resets.temp_handsize = (G.GAME.round_resets.temp_handsize or 0) + 1
+                    G.hand:change_size(1)
+                    return true
+                end
+            })
+            return {
+                message = localize{ type = "variable", key = "a_handsize", vars = { 1 }},
+                colour = G.C.DARK_EDITION
+            }
+        end
+    end,
+    draw = function (self, card, layer)
+        if (layer == "card" or layer == "both") and card.sprite_facing == "front" then
+            G.shared_seals[card.seal].role.draw_major = card
+            G.shared_seals[card.seal]:draw_shader('dissolve', nil, nil, nil, card.children.center)
+            G.shared_seals[card.seal]:draw_shader('negative', nil, card.ARGS.send_to_shader, nil, card.children.center)
+            G.shared_seals[card.seal]:draw_shader('negative_shine', nil, card.ARGS.send_to_shader, nil, card.children.center)
+        end
+    end
+}

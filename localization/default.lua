@@ -666,6 +666,13 @@ local descriptions = {
                 "unseeded run to",
                 "learn what it does"
             }
+        },
+        hpr_negative_seal = {
+            name = "Negative Seal",
+            text = {
+                "Temporary {C:dark_edition}+1{} Hand Size",
+                "when scored"
+            }
         }
     },
     Planet = {},
@@ -922,7 +929,8 @@ local misc = {
         hpr_moons = "Moon",
         hpr_diy = "DIY",
         hpr_stellar = "Stellar",
-        hpr_prophecy = "Corrupted"
+        hpr_prophecy = "Corrupted",
+        hpr_negative_seal = "Negative Seal"
     },
     poker_hand_descriptions = {},
     poker_hands = {},
