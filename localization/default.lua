@@ -85,7 +85,8 @@ local descriptions = {
             name = "Fusion Card",
             text = {
                 "No rank or suit",
-                "Balances {C:chips}Chips{} and {C:mult}Mult"
+                "Balances {C:chips}Chips{} and",
+                "{C:mult}Mult{} when scored"
             }
         }
     },
