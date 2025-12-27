@@ -155,16 +155,18 @@ SMODS.Seal {
     badge_colour = G.C.L_BLACK,
     calculate = function (self, card, context)
         if context.main_scoring and context.cardarea == G.play then
-            G.E_MANAGER:add_event(Event{
-                func = function ()
-                    G.GAME.round_resets.temp_handsize = (G.GAME.round_resets.temp_handsize or 0) + 1
-                    G.hand:change_size(1)
-                    return true
-                end
-            })
             return {
                 message = localize{ type = "variable", key = "a_handsize", vars = { 1 }},
-                colour = G.C.DARK_EDITION
+                colour = G.C.DARK_EDITION,
+                func = function ()
+                    G.E_MANAGER:add_event(Event{
+                        func = function ()
+                            G.GAME.round_resets.temp_handsize = (G.GAME.round_resets.temp_handsize or 0) + 1
+                            G.hand:change_size(1)
+                            return true
+                        end,
+                    })
+                end
             }
         end
     end,
