@@ -88,6 +88,14 @@ local descriptions = {
                 "Balances {C:chips}Chips{} and",
                 "{C:mult}Mult{} when scored"
             }
+        },
+        m_hpr_silver = {
+            name = "Silver Card",
+            text = {
+                "Creates a random {C:attention}Tag",
+                "when held in hand",
+                "at the end of round"
+            }
         }
     },
     Joker = {
@@ -891,7 +899,8 @@ local misc = {
         k_saved_q = "Saved?",
         ph_hpr_plarva = "Saved by Pluripotent Larva",
         b_hpr_prophecy_cards = "Corrupted Cards",
-        k_hpr_prophecy = "Corrupted"
+        k_hpr_prophecy = "Corrupted",
+        k_plus_tag = "+1 Tag"
 
     },
     high_scores = {},

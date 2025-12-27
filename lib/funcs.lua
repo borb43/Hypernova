@@ -95,3 +95,14 @@ function HPR.get_base_chips(card)
     end
     return chips
 end
+
+function HPR.poll_tag(seed, key_append, options)
+    local tag_pool = options or get_current_pool('Tag', nil, nil, key_append or seed)
+    local selected_tag = pseudorandom_element(tag_pool, seed)
+    local it = 1
+    while selected_tag == 'UNAVAILABLE' do
+        it = it + 1
+        selected_tag = pseudorandom_element(tag_pool, seed.."_resample"..it)
+    end
+    return selected_tag
+end

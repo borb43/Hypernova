@@ -108,5 +108,24 @@ SMODS.Enhancement {
         if context.main_scoring and context.cardarea == G.play then
             return { balance = true }
         end
-    end
+    end,
+    weight = 2
+}
+
+SMODS.Enhancement {
+    key = "silver",
+    atlas = "enhancers",
+    pos = { x = 2, y = 1 },
+    calculate = function (self, card, context)
+        if context.playing_card_end_of_round and context.cardarea == G.hand then
+            G.E_MANAGER:add_event(Event{
+                func = function ()
+                    add_tag(Tag(HPR.poll_tag("hpr_silver"), false, "Small"))
+                    return true
+                end
+            })
+            return { message = localize("k_plus_tag") }
+        end
+    end,
+    weight = 2
 }
