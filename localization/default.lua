@@ -72,6 +72,14 @@ local descriptions = {
                 "{C:red}Destroyed{} when discarded",
                 "or held at the end of round"
             }
+        },
+        m_hpr_alloy = {
+            name = "Alloy Card",
+            text = {
+                "Also {C:attention}scores{} while held in hand",
+                "Also triggers {C:attention}held in hand{}",
+                "effects when played and scoring"
+            }
         }
     },
     Joker = {

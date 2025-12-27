@@ -85,5 +85,13 @@ SMODS.Enhancement {
         if context.playing_card_end_of_round then
             SMODS.destroy_cards(card)
         end
-    end
+    end,
+    weight = 2
+}
+
+SMODS.Enhancement {
+    key = "alloy",
+    atlas = "enhancers",
+    pos = { x = 0, y = 1 },
+    weight = 2
 }
