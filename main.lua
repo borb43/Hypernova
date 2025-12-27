@@ -96,6 +96,13 @@ SMODS.Atlas {
     py = 95
 }
 
+SMODS.Atlas {
+    key = "enhancers",
+    path = "enhancers.png",
+    px = 71,
+    py = 95
+}
+
 if CardSleeves then
     SMODS.Atlas { --placeholder at 0,0
         key = "sleeve",
@@ -116,6 +123,7 @@ for _, file in ipairs(files) do
 	f()
 end
 
+assert(SMODS.load_file("items/modifier.lua"))()
 assert(SMODS.load_file("items/prophecy.lua"))()
 assert(SMODS.load_file("items/moon.lua"))()
 assert(SMODS.load_file("items/booster.lua"))()

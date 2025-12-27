@@ -38,7 +38,16 @@ local descriptions = {
     },
     Blind = {},
     Edition = {},
-    Enhanced = {},
+    Enhanced = {
+        m_hpr_ripple = {
+            name = "Ripple Card",
+            text = {
+                "When played and {C:attention}scoring,",
+                "all other {C:attention}scoring{} cards",
+                "{C:attention}permanently{} gain {C:chips}+#1#{} Chips"
+            }
+        }
+    },
     Joker = {
         j_hpr_growth = {
             name = "Growth",
