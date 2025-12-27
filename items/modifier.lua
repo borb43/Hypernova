@@ -95,3 +95,18 @@ SMODS.Enhancement {
     pos = { x = 0, y = 1 },
     weight = 2
 }
+
+SMODS.Enhancement {
+    key = "schematic",
+    atlas = "enhancers",
+    pos = { x = 1, y = 1},
+    no_rank = true,
+    no_suit = true,
+    replace_base_card = true,
+    always_scores = true,
+    calculate = function (self, card, context)
+        if context.main_scoring and context.cardarea == G.play then
+            return { balance = true }
+        end
+    end
+}

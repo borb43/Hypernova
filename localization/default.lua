@@ -80,6 +80,13 @@ local descriptions = {
                 "Also triggers {C:attention}held in hand{}",
                 "effects when played and scoring"
             }
+        },
+        m_hpr_schematic = {
+            name = "Fusion Card",
+            text = {
+                "No rank or suit",
+                "Balances {C:chips}Chips{} and {C:mult}Mult"
+            }
         }
     },
     Joker = {
