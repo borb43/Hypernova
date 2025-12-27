@@ -53,3 +53,37 @@ SMODS.Enhancement {
     end,
     weight = 2
 }
+
+SMODS.Enhancement {
+    key = "prism",
+    atlas = "enhancers",
+    pos = { x = 3, y = 0 },
+    shatters = true,
+    loc_vars = function (self, info_queue, card)
+        if not self.edition or self.edition.key ~= "e_polychrome" then
+            info_queue[#info_queue+1] = G.P_CENTERS.e_polychrome
+        end
+    end,
+    calculate = function (self, card, context)
+        if context.before and context.cardarea == G.play then
+            local cards = SMODS.Edition:get_edition_cards(G.hand, true)
+            local target = pseudorandom_element(cards, "hpr_prism")
+            if target then
+                return {
+                    message = localize("k_upgrade_ex"),
+                    colour = G.C.DARK_EDITION,
+                    message_card = target,
+                    func = function ()
+                        target:set_edition("e_polychrome", nil, nil)
+                    end
+                }
+            end
+        end
+        if context.discard and context.other_card == card then
+            return { remove = true }
+        end
+        if context.playing_card_end_of_round then
+            SMODS.destroy_cards(card)
+        end
+    end
+}

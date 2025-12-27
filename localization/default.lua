@@ -62,6 +62,16 @@ local descriptions = {
                 "Counts as a",
                 "{C:attention}face{} card"
             }
+        },
+        m_hpr_prism = {
+            name = "Prism Card",
+            text = {
+                "When played and {C:attention}scoring,",
+                "a random card in hand",
+                "becomes {C:dark_edition}Polychrome",
+                "{C:red}Destroyed{} when discarded",
+                "or held at the end of round"
+            }
         }
     },
     Joker = {
