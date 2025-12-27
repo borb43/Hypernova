@@ -42,9 +42,17 @@ local descriptions = {
         m_hpr_ripple = {
             name = "Ripple Card",
             text = {
-                "When played and {C:attention}scoring,",
+                "When played and {C:attention}scoring{},",
                 "all other {C:attention}scoring{} cards",
                 "{C:attention}permanently{} gain {C:chips}+#1#{} Chips"
+            }
+        },
+        m_hpr_storm = {
+            name = "Storm Card",
+            text = {
+                "When played and {C:attention}scoring{},",
+                "all other {C:attention}scoring{} cards",
+                "{C:attention}permanently{} gain {C:mult}+#1#{} Mult"
             }
         }
     },
