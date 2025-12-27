@@ -129,3 +129,21 @@ SMODS.Enhancement {
     end,
     weight = 2
 }
+
+SMODS.Enhancement {
+    key = "lunar",
+    atlas = "enhancers",
+    pos = { x = 3, y = 1 },
+    config = { extra = 2 },
+    loc_vars = function (self, info_queue, card)
+        local n, d = SMODS.get_probability_vars(card, 1, card.ability.extra, "hpr_lunar")
+    end,
+    calculate = function (self, card, context)
+        if context.before and context.cardarea == G.play and SMODS.pseudorandom_probability(card, "hpr_lunar", 1, card.ability.extra) then
+            return {
+                level_up = true,
+                message = localize("k_level_up_ex")
+            }
+        end
+    end
+}

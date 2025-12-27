@@ -96,6 +96,13 @@ local descriptions = {
                 "when held in hand",
                 "at the end of round"
             }
+        },
+        m_hpr_lunar = {
+            name = "Lunar Card",
+            text = {
+                "1 in 2 chance to level",
+                "up hand when played"
+            }
         }
     },
     Joker = {
