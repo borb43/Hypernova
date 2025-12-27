@@ -577,6 +577,13 @@ local descriptions = {
                 "{C:attention}Rental Perishable {C:red}Rare {C:attention}Joker",
                 "{C:inactive}(Must have room)"
             }
+        },
+        j_hpr_genius_horse = {
+            name = "Genius Horse",
+            text = {
+                "Adds the {C:attention}cube root{} of",
+                "current {C:chips}Chips{} to {C:mult}Mult"
+            }
         }
     },
     Other = {

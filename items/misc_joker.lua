@@ -801,3 +801,18 @@ SMODS.Joker {
         end
     end
 }
+
+SMODS.Joker {
+    key = "genius_horse",
+    atlas = "placeholder",
+    pos = { x = 0, y = 0 },
+    rarity = 1,
+    cost = 4,
+    calculate = function (self, card, context)
+        if context.joker_main then
+            return {
+                mult = (hand_chips or 0)^(1/3)
+            }
+        end
+    end
+}
