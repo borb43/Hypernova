@@ -338,3 +338,8 @@ function SMODS.pseudorandom_probability(trigger_obj, seed, base_numerator, base_
 	end
 	return res
 end
+
+local face_ref = Card.is_face
+function Card:is_face(from_boss)
+	return face_ref(self, from_boss) or SMODS.has_enhancement(self, "m_hpr_mimic")
+end

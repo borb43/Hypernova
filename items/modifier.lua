@@ -42,3 +42,14 @@ SMODS.Enhancement {
     end,
     weight = 2
 }
+
+SMODS.Enhancement {
+    key = "mimic",
+    atlas = "enhancers",
+    pos = { x = 2, y = 0 },
+    config = { x_mult = 1.25 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.x_mult }}
+    end,
+    weight = 2
+}

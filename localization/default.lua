@@ -54,6 +54,14 @@ local descriptions = {
                 "all other {C:attention}scoring{} cards",
                 "{C:attention}permanently{} gain {C:mult}+#1#{} Mult"
             }
+        },
+        m_hpr_mimic = {
+            name = "Mimic Card",
+            text = {
+                "{X:mult,C:white}X#1#{} Mult",
+                "Counts as a",
+                "{C:attention}face{} card"
+            }
         }
     },
     Joker = {
