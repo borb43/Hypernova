@@ -3,7 +3,7 @@ SMODS.ConsumableType {
     primary_colour = G.C.BOOSTER,
     secondary_colour = HEX("060d40"),
     default = "c_hpr_tome",
-    collection_rows = { 5, 5 }
+    collection_rows = { 6, 6 }
 }
 
 HPR.prophecy = SMODS.Consumable:extend{
