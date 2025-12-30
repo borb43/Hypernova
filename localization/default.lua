@@ -548,8 +548,8 @@ local descriptions = {
         j_hpr_ult_meal = {
             name = "Ultimate Meal",
             text = {
-                "{C:attention}Rerolls{} all {C:attention}listed {C:green,E:1}probabilities",
-                "{C:attention}2{} times on the {C:attention}first hand{} of round"
+                "{C:attention}Rerolls{} all {C:attention}listed",
+                "{C:green,E:1}probabilities {C:attention}#1#{} times"
             }
         },
         j_hpr_joker_versus = {

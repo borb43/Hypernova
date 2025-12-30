@@ -705,12 +705,12 @@ SMODS.Joker {
     pos = { x = 2, y = 0 },
     rarity = 3,
     cost = 8,
-    config = { extra = 2 },
+    config = { extra = 3 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra }}
     end,
     calculate = function (self, card, context)
-        if context.hpr_retrigger_probability and G.GAME.blind.in_blind and G.GAME.current_round.hands_played == 0 then
+        if context.hpr_retrigger_probability then
             return { hpr_retriggers = card.ability.extra }
         end
     end,
