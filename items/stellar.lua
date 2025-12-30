@@ -10,9 +10,9 @@ SMODS.Rarity {
 }
 
 HPR.StellarJoker = SMODS.Joker:extend({
-    atlas = "hpr_placeholder",
-    pos = { x = 0, y = 1 },
-    soul_pos = { x = 1, y = 1 },
+    atlas = "hpr_stellar",
+    pos = { x = 0, y = 0 },
+    soul_pos = { x = 1, y = 0 },
     rarity = "hpr_stellar",
     cost = 30,
 })
@@ -360,6 +360,8 @@ HPR.StellarJoker {
     key = "crazy",
     blueprint_compat = true,
     demicoloncompat = true,
+    pos = { x = 2, y = 0 },
+    soul_pos = { x = 3, y = 0 },
     config = { extra = { mult = 0, scale = 5 }},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.mult, card.ability.extra.scale }}
@@ -391,6 +393,8 @@ HPR.StellarJoker {
     key = "crafty",
     blueprint_compat = true,
     demicoloncompat = true,
+    pos = { x = 4, y = 0},
+    soul_pos = { x = 5, y = 0 },
     config = { extra = { chips = 0, scale = 30 }},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.chips, card.ability.extra.scale }}
@@ -752,6 +756,8 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "unity",
+    pos = { x = 6, y = 0 },
+    soul_pos = { x = 7, y = 0 },
     config = { extra = { xmult = 1, scale = 0.2}},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.xmult, card.ability.extra.scale }}
