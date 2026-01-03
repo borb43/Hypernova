@@ -43,6 +43,19 @@ local descriptions = {
                 "Takes the cube root",
                 "of base Chips and Mult"
             }
+        },
+        bl_hpr_final_mist = {
+            name = "Malachite Mist",
+            text = {
+                "All Jokers are debuffed"
+            }
+        },
+        bl_hpr_final_splash = {
+            name = "Saffron Splash",
+            text = {
+                "Unenhanced cards",
+                "will not score"
+            }
         }
     },
     Edition = {},
