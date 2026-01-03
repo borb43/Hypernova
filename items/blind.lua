@@ -45,3 +45,28 @@ SMODS.Blind {
         end
     end
 }
+
+SMODS.Blind {
+    key = "final_globe",
+    atlas = "blind_chip",
+    pos = { x = 0, y = 1 },
+    dollars = 8,
+    mult = 2,
+    boss = { showdown = true, min = 1 },
+    boss_colour = HEX("DB9D00"),
+    set_blind = function (self)
+        G.hand:change_size(-1)
+        ease_hands_played(-1)
+        ease_discard(-1)
+    end,
+    disable = function (self)
+        G.hand:change_size(1)
+        ease_hands_played(1)
+        ease_discard(1)
+    end,
+    defeat = function (self)
+        if not G.GAME.blind.disabled then
+            G.hand:change_size(1)
+        end
+    end
+}
