@@ -36,7 +36,15 @@ local descriptions = {
             }
         }
     },
-    Blind = {},
+    Blind = {
+        bl_hpr_final_horse = {
+            name = "Heliotrope Horse",
+            text = {
+                "Takes the cube root",
+                "of base Chips and Mult"
+            }
+        }
+    },
     Edition = {},
     Enhanced = {
         m_hpr_ripple = {

@@ -111,7 +111,7 @@ SMODS.Atlas {
 }
 
 SMODS.Atlas {
-    key = "blinds",
+    key = "blind_chip",
     path = "blind.png",
     atlas_table = "ANIMATION_ATLAS",
     frames = 21,
@@ -147,6 +147,7 @@ assert(SMODS.load_file("items/misc_joker.lua"))()
 assert(SMODS.load_file("items/legendary.lua"))()
 assert(SMODS.load_file("items/stellar.lua"))()
 assert(SMODS.load_file("items/back.lua"))()
+assert(SMODS.load_file("items/blind.lua"))()
 assert(SMODS.load_file("items/voucher.lua"))()
 assert(SMODS.load_file("crossmod/xmod_moons.lua"))()
 
