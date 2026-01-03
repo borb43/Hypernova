@@ -731,6 +731,21 @@ local descriptions = {
             text = {
                 "{E:1,C:hpr_stellar}Stellar{} Jokers may appear naturally",
             }
+        },
+        sleeve_hpr_treasury = {
+            name = "Treasury Sleeve",
+            text = {
+                "Start with an extra {C:money}$#1#",
+                "You cannot spend below {C:money}$#1#",
+            }
+        },
+        sleeve_hpr_treasury_alt = {
+            name = "Treasury Sleeve",
+            text = {
+                "Earn an extra {C:money}$1{} of",
+                "interest for every $5 you",
+                "have at end of round"
+            }
         }
     },
     Tag = {},

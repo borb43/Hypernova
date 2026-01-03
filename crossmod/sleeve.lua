@@ -100,3 +100,25 @@ CardSleeves.Sleeve {
         end
     end
 }
+
+CardSleeves.Sleeve {
+    key = "treasury",
+    atlas = "sleeve",
+    pos = { x = 0, y = 0 },
+    config = { extra = 25 },
+    loc_vars = function (self, sleeve)
+        local key = self.key
+        if self:get_current_deck_key() == "b_hpr_treasury" then
+            key = key .. "_alt"
+        end
+        return { key = key, vars = { self.config.extra } }
+    end,
+    apply = function (self, back)
+        if self:get_current_deck_key() == "b_hpr_treasury" then
+            G.GAME.interest_amount = G.GAME.interest_amount + 1
+        else
+            G.GAME.starting_params.dollars = G.GAME.starting_params.dollars + self.config.extra
+            G.GAME.bankrupt_at = G.GAME.bankrupt_at + self.config.extra
+        end
+    end,
+}
