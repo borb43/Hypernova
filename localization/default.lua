@@ -533,8 +533,9 @@ local descriptions = {
             name = "S026 LUCKY",
             text = {
                 "{C:green,E:1}Probabilities{} on {C:attention}Blinds{} are {C:attention}nullified",
-                "All other {C:attention}listed {C:green,E:1}Probabilities",
-                "are rerolled {C:attention}#1#{} times",
+                "When a {C:green,E:1}probability{} rolls for a card,",
+                "it permanently gains {C:green}+#1# {C:attention}listed",
+                "{C:green,E:1}numerators{} and {C:green,E:1}denominators",
                 "{s:1.2,C:hpr_super_gay,E:1}Luck is on your side"
             }
         },

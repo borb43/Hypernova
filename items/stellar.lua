@@ -919,7 +919,7 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "lucky",
-    config = { extra = 4 },
+    config = { extra = 0.1 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra }}
     end,
@@ -929,8 +929,15 @@ HPR.StellarJoker {
                 return { numerator = 0 }
             end
         end
-        if context.hpr_retrigger_probability and not (context.trigger_obj and context.trigger_obj.config and context.trigger_obj.config.blind) then
-            return { hpr_retriggers = card.ability.extra }
+        if context.pseudorandom_result and context.trigger_obj.ability and context.trigger_obj.ability.hpr_num_bonus and context.trigger_obj.ability.hpr_denom_bonus then
+            local c = context.trigger_obj
+            c.ability.hpr_num_bonus = c.ability.hpr_num_bonus + card.ability.extra
+            c.ability.hpr_denom_bonus = c.ability.hpr_denom_bonus + card.ability.extra
+            return {
+                message = localize("k_upgrade_ex"),
+                colour = G.C.GREEN,
+                message_card = context.trigger_obj
+            }
         end
     end,
     add_to_deck = function (self, card, from_debuff)
