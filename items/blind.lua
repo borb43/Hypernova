@@ -70,3 +70,18 @@ SMODS.Blind {
         end
     end
 }
+
+SMODS.Blind {
+    key = "final_bomb",
+    atlas = "blind_chip",
+    pos = { x = 0, y = 1 },
+    dollars = 8,
+    mult = 2,
+    boss = { showdown = true, min = 1 },
+    boss_colour = HEX("3E2F28"),
+    calculate = function (self, blind, context)
+        if context.destroy_card and context.cardarea == G.play then
+            return { remove = true }
+        end
+    end
+}

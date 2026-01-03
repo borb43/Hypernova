@@ -64,6 +64,12 @@ local descriptions = {
                 "-1 Discard",
                 "-1 Hand Size"
             }
+        },
+        bl_hpr_final_bomb = {
+            name = "Bark Bomb",
+            text = {
+                "Destroys all played cards"
+            }
         }
     },
     Edition = {},
