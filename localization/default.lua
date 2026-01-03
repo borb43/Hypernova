@@ -584,6 +584,12 @@ local descriptions = {
                 "Adds the {C:attention}cube root{} of",
                 "current {C:chips}Chips{} to {C:mult}Mult"
             }
+        },
+        j_hpr_fossil = {
+            name = "Fossilized Joker",
+            text = {
+                "{C:attention}-1{} Ante while held"
+            }
         }
     },
     Other = {

@@ -816,3 +816,21 @@ SMODS.Joker {
         end
     end
 }
+
+SMODS.Joker {
+    key = "fossil",
+    atlas = "placeholder",
+    pos = { x = 0, y = 0 },
+    rarity = 1,
+    cost = 5,
+    add_to_deck = function (self, card, from_debuff)
+        ease_ante(-1)
+        G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante or G.GAME.round_resets.ante
+        G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante - 1
+    end,
+    remove_from_deck = function (self, card, from_debuff)
+        ease_ante(1)
+        G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante or G.GAME.round_resets.ante
+        G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante + 1
+    end
+}
