@@ -151,7 +151,7 @@ local descriptions = {
                 "The next {C:attention}#1# listed",
                 "{C:green,E:1}probabilities{} are guaranteed",
                 "Creates a {C:dark_edition}Negative {C:Tarot}Tarot{} card",
-                "when destroyed"
+                "when eaten"
             }
         },
         j_hpr_eris = {
