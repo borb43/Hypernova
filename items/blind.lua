@@ -80,7 +80,7 @@ SMODS.Blind {
     boss = { showdown = true, min = 1 },
     boss_colour = HEX("3E2F28"),
     calculate = function (self, blind, context)
-        if context.destroy_card and context.cardarea == G.play then
+        if context.destroy_card and context.cardarea == G.hand then
             return { remove = true }
         end
     end

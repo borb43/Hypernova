@@ -68,7 +68,8 @@ local descriptions = {
         bl_hpr_final_bomb = {
             name = "Bark Bomb",
             text = {
-                "Destroys all played cards"
+                "Destroys all held in hand",
+                "cards after scoring"
             }
         }
     },
