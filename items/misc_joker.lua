@@ -474,8 +474,13 @@ SMODS.Joker {
     demicoloncompat = true,
     config = { extra = { loss = 2, dollars = 5, funny = 67 }},
     loc_vars = function (self, info_queue, card)
+        local stake_id = G.GAME.stake
+        local stake_key = stake_id and G.P_CENTER_POOLS.Stake[stake_id] and G.P_CENTER_POOLS.Stake[stake_id].key or "stake_white"
+        local stake_colour = stake_id and G.P_CENTER_POOLS.Stake[stake_id] and G.P_CENTER_POOLS.Stake[stake_id].colour or G.C.UI.TEXT_DARK
+        stake_colour = stake_colour ~= G.C.WHITE and stake_colour or G.C.UI.TEXT_DARK
+        local name = stake_key and localize{ type = "name_text", set = "Stake", key = stake_key } or localize("k_none")
         local num, denom = SMODS.get_probability_vars(card, 1, card.ability.extra.funny, "hpr_slot_machine")
-        return { vars = { card.ability.extra.loss, card.ability.extra.dollars, card.ability.extra.funny, num, denom}}
+        return { vars = { card.ability.extra.loss, card.ability.extra.dollars, card.ability.extra.funny, num, denom, name, colours = { stake_colour } }}
     end,
     calculate = function (self, card, context)
         if context.before then
