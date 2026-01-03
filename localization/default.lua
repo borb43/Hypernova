@@ -746,6 +746,21 @@ local descriptions = {
                 "interest for every $5 you",
                 "have at end of round"
             }
+        },
+        sleeve_hpr_inverted = {
+            name = "Inverted sleeve",
+            text = {
+                "{C:attention}Consumable{} cards",
+                "may be {C:dark_edition}Negative"
+            }
+        },
+        sleeve_hpr_inverted_alt = {
+            name = "Inverted Sleeve",
+            text = {
+                "{C:attention}Consumable{} cards",
+                "are {C:attention}#1#X{} as likely to",
+                "be {C:dark_edition}Negative"
+            }
         }
     },
     Tag = {},

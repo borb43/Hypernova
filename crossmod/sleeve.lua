@@ -113,7 +113,7 @@ CardSleeves.Sleeve {
         end
         return { key = key, vars = { self.config.extra } }
     end,
-    apply = function (self, back)
+    apply = function (self, sleeve)
         if self:get_current_deck_key() == "b_hpr_treasury" then
             G.GAME.interest_amount = G.GAME.interest_amount + 1
         else
@@ -121,4 +121,24 @@ CardSleeves.Sleeve {
             G.GAME.bankrupt_at = G.GAME.bankrupt_at + self.config.extra
         end
     end,
+}
+
+CardSleeves.Sleeve {
+    key = "inverted",
+    atlas = "sleeve",
+    pos = { x = 0, y = 0 },
+    config = { extra = { rate = 0.1, mult = 2 }},
+    loc_vars = function (self, sleeve)
+        local key = self.key
+        if self:get_current_deck_key() == "b_hpr_inverted" then
+            key = key .. "_alt"
+        end
+        return { vars = { self.config.mult }}
+    end,
+    apply = function (self, sleeve)
+        G.GAME.hpr_neg_consumable_rate = (G.GAME.hpr_neg_consumable_rate or self.config.rate)
+        if self:get_current_deck_key() == "b_hpr_inverted" then
+            G.GAME.hpr_neg_consumable_rate = G.GAME.hpr_neg_consumable_rate * self.config.mult
+        end
+    end
 }
