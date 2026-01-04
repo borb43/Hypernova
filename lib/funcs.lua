@@ -144,3 +144,9 @@ function HPR.awesome_fucking_banish(destroyer_key, to_banish) --single key for d
         end
     })
 end
+
+function HPR.is_any(str, ...)
+    for _, p in ipairs({...}) do
+        if str == p then return true end
+    end
+end

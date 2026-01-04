@@ -145,6 +145,11 @@ assert(SMODS.load_file("items/moon.lua"))()
 assert(SMODS.load_file("items/booster.lua"))()
 assert(SMODS.load_file("items/misc_joker.lua"))()
 assert(SMODS.load_file("items/legendary.lua"))()
+
+if next(SMODS.find_mod("entr")) then
+    assert(SMODS.load_file("crossmod/rlegendary.lua"))()
+end
+
 assert(SMODS.load_file("items/stellar.lua"))()
 assert(SMODS.load_file("items/back.lua"))()
 assert(SMODS.load_file("items/blind.lua"))()

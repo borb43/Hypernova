@@ -627,6 +627,16 @@ local descriptions = {
             text = {
                 "{C:attention}-1{} Ante while held"
             }
+        },
+        j_hpr_evil_eris = {
+            name = "Sire",
+            text = {
+                "When a {C:planet}Planet{}, {C:hpr_moons}Moon{} or {C:star}Star",
+                "card is used, all cards in your",
+                "{C:attention}full{} deck permanently gain {C:gold}+#1#",
+                "Ascension Power. {C:attention}Rankless{} cards",
+                "instead gain {X:gold,C:white}X#2#{} Ascension Power"
+            }
         }
     },
     Other = {
