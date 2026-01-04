@@ -231,6 +231,17 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
 		for _, c in ipairs(SMODS.find_card("j_hpr_growth")) do
 			amount = amount * c.ability.extra.eff_mod
 		end
+		for _, c in ipairs(SMODS.find_card("j_hpr_fast_growing")) do
+			if not HPR.findany(key:lower(), "x", "e", "hyper", "eq") then
+				if key:find("chips") then key = "x_chips" end
+				if key == "chip_mod" then key = "Xchip_mod" end
+				if key == "h_mult" then key = "mult" end
+				key = key:gsub("mult", "x_mult")
+				amount = 1 + amount*c.ability.extra.reduction
+			else
+				amount = amount * c.ability.extra.buff
+			end
+		end
 		if next(SMODS.find_card("j_hpr_antiderivative")) and string.find(key, "mult") and not HPR.findany(key:lower(), "x", "e", "hyper", "eq") then
 			local multi = 0
 			for _, c in ipairs(SMODS.find_card("j_hpr_antiderivative")) do
