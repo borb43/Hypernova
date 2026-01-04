@@ -88,7 +88,10 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_invisible = "j_hpr_mimic",
     j_blueprint = "j_hpr_mimic",
     j_brainstorm = "j_hpr_mimic",
-    j_oops = "j_hpr_lucky"
+    j_oops = "j_hpr_lucky",
+    j_green_joker = "j_hpr_recycle",
+    j_ramen = "j_hpr_recycle",
+    j_banner = "j_hpr_recycle",
 }
 
 HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'log', 'sin', 'cos', 'tan' }
@@ -952,6 +955,32 @@ HPR.StellarJoker {
         G.GAME.rare_mod = (G.GAME.rare_mod or 1) / 2
         if next(SMODS.find_mod("entr")) and G.GAME.modifiers.entr_meteorite then
             G.GAME.modifiers.entr_meteorite = G.GAME.modifiers.entr_meteorite * 3
+        end
+    end
+}
+
+HPR.StellarJoker {
+    key = "recycle",
+    config = { extra = { xmult = 1, gain = 0.2 }},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.xmult, card.ability.extra.gain }}
+    end,
+    calculate = function (self, card, context)
+        if context.before and G.GAME.round_resets.discards ~= 0 then
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "xmult",
+                scalar_value = "gain",
+                operation = function (ref_table, ref_value, initial, change)
+                    ref_table[ref_value] = initial + change * G.GAME.round_resets.discards
+                end,
+                message_key = "a_xmult",
+                message_colour = G.C.MULT
+            })
+            return nil, true
+        end
+        if context.joker_main and card.ability.extra.xmult ~= 1 then
+            return { xmult = card.ability.extra.xmult }
         end
     end
 }

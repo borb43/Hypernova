@@ -645,6 +645,15 @@ local descriptions = {
                 "and adds random {C:dark_edition}editions{} to {C:attention}#2#",
                 "cards in your {C:attention}full{} deck"
             }
+        },
+        j_hpr_recycle = {
+            name = "S027 RECYCLE",
+            text = {
+                "When hand is played, this",
+                "Joker gains {X:mult,C:white}X#2#{} Mult for",
+                "each remaining {C:red}discard",
+                "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
+            }
         }
     },
     Other = {
