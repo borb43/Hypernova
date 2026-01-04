@@ -106,3 +106,41 @@ function HPR.poll_tag(seed, key_append, options)
     end
     return selected_tag
 end
+
+function HPR.awesome_fucking_banish(destroyer_key, to_banish) --single key for destroyer (defaults to j_ceremonial) and a table of keys for to_banish
+    local destroyer = SMODS.create_card{ area = G.play, key = destroyer_key or "j_ceremonial" }
+    destroyer:start_materialize()
+    G.play:emplace(destroyer)
+    local cards = {}
+    for _, key in ipairs(to_banish) do
+        local c = SMODS.create_card{ area = G.play, key = key }
+        c:start_materialize()
+        G.play:emplace(c)
+        cards[#cards+1] = c
+    end
+
+    for _, c in ipairs(cards) do
+        G.GAME.banned_keys[c.config.center.key] = true
+        local temp = c
+        G.E_MANAGER:add_event(Event{
+            trigger = "after",
+            delay = 0.8,
+            func = function ()
+                destroyer:juice_up(0.8, 0.8)
+                temp:start_dissolve({G.C.RED}, nil, 1.6)
+                play_sound('slice1', 0.96 + math.random() * 0.08)
+                return true
+            end
+        })
+        delay(0.8)
+    end
+
+    G.E_MANAGER:add_event(Event{
+        trigger = "after",
+        delay = 0.5,
+        func = function ()
+            destroyer:start_dissolve()
+            return true
+        end
+    })
+end
