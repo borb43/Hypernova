@@ -839,3 +839,39 @@ SMODS.Joker {
         G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante + 1
     end
 }
+
+SMODS.Joker {
+    key = "good_bomb",
+    atlas = "placeholder",
+    pos = { x = 1, y = 0 },
+    rarity = 2,
+    cost = 7,
+    config = { extra = { rounds = 3, cards = 5 }},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.rounds, card.ability.extra.cards }}
+    end,
+    calculate = function (self, card, context)
+        if context.end_of_round and context.main_eval and not context.retrigger_joker then
+            card.ability.extra.rounds = card.ability.extra.rounds - 1
+            if card.ability.extra.rounds <= 0 then
+                local targets = SMODS.Edition:get_edition_cards(G.playing_cards, true)
+                for _ = 1, card.ability.extra.cards do
+                    local c, key = pseudorandom_element(targets, "hpr_good_bomb")
+                    if c and type(key) == "number" and c.set_edition then
+                        table.remove(targets, key)
+                        local ed = SMODS.poll_edition{ key = "hpr_bomb_edition", guaranteed = true, no_negative = true }
+                        c:set_edition(ed, nil, true, true)
+                    end
+                end
+                G.E_MANAGER:add_event(Event{
+                    func = function ()
+                        card:start_dissolve()
+                        return true
+                    end
+                })
+            else
+                return { message = localize{ type = "variable", key = "a_remaining", vars = { card.ability.extra.rounds} }}
+            end
+        end
+    end
+}

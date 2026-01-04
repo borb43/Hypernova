@@ -637,6 +637,14 @@ local descriptions = {
                 "Ascension Power. {C:attention}Rankless{} cards",
                 "instead gain {X:gold,C:white}X#2#{} Ascension Power"
             }
+        },
+        j_hpr_good_bomb = {
+            name = "Good Bomb",
+            text = {
+                "After {C:attention}#1#{} rounds, {C:red}self destructs",
+                "and adds random {C:dark_edition}editions{} to {C:attention}#2#",
+                "cards in your {C:attention}full{} deck"
+            }
         }
     },
     Other = {
