@@ -14,7 +14,6 @@ HPR.AwesomeJoker = SMODS.Joker:extend({
 
 HPR.AwesomeJoker{
     key = "voucherman",
-    blueprint_compat = true,
     config = { extra = 1 },
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = G.P_TAGS.tag_voucher
@@ -77,7 +76,7 @@ HPR.AwesomeJoker{
         if context.end_of_round and context.main_eval then
             G.E_MANAGER:add_event(Event({
                 func = function()
-                    add_tag(Tag('tag_double'))
+                    add_tag(Tag('tag_voucher'))
                     play_sound('generic1', 0.9 + math.random() * 0.1, 0.8)
                     play_sound('holo1', 1.2 + math.random() * 0.1, 0.4)
                     return true
