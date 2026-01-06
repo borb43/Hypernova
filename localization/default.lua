@@ -1073,7 +1073,8 @@ local misc = {
         k_hpr_plus_csl = "+1 Card Selection Limit",
         k_hpr_plus_reroll = "+1 Free Reroll",
         k_hpr_plus_iamt = "+1 Interest Amount",
-        k_hpr_plus_debt = "+$20 Debt Limit"
+        k_hpr_plus_debt = "+$20 Debt Limit",
+        k_hpr_plus_consumable = "+1 Consumable"
 
     },
     high_scores = {},

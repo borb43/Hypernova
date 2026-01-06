@@ -300,7 +300,7 @@ HPR.StellarJoker {
                             return true
                         end
                     })
-                    SMODS.calculate_effect({ message = localize("k_plus_q"), colour = G.C.DARK_EDITION }, context.blueprint_card or card)
+                    SMODS.calculate_effect({ message = localize("k_hpr_plus_consumable"), colour = G.C.DARK_EDITION }, context.blueprint_card or card)
                     return true
                 end
             })
