@@ -669,7 +669,9 @@ local descriptions = {
             text = {
                 "{C:attention}Permanently{} increase a",
                 "random stat when any",
-                "{C:attention}Voucher{} is redeemed"
+                "{C:attention}Voucher{} is redeemed",
+                "Creates a {C:attention}Voucher Tag",
+                "at the end of round"
             }
         }
     },
