@@ -60,4 +60,15 @@ HPR.super_gay = SMODS.Gradient {
     }
 }
 
+HPR.awesome_gradient = SMODS.Gradient{
+    key = "awesome",
+    colours = {
+        G.C.RARITY[1],
+        G.C.RARITY[2],
+        G.C.GOLD,
+        G.C.RARITY[3],
+        G.C.RARITY[4],
+    }
+}
+
 G.C.HPR_STLR = HEX("1F0D35")

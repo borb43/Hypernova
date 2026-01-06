@@ -1,5 +1,5 @@
 SMODS.Rarity {
-    badge_colour = HPR.super_gay,
+    badge_colour = HPR.awesome_gradient,
     key = "awesome",
     pools = { Joker = true }
 }
