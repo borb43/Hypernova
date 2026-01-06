@@ -663,6 +663,14 @@ local descriptions = {
                 "{X:dark_edition,C:white}X#2#{} all other {C:chips}Chips{} and {C:mult}Mult{} effects",
                 "Increases by {X:dark_edition,C:white}X#3#{} at the end of round"
             }
+        },
+        j_hpr_voucherman = {
+            name = "Voucherman",
+            text = {
+                "{C:attention}Permanently{} increase a",
+                "random stat when any",
+                "{C:attention}Voucher{} is redeemed"
+            }
         }
     },
     Other = {
@@ -1047,7 +1055,23 @@ local misc = {
         ph_hpr_plarva = "Saved by Pluripotent Larva",
         b_hpr_prophecy_cards = "Corrupted Cards",
         k_hpr_prophecy = "Corrupted",
-        k_plus_tag = "+1 Tag"
+        k_plus_tag = "+1 Tag",
+        k_hpr_awesome = "Awesome",
+        k_hpr_plus_shop = "+1 Shop Slot",
+        k_hpr_plus_csize = "+1 Consumable Slot",
+        k_hpr_plus_hand = "+1 Hand",
+        k_hpr_plus_discard = "+1 Discard",
+        k_hpr_plus_jsize = "+1 Joker Slot",
+        k_hpr_minus_ante = "-1 Ante",
+        k_hpr_plus_hsize = "+1 Hand Size",
+        k_hpr_green_hands = "+$1 per Hand",
+        k_hpr_green_discards = "+$1 per Discard",
+        k_hpr_plus_bsize = "+1 Booster Slot",
+        k_hpr_plus_vsize = "+1 Voucher Slot",
+        k_hpr_plus_csl = "+1 Card Selection Limit",
+        k_hpr_plus_reroll = "+1 Free Reroll",
+        k_hpr_plus_iamt = "+1 Interest Amount",
+        k_hpr_plus_debt = "+$20 Debt Limit"
 
     },
     high_scores = {},
@@ -1056,7 +1080,8 @@ local misc = {
         hpr_diy = "DIY",
         hpr_stellar = "Stellar",
         hpr_prophecy = "Corrupted",
-        hpr_negative_seal = "Negative Seal"
+        hpr_negative_seal = "Negative Seal",
+        hpr_awesome = "Awesome"
     },
     poker_hand_descriptions = {},
     poker_hands = {},
