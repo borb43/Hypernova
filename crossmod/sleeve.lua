@@ -85,7 +85,7 @@ CardSleeves.Sleeve {
         if self.get_current_deck_key() == "b_hpr_cosmic" then
             key = key .. "_alt"
         end
-        return { key = key, vars = { localize { type = 'name_text', key = "c_hpr_ascender", set = 'Spectral' } } }
+        return { key = key, vars = { localize { type = 'name_text', key = "c_hpr_ascender", set = 'hpr_prophecy' } } }
     end,
     apply = function (self, sleeve)
         if self.get_current_deck_key() == "b_hpr_cosmic" then
@@ -133,7 +133,7 @@ CardSleeves.Sleeve {
         if self:get_current_deck_key() == "b_hpr_inverted" then
             key = key .. "_alt"
         end
-        return { vars = { self.config.mult }}
+        return { vars = { self.config.mult }, key = key }
     end,
     apply = function (self, sleeve)
         G.GAME.hpr_neg_consumable_rate = (G.GAME.hpr_neg_consumable_rate or self.config.rate)
