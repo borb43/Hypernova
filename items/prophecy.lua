@@ -151,19 +151,6 @@ HPR.prophecy {
     end,
     use = function (self, card, area, copier)
         G.E_MANAGER:add_event(Event{
-            func = function ()
-                for _, c in ipairs(G.jokers.cards) do
-                    if c.ability.perishable and c.ability.perish_tally > 1 and not c.debuff then
-                        c.ability.perish_tally = 1
-                        c:calculate_perishable()
-                    end
-                end
-                return true
-            end,
-            trigger = "after",
-            delay = 0.4
-        })
-        G.E_MANAGER:add_event(Event{
             trigger = "after",
             delay = 0.7,
             func = function ()
@@ -179,6 +166,7 @@ HPR.prophecy {
                     end
                 end
                 for _, c in ipairs(copies) do G.jokers:emplace(c) end
+                G.GAME.perishable_rounds = math.max(G.GAME.perishable_rounds - 1, 1)
                 return true
             end
         })

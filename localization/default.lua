@@ -1010,11 +1010,12 @@ local descriptions = {
         c_hpr_divide = {
             name = "Divide",
             text = {
-                "All {C:attention}Perishable Jokers",
-                "immediately {C:red}perish",
                 "Creates {C:dark_edition}Negative {C:attention}Perishable",
                 "copies of all your non-",
-                "{C:attention}Perishable{} Jokers"
+                "{C:attention}Perishable{} Jokers",
+                "All future {C:attention}Perishable",
+                "Jokers last {C:attention}1{} less round",
+                "{C:inactive}(Minimum of {C:attention}1{C:inactive} round)"
             }
         }
     }
