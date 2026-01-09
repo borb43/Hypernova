@@ -208,4 +208,64 @@ HPR.prophecy {
         G.GAME.hpr_tome_plus = G.GAME.hpr_tome_plus + 1
     end
 }
+
+HPR.prophecy {
+    key = "collapse",
+    config = { extra = { x_level = 2, max = 100 } },
+    loc_vars = function (self, info_queue, card)
+        local _handname, _played = 'High Card', -1
+        for hand_key, hand in pairs(G.GAME.hands) do
+            if hand.played > _played then
+                _played = hand.played
+                _handname = hand_key
+            end
+        end
+        return { vars = { localize(_handname, "poker_hands"), card.ability.extra.x_level, card.ability.extra.max } }
+    end,
+    can_use = function (self, card)
+        return true
+    end,
+    use = function (self, card, area, copier)
+        local _handname, _played = "High Card", -1
+        for k, hand in pairs(G.GAME.hands) do
+            if hand.played > _played then
+                _played = hand.played
+                _handname = k
+            end
+        end
+        local lv_amt = G.GAME.hands[_handname].level * (card.ability.extra.x_level-1)
+        if type(lv_amt) == "table" then lv_amt = to_number(lv_amt) end
+        lv_amt = math.min(lv_amt, card.ability.extra.max)
+        SMODS.smart_level_up_hand(card, _handname, nil, lv_amt)
+        local planet
+        for _, c in pairs(G.P_CENTER_POOLS.Planet) do
+            if not (G.GAME.banned_keys[c.key] and G.GAME.hpr_true_ban[c.key]) and c.config and (c.config.hand_type == _handname or type(c.config.hand_types) == "table" and HPR.contains(c.config.hand_types, _handname)) then
+                planet = c.key
+            end
+        end
+        if planet then
+            G.GAME.banned_keys[planet] = true
+            G.GAME.hpr_true_ban[planet] = true
+            local loc = localize{ type = "name_text", key = planet, set = "Planet", }
+            G.E_MANAGER:add_event(Event{
+                trigger = "after",
+                delay = 0.4,
+                func = function ()
+                    attention_text{
+                        text = localize{type="variable",vars={loc},key="hpr_card_banned"},
+                        scale = 1.3,
+                        hold = 1.4,
+                        major = card,
+                        backdrop_colour = G.C.RED,
+                        align = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.SMODS_BOOSTER_OPENED) and "tm" or "cm",
+                        offset = { x = 0, y = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.SMODS_BOOSTER_OPENED) and -0.2 or 0 },
+                        silent = true
+                    }
+                    play_sound("tarot2", 1, 0.4)
+                    return true
+                end
+            })
+        end
+    end
+}
 --#endregion

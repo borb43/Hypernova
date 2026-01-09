@@ -160,3 +160,9 @@ function HPR.get_random_hand(include_hidden, seed, in_pool, fallback)
     end
     return pseudorandom_element(hands, seed, {in_pool = in_pool}) or fallback or "High Card"
 end
+
+function HPR.contains(_t, val)
+    for _, v in pairs(_t) do
+        if v == val then return true end
+    end
+end

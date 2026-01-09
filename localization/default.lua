@@ -1018,6 +1018,18 @@ local descriptions = {
                 "Jokers last {C:attention}1{} less round",
                 "{C:inactive}(Minimum of {C:attention}1{C:inactive} round)"
             }
+        },
+        c_hpr_collapse = {
+            name = "Collapse",
+            text = {
+                "{X:planet,C:white}X#2#{} the level of your",
+                "most played {C:attention}poker hand",
+                "The {C:planet}Planet{} card for your",
+                "most played {C:attention}poker hand",
+                "{C:red}can no longer appear",
+                "{C:inactive}Will target {C:attention}#1#",
+                "{C:inactive}(Max of {C:attention}+#3#{C:inactive} levels)"
+            }
         }
     }
 }
@@ -1101,7 +1113,8 @@ local misc = {
     v_dictionary = {
         hpr_credits_idea = { "Idea: #1#" },
         hpr_credits_art = { "Art: #1#" },
-        hpr_credits_code = { "Code: #1#" }
+        hpr_credits_code = { "Code: #1#" },
+        hpr_card_banned = "#1# Banished"
     },
     v_text = {},
 }
