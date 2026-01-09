@@ -73,7 +73,7 @@ HPR.prophecy {
                 level_sum = level_sum + (t.level - 1)
             end
         end
-        return G.hand and #G.hand.cards > 0 and G.hand.highlighted and #G.hand.highlighted > 0 and level_sum > G.hand.highlighted
+        return G.hand and #G.hand.cards > 0 and G.hand.highlighted and #G.hand.highlighted > 0 and level_sum >= #G.hand.highlighted
     end,
     use = function(self, card, area, copier)
         G.E_MANAGER:add_event(Event({
