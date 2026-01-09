@@ -772,7 +772,22 @@ local descriptions = {
         }
     },
     Planet = {},
-    Spectral = {},
+    Spectral = {
+        c_hpr_pulsar = {
+            name = "Pulsar",
+            text = {
+                "Applies {C:dark_edition}Negative{} edition",
+                "to {C:attention}#1#{} selected card"
+            }
+        },
+        c_hpr_ascender = {
+            name = "Ascension",
+            text = {
+                "{C:hpr_stellar}Ascends{} one eligible {C:attention}Joker{} to",
+                "its {C:hpr_stellar,E:1}Stellar{} counterpart"
+            }
+        },
+    },
     Stake = {},
     Sleeve = {
         sleeve_hpr_sealed = {
@@ -964,20 +979,6 @@ local descriptions = {
         }
     },
     hpr_prophecy = {
-        c_hpr_pulsar = {
-            name = "Pulsar",
-            text = {
-                "Applies {C:dark_edition}Negative{} edition",
-                "to {C:attention}#1#{} selected card"
-            }
-        },
-        c_hpr_ascender = {
-            name = "Ascension",
-            text = {
-                "{C:hpr_stellar}Ascends{} one eligible {C:attention}Joker{} to",
-                "its {C:hpr_stellar,E:1}Stellar{} counterpart"
-            }
-        },
         c_hpr_tome = {
             name = "Tome",
             text = {

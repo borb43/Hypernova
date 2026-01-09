@@ -85,7 +85,7 @@ CardSleeves.Sleeve {
         if self.get_current_deck_key() == "b_hpr_cosmic" then
             key = key .. "_alt"
         end
-        return { key = key, vars = { localize { type = 'name_text', key = "c_hpr_ascender", set = 'hpr_prophecy' } } }
+        return { key = key, vars = { localize { type = 'name_text', key = "c_hpr_ascender", set = 'Spectral' } } }
     end,
     apply = function (self, sleeve)
         if self.get_current_deck_key() == "b_hpr_cosmic" then

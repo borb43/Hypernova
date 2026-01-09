@@ -49,7 +49,7 @@ SMODS.Back {
     pos = { x = 4, y = 2 },
     config = { consumables = { "c_hpr_ascender" }},
     loc_vars = function (self, info_queue, card)
-        return { vars = { localize { type = 'name_text', key = self.config.consumables[1], set = 'hpr_prophecy' } }}
+        return { vars = { localize { type = 'name_text', key = self.config.consumables[1], set = 'Spectral' } }}
     end,
     pools = { RedeemableBacks = true }
 }
