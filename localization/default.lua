@@ -1047,6 +1047,14 @@ local descriptions = {
                 "to {C:attention}#2#s{} and lose {C:mult}#1#",
                 "Mult for each selected card"
             }
+        },
+        c_hpr_downpour = {
+            name = "Downpour",
+            text = {
+                "Selected cards are converted",
+                "to {C:attention}#2#s{} and lose {C:chips}#1#",
+                "Chips for each selected card"
+            }
         }
     }
 }
