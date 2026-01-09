@@ -983,8 +983,8 @@ local descriptions = {
             text = {
                 "Creates a {C:attention}Rental{} copy",
                 "of a random {C:attention}Joker",
-                "Permanently {C:red}doubles",
-                "{C:attention}Rental{} cost rate",
+                "Permanently increases",
+                "{C:attention}Rental{} cost by {C:red}$#1#",
                 "{C:inactive}(Must have room)"
             }
         },
