@@ -9,6 +9,13 @@ HPR.calculate = function(self, context)
             end
         })
     end
+    if context.before then
+        for _, c in ipairs(context.full_hand) do
+            if not c.debuff then
+                c.ability.hpr_times_played = c.ability.hpr_times_played + 1
+            end
+        end
+    end
 end
 
 local mod_path = HPR.path
