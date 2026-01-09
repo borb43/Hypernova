@@ -992,8 +992,8 @@ local descriptions = {
         c_hpr_ignorance = {
             name = "Ignorance",
             text = {
-                "Creates an {C:attention}Eternal",
-                "{C:attention}Consumable{} of the last",
+                "Creates {C:attention}#1# Eternal",
+                "{C:attention}Consumables{} of the last",
                 "used {C:attention}Consumable Type",
                 "{C:inactive}Currently: {V:1}#1#"
             }

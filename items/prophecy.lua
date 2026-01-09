@@ -27,34 +27,32 @@ SMODS.DrawStep {
 --#region normal cards
 HPR.prophecy {
     key = "ignorance",
+    config = { extra = 2 },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = { set = "Other", key = "eternal" }
         local set = G.GAME.hpr_ignorance_card
         local loc = set and localize(("k_"..set):lower()) or localize("k_none")
         local colour = set and G.C.SECONDARY_SET[set] or G.C.UI.TEXT_INACTIVE
-        return { vars = { loc, colours = { colour } } }
+        return { vars = { loc, card.ability.extra, colours = { colour } } }
     end,
     can_use = function (self, card)
         return (#G.consumeables.cards < G.consumeables.config.card_limit or card.area == G.consumeables) and G.GAME.hpr_ignorance_card
     end,
     use = function (self, card, area, copier)
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            delay = 0.4,
-            func = function()
-                if G.consumeables.config.card_limit > #G.consumeables.cards then
-                    play_sound('timpani')
-                    SMODS.add_card({
-                        set = G.GAME.hpr_ignorance_card,
-                        key_append = "hpr_ignorance",
-                        stickers = { "eternal" },
-                        force_stickers = true
-                    })
-                    card:juice_up(0.3, 0.5)
+        for _ = 1, math.min(card.ability.extra, G.consumeables.config.card_limit - #G.consumeables.cards) do
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.4,
+                func = function()
+                    if G.consumeables.config.card_limit > #G.consumeables.cards then
+                        play_sound('timpani')
+                        SMODS.add_card({ set = G.GAME.hpr_ignorance_card, key_append = "hpr_ignorance" })
+                        card:juice_up(0.3, 0.5)
+                    end
+                    return true
                 end
-                return true
-            end
-        }))
+            }))
+        end
         delay(0.6)
     end,
     in_pool = function (self, args)

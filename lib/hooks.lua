@@ -1,5 +1,10 @@
 local create_card_ref = create_card --hook for applying perma bonuses to cards (for stacking and mass production)
 create_card = function(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
+	if forced_key and G.GAME.hpr_true_ban and G.GAME.hpr_true_ban[forced_key] then
+		if not _type then _type = G.P_CENTERS[forced_key].set end
+		if G.P_CENTERS[forced_key].rarity and not _rarity then _rarity = G.P_CENTERS[forced_key].rarity end
+		forced_key = nil
+	end
     local ret_card = create_card_ref(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
     if ret_card.ability.set == "Default" or ret_card.ability.set == "Enhanced" then
         if G.GAME and G.GAME.used_vouchers.v_hpr_stacking then
