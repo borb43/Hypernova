@@ -69,9 +69,15 @@ HPR.prophecy {
         return { vars = { localize{ type = "name_text", set = "Enhanced", key = "m_hpr_lunar" }}}
     end,
     can_use = function ()
-        return G.hand and #G.hand.cards > 0
+        local level_sum = 0
+        if G.GAME and G.GAME.hands then
+            for _, t in pairs(G.GAME.hands) do
+                level_sum = level_sum + (t.level - 1)
+            end
+        end
+        return G.hand and #G.hand.cards > 0 and G.hand.highlighted and #G.hand.highlighted > 0 and level_sum > G.hand.highlighted
     end,
-    use = function (self, card, area, copier)
+    use = function(self, card, area, copier)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.4,
@@ -81,21 +87,61 @@ HPR.prophecy {
                 return true
             end
         }))
-
-        G.E_MANAGER:add_event(Event{
-            trigger = "after",
-            delay = 0.7,
-            func = function ()
-                local c = SMODS.add_card{
-                    area = G.hand,
-                    set = "Enhanced",
-                    key = "m_hpr_lunar"
-                }
-                SMODS.calculate_context({playing_card_added = true, cards = {c}})
+        for i = 1, #G.hand.highlighted do
+            local percent = 1.15 - (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.15,
+                func = function()
+                    G.hand.highlighted[i]:flip()
+                    play_sound('card1', percent)
+                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
+                    return true
+                end
+            }))
+        end
+        delay(0.2)
+        for i = 1, #G.hand.highlighted do
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.1,
+                func = function()
+                    G.hand.highlighted[i]:set_ability(card.ability.mod_conv)
+                    return true
+                end
+            }))
+        end
+        for i = 1, #G.hand.highlighted do
+            local percent = 0.85 + (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.15,
+                func = function()
+                    G.hand.highlighted[i]:flip()
+                    play_sound('tarot2', percent, 0.6)
+                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
+                    return true
+                end
+            }))
+        end
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
                 return true
             end
-        })
-    end
+        }))
+        delay(0.5)
+        local in_pool = function (v)
+            if v and G.GAME.hands[v] and G.GAME.hands[v].level > 1 then
+                return true
+            end
+        end
+        for _ = 1, #G.hand.highlighted do
+            SMODS.smart_level_up_hand(card, HPR.get_random_hand(true, self.key, in_pool))
+        end
+    end,
 }
 
 HPR.prophecy {

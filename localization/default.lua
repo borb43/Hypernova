@@ -1000,8 +1000,11 @@ local descriptions = {
         c_hpr_blessing = {
             name = "Blessing",
             text = {
-                "Creates a {C:attention}#1#",
-                "in your hand"
+                "Converts selected cards",
+                "to {C:attention}#1#s{}. {C:red}Level down",
+                "a random hand for each",
+                "selected card",
+                "{s:0.8,C:inactive}(Requires enough levels available to remove)"
             }
         },
         c_hpr_divide = {

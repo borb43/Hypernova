@@ -150,3 +150,13 @@ function HPR.is_any(str, ...)
         if str == p then return true end
     end
 end
+
+function HPR.get_random_hand(include_hidden, seed, in_pool, fallback)
+    local hands = {}
+    for name, _ in pairs(G.GAME.hands) do
+        if include_hidden or SMODS.is_poker_hand_visible(name) then
+            hands[#hands+1] = name
+        end
+    end
+    return pseudorandom_element(hands, seed, {in_pool = in_pool}) or fallback or "High Card"
+end
