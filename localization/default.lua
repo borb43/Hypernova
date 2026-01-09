@@ -1039,6 +1039,14 @@ local descriptions = {
                 "{C:red}-#1#{} hand size and",
                 "consumable slots"
             }
+        },
+        c_hpr_silence = {
+            name = "Silence",
+            text = {
+                "Selected cards are converted",
+                "to {C:attention}#2#s{} and lose {C:mult}#1#",
+                "Mult for each selected card"
+            }
         }
     }
 }
