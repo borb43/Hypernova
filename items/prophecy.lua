@@ -272,4 +272,37 @@ HPR.prophecy {
         end
     end
 }
+
+HPR.prophecy {
+    key = "quantum",
+    config = { extra = { slots = 1 }},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.slots }}
+    end,
+    can_use = function (self, card)
+        return G.hand and #G.hand.cards > 0
+    end,
+    use = function (self, card, area, copier)
+        local target = pseudorandom_element(G.hand.cards, self.key)
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                play_sound("tarot1")
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+        target.ability.card_limit = target.ability.card_limit + card.ability.extra.slots
+        G.E_MANAGER:add_event(Event({
+            trigger = "after",
+            delay = 0.1,
+            func = function()
+                target:juice_up()
+                return true
+            end
+        }))
+        delay(0.5)
+        G.hand:change_size(-card.ability.extra.slots)
+        G.consumeables:change_size(-card.ability.extra.slots)
+    end
+}
 --#endregion

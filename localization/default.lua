@@ -1030,6 +1030,15 @@ local descriptions = {
                 "{C:inactive}Will target {C:attention}#1#",
                 "{C:inactive}(Max of {C:attention}+#3#{C:inactive} levels)"
             }
+        },
+        c_hpr_quantum = {
+            name = "Quantum",
+            text = {
+                "A random card in hand",
+                "{C:attention}permanently{} gains {C:dark_edition}+#1#{} hand size",
+                "{C:red}-#1#{} hand size and",
+                "consumable slots"
+            }
         }
     }
 }
