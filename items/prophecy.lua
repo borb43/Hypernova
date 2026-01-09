@@ -46,7 +46,12 @@ HPR.prophecy {
                 func = function()
                     if G.consumeables.config.card_limit > #G.consumeables.cards then
                         play_sound('timpani')
-                        SMODS.add_card({ set = G.GAME.hpr_ignorance_card, key_append = "hpr_ignorance" })
+                        SMODS.add_card({
+                            set = G.GAME.hpr_ignorance_card,
+                            key_append = "hpr_ignorance",
+                            stickers = { "eternal" },
+                            force_stickers = true
+                        })
                         card:juice_up(0.3, 0.5)
                     end
                     return true
