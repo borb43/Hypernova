@@ -35,7 +35,6 @@ HPR.prophecy {
         local colour = set and G.C.SECONDARY_SET[set] or G.C.UI.TEXT_INACTIVE
         if set and not SMODS.ConsumableTypes[set] then
             colour = G.C.FILTER
-            loc = loc.."?"
         end
         return { vars = { loc, card.ability.extra, colours = { colour } } }
     end,

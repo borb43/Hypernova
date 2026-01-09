@@ -993,8 +993,8 @@ local descriptions = {
             name = "Ignorance",
             text = {
                 "Creates {C:attention}#2# Eternal",
-                "{C:attention}Consumables{} of the",
-                "last used {C:attention}card type",
+                "cards of the last used",
+                "{C:attention}card type",
                 "{C:inactive}Currently: {V:1}#1#"
             }
         },
