@@ -33,6 +33,10 @@ HPR.prophecy {
         local set = G.GAME.hpr_ignorance_card
         local loc = set and localize(("k_"..set):lower()) or localize("k_none")
         local colour = set and G.C.SECONDARY_SET[set] or G.C.UI.TEXT_INACTIVE
+        if set and not SMODS.ConsumableTypes[set] then
+            colour = G.C.FILTER
+            loc = loc.."?"
+        end
         return { vars = { loc, card.ability.extra, colours = { colour } } }
     end,
     can_use = function (self, card)

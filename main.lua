@@ -1,10 +1,11 @@
 HPR = SMODS.current_mod
 
 HPR.calculate = function(self, context)
-    if context.using_consumeable then
+    if context.using_consumeable or context.hpr_using_joker then
+        local c = context.consumeable or context.hpr_used_j
         G.E_MANAGER:add_event(Event{
             func = function ()
-                G.GAME.hpr_ignorance_card = context.consumeable.ability.set
+                G.GAME.hpr_ignorance_card = c.ability.set
                 return true
             end
         })
@@ -14,6 +15,19 @@ HPR.calculate = function(self, context)
             if not c.debuff then
                 c.ability.hpr_times_played = c.ability.hpr_times_played + 1
             end
+        end
+    end
+end
+
+HPR.post_load = function ()
+    if Entropy and G.FUNCS.use_joker then
+        local use_j_ref = G.FUNCS.use_joker
+        function G.FUNCS.use_joker(e)
+            use_j_ref(e)
+            SMODS.calculate_context({
+                hpr_using_joker = true,
+                hpr_used_j = e.config.ref_table
+            })
         end
     end
 end

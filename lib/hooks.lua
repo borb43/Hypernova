@@ -366,3 +366,9 @@ local face_ref = Card.is_face
 function Card:is_face(from_boss)
 	return face_ref(self, from_boss) or SMODS.has_enhancement(self, "m_hpr_mimic")
 end
+
+local inj = SMODS.injectItems
+function SMODS.injectItems(...)
+	inj(...)
+	HPR.post_load()
+end

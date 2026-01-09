@@ -25,7 +25,7 @@ payload = '''
 perma_eff_mod = self.ability and self.ability.perma_eff_mod or 0,
 hpr_num_bonus = self.ability and self.ability.hpr_num_bonus or 0,
 hpr_denom_bonus = self.ability and self.ability.hpr_denom_bonus or 0,
-hpr_times_played = self.ability and self.ability.hpr_times_played or 0
+hpr_times_played = self.ability and self.ability.hpr_times_played or 0,
 '''
 match_indent = true
 times = 1
