@@ -242,13 +242,12 @@ HPR.prophecy {
         SMODS.smart_level_up_hand(card, _handname, nil, lv_amt)
         local planet
         for _, c in pairs(G.P_CENTER_POOLS.Planet) do
-            if not (G.GAME.banned_keys[c.key] and G.GAME.hpr_true_ban[c.key]) and c.config and (c.config.hand_type == _handname or type(c.config.hand_types) == "table" and HPR.contains(c.config.hand_types, _handname)) then
+            if not (G.GAME.banned_keys[c.key]) and c.config and (c.config.hand_type == _handname or type(c.config.hand_types) == "table" and HPR.contains(c.config.hand_types, _handname)) then
                 planet = c.key
             end
         end
         if planet then
             G.GAME.banned_keys[planet] = true
-            G.GAME.hpr_true_ban[planet] = true
             local loc = localize{ type = "name_text", key = planet, set = "Planet", }
             G.E_MANAGER:add_event(Event{
                 trigger = "after",
@@ -443,5 +442,61 @@ HPR.prophecy {
         }))
         delay(0.5)
     end,
+}
+
+HPR.prophecy {
+    key = "wormhole",
+    config = { extra = { cards = 8, bans = 3 }},
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = { key = "e_negative_consumable", set = "Edition", config = { extra = 1 }}
+        return { vars = { card.ability.extra.cards, card.ability.extra.bans }}
+    end,
+    can_use = function (self, card)
+        return true
+    end,
+    use = function (self, card, area, copier)
+        local c = {}
+        for i = 1, card.ability.extra.cards do
+            G.E_MANAGER:add_event(Event{
+                trigger = "after",
+                delay = 0.4,
+                func = function ()
+                    c[#c+1] = SMODS.add_card{
+                        set = "Consumeables",
+                        area = G.consumeables,
+                        edition = "e_negative",
+                        key_append = self.key
+                    }
+                    return true
+                end
+            })
+        end
+        for i = 1, card.ability.extra.bans do
+            G.E_MANAGER:add_event(Event{
+                trigger = "after",
+                delay = 0.4,
+                func = function ()
+                    if c[i] then
+                        G.GAME.banned_keys[c[i].config.center.key] = true
+                        local loc = localize{ type = "name_text", key = c[i].config.center.key, set = c[i].ability.set, }
+                        attention_text{
+                            text = localize{type="variable",vars={loc},key="hpr_card_banned"},
+                            scale = 1.3,
+                            hold = 1.4,
+                            major = card,
+                            backdrop_colour = G.C.RED,
+                            align = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.SMODS_BOOSTER_OPENED) and "tm" or "cm",
+                            offset = { x = 0, y = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.SMODS_BOOSTER_OPENED) and -0.2 or 0 },
+                            silent = true
+                        }
+                        play_sound("tarot2", 1, 0.4)
+                        card:juice_up()
+                        return true
+                    end
+                end
+            })
+            delay(1)
+        end
+    end
 }
 --#endregion

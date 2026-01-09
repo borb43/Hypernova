@@ -1055,6 +1055,14 @@ local descriptions = {
                 "to {C:attention}#2#s{} and lose {C:chips}#1#",
                 "Chips for each selected card"
             }
+        },
+        c_hpr_wormhole = {
+            name = "Wormhole",
+            text = {
+                "Creates {C:attention}#1#{C:dark_edition} Negative{C:attention} Consumable",
+                "cards. The first {C:attention}#2#{} created cards",
+                "can {C:red}no longer appear{} this run"
+            }
         }
     }
 }

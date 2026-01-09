@@ -17,7 +17,6 @@ end
 
 HPR.reset_game_globals = function (run_start)
     if run_start then
-        G.GAME.hpr_true_ban = {}
         G.GAME.hpr_packs_mod = 1
     end
     reset_hpr_cavepaint()
