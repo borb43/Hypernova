@@ -137,6 +137,8 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_green_joker = "j_hpr_recycle",
     j_ramen = "j_hpr_recycle",
     j_banner = "j_hpr_recycle",
+    j_baron = "j_hpr_royalty",
+    j_shoot_the_moon = "j_hpr_royalty"
 }
 
 HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'log', 'sin', 'cos', 'tan' }
@@ -1045,6 +1047,29 @@ HPR.StellarJoker {
                 scalar_value = "gain"
             })
             return nil, true
+        end
+    end
+}
+
+HPR.StellarJoker {
+    key = "royalty",
+    config = { extra = 1 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra }}
+    end,
+    calculate = function (self, card, context)
+        if context.individual and not context.end_of_round and context.cardarea == G.hand and context.other_card:is_face() then
+            if not context.other_card.debuff then
+                local face_count = 0
+                for _, c in ipairs(context.full_hand) do
+                    if c:is_face() then face_count = face_count + 1 end
+                end
+                if face_count ~= 0 then
+                    return { xmult = 1 + face_count*card.ability.extra }
+                end
+            else
+                return { message = localize("k_debuffed") }
+            end
         end
     end
 }

@@ -673,6 +673,14 @@ local descriptions = {
                 "Creates a {C:attention}Voucher Tag",
                 "at the end of round"
             }
+        },
+        j_hpr_royalty = {
+            name = "S029 ROYALTY",
+            text = {
+                "Held in hand {C:attention}face{} cards",
+                "give {X:mult,C:white}X#1#{} Mult for each",
+                "played {C:attention}face{} card"
+            }
         }
     },
     Other = {
