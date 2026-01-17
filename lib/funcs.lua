@@ -67,7 +67,7 @@ end
 function HPR.get_unique_suits(cards)
     local suits = {}
     for _, c in ipairs(cards) do
-        for s, _ in ipairs(SMODS.Suits) do
+        for s in pairs(SMODS.Suits) do
             if not suits[s] and c.is_suit and c:is_suit(s) then
                 suits[s] = true
                 break
@@ -153,7 +153,7 @@ end
 
 function HPR.get_random_hand(include_hidden, seed, in_pool, fallback)
     local hands = {}
-    for name, _ in pairs(G.GAME.hands) do
+    for name in pairs(G.GAME.hands) do
         if include_hidden or SMODS.is_poker_hand_visible(name) then
             hands[#hands+1] = name
         end
