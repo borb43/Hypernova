@@ -3,8 +3,9 @@ SMODS.Voucher { --stacking, gives cards a chance to spawn with perma chips and m
     atlas = "voucher",
     pos = { x = 0, y = 0 },
     hpr_credits = {
-        code = "Eris",
-        idea = "Eris"
+        code = {"Eris"},
+        idea = {"Eris"},
+        art = {"Eris"}
     }
 }
 
@@ -14,7 +15,8 @@ SMODS.Voucher { --mass production, lets xmult and xchip bonuses spawn
     pos = { x = 4, y = 1 },
     requires = { "v_hpr_stacking" },
     hpr_credits = {
-        code = "Eris",
-        idea = "Eris"
+        code = {"Eris"},
+        idea = {"Eris"},
+        art = {"Eris"}
     }
 }

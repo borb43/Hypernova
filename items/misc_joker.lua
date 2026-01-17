@@ -39,8 +39,9 @@ SMODS.Joker { --growth, increases potency of other joker effects
         end
     end,
     hpr_credits = {
-        code = "Eris",
-        idea = "Eris"
+        code = {"Eris"},
+        idea = {"Eris"},
+        art = {"Eris"}
     },
     hpr_ascension_key = "j_hpr_fast_growing"
 }
@@ -97,9 +98,9 @@ SMODS.Joker { -- solar flare, levels up not most played hands and destroys some 
         end
     end,
     hpr_credits = {
-        art = "Codifyd",
-        code = "Eris",
-        idea = "Codifyd"
+        art = {"Codifyd"},
+        code = {"Eris"},
+        idea = {"Codifyd"}
     }
 }
 
@@ -122,8 +123,8 @@ SMODS.Joker { --tipping scales, increases numerator and denominator of probabili
         end
     end,
     hpr_credits = {
-        code = "Eris",
-        idea = "Eris"
+        code = {"Eris"},
+        idea = {"Eris"}
     }
 }
 
@@ -179,8 +180,8 @@ SMODS.Joker { --gambling addict, scales from probability rolls
         end
     end,
     hpr_credits = {
-        code = "Eris",
-        idea = "Eris"
+        code = {"Eris"},
+        idea = {"Eris"}
     }
 }
 
@@ -224,8 +225,8 @@ SMODS.Joker { --fortune cookie, guarantees 6 probabilities and then creates a ne
         end
     end,
     hpr_credits = {
-        code = "Eris",
-        idea = "Eris"
+        code = {"Eris"},
+        idea = {"Eris"}
     }
 }
 
@@ -256,8 +257,8 @@ SMODS.Joker {
         end
     end,
     hpr_credits = {
-        code = "Eris",
-        idea = "Eris"
+        code = {"Eris"},
+        idea = {"Eris"}
     }
 }
 
@@ -277,8 +278,8 @@ SMODS.Joker {
         end
     end,
     hpr_credits = {
-        code = "Eris",
-        idea = "Eris"
+        code = {"Eris"},
+        idea = {"Eris"}
     }
 }
 
@@ -295,8 +296,8 @@ SMODS.Joker {
         G.GAME.modifiers.booster_choice_mod = (G.GAME.modifiers.booster_choice_mod or 0) - 1000
     end,
     hpr_credits = {
-        code = "Eris",
-        idea = "Eris"
+        code = {"Eris"},
+        idea = {"Eris"}
     }
 }
 
@@ -340,8 +341,8 @@ SMODS.Joker {
         end
     end,
     hpr_credits = {
-        code = "Eris",
-        idea = "Eris"
+        code = {"Eris"},
+        idea = {"Eris"}
     }
 }
 
@@ -396,8 +397,8 @@ SMODS.Joker {
         end
     end,
     hpr_credits = {
-        code = "Eris",
-        idea = "Eris"
+        code = {"Eris"},
+        idea = {"Eris"}
     }
 }
 
@@ -427,8 +428,8 @@ SMODS.Joker {
         end
     end,
     hpr_credits = {
-        code = "Eris",
-        idea = "Eris"
+        code = {"Eris"},
+        idea = {"Eris"}
     }
 }
 
@@ -460,8 +461,8 @@ SMODS.Joker {
         info_queue[#info_queue+1] = G.P_CENTERS.e_negative
     end,
     hpr_credits = {
-        code = "Eris",
-        idea = "Eris"
+        code = {"Eris"},
+        idea = {"Eris"}
     }
 }
 

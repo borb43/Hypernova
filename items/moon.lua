@@ -110,8 +110,8 @@ HPR.moon = SMODS.Consumable:extend({
         }))
     end,
     hpr_credits = {
-        code = "Eris",
-        idea = "Eris"
+        code = {"Eris"},
+        idea = {"Eris"}
     }
 })
 
@@ -123,9 +123,9 @@ HPR.moon {
     end,
     pos = { x = 0, y = 0 },
     hpr_credits = {
-        idea = "Eris",
-        code = "Eris",
-        art = "LFMoth"
+        idea = {"Eris"},
+        code = {"Eris"},
+        art = {"LFMoth"}
     },
     apply_bonus = function (self, card, other_card)
         other_card.ability.perma_mult = other_card.ability.perma_mult + card.ability.extra
@@ -164,9 +164,9 @@ HPR.moon {
     end,
     pos = { x = 3, y = 0 },
     hpr_credits = {
-        idea = "Eris",
-        code = "Eris",
-        art = "LFMoth"
+        idea = {"Eris"},
+        code = {"Eris"},
+        art = {"LFMoth"}
     },
     apply_bonus = function (self, card, other_card)
         other_card.ability.perma_h_mult = other_card.ability.perma_h_mult + card.ability.extra
@@ -181,9 +181,9 @@ HPR.moon {
     end,
     pos = { x = 4, y = 0 },
     hpr_credits = {
-        idea = "Eris",
-        code = "Eris",
-        art = "LFMoth"
+        idea = {"Eris"},
+        code = {"Eris"},
+        art = {"LFMoth"}
     },
     apply_bonus = function (self, card, other_card)
         other_card.ability.perma_x_mult = other_card.ability.perma_x_mult + card.ability.extra
@@ -359,7 +359,7 @@ SMODS.Consumable {
     hidden = true,
     soul_set = "hpr_moons",
     hpr_credits = {
-        idea = "Eris",
-        code = "Eris"
+        idea = {"Eris"},
+        code = {"Eris"}
     }
 }

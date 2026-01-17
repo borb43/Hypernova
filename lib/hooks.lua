@@ -39,22 +39,18 @@ function SMODS.create_mod_badges(obj, badges)
 			local scale_fac = calced_text_width > max_text_width and max_text_width / calced_text_width or 1
 			return scale_fac
 		end
-		if obj.hpr_credits.art or obj.hpr_credits.code or obj.hpr_credits.idea or obj.hpr_credits.custom then
+		if obj.hpr_credits.art or obj.hpr_credits.code or obj.hpr_credits.idea then
 			local scale_fac = {}
 			local min_scale_fac = 1
 			local strings = { HPR.display_name }
 			for _, v in ipairs({ "idea", "art", "code" }) do
 				if obj.hpr_credits[v] then
-					if type(obj.hpr_credits[v]) == "string" then obj.hpr_credits[v] = {obj.hpr_credits[v]} end
 					for i = 1, #obj.hpr_credits[v] do
 						strings[#strings + 1] =
-							localize({ type = "variable", key = "cry_" .. v, vars = { obj.hpr_credits[v][i] } })[1]
+							localize({ type = "variable", key = "hpr_credits_" .. v, vars = { obj.hpr_credits[v][i] } })[1]
 					end
 				end
 			end
-            if obj.hpr_credits.custom then
-                strings[#strings + 1] = localize({ type="variable", key = obj.hpr_credits.custom.key, vars = { obj.hpr_credits.custom.text } })
-            end
 			for i = 1, #strings do
 				scale_fac[i] = calc_scale_fac(strings[i])
 				min_scale_fac = math.min(min_scale_fac, scale_fac[i])
@@ -102,8 +98,16 @@ function SMODS.create_mod_badges(obj, badges)
 					},
 				},
 			}
-			for i = 1, #badges do	
-				if badges[i].nodes[1].nodes[2].config.object.string == HPR.display_name then --this was meant to be a hex code but it just doesnt work for like no reason so its hardcoded
+			local function eq_col(x, y)
+				for i = 1, 4 do
+					if x[i] ~= y[i] then
+						return false
+					end
+				end
+				return true
+			end
+			for i = 1, #badges do
+				if eq_col(badges[i].nodes[1].config.colour, HEX("C09ED9")) then
 					badges[i].nodes[1].nodes[2].config.object:remove()
 					badges[i] = hpr_badge
 					break
