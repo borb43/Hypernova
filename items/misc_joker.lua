@@ -20,8 +20,8 @@ SMODS.Joker { --fusion reactor, balances before scoring
 
 SMODS.Joker { --growth, increases potency of other joker effects
     key = "growth",
-    atlas = "placeholder",
-    pos = { x = 2, y = 0 },
+    atlas = "joker",
+    pos = { x = 3, y = 0 },
     config = { extra = { eff_mod = 1, scale = 0.05 } },
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.eff_mod, card.ability.extra.scale } }
