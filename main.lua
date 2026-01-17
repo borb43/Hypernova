@@ -62,6 +62,9 @@ to_big = to_big or function(x) return x end
 to_number = to_number or function(x) return x end
 loc_colour()
 
+G.ARGS.LOC_COLOURS.score = HEX("7b559c")
+G.ARGS.LOC_COLOURS.blind_effect = HEX("a52a2a")
+
 SMODS.ObjectType {
     key = "Food",
     default = "j_ice_cream",
