@@ -166,3 +166,19 @@ function HPR.contains(_t, val)
         if v == val then return true end
     end
 end
+
+function HPR.mod_blind_amount(amt, op)
+    local new_amt
+    if not op or op == "*" or op =="X" then
+        new_amt = G.GAME.blind.chips * amt
+    elseif op == "+" then
+        new_amt = G.GAME.blind.chips + amt
+    elseif op == "^" then
+        new_amt = G.GAME.blind.chips ^ amt
+    elseif op == "eq" then
+        new_amt = amt
+    end
+    G.GAME.blind.chips = new_amt
+    G.GAME.blind.chip_text = number_format(new_amt)
+    G.HUD_blind:recalculate()
+end
