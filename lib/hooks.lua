@@ -1,5 +1,8 @@
 local create_card_ref = create_card --hook for applying perma bonuses to cards (for stacking and mass production)
 create_card = function(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
+	if next(SMODS.find_card("j_hpr_missing")) and SMODS.ConsumableTypes[_type] then
+		_type = "Consumeables"
+	end
     local ret_card = create_card_ref(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
     if ret_card.ability.set == "Default" or ret_card.ability.set == "Enhanced" then
         if G.GAME and G.GAME.used_vouchers.v_hpr_stacking then
