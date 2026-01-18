@@ -343,7 +343,6 @@ end
 local prob_ref = SMODS.pseudorandom_probability
 function SMODS.pseudorandom_probability(trigger_obj, seed, base_numerator, base_denominator, identifier, no_mod)
 	local res = prob_ref(trigger_obj, seed, base_numerator, base_denominator, identifier, no_mod)
-	local reps = 0
 	local effects = {}
 	SMODS.calculate_context({
 		trigger_obj = trigger_obj,
@@ -351,12 +350,14 @@ function SMODS.pseudorandom_probability(trigger_obj, seed, base_numerator, base_
 		hpr_retrigger_probability = true
 	}, effects)
 	for i = 1, #effects do
-		reps = reps + math.floor(effects[i] and effects[i].jokers and effects[i].jokers.hpr_retriggers or 0)
-	end
-	for _ = 1, reps do
-		local new_res = prob_ref(trigger_obj, seed, base_numerator, base_denominator, identifier, no_mod)
-		card_eval_status_text(trigger_obj, "extra", nil, nil, nil, { message = localize("k_again_ex"), colour = G.C.GREEN })
-		res = res or new_res
+		local eff = effects[i]
+		if eff and eff.jokers and (eff.jokers.hpr_retriggers or 0) >= 1 then
+			for _ = 1, eff.jokers.hpr_retriggers do
+				local new_res = prob_ref(trigger_obj, seed, base_numerator, base_denominator, identifier, no_mod)
+				card_eval_status_text(eff.jokers.card or trigger_obj, "extra", nil, nil, nil, { message = eff.jokers.message or localize("k_again_ex"), colour = eff.jokers.colour or G.C.GREEN })
+				res = res or new_res
+			end
+		end
 	end
 	return res
 end
