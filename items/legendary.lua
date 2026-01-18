@@ -1,8 +1,8 @@
 SMODS.Joker {
     key = "eris",
-    atlas = "placeholder",
-    pos = { x = 3, y = 0 },
-    soul_pos = { x = 4, y = 0 },
+    atlas = "joker",
+    pos = { x = 0, y = 1 },
+    soul_pos = { x = 1, y = 1 },
     rarity = 4,
     cost = 20,
     blueprint_compat = true,
@@ -51,7 +51,8 @@ SMODS.Joker {
     end,
     pronouns = "any_all",
     hpr_credits = {
-        code = "Eris",
-        idea = "Eris"
+        code = {"Eris"},
+        idea = {"Eris"},
+        art = {"Eris"}
     }
 }
