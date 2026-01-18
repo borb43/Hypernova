@@ -436,7 +436,12 @@ HPR.StellarJoker {
         if context.joker_main or context.forcetrigger then
             return { mult = card.ability.extra.mult }
         end
-    end
+    end,
+    hpr_credits = {
+        code = {"Eris"},
+        idea = {"Eris"},
+        art = {"Eris"}
+    }
 }
 
 HPR.StellarJoker {
@@ -469,7 +474,12 @@ HPR.StellarJoker {
         if context.joker_main or context.forcetrigger then
             return { chips = card.ability.extra.chips }
         end
-    end
+    end,
+    hpr_credits = {
+        code = {"Eris"},
+        idea = {"Eris"},
+        art = {"Eris"}
+    }
 }
 
 HPR.StellarJoker {
@@ -834,7 +844,12 @@ HPR.StellarJoker {
         if (context.joker_main or context.forcetrigger) and card.ability.extra.xmult ~= 1 then
             return { xmult = card.ability.extra.xmult }
         end
-    end
+    end,
+    hpr_credits = {
+        code = {"Eris"},
+        idea = {"Eris"},
+        art = {"Eris"}
+    }
 }
 
 HPR.StellarJoker {
