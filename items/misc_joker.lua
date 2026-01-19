@@ -928,3 +928,22 @@ SMODS.Joker {
         code = {"Eris"},
     }
 }
+
+SMODS.Joker {
+    key = "benthic",
+    atlas = "placeholder",
+    pos = { x = 1, y = 0 },
+    rarity = 2,
+    cost = 7,
+    config = { extra = 0.5 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra }}
+    end,
+    add_to_deck = function (self, card, from_debuff)
+        G.GAME.common_mod = (G.GAME.common_mod or 1) * card.ability.extra
+    end,
+    remove_from_deck = function (self, card, from_debuff)
+        G.GAME.common_mod = (G.GAME.common_mod or 1) / card.ability.extra
+    end,
+    inversion = "j_oops"
+}

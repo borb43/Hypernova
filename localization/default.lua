@@ -691,6 +691,13 @@ local descriptions = {
                 "has no {C:attention}enhanced{} cards"
             }
         },
+        j_hpr_benthic = {
+            name = "Benthic Bloom",
+            text = {
+                "{C:blue}Common{C:attention} Jokers{} appear",
+                "{C:attention}#1#X{} as often"
+            }
+        }
     },
     Other = {
         p_hpr_lunar_pack = {
