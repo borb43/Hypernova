@@ -879,3 +879,51 @@ SMODS.Joker {
         end
     end
 }
+
+SMODS.Joker {
+    key = "paint_bucket",
+    atlas = "placeholder",
+    pos = { x = 0, y = 0 },
+    rarity = 1,
+    cost = 6,
+    config = { extra = 3 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra }}
+    end,
+    calculate = function (self, card, context)
+        if context.before and not context.blueprint then
+            local enh = 0
+            for _, c in ipairs(context.scoring_hand) do
+                if next(SMODS.get_enhancements(c)) and not c.debuff and not c.vampired then
+                    enh = enh+1
+                    c.vampired = true
+                    c:set_ability("c_base", nil, true)
+                    G.E_MANAGER:add_event(Event{
+                        func = function ()
+                            c:juice_up()
+                            c.vampired = nil
+                            return true
+                        end
+                    })
+                end
+            end
+            if enh ~= 0 then
+                return { message = localize("k_hpr_painted_ex") }
+            else
+                SMODS.destroy_cards(card, nil, nil, true)
+                return { message = localize("k_drank_ex") }
+            end
+        end
+    end,
+    add_to_deck = function (self, card, from_debuff)
+        G.hand:change_size(card.ability.extra)
+    end,
+    remove_from_deck = function (self, card, from_debuff)
+        G.hand:change_size(-card.ability.extra)
+    end,
+    pools = { Food = true },
+    hpr_credits = {
+        idea = {"Eris"},
+        code = {"Eris"},
+    }
+}

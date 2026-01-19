@@ -681,7 +681,17 @@ local descriptions = {
                 "give {X:mult,C:white}X#1#{} Mult for each",
                 "played {C:attention}face{} card"
             }
-        }
+        },
+        j_hpr_paint_bucket = {
+            name = "Quart of White Paint",
+            text = {
+                "{C:attention}+#1#{} hand size",
+                "Removes {C:attention}enhancement{} from scoring",
+                "cards when hand is played",
+                "Destroyed if scoring hand",
+                "has no {C:attention}enhanced{} cards"
+            }
+        },
     },
     Other = {
         p_hpr_lunar_pack = {
@@ -1132,7 +1142,8 @@ local misc = {
         k_hpr_plus_reroll = "+1 Free Reroll",
         k_hpr_plus_iamt = "+1 Interest Amount",
         k_hpr_plus_debt = "+$20 Debt Limit",
-        k_hpr_plus_consumable = "+1 Consumable"
+        k_hpr_plus_consumable = "+1 Consumable",
+        k_hpr_painted_ex = "Painted!"
 
     },
     high_scores = {},
