@@ -1005,20 +1005,6 @@ HPR.StellarJoker {
             }
         end
     end,
-    add_to_deck = function (self, card, from_debuff)
-        G.GAME.common_mod = (G.GAME.common_mod or 1) * 0.5
-        G.GAME.rare_mod = (G.GAME.rare_mod or 1) * 2
-        if next(SMODS.find_mod("entr")) and G.GAME.modifiers.entr_meteorite then
-            G.GAME.modifiers.entr_meteorite = G.GAME.modifiers.entr_meteorite / 3
-        end
-    end,
-    remove_from_deck = function (self, card, from_debuff)
-        G.GAME.common_mod = (G.GAME.common_mod or 1) / 0.5
-        G.GAME.rare_mod = (G.GAME.rare_mod or 1) / 2
-        if next(SMODS.find_mod("entr")) and G.GAME.modifiers.entr_meteorite then
-            G.GAME.modifiers.entr_meteorite = G.GAME.modifiers.entr_meteorite * 3
-        end
-    end
 }
 
 HPR.StellarJoker {

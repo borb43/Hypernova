@@ -572,7 +572,6 @@ local descriptions = {
                 "When a {C:green,E:1}probability{} rolls for a card,",
                 "it permanently gains {C:green}+#1# {C:attention}listed",
                 "{C:green,E:1}numerators{} and {C:green,E:1}denominators",
-                "{s:1.2,C:hpr_super_gay,E:1}Luck is on your side"
             }
         },
         j_hpr_diamond_shape_with_a_dot_inside = {
