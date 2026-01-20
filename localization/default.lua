@@ -1171,7 +1171,8 @@ local misc = {
         k_hpr_plus_iamt = "+1 Interest Amount",
         k_hpr_plus_debt = "+$20 Debt Limit",
         k_hpr_plus_consumable = "+1 Consumable",
-        k_hpr_painted_ex = "Painted!"
+        k_hpr_painted_ex = "Painted!",
+        k_hpr_wee = "Wee"
 
     },
     high_scores = {},
