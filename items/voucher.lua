@@ -24,6 +24,9 @@ SMODS.Voucher { --mass production, lets xmult and xchip bonuses spawn
 --#endregion
 --#region branched T3 vouchers
 HPR.BranchingVoucher = SMODS.Voucher:extend{
+    atlas = "placeholder",
+    pos = { x = 5, y = 1 },
+    --soul_pos = {},
     in_pool = function (self, args)
         if G.shop_vouchers and G.load_shop_vouchers.cards then
             for _, v in ipairs(G.shop_vouchers.cards) do
