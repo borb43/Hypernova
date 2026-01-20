@@ -81,6 +81,14 @@ SMODS.ObjectType {
     }
 }
 
+SMODS.ObjectType {
+    key = "wee",
+    default = "j_wee",
+    cards = {
+        j_wee = true
+    }
+}
+
 SMODS.current_mod.optional_features = {
     post_trigger = true,
     retrigger_joker = true

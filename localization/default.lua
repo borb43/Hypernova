@@ -697,6 +697,14 @@ local descriptions = {
                 "{C:blue}Common{C:attention} Jokers{} appear",
                 "{C:attention}#1#X{} as often"
             }
+        },
+        j_hpr_blue_wee = {
+            name = "Blue Baby",
+            text = {
+                "{C:chips}+#1#{} Chips for each",
+                "{C:attention}2{} in your full deck",
+                "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)"
+            }
         }
     },
     Other = {

@@ -609,7 +609,8 @@ SMODS.Joker {
                 end
             end
         end
-    end
+    end,
+    pools = { wee = true }
 }
 
 SMODS.Joker {
@@ -946,4 +947,36 @@ SMODS.Joker {
         G.GAME.common_mod = (G.GAME.common_mod or 1) / card.ability.extra
     end,
     inversion = "j_oops"
+}
+
+SMODS.Joker {
+    key = "blue_wee",
+    pos = { x = 7, y = 10 },
+    display_size = { w = 71 * 0.7, h = 95 * 0.7 },
+    rarity = 2,
+    cost = 7,
+    config = { extra = 10 },
+    loc_vars = function (self, info_queue, card)
+        local two = 0
+        if G.playing_cards then
+            for _, c in ipairs(G.playing_cards) do
+                if c:get_id() == 2 then two = two+1 end
+            end
+        else
+            two = 4
+        end
+        return { vars = { card.ability.extra, card.ability.extra*two }}
+    end,
+    calculate = function (self, card, context)
+        if context.joker_main then
+            local two = 0
+            for _, c in ipairs(G.playing_cards) do
+                if c:get_id() == 2 then two = two+1 end
+            end
+            if two ~= 0 then
+                return { chips = card.ability.extra*two }
+            end
+        end
+    end,
+    pools = { wee = true }
 }
