@@ -24,7 +24,7 @@ SMODS.Voucher { --mass production, lets xmult and xchip bonuses spawn
 --#endregion
 --#region branched T3 vouchers
 HPR.BranchingVoucher = SMODS.Voucher:extend{
-    atlas = "placeholder",
+    atlas = "hpr_placeholder",
     pos = { x = 5, y = 1 },
     --soul_pos = {},
     in_pool = function (self, args)
@@ -37,3 +37,36 @@ HPR.BranchingVoucher = SMODS.Voucher:extend{
     end
 }
 
+HPR.BranchingVoucher{
+    key = "multistock",
+    config = { extra = 1 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra }}
+    end,
+    requires = {"v_overstock_plus"},
+    exclusive = "v_hpr_overstuffed",
+    redeem = function (self, card)
+        SMODS.change_booster_limit(card.ability.extra)
+        SMODS.change_voucher_limit(card.ability.extra)
+    end,
+    unredeem = function (self, card)
+        SMODS.change_booster_limit(-card.ability.extra)
+        SMODS.change_voucher_limit(-card.ability.extra)
+    end
+}
+
+HPR.BranchingVoucher{
+    key = "overstuffed",
+    config = { extra = 2 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.extra}}
+    end,
+    requires = {"v_overstock_plus"},
+    exclusive = "v_hpr_multistock",
+    redeem = function (self, card)
+        G.GAME.modifiers.booster_choice_mod = (G.GAME.modifiers.booster_choice_mod or 0) + card.ability.extra
+    end,
+    unredeem = function (self, card)
+        G.GAME.modifiers.booster_choice_mod = (G.GAME.modifiers.booster_choice_mod or 0) - card.ability.extra
+    end
+}
