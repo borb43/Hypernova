@@ -4,23 +4,7 @@ create_card = function(_type, area, legendary, _rarity, skip_materialize, soulab
 		_type = "Consumeables"
 	end
     local ret_card = create_card_ref(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
-    if ret_card.ability.set == "Default" or ret_card.ability.set == "Enhanced" then
-        if G.GAME and G.GAME.used_vouchers.v_hpr_stacking then
-            if pseudorandom("stacking") < 0.5 then ret_card.ability.perma_bonus = (ret_card.ability.perma_bonus or 0) + pseudorandom("stacking_buff"..(key_append or ""), 10, 60) end
-            if pseudorandom("stacking") < 0.5 then ret_card.ability.perma_h_chips = (ret_card.ability.perma_h_chips or 0) + pseudorandom("stacking_buff"..(key_append or ""), 15, 90) end
-            if pseudorandom("stacking") < 0.4 then ret_card.ability.perma_mult = (ret_card.ability.perma_mult or 0) + pseudorandom("stacking_buff"..(key_append or ""), 2, 10) end
-            if pseudorandom("stacking") < 0.4 then ret_card.ability.perma_h_mult = (ret_card.ability.perma_h_mult or 0) + pseudorandom("stacking_buff"..(key_append or ""), 3, 15) end
-        end
-        if G.GAME and G.GAME.used_vouchers.v_hpr_massprod then
-            if pseudorandom("stacking") < 0.25 then ret_card.ability.perma_x_chips = (ret_card.ability.perma_x_chips or 1) + (pseudorandom("stacking_buff"..(key_append or ""), 1, 10)/10) end
-            if pseudorandom("stacking") < 0.25 then ret_card.ability.perma_h_x_chips = (ret_card.ability.perma_h_x_chips or 1) + (pseudorandom("stacking_buff"..(key_append or ""), 1, 10)/10) end
-            if pseudorandom("stacking") < 0.25 then ret_card.ability.perma_x_mult = (ret_card.ability.perma_x_mult or 1) + (pseudorandom("stacking_buff"..(key_append or ""), 1, 10)/10) end
-            if pseudorandom("stacking") < 0.25 then ret_card.ability.perma_h_x_mult = (ret_card.ability.perma_h_x_mult or 1) + (pseudorandom("stacking_buff"..(key_append or ""), 1, 10)/10) end
-        end
-    end
-	if ret_card.ability.consumeable and G.GAME.modifiers.hpr_neg_consumable_rate and pseudorandom((key_append or "").."neg_consumable_deck") < G.GAME.modifiers.hpr_neg_consumable_rate then
-		ret_card:set_edition("e_negative")
-	end
+    HPR.post_create_card(ret_card, area, soulable, key_append)
     return ret_card
 end
 --#region card credits

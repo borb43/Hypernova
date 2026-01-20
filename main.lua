@@ -41,6 +41,26 @@ HPR.post_load = function ()
     end
 end
 
+HPR.post_create_card = function (card, area, soulable, key_append)
+    if (card.ability.set == "Default" or card.ability.set == "Enhanced") and (area == G.shop or area == G.shop_vouchers or area == G.shop_boosters or area == G.pack_cards ) then
+        if G.GAME and G.GAME.used_vouchers.v_hpr_stacking then
+            if pseudorandom("stacking") < 0.5 then card.ability.perma_bonus = (card.ability.perma_bonus or 0) + pseudorandom("stacking_buff"..(key_append or ""), 10, 60) end
+            if pseudorandom("stacking") < 0.5 then card.ability.perma_h_chips = (card.ability.perma_h_chips or 0) + pseudorandom("stacking_buff"..(key_append or ""), 15, 90) end
+            if pseudorandom("stacking") < 0.4 then card.ability.perma_mult = (card.ability.perma_mult or 0) + pseudorandom("stacking_buff"..(key_append or ""), 2, 10) end
+            if pseudorandom("stacking") < 0.4 then card.ability.perma_h_mult = (card.ability.perma_h_mult or 0) + pseudorandom("stacking_buff"..(key_append or ""), 3, 15) end
+        end
+        if G.GAME and G.GAME.used_vouchers.v_hpr_massprod then
+            if pseudorandom("stacking") < 0.25 then card.ability.perma_x_chips = (card.ability.perma_x_chips or 1) + (pseudorandom("stacking_buff"..(key_append or ""), 1, 10)/10) end
+            if pseudorandom("stacking") < 0.25 then card.ability.perma_h_x_chips = (card.ability.perma_h_x_chips or 1) + (pseudorandom("stacking_buff"..(key_append or ""), 1, 10)/10) end
+            if pseudorandom("stacking") < 0.25 then card.ability.perma_x_mult = (card.ability.perma_x_mult or 1) + (pseudorandom("stacking_buff"..(key_append or ""), 1, 10)/10) end
+            if pseudorandom("stacking") < 0.25 then card.ability.perma_h_x_mult = (card.ability.perma_h_x_mult or 1) + (pseudorandom("stacking_buff"..(key_append or ""), 1, 10)/10) end
+        end
+    end
+    if card.ability.consumeable and G.GAME.modifiers.hpr_neg_consumable_rate and pseudorandom((key_append or "").."neg_consumable_deck") < G.GAME.modifiers.hpr_neg_consumable_rate then
+		card:set_edition("e_negative")
+	end
+end
+
 local mod_path = HPR.path
 
 HPR.erratic_colours = {

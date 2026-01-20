@@ -898,15 +898,17 @@ local descriptions = {
         v_hpr_stacking = {
             name = "Stacking",
             text = {
-                "Playing cards may appear with random",
-                "permanent {C:chips}Chips{} or {C:mult}Mult{} bonuses"
+                "{C:attention}Playing cards{} in shop or packs",
+                "may appear with random permanent",
+                "{C:chips}Chips{} or {C:mult}Mult{} bonuses"
             }
         },
         v_hpr_massprod = {
             name = "Mass Production",
             text = {
-                "Playing cards may appear with random",
-                "permanent {X:chips,C:white}XChips{} or {X:mult,C:white}XMult{} bonuses"
+                "{C:attention}Playing cards{} in shop or packs",
+                "may appear with random permanent",
+                "{X:chips,C:white}XChips{} or {X:mult,C:white}XMult{} bonuses"
             }
         },
         v_hpr_multistock = {
