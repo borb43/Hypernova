@@ -42,7 +42,7 @@ SMODS.Enhancement {
     end,
     weight = 2
 }
-
+--[[
 SMODS.Enhancement {
     key = "mimic",
     atlas = "enhancers",
@@ -111,7 +111,7 @@ SMODS.Enhancement {
     end,
     weight = 2
 }
-
+]]
 SMODS.Enhancement {
     key = "silver",
     atlas = "enhancers",
