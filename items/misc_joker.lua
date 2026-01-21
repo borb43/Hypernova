@@ -729,27 +729,29 @@ SMODS.Joker {
 }
 
 SMODS.Joker {
-    key = "joker_versus",
-    atlas = "placeholder",
-    pos = { x = 0, y = 0 },
+    key = "tiny_graph",
+    pos = { x = 2, y = 13 },
+    pixel_size = { h = 95 / 1.2 },
+    display_size = { w = 71 * 0.7, h = 95 * 0.7 },
     rarity = 1,
     cost = 3,
-    config = { extra = 3 },
+    config = { extra = 2 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra }}
     end,
     calculate = function (self, card, context)
-        if context.individual and context.cardarea == G.play and context.other_card:get_id() == 3 then
+        if context.individual and context.cardarea == G.play and context.other_card:get_id() == 2 then
             local p = false
             for _, c in ipairs(context.scoring_hand) do
-                if c:get_id() == 3 then
+                if c:get_id() == 2 then
                     p = c == context.other_card
                     break
                 end
             end
             if p then return { xmult = card.ability.extra } end
         end
-    end
+    end,
+    pools = { wee = true }
 }
 
 SMODS.Joker {

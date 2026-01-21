@@ -588,10 +588,10 @@ local descriptions = {
                 "{C:green,E:1}probabilities {C:attention}#1#{} times"
             }
         },
-        j_hpr_joker_versus = {
-            name = "Joker Versus",
+        j_hpr_tiny_graph = {
+            name = "Memory",
             text = {
-                "First scoring {C:attention}3",
+                "First played {C:attention}2",
                 "gives {X:mult,C:white}X#1#{} Mult",
                 "when scored"
             }
