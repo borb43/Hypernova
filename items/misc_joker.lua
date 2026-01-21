@@ -546,6 +546,7 @@ SMODS.Joker {
     pos = { x = 0, y = 0 },
     rarity = 1,
     cost = 6,
+    blueprint_compat = true,
     config = { extra = { rank1 = "6", rank2 = "7" }},
     loc_vars = function (self, info_queue, card)
         return { vars = { localize(card.ability.extra.rank1, "ranks"), localize(card.ability.extra.rank2, "ranks")}}
@@ -697,6 +698,7 @@ SMODS.Joker {
     pos = { x = 0, y = 0 },
     rarity = 1,
     cost = 6,
+    blueprint_compat = true,
     config = { extra = 1.2 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra }}
@@ -735,6 +737,7 @@ SMODS.Joker {
     display_size = { w = 71 * 0.7, h = 95/1.2 * 0.7 },
     rarity = 1,
     cost = 3,
+    blueprint_compat = true,
     config = { extra = 2 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra }}
@@ -790,6 +793,7 @@ SMODS.Joker {
     pos = { x = 1, y = 0 },
     rarity = 2,
     cost = 7,
+    eternal_compat = false,
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = { set = "Other", key = "perishable", vars = { G.GAME.perishable_rounds, G.GAME.perishable_rounds }}
         info_queue[#info_queue+1] = { set = "Other", key = "rental", vars = { G.GAME.rental_rate }}
@@ -821,6 +825,7 @@ SMODS.Joker {
     pos = { x = 0, y = 0 },
     rarity = 1,
     cost = 4,
+    blueprint_compat = true,
     calculate = function (self, card, context)
         if context.joker_main then
             return {
@@ -854,6 +859,7 @@ SMODS.Joker {
     pos = { x = 1, y = 0 },
     rarity = 2,
     cost = 7,
+    eternal_compat = false,
     config = { extra = { rounds = 3, cards = 5 }},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.rounds, card.ability.extra.cards }}
@@ -890,6 +896,7 @@ SMODS.Joker {
     pos = { x = 0, y = 0 },
     rarity = 1,
     cost = 6,
+    eternal_compat = false,
     config = { extra = 3 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra }}
@@ -981,4 +988,66 @@ SMODS.Joker {
         end
     end,
     pools = { wee = true }
+}
+
+SMODS.Joker {
+    key = "petit_michel",
+    blueprint_compat = true,
+    eternal_compat = false,
+    rarity = 1,
+    cost = 5,
+    pos = { x = 7, y = 6 },
+    display_size = { w = 71 * 0.7, h = 95 * 0.7 },
+    config = { extra = { mult = 10, odds = 3 }},
+    loc_vars = function (self, info_queue, card)
+        local n, d = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, self.key)
+        return { vars = { card.ability.extra.mult, n, d }}
+    end,
+    calculate = function (self, card, context)
+        if context.individual and context.cardarea == G.play and context.other_card:get_id() == 2 then
+            return { mult = card.ability.extra.mult }
+        end
+        if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then
+            if SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds) then
+                SMODS.destroy_cards(card, nil, nil, true)
+                G.GAME.pool_flags.hpr_wee_michel_extinct = true
+                return {
+                    message = localize('k_extinct_ex')
+                }
+            else
+                return {
+                    message = localize('k_safe_ex')
+                }
+            end
+        end
+    end,
+    in_pool = function (self, args)
+        return not G.GAME.pool_flags.hpr_wee_michel_extinct
+    end
+}
+
+SMODS.Joker {
+    key = "averagedish",
+    blueprint_compat = true,
+    eternal_compat = false,
+    rarity = 3,
+    cost = 8,
+    pos = { x = 5, y = 11 },
+    display_size = { w = 71 * 0.7, h = 95 * 0.7 },
+    config = { extra = { odds = 6, xmult = 2 }},
+    loc_vars = function (self, info_queue, card)
+        local n, d = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, self.key)
+        return { vars = { card.ability.extra.xmult, n, d }}
+    end,
+    calculate = function (self, card, context)
+        if context.individual and context.cardarea == G.play and context.other_card:get_id() == 2 then
+            return { xmult = card.ability.extra.xmult }
+        end
+        if context.destroy_card and context.cardarea == G.play and context.destroy_card:get_id() == 2 and SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds ) then
+            return { remove = true }
+        end
+    end,
+    in_pool = function (self, args)
+        return G.GAME.pool_flags.hpr_wee_michel_extinct
+    end
 }

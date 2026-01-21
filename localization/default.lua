@@ -705,6 +705,24 @@ local descriptions = {
                 "{C:attention}2{} in your full deck",
                 "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)"
             }
+        },
+        j_hpr_petit_michel = {
+            name = "Petit Michel",
+            text = {
+                "Each played {C:attention}2{} gives",
+                "{C:mult}+#1#{} Mult when scored",
+                "{C:green}#2# in #3#{} chance this is",
+                "destroyed at end of round"
+            }
+        },
+        j_hpr_averagedish = {
+            name = "Average Sized Cavendish",
+            text = {
+                "Each played {C:attention}2{} gives",
+                "{X:mult,C:white}X#2#{} Mult when scored",
+                "and has a {C:green}#2# in #3#{} chance",
+                "to be destroyed"
+            }
         }
     },
     Other = {
