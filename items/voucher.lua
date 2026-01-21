@@ -87,5 +87,40 @@ HPR.BranchingVoucher{
     end,
     redeem = function (self, card)
         G.GAME.hpr_cost_reduction = (G.GAME.hpr_cost_reduction or 0) + card.ability.extra
+    end,
+    unredeem = function (self, card)
+        G.GAME.hpr_cost_reduction = (G.GAME.hpr_cost_reduction or 0) - card.ability.extra
+    end
+}
+
+HPR.BranchingVoucher{
+    key = "dark_side",
+    requires = {"v_glow_up"},
+    exclusive = "v_hpr_prism",
+    config = { extra = 5 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.extra}}
+    end,
+    redeem = function (self, card)
+        G.GAME.hpr_negative_mod = (G.GAME.hpr_negative_mod or 1) * card.ability.extra
+    end,
+    unredeem = function (self, card)
+        G.GAME.hpr_negative_mod = (G.GAME.hpr_negative_mod or 1) / card.ability.extra
+    end
+}
+
+HPR.BranchingVoucher{
+    key = "prism",
+    requires = {"v_glow_up"},
+    exclusive = "v_hpr_dark_side",
+    config = { extra = 2 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra }}
+    end,
+    redeem = function (self, card)
+        G.GAME.hpr_edition_rate = (G.GAME.hpr_edition_rate or 1) * card.ability.extra
+    end,
+    unredeem = function (self, card)
+        G.GAME.hpr_edition_rate = (G.GAME.hpr_edition_rate or 1) / card.ability.extra
     end
 }

@@ -361,3 +361,10 @@ function SMODS.injectItems(...)
 	inj(...)
 	HPR.post_load()
 end
+
+local ed = poll_edition
+function poll_edition(_key, _mod, _no_neg, _guaranteed, _options)
+	_mod = _mod or 1
+	_mod = _mod * (G.GAME.hpr_edition_rate or 1)
+	return ed(_key, _mod, _no_neg, _guaranteed, _options)
+end

@@ -956,6 +956,20 @@ local descriptions = {
                 "All cards are",
                 "{C:money}$#1#{} cheaper"
             }
+        },
+        v_hpr_dark_side = {
+            name = "Dark Side",
+            text = {
+                "{C:dark_edition}Negative{} cards appear",
+                "{C:attention}#1#X{} more often"
+            }
+        },
+        v_hpr_prism = {
+            name = "Prism",
+            text = {
+                "Cards are {C:attention}#1#X{} as likely",
+                "to have any {C:dark_edition}edition"
+            }
         }
     },
     hpr_moons = {

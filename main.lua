@@ -39,6 +39,11 @@ HPR.post_load = function ()
             end
         end
     end
+    local ref = G.P_CENTERS.e_negative.get_weight
+    G.P_CENTERS.e_negative.get_weight = function (self)
+        local base_weight = ref and ref(self) or self.weight
+        return base_weight * (G.GAME.hpr_negative_mod or 1)
+    end
 end
 
 HPR.post_create_card = function (card, area, soulable, key_append)
