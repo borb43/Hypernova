@@ -70,3 +70,22 @@ HPR.BranchingVoucher{
         G.GAME.modifiers.booster_choice_mod = (G.GAME.modifiers.booster_choice_mod or 0) - card.ability.extra
     end
 }
+
+HPR.BranchingVoucher{
+    key = "samples",
+    requires = { "v_liquidation" },
+    exclusive = "v_hpr_monopoly",
+}
+
+HPR.BranchingVoucher{
+    key = "monopoly",
+    requires = {"v_liquidation"},
+    exclusive = "v_hpr_samples",
+    config = { extra = 1 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.extra}}
+    end,
+    redeem = function (self, card)
+        G.GAME.hpr_cost_reduction = (G.GAME.hpr_cost_reduction or 0) + card.ability.extra
+    end
+}

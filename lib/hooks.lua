@@ -199,10 +199,16 @@ end
 
 local set_cost_ref = Card.set_cost
 function Card:set_cost()
+	if G.GAME.used_vouchers and G.GAME.used_vouchers.v_hpr_samples and self.area and self.area.type == "shop" and not self.ability.hpr_samples_triggered then
+		self.ability.hpr_samples_triggered = true
+		if pseudorandom("hpr_samples") < 0.3 then
+			self.ability.couponed = true
+		end
+	end
     set_cost_ref(self)
     if next(SMODS.find_card("j_hpr_master")) then
         local y = false
-        y = self.ability.set == "Booster"
+        y = self.ability.set == "Booster" or not not SMODS.ConsumableTypes[self.ability.set]
         if not y then
             for _, center in ipairs(G.P_CENTER_POOLS.Consumeables) do
                 if center.key == self.config.center.key then y = true end
@@ -214,6 +220,9 @@ function Card:set_cost()
             self.sell_cost_label = self.facing == 'back' and '?' or self.sell_cost
         end
     end
+	if G.GAME.hpr_cost_reduction then
+		self.cost = self.cost - G.GAME.hpr_cost_reduction
+	end
 end
 
 local scie = SMODS.calculate_individual_effect

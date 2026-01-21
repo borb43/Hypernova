@@ -942,6 +942,20 @@ local descriptions = {
                 "All {C:attention}Booster Packs{} contain",
                 "{C:attention}#1#{} additional cards"
             }
+        },
+        v_hpr_samples = {
+            name = "Free Samples",
+            text = {
+                "Items in the shop",
+                "may randomly be {C:attention}free"
+            }
+        },
+        v_hpr_monopoly = {
+            name = "Monopoly",
+            text = {
+                "All cards are",
+                "{C:money}$#1#{} cheaper"
+            }
         }
     },
     hpr_moons = {
