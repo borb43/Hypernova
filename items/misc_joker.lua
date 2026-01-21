@@ -732,7 +732,7 @@ SMODS.Joker {
     key = "tiny_graph",
     pos = { x = 2, y = 13 },
     pixel_size = { h = 95 / 1.2 },
-    display_size = { w = 71 * 0.7, h = 95 * 0.7 },
+    display_size = { w = 71 * 0.7, h = 95/1.2 * 0.7 },
     rarity = 1,
     cost = 3,
     config = { extra = 2 },
