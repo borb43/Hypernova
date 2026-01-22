@@ -1,4 +1,5 @@
 HPR = SMODS.current_mod
+HPR.consts = {}
 
 HPR.calculate = function(self, context)
     if context.using_consumeable or context.hpr_using_joker then
@@ -186,6 +187,13 @@ SMODS.Atlas {
     frames = 21,
     px = 34,
     py = 34
+}
+
+SMODS.Atlas {
+    key = "consumable",
+    path = "misc_consumable.png",
+    px = 71,
+    py = 95,
 }
 
 if CardSleeves then

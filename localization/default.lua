@@ -77,7 +77,7 @@ local descriptions = {
         e_hpr_green = {
             name = "{C:hpr_ultragreen}Green",
             text = {
-                "{C:hpr_ultragreen,E:1,s:1.3}?????"
+                "{C:hpr_ultragreen,E:1,s:1.3}Green"
             }
         }
     },
@@ -1227,8 +1227,8 @@ local misc = {
         k_hpr_plus_debt = "+$20 Debt Limit",
         k_hpr_plus_consumable = "+1 Consumable",
         k_hpr_painted_ex = "Painted!",
-        k_hpr_wee = "Wee"
-
+        k_hpr_wee = "Wee",
+        k_hpr_green = "Green",
     },
     high_scores = {},
     labels = {

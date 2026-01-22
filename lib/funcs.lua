@@ -195,3 +195,28 @@ function HPR.mod_blind_amount(amt, op)
     G.GAME.blind.chip_text = number_format(new_amt)
     G.HUD_blind:recalculate()
 end
+
+function HPR.get_all_highlighted(source, areas)
+    local cards = {}
+    for _, area in ipairs(areas) do
+        if area and area.highlighted then
+            for _, c in ipairs(area.highlighted) do
+                if c~=source then
+                    cards[#cards+1] = c
+                end
+            end
+        end
+    end
+end
+
+function HPR.find_edition(key)
+    local cards = {}
+    for _, area in ipairs(SMODS.get_card_areas('jokers')) do
+        for _, c in ipairs(area or {}) do
+            if c.edition and c.edition.key == key then
+                cards[#cards+1] = c
+            end
+        end
+    end
+    return cards
+end

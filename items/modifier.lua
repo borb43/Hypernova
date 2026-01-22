@@ -187,5 +187,10 @@ SMODS.Shader{
 
 SMODS.Edition{
     key = "green",
-    shader = "green"
+    shader = "green",
+    atlas = "consumable",
+    pos = {x = 0, y = 0},
+    badge_colour = G.C.HPR_ULTRAGREEN,
+    apply_to_float = true,
+    extra_cost = 5,
 }

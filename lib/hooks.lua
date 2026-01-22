@@ -368,3 +368,17 @@ function poll_edition(_key, _mod, _no_neg, _guaranteed, _options)
 	_mod = _mod * (G.GAME.hpr_edition_rate or 1)
 	return ed(_key, _mod, _no_neg, _guaranteed, _options)
 end
+
+HPR.consts.green_mult = 0.95
+local gba = get_blind_amount
+function get_blind_amount(ante)
+	local base = gba(ante)
+	local mult = 1
+	mult = mult * HPR.consts.green_mult^#HPR.find_edition("e_hpr_green")
+	for _, c in ipairs(G.playing_cards) do
+		if c.edition and c.edition.key == "e_hpr_green" then
+			mult = mult * HPR.consts.green_mult
+		end
+	end
+	return math.floor(base * mult)
+end
