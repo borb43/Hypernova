@@ -179,3 +179,13 @@ SMODS.Seal {
         end
     end
 }
+
+SMODS.Shader{
+    key = "green",
+    path = "green.fs"
+}
+
+SMODS.Edition{
+    key = "green",
+    shader = "green"
+}

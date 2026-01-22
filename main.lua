@@ -96,8 +96,10 @@ to_big = to_big or function(x) return x end
 to_number = to_number or function(x) return x end
 loc_colour()
 
+G.C.HPR_ULTRAGREEN = {0, 1, 0, 1}
 G.ARGS.LOC_COLOURS.score = HEX("7b559c")
 G.ARGS.LOC_COLOURS.blind_effect = HEX("a52a2a")
+G.ARGS.LOC_COLOURS.hpr_ultragreen = G.C.HPR_ULTRAGREEN
 
 SMODS.ObjectType {
     key = "Food",

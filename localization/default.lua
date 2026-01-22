@@ -73,7 +73,14 @@ local descriptions = {
             }
         }
     },
-    Edition = {},
+    Edition = {
+        e_hpr_green = {
+            name = "{C:hpr_ultragreen}Green",
+            text = {
+                "{C:hpr_ultragreen,E:1,s:1.3}?????"
+            }
+        }
+    },
     Enhanced = {
         m_hpr_ripple = {
             name = "Ripple Card",
@@ -1230,7 +1237,8 @@ local misc = {
         hpr_stellar = "Stellar",
         hpr_prophecy = "Corrupted",
         hpr_negative_seal = "Negative Seal",
-        hpr_awesome = "Awesome"
+        hpr_awesome = "Awesome",
+        hpr_green = "Green"
     },
     poker_hand_descriptions = {},
     poker_hands = {},
