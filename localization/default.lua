@@ -918,7 +918,14 @@ local descriptions = {
         }
     },
     Tag = {},
-    Tarot = {},
+    Tarot = {
+        c_hpr_green = {
+            name = "The Green",
+            text = {
+                "{C:hpr_ultragreen}Greens{} 1 selected card"
+            }
+        }
+    },
     Voucher = {
         v_hpr_stacking = {
             name = "Stacking",

@@ -219,6 +219,7 @@ end
 assert(SMODS.load_file("items/modifier.lua"))()
 assert(SMODS.load_file("items/prophecy.lua"))()
 assert(SMODS.load_file("items/moon.lua"))()
+assert(SMODS.load_file("items/consumable.lua"))()
 assert(SMODS.load_file("items/booster.lua"))()
 assert(SMODS.load_file("items/misc_joker.lua"))()
 assert(SMODS.load_file("items/legendary.lua"))()

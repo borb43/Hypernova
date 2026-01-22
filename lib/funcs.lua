@@ -207,6 +207,7 @@ function HPR.get_all_highlighted(source, areas)
             end
         end
     end
+    return cards
 end
 
 function HPR.find_edition(key)
