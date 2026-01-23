@@ -3,6 +3,12 @@ create_card = function(_type, area, legendary, _rarity, skip_materialize, soulab
 	if next(SMODS.find_card("j_hpr_missing")) and SMODS.ConsumableTypes[_type] then
 		_type = "Consumeables"
 	end
+	if G.GAME.used_vouchers.v_hpr_void_cradle and _type == "Tarot" and key_append ~= "ar1" and not forced_key and pseudorandom("hpr_void_cradle") < 0.2 then
+		_type = "Spectral"
+	end
+	if G.GAME.used_vouchers.v_hpr_astrology and (_type == "Planet" or _type == "Tarot") and not forced_key then
+		_type = "Tarot_Planet"
+	end
     local ret_card = create_card_ref(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
     HPR.post_create_card(ret_card, area, soulable, key_append)
     return ret_card

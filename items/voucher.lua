@@ -167,3 +167,15 @@ HPR.BranchingVoucher{
         end
     end
 }
+
+HPR.BranchingVoucher{
+    key = "void_cradle",
+    requires = {"v_omen_globe"},
+    exclusive = "v_hpr_astrology"
+}
+
+HPR.BranchingVoucher{
+    key = "astrology",
+    requires = {"v_omen_globe"},
+    exclusive = "v_hpr_void_cradle"
+}

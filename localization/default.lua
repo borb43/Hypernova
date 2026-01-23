@@ -998,6 +998,23 @@ local descriptions = {
                 "{C:attention}Rerolling{} the shop also",
                 "rerolls {C:attention}Booster Packs"
             }
+        },
+        v_hpr_void_cradle = {
+            name = "Void Cradle",
+            text = {
+                "When a random {C:tarot}Tarot{} card",
+                "is created, chance to",
+                "create a {C:spectral}Spectral{} instead"
+            }
+        },
+        v_hpr_astrology = {
+            name = "Astrology",
+            text = {
+                "When a random {C:tarot}Tarot{} or",
+                "{C:planet}Planet{} card is created,",
+                "randomly create either",
+                "of the two"
+            }
         }
     },
     hpr_moons = {
