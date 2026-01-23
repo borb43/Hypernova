@@ -175,6 +175,7 @@ function HPR.get_random_hand(include_hidden, seed, in_pool, fallback)
 end
 
 function HPR.contains(_t, val)
+    if type(_t) ~= "table" then return end
     for _, v in pairs(_t) do
         if v == val then return true end
     end

@@ -179,3 +179,40 @@ HPR.BranchingVoucher{
     requires = {"v_omen_globe"},
     exclusive = "v_hpr_void_cradle"
 }
+
+HPR.BranchingVoucher{
+    key = "satellite",
+    requires = {"v_observatory"},
+    exclusive = "v_hpr_colony",
+    config = { extra = 5 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.extra}}
+    end,
+    calculate = function (self, card, context)
+        if context.using_consumeable and context.consumeable.ability.set == "Planet" then
+            for _, c in ipairs(G.playing_cards) do
+                c.ability.perma_bonus = c.ability.perma_bonus + card.ability.extra
+            end
+        end
+    end
+}
+
+HPR.BranchingVoucher{
+    key = "colony",
+    requires = {"v_observatory"},
+    exclusive = "v_hpr_satellite",
+    config = { extra = 4 },
+    loc_vars = function (self, info_queue, card)
+        local n, d = SMODS.get_probability_vars(card, 1, card.ability.extra, self.key)
+        return{vars={n,d}}
+    end,
+    calculate = function (self, card, context)
+        if context.before then
+            for _, c in ipairs(G.consumeables.cards) do
+                if c.ability.consumeable and c.ability.set == "Planet" and (c.ability.consumeable.hand_type == context.scoring_name or HPR.contains(c.ability.consumeable.hand_types,context.scoring_name)) and SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra) then
+                    SMODS.calculate_effect({level_up = true, message = localize("k_level_up_ex"), message_card = c})
+                end
+            end
+        end
+    end
+}

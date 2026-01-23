@@ -1015,6 +1015,23 @@ local descriptions = {
                 "randomly create either",
                 "of the two"
             }
+        },
+        v_hpr_satellite = {
+            name = "Satellite",
+            text = {
+                "Used {C:planet}Planet{} cards also",
+                "add {C:chips}+#1#{} Chips to all",
+                "cards in your {C:attention}full deck"
+            }
+        },
+        v_hpr_colony = {
+            name = "Colony",
+            text = {
+                "{C:planet}Planet{} cards in your consumable",
+                "area have a {C:green}#1# in #2#{} chance to",
+                "{C:attention}level up{} their specified hand",
+                "when it is played"
+            }
         }
     },
     hpr_moons = {
