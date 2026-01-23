@@ -1023,7 +1023,8 @@ SMODS.Joker {
     end,
     in_pool = function (self, args)
         return not G.GAME.pool_flags.hpr_wee_michel_extinct
-    end
+    end,
+    pools = { wee = true }
 }
 
 SMODS.Joker {
@@ -1049,5 +1050,6 @@ SMODS.Joker {
     end,
     in_pool = function (self, args)
         return G.GAME.pool_flags.hpr_wee_michel_extinct
-    end
+    end,
+    pools = { wee = true }
 }

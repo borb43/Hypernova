@@ -984,6 +984,20 @@ local descriptions = {
                 "Cards are {C:attention}#1#X{} as likely",
                 "to have any {C:dark_edition}edition"
             }
+        },
+        v_hpr_reroll_overflow = {
+            name = "Reroll Overflow",
+            text = {
+                "{C:attention}#1#{} free {C:green}rerolls",
+                "in each shop"
+            }
+        },
+        v_hpr_reroll_bargain = {
+            name = "Reroll Bargaining",
+            text = {
+                "{C:attention}Rerolling{} the shop also",
+                "rerolls {C:attention}Booster Packs"
+            }
         }
     },
     hpr_moons = {

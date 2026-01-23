@@ -124,3 +124,46 @@ HPR.BranchingVoucher{
         G.GAME.hpr_edition_rate = (G.GAME.hpr_edition_rate or 1) / card.ability.extra
     end
 }
+
+HPR.BranchingVoucher{
+    key = "reroll_overflow",
+    requires = {"v_reroll_glut"},
+    exclusive = "v_hpr_reroll_bargain",
+    config = { extra = 2 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.extra}}
+    end,
+    redeem = function (self, card)
+        SMODS.change_free_rerolls(card.ability.extra)
+    end,
+    unredeem = function (self, card)
+        SMODS.change_free_rerolls(-card.ability.extra)
+    end
+}
+
+HPR.BranchingVoucher{
+    key = "reroll_bargain",
+    requires = {"v_reroll_glut"},
+    exclusive = "v_hpr_reroll_overflow",
+    calculate = function (self, card, context)
+        if context.reroll_shop then
+            G.E_MANAGER:add_event(Event{
+                func = function ()
+                    for _, c in ipairs(G.shop_booster.cards) do
+                        c:start_dissolve()
+                    end
+                    for i = 1, G.shop_booster.config.card_limit do
+                        local c = SMODS.add_card{
+                            area = G.shop_booster,
+                            key = get_pack('shop_pack').key,
+                            set = "Booster"
+                        }
+                        create_shop_card_ui(c, "Booster", G.shop_booster)
+                        c:start_materialize()
+                    end
+                    return true
+                end
+            })
+        end
+    end
+}

@@ -11,12 +11,3 @@ times = 1
 position = "at"
 payload = ""
 match_indent = true
-
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = "self.ability.consumeable = center.config"
-times = 1
-position = "at"
-payload = "self.ability.consumeable = self.ability"
-match_indent = true
