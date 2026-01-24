@@ -937,7 +937,7 @@ local descriptions = {
             name = "Stacking",
             text = {
                 "{C:attention}Playing cards{} in shop or packs",
-                "may appear with random permanent",
+                "may appear with permanent",
                 "{C:chips}Chips{} or {C:mult}Mult{} bonuses"
             }
         },
@@ -945,7 +945,7 @@ local descriptions = {
             name = "Mass Production",
             text = {
                 "{C:attention}Playing cards{} in shop or packs",
-                "may appear with random permanent",
+                "may appear with permanent",
                 "{X:chips,C:white}XChips{} or {X:mult,C:white}XMult{} bonuses"
             }
         },
