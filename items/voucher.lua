@@ -216,3 +216,49 @@ HPR.BranchingVoucher{
         end
     end
 }
+
+HPR.BranchingVoucher{
+    key = "tarot_shipment",
+    requires = {"v_tarot_tycoon"},
+    exclusive = "v_hpr_tarot_augment",
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_TAGS.tag_hpr_mini_charm
+        local name = localize{ type = "name_text", key = "tag_hpr_mini_charm", set = "Tag" }
+        return { vars = {name}}
+    end,
+    calculate = function (self, card, context)
+        if context.ending_shop then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    add_tag(Tag('tag_hpr_mini_charm'))
+                    play_sound('generic1', 0.9 + math.random() * 0.1, 0.8)
+                    play_sound('holo1', 1.2 + math.random() * 0.1, 0.4)
+                    return true
+                end
+            }))
+        end
+    end
+}
+
+HPR.BranchingVoucher{
+    key = "tarot_augment",
+    requires = {"v_tarot_tycoon"},
+    exclusive = "v_hpr_tarot_shipment",
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'e_negative_consumable', set = 'Edition', config = { extra = 1 } }
+    end,
+    calculate = function (self, card, context)
+        if context.using_consumeable and not (context.consumeable.edition and context.consumeable.edition.negative) and context.consumeable.ability.set == "Tarot" then
+            local c = context.consumeable
+            G.E_MANAGER:add_event(Event{
+                func = function()
+                    local copied_card = copy_card(c)
+                    copied_card:set_edition("e_negative", true)
+                    copied_card:add_to_deck()
+                    G.consumeables:emplace(copied_card)
+                    return true
+                end
+            })
+        end
+    end
+}

@@ -1047,6 +1047,21 @@ local descriptions = {
                 "{C:attention}level up{} their specified hand",
                 "when it is played"
             }
+        },
+        v_hpr_tarot_shipment = {
+            name = "Tarot Shipments",
+            text = {
+                "Gain a free {C:tarot}#1#",
+                "at the end of the shop"
+            }
+        },
+        v_hpr_tarot_augment = {
+            name = "Tarot Augmentation",
+            text = {
+                "When a non-{C:dark_edition}Negative{C:tarot} Tarot",
+                "card is used, create a",
+                "{C:dark_edition}Negative{} copy of it"
+            }
         }
     },
     hpr_moons = {

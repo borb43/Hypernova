@@ -223,7 +223,7 @@ assert(SMODS.load_file("items/consumable.lua"))()
 assert(SMODS.load_file("items/booster.lua"))()
 assert(SMODS.load_file("items/misc_joker.lua"))()
 assert(SMODS.load_file("items/legendary.lua"))()
-assert(SMODS.load_file("items/tag.lua"))
+assert(SMODS.load_file("items/tag.lua"))()
 
 if next(SMODS.find_mod("entr")) then
     assert(SMODS.load_file("crossmod/rlegendary.lua"))()
