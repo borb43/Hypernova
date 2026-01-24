@@ -1138,6 +1138,34 @@ local descriptions = {
                 "Earn an extra {C:money}$#1#{} when",
                 "{C:attention}Boss Blind{} is defeated"
             }
+        },
+        v_hpr_claw_arm = {
+            name = "Claw Arm",
+            text = {
+                "{C:attention}+#1#{} Play selection limit"
+            }
+        },
+        v_hpr_garden_gloves = {
+            name = "Gardening Gloves",
+            text = {
+                "Earn an extra {C:money}$#1#",
+                "per remaining {C:blue}hand",
+                "at the end of round"
+            }
+        },
+        v_hpr_bulk_waste = {
+            name = "Bulk Waste",
+            text = {
+                "{C:attention}+#1#{} Discard selection limit"
+            }
+        },
+        v_hpr_upcycling = {
+            name = "Upcycling",
+            text = {
+                "Earn an extra {C:money}$#1#",
+                "per remaining {C:red}discard",
+                "at the end of round"
+            }
         }
     },
     hpr_moons = {

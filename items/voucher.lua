@@ -218,6 +218,70 @@ HPR.BranchingVoucher{
 }
 
 HPR.BranchingVoucher{
+    key = "claw_arm",
+    requires = {"v_nacho_tong"},
+    exclusive = "v_hpr_garden_gloves",
+    config = { extra = 2 },
+    loc_vars = function (self, info_queue, card)
+        return{vars={card.ability.extra}}
+    end,
+    redeem = function (self, card)
+        SMODS.change_play_limit(card.ability.extra)
+    end,
+    unredeem = function (self, card)
+        SMODS.change_play_limit(-card.ability.extra)
+    end
+}
+
+HPR.BranchingVoucher{
+    key = "garden_gloves",
+    requires = {"v_nacho_tong"},
+    exclusive = "v_hpr_claw_arm",
+    config = { extra = 1 },
+    loc_vars = function (self, info_queue, card)
+        return{vars={card.ability.extra}}
+    end,
+    redeem = function (self, card)
+        G.GAME.modifiers.money_per_hand = (G.GAME.modifiers.money_per_hand or 1) + card.ability.extra
+    end,
+    unredeem = function (self, card)
+        G.GAME.modifiers.money_per_hand = (G.GAME.modifiers.money_per_hand or 1) - card.ability.extra
+    end,
+}
+
+HPR.BranchingVoucher{
+    key = "bulk_waste",
+    requires = {"v_recyclomancy"},
+    exclusive = "v_hpr_upcycling",
+    config = { extra = 2 },
+    loc_vars = function (self, info_queue, card)
+        return{vars={card.ability.extra}}
+    end,
+    redeem = function (self, card)
+        SMODS.change_discard_limit(card.ability.extra)
+    end,
+    unredeem = function (self, card)
+        SMODS.change_discard_limit(-card.ability.extra)
+    end,
+}
+
+HPR.BranchingVoucher{
+    key = "upcycling",
+    requires = {"v_recyclomancy"},
+    exclusive = "v_hpr_bulk_waste",
+    config = { extra = 1 },
+    loc_vars = function (self,info_queue,card)
+        return{vars={card.ability.extra}}
+    end,
+    redeem = function (self, card)
+        G.GAME.modifiers.money_per_discard = (G.GAME.modifiers.money_per_discard or 0) + card.ability.extra
+    end,
+    unredeem = function (self, card)
+        G.GAME.modifiers.money_per_discard = (G.GAME.modifiers.money_per_discard or 0) - card.ability.extra
+    end,
+}
+
+HPR.BranchingVoucher{
     key = "tarot_shipment",
     requires = {"v_tarot_tycoon"},
     exclusive = "v_hpr_tarot_augment",
