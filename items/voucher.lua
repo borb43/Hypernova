@@ -511,4 +511,28 @@ HPR.BranchingVoucher{
         end
     end
 }
+
+HPR.BranchingVoucher{
+    key = "paint_bucket",
+    requires = {"v_palette"},
+    exclusive = "v_hpr_magic_wand",
+    config = { extra = 1 },
+    loc_vars = function (self, info_queue, card)
+        return{vars={card.ability.extra}}
+    end,
+    redeem = function (self, card)
+        SMODS.change_play_limit(card.ability.extra)
+        SMODS.change_discard_limit(card.ability.extra)
+    end,
+    unredeem = function (self, card)
+        SMODS.change_play_limit(-card.ability.extra)
+        SMODS.change_discard_limit(-card.ability.extra)
+    end,
+}
+
+HPR.BranchingVoucher{
+    key = "magic_wand",
+    requires = {"v_palette"},
+    exclusive = "v_hpr_paint_bucket",
+}
 --#endregion

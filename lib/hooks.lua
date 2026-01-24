@@ -273,6 +273,13 @@ function SMODS.score_card(card, context)
 		G.scorehand = nil
 		context.cardarea = G.hand
 	end
+	if not G.scorehand and context.cardarea == "unscored" and G.GAME.used_vouchers.v_hpr_magic_wand then
+		G.scorehand = true
+		context.cardarea = G.hand
+		SMODS.score_card(card, context)
+		G.scorehand = nil
+		context.cardarea = "unscored"
+	end
 	return score_card_ref(card, context)
 end
 

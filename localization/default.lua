@@ -1166,6 +1166,20 @@ local descriptions = {
                 "per remaining {C:red}discard",
                 "at the end of round"
             }
+        },
+        v_hpr_paint_bucket = {
+            name = "Paint Bucket",
+            text = {
+                "{C:attention}+#1#{} Card selection limit"
+            }
+        },
+        v_hpr_magic_wand = {
+            name = "Magic Wand",
+            text = {
+                "Played and {C:attention}non-scoring",
+                "cards trigger their",
+                "{C:attention}held in hand{} effects"
+            }
         }
     },
     hpr_moons = {
