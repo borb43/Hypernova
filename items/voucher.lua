@@ -28,7 +28,7 @@ HPR.BranchingVoucher = SMODS.Voucher:extend{
     pos = { x = 5, y = 1 },
     --soul_pos = {},
     in_pool = function (self, args)
-        if G.shop_vouchers and G.load_shop_vouchers.cards then
+        if G.shop_vouchers and G.shop_vouchers.cards then
             for _, v in ipairs(G.shop_vouchers.cards) do
                 if v.config.center.key == self.exclusive then return false end
             end
@@ -414,6 +414,37 @@ HPR.BranchingVoucher{
     end,
     redeem = function (self, card)
         G.GAME.hpr_stasis = card.ability.extra
+    end
+}
+
+HPR.BranchingVoucher{
+    key = "staged",
+    requires = {"v_retcon"},
+    exclusive = "v_hpr_paid_actor",
+    calculate = function (self, card, context)
+        if context.hand_drawn and G.GAME.current_round.hands_left <= 1 and G.GAME.blind and G.GAME.blind.boss and not G.GAME.blind.disabled then
+            return{
+                message = localize("ph_boss_disabled"),
+                func = function ()
+                    G.GAME.blind:disable()
+                end
+            }
+        end
+    end
+}
+
+HPR.BranchingVoucher{
+    key = "paid_actor",
+    requires = {"v_retcon"},
+    exclusive = "v_hpr_staged",
+    config = { extra = 25 },
+    loc_vars = function (self, info_queue, card)
+        return{ vars = {card.ability.extra}}
+    end,
+    calc_dollar_bonus = function (self, card)
+        if G.GAME.last_blind and G.GAME.last_blind.boss then
+            return card.ability.extra
+        end
     end
 }
 --#endregion

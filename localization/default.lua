@@ -1124,6 +1124,20 @@ local descriptions = {
             text = {
                 "{C:attention}X#1#^Ante{} Blind Size"
             }
+        },
+        v_hpr_staged = {
+            name = "Staged",
+            text = {
+                "Disables the {C:attention}Boss Blind",
+                "on {C:attention}final hand{} of round"
+            }
+        },
+        v_hpr_paid_actor = {
+            name = "Paid Actor",
+            text = {
+                "Earn an extra {C:money}$#1#{} when",
+                "{C:attention}Boss Blind{} is defeated"
+            }
         }
     },
     hpr_moons = {
