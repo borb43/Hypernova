@@ -42,76 +42,7 @@ SMODS.Enhancement {
     end,
     weight = 2
 }
---[[
-SMODS.Enhancement {
-    key = "mimic",
-    atlas = "enhancers",
-    pos = { x = 2, y = 0 },
-    config = { x_mult = 1.25 },
-    loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.x_mult }}
-    end,
-    weight = 2
-}
 
-SMODS.Enhancement {
-    key = "prism",
-    atlas = "enhancers",
-    pos = { x = 3, y = 0 },
-    shatters = true,
-    loc_vars = function (self, info_queue, card)
-        if not self.edition or self.edition.key ~= "e_polychrome" then
-            info_queue[#info_queue+1] = G.P_CENTERS.e_polychrome
-        end
-    end,
-    calculate = function (self, card, context)
-        if context.before and context.cardarea == G.play then
-            local cards = SMODS.Edition:get_edition_cards(G.hand, true)
-            local target = pseudorandom_element(cards, "hpr_prism")
-            if target then
-                return {
-                    message = localize("k_upgrade_ex"),
-                    colour = G.C.DARK_EDITION,
-                    message_card = target,
-                    func = function ()
-                        target:set_edition("e_polychrome", nil, nil)
-                    end
-                }
-            end
-        end
-        if context.discard and context.other_card == card then
-            return { remove = true }
-        end
-        if context.playing_card_end_of_round then
-            SMODS.destroy_cards(card)
-        end
-    end,
-    weight = 2
-}
-
-SMODS.Enhancement {
-    key = "alloy",
-    atlas = "enhancers",
-    pos = { x = 0, y = 1 },
-    weight = 2
-}
-
-SMODS.Enhancement {
-    key = "schematic",
-    atlas = "enhancers",
-    pos = { x = 1, y = 1},
-    no_rank = true,
-    no_suit = true,
-    replace_base_card = true,
-    always_scores = true,
-    calculate = function (self, card, context)
-        if context.main_scoring and context.cardarea == G.play then
-            return { balance = true }
-        end
-    end,
-    weight = 2
-}
-]]
 SMODS.Enhancement {
     key = "silver",
     atlas = "enhancers",

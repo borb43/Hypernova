@@ -266,19 +266,12 @@ end
 
 local score_card_ref = SMODS.score_card
 function SMODS.score_card(card, context)
-	if not G.scorehand and context.cardarea == G.hand and (next(SMODS.find_card("j_hpr_storm")) or SMODS.has_enhancement(card, "m_hpr_alloy") ) then
+	if not G.scorehand and context.cardarea == G.hand and next(SMODS.find_card("j_hpr_storm")) then
 		G.scorehand = true
 		context.cardarea = G.play
 		SMODS.score_card(card, context)
 		G.scorehand = nil
 		context.cardarea = G.hand
-	end
-	if not G.scorehand and context.cardarea == G.play and SMODS.has_enhancement(card, "m_hpr_alloy") then
-		G.scorehand = true
-		context.cardarea = G.hand
-		SMODS.score_card(card, context)
-		G.scorehand = nil
-		context.cardarea = G.play
 	end
 	return score_card_ref(card, context)
 end
@@ -349,11 +342,6 @@ function SMODS.pseudorandom_probability(trigger_obj, seed, base_numerator, base_
 		end
 	end
 	return res
-end
-
-local face_ref = Card.is_face
-function Card:is_face(from_boss)
-	return face_ref(self, from_boss) or SMODS.has_enhancement(self, "m_hpr_mimic")
 end
 
 local inj = SMODS.injectItems
