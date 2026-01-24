@@ -1062,6 +1062,21 @@ local descriptions = {
                 "card is used, create a",
                 "{C:dark_edition}Negative{} copy of it"
             }
+        },
+        v_hpr_planet_shipment = {
+            name = "Planet Shipments",
+            text = {
+                "Gain a free {C:planet}#1#",
+                "at the end of the shop"
+            }
+        },
+        v_hpr_planet_augment = {
+            name = "Planet Augmentation",
+            text = {
+                "When a non-{C:dark_edition}Negative{C:planet} Planet",
+                "card is used, create a",
+                "{C:dark_edition}Negative{} copy of it"
+            }
         }
     },
     hpr_moons = {
