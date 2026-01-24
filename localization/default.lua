@@ -917,7 +917,22 @@ local descriptions = {
             }
         }
     },
-    Tag = {},
+    Tag = {
+        tag_hpr_mini_charm = {
+            name = "Mini Charm Tag",
+            text = {
+                "Immediately open a",
+                "free {C:tarot}Arcana Pack"
+            }
+        },
+        tag_hpr_mini_meteor = {
+            name = "Mini Meteor Tag",
+            text = {
+                "Immediately open a",
+                "free {C:planet}Celestial Pack"
+            }
+        }
+    },
     Tarot = {
         c_hpr_green = {
             name = "The Green",
