@@ -214,7 +214,7 @@ end
 function HPR.find_edition(key)
     local cards = {}
     for _, area in ipairs(SMODS.get_card_areas('jokers')) do
-        for _, c in ipairs(area or {}) do
+        for _, c in ipairs((area or {}).cards or {}) do
             if c.edition and c.edition.key == key then
                 cards[#cards+1] = c
             end
