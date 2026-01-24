@@ -1179,6 +1179,22 @@ local descriptions = {
                 "cards trigger their",
                 "{C:attention}held in hand{} effects"
             }
+        },
+        v_hpr_falsified = {
+            name = "Falsified",
+            text = {
+                "{C:attention}Playing cards{} in shop",
+                "or packs may appear with",
+                "a permanent {C:attention}retrigger"
+            }
+        },
+        v_hpr_fool_gold = {
+            name = "Fool's Gold",
+            text = {
+                "{C:attention}Playing cards{} in shop",
+                "or packs may appear with",
+                "permanent {C:money}${} bonuses"
+            }
         }
     },
     hpr_moons = {

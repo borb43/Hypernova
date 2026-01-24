@@ -533,4 +533,15 @@ HPR.BranchingVoucher{
     requires = {"v_palette"},
     exclusive = "v_hpr_paint_bucket",
 }
+
+HPR.BranchingVoucher{
+    key = "falsified",
+    requires = {"v_hpr_massprod"},
+    exclusive = "v_hpr_fool_gold",
+}
+HPR.BranchingVoucher{
+    key = "fool_gold",
+    requires = {"v_hpr_massprod"},
+    exclusive = "v_hpr_falsified"
+}
 --#endregion
