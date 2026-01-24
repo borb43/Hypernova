@@ -124,4 +124,75 @@ SMODS.Edition{
     badge_colour = G.C.HPR_ULTRAGREEN,
     apply_to_float = true,
     extra_cost = 5,
+    config = { extra = { green = 0, add = 1 }},
+    loc_vars = function (self, info_queue, card)
+        local key = self.key
+        if card.playing_card then key = key.."_pcard" end
+        return{ vars = { card.edition.extra.green, card.edition.extra.add }, key = key }
+    end,
+    calculate = function (self, card, context)
+        if card.playing_card then
+            if context.discard and context.other_card == card then
+                SMODS.scale_card(card, {
+                    ref_table = card.edition.extra,
+                    ref_value = "green",
+                    scalar_value = "add",
+                    operation = '-',
+                    message_key = "a_hpr_green_minus",
+                    message_colour = G.C.HPR_ULTRAGREEN
+                })
+            end
+            if context.before and (context.cardarea == G.play or context.cardarea == "unscored") then
+                SMODS.scale_card(card, {
+                    ref_table = card.edition.extra,
+                    ref_value = "green",
+                    scalar_value = "add",
+                    message_key = "a_hpr_green",
+                    message_colour = G.C.HPR_ULTRAGREEN
+                })
+            end
+            if context.main_scoring and context.cardarea == G.play then
+                return{
+                    mult = card.edition.extra.green,
+                    message = localize{type="variable",key="a_hpr_green",vars={card.edition.extra.green}},
+                    colour = G.C.HPR_ULTRAGREEN,
+                    remove_default_message = true,
+                    sound = "foil2",
+                    volume = 0.3,
+                    hpr_no_mod = true
+                }
+            end
+        else
+            if context.pre_discard then
+                SMODS.scale_card(card, {
+                    ref_table = card.edition.extra,
+                    ref_value = "green",
+                    scalar_value = "add",
+                    operation = '-',
+                    message_key = "a_hpr_green_minus",
+                    message_colour = G.C.HPR_ULTRAGREEN
+                })
+            end
+            if context.before then
+                SMODS.scale_card(card, {
+                    ref_table = card.edition.extra,
+                    ref_value = "green",
+                    scalar_value = "add",
+                    message_key = "a_hpr_green",
+                    message_colour = G.C.HPR_ULTRAGREEN
+                })
+            end
+            if context.pre_joker then
+                return{
+                    mult = card.edition.extra.green,
+                    message = localize{type="variable",key="a_hpr_green",vars={card.edition.extra.green}},
+                    colour = G.C.HPR_ULTRAGREEN,
+                    remove_default_message = true,
+                    sound = "foil2",
+                    volume = 0.3,
+                    hpr_no_mod = true
+                }
+            end
+        end
+    end
 }

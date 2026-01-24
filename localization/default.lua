@@ -77,7 +77,17 @@ local descriptions = {
         e_hpr_green = {
             name = "{C:hpr_ultragreen}Green",
             text = {
-                "{C:hpr_ultragreen,E:1,s:1.3}Green"
+                "{C:hpr_ultragreen}+#1#{} Green",
+                "{C:hpr_ultragreen}+#2#{} Green on hand played",
+                "{C:hpr_ultragreen}-#2#{} Green on discard"
+            }
+        },
+        e_hpr_green_pcard = {
+            name = "{C:hpr_ultragreen}Green",
+            text = {
+                "{C:hpr_ultragreen}+#1#{} Green",
+                "{C:hpr_ultragreen}+#2#{} Green when played",
+                "{C:hpr_ultragreen}-#2#{} Green when discarded"
             }
         }
     },
@@ -1469,7 +1479,9 @@ local misc = {
         hpr_credits_idea = { "Idea: #1#" },
         hpr_credits_art = { "Art: #1#" },
         hpr_credits_code = { "Code: #1#" },
-        hpr_card_banned = "#1# Banished"
+        hpr_card_banned = "#1# Banished",
+        a_hpr_green = "+#1# Green",
+        a_hpr_green_minus = "-#1# Green",
     },
     v_text = {},
 }

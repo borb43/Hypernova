@@ -233,7 +233,7 @@ end
 
 local scie = SMODS.calculate_individual_effect
 function SMODS.calculate_individual_effect(effect, scored_card, key, amount, from_edition)
-	if HPR.findany(key, "mult", "chip") then
+	if HPR.findany(key, "mult", "chip") and not effect.hpr_no_mod then
 		for _, c in ipairs(SMODS.find_card("j_hpr_growth")) do
 			amount = amount * c.ability.extra.eff_mod
 		end
@@ -257,7 +257,7 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
 			end
 		end
 	end
-	if HPR.findany(key, "mult", "chip", "dollar") then
+	if HPR.findany(key, "mult", "chip", "dollar") and not effect.hpr_no_mod then
 		amount = amount * (scored_card.ability.perma_eff_mod + 1)
 		if key == "dollars" or key == "p_dollars" or key == "h_dollars" then amount = math.floor(amount) end
 	end
@@ -369,12 +369,6 @@ local gba = get_blind_amount
 function get_blind_amount(ante)
 	local base = gba(ante)
 	local mult = 1
-	mult = mult * HPR.consts.green_mult^#HPR.find_edition("e_hpr_green")
-	for _, c in ipairs(G.playing_cards) do
-		if c.edition and c.edition.key == "e_hpr_green" then
-			mult = mult * HPR.consts.green_mult
-		end
-	end
 	if G.GAME.hpr_stasis then
 		mult = mult * G.GAME.hpr_stasis^(G.GAME.round_resets.blind_ante or G.GAME.round_resets.ante)
 	end
