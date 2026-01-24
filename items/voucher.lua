@@ -354,4 +354,33 @@ HPR.BranchingVoucher{
     requires = {"v_antimatter"},
     exclusive = "v_hpr_tachyon",
 }
+
+HPR.BranchingVoucher{
+    key = "magician",
+    requires = {"v_illusion"},
+    exclusive = "v_hpr_conjuring",
+}
+
+HPR.BranchingVoucher{
+    key = "conjuring",
+    requires = {"v_illusion"},
+    exclusive = "v_hpr_magician",
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_TAGS.tag_standard
+        local name = localize{ type = "name_text", key = "tag_standard", set = "Tag" }
+        return { vars = {name}}
+    end,
+    calculate = function (self, card, context)
+        if context.ending_shop then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    add_tag(Tag('tag_standard'))
+                    play_sound('generic1', 0.9 + math.random() * 0.1, 0.8)
+                    play_sound('holo1', 1.2 + math.random() * 0.1, 0.4)
+                    return true
+                end
+            }))
+        end
+    end
+}
 --#endregion

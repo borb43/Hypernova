@@ -1107,6 +1107,20 @@ local descriptions = {
                 "or packs have a high",
                 "chance to be {C:dark_edition}Negative"
             }
+        },
+        v_hpr_magician = {
+            name = "Magician",
+            text = {
+                "{C:attention}Playing cards{} in shop or packs",
+                "always have an {C:attention}Enhancement"
+            }
+        },
+        v_hpr_conjuring = {
+            name = "Conjuring",
+            text = {
+                "Gain a free {C:attention}#1#",
+                "at the end of the shop"
+            }
         }
     },
     hpr_moons = {

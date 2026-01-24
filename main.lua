@@ -68,6 +68,10 @@ HPR.post_create_card = function (card, area, soulable, key_append)
     if area and G.GAME.used_vouchers.v_hpr_graviton and (area.config.type == "shop" or area == G.pack_cards) and card.is_rarity and card:is_rarity(1) and pseudorandom((key_append or "").."hpr_graviton") < 0.05 then
         card:set_edition("e_negative")
     end
+    if G.GAME.used_vouchers.v_hpr_magician and card.ability.set == "Default" and area and (area.config.type == "shop" or area == G.pack_cards) then
+        local enh = SMODS.poll_enhancement{guaranteed = true, type_key = (key_append or "").."hpr_magician"}
+        card:set_ability(enh)
+    end
 end
 
 local mod_path = HPR.path
