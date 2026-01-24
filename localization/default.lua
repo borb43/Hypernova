@@ -1092,6 +1092,21 @@ local descriptions = {
                 "Earn an extra {C:money}$#1#",
                 "at end of round"
             }
+        },
+        v_hpr_tachyon = {
+            name = "Tachyon",
+            text = {
+                "{C:attention}Retriggers{} the",
+                "leftmost Joker"
+            }
+        },
+        v_hpr_graviton = {
+            name = "Graviton",
+            text = {
+                "{C:common}Common{C:attention} Jokers{} in shop",
+                "or packs have a high",
+                "chance to be {C:dark_edition}Negative"
+            }
         }
     },
     hpr_moons = {

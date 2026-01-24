@@ -337,4 +337,21 @@ HPR.BranchingVoucher{
         return card.ability.extra
     end
 }
+
+HPR.BranchingVoucher{
+    key = "tachyon",
+    requires = {"v_antimatter"},
+    exclusive = "v_hpr_graviton",
+    calculate = function (self, card, context)
+        if context.retrigger_joker_check and not context.retrigger_joker and context.other_card == G.jokers.cards[1] then
+            return { repetitions = 1 }
+        end
+    end
+}
+
+HPR.BranchingVoucher{
+    key = "graviton",
+    requires = {"v_antimatter"},
+    exclusive = "v_hpr_tachyon",
+}
 --#endregion
