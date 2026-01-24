@@ -46,11 +46,9 @@ HPR.BranchingVoucher{
     requires = {"v_overstock_plus"},
     exclusive = "v_hpr_overstuffed",
     redeem = function (self, card)
-        SMODS.change_booster_limit(card.ability.extra)
         SMODS.change_voucher_limit(card.ability.extra)
     end,
     unredeem = function (self, card)
-        SMODS.change_booster_limit(-card.ability.extra)
         SMODS.change_voucher_limit(-card.ability.extra)
     end
 }
@@ -64,10 +62,10 @@ HPR.BranchingVoucher{
     requires = {"v_overstock_plus"},
     exclusive = "v_hpr_multistock",
     redeem = function (self, card)
-        G.GAME.modifiers.booster_choice_mod = (G.GAME.modifiers.booster_choice_mod or 0) + card.ability.extra
+        SMODS.change_booster_limit(card.ability.extra)
     end,
     unredeem = function (self, card)
-        G.GAME.modifiers.booster_choice_mod = (G.GAME.modifiers.booster_choice_mod or 0) - card.ability.extra
+        SMODS.change_booster_limit(card.ability.extra)
     end
 }
 

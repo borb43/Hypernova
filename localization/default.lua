@@ -952,15 +952,14 @@ local descriptions = {
         v_hpr_multistock = {
             name = "Multistock",
             text = {
-                "{C:attention}+#1#{} Booster pack and Voucher",
-                "available in each shop"
+                "{C:attention}+#1#{} Voucher in shop",
             }
         },
         v_hpr_overstuffed = {
             name = "Overstuffed",
             text = {
-                "All {C:attention}Booster Packs{} contain",
-                "{C:attention}#1#{} additional cards"
+                "{C:attention}+#1#{} Booster Packs",
+                "in each shop"
             }
         },
         v_hpr_samples = {
