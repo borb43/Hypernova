@@ -36,7 +36,9 @@ HPR.post_load = function ()
             local ref = c.set_badges
             c.set_badges = function (self, card, badges)
                 if ref then ref(self, card, badges) end
-                badges[#badges+1] = create_badge(localize("k_hpr_wee"), G.C.HPR_WEE, G.C.WHITE, 1)
+                if self.discovered then
+                    badges[#badges+1] = create_badge(localize("k_hpr_wee"), G.C.HPR_WEE, G.C.WHITE, 1)
+                end
             end
         end
     end
