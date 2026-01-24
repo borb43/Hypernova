@@ -308,3 +308,33 @@ HPR.BranchingVoucher{
         end
     end
 }
+
+HPR.BranchingVoucher{
+    key = "money_orchard",
+    requires = {"v_money_tree"},
+    exclusive = "v_hpr_money_harvest",
+    config = { extra = 1 },
+    loc_vars = function (self,  info_queue, card)
+        return{vars={card.ability.extra}}
+    end,
+    redeem = function (self, card)
+        G.GAME.interest_amount = G.GAME.interest_amount + card.ability.extra
+    end,
+    unredeem = function (self, card)
+        G.GAME.interest_amount = G.GAME.interest_amount - card.ability.extra
+    end
+}
+
+HPR.BranchingVoucher{
+    key = "money_harvest",
+    requires = {"v_money_tree"},
+    exclusive = "v_hpr_money_orchard",
+    config = { extra = 10 },
+    loc_vars = function (self, info_queue, card)
+        return{ vars = {card.ability.extra}}
+    end,
+    calc_dollar_bonus = function (self, card)
+        return card.ability.extra
+    end
+}
+--#endregion

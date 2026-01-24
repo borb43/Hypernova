@@ -1077,6 +1077,21 @@ local descriptions = {
                 "card is used, create a",
                 "{C:dark_edition}Negative{} copy of it"
             }
+        },
+        v_hpr_money_orchard = {
+            name = "Money Orchard",
+            text = {
+                "Earn an extra {C:money}$#1#{} of",
+                "{C:attention}interest{} for every {C:money}$5{} you",
+                "have at end of round",
+            }
+        },
+        v_hpr_money_harvest = {
+            name = "Money Harvest",
+            text = {
+                "Earn an extra {C:money}$#1#",
+                "at end of round"
+            }
         }
     },
     hpr_moons = {
