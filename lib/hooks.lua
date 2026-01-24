@@ -345,13 +345,18 @@ function SMODS.pseudorandom_probability(trigger_obj, seed, base_numerator, base_
 		hpr_retrigger_probability = true
 	}, effects)
 	for i = 1, #effects do
-		local eff = effects[i]
-		if eff and eff.jokers and (eff.jokers.hpr_retriggers or 0) >= 1 then
-			for _ = 1, eff.jokers.hpr_retriggers do
-				local new_res = prob_ref(trigger_obj, seed, base_numerator, base_denominator, identifier, no_mod)
-				card_eval_status_text(eff.jokers.message_card or eff.jokers.card or trigger_obj, "extra", nil, nil, nil, { message = eff.jokers.message or localize("k_again_ex"), colour = eff.jokers.colour or G.C.GREEN })
-				res = res or new_res
+		local eff = effects[i] and effects[i].jokers
+		while eff do
+			if eff.repetitions then
+				for _ = 1, eff.repetitions do
+					local new_res = prob_ref(trigger_obj, seed, base_numerator, base_denominator, identifier, no_mod)
+					card_eval_status_text(eff.message_card or eff.card or trigger_obj, "extra", nil, nil, nil, { message = eff.message or localize("k_again_ex"), colour = eff.colour or G.C.GREEN })
+					res = res or new_res
+				end
+			else
+				sendWarnMessage("Found effect table during repetition check with no assigned repetitions", "Hypernova")
 			end
+			eff = eff.extra
 		end
 	end
 	return res

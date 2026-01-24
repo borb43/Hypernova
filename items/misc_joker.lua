@@ -724,7 +724,7 @@ SMODS.Joker {
     end,
     calculate = function (self, card, context)
         if context.hpr_retrigger_probability then
-            return { hpr_retriggers = card.ability.extra }
+            return { repetitions = card.ability.extra }
         end
     end,
     hpr_ascension_key = "j_hpr_lucky",
