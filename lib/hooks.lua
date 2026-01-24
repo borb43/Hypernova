@@ -391,5 +391,8 @@ function get_blind_amount(ante)
 			mult = mult * HPR.consts.green_mult
 		end
 	end
+	if G.GAME.hpr_stasis then
+		mult = mult * G.GAME.hpr_stasis^(G.GAME.round_resets.blind_ante or G.GAME.round_resets.ante)
+	end
 	return math.floor(base * mult)
 end

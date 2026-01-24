@@ -1121,6 +1121,18 @@ local descriptions = {
                 "Gain a free {C:attention}#1#",
                 "at the end of the shop"
             }
+        },
+        v_hpr_fossil = {
+            name = "Fossil",
+            text = {
+                "{C:attention}-#1#{} Ante"
+            }
+        },
+        v_hpr_stasis = {
+            name = "Stasis",
+            text = {
+                "{C:attention}X#1#^Ante{} Blind Size"
+            }
         }
     },
     hpr_moons = {

@@ -383,4 +383,37 @@ HPR.BranchingVoucher{
         end
     end
 }
+
+HPR.BranchingVoucher{
+    key = "fossil",
+    requires = {"v_petroglyph"},
+    exclusive = "v_hpr_stasis",
+    config = { extra = 1 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.extra}}
+    end,
+    redeem = function (self, card)
+        ease_ante(-card.ability.extra)
+        G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante or G.GAME.round_resets.ante
+        G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante - card.ability.extra
+    end,
+    unredeem = function (self, card)
+        ease_ante(card.ability.extra)
+        G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante or G.GAME.round_resets.ante
+        G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante + card.ability.extra
+    end
+}
+
+HPR.BranchingVoucher{
+    key = "stasis",
+    requires = {"v_petroglyph"},
+    exclusive = "v_hpr_fossil",
+    config = { extra = 0.9 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.extra}}
+    end,
+    redeem = function (self, card)
+        G.GAME.hpr_stasis = card.ability.extra
+    end
+}
 --#endregion
