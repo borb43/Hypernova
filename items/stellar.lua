@@ -1034,25 +1034,6 @@ HPR.StellarJoker {
 }
 
 HPR.StellarJoker {
-    key = "fast_growing",
-    config = { extra = { reduction = 0.1, buff = 1, gain = 0.1 }},
-    loc_vars = function (self, info_queue, card)
-        local e = card.ability.extra
-        return { vars = { e.reduction, e.buff, e.gain }}
-    end,
-    calculate = function (self, card, context)
-        if context.end_of_round and context.main_eval then
-            SMODS.scale_card(card, {
-                ref_table = card.ability.extra,
-                ref_value = "buff",
-                scalar_value = "gain"
-            })
-            return nil, true
-        end
-    end
-}
-
-HPR.StellarJoker {
     key = "royalty",
     config = { extra = 1 },
     loc_vars = function (self, info_queue, card)

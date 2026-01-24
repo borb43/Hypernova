@@ -661,15 +661,6 @@ local descriptions = {
                 "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
             }
         },
-        j_hpr_fast_growing = {
-            name = "S028 FAST-GROWING",
-            text = {
-                "All {C:chips}+Chips{} and {C:mult}+Mult{} effects are converted",
-                "to {X:chips,C:white}XChips{} and {X:mult,C:white}XMult{} at {C:attention}1+#1#X{} the amount",
-                "{X:dark_edition,C:white}X#2#{} all other {C:chips}Chips{} and {C:mult}Mult{} effects",
-                "Increases by {X:dark_edition,C:white}X#3#{} at the end of round"
-            }
-        },
         j_hpr_voucherman = {
             name = "Voucherman",
             text = {
@@ -681,7 +672,7 @@ local descriptions = {
             }
         },
         j_hpr_royalty = {
-            name = "S029 ROYALTY",
+            name = "S028 ROYALTY",
             text = {
                 "Held in hand {C:attention}face{} cards",
                 "give {X:mult,C:white}X#1#{} Mult for each",
