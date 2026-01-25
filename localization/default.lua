@@ -1059,8 +1059,8 @@ local descriptions = {
             name = "Tarot Augmentation",
             text = {
                 "When a non-{C:dark_edition}Negative{C:tarot} Tarot",
-                "card is used, create a",
-                "{C:dark_edition}Negative{} copy of it"
+                "card is used, #1# in #2# chance",
+                "to create a {C:dark_edition}Negative{} copy of it"
             }
         },
         v_hpr_planet_shipment = {
@@ -1074,8 +1074,8 @@ local descriptions = {
             name = "Planet Augmentation",
             text = {
                 "When a non-{C:dark_edition}Negative{C:planet} Planet",
-                "card is used, create a",
-                "{C:dark_edition}Negative{} copy of it"
+                "card is used, #1# in #2# chance",
+                "to create a {C:dark_edition}Negative{} copy of it"
             }
         },
         v_hpr_money_orchard = {

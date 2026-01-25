@@ -306,11 +306,14 @@ HPR.BranchingVoucher{
     key = "tarot_augment",
     requires = {"v_tarot_tycoon"},
     exclusive = "v_hpr_tarot_shipment",
+    config = { extra = 2 },
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'e_negative_consumable', set = 'Edition', config = { extra = 1 } }
+        local n, d = SMODS.get_probability_vars(card, 1, card.ability.extra, self.key)
+        return{vars={n,d}}
     end,
     calculate = function (self, card, context)
-        if context.using_consumeable and not (context.consumeable.edition and context.consumeable.edition.negative) and context.consumeable.ability.set == "Tarot" then
+        if context.using_consumeable and not (context.consumeable.edition and context.consumeable.edition.negative) and context.consumeable.ability.set == "Tarot" and SMODS.pseudorandom_probability(card,self.key,1,card.ability.extra) then
             local c = context.consumeable
             G.E_MANAGER:add_event(Event{
                 func = function()
@@ -352,11 +355,14 @@ HPR.BranchingVoucher{
     key = "planet_augment",
     requires = {"v_planet_tycoon"},
     exclusive = "v_hpr_planet_shipment",
+    config = { extra = 2 },
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'e_negative_consumable', set = 'Edition', config = { extra = 1 } }
+        local n, d = SMODS.get_probability_vars(card, 1, card.ability.extra, self.key)
+        return{vars={n,d}}
     end,
     calculate = function (self, card, context)
-        if context.using_consumeable and not (context.consumeable.edition and context.consumeable.edition.negative) and context.consumeable.ability.set == "Planet" then
+        if context.using_consumeable and not (context.consumeable.edition and context.consumeable.edition.negative) and context.consumeable.ability.set == "Planet" and SMODS.pseudorandom_probability(card,self.key,1,card.ability.extra) then
             local c = context.consumeable
             G.E_MANAGER:add_event(Event{
                 func = function()
