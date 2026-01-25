@@ -43,7 +43,6 @@ SMODS.Joker { --growth, increases potency of other joker effects
         idea = {"Eris"},
         art = {"Eris"}
     },
-    hpr_ascension_key = "j_hpr_fast_growing"
 }
 
 
@@ -524,7 +523,6 @@ SMODS.Joker {
             card.ability.extra.active = true
         end
     end,
-    hpr_ascension_key = "j_hpr_fast_growing"
 }
 
 SMODS.Joker {
@@ -537,7 +535,6 @@ SMODS.Joker {
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra }}
     end,
-    hpr_ascension_key = "j_hpr_fast_growing"
 }
 
 SMODS.Joker {
