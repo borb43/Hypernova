@@ -132,7 +132,7 @@ SMODS.Edition{
     end,
     calculate = function (self, card, context)
         if card.playing_card then
-            if context.discard and context.other_card == card then
+            if context.discard and context.other_card == card and card.edition.extra.green > 0 then
                 SMODS.scale_card(card, {
                     ref_table = card.edition.extra,
                     ref_value = "green",
@@ -151,7 +151,7 @@ SMODS.Edition{
                     message_colour = G.C.HPR_ULTRAGREEN
                 })
             end
-            if context.main_scoring and context.cardarea == G.play then
+            if context.main_scoring and context.cardarea == G.play and card.edition.extra.green ~= 0 then
                 return{
                     mult = card.edition.extra.green,
                     message = localize{type="variable",key="a_hpr_green",vars={card.edition.extra.green}},
@@ -163,7 +163,7 @@ SMODS.Edition{
                 }
             end
         else
-            if context.pre_discard then
+            if context.pre_discard and card.edition.extra.green > 0 then
                 SMODS.scale_card(card, {
                     ref_table = card.edition.extra,
                     ref_value = "green",
@@ -182,7 +182,7 @@ SMODS.Edition{
                     message_colour = G.C.HPR_ULTRAGREEN
                 })
             end
-            if context.pre_joker then
+            if context.pre_joker and card.edition.extra.green ~= 0 then
                 return{
                     mult = card.edition.extra.green,
                     message = localize{type="variable",key="a_hpr_green",vars={card.edition.extra.green}},
