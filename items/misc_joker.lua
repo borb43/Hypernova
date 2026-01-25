@@ -29,6 +29,7 @@ SMODS.Joker { --growth, increases potency of other joker effects
     rarity = 3,
     cost = 10,
     perishable_compat = false,
+    demicoloncompat = true,
     calculate = function(self, card, context)
         if (context.end_of_round and context.main_eval and not context.blueprint) or context.forcetrigger then
             SMODS.scale_card(card, {
@@ -440,7 +441,6 @@ SMODS.Joker {
     cost = 5,
     blueprint_compat = true,
     demicoloncompat = true,
-    eternal_compat = false,
     calculate = function (self, card, context)
         if context.end_of_round and context.main_eval and context.beat_boss then
             G.E_MANAGER:add_event(Event{
@@ -654,6 +654,7 @@ SMODS.Joker {
     pos = { x = 1, y = 0 },
     rarity = 2,
     cost = 6,
+    eternal_compat = false,
     calculate = function (self, card, context)
         if context.game_over and not context.blueprint and context.main_eval then
             local all_eternal = true
@@ -715,6 +716,7 @@ SMODS.Joker {
     pos = { x = 2, y = 0 },
     rarity = 3,
     cost = 8,
+    blueprint_compat = true,
     config = { extra = 3 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra }}
@@ -961,6 +963,7 @@ SMODS.Joker {
     display_size = { w = 71 * 0.7, h = 95 * 0.7 },
     rarity = 2,
     cost = 7,
+    blueprint_compat = true,
     config = { extra = 10 },
     loc_vars = function (self, info_queue, card)
         local two = 0
@@ -1079,4 +1082,47 @@ SMODS.Joker {
         end
     end,
     pools = { Food = true }
+}
+
+SMODS.Joker {
+    key = "2_ball",
+    blueprint_compat = true,
+    rarity = 1,
+    cost = 6,
+    atlas = "joker",
+    pos = { x = 4, y = 0 },
+    display_size = { w = 71 * 0.7, h = 95 * 0.7 },
+    config = { extra = 4 },
+    loc_vars = function (self, info_queue, card)
+        local n,d=SMODS.get_probability_vars(card,1,card.ability.extra,self.key)
+        info_queue[#info_queue+1] = G.P_CENTERS.e_hpr_green
+        info_queue[#info_queue+1] = G.P_CENTERS.c_hpr_green
+        return{vars={n,d}}
+    end,
+    calculate = function (self, card, context)
+        if context.individual and context.cardarea == G.play and context.other_card:get_id() == 2 and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit and SMODS.pseudorandom_probability(card,self.key,1,card.ability.extra) then
+            G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+            return {
+                extra = {
+                    message = localize{ type = "variable", key = "a_hpr_green", vars={1}},
+                    colour = G.C.HPR_ULTRAGREEN,
+                    func = function ()
+                        G.E_MANAGER:add_event(Event{
+                            func = function ()
+                                SMODS.add_card{
+                                    key = "c_hpr_green",
+                                    set = "Tarot",
+                                    key_append = "hpr_2_ball",
+                                    edition = "e_hpr_green"
+                                }
+                                G.GAME.consumeable_buffer = 0
+                                return true
+                            end
+                        })
+                    end
+                }
+            }
+        end
+    end,
+    pools = { wee = true }
 }

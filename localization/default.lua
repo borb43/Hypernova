@@ -739,6 +739,15 @@ local descriptions = {
                 "{C:mult}+#1#{} Mult for the",
                 "next {C:attention}#2#{} discard#3#"
             }
+        },
+        j_hpr_2_ball = {
+            name = "2 Ball",
+            text = {
+                "{C:green}#1# in #2#{} chance for each",
+                "played {C:attention}2{} to create a",
+                "{C:dark_edition}Green {C:hpr_ultragreen}The Green{} when scored",
+                "{C:inactive}(Must have room)"
+            }
         }
     },
     Other = {
