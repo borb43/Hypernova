@@ -1021,7 +1021,7 @@ SMODS.Joker {
     in_pool = function (self, args)
         return not G.GAME.pool_flags.hpr_wee_michel_extinct
     end,
-    pools = { wee = true }
+    pools = { wee = true, Food = true }
 }
 
 SMODS.Joker {
@@ -1048,5 +1048,34 @@ SMODS.Joker {
     in_pool = function (self, args)
         return G.GAME.pool_flags.hpr_wee_michel_extinct
     end,
-    pools = { wee = true }
+    pools = { wee = true, Food = true }
+}
+
+SMODS.Joker {
+    key = "mealy_apple",
+    blueprint_compat = true,
+    eternal_compat = false,
+    rarity = 1,
+    cost = 5,
+    atlas = "placeholder",
+    pos = {x=0,y=0},
+    config = { extra = { mult = 1, discards = 5 }},
+    loc_vars = function (self, info_queue, card)
+        return{ vars = { card.ability.extra.mult, card.ability.extra.discards, card.ability.extra.discards ~= 1 and "s" or "" }}
+    end,
+    calculate = function (self, card, context)
+        if context.discard then
+            context.other_card.ability.perma_mult = context.other_card.ability.perma_mult + card.ability.extra.mult
+            local c=context.other_card
+            SMODS.calculate_effect({ message = localize("k_upgrade_ex"), message_card = c, juice_card = card, colour = G.C.MULT }, card)
+            if context.other_card == context.full_hand[#context.full_hand] then
+                card.ability.extra.discards = card.ability.extra.discards - 1
+                if card.ability.extra.discards <= 0 then
+                    SMODS.destroy_cards(card, nil, nil, true)
+                    SMODS.calculate_effect({message = localize("k_eaten_ex")}, card)
+                end
+            end
+            return nil, true
+        end
+    end
 }

@@ -731,6 +731,14 @@ local descriptions = {
                 "and has a {C:green}#2# in #3#{} chance",
                 "to be destroyed"
             }
+        },
+        j_hpr_mealy_apple = {
+            name = "Mealy Apple",
+            text = {
+                "Discarded cards gain",
+                "{C:mult}+#1#{} Mult for the",
+                "next {C:attention}#2#{} discard#3#"
+            }
         }
     },
     Other = {
