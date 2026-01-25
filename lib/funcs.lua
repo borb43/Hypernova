@@ -57,7 +57,7 @@ function HPR.poll_erratic_set(seed) --returns a random set, along with additiona
 end
 
 function HPR.poll_set(seed, opts, rare_opts, rare_rate, p_card_edition, p_card_seal) --returns a random set from the given ones along with additional create_card information
-    local set, edition, seal, area
+    local set, edition, seal
     if pseudorandom(seed) < rare_rate then
         set = pseudorandom_element(rare_opts, seed)
     else
@@ -71,14 +71,10 @@ function HPR.poll_set(seed, opts, rare_opts, rare_rate, p_card_edition, p_card_s
             seal = SMODS.poll_seal(p_card_seal)
         end
     end
-    if set == "Consumeables" --[[or set == "Voucher" or set == "Booster"]] then
-        area = G.consumeables
-    end
     return{
         set = set,
         edition = edition,
         seal = seal,
-        area = area
     }
 end
 
