@@ -104,9 +104,10 @@ function HPR.get_base_chips(card)
     for _, rank in pairs(SMODS.Ranks) do
         if id == rank.id then
             chips = rank.nominal
+            break
         end
     end
-    return chips
+    return chips or 0
 end
 
 function HPR.poll_tag(seed, key_append, options)
