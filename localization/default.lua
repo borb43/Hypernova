@@ -844,6 +844,30 @@ local descriptions = {
                 "Temporary {C:dark_edition}+1{} Hand Size",
                 "when scored"
             }
+        },
+        p_hpr_abyssal_normal = {
+            name = "Abyssal Pack",
+            text = {
+                "Choose {C:attention}#2#{} of up to",
+                "{C:attention}#1# {C:hpr_prophecy}Corrupted{} cards to",
+                "add to your consumables"
+            }
+        },
+        p_hpr_abyssal_jumbo = {
+            name = "Jumbo Abyssal Pack",
+            text = {
+                "Choose {C:attention}#2#{} of up to",
+                "{C:attention}#1# {C:hpr_prophecy}Corrupted{} cards to",
+                "add to your consumables"
+            }
+        },
+        p_hpr_abyssal_mega = {
+            name = "Mega Abyssal Pack",
+            text = {
+                "Choose {C:attention}#2#{} of up to",
+                "{C:attention}#1# {C:hpr_prophecy}Corrupted{} cards to",
+                "add to your consumables"
+            }
         }
     },
     Planet = {},
@@ -1474,6 +1498,7 @@ local misc = {
         k_hpr_painted_ex = "Painted!",
         k_hpr_wee = "Wee",
         k_hpr_green = "Green",
+        k_hpr_abyssal_pack = "Abyssal Pack"
     },
     high_scores = {},
     labels = {

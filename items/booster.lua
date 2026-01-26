@@ -39,8 +39,8 @@ SMODS.Booster {
         }
     end,
     ease_background_colour = function (self)
-        ease_colour(G.C.DYN_UI.MAIN, G.C.SET.hpr_moons)
-        ease_background_colour({ new_colour = G.C.SET.hpr_moons, special_colour = G.C.BLACK, contrast = 2 })
+        ease_colour(G.C.DYN_UI.MAIN, G.C.SECONDARY_SET.hpr_moons)
+        ease_background_colour({ new_colour = G.C.SECONDARY_SET.hpr_moons, special_colour = G.C.BLACK, contrast = 2 })
     end,
     particles = function(self)
         G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
@@ -79,8 +79,8 @@ SMODS.Booster {
         }
     end,
     ease_background_colour = function (self)
-        ease_colour(G.C.DYN_UI.MAIN, G.C.SET.hpr_moons)
-        ease_background_colour({ new_colour = G.C.SET.hpr_moons, special_colour = G.C.BLACK, contrast = 2 })
+        ease_colour(G.C.DYN_UI.MAIN, G.C.SECONDARY_SET.hpr_moons)
+        ease_background_colour({ new_colour = G.C.SECONDARY_SET.hpr_moons, special_colour = G.C.BLACK, contrast = 2 })
     end,
     particles = function(self)
         G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
@@ -119,8 +119,8 @@ SMODS.Booster {
         }
     end,
     ease_background_colour = function (self)
-        ease_colour(G.C.DYN_UI.MAIN, G.C.SET.hpr_moons)
-        ease_background_colour({ new_colour = G.C.SET.hpr_moons, special_colour = G.C.BLACK, contrast = 2 })
+        ease_colour(G.C.DYN_UI.MAIN, G.C.SECONDARY_SET.hpr_moons)
+        ease_background_colour({ new_colour = G.C.SECONDARY_SET.hpr_moons, special_colour = G.C.BLACK, contrast = 2 })
     end,
     particles = function(self)
         G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
@@ -159,8 +159,8 @@ SMODS.Booster {
         }
     end,
     ease_background_colour = function (self)
-        ease_colour(G.C.DYN_UI.MAIN, G.C.SET.hpr_moons)
-        ease_background_colour({ new_colour = G.C.SET.hpr_moons, special_colour = G.C.BLACK, contrast = 2 })
+        ease_colour(G.C.DYN_UI.MAIN, G.C.SECONDARY_SET.hpr_moons)
+        ease_background_colour({ new_colour = G.C.SECONDARY_SET.hpr_moons, special_colour = G.C.BLACK, contrast = 2 })
     end,
     particles = function(self)
         G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
@@ -386,5 +386,159 @@ SMODS.Booster {
     pronouns = "any_all",
     cry_digital_hallucinations = erratic_hallucinations_compat,
     draw_hand = true
+}
+--#endregion
+--#region abyssal packs
+local abyssal_create_card = function (self, card, i)
+    return {
+        set = "hpr_prophecy",
+        skip_materialize = true,
+        soulable = true,
+        key_append = "hpr_abyss_pack"
+    }
+end
+
+SMODS.Booster {
+    key = "abyssal_normal_1",
+    weight = 0.2,
+    kind = "hpr_abyssal",
+    cost = 4,
+    atlas = "placeholder",
+    pos = { x = 0, y = 3 },
+    config = { extra = 2, choose = 1 },
+    group_key = "k_hpr_abyssal_pack",
+    loc_vars = function (self, info_queue, card)
+        local cfg = (card and card.ability) or self.config or {}
+        return { vars = { cfg.extra, cfg.choose }, key = self.key:sub(1, -3), }
+    end,
+    ease_background_colour = function (self)
+        ease_colour(G.C.DYN_UI.MAIN, G.C.SECONDARY_SET.hpr_prophecy)
+        ease_background_colour({new_colour = G.C.SECONDARY_SET.hpr_prophecy, special_colour = G.C.BLACK, contrast = 2 })
+    end,
+    particles = function (self)
+        G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
+            timer = 0.015,
+            scale = 0.1,
+            initialize = true,
+            lifespan = 3,
+            speed = 0.2,
+            padding = -1,
+            attach = G.ROOM_ATTACH,
+            colours = { G.C.BLACK, G.C.SECONDARY_SET.hpr_prophecy },
+            fill = true
+        })
+        G.booster_pack_sparkles.fade_alpha = 1
+        G.booster_pack_sparkles:fade(1, 0)
+    end,
+    create_card = abyssal_create_card,
+    select_card = "consumeables"
+}
+
+SMODS.Booster {
+    key = "abyssal_normal_2",
+    weight = 0.2,
+    kind = "hpr_abyssal",
+    cost = 4,
+    atlas = "placeholder",
+    pos = { x = 0, y = 3 },
+    config = { extra = 2, choose = 1 },
+    group_key = "k_hpr_abyssal_pack",
+    loc_vars = function (self, info_queue, card)
+        local cfg = (card and card.ability) or self.config or {}
+        return { vars = { cfg.extra, cfg.choose }, key = self.key:sub(1, -3),}
+    end,
+    ease_background_colour = function (self)
+        ease_colour(G.C.DYN_UI.MAIN, G.C.SECONDARY_SET.hpr_prophecy)
+        ease_background_colour({new_colour = G.C.SECONDARY_SET.hpr_prophecy, special_colour = G.C.BLACK, contrast = 2 })
+    end,
+    particles = function (self)
+        G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
+            timer = 0.015,
+            scale = 0.1,
+            initialize = true,
+            lifespan = 3,
+            speed = 0.2,
+            padding = -1,
+            attach = G.ROOM_ATTACH,
+            colours = { G.C.BLACK, G.C.SECONDARY_SET.hpr_prophecy },
+            fill = true
+        })
+        G.booster_pack_sparkles.fade_alpha = 1
+        G.booster_pack_sparkles:fade(1, 0)
+    end,
+    create_card = abyssal_create_card,
+    select_card = "consumeables"
+}
+
+SMODS.Booster {
+    key = "abyssal_jumbo_1",
+    weight = 0.2,
+    kind = "hpr_abyssal",
+    cost = 4,
+    atlas = "placeholder",
+    pos = { x = 0, y = 3 },
+    config = { extra = 4, choose = 1 },
+    group_key = "k_hpr_abyssal_pack",
+    loc_vars = function (self, info_queue, card)
+        local cfg = (card and card.ability) or self.config or {}
+        return { vars = { cfg.extra, cfg.choose }, key = self.key:sub(1, -3),}
+    end,
+    ease_background_colour = function (self)
+        ease_colour(G.C.DYN_UI.MAIN, G.C.SECONDARY_SET.hpr_prophecy)
+        ease_background_colour({new_colour = G.C.SECONDARY_SET.hpr_prophecy, special_colour = G.C.BLACK, contrast = 2 })
+    end,
+    particles = function (self)
+        G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
+            timer = 0.015,
+            scale = 0.1,
+            initialize = true,
+            lifespan = 3,
+            speed = 0.2,
+            padding = -1,
+            attach = G.ROOM_ATTACH,
+            colours = { G.C.BLACK, G.C.SECONDARY_SET.hpr_prophecy },
+            fill = true
+        })
+        G.booster_pack_sparkles.fade_alpha = 1
+        G.booster_pack_sparkles:fade(1, 0)
+    end,
+    create_card = abyssal_create_card,
+    select_card = "consumeables"
+}
+
+SMODS.Booster {
+    key = "abyssal_mega_1",
+    weight = 0.04,
+    kind = "hpr_abyssal",
+    cost = 4,
+    atlas = "placeholder",
+    pos = { x = 0, y = 3 },
+    config = { extra = 4, choose = 2 },
+    group_key = "k_hpr_abyssal_pack",
+    loc_vars = function (self, info_queue, card)
+        local cfg = (card and card.ability) or self.config or {}
+        return { vars = { cfg.extra, cfg.choose }, key = self.key:sub(1, -3),}
+    end,
+    ease_background_colour = function (self)
+        ease_colour(G.C.DYN_UI.MAIN, G.C.SECONDARY_SET.hpr_prophecy)
+        ease_background_colour({new_colour = G.C.SECONDARY_SET.hpr_prophecy, special_colour = G.C.BLACK, contrast = 2 })
+    end,
+    particles = function (self)
+        G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
+            timer = 0.015,
+            scale = 0.1,
+            initialize = true,
+            lifespan = 3,
+            speed = 0.2,
+            padding = -1,
+            attach = G.ROOM_ATTACH,
+            colours = { G.C.BLACK, G.C.SECONDARY_SET.hpr_prophecy },
+            fill = true
+        })
+        G.booster_pack_sparkles.fade_alpha = 1
+        G.booster_pack_sparkles:fade(1, 0)
+    end,
+    create_card = abyssal_create_card,
+    select_card = "consumeables"
 }
 --#endregion
