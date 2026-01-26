@@ -1,4 +1,14 @@
 --#region lunar
+local lunar_create_card = function (self, card, i)
+    return {
+        set = "hpr_moons",
+        area = G.pack_cards,
+        skip_materialize = true,
+        soulable = true,
+        key_append = "hpr_lunar_pack"
+    }
+end
+
 local lunar_hallucinations_compat = {
     colour = HEX("5d15d1"),
     loc_key = "hpr_plus_moon",
@@ -47,15 +57,7 @@ SMODS.Booster {
         G.booster_pack_sparkles.fade_alpha = 1
         G.booster_pack_sparkles:fade(1, 0)
     end,
-    create_card = function (self, card, i)
-        return {
-            set = "hpr_moons",
-            area = G.pack_cards,
-            skip_materialize = true,
-            soulable = true,
-            key_append = "hpr_lunar_pack"
-        }
-    end,
+    create_card = lunar_create_card,
     draw_hand = true,
     cry_digital_hallucinations = lunar_hallucinations_compat,
 }
@@ -95,15 +97,7 @@ SMODS.Booster {
         G.booster_pack_sparkles.fade_alpha = 1
         G.booster_pack_sparkles:fade(1, 0)
     end,
-    create_card = function (self, card, i)
-        return {
-            set = "hpr_moons",
-            area = G.pack_cards,
-            skip_materialize = true,
-            soulable = true,
-            key_append = "hpr_lunar_pack"
-        }
-    end,
+    create_card = lunar_create_card,
     draw_hand = true,
     cry_digital_hallucinations = lunar_hallucinations_compat,
 }
@@ -143,15 +137,7 @@ SMODS.Booster {
         G.booster_pack_sparkles.fade_alpha = 1
         G.booster_pack_sparkles:fade(1, 0)
     end,
-    create_card = function (self, card, i)
-        return {
-            set = "hpr_moons",
-            area = G.pack_cards,
-            skip_materialize = true,
-            soulable = true,
-            key_append = "hpr_lunar_pack"
-        }
-    end,
+    create_card = lunar_create_card,
     draw_hand = true,
     cry_digital_hallucinations = lunar_hallucinations_compat,
 }
@@ -191,15 +177,7 @@ SMODS.Booster {
         G.booster_pack_sparkles.fade_alpha = 1
         G.booster_pack_sparkles:fade(1, 0)
     end,
-    create_card = function (self, card, i)
-        return {
-            set = "hpr_moons",
-            area = G.pack_cards,
-            skip_materialize = true,
-            soulable = true,
-            key_append = "hpr_lunar_pack"
-        }
-    end,
+    create_card = lunar_create_card,
     draw_hand = true,
     cry_digital_hallucinations = lunar_hallucinations_compat,
 }
@@ -215,6 +193,18 @@ SMODS.Gradient {
     interpolation = "linear"
 }
 
+local erratic_create_card = function (self, card, i)
+    local pool = HPR.poll_set("hpr_erratic", {"Consumeables", "Joker", "Playing Card"}, HPR.get_generic_rare_sets(), 0.1)
+    return {
+        set = pool.set,
+        seal = pool.seal,
+        edition = pool.edition,
+        skip_materialize = true,
+        soulable = true,
+        area = G.pack_cards,
+        key_append = "hpr_erratic_card"
+    }
+end
 
 local erratic_hallucinations_compat = {
     colour = SMODS.Gradients.hpr_erratic_col,
@@ -269,18 +259,7 @@ SMODS.Booster {
         G.booster_pack_sparkles.fade_alpha = 1
         G.booster_pack_sparkles:fade(1, 0)
     end,
-    create_card = function (self, card, i)
-        local pool = HPR.poll_erratic_set("hpr_erratic")
-        return {
-            set = pool.set,
-            area = G.pack_cards,
-            skip_materialize = true,
-            soulable = true,
-            key_append = "hpr_erratic_card",
-            seal = pool.seal,
-            edition = pool.edition
-        }
-    end,
+    create_card = erratic_create_card,
     pronouns = "any_all",
     cry_digital_hallucinations = erratic_hallucinations_compat,
     draw_hand = true
@@ -321,18 +300,7 @@ SMODS.Booster {
         G.booster_pack_sparkles.fade_alpha = 1
         G.booster_pack_sparkles:fade(1, 0)
     end,
-    create_card = function (self, card, i)
-        local pool = HPR.poll_erratic_set("hpr_erratic")
-        return {
-            set = pool.set,
-            area = G.pack_cards,
-            skip_materialize = true,
-            soulable = true,
-            key_append = "hpr_erratic_card",
-            seal = pool.seal,
-            edition = pool.edition
-        }
-    end,
+    create_card = erratic_create_card,
     pronouns = "any_all",
     cry_digital_hallucinations = erratic_hallucinations_compat,
     draw_hand = true
@@ -373,18 +341,7 @@ SMODS.Booster {
         G.booster_pack_sparkles.fade_alpha = 1
         G.booster_pack_sparkles:fade(1, 0)
     end,
-    create_card = function (self, card, i)
-        local pool = HPR.poll_erratic_set("hpr_erratic")
-        return {
-            set = pool.set,
-            area = G.pack_cards,
-            skip_materialize = true,
-            soulable = true,
-            key_append = "hpr_erratic_card",
-            seal = pool.seal,
-            edition = pool.edition
-        }
-    end,
+    create_card = erratic_create_card,
     pronouns = "any_all",
     cry_digital_hallucinations = erratic_hallucinations_compat,
     draw_hand = true
@@ -425,18 +382,7 @@ SMODS.Booster {
         G.booster_pack_sparkles.fade_alpha = 1
         G.booster_pack_sparkles:fade(1, 0)
     end,
-    create_card = function (self, card, i)
-        local pool = HPR.poll_erratic_set("hpr_erratic")
-        return {
-            set = pool.set,
-            area = G.pack_cards,
-            skip_materialize = true,
-            soulable = true,
-            key_append = "hpr_erratic_card",
-            seal = pool.seal,
-            edition = pool.edition
-        }
-    end,
+    create_card = erratic_create_card,
     pronouns = "any_all",
     cry_digital_hallucinations = erratic_hallucinations_compat,
     draw_hand = true

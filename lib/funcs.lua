@@ -56,6 +56,17 @@ function HPR.poll_erratic_set(seed) --returns a random set, along with additiona
     end
 end
 
+function HPR.get_generic_rare_sets()
+    local t = {"Voucher"}
+    if Entropy then
+        t[#t+1] = "Back"
+        if CardSleeves then
+            t[#t+1] = "Sleeve"
+        end
+    end
+    return t
+end
+
 function HPR.poll_set(seed, opts, rare_opts, rare_rate, p_card_edition, p_card_seal) --returns a random set from the given ones along with additional create_card information
     local set, edition, seal
     if pseudorandom(seed) < rare_rate then
@@ -63,12 +74,12 @@ function HPR.poll_set(seed, opts, rare_opts, rare_rate, p_card_edition, p_card_s
     else
         set = pseudorandom_element(opts, seed)
     end
-    if set == "Playing Card" then
+    if set == "Playing Card" or set == "Default" or set == "Enhanced" then
         if p_card_edition then
-            edition = SMODS.poll_edition(p_card_edition)
+            edition = SMODS.poll_edition(p_card_edition or {type_key = (seed or "").."_edition"})
         end
         if p_card_seal then
-            seal = SMODS.poll_seal(p_card_seal)
+            seal = SMODS.poll_seal(p_card_seal or {type_key = (seed or "").."_seal"})
         end
     end
     return{
