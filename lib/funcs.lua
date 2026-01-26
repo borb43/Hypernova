@@ -76,7 +76,7 @@ function HPR.poll_set(seed, opts, rare_opts, rare_rate, p_card_edition, p_card_s
     end
     if set == "Playing Card" or set == "Default" or set == "Enhanced" then
         if p_card_edition then
-            edition = SMODS.poll_edition(p_card_edition or {type_key = (seed or "").."_edition"})
+            edition = SMODS.poll_edition(p_card_edition or {type_key = (seed or "").."_edition", no_negative = true})
         end
         if p_card_seal then
             seal = SMODS.poll_seal(p_card_seal or {type_key = (seed or "").."_seal"})
