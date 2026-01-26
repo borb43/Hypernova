@@ -69,7 +69,7 @@ end
 
 function HPR.poll_set(seed, opts, rare_opts, rare_rate, p_card_edition, p_card_seal) --returns a random set from the given ones along with additional create_card information
     local set, edition, seal
-    if pseudorandom(seed) < rare_rate then
+    if rare_rate and rare_opts and next(rare_opts) and pseudorandom(seed) < rare_rate then
         set = pseudorandom_element(rare_opts, seed)
     else
         set = pseudorandom_element(opts, seed)
