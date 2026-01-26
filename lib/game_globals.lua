@@ -70,6 +70,3 @@ HPR.awesome_gradient = SMODS.Gradient{
         G.C.RARITY[4],
     }
 }
-
-G.C.HPR_STLR = HEX("1F0D35")
-G.C.HPR_WEE = HEX("60c4a5")
