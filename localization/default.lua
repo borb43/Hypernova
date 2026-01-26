@@ -1433,6 +1433,15 @@ local descriptions = {
                 "cards. The first {C:attention}#2#{} created cards",
                 "can {C:red}no longer appear{} this run"
             }
+        },
+        c_hpr_integrate = {
+            name = "Integrate",
+            text = {
+                "Destroys any selected card.",
+                "It may appear in future {C:hpr_prophecy}Abyssal",
+                "{C:hpr_prophecy}Packs{}, but will otherwise",
+                "no longer appear naturally"
+            }
         }
     }
 }
@@ -1524,6 +1533,7 @@ local misc = {
         hpr_card_banned = "#1# Banished",
         a_hpr_green = "+#1# Green",
         a_hpr_green_minus = "-#1# Green",
+        hpr_card_integrated = "#1# Integrated"
     },
     v_text = {},
 }

@@ -499,4 +499,42 @@ HPR.prophecy {
         end
     end
 }
+
+HPR.prophecy {
+    key = "integrate",
+    can_use = function (self, card)
+        local highlighted = HPR.get_all_highlighted(card, { "hand", "jokers", "consumeables", "shop_jokers", "shop_booster", "shop_vouchers", "pack_cards" })
+        return #highlighted == 1 and highlighted[1].ability.set ~= "Booster"
+    end,
+    use = function (self, card, area, copier)
+        local cards = HPR.get_all_highlighted(card, { "hand", "jokers", "consumeables", "shop_jokers", "shop_booster", "shop_vouchers", "pack_cards" })
+        for _, c in ipairs(cards) do
+            local key = c.config.center.key
+            local set = c.ability.set
+            G.GAME.integrate_keys[#G.GAME.integrate_keys+1] = key
+            SMODS.destroy_cards(c)
+            G.E_MANAGER:add_event(Event{
+                trigger = "after",
+                delay = 0.4,
+                func = function ()
+                    G.GAME.banned_keys[key] = true
+                    local loc = localize{ type = "name_text", key = key, set = set }
+                    attention_text{
+                        text = localize{ type = "variable", vars={loc}, key = "hpr_card_integrated" },
+                        scale = 1.3,
+                        hold = 1.4,
+                        major = card,
+                        backdrop_colour = G.C.SECONDARY_SET.hpr_prophecy,
+                        align = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.SMODS_BOOSTER_OPENED) and "tm" or "cm",
+                        offset = { x = 0, y = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.SMODS_BOOSTER_OPENED) and -0.2 or 0 },
+                        silent = true
+                    }
+                    play_sound("tarot2", 1, 0.4)
+                    card:juice_up()
+                    return true
+                end
+            })
+        end
+    end
+}
 --#endregion

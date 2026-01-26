@@ -208,8 +208,14 @@ end
 function HPR.get_all_highlighted(source, areas)
     local cards = {}
     for _, area in ipairs(areas) do
-        if area and area.highlighted then
-            for _, c in ipairs(area.highlighted) do
+        local real_area
+        if type(area) == "string" then
+            real_area = G[area]
+        elseif type(area) == "table" then
+            real_area = area
+        end
+        if real_area and real_area.highlighted then
+            for _, c in ipairs(real_area.highlighted) do
                 if c~=source then
                     cards[#cards+1] = c
                 end
