@@ -511,7 +511,7 @@ HPR.prophecy {
         for _, c in ipairs(cards) do
             local key = c.config.center.key
             local set = c.ability.set
-            G.GAME.integrate_keys[#G.GAME.integrate_keys+1] = key
+            G.GAME.hpr_integrate_keys[#G.GAME.hpr_integrate_keys+1] = key
             SMODS.destroy_cards(c)
             G.E_MANAGER:add_event(Event{
                 trigger = "after",

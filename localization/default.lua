@@ -1437,10 +1437,10 @@ local descriptions = {
         c_hpr_integrate = {
             name = "Integrate",
             text = {
-                "Destroys any selected card.",
+                "{C:attention}Destroys{} any selected card.",
                 "It may appear in future {C:hpr_prophecy}Abyssal",
                 "{C:hpr_prophecy}Packs{}, but will otherwise",
-                "no longer appear naturally"
+                "{C:red}no longer appear naturally"
             }
         }
     }

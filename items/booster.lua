@@ -390,6 +390,19 @@ SMODS.Booster {
 --#endregion
 --#region abyssal packs
 local abyssal_create_card = function (self, card, i)
+    if G.GAME.hpr_integrate_keys and next(G.GAME.hpr_integrate_keys) and pseudorandom("hpr_integrate") < 0.2 then
+        local key = pseudorandom_element(G.GAME.hpr_integrate_keys) or ""
+        G.GAME.banned_keys[key] = nil
+        local c = SMODS.create_card {
+            key = key,
+            set = G.P_CENTERS[key].set,
+            skip_materialize = true,
+            key_append = "hpr_abyssal_integrate_card",
+            area = G.pack_cards
+        }
+        G.GAME.banned_keys[key] = true
+        return c
+    end
     return {
         set = "hpr_prophecy",
         skip_materialize = true,
@@ -431,7 +444,9 @@ SMODS.Booster {
         G.booster_pack_sparkles:fade(1, 0)
     end,
     create_card = abyssal_create_card,
-    select_card = "consumeables"
+    select_card = {
+        hpr_prophecy = "consumeables"
+    }
 }
 
 SMODS.Booster {
@@ -467,7 +482,9 @@ SMODS.Booster {
         G.booster_pack_sparkles:fade(1, 0)
     end,
     create_card = abyssal_create_card,
-    select_card = "consumeables"
+    select_card = {
+        hpr_prophecy = "consumeables"
+    }
 }
 
 SMODS.Booster {
@@ -503,7 +520,9 @@ SMODS.Booster {
         G.booster_pack_sparkles:fade(1, 0)
     end,
     create_card = abyssal_create_card,
-    select_card = "consumeables"
+    select_card = {
+        hpr_prophecy = "consumeables"
+    }
 }
 
 SMODS.Booster {
@@ -539,6 +558,8 @@ SMODS.Booster {
         G.booster_pack_sparkles:fade(1, 0)
     end,
     create_card = abyssal_create_card,
-    select_card = "consumeables"
+    select_card = {
+        hpr_prophecy = "consumeables"
+    }
 }
 --#endregion
