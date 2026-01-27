@@ -68,25 +68,13 @@ function HPR.get_generic_rare_sets()
 end
 
 function HPR.poll_set(seed, opts, rare_opts, rare_rate, p_card_edition, p_card_seal) --returns a random set from the given ones along with additional create_card information
-    local set, edition, seal
+    local set
     if rare_rate and rare_opts and next(rare_opts) and pseudorandom(seed) < rare_rate then
         set = pseudorandom_element(rare_opts, seed)
     else
         set = pseudorandom_element(opts, seed)
     end
-    if set == "Playing Card" or set == "Default" or set == "Enhanced" then
-        if p_card_edition then
-            edition = SMODS.poll_edition(p_card_edition or {type_key = (seed or "").."_edition", no_negative = true})
-        end
-        if p_card_seal then
-            seal = SMODS.poll_seal(p_card_seal or {type_key = (seed or "").."_seal"})
-        end
-    end
-    return{
-        set = set,
-        edition = edition,
-        seal = seal,
-    }
+    return set
 end
 
 function HPR.get_ascension(card)
