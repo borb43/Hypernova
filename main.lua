@@ -21,6 +21,7 @@ HPR.calculate = function(self, context)
 end
 
 HPR.post_load = function ()
+    --[[
     if Entropy and G.FUNCS.use_joker then
         local use_j_ref = G.FUNCS.use_joker
         function G.FUNCS.use_joker(e)
@@ -30,7 +31,7 @@ HPR.post_load = function ()
                 hpr_used_j = e.config.ref_table
             })
         end
-    end
+    end]]
     for _, c in pairs(G.P_CENTERS) do
         if c.pools and c.pools.wee then
             local ref = c.set_badges
