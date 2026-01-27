@@ -1126,3 +1126,53 @@ SMODS.Joker {
     end,
     pools = { wee = true }
 }
+
+SMODS.Joker {
+    key = "apostrophe_m",
+    rarity = 3,
+    cost = 10,
+    atlas = "placeholder",
+    pos = { x = 2, y = 0 },
+    loc_vars = function (self, info_queue, card)
+        local ctypes = {}
+        for k, v in pairs(SMODS.ConsumableTypes) do
+            ctypes[#ctypes+1] = {string=localize("b_"..k:lower().."_cards"), colour = v.secondary_colour or G.C.UI.TEXT_DARK }
+        end
+        local main_start = {
+            {
+                n = G.UIT.O,
+                config = {
+                    object = DynaText{
+                        string = ctypes,
+                        colours = G.C.UI.TEXT_DARK,
+                        pop_in_rate = 9999999,
+                        silent = true,
+                        random_element = true,
+                        pop_delay = 0.3,
+                        scale = 0.32,
+                        min_cycle_time = 0
+                    }
+                }
+            }
+        }
+        local main_end = {
+            {
+                n = G.UIT.O,
+                config = {
+                    object = DynaText{
+                        string = ctypes,
+                        colours = G.C.UI.TEXT_DARK,
+                        pop_in_rate = 9999999,
+                        silent = true,
+                        random_element = true,
+                        pop_delay = 0.3,
+                        scale = 0.32,
+                        min_cycle_time = 0
+                    }
+                }
+            }
+        }
+        return { main_start = main_start, main_end = main_end }
+    end,
+    hpr_ascension_key = "j_hpr_missing"
+}

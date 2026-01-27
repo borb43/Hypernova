@@ -259,7 +259,7 @@ local descriptions = {
             }
         },
         j_hpr_missing = {
-            name = "S{C:hpr_super_gay}??? ?{}ERR{C:hpr_super_gay}??{}OR",
+            name = "S{C:hpr_super_gay}-nan ?{}ERR{C:hpr_super_gay}??{}OR",
             text = {
                 ""
             }
@@ -747,6 +747,12 @@ local descriptions = {
                 "played {C:attention}2{} to create a",
                 "{C:dark_edition}Green {C:hpr_ultragreen}The Green{} when scored",
                 "{C:inactive}(Must have room)"
+            }
+        },
+        j_hpr_apostrophe_m = {
+            name = "'M",
+            text = {
+                "replaced by"
             }
         }
     },
