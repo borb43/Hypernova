@@ -730,6 +730,22 @@ local descriptions = {
                 "{C:green}#2# in #3#{} chance to",
                 "be {C:attention}destroyed"
             }
+        },
+        j_hpr_ceramic = {
+            name = "Ceramic",
+            text = {
+                "{C:chips}+#1#{} Chips",
+                "Breaks after {C:attention}#2#",
+                "cards discarded"
+            }
+        },
+        j_hpr_fine_china = {
+            name = "Fine China",
+            text = {
+                "{C:chips}X#1#{} Chips",
+                "Breaks when discarding",
+                "more than {C:attention}#2#{} cards at once"
+            }
         }
     },
     Other = {

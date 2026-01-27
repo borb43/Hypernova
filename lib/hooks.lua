@@ -377,5 +377,8 @@ end
 
 local shatter_ref = SMODS.shatters
 function SMODS.shatters(card)
-	return card.hpr_force_shatter or shatter_ref(card)
+	if card.hpr_force_shatter or card.config.center.key == "j_hpr_ceramic" or card.config.center.key == "j_hpr_fine_china" then
+		return true
+	end
+	return shatter_ref(card)
 end

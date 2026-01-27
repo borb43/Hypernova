@@ -1199,3 +1199,51 @@ SMODS.Joker {
         end
     end
 }
+
+SMODS.Joker {
+    key = "ceramic",
+    blueprint_compat = true,
+    rarity = 1,
+    cost = 5,
+    atlas = "placeholder",
+    pos = { x = 0, y = 0 },
+    config = { extra = { chips = 100, discards = 40 }},
+    loc_vars = function (self, info_queue, card)
+        return { card.ability.extra.chips, card.ability.extra.discards }
+    end,
+    calculate = function (self, card, context)
+        if context.joker_main then
+            return { chips = card.ability.extra.chips }
+        end
+        if context.discard and not context.blueprint then
+            card.ability.extra.discards = card.ability.extra.discards - 1
+            if card.ability.extra.discards <= 0 then
+                G.GAME.pool_flags.hpr_ceramic_shattered = true
+                SMODS.destroy_cards(card)
+            end
+        end
+    end,
+    no_pool_flag = "hpr_ceramic_shattered"
+}
+
+SMODS.Joker {
+    key = "fine_china",
+    blueprint_compat = true,
+    rarity = 1,
+    cost = 8,
+    atlas = "placeholder",
+    pos = { x = 0, y = 0 },
+    config = { extra = { xchip = 4, max_discard = 4 }},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.xchip, card.ability.extra.max_discard }}
+    end,
+    calculate = function (self, card, context)
+        if context.joker_main then
+            return { xchips = card.ability.extra.xchip }
+        end
+        if context.pre_discard and #context.full_hand > card.ability.extra.max_discard then
+            SMODS.destroy_cards(card)
+        end
+    end,
+    yes_pool_flag = "hpr_ceramic_shattered"
+}
