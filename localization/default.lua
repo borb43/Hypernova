@@ -720,6 +720,16 @@ local descriptions = {
             text = {
                 "replaced by"
             }
+        },
+        j_hpr_glass_shard = {
+            name = "Glass Shard",
+            text = {
+                "{X:mult,C:white}X#1#{} Mult",
+                "The first card used",
+                "in scoring has a",
+                "{C:green}#2# in #3#{} chance to",
+                "be {C:attention}destroyed"
+            }
         }
     },
     Other = {

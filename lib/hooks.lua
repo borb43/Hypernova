@@ -374,3 +374,8 @@ function get_blind_amount(ante)
 	end
 	return math.floor(base * mult)
 end
+
+local shatter_ref = SMODS.shatters
+function SMODS.shatters(card)
+	return card.hpr_force_shatter or shatter_ref(card)
+end

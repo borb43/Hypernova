@@ -1176,3 +1176,26 @@ SMODS.Joker {
     end,
     hpr_ascension_key = "j_hpr_missing"
 }
+
+SMODS.Joker {
+    key = "glass_shard",
+    blueprint_compat = true,
+    rarity = 1,
+    cost = 6,
+    atlas = "placeholder",
+    pos = { x = 0, y = 0 },
+    config = { extra = { xmult = 2, odds = 4 }},
+    loc_vars = function (self, info_queue, card)
+        local n,d = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, self.key)
+        return{ vars = {card.ability.extra.xmult, n, d }}
+    end,
+    calculate = function (self, card, context)
+        if context.joker_main then
+            return { xmult = card.ability.extra.xmult }
+        end
+        if context.destroy_card and not context.blueprint and context.destroy_card == context.scoring_hand[1] and SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds) then
+            context.destroy_card.hpr_force_shatter = true
+            return { remove = true }
+        end
+    end
+}
