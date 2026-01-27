@@ -108,40 +108,6 @@ local descriptions = {
                 "{C:attention}permanently{} gain {C:mult}+#1#{} Mult"
             }
         },
-        m_hpr_mimic = {
-            name = "Mimic Card",
-            text = {
-                "{X:mult,C:white}X#1#{} Mult",
-                "Counts as a",
-                "{C:attention}face{} card"
-            }
-        },
-        m_hpr_prism = {
-            name = "Prism Card",
-            text = {
-                "When played and {C:attention}scoring,",
-                "a random card in hand",
-                "becomes {C:dark_edition}Polychrome",
-                "{C:red}Destroyed{} when discarded",
-                "or held at the end of round"
-            }
-        },
-        m_hpr_alloy = {
-            name = "Alloy Card",
-            text = {
-                "Also {C:attention}scores{} while held in hand",
-                "Also triggers {C:attention}held in hand{}",
-                "effects when played and scoring"
-            }
-        },
-        m_hpr_schematic = {
-            name = "Fusion Card",
-            text = {
-                "No rank or suit",
-                "Balances {C:chips}Chips{} and",
-                "{C:mult}Mult{} when scored"
-            }
-        },
         m_hpr_silver = {
             name = "Silver Card",
             text = {
@@ -170,7 +136,7 @@ local descriptions = {
         j_hpr_fusion = {
             name = "Fusion Reactor",
             text = {
-                "Balances {C:chips}Chips{} and {C:mult}Mult{}",
+                "{C:hpr_balance}Balances {C:chips}Chips{} and {C:mult}Mult{}",
                 "before scoring"
             }
         },
@@ -1446,7 +1412,7 @@ local descriptions = {
                 "{C:attention}Destroys{} any selected card.",
                 "It may appear in future {C:hpr_prophecy}Abyssal",
                 "{C:hpr_prophecy}Packs{}, but will otherwise",
-                "{C:red}no longer appear naturally"
+                "{C:red}no longer appear"
             }
         }
     }

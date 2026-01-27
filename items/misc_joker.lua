@@ -14,7 +14,7 @@ SMODS.Joker { --fusion reactor, balances before scoring
         end
     end,
     hpr_credits = {
-        idea = "Eris"
+        idea = {"Eris"}
     }
 }
 
