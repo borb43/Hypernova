@@ -1136,7 +1136,7 @@ SMODS.Joker {
     loc_vars = function (self, info_queue, card)
         local ctypes = {}
         for k, v in pairs(SMODS.ConsumableTypes) do
-            ctypes[#ctypes+1] = {string=localize("b_"..k:lower().."_cards"), colour = v.secondary_colour or G.C.UI.TEXT_DARK }
+            if not v.no_collection then ctypes[#ctypes+1] = {string=localize("b_"..k:lower().."_cards"), colour = v.secondary_colour or G.C.UI.TEXT_DARK } end
         end
         local main_start = {
             {
