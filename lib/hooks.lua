@@ -285,10 +285,19 @@ end
 
 local fingies_ref = SMODS.four_fingers
 function SMODS.four_fingers(hand_type)
-	if next(SMODS.find_card("j_hpr_shorthand")) then
-		return math.min(3, fingies_ref(hand_type))
+	local results = {}
+	local fingers = SMODS.find_card("j_hpr_butterfinger")
+	if next(fingers) then
+		local min = math.huge
+		for _, c in ipairs(fingers) do
+			min = math.min(c.ability.extra, min)
+		end
+		results[#results+1] = min
 	end
-	return fingies_ref(hand_type)
+	if next(SMODS.find_card("j_hpr_shorthand")) then
+		results[#results+1] = 3
+	end
+	return math.min(fingies_ref(hand_type), unpack(results))
 end
 
 local x_same_ref = get_X_same

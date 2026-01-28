@@ -1203,13 +1203,14 @@ SMODS.Joker {
 SMODS.Joker {
     key = "ceramic",
     blueprint_compat = true,
+    eternal_compat = false,
     rarity = 1,
     cost = 5,
     atlas = "placeholder",
     pos = { x = 0, y = 0 },
     config = { extra = { chips = 100, discards = 40 }},
     loc_vars = function (self, info_queue, card)
-        return { card.ability.extra.chips, card.ability.extra.discards }
+        return { vars = { card.ability.extra.chips, card.ability.extra.discards } }
     end,
     calculate = function (self, card, context)
         if context.joker_main then
@@ -1229,6 +1230,7 @@ SMODS.Joker {
 SMODS.Joker {
     key = "fine_china",
     blueprint_compat = true,
+    eternal_compat = false,
     rarity = 1,
     cost = 8,
     atlas = "placeholder",
@@ -1246,4 +1248,30 @@ SMODS.Joker {
         end
     end,
     yes_pool_flag = "hpr_ceramic_shattered"
+}
+
+SMODS.Joker {
+    key = "butterfinger",
+    eternal_compat = false,
+    rarity = 2,
+    cost = 7,
+    atlas = "placeholder",
+    pos = { x = 1, y = 0 },
+    config = { extra = 1 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.extra, card.ability.extra ~= 1 and "s" or ""}}
+    end,
+    calculate = function (self, card, context)
+        if context.end_of_round and context.main_eval then
+            card.ability.extra = card.ability.extra + 1
+            if card.ability.extra >= 5 then
+                SMODS.destroy_cards(card, nil, nil, true)
+                return {
+                    message = localize("k_eaten_ex")
+                }
+            else
+                return { message = localize{ type = "variable", vars = {card.ability.extra}, key = "hpr_n_cards"}}
+            end
+        end
+    end
 }

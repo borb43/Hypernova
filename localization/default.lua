@@ -742,9 +742,18 @@ local descriptions = {
         j_hpr_fine_china = {
             name = "Fine China",
             text = {
-                "{C:chips}X#1#{} Chips",
+                "{X:chips,C:white}X#1#{} Chips",
                 "Breaks when discarding",
                 "more than {C:attention}#2#{} cards at once"
+            }
+        },
+        j_hpr_butterfinger = {
+            name = "Butterfingers",
+            text = {
+                "All {C:attention}Straights{} and",
+                "{C:attention}Flushes{} can be made",
+                "with {C:attention}#1#{} cards. Increases",
+                "by {C:attention}1{} at end of round"
             }
         }
     },
@@ -1531,7 +1540,8 @@ local misc = {
         hpr_card_banned = "#1# Banished",
         a_hpr_green = "+#1# Green",
         a_hpr_green_minus = "-#1# Green",
-        hpr_card_integrated = "#1# Integrated"
+        hpr_card_integrated = "#1# Integrated",
+        hpr_n_cards = "#1# Cards"
     },
     v_text = {},
 }
