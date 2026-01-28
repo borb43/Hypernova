@@ -752,7 +752,7 @@ local descriptions = {
             text = {
                 "All {C:attention}Straights{} and",
                 "{C:attention}Flushes{} can be made",
-                "with {C:attention}#1#{} cards. Increases",
+                "with {C:attention}#1#{} card#2#. Increases",
                 "by {C:attention}1{} at end of round"
             }
         }
