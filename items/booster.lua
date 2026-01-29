@@ -229,8 +229,8 @@ SMODS.Booster {
     weight = 0.5,
     kind = "hpr_erratic",
     cost = 4,
-    atlas = "placeholder",
-    pos = { x = 0, y = 3 },
+    atlas = "booster",
+    pos = { x = 0, y = 0 },
     config = { extra = 3, choose = 1 },
     group_key = "k_erratic_pack",
     loc_vars = function (self, info_queue, card)
@@ -270,8 +270,8 @@ SMODS.Booster {
     weight = 0.5,
     kind = "hpr_erratic",
     cost = 4,
-    atlas = "placeholder",
-    pos = { x = 0, y = 3 },
+    atlas = "booster",
+    pos = { x = 1, y = 0 },
     config = { extra = 3, choose = 1 },
     group_key = "k_erratic_pack",
     loc_vars = function (self, info_queue, card)
@@ -311,8 +311,8 @@ SMODS.Booster {
     weight = 0.5,
     kind = "hpr_erratic",
     cost = 6,
-    atlas = "placeholder",
-    pos = { x = 1, y = 3 },
+    atlas = "booster",
+    pos = { x = 2, y = 0 },
     config = { extra = 5, choose = 1 },
     group_key = "k_erratic_pack",
     loc_vars = function (self, info_queue, card)
@@ -352,8 +352,8 @@ SMODS.Booster {
     weight = 0.1,
     kind = "hpr_erratic",
     cost = 8,
-    atlas = "placeholder",
-    pos = { x = 2, y = 3 },
+    atlas = "booster",
+    pos = { x = 3, y = 0 },
     config = { extra = 5, choose = 2 },
     group_key = "k_erratic_pack",
     loc_vars = function (self, info_queue, card)
