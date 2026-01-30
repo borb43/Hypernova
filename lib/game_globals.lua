@@ -19,6 +19,7 @@ HPR.reset_game_globals = function (run_start)
     if run_start then
         G.GAME.hpr_packs_mod = 1
         G.GAME.hpr_integrate_keys = {}
+        G.GAME.hpr_corruption = 1
     end
     reset_hpr_cavepaint()
 end

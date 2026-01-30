@@ -411,6 +411,11 @@ local abyssal_create_card = function (self, card, i)
     }
 end
 
+local abyssal_get_weight = function (self)
+    if not G.GAME.hpr_corruption then return self.weight end
+    return self.weight * (HPR.get_corruption_factor()/5) + 1
+end
+
 SMODS.Booster {
     key = "abyssal_normal_1",
     weight = 0.2,
@@ -446,7 +451,8 @@ SMODS.Booster {
     create_card = abyssal_create_card,
     select_card = {
         hpr_prophecy = "consumeables"
-    }
+    },
+    get_weight = abyssal_get_weight
 }
 
 SMODS.Booster {
@@ -484,7 +490,8 @@ SMODS.Booster {
     create_card = abyssal_create_card,
     select_card = {
         hpr_prophecy = "consumeables"
-    }
+    },
+    get_weight = abyssal_get_weight
 }
 
 SMODS.Booster {
@@ -522,12 +529,13 @@ SMODS.Booster {
     create_card = abyssal_create_card,
     select_card = {
         hpr_prophecy = "consumeables"
-    }
+    },
+    get_weight = abyssal_get_weight
 }
 
 SMODS.Booster {
     key = "abyssal_mega_1",
-    weight = 0.04,
+    weight = 0.06,
     kind = "hpr_abyssal",
     cost = 4,
     atlas = "placeholder",
@@ -560,6 +568,9 @@ SMODS.Booster {
     create_card = abyssal_create_card,
     select_card = {
         hpr_prophecy = "consumeables"
-    }
+    },
+    get_weight = function (self)
+        return abyssal_get_weight(self)^1.25
+    end
 }
 --#endregion

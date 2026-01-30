@@ -224,3 +224,8 @@ function HPR.find_edition(key)
     end
     return cards
 end
+
+function HPR.get_corruption_factor(corruption_override)
+    local c = corruption_override or G.GAME.hpr_corruption
+    return (math.log(c, 2)*math.sqrt(c))
+end
