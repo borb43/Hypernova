@@ -32,6 +32,7 @@ HPR.post_load = function ()
             })
         end
     end]]
+    -- center function hooks
     for _, c in pairs(G.P_CENTERS) do
         if c.pools and c.pools.wee then
             local ref = c.set_badges
@@ -47,6 +48,24 @@ HPR.post_load = function ()
     G.P_CENTERS.e_negative.get_weight = function (self)
         local base_weight = ref and ref(self) or self.weight
         return base_weight * (G.GAME.hpr_negative_mod or 1)
+    end
+    -- engulf functions
+    if next(SMODS.find_mod("enf")) and Engulf then
+        Engulf.EditionFuncs["e_hpr_green"] = function (card, hand, instant, amount, edition, cosmetic)
+            if not cosmetic then
+                G.GAME.hands[hand].mult = G.GAME.hands[hand].mult + (edition.extra.green * amount)
+            end
+            if (not instant) or Engulf.config.verbose then
+                G.E_MANAGER:add_event(Event{trigger = "after", delay = 0.4, func = function ()
+                    play_sound("multhit1")
+                    if card then card:juice_up(0.8, 0.5) end
+                return true end})
+                Engulf.hm((edition.extra.green > 0 and "+" or "-")..number_format(math.abs(edition.extra.green*amount)), true)
+                delay(0.2)
+                Engulf.hm(number_format(G.GAME.hands[hand].mult), false)
+                delay(0.7)
+            end
+        end
     end
 end
 
