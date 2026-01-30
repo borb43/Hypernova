@@ -502,6 +502,9 @@ HPR.prophecy {
 
 HPR.prophecy {
     key = "integrate",
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = { set = "Other", key = "hpr_integrate_tooltip" }
+    end,
     can_use = function (self, card)
         local highlighted = HPR.get_all_highlighted(card, { "hand", "jokers", "consumeables", "shop_jokers", "shop_booster", "shop_vouchers", "pack_cards" })
         return #highlighted == 1 and highlighted[1].ability.set ~= "Booster"

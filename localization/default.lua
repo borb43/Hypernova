@@ -875,6 +875,14 @@ local descriptions = {
                 "{C:attention}#1# {C:hpr_prophecy}Corrupted{} cards to",
                 "add to your consumables"
             }
+        },
+        hpr_integrate_tooltip = {
+            name = "Integrate",
+            text = {
+                "{C:hpr_prophecy}Integrated{} cards may",
+                "appear in any future",
+                "{C:hpr_prophecy}Abyssal Packs"
+            }
         }
     },
     Planet = {},
@@ -1444,10 +1452,9 @@ local descriptions = {
         c_hpr_integrate = {
             name = "Integrate",
             text = {
-                "{C:attention}Destroys{} any selected card.",
-                "It may appear in future {C:hpr_prophecy}Abyssal",
-                "{C:hpr_prophecy}Packs{}, but will otherwise",
-                "{C:red}no longer appear"
+                "{C:attention}Destroy{} and {C:hpr_prophecy}Integrate{} any",
+                "selected card. It will",
+                "{C:red}no longer appear{} otherwise"
             }
         }
     }
