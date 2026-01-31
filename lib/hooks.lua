@@ -9,6 +9,9 @@ create_card = function(_type, area, legendary, _rarity, skip_materialize, soulab
 	if G.GAME.used_vouchers.v_hpr_astrology and (_type == "Planet" or _type == "Tarot") and not forced_key then
 		_type = "Tarot_Planet"
 	end
+	if G.GAME.used_vouchers.v_hpr_magician and _type == "Default" and area and (area.config.type == "shop" or area == G.pack_cards) then
+		set = "Enhanced"
+	end
     local ret_card = create_card_ref(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
     HPR.post_create_card(ret_card, area, soulable, key_append)
     return ret_card
