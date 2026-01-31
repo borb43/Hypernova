@@ -11,7 +11,7 @@ SMODS.Joker {
         info_queue[#info_queue + 1] = { key = 'e_negative_consumable', set = 'Edition', config = { extra = 1 } }
     end,
     calculate = function (self, card, context)
-        if context.setting_blind then
+        if context.setting_blind and context.blind.boss then
             local planets = {}
             for _, c in ipairs(G.consumeables.cards) do
                 if c.ability.set == "Planet" and not SMODS.is_eternal(c, card) then planets[#planets+1] = c end

@@ -177,7 +177,7 @@ local descriptions = {
             name = "Eris",
             text = {
                 {
-                    "When {C:attention}Blind{} is selected, {C:attention}destroys",
+                    "When {C:attention}Boss Blind{} is selected, {C:attention}destroys",
                     "a random held {C:planet}Planet{} card to",
                     "create a {C:dark_edition}Negative {C:hpr_moons}Moon{} card"
                 },
