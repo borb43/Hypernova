@@ -24,9 +24,11 @@ SMODS.Consumable {
     pos = { x = 2, y = 2 },
     hidden = true,
     can_use = function (self, card)
-        return G.jokers and #G.jokers.highlighted == 1 and HPR.get_ascension(G.jokers.highlighted[1])
+        local highlighted = HPR.get_all_highlighted(card, "jokers")
+        return highlighted == 1 and HPR.get_ascension(highlighted[1])
     end,
     use = function (self, card, area, copier)
+        local highlighted = HPR.get_all_highlighted(card, "jokers")
         G.E_MANAGER:add_event(Event{
             trigger = 'after',
             delay = 0.4,
@@ -40,7 +42,7 @@ SMODS.Consumable {
             trigger = 'after',
             delay = 0.15,
             func = function ()
-                G.jokers.highlighted[1]:flip()
+                highlighted[1]:flip()
                 play_sound('card1')
                 return true
             end
@@ -50,11 +52,11 @@ SMODS.Consumable {
             trigger = 'after',
             delay = 0.15,
             func = function ()
-                G.jokers.highlighted[1]:remove_from_deck()
-                G.jokers.highlighted[1]:set_ability(HPR.get_ascension(G.jokers.highlighted[1]))
-                G.jokers.highlighted[1]:add_to_deck()
-                G.jokers.highlighted[1]:set_cost()
-                G.jokers.highlighted[1]:flip()
+                highlighted[1]:remove_from_deck()
+                highlighted[1]:set_ability(HPR.get_ascension(G.jokers.highlighted[1]))
+                highlighted[1]:add_to_deck()
+                highlighted[1]:set_cost()
+                highlighted[1]:flip()
                 return true
             end
         })
