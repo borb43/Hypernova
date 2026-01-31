@@ -227,5 +227,5 @@ end
 
 function HPR.get_corruption_factor(corruption_override)
     local c = corruption_override or G.GAME.hpr_corruption
-    return (math.log(c, 2)*math.sqrt(c))
+    return (math.log(c+1, 2)*math.sqrt(c+1))
 end

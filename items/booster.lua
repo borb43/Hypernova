@@ -413,7 +413,7 @@ end
 
 local abyssal_get_weight = function (self)
     if not G.GAME.hpr_corruption then return self.weight end
-    return self.weight * (HPR.get_corruption_factor()/5) + 1
+    return self.weight * ((HPR.get_corruption_factor()/5) + 1)
 end
 
 SMODS.Booster {
@@ -570,7 +570,7 @@ SMODS.Booster {
         hpr_prophecy = "consumeables"
     },
     get_weight = function (self)
-        return abyssal_get_weight(self)^1.25
+        return self.weight * ((HPR.get_corruption_factor()/5 + 1)^1.25)
     end
 }
 --#endregion
