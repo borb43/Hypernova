@@ -25,7 +25,7 @@ SMODS.Consumable {
     hidden = true,
     can_use = function (self, card)
         local highlighted = HPR.get_all_highlighted(card, "jokers")
-        return highlighted == 1 and HPR.get_ascension(highlighted[1])
+        return #highlighted == 1 and HPR.get_ascension(highlighted[1])
     end,
     use = function (self, card, area, copier)
         local highlighted = HPR.get_all_highlighted(card, "jokers")
@@ -976,7 +976,7 @@ HPR.StellarJoker {
     key = "mimic",
     blueprint_compat = true,
     calculate = function (self, card, context)
-        if context.retriggger_joker_check and not context.retrigger_joker and card.area and card.rank then
+        if context.retrigger_joker_check and not context.retrigger_joker and card.area and card.rank then
             if context.other_card == card.area.cards[card.rank+1] or context.other_card == card.area.cards[card.rank-1] then
                 return { repetitions = 1 }
             end
