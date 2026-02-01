@@ -195,6 +195,7 @@ end
 
 function HPR.get_all_highlighted(source, areas)
     local cards = {}
+    if type(areas) == "string" then areas = {areas} end
     for _, area in ipairs(areas) do
         local real_area
         if type(area) == "string" then
