@@ -24,11 +24,11 @@ SMODS.Consumable {
     pos = { x = 2, y = 2 },
     hidden = true,
     can_use = function (self, card)
-        local highlighted = HPR.get_all_highlighted(card, "jokers")
+        local highlighted = HPR.get_all_highlighted(card, {"jokers"})
         return highlighted == 1 and HPR.get_ascension(highlighted[1])
     end,
     use = function (self, card, area, copier)
-        local highlighted = HPR.get_all_highlighted(card, "jokers")
+        local highlighted = HPR.get_all_highlighted(card, {"jokers"})
         G.E_MANAGER:add_event(Event{
             trigger = 'after',
             delay = 0.4,
