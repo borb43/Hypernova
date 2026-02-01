@@ -34,7 +34,7 @@ SMODS.Enhancement {
             for _, c in ipairs(context.scoring_hand) do
                 if c ~= card then
                     c.ability.perma_mult = c.ability.perma_mult + card.ability.extra
-                    SMODS.calculate_effect({ message = localize("k_upgrade_ex"), message_card = c, colour = G.C.CHIPS })
+                    SMODS.calculate_effect({ message = localize("k_upgrade_ex"), message_card = c, colour = G.C.MULT })
                 end
             end
             return nil, true
