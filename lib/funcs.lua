@@ -79,6 +79,12 @@ end
 
 function HPR.get_ascension(card)
     local center = card.config and card.config.center or card
+    if center.effect == "Cry Type Mult" then
+        return "j_hpr_crazy"
+    end
+    if center.effect == "Cry Type Chips" then
+        return "j_hpr_crafty"
+    end
     if center.key then
         return HPR.vanilla_ascensions[center.key] or center.hpr_ascension_key or nil
     end

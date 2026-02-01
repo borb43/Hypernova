@@ -867,7 +867,7 @@ SMODS.Joker {
         if context.end_of_round and context.main_eval and not context.retrigger_joker then
             card.ability.extra.rounds = card.ability.extra.rounds - 1
             if card.ability.extra.rounds <= 0 then
-                local targets = SMODS.Edition:get_edition_cards(G.playing_cards, true)
+                local targets = SMODS.Edition:get_edition_cards({cards = G.playing_cards}, true)
                 for _ = 1, card.ability.extra.cards do
                     local c, key = pseudorandom_element(targets, "hpr_good_bomb")
                     if c and type(key) == "number" and c.set_edition then
