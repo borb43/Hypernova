@@ -414,7 +414,7 @@ HPR.StellarJoker {
     demicoloncompat = true,
     pos = { x = 2, y = 0 },
     soul_pos = { x = 3, y = 0 },
-    config = { extra = { mult = 0, scale = 5 }},
+    config = { extra = { mult = 0, scale = 4 }},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.mult, card.ability.extra.scale }}
     end,
@@ -452,7 +452,7 @@ HPR.StellarJoker {
     demicoloncompat = true,
     pos = { x = 4, y = 0},
     soul_pos = { x = 5, y = 0 },
-    config = { extra = { chips = 0, scale = 30 }},
+    config = { extra = { chips = 0, scale = 20 }},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.chips, card.ability.extra.scale }}
     end,
@@ -820,7 +820,7 @@ HPR.StellarJoker {
     key = "unity",
     pos = { x = 6, y = 0 },
     soul_pos = { x = 7, y = 0 },
-    config = { extra = { xmult = 1, scale = 0.2}},
+    config = { extra = { xmult = 1, scale = 0.1}},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.xmult, card.ability.extra.scale }}
     end,
