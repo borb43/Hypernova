@@ -785,22 +785,22 @@ local descriptions = {
         p_hpr_erratic_pack = {
             name = "Erratic Pack",
             text = {
-                "Select {C:hpr_erratic_col}#1#{} of up to",
-                "{C:hpr_erratic_col}#2#{} random cards"
+                "Select {C:hpr_erratic_col}#2#{} of up to",
+                "{C:hpr_erratic_col}#1#{} random cards"
             }
         },
         p_hpr_erratic_pack_jumbo = {
             name = "#3# Erratic Pack",
             text = {
-                "Select {C:hpr_erratic_col}#1#{} of up to",
-                "{C:hpr_erratic_col}#2#{} random cards"
+                "Select {C:hpr_erratic_col}#@#{} of up to",
+                "{C:hpr_erratic_col}#1#{} random cards"
             }
         },
         p_hpr_erratic_pack_mega = {
             name = "#3# Erratic Pack",
             text = {
-                "Select {C:hpr_erratic_col}#1#{} of up to",
-                "{C:hpr_erratic_col}#2#{} random cards"
+                "Select {C:hpr_erratic_col}#2#{} of up to",
+                "{C:hpr_erratic_col}#1#{} random cards"
             }
         },
         card_extra_eff_mod = {
