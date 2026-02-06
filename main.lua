@@ -271,7 +271,7 @@ if next(SMODS.find_mod("entr")) then
 end
 
 assert(SMODS.load_file("items/stellar.lua"))()
---assert(SMODS.load_file("items/awesome.lua"))()
+assert(SMODS.load_file("items/awesome.lua"))()
 assert(SMODS.load_file("items/back.lua"))()
 assert(SMODS.load_file("items/blind.lua"))()
 assert(SMODS.load_file("items/voucher.lua"))()

@@ -890,6 +890,13 @@ local descriptions = {
                 "appear in any future",
                 "{C:hpr_prophecy}Abyssal Packs"
             }
+        },
+        p_hpr_awesome = {
+            name = "{C:hpr_awesome}AWESOME{} Buffoon Pack",
+            text = {
+                "Choose {C:attention}#1#{} of up to",
+                "{C:attention}#2#{C:hpr_awesome} AWESOME{} Jokers"
+            }
         }
     },
     Planet = {},

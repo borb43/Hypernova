@@ -563,3 +563,30 @@ SMODS.Booster {
     },
 }
 --#endregion
+
+SMODS.Booster {
+    key = "awesome",
+    weight = 0.07,
+    kind = "Buffoon",
+    cost = 10,
+    atlas = "booster",
+    pos = { x = 0, y = 1 },
+    config = { extra = 3, choose = 1 },
+    group_key = "k_hpr_awesome_pack",
+    loc_vars = function (self, info_queue, card)
+        local cfg = (card and card.ability) or self.config or {}
+        return { vars = { cfg.choose, cfg.extra }}
+    end,
+    ease_background_colour = function (self)
+        ease_background_colour_blind(G.STATES.BUFFOON_PACK)
+    end,
+    create_card = function (self, card, i)
+        return { set = "Joker", rarity = "hpr_awesome", area = G.pack_cards, skip_materialize = true, soulable = true, key_append = "hpr_awesome_buf" }
+    end,
+    in_pool = function (self, args)
+        return G.GAME.selected_back and G.GAME.selected_back.effect.center.key == "b_hpr_experiment"
+    end,
+    get_weight = function (self)
+        return self.weight * (G.GAME.hpr_awesome_pack_mod or 1)
+    end
+}
