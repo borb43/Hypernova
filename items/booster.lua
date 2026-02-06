@@ -584,7 +584,7 @@ SMODS.Booster {
         return { set = "Joker", rarity = "hpr_awesome", area = G.pack_cards, skip_materialize = true, soulable = true, key_append = "hpr_awesome_buf" }
     end,
     in_pool = function (self, args)
-        return G.GAME.selected_back and G.GAME.selected_back.effect.center.key == "b_hpr_experiment"
+        return Entropy and Entropy.DeckOrSleeve("b_hpr_experiment") or G.GAME.selected_back and G.GAME.selected_back.effect.center.key == "b_hpr_experiment"
     end,
     get_weight = function (self)
         return self.weight * (G.GAME.hpr_awesome_pack_mod or 1)

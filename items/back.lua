@@ -79,3 +79,18 @@ SMODS.Back {
     end,
     pools = { RedeemableBacks = true }
 }
+
+SMODS.Back {
+    key = "experiment",
+    atlas = "placeholder",
+    pos = { x = 4, y = 2 },
+    pools = { RedeemableBacks = true },
+    calculate = function (self, back, context)
+        if context.end_of_round and context.main_eval and context.beat_boss then
+            G.GAME.hpr_awesome_pack_mod = (G.GAME.hpr_awesome_pack_mod or 1) * 2
+        end
+        if context.open_booster and context.booster.key == "p_hpr_awesome" then
+            G.GAME.hpr_awesome_pack_mod = math.max(math.log(G.GAME.hpr_awesome_pack_mod, 2),1)
+        end
+    end
+}
