@@ -776,6 +776,16 @@ local descriptions = {
                 "{C:hpr_balance}Balances {C:chips}Chips{} and {C:mult}Mult",
                 "values of scored cards"
             }
+        },
+        j_hpr_true_balance = {
+            name = "True Balance",
+            text = {
+                "{C:hpr_balance}Balances{} all {C:chips}Chips{} and {C:mult}Mult",
+                "values of held and played cards",
+                "{C:hpr_balance}Balances {C:blue}Hands{} and {C:red}Discards",
+                "when {C:attention}blind{} is selected",
+                "{C:hpr_balance}Balances {C:chips}Chips{} and {C:mult}Mult"
+            }
         }
     },
     Other = {
