@@ -755,6 +755,13 @@ local descriptions = {
                 "with {C:attention}#1#{} card#2#. Increases",
                 "by {C:attention}1{} at end of round"
             }
+        },
+        j_hpr_superfluid = {
+            name = "Superfluid",
+            text = {
+                "{C:hpr_balance}Balances {C:chips}Chips{} and {C:mult}Mult",
+                "values of scored cards"
+            }
         }
     },
     Other = {

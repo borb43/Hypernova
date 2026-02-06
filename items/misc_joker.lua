@@ -1275,3 +1275,28 @@ SMODS.Joker {
         end
     end
 }
+
+SMODS.Joker {
+    key = "superfluid",
+    blueprint_compat = true, --i guess bro
+    rarity = 2,
+    cost = 8,
+    atlas = "placeholder",
+    pos = { x = 1, y = 0 },
+    calculate = function (self, card, context)
+        if context.individual and context.cardarea == G.play then
+            local starting_chips = context.other_card:get_chip_bonus()
+            local starting_mult = context.other_card:get_chip_mult()
+            local target = (starting_chips+starting_mult)/2
+            context.other_card.ability.perma_bonus = -starting_chips+target
+            context.other_card.ability.perma_mult = -starting_mult+target
+            return {
+                message = localize("k_balanced"),
+                sound = "gong",
+                volume = 0.3,
+                pitch = 0.94,
+                colour = {0.8, 0.45, 0.85, 1}
+            }
+        end
+    end
+}
