@@ -117,26 +117,6 @@ HPR.AwesomeJoker {
             local h_target = (base_h_chip+base_h_mult)/2
             context.other_card.ability.perma_h_chips = -base_h_chip + h_target
             context.other_card.ability.perma_h_mult = -base_h_mult + target
-            -- Xchip/mult
-            local base_x_chip = context.other_card:get_chip_x_bonus()
-            if base_x_chip == 0 then base_x_chip = 1 end
-            local base_x_mult = context.other_card:get_chip_x_mult()
-            if base_x_mult == 0 then base_x_mult = 1 end
-            local x_target = ((base_x_chip - 1)+(base_x_mult - 1))/2 + 1
-            local true_base_x_chip = base_x_chip/(context.other_card.ability.perma_x_chips+1)
-            local true_base_x_mult = base_x_mult/(context.other_card.ability.perma_x_mult+1)
-            context.other_card.ability.perma_x_chips = (x_target/true_base_x_chip)-1
-            context.other_card.ability.perma_x_mult = (x_target/true_base_x_mult)-1
-            -- held Xchip/mult
-            local base_h_x_chip = context.other_card:get_chip_h_x_bonus()
-            if base_h_x_chip == 0 then base_h_x_chip = 1 end
-            local base_h_x_mult = context.other_card:get_chip_h_x_mult()
-            if base_h_x_mult == 0 then base_h_x_mult = 1 end
-            local h_x_target = ((base_h_x_chip - 1)+(base_h_x_mult - 1))/2 + 1
-            local true_base_h_x_chip = base_h_x_chip/(context.other_card.ability.perma_h_x_chips+1)
-            local true_base_h_x_mult = base_h_x_mult/(context.other_card.ability.perma_h_x_mult+1)
-            context.other_card.ability.perma_h_x_chips = (h_x_target/true_base_h_x_chip)-1
-            context.other_card.ability.perma_h_x_mult = (x_target/true_base_h_x_mult)-1
             return {
                 message = localize("k_balanced"),
                 sound = "gong",
