@@ -271,7 +271,7 @@ HPR.moon {
         other_card.ability.hpr_num_bonus = other_card.ability.hpr_num_bonus + card.ability.extra
     end
 }
-
+--[[
 HPR.moon {
     key = "dysnomia",
     config = { extra = 0.2, max_highlighted = 1 },
@@ -283,7 +283,7 @@ HPR.moon {
         other_card.ability.perma_eff_mod = other_card.ability.perma_eff_mod + card.ability.extra
     end
 }
-
+]]
 SMODS.Consumable {
     key = "pulsar",
     set = "Spectral",
