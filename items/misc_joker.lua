@@ -1401,3 +1401,26 @@ SMODS.Joker {
         end
     end
 }
+
+SMODS.Joker {
+    key = "softball",
+    rarity = 2,
+    cost = 7,
+    pos = { x = 6, y = 14 },
+    display_size = { w = 71 * 0.7, h = 95 * 0.7 },
+    config = { extra = 1.5 },
+    pools = { wee = true },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.extra} }
+    end,
+    calculate = function (self, card, context)
+        if context.other_joker and context.other_joker ~= card then
+            local p = context.other_joker.config.center.pools
+            if p and p.wee then
+                return {
+                    xmult = card.ability.extra
+                }
+            end
+        end
+    end
+}

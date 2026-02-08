@@ -820,6 +820,13 @@ local descriptions = {
                 "gain {C:attention}+#1#{} hand size",
                 "{C:inactive}(Currently {C:attention}#3#{C:inactive}/#2#)"
             }
+        },
+        j_hpr_softball = {
+            name = "Softball Card",
+            text = {
+                "Other {C:hpr_wee}Wee{} Jokers",
+                "each give {X:mult,C:white}X#1#{} Mult"
+            }
         }
     },
     Other = {
