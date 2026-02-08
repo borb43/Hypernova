@@ -803,6 +803,14 @@ local descriptions = {
                 "{X:chips,C:white}X#2#{} Chips and {X:mult,C:white}X#1#{} Mult",
                 "when scored"
             }
+        },
+        j_hpr_night = {
+            name = "Night",
+            text = {
+                "Jokers have a {C:green}#1# in #2#",
+                "chance to be {C:attention}retriggered",
+                "while outside of a {C:attention}Blind"
+            }
         }
     },
     Other = {

@@ -1350,3 +1350,21 @@ SMODS.Joker {
         end
     end
 }
+
+SMODS.Joker {
+    key = "night",
+    rarity = 3,
+    cost = 8,
+    atlas = "placeholder",
+    pos = { x = 2, y = 0 },
+    config = { extra = 2 },
+    loc_vars = function (self, info_queue, card)
+        local n,d = SMODS.get_probability_vars(card, 1, card.ability.extra, self.key)
+        return { vars = {n,d}}
+    end,
+    calculate = function (self, card, context)
+        if context.retrigger_joker_check and not context.retrigger_joker and not (G.GAME.blind and G.GAME.blind.in_blind) and SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra) then
+            return { repetitions = 1 }
+        end
+    end
+}
