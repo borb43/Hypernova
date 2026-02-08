@@ -74,9 +74,9 @@ local descriptions = {
         bl_hpr_final_globe = {
             name = "Golden Globe",
             text = {
-                "-1 Hand",
-                "-1 Discard",
-                "-1 Hand Size"
+                "-1 Hand,",
+                "-1 Discard,",
+                "-1 Hand Size,"
             }
         },
         bl_hpr_final_bomb = {

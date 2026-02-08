@@ -1,7 +1,7 @@
 SMODS.Blind {
     key = "final_horse",
     atlas = "blind_chip",
-    pos = { x = 0, y = 1 },
+    pos = { x = 0, y = 2 },
     dollars = 8,
     mult = 2,
     boss = { showdown = true, min = 1 },
@@ -19,7 +19,7 @@ SMODS.Blind {
 SMODS.Blind {
     key = "final_mist",
     atlas = "blind_chip",
-    pos = { x = 0, y = 1 },
+    pos = { x = 0, y = 3 },
     dollars = 8,
     mult = 0.1,
     boss = { showdown = true, min = 1 },
@@ -34,7 +34,7 @@ SMODS.Blind {
 SMODS.Blind {
     key = "final_splash",
     atlas = "blind_chip",
-    pos = { x = 0, y = 1 },
+    pos = { x = 0, y = 4 },
     dollars = 8,
     mult = 2,
     boss = { showdown = true, min = 1 },
@@ -49,7 +49,7 @@ SMODS.Blind {
 SMODS.Blind {
     key = "final_globe",
     atlas = "blind_chip",
-    pos = { x = 0, y = 1 },
+    pos = { x = 0, y = 5 },
     dollars = 8,
     mult = 2,
     boss = { showdown = true, min = 1 },
@@ -74,7 +74,7 @@ SMODS.Blind {
 SMODS.Blind {
     key = "final_bomb",
     atlas = "blind_chip",
-    pos = { x = 0, y = 1 },
+    pos = { x = 0, y = 6 },
     dollars = 8,
     mult = 2,
     boss = { showdown = true, min = 1 },
