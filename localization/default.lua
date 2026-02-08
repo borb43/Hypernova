@@ -921,6 +921,13 @@ local descriptions = {
                 "Choose {C:attention}#1#{} of up to",
                 "{C:attention}#2#{C:hpr_awesome} AWESOME{} Jokers"
             }
+        },
+        p_hpr_wee = {
+            name = "Wee Buffoon Pack",
+            text = {
+                "Choose {C:attention}#1#{} of up to",
+                "{C:attention}#2# {C:hpr_wee}Wee{} Joker cards"
+            }
         }
     },
     Planet = {},
@@ -1559,7 +1566,8 @@ local misc = {
         k_hpr_painted_ex = "Painted!",
         k_hpr_wee = "Wee",
         k_hpr_green = "Green",
-        k_hpr_abyssal_pack = "Abyssal Pack"
+        k_hpr_abyssal_pack = "Abyssal Pack",
+        k_hpr_awesome_pack = "AWESOME Pack"
     },
     high_scores = {},
     labels = {

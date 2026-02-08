@@ -563,7 +563,7 @@ SMODS.Booster {
     },
 }
 --#endregion
-
+--#region misc buffoon packs
 SMODS.Booster {
     key = "awesome",
     weight = 0.07,
@@ -590,3 +590,26 @@ SMODS.Booster {
         return self.weight * (G.GAME.hpr_awesome_pack_mod or 1)
     end
 }
+
+SMODS.Booster {
+    key = "wee",
+    weight = 0.15,
+    kind = "Buffoon",
+    cost = 4,
+    atlas = "booster",
+    pos = { x = 1, y = 1 },
+    display_size = { w = 71 * 0.7, h = 95 * 0.7 },
+    config = { extra = 2, choose = 1 },
+    group_key = "k_buffoon_pack",
+    loc_vars = function (self, info_queue, card)
+        local cfg = (card and card.ability) or self.config or {}
+        return { vars = { cfg.choose, cfg.extra }}
+    end,
+    ease_background_colour = function (self)
+        ease_background_colour_blind(G.STATES.BUFFOON_PACK)
+    end,
+    create_card = function (self, card, i)
+        return { set = "wee", area = G.pack_cards, skip_materialize = true, soulable = true, key_append = "hpr_wee_buf" }
+    end
+}
+--#endregion
