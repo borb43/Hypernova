@@ -786,6 +786,15 @@ local descriptions = {
                 "when {C:attention}blind{} is selected",
                 "{C:hpr_balance}Balances {C:chips}Chips{} and {C:mult}Mult"
             }
+        },
+        j_hpr_cloud_2 = {
+            name = "Cloud 2",
+            text = {
+                "Earn {C:money}$#1#{} for each",
+                "{C:attention}2{} in your {C:attention}full deck",
+                "at end of round",
+                "{C:inactive}(Currently {C:money}$#2#{C:inactive})"
+            }
         }
     },
     Other = {

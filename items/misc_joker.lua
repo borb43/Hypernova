@@ -1096,7 +1096,6 @@ SMODS.Joker {
     pos = { x = 4, y = 0 },
     display_size = { w = 71 * 0.7, h = 95 * 0.7 },
     config = { extra = 4 },
-    pools = { Meme = true },
     loc_vars = function (self, info_queue, card)
         local n,d=SMODS.get_probability_vars(card,1,card.ability.extra,self.key)
         info_queue[#info_queue+1] = G.P_CENTERS.e_hpr_green
@@ -1128,7 +1127,7 @@ SMODS.Joker {
             }
         end
     end,
-    pools = { wee = true }
+    pools = { wee = true, Meme = true }
 }
 
 SMODS.Joker {
@@ -1303,4 +1302,31 @@ SMODS.Joker {
             }
         end
     end
+}
+
+SMODS.Joker {
+    key = "cloud_2",
+    rarity = 2,
+    cost = 7,
+    atlas = "joker",
+    pos = { x = 5, y = 0 },
+    display_size = { w = 71 * 0.7, h = 95 * 0.7 },
+    config = { extra = { dollars = 1 } },
+    loc_vars = function(self, info_queue, card)
+        local two_tally = 0
+        if G.playing_cards then
+            for _, playing_card in ipairs(G.playing_cards) do
+                if playing_card:get_id() == 2 then two_tally = two_tally + 1 end
+            end
+        end
+        return { vars = { card.ability.extra.dollars, card.ability.extra.dollars * two_tally } }
+    end,
+    calc_dollar_bonus = function(self, card)
+        local two_tally = 0
+        for _, playing_card in ipairs(G.playing_cards) do
+            if playing_card:get_id() == 2 then two_tally = two_tally + 1 end
+        end
+        return two_tally > 0 and card.ability.extra.dollars * two_tally or nil
+    end,
+    pools = { wee = true }
 }
