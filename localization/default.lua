@@ -795,6 +795,14 @@ local descriptions = {
                 "at end of round",
                 "{C:inactive}(Currently {C:money}$#2#{C:inactive})"
             }
+        },
+        j_hpr_wee_remote = {
+            name = "Wee Remote",
+            text = {
+                "Each played {C:attention}2{} gives",
+                "{X:chips,C:white}X#2#{} Chips and {X:mult,C:white}X#1#{} Mult",
+                "when scored"
+            }
         }
     },
     Other = {

@@ -1330,3 +1330,23 @@ SMODS.Joker {
     end,
     pools = { wee = true }
 }
+
+SMODS.Joker {
+    key = "wee_remote",
+    rarity = 1,
+    cost = 4,
+    pos = { x = 8, y = 15 },
+    display_size = { w = 71 * 0.7, h = 95 * 0.7 },
+    config = { extra = { xmult = 1.2, xchip = 1.2 }},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.xmult, card.ability.extra.xchip }}
+    end,
+    calculate = function (self, card, context)
+        if context.individual and context.cardarea == G.play and context.other_card:get_id() == 2 then
+            return {
+                xmult = card.ability.extra.xmult,
+                xchips = card.ability.extra.xchip
+            }
+        end
+    end
+}
