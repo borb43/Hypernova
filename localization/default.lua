@@ -811,6 +811,15 @@ local descriptions = {
                 "chance to be {C:attention}retriggered",
                 "while outside of a {C:attention}Blind"
             }
+        },
+        j_hpr_sprout = {
+            name = "Bean Sprout",
+            text = {
+                "After {C:attention}#2#{} rounds, sell",
+                "this card to permanently",
+                "gain {C:attention}+#1#{} hand size",
+                "{C:inactive}(Currently {C:attention}#3#{C:inactive}/#2#)"
+            }
         }
     },
     Other = {

@@ -1368,3 +1368,36 @@ SMODS.Joker {
         end
     end
 }
+
+SMODS.Joker {
+    key = "sprout",
+    rarity = 3,
+    cost = 9,
+    eternal_compat = false,
+    atlas = "placeholder",
+    pos = { x = 2, y = 0 },
+    config = { extra = { h_size = 1, rounds = 2, current = 0 }},
+    pools = { Food = true },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.h_size, card.ability.extra.rounds, card.ability.extra.current }}
+    end,
+    calculate = function (self, card, context)
+        if context.end_of_round and not context.game_over and context.main_eval then
+            card.ability.extra.current = card.ability.extra.current + 1
+            if card.ability.extra.current >= card.ability.extra.rounds then
+                local eval = function(card) return not card.REMOVED end
+                juice_card_until(card, eval, true)
+            end
+            return {
+                message = (card.ability.extra.current < card.ability.extra.rounds) and
+                    (card.ability.extra.current .. '/' .. card.ability.extra.rounds) or
+                    localize('k_active_ex'),
+                colour = G.C.FILTER
+            }
+        end
+        if context.selling_self then
+            G.hand:change_size(card.ability.extra.h_size)
+            return { message = localize{type = "variable", key = "a_handsize", vars = {card.ability.extra.h_size}}}
+        end
+    end
+}
