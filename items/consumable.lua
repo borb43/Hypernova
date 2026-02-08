@@ -4,7 +4,6 @@ SMODS.Consumable{
     atlas = "consumable",
     pos = { x = 0, y = 0 },
     no_collection = true,
-    pools = { Meme = true }, --i cba to find the actual cryptid objecttype so i hope this is right
     can_use = function (self, card)
         return #HPR.get_all_highlighted(card, {G.hand,G.consumeables,G.jokers}) == 1
     end,

@@ -309,6 +309,7 @@ SMODS.Joker {
     cost = 7,
     blueprint_compat = true,
     config = { extra = 7 },
+    pools = { Meme = true },
     loc_vars = function (self, info_queue, card)
         local n, d = SMODS.get_probability_vars(card, 1, card.ability.extra, "hpr_7_ball")
         return { vars = { n, d }}
@@ -473,6 +474,7 @@ SMODS.Joker {
     cost = 5,
     blueprint_compat = true, --why would you even want this?
     demicoloncompat = true,
+    pools = { Meme = true },
     config = { extra = { loss = 2, dollars = 5, funny = 67 }},
     loc_vars = function (self, info_queue, card)
         local stake_id = G.GAME.stake
@@ -544,6 +546,7 @@ SMODS.Joker {
     rarity = 1,
     cost = 6,
     blueprint_compat = true,
+    pools = { Meme = true },
     config = { extra = { rank1 = "6", rank2 = "7" }},
     loc_vars = function (self, info_queue, card)
         return { vars = { localize(card.ability.extra.rank1, "ranks"), localize(card.ability.extra.rank2, "ranks")}}
@@ -1093,6 +1096,7 @@ SMODS.Joker {
     pos = { x = 4, y = 0 },
     display_size = { w = 71 * 0.7, h = 95 * 0.7 },
     config = { extra = 4 },
+    pools = { Meme = true },
     loc_vars = function (self, info_queue, card)
         local n,d=SMODS.get_probability_vars(card,1,card.ability.extra,self.key)
         info_queue[#info_queue+1] = G.P_CENTERS.e_hpr_green

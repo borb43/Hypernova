@@ -160,6 +160,15 @@ SMODS.ObjectType {
     }
 }
 
+if Cryptid then
+    SMODS.ObjectType{
+        key = "Meme",
+        cards = {
+            "j_wee"
+        }
+    }
+end
+
 SMODS.current_mod.optional_features = {
     --post_trigger = true,
     retrigger_joker = true
