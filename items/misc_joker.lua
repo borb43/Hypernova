@@ -1333,7 +1333,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "wee_remote",
-    rarity = 1,
+    rarity = 2,
     cost = 4,
     pos = { x = 8, y = 15 },
     display_size = { w = 71 * 0.7, h = 95 * 0.7 },
