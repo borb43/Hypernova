@@ -18,7 +18,7 @@ SMODS.Enhancement {
             return nil, true
         end
     end,
-    weight = 2
+    weight = 1.5
 }
 
 SMODS.Enhancement {
@@ -40,7 +40,7 @@ SMODS.Enhancement {
             return nil, true
         end
     end,
-    weight = 2
+    weight = 1.5
 }
 
 SMODS.Enhancement {
@@ -58,7 +58,7 @@ SMODS.Enhancement {
             return { message = localize("k_plus_tag") }
         end
     end,
-    weight = 2
+    weight = 0.5
 }
 
 SMODS.Enhancement {
@@ -77,7 +77,8 @@ SMODS.Enhancement {
                 message = localize("k_level_up_ex")
             }
         end
-    end
+    end,
+    weight = 1
 }
 
 SMODS.Seal {
@@ -108,6 +109,9 @@ SMODS.Seal {
             G.shared_seals[card.seal]:draw_shader('negative', nil, card.ARGS.send_to_shader, nil, card.children.center)
             G.shared_seals[card.seal]:draw_shader('negative_shine', nil, card.ARGS.send_to_shader, nil, card.children.center)
         end
+    end,
+    in_pool = function (self, args)
+        return false
     end
 }
 
