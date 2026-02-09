@@ -147,6 +147,34 @@ SMODS.Seal {
     end
 }
 
+SMODS.Seal {
+    key = "bronze",
+    atlas = "enhancers",
+    pos = { x = 1, y = 1 },
+    config = { extra = 1 },
+    badge_colour = G.C.ORANGE,
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.seal.extra }}
+    end,
+    calculate = function (self, card, context)
+        if context.destroy_card == card and #context.full_hand == 1 then
+            return {
+                remove = true,
+                func = function ()
+                    G.consumeables:change_size(card.ability.seal.extra)
+                end
+            }
+        end
+    end,
+    draw = function(self, card, layer)
+        if (layer == 'card' or layer == 'both') and card.sprite_facing == 'front' then
+            G.shared_seals[card.seal].role.draw_major = card
+            G.shared_seals[card.seal]:draw_shader('dissolve', nil, nil, nil, card.children.center)
+            G.shared_seals[card.seal]:draw_shader('voucher', nil, card.ARGS.send_to_shader, nil, card.children.center)
+        end
+    end
+}
+
 SMODS.Shader{
     key = "green",
     path = "green.fs"

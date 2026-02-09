@@ -979,6 +979,14 @@ local descriptions = {
                 "{C:blue}+#2#{} Hand when",
                 "discarded"
             }
+        },
+        hpr_bronze_seal = {
+            name = "Copper Seal",
+            text = {
+                "If this is the {C:attention}only",
+                "played card, destroy it",
+                "and gain {C:attention}+#1#{} consumable slot"
+            }
         }
     },
     Planet = {},
@@ -1629,7 +1637,8 @@ local misc = {
         hpr_negative_seal = "Negative Seal",
         hpr_awesome = "Awesome",
         hpr_green = "Green",
-        hpr_dual_seal = "Dual Seal"
+        hpr_dual_seal = "Dual Seal",
+        hpr_bronze_seal = "Copper Seal"
     },
     poker_hand_descriptions = {},
     poker_hands = {},
