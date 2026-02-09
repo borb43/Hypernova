@@ -110,9 +110,6 @@ SMODS.Seal {
             G.shared_seals[card.seal]:draw_shader('negative_shine', nil, card.ARGS.send_to_shader, nil, card.children.center)
         end
     end,
-    in_pool = function (self, args)
-        return false
-    end
 }
 
 SMODS.Shader{
