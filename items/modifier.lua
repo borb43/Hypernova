@@ -175,6 +175,28 @@ SMODS.Seal {
     end
 }
 
+SMODS.Seal{
+    key = "void",
+    atlas = "enhancers",
+    pos = { x = 2, y = 1 },
+    calculate = function (self, card, context)
+        if context.before and context.cardarea == G.play and G.GAME.current_round.hands_played == 0 and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+            G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+            G.E_MANAGER:add_event(Event{
+                func = function ()
+                    SMODS.add_card{
+                        set = "hpr_moons",
+                        key_append = "hpr_voidseal"
+                    }
+                    return true
+                end
+            })
+            return { message = localize("k_plus_hpr_moon"), colour = G.C.SECONDARY_SET.hpr_moons }
+        end
+    end,
+    badge_colour = HEX("5d15d1")
+}
+
 SMODS.Shader{
     key = "green",
     path = "green.fs"

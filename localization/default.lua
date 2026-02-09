@@ -987,6 +987,14 @@ local descriptions = {
                 "played card, destroy it",
                 "and gain {C:attention}+#1#{} consumable slot"
             }
+        },
+        hpr_void_seal = {
+            name = "Void Seal",
+            text = {
+                "Creates a {C:hpr_moons}Moon{} card",
+                "when played and scoring",
+                "on first hand of round"
+            }
         }
     },
     Planet = {},
@@ -1626,7 +1634,8 @@ local misc = {
         k_hpr_wee = "Wee",
         k_hpr_green = "Green",
         k_hpr_abyssal_pack = "Abyssal Pack",
-        k_hpr_awesome_pack = "AWESOME Pack"
+        k_hpr_awesome_pack = "AWESOME Pack",
+        k_plus_hpr_moon = "+1 Moon"
     },
     high_scores = {},
     labels = {
@@ -1638,7 +1647,8 @@ local misc = {
         hpr_awesome = "Awesome",
         hpr_green = "Green",
         hpr_dual_seal = "Dual Seal",
-        hpr_bronze_seal = "Copper Seal"
+        hpr_bronze_seal = "Copper Seal",
+        hpr_void_seal = "Void Seal"
     },
     poker_hand_descriptions = {},
     poker_hands = {},
