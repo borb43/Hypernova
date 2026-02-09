@@ -46,7 +46,7 @@ SMODS.Enhancement {
 SMODS.Enhancement {
     key = "silver",
     atlas = "enhancers",
-    pos = { x = 2, y = 1 },
+    pos = { x = 2, y = 0 },
     calculate = function (self, card, context)
         if context.playing_card_end_of_round and context.cardarea == G.hand then
             G.E_MANAGER:add_event(Event{
@@ -64,7 +64,7 @@ SMODS.Enhancement {
 SMODS.Enhancement {
     key = "lunar",
     atlas = "enhancers",
-    pos = { x = 3, y = 1 },
+    pos = { x = 3, y = 0 },
     config = { extra = 2 },
     loc_vars = function (self, info_queue, card)
         local n, d = SMODS.get_probability_vars(card, 1, card.ability.extra, "hpr_lunar")
@@ -84,7 +84,11 @@ SMODS.Enhancement {
 SMODS.Seal {
     key = "negative",
     pos = { x = 4, y = 4 },
-    badge_colour = G.C.L_BLACK,
+    badge_colour = G.C.DARK_EDITION,
+    config = { extra = 1 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.seal.extra} }
+    end,
     calculate = function (self, card, context)
         if context.main_scoring and context.cardarea == G.play then
             return {
@@ -93,8 +97,8 @@ SMODS.Seal {
                 func = function ()
                     G.E_MANAGER:add_event(Event{
                         func = function ()
-                            G.GAME.round_resets.temp_handsize = (G.GAME.round_resets.temp_handsize or 0) + 1
-                            G.hand:change_size(1)
+                            G.GAME.round_resets.temp_handsize = (G.GAME.round_resets.temp_handsize or 0) + card.ability.seal.extra
+                            G.hand:change_size(card.ability.seal.extra)
                             return true
                         end,
                     })
@@ -110,6 +114,37 @@ SMODS.Seal {
             G.shared_seals[card.seal]:draw_shader('negative_shine', nil, card.ARGS.send_to_shader, nil, card.children.center)
         end
     end,
+}
+
+SMODS.Seal {
+    key = "dual",
+    atlas = "enhancers",
+    pos = { x = 0, y = 1 },
+    config = { extra = { discard = 1, hand = 1 }},
+    badge_colour = HPR.dual_gradient,
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.seal.extra.discard, card.ability.seal.extra.hand }}
+    end,
+    calculate = function (self, card, context)
+        if context.discard and context.other_card == card then
+            return {
+                message = localize{type = "variable", key = "a_hands", vars = {card.ability.seal.extra.hand}},
+                func = function ()
+                    ease_hands_played(card.ability.seal.extra.hand)
+                end,
+                colour = G.C.BLUE
+            }
+        end
+        if context.main_scoring then
+            return {
+                message = localize{type = "variable", key = "a_discards", vars = {card.ability.seal.extra.discard}},
+                func = function ()
+                    ease_discard(card.ability.seal.extra.discard)
+                end,
+                colour = G.C.RED
+            }
+        end
+    end
 }
 
 SMODS.Shader{

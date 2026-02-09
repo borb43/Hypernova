@@ -73,3 +73,11 @@ HPR.awesome_gradient = SMODS.Gradient{
         G.C.RARITY[4],
     }
 }
+
+HPR.dual_gradient = SMODS.Gradient{
+    key = "dual_gradient",
+    colours = {
+        G.C.RED,
+        G.C.BLUE
+    }
+}

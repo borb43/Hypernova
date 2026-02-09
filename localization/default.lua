@@ -920,7 +920,8 @@ local descriptions = {
         hpr_negative_seal = {
             name = "Negative Seal",
             text = {
-                "Temporary {C:dark_edition}+1{} Hand Size",
+                "{C:dark_edition}+#1#{} Hand Size",
+                "until end of round",
                 "when scored"
             }
         },
@@ -968,6 +969,15 @@ local descriptions = {
             text = {
                 "Choose {C:attention}#1#{} of up to",
                 "{C:attention}#2# {C:hpr_wee}Wee{} Joker cards"
+            }
+        },
+        hpr_dual_seal = {
+            name = "Dual Seal",
+            text = {
+                "{C:red}+#1#{} Discard",
+                "when scored",
+                "{C:blue}+#2#{} Hand when",
+                "discarded"
             }
         }
     },
@@ -1618,7 +1628,8 @@ local misc = {
         hpr_prophecy = "Corrupted",
         hpr_negative_seal = "Negative Seal",
         hpr_awesome = "Awesome",
-        hpr_green = "Green"
+        hpr_green = "Green",
+        hpr_dual_seal = "Dual Seal"
     },
     poker_hand_descriptions = {},
     poker_hands = {},
@@ -1635,7 +1646,8 @@ local misc = {
         a_hpr_green = "+#1# Green",
         a_hpr_green_minus = "-#1# Green",
         hpr_card_integrated = "#1# Integrated",
-        hpr_n_cards = "#1# Cards"
+        hpr_n_cards = "#1# Cards",
+        a_discards = "+#1# Discards"
     },
     v_text = {},
 }
