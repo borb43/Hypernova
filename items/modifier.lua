@@ -157,7 +157,7 @@ SMODS.Seal {
         return { vars = { card.ability.seal.extra }}
     end,
     calculate = function (self, card, context)
-        if context.destroy_card == card and #context.full_hand == 1 then
+        if context.destroy_card == card and #context.full_hand == 1 and context.cardarea == G.play then
             return {
                 remove = true,
                 func = function ()

@@ -993,7 +993,8 @@ local descriptions = {
             text = {
                 "Creates a {C:hpr_moons}Moon{} card",
                 "when played and scoring",
-                "on first hand of round"
+                "on first hand of round",
+                "{C:inactive}(Must have room)"
             }
         }
     },
