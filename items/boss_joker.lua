@@ -1,5 +1,5 @@
 SMODS.Rarity {
     key = "boss",
-    badge_colour = HEX("FFEB04"),
+    badge_colour = HEX("eddd22"),
 }
 
