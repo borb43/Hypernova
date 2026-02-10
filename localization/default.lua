@@ -1101,6 +1101,14 @@ local descriptions = {
                 "Immediately open a",
                 "free {C:planet}Celestial Pack"
             }
+        },
+        tag_hpr_boss = {
+            name = "Boss Tag",
+            text = {
+                "Adds the {C:hpr_boss}Boss{} Joker",
+                "for {C:attention}#1#{} to the",
+                "next shop"
+            }
         }
     },
     Tarot = {
@@ -1636,7 +1644,8 @@ local misc = {
         k_hpr_green = "Green",
         k_hpr_abyssal_pack = "Abyssal Pack",
         k_hpr_awesome_pack = "AWESOME Pack",
-        k_plus_hpr_moon = "+1 Moon"
+        k_plus_hpr_moon = "+1 Moon",
+        k_hpr_boss = "Boss"
     },
     high_scores = {},
     labels = {
@@ -1649,7 +1658,8 @@ local misc = {
         hpr_green = "Green",
         hpr_dual_seal = "Dual Seal",
         hpr_bronze_seal = "Copper Seal",
-        hpr_void_seal = "Void Seal"
+        hpr_void_seal = "Void Seal",
+        hpr_boss = "Boss"
     },
     poker_hand_descriptions = {},
     poker_hands = {},

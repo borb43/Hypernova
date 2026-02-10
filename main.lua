@@ -18,8 +18,23 @@ HPR.calculate = function(self, context)
             end
         end
     end
-    if context.end_of_round and G.GAME.blind and G.GAME.blind.boss then
-        
+    if context.end_of_round and context.main_eval and G.GAME.blind and G.GAME.blind.boss then
+        local key = G.GAME.blind.config and G.GAME.blind.config.blind.key
+        if key and pseudorandom("hpr_boss_joker_spawn") < 1 then
+            G.E_MANAGER:add_event(Event{
+                func = function ()
+                    G.hpr_adding_boss_tag = true
+                    local tag = Tag("tag_hpr_boss", false, "Small")
+                    tag.ability.boss_key = key
+                    G.GAME.last_hpr_boss_tag_key = key
+                    add_tag(tag)
+                    G.hpr_adding_boss_tag = nil
+                    play_sound('generic1', 0.9 + math.random() * 0.1, 0.8)
+                    play_sound('polychrome1', 1.2 + math.random() * 0.1, 0.4)
+                    return true
+                end
+            })
+        end
     end
 end
 
@@ -289,6 +304,7 @@ assert(SMODS.load_file("items/moon.lua"))()
 assert(SMODS.load_file("items/consumable.lua"))()
 assert(SMODS.load_file("items/booster.lua"))()
 assert(SMODS.load_file("items/misc_joker.lua"))()
+assert(SMODS.load_file("items/boss_joker.lua"))()
 assert(SMODS.load_file("items/legendary.lua"))()
 assert(SMODS.load_file("items/tag.lua"))()
 
