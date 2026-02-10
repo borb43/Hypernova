@@ -18,6 +18,9 @@ HPR.calculate = function(self, context)
             end
         end
     end
+    if context.end_of_round and G.GAME.blind and G.GAME.blind.boss then
+        
+    end
 end
 
 HPR.post_load = function ()
@@ -245,6 +248,19 @@ SMODS.Atlas {
     path = "booster.png",
     px = 71,
     py = 95,
+}
+
+SMODS.Atlas {
+    key = "tag",
+    path = "tag.png",
+    px = 34,
+    py = 34,
+}
+
+SMODS.Atlas {
+    key = "boss_joker",
+    path = "boss_joker.png",
+    px = 71, py = 95
 }
 
 if CardSleeves then
