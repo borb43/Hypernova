@@ -842,6 +842,24 @@ local descriptions = {
                     "{C:inactive,s:0.8}(Playing card effects excluded)"
                 }
             }
+        },
+        j_hpr_ox = {
+            name = "The Ox",
+            text = {
+                "If {C:attention}poker hand{} is {C:attention}not{} your",
+                "most played, earn number of",
+                "times it has been played this",
+                "run as money, otherwise",
+                "sets money to {C:money}$0"
+            }
+        },
+        j_hpr_house = {
+            name = "The House",
+            text = {
+                "Cards in first drawn hand",
+                "are drawn face down and",
+                "permanently gain {C:mult}+#1#{} Mult"
+            }
         }
     },
     Other = {

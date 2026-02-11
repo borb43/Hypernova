@@ -60,3 +60,46 @@ HPR.BossJoker {
     end,
     boss_key = "bl_hook"
 }
+
+HPR.BossJoker {
+    key = "ox",
+    pos = { x = 1, y = 0 },
+    calculate = function (self, card, context)
+        if context.before then
+            local reset = true
+            local hand_played = G.GAME.hands[context.scoring_name].played
+            for k, v in pairs(G.GAME.hands) do
+                if k ~= context.scoring_name and v.played > hand_played and SMODS.is_poker_hand_visible(k) then
+                    reset = false
+                    break
+                end
+            end
+            if reset then
+                ease_dollars(-G.GAME.dollars)
+            else
+                G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + hand_played
+                return {
+                    dollars = hand_played,
+                    func = HPR.event_presets.reset_dollar_buffer
+                }
+            end
+        end
+    end,
+    boss_key = "bl_ox"
+}
+
+HPR.BossJoker {
+    key = "house",
+    pos = { x = 2, y = 0 },
+    config = { extra = 8 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.extra}}
+    end,
+    calculate = function (self, card, context)
+        if context.stay_flipped and context.to_area == G.hand and G.GAME.current_round.discards_used == 0 and G.GAME.current_round.hands_played == 0 then
+            context.other_card.ability.perma_mult = context.other_card.ability.perma_mult + card.ability.extra
+            return { stay_flipped = true }
+        end
+    end,
+    boss_key = "bl_house"
+}
