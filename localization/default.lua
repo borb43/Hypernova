@@ -1694,7 +1694,8 @@ local misc = {
         k_hpr_abyssal_pack = "Abyssal Pack",
         k_hpr_awesome_pack = "AWESOME Pack",
         k_plus_hpr_moon = "+1 Moon",
-        k_hpr_boss = "Boss"
+        k_hpr_boss = "Boss",
+        k_level_down = "Level Down"
     },
     high_scores = {},
     labels = {

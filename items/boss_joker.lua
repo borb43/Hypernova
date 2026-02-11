@@ -134,5 +134,35 @@ HPR.BossJoker {
             context.other_card.ability.perma_x_mult = context.other_card.ability.perma_x_mult + card.ability.extra.xmult
             return { stay_flipped = true }
         end
-    end
+    end,
+    boss_key = "bl_wheel"
+}
+
+HPR.BossJoker {
+    key = "arm",
+    pos = { x = 5, y = 0 },
+    config = { extra = { chips = 0, mult = 0 }},
+    loc_vars = function (self, info_queue,card)
+        return {vars = { card.ability.extra.chips, card.ability.extra.mult }}
+    end,
+    calculate = function (self, card, context)
+        if context.before and G.GAME.hands[context.scoring_name].level > 1 then
+            card.ability.extra.chips = card.ability.extra.chips + G.GAME.hands[context.scoring_name].l_chips
+            card.ability.extra.mult = card.ability.extra.mult + G.GAME.hands[context.scoring_name].l_mult
+            return {
+                level_up = -1,
+                message = localize("k_level_down"),
+                colour = G.C.RED
+            }
+        end
+        if context.joker_main then
+            local chips = card.ability.extra.chips
+            local mult = card.ability.extra.mult
+            return {
+                chips = chips~=0 and chips or nil,
+                mult = mult~=0 and mult or nil
+            }
+        end
+    end,
+    boss_key = "bl_arm"
 }
