@@ -120,3 +120,19 @@ HPR.BossJoker {
     end,
     boss_key = "bl_wall"
 }
+
+HPR.BossJoker {
+    key = "wheel",
+    pos = { x = 4, y = 0 },
+    config = { extra = { odds = 7, xmult = 0.1 } },
+    loc_vars = function (self, info_queue, card)
+        local n,d = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, self.key)
+        return { vars = {n,d,card.ability.extra.xmult}}
+    end,
+    calculate = function (self, card, context)
+        if context.stay_flipped and context.to_area == G.hand and SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds) then
+            context.other_card.ability.perma_x_mult = context.other_card.ability.perma_x_mult + card.ability.extra.xmult
+            return { stay_flipped = true }
+        end
+    end
+}

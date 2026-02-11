@@ -868,6 +868,14 @@ local descriptions = {
                 "selected, {X:hpr_dual_gradient,C:white}X#1#{} Hands,",
                 "Discards and Blind Size"
             }
+        },
+        j_hpr_wheel = {
+            name = "The Wheel",
+            text = {
+                "{C:green}#1# in #2#{} cards are",
+                "drawn face down and",
+                "gain {X:mult,C:white}X#3#{} Mult"
+            }
         }
     },
     Other = {
