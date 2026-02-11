@@ -102,8 +102,6 @@ SMODS.Tag {
         end
     end,
     set_ability = function (self, tag)
-        if not G.hpr_adding_boss_tag then
-            tag.ability.boss_key = G.GAME.last_hpr_boss_tag_key
-        end
+        tag.ability.boss_key = G.GAME.last_hpr_boss_tag_key
     end
 }
