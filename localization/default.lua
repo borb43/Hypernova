@@ -860,6 +860,14 @@ local descriptions = {
                 "are drawn face down and",
                 "permanently gain {C:mult}+#1#{} Mult"
             }
+        },
+        j_hpr_wall = {
+            name = "The Wall",
+            text = {
+                "When {C:attention}Boss Blind{} is",
+                "selected, {X:hpr_dual_gradient,C:white}X#1#{} Hands,",
+                "Discards and Blind Size"
+            }
         }
     },
     Other = {

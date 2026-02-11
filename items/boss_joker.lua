@@ -103,3 +103,20 @@ HPR.BossJoker {
     end,
     boss_key = "bl_house"
 }
+
+HPR.BossJoker {
+    key = "wall",
+    pos = { x = 3, y = 0 },
+    config = { extra = 2 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.extra}}
+    end,
+    calculate = function (self, card, context)
+        if context.setting_blind and context.blind.boss then
+            HPR.mod_blind_amount(card.ability.extra)
+            ease_discard(G.GAME.current_round.discards_left * (card.ability.extra-1) )
+            ease_hands_played(G.GAME.current_round.hands_left * (card.ability.extra - 1))
+        end
+    end,
+    boss_key = "bl_wall"
+}

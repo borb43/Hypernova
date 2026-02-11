@@ -184,6 +184,7 @@ function HPR.contains(_t, val)
 end
 
 function HPR.mod_blind_amount(amt, op)
+    if not (G.GAME.blind and G.GAME.blind.chips) then return end
     local new_amt
     if not op or op == "*" or op =="X" then
         new_amt = G.GAME.blind.chips * amt
