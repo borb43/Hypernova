@@ -491,7 +491,8 @@ local descriptions = {
         j_hpr_tiny_chad = {
             name = "Tiny Hanging Chad",
             text = {
-                "First scoring {C:attention}2{} gains",
+                "If {C:attention}first hand{} of round",
+                "is a single {C:attention}2{}, it gains",
                 "{C:attention}1{} permanent retrigger"
             }
         },

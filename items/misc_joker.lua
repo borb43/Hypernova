@@ -533,7 +533,7 @@ SMODS.Joker {
     pos = { x = 2, y = 0 },
     rarity = 3,
     cost = 6,
-    config = { extra = 0.1 },
+    config = { extra = 0.05 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra }}
     end,
@@ -600,15 +600,15 @@ SMODS.Joker {
     display_size = { w = 71 * 0.7, h = 95 * 0.7 },
     rarity = 3,
     cost = 9,
-    blueprint_compat = true,
+    immutable = true,
     calculate = function (self, card, context)
-        if context.before then
-            for _, c in ipairs(context.scoring_hand) do
-                if c:get_id() == 2 then
-                    c.ability.perma_repetitions = c.ability.perma_repetitions + 1
-                    return { message = localize("k_upgrade_ex"), colour = G.C.FILTER, message_card = c }
-                end
-            end
+        if context.before and G.GAME.current_round.hands_played == 0 and #context.full_hand == 1 and context.full_hand[1]:get_id() == 2 then
+            local c = context.full_hand[1]
+            c.ability.perma_repetitions = c.ability.perma_repetitions + 1
+            return {
+                message = localize("k_upgrade_ex"),
+                message_card = c
+            }
         end
     end,
     pools = { wee = true }
