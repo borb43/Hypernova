@@ -828,6 +828,20 @@ local descriptions = {
                 "Other {C:hpr_wee}Wee{} Jokers",
                 "each give {X:mult,C:white}X#1#{} Mult"
             }
+        },
+        j_hpr_hook = {
+            name = "The Hook",
+            text = {
+                {
+                    "Discard {C:attention}#1#{} random cards",
+                    "in hand when hand is played"
+                },
+                {
+                    "Retriggers all {C:attention}on-discard",
+                    "effects {C:attention}#2#{} times",
+                    "{C:inactive,s:0.8}(Playing card effects excluded)"
+                }
+            }
         }
     },
     Other = {

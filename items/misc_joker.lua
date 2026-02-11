@@ -870,13 +870,13 @@ SMODS.Joker {
         if context.end_of_round and context.main_eval and not context.retrigger_joker then
             card.ability.extra.rounds = card.ability.extra.rounds - 1
             if card.ability.extra.rounds <= 0 then
-                local targets = SMODS.Edition:get_edition_cards({cards = G.playing_cards}, true)
                 for _ = 1, card.ability.extra.cards do
-                    local c, key = pseudorandom_element(targets, "hpr_good_bomb")
-                    if c and type(key) == "number" and c.set_edition then
-                        table.remove(targets, key)
+                    local c = pseudorandom_element(G.playing_cards, "hpr_good_bomb", { in_pool = function(v,args) return not v.edition and not v.will_be_editioned end})
+                    if c and c.set_edition then
+                        c.will_be_editioned = true
                         local ed = SMODS.poll_edition{ key = "hpr_bomb_edition", guaranteed = true, no_negative = true }
                         c:set_edition(ed, nil, true, true)
+                        c.will_be_editioned = nil
                     end
                 end
                 G.E_MANAGER:add_event(Event{
