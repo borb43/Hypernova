@@ -240,7 +240,7 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
 		for _, c in ipairs(SMODS.find_card("j_hpr_growth")) do
 			amount = amount * c.ability.extra.eff_mod
 		end
-		if next(SMODS.find_card("j_hpr_antiderivative")) and string.find(key, "mult") and not HPR.findany(key:lower(), "x", "e", "hyper", "eq") then
+		if next(SMODS.find_card("j_hpr_antiderivative")) and string.find(key, "mult") and not HPR.findany(key:lower(), "x", "e") then
 			local multi = 0
 			for _, c in ipairs(SMODS.find_card("j_hpr_antiderivative")) do
 				multi = math.max(multi, c.ability.extra)
@@ -250,7 +250,7 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
 			amount = 1 + amount*multi
 		end
 		for _, c in ipairs(SMODS.find_card("j_hpr_derivative")) do
-			if HPR.findany(key, "X", "x") and key:find("mult") and c.ability.extra.active then
+			if HPR.findany(key, "X", "x") and key:find("mult") and not key:find("xlog") and c.ability.extra.active then
 				key = key:gsub("x_", "")
 				key = key:gsub("X", "")
 				key = key:gsub("x", "")

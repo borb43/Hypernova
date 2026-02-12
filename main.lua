@@ -20,15 +20,16 @@ HPR.calculate = function(self, context)
     end
     if context.end_of_round and context.main_eval and G.GAME.blind and G.GAME.blind.boss then
         local key = G.GAME.blind.config and G.GAME.blind.config.blind.key
-        if key and pseudorandom("hpr_boss_joker_spawn") < 1 then
+        local pass
+        for _, c in pairs(G.P_CENTERS) do
+            if c.boss_key == key then pass = true end
+        end
+        if key and pass and pseudorandom("hpr_boss_joker_spawn") < 0.15 then
             G.E_MANAGER:add_event(Event{
                 func = function ()
-                    G.hpr_adding_boss_tag = true
-                    local tag = Tag("tag_hpr_boss", false, "Small")
-                    tag.ability.boss_key = key
                     G.GAME.last_hpr_boss_tag_key = key
+                    local tag = Tag("tag_hpr_boss", false, "Small")
                     add_tag(tag)
-                    G.hpr_adding_boss_tag = nil
                     play_sound('generic1', 0.9 + math.random() * 0.1, 0.8)
                     play_sound('polychrome1', 1.2 + math.random() * 0.1, 0.4)
                     return true
@@ -91,15 +92,15 @@ HPR.post_create_card = function (card, area, soulable, key_append)
     if (card.ability.set == "Default" or card.ability.set == "Enhanced") and area and (area.config.type == "shop" or area == G.pack_cards) then
         if G.GAME and G.GAME.used_vouchers.v_hpr_stacking then
             if pseudorandom("hpr_stacking") < 0.5 then card.ability.perma_bonus = card.ability.perma_bonus + pseudorandom("hpr_stacking_buff"..(key_append or ""), 10, 60) end
-            if pseudorandom("hpr_stacking") < 0.5 then card.ability.perma_h_chips = card.ability.perma_h_chips + pseudorandom("hpr_stacking_buff"..(key_append or ""), 15, 90) end
+            if pseudorandom("hpr_stacking") < 0.5 then card.ability.perma_h_chips = card.ability.perma_h_chips + pseudorandom("hpr_stacking_buff"..(key_append or ""), 10, 60) end
             if pseudorandom("hpr_stacking") < 0.4 then card.ability.perma_mult = card.ability.perma_mult + pseudorandom("hpr_stacking_buff"..(key_append or ""), 2, 10) end
-            if pseudorandom("hpr_stacking") < 0.4 then card.ability.perma_h_mult = card.ability.perma_h_mult + pseudorandom("hpr_stacking_buff"..(key_append or ""), 3, 15) end
+            if pseudorandom("hpr_stacking") < 0.4 then card.ability.perma_h_mult = card.ability.perma_h_mult + pseudorandom("hpr_stacking_buff"..(key_append or ""), 2, 10) end
         end
         if G.GAME and G.GAME.used_vouchers.v_hpr_massprod then
-            if pseudorandom("hpr_stacking2") < 0.25 then card.ability.perma_x_chips = card.ability.perma_x_chips + (pseudorandom("hpr_stacking_buff2"..(key_append or ""), 1, 10)/10) end
-            if pseudorandom("hpr_stacking2") < 0.25 then card.ability.perma_h_x_chips = card.ability.perma_h_x_chips + (pseudorandom("hpr_stacking_buff2"..(key_append or ""), 1, 10)/10) end
-            if pseudorandom("hpr_stacking2") < 0.25 then card.ability.perma_x_mult = card.ability.perma_x_mult + (pseudorandom("hpr_stacking_buff2"..(key_append or ""), 1, 10)/10) end
-            if pseudorandom("hpr_stacking2") < 0.25 then card.ability.perma_h_x_mult = card.ability.perma_h_x_mult + (pseudorandom("hpr_stacking_buff2"..(key_append or ""), 1, 10)/10) end
+            if pseudorandom("hpr_stacking2") < 0.25 then card.ability.perma_x_chips = card.ability.perma_x_chips + (pseudorandom("hpr_stacking_buff2"..(key_append or ""), 1, 5)/10) end
+            if pseudorandom("hpr_stacking2") < 0.25 then card.ability.perma_h_x_chips = card.ability.perma_h_x_chips + (pseudorandom("hpr_stacking_buff2"..(key_append or ""), 1, 5)/10) end
+            if pseudorandom("hpr_stacking2") < 0.25 then card.ability.perma_x_mult = card.ability.perma_x_mult + (pseudorandom("hpr_stacking_buff2"..(key_append or ""), 1, 10)/5) end
+            if pseudorandom("hpr_stacking2") < 0.25 then card.ability.perma_h_x_mult = card.ability.perma_h_x_mult + (pseudorandom("hpr_stacking_buff2"..(key_append or ""), 1, 5)/10) end
         end
         if G.GAME and G.GAME.used_vouchers.v_hpr_falsified then
             if pseudorandom("hpr_stacking3") < 0.2 then card.ability.perma_repetitions = card.ability.perma_repetitions + 1 end

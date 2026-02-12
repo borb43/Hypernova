@@ -117,7 +117,7 @@ HPR.moon = SMODS.Consumable:extend({
 
 HPR.moon {
     key = "deimos",
-    config = { extra = 8, max_highlighted = 2 },
+    config = { extra = 6, max_highlighted = 2 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra, card.ability.max_highlighted }}
     end,
@@ -158,7 +158,7 @@ HPR.moon {
 
 HPR.moon {
     key = "phobos",
-    config = { extra = 8, max_highlighted = 3 },
+    config = { extra = 6, max_highlighted = 3 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra, card.ability.max_highlighted }}
     end,
@@ -175,7 +175,7 @@ HPR.moon {
 
 HPR.moon {
     key = "europa",
-    config = { extra = 0.25, max_highlighted = 1 },
+    config = { extra = 0.2, max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra, card.ability.max_highlighted }}
     end,
@@ -192,7 +192,7 @@ HPR.moon {
 
 HPR.moon {
     key = "hyperion",
-    config = { extra = 0.25, max_highlighted = 1 },
+    config = { extra = 0.2, max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra, card.ability.max_highlighted }}
     end,
@@ -204,7 +204,7 @@ HPR.moon {
 
 HPR.moon {
     key = "titania",
-    config = { extra = 0.25, max_highlighted = 2 },
+    config = { extra = 0.2, max_highlighted = 2 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra, card.ability.max_highlighted }}
     end,
@@ -216,7 +216,7 @@ HPR.moon {
 
 HPR.moon {
     key = "triton",
-    config = { extra = 0.25, max_highlighted = 2 },
+    config = { extra = 0.2, max_highlighted = 2 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra, card.ability.max_highlighted }}
     end,
@@ -257,7 +257,7 @@ HPR.moon {
 
 HPR.moon {
     key = "asteroid",
-    config = { extra = 1, max_highlighted = 1 },
+    config = { extra = 1, max_highlighted = 2 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra, card.ability.max_highlighted }}
     end,

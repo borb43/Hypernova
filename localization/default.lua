@@ -491,7 +491,8 @@ local descriptions = {
         j_hpr_tiny_chad = {
             name = "Tiny Hanging Chad",
             text = {
-                "First scoring {C:attention}2{} gains",
+                "If {C:attention}first hand{} of round",
+                "is a single {C:attention}2{}, it gains",
                 "{C:attention}1{} permanent retrigger"
             }
         },
@@ -826,6 +827,54 @@ local descriptions = {
             text = {
                 "Other {C:hpr_wee}Wee{} Jokers",
                 "each give {X:mult,C:white}X#1#{} Mult"
+            }
+        },
+        j_hpr_hook = {
+            name = "The Hook",
+            text = {
+                {
+                    "Discard {C:attention}#1#{} random cards",
+                    "in hand when hand is played"
+                },
+                {
+                    "Retriggers all {C:attention}on-discard",
+                    "effects {C:attention}#2#{} times",
+                    "{C:inactive,s:0.8}(Playing card effects excluded)"
+                }
+            }
+        },
+        j_hpr_ox = {
+            name = "The Ox",
+            text = {
+                "If {C:attention}poker hand{} is {C:attention}not{} your",
+                "most played, earn number of",
+                "times it has been played this",
+                "run as money, otherwise",
+                "sets money to {C:money}$0"
+            }
+        },
+        j_hpr_house = {
+            name = "The House",
+            text = {
+                "Cards in first drawn hand",
+                "are drawn face down and",
+                "permanently gain {C:mult}+#1#{} Mult"
+            }
+        },
+        j_hpr_wall = {
+            name = "The Wall",
+            text = {
+                "When {C:attention}Boss Blind{} is",
+                "selected, {X:hpr_dual_gradient,C:white}X#1#{} Hands,",
+                "Discards and Blind Size"
+            }
+        },
+        j_hpr_wheel = {
+            name = "The Wheel",
+            text = {
+                "{C:green}#1# in #2#{} cards are",
+                "drawn face down and",
+                "gain {X:mult,C:white}X#3#{} Mult"
             }
         }
     },
@@ -1645,7 +1694,8 @@ local misc = {
         k_hpr_abyssal_pack = "Abyssal Pack",
         k_hpr_awesome_pack = "AWESOME Pack",
         k_plus_hpr_moon = "+1 Moon",
-        k_hpr_boss = "Boss"
+        k_hpr_boss = "Boss",
+        k_level_down = "Level Down"
     },
     high_scores = {},
     labels = {
