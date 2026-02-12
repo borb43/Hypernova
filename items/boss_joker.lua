@@ -181,3 +181,20 @@ HPR.BossJoker {
         if context.debuff_card and context.debuff_card:is_suit("Clubs") then return { debuff = true } end
     end
 }
+
+HPR.BossJoker {
+    key = "fish",
+    pos = { x = 1, y = 1 },
+    config = { extra = 25 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.extra}}
+    end,
+    calculate = function (self, card, context)
+        if context.press_play then card.ability.prepped = true end
+        if context.stay_flipped and card.ability.prepped then
+            context.other_card.ability.perma_bonus = context.other_card.ability.perma_bonus + card.ability.extra
+            return { stay_flipped = true }
+        end
+        if context.hand_drawn or context.setting_blind then card.ability.prepped = nil end
+    end
+}

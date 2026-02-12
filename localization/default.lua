@@ -922,6 +922,14 @@ local descriptions = {
                 "{C:mult}+#1#{} Mult when scored",
                 "{C:clubs}Clubs{} are debuffed"
             }
+        },
+        j_hpr_fish = {
+            name = "The Fish",
+            text = {
+                "Cards are drawn face",
+                "down and gain {C:chips}+#1#{} Chips",
+                "after each hand"
+            }
         }
     },
     Other = {
