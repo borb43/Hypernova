@@ -109,10 +109,10 @@ HPR.post_create_card = function (card, area, soulable, key_append)
             if pseudorandom("hpr_stacking4") < 0.2 then card.ability.perma_p_dollars = card.ability.perma_p_dollars + pseudorandom("hpr_stacking_buff4"..(key_append or ""),1,4) end
         end
     end
-    if card.ability.consumeable and G.GAME.modifiers.hpr_neg_consumable_rate and pseudorandom((key_append or "").."neg_consumable_deck") < G.GAME.modifiers.hpr_neg_consumable_rate then
+    if card.ability.consumeable and not card.edition and G.GAME.modifiers.hpr_neg_consumable_rate and pseudorandom((key_append or "").."neg_consumable_deck") < G.GAME.modifiers.hpr_neg_consumable_rate then
 		card:set_edition("e_negative")
 	end
-    if area and G.GAME.used_vouchers.v_hpr_graviton and (area.config.type == "shop" or area == G.pack_cards) and card.is_rarity and card:is_rarity(1) and pseudorandom((key_append or "").."hpr_graviton") < 0.05 then
+    if area and G.GAME.used_vouchers.v_hpr_graviton and (area.config.type == "shop" or area == G.pack_cards) and not card.edition and card.is_rarity and card:is_rarity(1) and pseudorandom((key_append or "").."hpr_graviton") < 0.05 then
         card:set_edition("e_negative")
     end
 end
