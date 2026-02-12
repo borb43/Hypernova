@@ -188,6 +188,7 @@ SMODS.Seal{
                         set = "hpr_moons",
                         key_append = "hpr_voidseal"
                     }
+                    G.GAME.consumeable_buffer = 0
                     return true
                 end
             })
