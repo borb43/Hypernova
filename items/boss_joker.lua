@@ -166,3 +166,18 @@ HPR.BossJoker {
     end,
     boss_key = "bl_arm"
 }
+
+HPR.BossJoker {
+    key = "club_boss",
+    pos = { x = 0, y = 1 },
+    config = { extra = 7 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.extra}}
+    end,
+    calculate = function (self, card, context)
+        if context.individual and context.cardarea == G.play then
+            return { mult = card.ability.extra }
+        end
+        if context.debuff_card and context.debuff_card:is_suit("Clubs") then return { debuff = true } end
+    end
+}

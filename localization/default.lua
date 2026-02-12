@@ -914,6 +914,14 @@ local descriptions = {
                 {"Replace all future {C:attention}Food{} Jokers",
                 "with {C:attention}Grilled Chicken{} variants"}
             }
+        },
+        j_hpr_club_boss = {
+            name = "The Club",
+            text = {
+                "Played cards give",
+                "{C:mult}+#1#{} Mult when scored",
+                "{C:clubs}Clubs{} are debuffed"
+            }
         }
     },
     Other = {
