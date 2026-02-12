@@ -876,6 +876,44 @@ local descriptions = {
                 "drawn face down and",
                 "gain {X:mult,C:white}X#3#{} Mult"
             }
+        },
+        j_hpr_bosschicken = {
+            name = "The Chicken",
+            text = {
+                {"All {C:attention}Grilled Chicken{} Jokers",
+                "give {X:mult,C:white}X#1#{} Mult, debuffs all",
+                "non-{C:attention}Grilled Chicken{} Jokers"},
+                {"Replace all future {C:attention}Food{} Jokers",
+                "with {C:attention}Grilled Chicken{} variants"}
+            }
+        },
+        j_hpr_stellarchicken = {
+            name = "SDX001 GRILLED CHICKEN",
+            text = {
+                {
+                    "Retriggers all Grilled Chicken",
+                    "Jokers once for every #1# Ante"
+                },
+                {
+                    "Creates a {C:attention}Grilled Chicken",
+                    "Joker when {C:attention}Blind{} is selected"
+                },
+                {"Replace all future {C:attention}Food{} Jokers",
+                "with {C:attention}Grilled Chicken{} variants"}
+            }
+        },
+        j_hpr_awesomechicken = {
+            name = "{C:hpr_awesome}AWESOME{} Fucking Chicken",
+            text = {
+                {
+                    "{X:mult,C:white}X#1#{} Mult",
+                    "When {C:attention}Blind{} is selected, converts",
+                    "Joker to the right into a {C:attention}Grilled",
+                    "{C:attention}Chicken{} of the respective rarity"
+                },
+                {"Replace all future {C:attention}Food{} Jokers",
+                "with {C:attention}Grilled Chicken{} variants"}
+            }
         }
     },
     Other = {

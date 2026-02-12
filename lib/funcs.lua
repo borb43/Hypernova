@@ -79,6 +79,9 @@ end
 
 function HPR.get_ascension(card)
     local center = card.config and card.config.center or card
+    if MyDreamJournal and MyDreamJournal.is_grilled_chicken(center.key) then
+        return "j_hpr_stellarchicken"
+    end
     if center.effect == "Cry Type Mult" then
         return "j_hpr_crazy"
     end

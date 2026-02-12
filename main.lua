@@ -86,6 +86,14 @@ HPR.post_load = function ()
             end
         end
     end
+    if MyDreamJournal and MyDreamJournal.grilled_chicken then
+        MyDreamJournal.ribstable["hpr_boss"] = 0.67
+        MyDreamJournal.ribstable["hpr_stellar"] = 0.68
+        MyDreamJournal.ribstable["hpr_awesome"] = 0.69
+        MyDreamJournal.grilled_chicken[0.67] = {"j_hpr_bosschicken"}
+        MyDreamJournal.grilled_chicken[0.68] = {"j_hpr_stellarchicken"}
+        MyDreamJournal.grilled_chicken[0.69] = {"j_hpr_awesomechicken"}
+    end
 end
 
 HPR.post_create_card = function (card, area, soulable, key_append)
@@ -319,6 +327,10 @@ assert(SMODS.load_file("items/back.lua"))()
 assert(SMODS.load_file("items/blind.lua"))()
 assert(SMODS.load_file("items/voucher.lua"))()
 assert(SMODS.load_file("crossmod/xmod_moons.lua"))()
+
+if next(SMODS.find_mod("MyDreamJournal")) then
+    assert(SMODS.load_file("crossmod/grilled_chicken.lua"))()
+end
 
 if CardSleeves then
     assert(SMODS.load_file("crossmod/sleeve.lua"))()
