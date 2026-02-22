@@ -641,15 +641,6 @@ local descriptions = {
                 "cards in your {C:attention}full{} deck"
             }
         },
-        j_hpr_recycle = {
-            name = "S027 RECYCLE",
-            text = {
-                "When hand is played, this",
-                "Joker gains {X:mult,C:white}X#2#{} Mult for",
-                "each remaining {C:red}discard",
-                "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
-            }
-        },
         j_hpr_voucherman = {
             name = "Voucherman",
             text = {
@@ -662,7 +653,7 @@ local descriptions = {
             }
         },
         j_hpr_royalty = {
-            name = "S028 ROYALTY",
+            name = "S027 ROYALTY",
             text = {
                 "Held in hand {C:attention}face{} cards",
                 "give {X:mult,C:white}X#1#{} Mult for each",
