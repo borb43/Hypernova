@@ -281,5 +281,7 @@ SMODS.Edition{
                 }
             end
         end
-    end
+    end,
+    in_shop = true,
+    weight = 4
 }

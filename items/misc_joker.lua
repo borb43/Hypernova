@@ -1090,7 +1090,7 @@ SMODS.Joker {
 SMODS.Joker {
     key = "2_ball",
     blueprint_compat = true,
-    rarity = 1,
+    rarity = 2,
     cost = 6,
     atlas = "joker",
     pos = { x = 4, y = 0 },
@@ -1113,7 +1113,6 @@ SMODS.Joker {
                         G.E_MANAGER:add_event(Event{
                             func = function ()
                                 SMODS.add_card{
-                                    key = "c_hpr_green",
                                     set = "Tarot",
                                     key_append = "hpr_2_ball",
                                     edition = "e_hpr_green"
