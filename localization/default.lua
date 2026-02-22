@@ -716,7 +716,7 @@ local descriptions = {
             text = {
                 "{C:green}#1# in #2#{} chance for each",
                 "played {C:attention}2{} to create a",
-                "{C:dark_edition}Green {C:hpr_ultragreen}The Green{} when scored",
+                "{C:dark_edition}Green {C:tarot}Tarot{} card when scored",
                 "{C:inactive}(Must have room)"
             }
         },
