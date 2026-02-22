@@ -653,11 +653,12 @@ local descriptions = {
         j_hpr_voucherman = {
             name = "Voucherman",
             text = {
-                "{C:attention}Permanently{} increase a",
-                "random stat when any",
-                "{C:attention}Voucher{} is redeemed",
-                "Creates a {C:attention}Voucher Tag",
-                "at the end of round"
+                "Randomly increase",
+                "{C:blue}Hands{}, {C:red}Discards{}, {C:attention}Hand Size{},",
+                "{C:attention}Consumable slots{}, {C:dark_edition}Joker slots{},",
+                "{C:attention}Discard limit{}, {C:attention}Play limit{}, or",
+                "decrease {C:attention}Ante{} by {C:attention}1{} when",
+                "any {C:attention}Voucher{} is redeemed"
             }
         },
         j_hpr_royalty = {
@@ -1731,14 +1732,8 @@ local misc = {
         k_hpr_plus_jsize = "+1 Joker Slot",
         k_hpr_minus_ante = "-1 Ante",
         k_hpr_plus_hsize = "+1 Hand Size",
-        k_hpr_green_hands = "+$1 per Hand",
-        k_hpr_green_discards = "+$1 per Discard",
-        k_hpr_plus_bsize = "+1 Booster Slot",
-        k_hpr_plus_vsize = "+1 Voucher Slot",
-        k_hpr_plus_csl = "+1 Card Selection Limit",
-        k_hpr_plus_reroll = "+1 Free Reroll",
-        k_hpr_plus_iamt = "+1 Interest Amount",
-        k_hpr_plus_debt = "+$20 Debt Limit",
+        k_hpr_plus_psize = "+1 Play limit",
+        k_hpr_plus_dsize = "+1 Discard limit",
         k_hpr_plus_consumable = "+1 Consumable",
         k_hpr_painted_ex = "Painted!",
         k_hpr_wee = "Wee",
