@@ -290,7 +290,7 @@ local descriptions = {
             text = {
                 "If played hand contains a {C:attention}Straight",
                 "this Joker gains {X:mult,C:white}X#2#{} Mult and",
-                "creates a {C:dark_edition}Negative {C:spectral}Spectral{} card",
+                "creates a {C:dark_edition}Negative {C:attention}Consumable{} card",
                 "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
             }
         },

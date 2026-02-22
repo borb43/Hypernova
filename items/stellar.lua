@@ -515,13 +515,13 @@ HPR.StellarJoker {
             G.E_MANAGER:add_event(Event{
                 func = function ()
                     SMODS.add_card({
-                        set = "Spectral",
+                        set = "Consumeables",
                         edition = "e_negative"
                     })
                     return true
                 end
             })
-            return { message = localize("k_plus_spectral") }
+            return { message = localize("k_hpr_plus_consumable") }
         end
         if context.joker_main and card.ability.extra.xmult ~= 1 then
             return { xmult = card.ability.extra.xmult }
