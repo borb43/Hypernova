@@ -41,12 +41,10 @@ local descriptions = {
                 "The {C:hpr_awesome,T:p_hpr_awesome}AWESOME Buffoon Pack",
                 "may appear in the shop",
                 "Spawn rate {C:attention}doubles{} when",
-                "{C:attention}Boss Blind{} is defeated",
-                "Spawn rate multiplier is set",
-                "to the {C:attention}base-2 logarithm{} of",
-                "the current multiplier when",
-                "an {C:hpr_awesome}AWESOME Buffoon Pack{} is bought",
-                "{C:inactive}(Minimum of 1X spawn rate)"
+                "{C:attention}Boss Blind{} is defeated,",
+                "resets when an",
+                "{C:hpr_awesome}AWESOME Buffoon Pack{}",
+                "is bought"
             }
         }
     },

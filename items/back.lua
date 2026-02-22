@@ -90,7 +90,7 @@ SMODS.Back {
             G.GAME.hpr_awesome_pack_mod = (G.GAME.hpr_awesome_pack_mod or 1) * 2
         end
         if context.open_booster and context.booster.key == "p_hpr_awesome" then
-            G.GAME.hpr_awesome_pack_mod = math.max(math.log(G.GAME.hpr_awesome_pack_mod, 2),1)
+            G.GAME.hpr_awesome_pack_mod = 1
         end
     end
 }
