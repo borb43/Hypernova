@@ -179,7 +179,8 @@ HPR.BossJoker {
             return { mult = card.ability.extra }
         end
         if context.debuff_card and context.debuff_card:is_suit("Clubs") then return { debuff = true } end
-    end
+    end,
+    boss_key = "bl_club"
 }
 
 HPR.BossJoker {
@@ -196,7 +197,8 @@ HPR.BossJoker {
             return { stay_flipped = true }
         end
         if context.hand_drawn or context.setting_blind then card.ability.prepped = nil end
-    end
+    end,
+    boss_key = "bl_fish"
 }
 
 HPR.BossJoker{
@@ -215,5 +217,24 @@ HPR.BossJoker{
             }
         end
         if context.repetition and context.cardarea == G.play then return { repetitions = 1 } end
-    end
+    end,
+    boss_key = "bl_psychic"
+}
+
+HPR.BossJoker {
+    key = "goad",
+    pos = { x = 2, y = 2 },
+    config = { extra = 50 },
+    loc_vars = function (self, info_queue, card)
+        return{ vars = {card.ability.extra}}
+    end,
+    calculate = function (self, card, context)
+        if context.debuff_card and context.debuff_card:is_suit("Spades") then
+            return { debuff = true }
+        end
+        if context.individual and context.cardarea == G.play then
+            return { chips = card.ability.extra}
+        end
+    end,
+    boss_key = "bl_goad"
 }

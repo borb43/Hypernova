@@ -932,6 +932,14 @@ local descriptions = {
                 "Retriggers all",
                 "and scoring cards"
             }
+        },
+        j_hpr_goad = {
+            name = "The Goad",
+            text = {
+                "Played cards give",
+                "{C:chips}+#1#{} Chips when scored",
+                "{C:spades}Spades{} are debuffed"
+            }
         }
     },
     Other = {
