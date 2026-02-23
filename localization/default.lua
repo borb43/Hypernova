@@ -245,10 +245,13 @@ local descriptions = {
         j_hpr_master = {
             name = "S002 MASTER",
             text = {
-                "All {C:attention}consumables{} and {C:attention}Booster",
-                "{C:attention}Packs{} in the shop are {C:attention}free",
-                "Creates a {C:dark_edition}Negative {C:attention}Consumable",
-                "when blind is selected"
+                {"All {C:attention}consumables{} and {C:attention}Booster",
+                "{C:attention}Packs{} in the shop are {C:attention}free"},
+                {"Creates a {C:dark_edition}Negative {C:attention}Consumable",
+                "when blind is selected"},
+                {"{C:legendary}Rare Consumables{} can",
+                "appear from any {C:attention}random",
+                "{C:attention}card{} creation sources"}
             }
         },
         j_hpr_potassium = {
