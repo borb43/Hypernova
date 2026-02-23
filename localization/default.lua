@@ -249,7 +249,7 @@ local descriptions = {
                 "{C:attention}Packs{} in the shop are {C:attention}free"},
                 {"Creates a {C:dark_edition}Negative {C:attention}Consumable",
                 "when blind is selected"},
-                {"{C:legendary}Rare Consumables{} can",
+                {"{C:legendary,E:1}Rare Consumables{} can",
                 "appear from any {C:attention}random",
                 "{C:attention}card{} creation sources"}
             }
