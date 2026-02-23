@@ -1066,7 +1066,7 @@ SMODS.Joker {
     cost = 5,
     atlas = "placeholder",
     pos = {x=0,y=0},
-    config = { extra = { mult = 1, discards = 5 }},
+    config = { extra = { mult = 1, discards = 8 }},
     loc_vars = function (self, info_queue, card)
         return{ vars = { card.ability.extra.mult, card.ability.extra.discards, card.ability.extra.discards ~= 1 and "s" or "" }}
     end,
