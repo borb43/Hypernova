@@ -750,7 +750,7 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "conjurer",
-    config = { extra = { xmult = 1, gain = 0.5, packs = 2 }},
+    config = { extra = { xmult = 1, gain = 0.25, packs = 2 }},
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.p_standard_mega_1
         return { vars = { card.ability.extra.xmult, card.ability.extra.gain, card.ability.extra.packs }}
