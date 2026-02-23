@@ -791,26 +791,6 @@ HPR.StellarJoker {
     key = "circus",
     config = { extra = 1 },
     loc_vars = function (self, info_queue, card)
-        local main_end
-        if card and card.area and card.rank and not card.area.collection then
-            local target = card.area.cards[card.rank+1]
-            if target then
-                local compat = HPR.get_add_to_deck_compat(target.config.center) and target.config.center.key ~= self.key
-                main_end = {
-                    {
-                        n = G.UIT.C,
-                        config = { align = "bm", minh = 0.4 },
-                        nodes = {
-                            {
-                                n = G.UIT.C,
-                                config = { ref_table = card, align = "m", colour = compat and mix_colours(G.C.GREEN, G.C.JOKER_GREY, 0.8) or mix_colours(G.C.RED, G.C.JOKER_GREY, 0.8), r = 0.05, padding = 0.06 },
-                                nodes = {{ n = G.UIT.T, config = { text = ' ' .. localize('k_' .. (compat and 'compatible' or 'incompatible')) .. ' ', colour = G.C.UI.TEXT_LIGHT, scale = 0.32 * 0.8 } },}
-                            }
-                        }
-                    }
-                }
-            end
-        end
         return { vars = { card.ability.extra }, main_end = main_end or nil }
     end,
     add_to_deck = function (self, card, from_debuff)
@@ -841,20 +821,6 @@ HPR.StellarJoker {
         G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante or G.GAME.round_resets.ante
         G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante + card.ability.extra
     end,
-    calculate = function (self, card, context)
-        if context.end_of_round and context.main_eval and context.beat_boss then
-            local target = pseudorandom_element(G.jokers.cards, self.key, { in_pool = function(v, args) return HPR.get_add_to_deck_compat(v.config.center) and v.config.center.key ~= self.key end})
-            if target then
-                target.added_to_deck = false
-                target:add_to_deck()
-                return {
-                    message = localize("k_plus_joker_q"),
-                    colour = G.C.DARK_EDITION,
-                    message_card = target
-                }
-            end
-        end
-    end
 }
 
 HPR.StellarJoker {

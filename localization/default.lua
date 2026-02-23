@@ -446,15 +446,9 @@ local descriptions = {
         j_hpr_circus = {
             name = "S018 IRRADIANT",
             text = {
-                {"{C:inactive}Wether or not Joker to the right",
-                "{C:inactive}is compatible for the second effect",},
-                {"Increases {C:dark_edition}ALL{} your stats by {C:attention}#1#{},",
+                "Increases {C:dark_edition}ALL{} your stats by {C:attention}#1#{},",
                 "reduces Ante by {C:attention}#1#{} while held",
-                "{C:inactive}(Joker Slots excluded)"},
-                {"When {C:attention}Boss Blind{} is defeated,",
-                "triggers the {C:attention}add to deck{} effect",
-                "of a random eligible {C:attention}Joker",
-                "{C:inactive}(excludes self)"}
+                "{C:inactive}(Joker Slots excluded)",
             }
         },
         j_hpr_unity = {
