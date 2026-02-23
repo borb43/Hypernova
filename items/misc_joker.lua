@@ -101,7 +101,8 @@ SMODS.Joker { -- solar flare, levels up not most played hands and destroys some 
         art = {"Codifyd"},
         code = {"Eris"},
         idea = {"Codifyd"}
-    }
+    },
+    hpr_ascension_key = "j_hpr_observatorium"
 }
 
 SMODS.Joker { --tipping scales, increases numerator and denominator of probabilities
@@ -125,7 +126,8 @@ SMODS.Joker { --tipping scales, increases numerator and denominator of probabili
     hpr_credits = {
         code = {"Eris"},
         idea = {"Eris"}
-    }
+    },
+    hpr_ascension_key = "j_hpr_lucky"
 }
 
 
@@ -227,7 +229,8 @@ SMODS.Joker { --fortune cookie, guarantees 6 probabilities and then creates a ne
     hpr_credits = {
         code = {"Eris"},
         idea = {"Eris"}
-    }
+    },
+    hpr_ascension_key = "j_hpr_lucky"
 }
 
 SMODS.Joker {
@@ -366,7 +369,8 @@ SMODS.Joker {
             context.other_card.ability.perma_mult = context.other_card.ability.perma_mult + pseudorandom("hpr_dice", e.mult_min, e.mult_max)
             return { message = localize("k_upgrade_ex")}
         end
-    end
+    end,
+    hpr_ascension_key = "j_hpr_ascendant"
 }
 
 SMODS.Joker {
@@ -400,7 +404,8 @@ SMODS.Joker {
     hpr_credits = {
         code = {"Eris"},
         idea = {"Eris"}
-    }
+    },
+    hpr_ascension_key = "j_hpr_lucky"
 }
 
 SMODS.Joker {
@@ -787,7 +792,8 @@ SMODS.Joker {
                 return { message = localize("k_duplicated_ex") }
             end
         end
-    end
+    end,
+    hpr_ascension_key = "j_hpr_mimic"
 }
 
 SMODS.Joker {
@@ -853,7 +859,8 @@ SMODS.Joker {
         ease_ante(1)
         G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante or G.GAME.round_resets.ante
         G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante + 1
-    end
+    end,
+    hpr_ascension_key = "j_hpr_circus"
 }
 
 SMODS.Joker {
@@ -1028,7 +1035,8 @@ SMODS.Joker {
     in_pool = function (self, args)
         return not G.GAME.pool_flags.hpr_wee_michel_extinct
     end,
-    pools = { wee = true, Food = true }
+    pools = { wee = true, Food = true },
+    hpr_ascension_key = "j_hpr_potassium"
 }
 
 SMODS.Joker {
@@ -1055,7 +1063,8 @@ SMODS.Joker {
     in_pool = function (self, args)
         return G.GAME.pool_flags.hpr_wee_michel_extinct
     end,
-    pools = { wee = true, Food = true }
+    pools = { wee = true, Food = true },
+    hpr_ascension_key = "j_hpr_potassium"
 }
 
 SMODS.Joker {
@@ -1277,7 +1286,8 @@ SMODS.Joker {
                 return { message = localize{ type = "variable", vars = {card.ability.extra}, key = "hpr_n_cards"}}
             end
         end
-    end
+    end,
+    hpr_ascension_key = "j_hpr_shorthand"
 }
 
 SMODS.Joker {
@@ -1367,7 +1377,8 @@ SMODS.Joker {
         if context.retrigger_joker_check and not context.retrigger_joker and not (G.GAME.blind and G.GAME.blind.in_blind) and SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra) then
             return { repetitions = 1 }
         end
-    end
+    end,
+    hpr_ascension_key = "j_hpr_mimic"
 }
 
 SMODS.Joker {
