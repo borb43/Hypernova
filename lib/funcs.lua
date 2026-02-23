@@ -235,3 +235,16 @@ function HPR.find_edition(key)
     end
     return cards
 end
+
+function HPR.get_add_to_deck_compat(center)
+    if center.config and (center.config.h_size or center.config.d_size) then return true end
+    if center.name == "Credit Card" or center.name == "Chicot"
+    or center.name == "Chaos the Clown" or center.name == "Turtle Bean"
+    or center.name == "Oops! All 6s" or center.name == "To The Moon"
+    or center.name == "Astronomer" or center.name == "Troubadour"
+    or center.name == "Stuntman" then
+        return true
+    end
+    if center.add_to_deck then return true end
+    return false
+end

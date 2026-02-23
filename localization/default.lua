@@ -444,12 +444,18 @@ local descriptions = {
             }
         },
         j_hpr_circus = {
-            name = "S018 CIRCUS",
+            name = "S018 IRRADIANT",
             text = {
-                "{C:attention}+#1#{} Hands and Discards",
-                "{C:attention}+#2#{} Hand Size and",
-                "Consumable Slots",
-                "{C:attention}+#3#{} Card Selection Limit"
+                {"Increases {C:dark_edition}ALL",
+                "your stats by {C:attention}#1#",
+                "Reduces {C:attention}Ante{} by",
+                "{C:attention}#1#{} while held",
+                "{C:inactive}(Joker Slots excluded)"},
+                {"When {C:attention}Boss Blind{} is",
+                "defeated, triggers the",
+                "{C:attention}add to deck{} effect of a",
+                "random eligible {C:attention}Joker",
+                "{C:inactive}(excludes self)"}
             }
         },
         j_hpr_unity = {
@@ -1700,13 +1706,9 @@ local misc = {
         k_extremely = "Extremely",
         k_huge = "Huge",
         --#endregion
-        k_level_stats = "per level",
         hpr_plus_moon = "+1 Moon",
         hpr_plus_q = "+1 ???",
         k_erratic_pack = "Erratic Pack",
-        k_hpr_diy = "diy",
-        b_hpr_diy_cards = "diy cards",
-        k_hpr_diy_pack = "Build your deck!",
         k_hpr_stellar = "Stellar",
         hpr_generic_q = "?????",
         k_plus_aura = "+1 Aura",
@@ -1733,7 +1735,8 @@ local misc = {
         k_hpr_awesome_pack = "AWESOME Pack",
         k_plus_hpr_moon = "+1 Moon",
         k_hpr_boss = "Boss",
-        k_level_down = "Level Down"
+        k_level_down = "Level Down",
+        k_plus_joker_q = "+1 Joker?"
     },
     high_scores = {},
     labels = {

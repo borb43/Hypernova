@@ -789,27 +789,51 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "circus",
-    config = { extra = { h_d = 3, h_c = 2, csl = 1 }},
+    config = { extra = 1 },
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra.h_d, card.ability.extra.h_c, card.ability.extra.csl}}
+        return { vars = { card.ability.extra }}
     end,
     add_to_deck = function (self, card, from_debuff)
-        ease_hands_played(card.ability.extra.h_d)
-        ease_discard(card.ability.extra.h_d)
-        G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.h_d
-        G.GAME.round_resets.discards = G.GAME.round_resets.discards + card.ability.extra.h_d
-        G.hand:change_size(card.ability.extra.h_c); G.consumeables:change_size(card.ability.extra.h_c)
-        SMODS.change_play_limit(card.ability.extra.csl)
-        SMODS.change_discard_limit(card.ability.extra.csl)
+        G.hand:change_size(card.ability.extra)
+        G.consumeables:change_size(card.ability.extra)
+        ease_hands_played(card.ability.extra)
+        G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra
+        ease_discard(card.ability.extra)
+        G.GAME.round_resets.discards = G.GAME.round_resets.discards + card.ability.extra
+        SMODS.change_play_limit(card.ability.extra)
+        SMODS.change_discard_limit(card.ability.extra)
+        change_shop_size(card.ability.extra)
+        ease_ante(-card.ability.extra)
+        G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante or G.GAME.round_resets.ante
+        G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante - card.ability.extra
     end,
     remove_from_deck = function (self, card, from_debuff)
-        ease_hands_played(-card.ability.extra.h_d)
-        ease_discard(-card.ability.extra.h_d)
-        G.GAME.round_resets.hands = G.GAME.round_resets.hands - card.ability.extra.h_d
-        G.GAME.round_resets.discards = G.GAME.round_resets.discards - card.ability.extra.h_d
-        G.hand:change_size(-card.ability.extra.h_c); G.consumeables:change_size(-card.ability.extra.h_c)
-        SMODS.change_play_limit(-card.ability.extra.csl)
-        SMODS.change_discard_limit(-card.ability.extra.csl)
+        G.hand:change_size(-card.ability.extra)
+        G.consumeables:change_size(-card.ability.extra)
+        ease_hands_played(-card.ability.extra)
+        G.GAME.round_resets.hands = G.GAME.round_resets.hands - card.ability.extra
+        ease_discard(-card.ability.extra)
+        G.GAME.round_resets.discards = G.GAME.round_resets.discards - card.ability.extra
+        SMODS.change_play_limit(-card.ability.extra)
+        SMODS.change_discard_limit(-card.ability.extra)
+        change_shop_size(-card.ability.extra)
+        ease_ante(card.ability.extra)
+        G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante or G.GAME.round_resets.ante
+        G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante + card.ability.extra
+    end,
+    calculate = function (self, card, context)
+        if context.end_of_round and context.main_eval and context.beat_boss then
+            local target = pseudorandom_element(G.jokers.cards, self.key, { in_pool = function(v, args) return HPR.get_add_to_deck_compat(v.config.center) and v.config.center.key ~= "j_hpr_circus" end})
+            if target then
+                target.added_to_deck = false
+                target:add_to_deck()
+                return {
+                    message = localize("k_plus_joker_q"),
+                    colour = G.C.DARK_EDITION,
+                    message_card = target
+                }
+            end
+        end
     end
 }
 
