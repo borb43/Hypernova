@@ -1054,3 +1054,32 @@ HPR.StellarJoker {
         end
     end
 }
+
+HPR.StellarJoker {
+    key = "guardian",
+    config = { extra = { active = true }},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { localize(card.ability.extra.active and "k_active" or "k_inactive") }}
+    end,
+    calculate = function (self, card, context)
+        if context.ante_change and SMODS.ante_end then
+            card.ability.extra.active = true
+        end
+        if context.game_over and card.ability.extra.active and not context.blueprint and context.main_eval then
+            card.ability.extra.active = false
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    G.hand_text_area.blind_chips:juice_up()
+                    G.hand_text_area.game_chips:juice_up()
+                    play_sound('tarot1')
+                    return true
+                end
+            }))
+            return {
+                message = localize("k_blessed_ex"),
+                saved = "ph_hpr_stellar_revive",
+                colour = G.C.RARITY.hpr_stellar
+            }
+        end
+    end
+}

@@ -940,6 +940,15 @@ local descriptions = {
                 "{C:chips}+#1#{} Chips when scored",
                 "{C:spades}Spades{} are debuffed"
             }
+        },
+        j_hpr_guardian = {
+            name = "S028 GUARDIAN",
+            text = {
+                "{C:attention}Prevents death{} once",
+                "per {C:attention}Ante{} and grants",
+                "(some bonus idk)",
+                "{C:inactive}(Currently #1#)"
+            }
         }
     },
     Other = {
@@ -1741,7 +1750,9 @@ local misc = {
         k_plus_hpr_moon = "+1 Moon",
         k_hpr_boss = "Boss",
         k_level_down = "Level Down",
-        k_plus_joker_q = "+1 Joker?"
+        k_plus_joker_q = "+1 Joker?",
+        k_inactive = "inactive",
+        ph_hpr_stellar_revive = "Blessed by the stars"
     },
     high_scores = {},
     labels = {
