@@ -924,6 +924,14 @@ local descriptions = {
                 "down and gain {C:chips}+#1#{} Chips",
                 "after each hand"
             }
+        },
+        j_hpr_psychic = {
+            name = "The Psychic",
+            text = {
+                "Must play {C:attention}#1#{} cards",
+                "Retriggers all",
+                "and scoring cards"
+            }
         }
     },
     Other = {
@@ -1757,7 +1765,8 @@ local misc = {
         a_hpr_green_minus = "-#1# Green",
         hpr_card_integrated = "#1# Integrated",
         hpr_n_cards = "#1# Cards",
-        a_discards = "+#1# Discards"
+        a_discards = "+#1# Discards",
+        play_x_cards = "Must play #1# cards"
     },
     v_text = {},
 }

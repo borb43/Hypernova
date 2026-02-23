@@ -198,3 +198,22 @@ HPR.BossJoker {
         if context.hand_drawn or context.setting_blind then card.ability.prepped = nil end
     end
 }
+
+HPR.BossJoker{
+    key = "psychic",
+    pos = { x = 2, y = 1 },
+    config = { extra = 5 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.extra}}
+    end,
+    calculate = function (self, card, context)
+        if context.debuff_hand and #context.full_hand ~= card.ability.extra then
+            return {
+                debuff = true,
+                debuff_text = localize{ type = "variable", vars = {card.ability.extra}, key = "play_x_cards"},
+                no_juice = context.check
+            }
+        end
+        if context.repetition and context.cardarea == G.play then return { repetitions = 1 } end
+    end
+}
