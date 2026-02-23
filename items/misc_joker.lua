@@ -611,7 +611,8 @@ SMODS.Joker {
             }
         end
     end,
-    pools = { wee = true }
+    pools = { wee = true },
+    hpr_ascension_key = "j_hpr_ascendant"
 }
 
 SMODS.Joker {

@@ -986,6 +986,11 @@ HPR.StellarJoker {
                 message_card = c
             }
         end
+        if context.discard then
+            context.other_card.ability.perma_x_mult = context.other_card.ability.perma_x_mult + card.ability.extra
+            context.other_card.ability.perma_h_x_mult = context.other_card.ability.perma_h_x_mult + card.ability.extra
+            return { message = localize("k_upgrade_ex"), colour = G.C.RED }
+        end
     end
 }
 
