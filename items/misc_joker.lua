@@ -1084,7 +1084,8 @@ SMODS.Joker {
             return nil, true
         end
     end,
-    pools = { Food = true }
+    pools = { Food = true },
+    hpr_ascension_key = "j_hpr_ascendant"
 }
 
 SMODS.Joker {

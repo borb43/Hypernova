@@ -791,7 +791,7 @@ HPR.StellarJoker {
     key = "circus",
     config = { extra = 1 },
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra }, main_end = main_end or nil }
+        return { vars = { card.ability.extra } }
     end,
     add_to_deck = function (self, card, from_debuff)
         G.hand:change_size(card.ability.extra)
@@ -970,10 +970,10 @@ HPR.StellarJoker {
     calculate = function (self, card, context)
         if context.individual and not context.end_of_round then
             if context.cardarea == G.play or context.cardarea == 'unscored' then
-                context.other_card.ability.perma_x_mult = context.other_card.ability.perma_x_mult + card.ability.extra
+                context.other_card.ability.perma_x_chips = context.other_card.ability.perma_x_chips + card.ability.extra
             end
             if context.cardarea == G.hand then
-                context.other_card.ability.perma_h_x_mult = context.other_card.ability.perma_h_x_mult + card.ability.extra
+                context.other_card.ability.perma_h_x_chips = context.other_card.ability.perma_h_x_chips + card.ability.extra
             end
         end
     end
