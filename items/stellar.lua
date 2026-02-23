@@ -971,10 +971,20 @@ HPR.StellarJoker {
         if context.individual and not context.end_of_round then
             if context.cardarea == G.play or context.cardarea == 'unscored' then
                 context.other_card.ability.perma_x_chips = context.other_card.ability.perma_x_chips + card.ability.extra
+                return { message = localize("k_upgrade_ex"), colour = G.C.BLUE }
             end
             if context.cardarea == G.hand then
                 context.other_card.ability.perma_h_x_chips = context.other_card.ability.perma_h_x_chips + card.ability.extra
+                return{ message = localize("k_upgrade_ex"), colour = G.C.BLUE }
             end
+        end
+        if context.before and #context.full_hand == 1 and G.GAME.current_round.hands_played == 0 then
+            local c = context.full_hand[1]
+            c.ability.perma_repetitions = c.ability.perma_repetitions + 1
+            return {
+                message = localize("k_upgrade_ex"),
+                message_card = c
+            }
         end
     end
 }

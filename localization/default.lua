@@ -550,9 +550,12 @@ local descriptions = {
         j_hpr_ascendant = {
             name = "S024 ASCENDANT",
             text = {
-                "All {C:attention}played{} and",
-                "{C:attention}held in hand{} cards gain",
-                "{X:chips,C:white}X#1#{} Chips for their {C:attention}area"
+                {"All {C:attention}played{} and {C:attention}held in hand{}",
+                "cards gain {X:chips,C:white}X#1#{} Chips",
+                "for their {C:attention}area"},
+                {"If {C:attention}first{} hand of round has",
+                "only {C:attention}1{} card, it gains a",
+                "permanent retrigger"}
             }
         },
         j_hpr_mimic = {
