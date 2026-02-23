@@ -1100,7 +1100,7 @@ local descriptions = {
         c_hpr_pulsar = {
             name = "Pulsar",
             text = {
-                "Applies {C:dark_edition}Negative{} edition",
+                "Applies {C:dark_edition,E:1}Negative{} edition",
                 "to {C:attention}#1#{} selected card"
             }
         },
