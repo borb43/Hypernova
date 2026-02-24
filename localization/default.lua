@@ -945,8 +945,9 @@ local descriptions = {
             name = "S028 GUARDIAN",
             text = {
                 "{C:attention}Prevents death{} once",
-                "per {C:attention}Ante{} and grants",
-                "(some bonus idk)",
+                "per {C:attention}Ante{} and creates",
+                "{C:attention}#2#{} random {C:attention}Jokers",
+                "{C:inactive}(Does not require room)",
                 "{C:inactive}(Currently #1#)"
             }
         }

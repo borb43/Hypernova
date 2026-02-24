@@ -1057,9 +1057,9 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "guardian",
-    config = { extra = { active = true }},
+    config = { extra = { active = true, cards = 2 }},
     loc_vars = function (self, info_queue, card)
-        return { vars = { localize(card.ability.extra.active and "k_active" or "k_inactive") }}
+        return { vars = { localize(card.ability.extra.active and "k_active" or "k_inactive"), card.ability.extra.cards }}
     end,
     calculate = function (self, card, context)
         if context.ante_change and SMODS.ante_end then
@@ -1069,6 +1069,9 @@ HPR.StellarJoker {
             card.ability.extra.active = false
             G.E_MANAGER:add_event(Event({
                 func = function()
+                    for _ = 1, card.ability.extra.cards do
+                        SMODS.add_card{ set = "Joker", key_append = self.key }
+                    end
                     G.hand_text_area.blind_chips:juice_up()
                     G.hand_text_area.game_chips:juice_up()
                     play_sound('tarot1')
