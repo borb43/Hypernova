@@ -267,31 +267,80 @@ HPR.StellarJoker {
         }
     end,
     calc_dollar_bonus = function (self, card)
-        return pseudorandom("hpr_error_cashout",-4,11)
+        return pseudorandom("hpr_error_cashout",-3,9)
     end,
     calculate = function (self, card, context)
         if context.setting_blind then
-            ease_discard(pseudorandom("hpr_error_discard", -2, 4))
-            ease_hands_played(pseudorandom("hpr_error_hands", -2, 4))
-            local h = pseudorandom("hpr_error_h_size", -1, 2)
+            ease_discard(pseudorandom("hpr_error_discard", -1, 3))
+            ease_hands_played(pseudorandom("hpr_error_hands", -1, 3))
+            local h = pseudorandom("hpr_error_h_size", 0, 2)
             G.hand:change_size(h)
             G.GAME.round_resets.temp_handsize = (G.GAME.round_resets.temp_handsize or 0) + h
             return { message = localize("hpr_generic_q")}
         end
-        if context.individual and context.cardarea == G.play then
-            local res = pseudorandom("hpr_error_individual",1,6)
-            if res == 1 then return { chips = pseudorandom("hpr_error_individual_effect",5,75) } end
-            if res == 2 then return { xchips = pseudorandom("hpr_error_individual_effect",10,15)/10 } end
-            if res == 3 then return { mult = pseudorandom("hpr_error_individual_effect",1,25) } end
-            if res == 4 then return { xmult = pseudorandom("hpr_error_individual_effect",10,15)/10 } end
-            if res == 5 then return { dollars = pseudorandom("hpr_error_individual_effect",0,4)} end
-            if res == 6 then return { swap = true } end
-        end
         if context.joker_main then
+            local res = pseudorandom("hpr_error_effect", 1, 6)
+            if res == 1 then return { chips = pseudorandom("hpr_error_amt",30,150)} end
+            if res == 2 then return { mult = pseudorandom("hpr_error_amt",5,40)} end
+            if res == 3 then return { xchips = pseudorandom("hpr_error_amt",15,30)/10 } end
+            if res == 4 then return { xmult = pseudorandom("hpr_error_amt",15,30)/10 } end
+            if res == 5 then return { swap = true, message = localize("k_swapped_ex") } end
+            if res == 6 then return { balance = true } end
+        end
+        if context.before then
+            local any = false
+            for _, c in ipairs(context.full_hand) do
+                if SMODS.pseudorandom_probability(card, self.key, 1, 7) then
+                    any = true
+                    c:set_ability("m_hpr_error_enh", nil, true)
+                    G.E_MANAGER:add_event(Event{
+                        func = function ()
+                            c:juice_up() return true
+                        end
+                    })
+                end
+            end
+            if any then
+                return { message = localize("hpr_generic_q") }
+            end
+        end
+    end
+}
+
+SMODS.Enhancement{
+    key = "error_enh",
+    atlas = "stellar",
+    pos = { x = 0, y = 0 },
+    weight = 0,
+    in_pool = function (self, args)
+        return false
+    end,
+    calculate = function (self, card, context)
+        if context.main_scoring and context.cardarea == G.play then
+            local res = pseudorandom("hpr_error_effect", 1, 6)
+            if res == 1 then return { chips = pseudorandom("hpr_error_amt",30,150)} end
+            if res == 2 then return { mult = pseudorandom("hpr_error_amt",5,40)} end
+            if res == 3 then return { xchips = pseudorandom("hpr_error_amt",15,30)/10 } end
+            if res == 4 then return { xmult = pseudorandom("hpr_error_amt",15,30)/10 } end
+            if res == 5 then return { swap = true, message = localize("k_swapped_ex") } end
+            if res == 6 then return { balance = true } end
+        end
+        if context.playing_card_end_of_round then
+            local dollars = pseudorandom("hpr_error_cashout",-3,9)
+            G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + dollars
             return {
-                xmult = pseudorandom("hpr_error_j_main", 7, 47)/10
+                dollars = dollars,
+                func = HPR.event_presets.reset_dollar_buffer
             }
         end
+    end,
+    no_collection = true,
+    no_rank = true,
+    always_scores = true,
+    replace_base_card = true,
+    any_suit = true,
+    set_badges = function (self, card, badges)
+        badges[#badges+1] = create_badge(localize("k_hpr_stellar"), HPR.stellar_gradient, G.C.UI.TEXT_LIGHT, 1.2)
     end
 }
 

@@ -134,6 +134,12 @@ local descriptions = {
                 "{C:green}#1# in #2#{} chance to level",
                 "up hand when played"
             }
+        },
+        m_hpr_error_enh = {
+            name = "[MISSING]",
+            text = {
+                "{C:dark_edition}?????"
+            }
         }
     },
     Joker = {
