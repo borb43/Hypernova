@@ -652,7 +652,8 @@ SMODS.Joker {
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = { key = "eternal", set = "Other"}
     end,
-    inversion = "j_mr_bones"
+    inversion = "j_mr_bones",
+    hpr_ascension_key = "j_hpr_guardian"
 }
 
 SMODS.Joker {
