@@ -235,3 +235,16 @@ function HPR.find_edition(key)
     end
     return cards
 end
+
+function HPR.reset_blind()
+    G.STATE = 1
+    G.STATE_COMPLETE = false
+    G.GAME.current_round.hands_left = G.GAME.round_resets.hands
+    G.GAME.current_round.discards_left = G.GAME.round_resets.discards
+    G.FUNCS.draw_from_discard_to_deck()
+    G.deck:shuffle()
+end
+
+function HPR.should_spawn_superboss()
+    return G.GAME.round_resets.ante >= 24 and not G.GAME.hpr_superboss_beaten
+end

@@ -399,3 +399,69 @@ function SMODS.shatters(card)
 	end
 	return shatter_ref(card)
 end
+
+local end_round_ref = end_round
+function end_round()
+	if G.GAME.blind and G.GAME.blind.config and G.GAME.blind.config.blind.hpr_next_phase and G.GAME.chips >= G.GAME.blind.chips then
+		G.GAME.chips = 0
+		G.GAME.round_resets.lost = true
+		G.GAME.blind:set_blind(G.P_BLINDS[G.GAME.blind.config.blind.hpr_next_phase])
+		G.E_MANAGER:add_event(Event{
+			func = function ()
+				HPR.reset_blind()
+				return true
+			end
+		})
+	else
+		for _, c in ipairs(G.I.CARD) do if c.ability then c.ability.hpr_played_this_round = nil end end
+		end_round_ref()
+	end
+end
+-- one million anti changing the blind measures
+reroll_boss_but_ref = G.FUNCS.reroll_boss_button
+function G.FUNCS.reroll_boss_button(e)
+	reroll_boss_but_ref(e)
+	local bl_key = G.GAME.round_resets.blind_choices.Boss
+	if bl_key and G.P_BLINDS[bl_key] and G.P_BLINDS[bl_key].hpr_no_avoid then
+		e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+		e.config.button = nil
+		e.children[1].children[1].config.shadow = false
+		if e.children[2] then e.children[2].children[1].config.shadow = false end
+	end
+end
+
+reroll_boss_ref = G.FUNCS.reroll_boss
+function G.FUNCS.reroll_boss(e)
+	local bl_key = G.GAME.round_resets.blind_choices.Boss
+	if bl_key and G.P_BLINDS[bl_key] and G.P_BLINDS[bl_key].hpr_no_avoid then return end
+	reroll_boss_ref(e)
+end
+
+local disable_ref = Blind.disable
+function Blind:disable()
+	if not self.config.blind.hpr_no_avoid then disable_ref(self) end
+end
+
+local blind_ui_ref = create_UIBox_blind_select
+function create_UIBox_blind_select()
+	if HPR.should_spawn_superboss() then
+		G.GAME.round_resets.blind_choices.Boss = "bl_hpr_true_final_star_p1"
+	end
+	return blind_ui_ref()
+end
+
+local new_boss_ref = get_new_boss
+function get_new_boss()
+	if HPR.should_spawn_superboss() then return "bl_hpr_true_final_star_p1" end
+	return new_boss_ref()
+end
+
+local play_ref = G.FUNCS.play_cards_from_highlighted
+function G.FUNCS.play_cards_from_highlighted(e)
+	if not (G.play and G.play.cards[1]) then
+		for i = 1, #G.hand.highlighted do
+			G.hand.highlighted[i].ability.hpr_played_this_round = true
+		end
+	end
+	play_ref(e)
+end

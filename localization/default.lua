@@ -83,6 +83,45 @@ local descriptions = {
                 "Destroys all held in hand",
                 "cards after scoring"
             }
+        },
+        bl_hpr_true_final_star_p1 = {
+            name = "Wastes of the Void",
+            text = {
+                "Destroys all Consumables",
+                "Good Luck."
+            }
+        },
+        bl_hpr_true_final_star_p2 = {
+            name = "Blue Moon of Prophecy",
+            text = {
+                "Reduces all stats by 1",
+                "Applies all previous phases"
+            }
+        },
+        bl_hpr_true_final_star_p3 = {
+            name = "Eternal Red Sun",
+            text = {
+                "Destroys all unmodified cards",
+                "Applies all previous phases"
+            }
+        },
+        bl_hpr_true_final_star_p4 = {
+            name = "The Stellar Heart",
+            text = {
+                "Base Chips and Mult are",
+                "reduced to hand's starting",
+                "Chips and Mult",
+                "Applies all previous phases"
+            }
+        },
+        bl_hpr_true_final_star_p5 = {
+            name = "The Final Horizon",
+            text = {
+                "Greatly reduced blind size",
+                "All Jokers and cards played",
+                "previously this round are debuffed",
+                "Applies all previous phases"
+            }
         }
     },
     Edition = {
