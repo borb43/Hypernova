@@ -87,19 +87,19 @@ local descriptions = {
     },
     Edition = {
         e_hpr_green = {
-            name = "{C:hpr_ultragreen}Green",
+            name = "Green",
             text = {
-                "{C:hpr_ultragreen}+#1#{} Green",
-                "{C:hpr_ultragreen}+#2#{} Green on hand played",
-                "{C:hpr_ultragreen}-#2#{} Green on discard"
+                "{C:mult}+#1#{} Mult",
+                "{C:mult}+#2#{} Mult on hand played",
+                "{C:mult}-#2#{} Mult on discard"
             }
         },
         e_hpr_green_pcard = {
-            name = "{C:hpr_ultragreen}Green",
+            name = "Green",
             text = {
-                "{C:hpr_ultragreen}+#1#{} Green",
-                "{C:hpr_ultragreen}+#2#{} Green when played",
-                "{C:hpr_ultragreen}-#2#{} Green when discarded"
+                "{C:mult}+#1#{} Mult",
+                "{C:mult}+#2#{} Mult when played",
+                "{C:mult}-#2#{} Mult when discarded"
             }
         }
     },
@@ -1244,7 +1244,7 @@ local descriptions = {
         c_hpr_green = {
             name = "The Green",
             text = {
-                "{C:hpr_ultragreen}Greens{} 1 selected card"
+                "{C:mult}Greens{} 1 selected card"
             }
         }
     },

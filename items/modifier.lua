@@ -225,8 +225,8 @@ SMODS.Edition{
                     ref_value = "green",
                     scalar_value = "add",
                     operation = '-',
-                    message_key = "a_hpr_green_minus",
-                    message_colour = G.C.HPR_ULTRAGREEN
+                    message_key = "a_mult_minus",
+                    message_colour = G.C.DARK_EDITION,
                 })
             end
             if context.before and (context.cardarea == G.play or context.cardarea == "unscored") then
@@ -234,19 +234,13 @@ SMODS.Edition{
                     ref_table = card.edition.extra,
                     ref_value = "green",
                     scalar_value = "add",
-                    message_key = "a_hpr_green",
-                    message_colour = G.C.HPR_ULTRAGREEN
+                    message_key = "a_mult",
+                    message_colour = G.C.DARK_EDITION,
                 })
             end
             if context.main_scoring and context.cardarea == G.play and card.edition.extra.green ~= 0 then
                 return{
                     mult = card.edition.extra.green,
-                    message = localize{type="variable",key="a_hpr_green",vars={card.edition.extra.green}},
-                    colour = G.C.HPR_ULTRAGREEN,
-                    remove_default_message = true,
-                    sound = "foil2",
-                    volume = 0.3,
-                    hpr_no_mod = true
                 }
             end
         else
@@ -272,12 +266,6 @@ SMODS.Edition{
             if context.pre_joker and card.edition.extra.green ~= 0 then
                 return{
                     mult = card.edition.extra.green,
-                    message = localize{type="variable",key="a_hpr_green",vars={card.edition.extra.green}},
-                    colour = G.C.HPR_ULTRAGREEN,
-                    remove_default_message = true,
-                    sound = "foil2",
-                    volume = 0.3,
-                    hpr_no_mod = true
                 }
             end
         end
