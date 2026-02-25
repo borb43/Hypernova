@@ -1411,3 +1411,27 @@ SMODS.Joker {
         end
     end
 }
+
+SMODS.Joker {
+    key = "through_the_mirror",
+    rarity = 3,
+    cost = 8,
+    atlas = "placeholder",
+    pos = { x = 2, y = 0 },
+    config = { extra = 8, immutable = 100 },
+    loc_vars = function (self, info_queue, card)
+        local n, d = SMODS.get_probability_vars(card, card.ability.extra, card.ability.extra, self.key)
+        return { vars = {n,d}}
+    end,
+    calculate = function (self, card, context)
+        if context.repetition and context.cardarea == G.play and context.other_card:get_id() == 8 then
+            local reps = 0
+            while SMODS.pseudorandom_probability(card, self.key, card.ability.extra - reps, card.ability.extra) and reps < card.ability.immutable do
+                reps = reps + 1
+            end
+            if reps > 0 then
+                return { repetitions = reps }
+            end
+        end
+    end
+}

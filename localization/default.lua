@@ -1003,6 +1003,15 @@ local descriptions = {
                 "{C:money}$#1#{} when they change",
                 "{C:attention}Enhancement"
             }
+        },
+        j_hpr_through_the_mirror = {
+            name = "Through the Mirror",
+            text = {
+                "Scored {C:attention}8s{} have a recursive",
+                "{C:green}#1# in #2#{} chance to retrigger",
+                "Reduces {C:green}numerator{} by {C:green}1{} for",
+                "every consecutive success"
+            }
         }
     },
     Other = {
