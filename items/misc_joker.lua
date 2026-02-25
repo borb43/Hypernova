@@ -1393,3 +1393,21 @@ SMODS.Joker {
         end
     end
 }
+
+SMODS.Joker {
+    key = "hurtbreak",
+    rarity = 3,
+    cost = 8,
+    atlas = "placeholder",
+    pos = { x = 2, y = 0 },
+    config = { extra = 1 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.extra}}
+    end,
+    calculate = function (self, card, context)
+        if context.setting_ability and context.old and not context.unchanged and context.other_card.get_id and context.other_card:get_id() == 8 then
+            context.other_card.ability.perma_p_dollars = context.other_card.ability.perma_p_dollars + card.ability.extra
+            return { message = localize("k_upgrade_ex"), colour = G.C.MONEY, message_card = context.other_card }
+        end
+    end
+}

@@ -995,6 +995,14 @@ local descriptions = {
                 "{C:inactive}(Does not require room)",
                 "{C:inactive}(Currently #1#)"
             }
+        },
+        j_hpr_hurtbreak = {
+            name = "Hurtbreak Wonderland",
+            text = {
+                "{C:attention}8s{} permanently gain",
+                "{C:money}$#1#{} when they change",
+                "{C:attention}Enhancement"
+            }
         }
     },
     Other = {
