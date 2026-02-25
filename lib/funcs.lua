@@ -246,5 +246,6 @@ function HPR.reset_blind()
 end
 
 function HPR.should_spawn_superboss()
+    do return false end
     return G.GAME.round_resets.ante >= 24 and not G.GAME.hpr_superboss_beaten
 end

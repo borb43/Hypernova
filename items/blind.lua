@@ -85,7 +85,7 @@ SMODS.Blind {
         end
     end
 }
-
+--[[
 SMODS.Blind {
     key = "true_final_star_p1",
     atlas = "blind_chip",
@@ -251,3 +251,4 @@ SMODS.Blind {
         G.GAME.hpr_superboss_beaten = true
     end
 }
+]]
