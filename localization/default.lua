@@ -1019,6 +1019,14 @@ local descriptions = {
                 "Played {C:attention}8s{} level up",
                 "a random {C:attention}poker hand"
             }
+        },
+        j_hpr_final_flight = {
+            name = "Final Flight",
+            text = {
+                "Draw an {C:attention}extra card",
+                "after each hand for",
+                "every {C:attention}8{} held in hand"
+            }
         }
     },
     Other = {

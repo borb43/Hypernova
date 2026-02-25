@@ -1461,3 +1461,26 @@ SMODS.Joker {
         end
     end
 }
+
+SMODS.Joker {
+    key = "final_flight",
+    rarity = 3,
+    cost = 8,
+    atlas = "placeholder",
+    pos = { x = 2, y = 0 },
+    calculate = function (self, card, context)
+        if context.press_play then card.ability.prepped = true end
+        if context.drawing_cards and card.ability.prepped then
+            local i = 0
+            for _, c in ipairs(G.hand.cards) do
+                if c:get_id() == 8 then
+                    i = i + 1
+                end
+            end
+            card.ability.prepped = nil
+            if i > 0 then
+                return { modify = i }
+            end
+        end
+    end
+}
