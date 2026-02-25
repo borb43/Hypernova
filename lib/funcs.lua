@@ -176,7 +176,8 @@ function HPR.get_random_hand(include_hidden, seed, in_pool, fallback)
             hands[#hands+1] = name
         end
     end
-    return pseudorandom_element(hands, seed, {in_pool = in_pool}) or fallback or "High Card"
+    local hand = pseudorandom_element(hands, seed, {in_pool = in_pool})
+    return hand or fallback or "High Card"
 end
 
 function HPR.contains(_t, val)

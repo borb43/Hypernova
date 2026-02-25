@@ -1012,6 +1012,13 @@ local descriptions = {
                 "Reduces {C:green}numerator{} by {C:green}1{} for",
                 "every consecutive success"
             }
+        },
+        j_hpr_disintegration_loop = {
+            name = "Disintegration Loop",
+            text = {
+                "Played {C:attention}8s{} level up",
+                "a random {C:attention}poker hand"
+            }
         }
     },
     Other = {

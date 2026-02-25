@@ -1435,3 +1435,29 @@ SMODS.Joker {
         end
     end
 }
+
+SMODS.Joker {
+    key = "disintegration_loop",
+    rarity = 3,
+    cost = 8,
+    atlas = "placeholder",
+    pos = { x = 2, y = 0 },
+    calculate = function (self, card, context)
+        if context.before then
+            local any
+            for _, c in ipairs(context.full_hand) do
+                if c:get_id() == 8 then
+                    any = true
+                    local hand = HPR.get_random_hand(false, self.key)
+                    SMODS.calculate_effect({
+                        level_up = true,
+                        message = localize("k_level_up_ex"),
+                        level_up_hand = hand,
+                        message_card = c
+                    }, card)
+                end
+            end
+            if any then return nil, true end
+        end
+    end
+}
