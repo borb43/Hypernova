@@ -279,13 +279,12 @@ HPR.StellarJoker {
             return { message = localize("hpr_generic_q")}
         end
         if context.joker_main then
-            local res = pseudorandom("hpr_error_effect", 1, 6)
-            if res == 1 then return { chips = pseudorandom("hpr_error_amt",30,150)} end
-            if res == 2 then return { mult = pseudorandom("hpr_error_amt",5,40)} end
-            if res == 3 then return { xchips = pseudorandom("hpr_error_amt",15,30)/10 } end
-            if res == 4 then return { xmult = pseudorandom("hpr_error_amt",15,30)/10 } end
-            if res == 5 then return { swap = true, message = localize("k_swapped_ex") } end
-            if res == 6 then return { balance = true } end
+            local res = pseudorandom("hpr_error_effect", 1, 5)
+            if res == 1 then return { xchips = pseudorandom("hpr_error_amt",15,30)/10 } end
+            if res == 2 then return { xmult = pseudorandom("hpr_error_amt",15,30)/10 } end
+            if res == 3 then return { echips = pseudorandom("hpr_error_amt",105,115)/100 } end
+            if res == 4 then return { emult = pseudorandom("hpr_error_amt",110,125)/100 } end
+            if res == 5 then return { balance = true } end
         end
         if context.before then
             local any = false
@@ -317,13 +316,12 @@ SMODS.Enhancement{
     end,
     calculate = function (self, card, context)
         if context.main_scoring and context.cardarea == G.play then
-            local res = pseudorandom("hpr_error_effect", 1, 6)
+            local res = pseudorandom("hpr_error_effect", 1, 5)
             if res == 1 then return { chips = pseudorandom("hpr_error_amt",30,150)} end
             if res == 2 then return { mult = pseudorandom("hpr_error_amt",5,40)} end
             if res == 3 then return { xchips = pseudorandom("hpr_error_amt",15,30)/10 } end
             if res == 4 then return { xmult = pseudorandom("hpr_error_amt",15,30)/10 } end
             if res == 5 then return { swap = true, message = localize("k_swapped_ex") } end
-            if res == 6 then return { balance = true } end
         end
         if context.playing_card_end_of_round then
             local dollars = pseudorandom("hpr_error_cashout",-3,9)
