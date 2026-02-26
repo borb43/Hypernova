@@ -4,6 +4,9 @@ This is my silly little mod where i add basically whatever i feel like!
 
 NOTE: currently in a pre-release state!
 
+# IMPORTANT:
+Any releases *after* version 0.5.0 will REQUIRE [SpectralLib](https://github.com/SpectralPack/Spectrallib/releases/latest), make sure to download it here
+
 The mod currently adds:
 - 30 Jokers
     - 4 Common
