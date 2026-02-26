@@ -1141,3 +1141,46 @@ HPR.StellarJoker {
     end,
     forcetrigger_compat = true
 }
+
+HPR.StellarJoker {
+    key = "buffoon",
+    config = { extra = { cards = 2, common = 4, uncommon = 3, rare = 2, other = 1.5 }},
+    loc_vars = function (self, info_queue, card)
+        local cae = card.ability.extra
+        return { vars = { cae.cards, cae.common, cae.uncommon, cae.rare, cae.other }}
+    end,
+    calculate = function (self, card, context)
+        if (context.setting_blind or context.forcetrigger) and #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+            local to_create = math.min(card.ability.extra.cards, G.jokers.config.card_limit - (#G.jokers.cards + G.GAME.joker_buffer))
+            G.GAME.joker_buffer = G.GAME.joker_buffer + to_create
+            G.E_MANAGER:add_event(Event{
+                func = function ()
+                    local cards = {}
+                    for _ = 1, to_create do
+                        cards[#cards+1] = SMODS.add_card{
+                            set = "Joker",
+                            edition = SMODS.poll_edition{ guaranteed = true, key_append = self.key.."_edition" },
+                            key_append = self.key
+                        }
+                    end
+                    for _, c in ipairs(cards) do
+                        local rarity = c.config.center.rarity
+                        if rarity == 1 then
+                            Spectrallib.manipulate(c, { type = "X", value = card.ability.extra.common })
+                        elseif rarity == 2 then
+                            Spectrallib.manipulate(c, { type = "X", value = card.ability.extra.uncommon })
+                        elseif rarity == 3 then
+                            Spectrallib.manipulate(c, { type = "X", value = card.ability.extra.rare })
+                        elseif rarity and SMODS.Rarities[rarity] and not (SMODS.Rarities[rarity].weight and SMODS.Rarities[rarity].weight <= 0 or not SMODS.Rarities[rarity].weight) then
+                            Spectrallib.manipulate(c, { type = "X", value = card.ability.extra.other })
+                        end
+                    end
+                    return true
+                end
+            })
+            return {
+                message = localize("k_plus_joker"),
+            }
+        end
+    end
+}

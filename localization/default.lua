@@ -1027,6 +1027,20 @@ local descriptions = {
                 "after each hand for",
                 "every {C:attention}8{} held in hand"
             }
+        },
+        j_hpr_buffoon = {
+            name = "S028 BUFFOON",
+            text = {
+                {"When {C:attention}Blind{} is selected, creates",
+                "{C:attention}#1# {C:dark_edition}editioned {C:attention}Jokers{} with increased",
+                "values based on their {C:attention}rarity"},
+                {
+                    "{C:common}Common{}: {X:dark_edition,C:white}X#2#",
+                    "{C:uncommon}Uncommon{}: {X:dark_edition,C:white}X#3#",
+                    "{C:rare}Rare{}: {X:dark_edition,C:white}X#4#",
+                    "{C:attention}Other {s:0.8}(with base weight >0){}: {X:dark_edition,C:white}X#5#"
+                }
+            }
         }
     },
     Other = {
