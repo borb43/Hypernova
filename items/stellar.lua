@@ -108,8 +108,7 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_ancient = "j_hpr_wild",
     j_seeing_double = "j_hpr_wild",
     j_flower_pot = "j_hpr_wild",
-    j_marble = "j_hpr_stone",
-    j_stone = "j_hpr_stone",
+    j_marble = "j_hpr_conjurer",
     j_hologram = "j_hpr_conjurer",
     j_certificate = "j_hpr_conjurer",
     j_juggler = "j_hpr_circus",
@@ -144,7 +143,8 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_blue_joker = "j_hpr_conjurer",
     j_mr_bones = "j_hpr_guardian",
     j_riff_raff = "j_hpr_buffoon",
-    j_sixth_sense = "j_hpr_master"
+    j_sixth_sense = "j_hpr_master",
+    j_business = "j_hpr_mask"
 }
 
 HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'log', 'sin', 'cos', 'tan' }
