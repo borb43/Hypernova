@@ -24,11 +24,10 @@ SMODS.Consumable {
     pos = { x = 2, y = 2 },
     hidden = true,
     can_use = function (self, card)
-        local highlighted = HPR.get_all_highlighted(card, "jokers")
-        return #highlighted == 1 and HPR.get_ascension(highlighted[1])
+        return G.jokers and G.jokers.highlighted and #G.jokers.highlighted == 1
     end,
     use = function (self, card, area, copier)
-        local highlighted = HPR.get_all_highlighted(card, "jokers")
+        local highlighted = Spectrallib.get_highlighted_cards({ G.jokers }, card, 1, 1, nil, self.key.."_forcetrigger")
         G.E_MANAGER:add_event(Event{
             trigger = 'after',
             delay = 0.4,
@@ -62,6 +61,10 @@ SMODS.Consumable {
         })
         delay(0.5)
     end,
+    force_use = function (self, card, area)
+        self:use(card, area)
+    end,
+    forcetrigger_compat = true,
 }
 
 HPR.vanilla_ascensions = { --ASCENSION LIST
@@ -267,7 +270,8 @@ HPR.StellarJoker {
         }
     end,
     calc_dollar_bonus = function (self, card)
-        return pseudorandom("hpr_error_cashout",-3,9)
+        local dollars = pseudorandom("hpr_error_cashout",-3,9)
+        if dollars ~= 0 then return dollars end
     end,
     calculate = function (self, card, context)
         if context.setting_blind then
@@ -303,7 +307,26 @@ HPR.StellarJoker {
                 return { message = localize("hpr_generic_q") }
             end
         end
-    end
+    end,
+    forcetrigger = function (self, card, context)
+        local ret = { extra = {} }
+        ret.extra.message = localize("hpr_generic_q")
+        local res = pseudorandom("hpr_error_effect",1,5)
+        if res == 1 then ret.xchips = pseudorandom("hpr_error_amt",15,30)/10 end
+        if res == 2 then ret.xmult = pseudorandom("hpr_error_amt",15,30)/10 end
+        if res == 3 then ret.echips = pseudorandom("hpr_error_amt",105,115)/100 end
+        if res == 4 then ret.emult = pseudorandom("hpr_error_amt",110,125)/100 end
+        if res == 5 then ret.balance = true end
+        ease_discard(pseudorandom("hpr_error_discard", -1, 3))
+        ease_hands_played(pseudorandom("hpr_error_hands", -1, 3))
+        local h = pseudorandom("hpr_error_h_size", 0, 2)
+        G.hand:change_size(h)
+        G.GAME.round_resets.temp_handsize = (G.GAME.round_resets.temp_handsize or 0) + h
+        local dollars = self:calc_dollar_bonus(card)
+        if dollars ~= 0 then ret.dollars = dollars end
+        return ret
+    end,
+    forcetrigger_compat = true,
 }
 
 SMODS.Enhancement{
@@ -315,21 +338,26 @@ SMODS.Enhancement{
         return false
     end,
     calculate = function (self, card, context)
-        if context.main_scoring and context.cardarea == G.play then
+        if context.playing_card_end_of_round then
+            local dollars = pseudorandom("hpr_error_cashout",-3,9)
+            G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + dollars
+            local t = {
+                dollars = dollars,
+                func = HPR.event_presets.reset_dollar_buffer
+            }
+            if not context.forcetrigger then
+                return t
+            else
+                SMODS.calculate_effect(t, card)
+            end
+        end
+        if context.main_scoring and context.cardarea == G.play or context.forcetrigger then
             local res = pseudorandom("hpr_error_effect", 1, 5)
             if res == 1 then return { chips = pseudorandom("hpr_error_amt",30,150)} end
             if res == 2 then return { mult = pseudorandom("hpr_error_amt",5,40)} end
             if res == 3 then return { xchips = pseudorandom("hpr_error_amt",15,30)/10 } end
             if res == 4 then return { xmult = pseudorandom("hpr_error_amt",15,30)/10 } end
             if res == 5 then return { swap = true, message = localize("k_swapped_ex") } end
-        end
-        if context.playing_card_end_of_round then
-            local dollars = pseudorandom("hpr_error_cashout",-3,9)
-            G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + dollars
-            return {
-                dollars = dollars,
-                func = HPR.event_presets.reset_dollar_buffer
-            }
         end
     end,
     no_collection = true,
@@ -339,14 +367,15 @@ SMODS.Enhancement{
     any_suit = true,
     set_badges = function (self, card, badges)
         badges[#badges+1] = create_badge(localize("k_hpr_stellar"), HPR.stellar_gradient, G.C.UI.TEXT_LIGHT, 1.2)
-    end
+    end,
+    forcetrigger_compat = true,
 }
 
 HPR.StellarJoker {
     key = "observatorium",
     config = { extra = { chips = 0, mult = 0 }},
     blueprint_compat = true,
-    demicoloncompat = true,
+    forcetrigger_compat = true,
     perishable_compat = false,
     calculate = function (self, card, context)
         if context.hpr_level_up_hand and not context.blueprint and (context.chips > 0 or context.mult > 0) then
@@ -379,7 +408,7 @@ HPR.StellarJoker {
 HPR.StellarJoker {
     key = "master",
     blueprint_compat = true,
-    demicoloncompat = true,
+    forcetrigger_compat = true,
     calculate = function (self, card, context)
         if context.setting_blind or context.forcetrigger then
             G.E_MANAGER:add_event(Event{
@@ -420,7 +449,7 @@ HPR.StellarJoker {
 HPR.StellarJoker {
     key = "potassium",
     blueprint_compat = true,
-    --demicoloncompat = true,
+    forcetrigger_compat = true,
     config = { extra = { xmult = 3, odds1 = 3, odds2 = 6 }},
     loc_vars = function (self, info_queue, card)
         local e = card.ability.extra
@@ -436,7 +465,7 @@ HPR.StellarJoker {
             G.GAME.banned_keys[context.destroy_card.config.center.key] = true
             return { remove = true }
         end
-        if context.end_of_round and card.area and card.rank and not context.blueprint then
+        if context.end_of_round and card.area and card.rank and not context.blueprint or context.forcetrigger then
             if card.area.cards[card.rank-1] and not SMODS.is_eternal(card.area.cards[card.rank-1]) and SMODS.pseudorandom_probability(card, self.key.."2", 1, card.ability.extra.odds2) then
                 G.GAME.banned_keys[card.area.cards[card.rank-1].config.center.key] = true
                 SMODS.calculate_effect({ message_card = card.area.cards[card.rank-1], message = localize("k_extinct_ex")}, card)
@@ -457,7 +486,7 @@ HPR.StellarJoker {
 HPR.StellarJoker {
     key = "crazy",
     blueprint_compat = true,
-    demicoloncompat = true,
+    forcetrigger_compat = true,
     pos = { x = 2, y = 0 },
     soul_pos = { x = 3, y = 0 },
     config = { extra = { mult = 0, scale = 4 }},
@@ -495,7 +524,7 @@ HPR.StellarJoker {
 HPR.StellarJoker {
     key = "crafty",
     blueprint_compat = true,
-    demicoloncompat = true,
+    forcetrigger_compat = true,
     pos = { x = 4, y = 0},
     soul_pos = { x = 5, y = 0 },
     config = { extra = { chips = 0, scale = 20 }},
@@ -550,7 +579,7 @@ HPR.StellarJoker {
         return { vars = { card.ability.extra.xmult, card.ability.extra.gain }}
     end,
     calculate = function (self, card, context)
-        if context.before and next(context.poker_hands["Straight"]) then
+        if context.before and next(context.poker_hands["Straight"]) or context.forcetrigger then
             SMODS.scale_card(card, {
                 ref_table = card.ability.extra,
                 ref_value = "xmult",
@@ -567,12 +596,14 @@ HPR.StellarJoker {
                     return true
                 end
             })
-            return { message = localize("k_hpr_plus_consumable") }
+            local t = { message = localize("k_hpr_plus_consumable") }
+            if context.forcetrigger then SMODS.calculate_effect(t, card) else return t end
         end
-        if context.joker_main and card.ability.extra.xmult ~= 1 then
+        if (context.joker_main or context.forcetrigger) and card.ability.extra.xmult ~= 1 then
             return { xmult = card.ability.extra.xmult }
         end
-    end
+    end,
+    forcetrigger_compat = true,
 }
 
 HPR.StellarJoker {
@@ -592,7 +623,7 @@ HPR.StellarJoker {
         return { vars = { card.ability.extra.xmult_per, amt*card.ability.extra.xmult_per, G.GAME.starting_deck_size or 52 }}
     end,
     calculate = function (self, card, context)
-        if context.joker_main then
+        if context.joker_main or context.forcetrigger then
             local amt = 0
             amt = amt + G.GAME.starting_params.play_limit-#context.full_hand
             amt = amt + (G.jokers.config.card_limit - #G.jokers.cards)
@@ -600,7 +631,8 @@ HPR.StellarJoker {
             amt = amt * math.max(1, G.GAME.starting_deck_size - #G.playing_cards)
             if amt > 1 then return { xmult = math.max(amt * card.ability.extra.xmult_per,1) } end
         end
-    end
+    end,
+    forcetrigger_compat = true,
 }
 
 HPR.StellarJoker {
@@ -625,6 +657,13 @@ HPR.StellarJoker {
                 colour = G.C.MONEY
             }
         end
+        if context.forcetrigger then
+            local d = self:calc_dollar_bonus(card)
+            if d ~= 0 then
+                G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + d
+                return { dollars = d, func = HPR.event_presets.reset_dollar_buffer }
+            end
+        end
     end,
     calc_dollar_bonus = function (self, card)
         local total = 0
@@ -632,7 +671,8 @@ HPR.StellarJoker {
             if c:get_id() == 9 then total = total + c:get_p_dollars() + c:get_h_dollars() end
         end
         return total
-    end
+    end,
+    forcetrigger_compat = true,
 }
 
 HPR.StellarJoker { --literally everything this does is a hook lmfao
@@ -669,7 +709,9 @@ HPR.StellarJoker {
                 xmult = card.ability.extra.xmult
             }
         end
-    end
+        if context.forcetrigger then return { xmult = card.ability.extra.xmult } end
+    end,
+    forcetrigger_compat = true,
 }
 
 HPR.StellarJoker {
@@ -728,10 +770,11 @@ HPR.StellarJoker {
                 end
             end
         end
-        if context.individual and context.cardarea == G.play and context.other_card:is_suit(G.GAME.current_round.ancient_card.suit) then
+        if context.individual and context.cardarea == G.play and context.other_card:is_suit(G.GAME.current_round.ancient_card.suit) or context.forcetrigger then
             return { xmult = card.ability.extra }
         end
-    end
+    end,
+    forcetrigger_compat = true,
 }
 
 HPR.StellarJoker {
@@ -742,7 +785,7 @@ HPR.StellarJoker {
         return { vars = { card.ability.extra.xmult, card.ability.extra.gain, card.ability.extra.packs }}
     end,
     calculate = function (self, card, context)
-        if context.starting_shop then
+        if context.starting_shop or (context.forcetrigger and G.STATE == G.STATES.SHOP) then --i hope this is safe?
             G.E_MANAGER:add_event(Event{
                 func = function ()
                     for i = 1, card.ability.extra.packs do
@@ -765,12 +808,13 @@ HPR.StellarJoker {
                 end
             })
         end
-        if context.joker_main and card.ability.extra.xmult ~= 1 then
+        if (context.joker_main or context.forcetrigger) and card.ability.extra.xmult ~= 1 then
             return {
                 xmult = card.ability.extra.xmult
             }
         end
-    end
+    end,
+    forcetrigger_compat = true,
 }
 
 HPR.StellarJoker {
@@ -818,7 +862,7 @@ HPR.StellarJoker {
         return { vars = { card.ability.extra.xmult, card.ability.extra.scale }}
     end,
     blueprint_compat = true,
-    demicoloncompat = true,
+    forcetrigger_compat = true,
     calculate = function (self, card, context)
         if context.before and not context.blueprint then
             local hands = 0
@@ -854,12 +898,12 @@ HPR.StellarJoker {
         return { vars = { card.ability.extra.xmult, card.ability.extra.chips, card.ability.extra.dollar }}
     end,
     blueprint_compat = true,
-    demicoloncompat = true,
+    forcetrigger_compat = true,
     calculate = function (self, card, context)
         if context.repetition and context.other_card:is_face() then
             return { repetitions = 1 }
         end
-        if context.individual and context.cardarea == G.play and context.other_card:is_face() then
+        if context.individual and context.cardarea == G.play and context.other_card:is_face() or context.forcetrigger then
             local res = pseudorandom("hpr_mask_effect",1,3)
             if res == 1 then return { xmult = card.ability.extra.xmult } end
             if res == 2 then return { chips = card.ability.extra.chips } end
@@ -898,16 +942,26 @@ HPR.StellarJoker {
     calc_dollar_bonus = function (self, card)
         local amt = math.floor(G.GAME.dollars/card.ability.extra.per)
         amt = math.min(amt, card.ability.extra.cap)
-        SMODS.scale_card(card, {
-            ref_table = card.ability.extra,
-            ref_value = "cap",
-            scalar_value = "scale",
-            message_colour = G.C.MONEY
-        })
+        if not card.FORCETRIGGER then
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "cap",
+                scalar_value = "scale",
+                message_colour = G.C.MONEY
+            })
+        end
         if amt > 0 then return amt end
     end,
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.cap, card.ability.extra.per, card.ability.extra.scale }}
+    end,
+    forcetrigger = function (self, card, context)
+        card.FORCETRIGGER = true
+        local d = self:calc_dollar_bonus(card)
+        if d ~= 0 then
+            G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + d
+            return { dollars = d, func = HPR.event_presets.reset_dollar_buffer }
+        end
     end
 }
 
@@ -919,7 +973,7 @@ HPR.StellarJoker {
         return { vars = { card.ability.extra.xmult  }}
     end,
     calculate = function (self, card, context)
-        if context.setting_blind and not context.blueprint and card.area and card.rank and card.area.cards[card.rank+1] and not SMODS.is_eternal(card.area.cards[card.rank+1], card) and not card.area.cards[card.rank+1].getting_sliced then
+        if (context.setting_blind or context.forcetrigger) and not context.blueprint and card.area and card.rank and card.area.cards[card.rank+1] and not SMODS.is_eternal(card.area.cards[card.rank+1], card) and not card.area.cards[card.rank+1].getting_sliced then
             local target = card.area.cards[card.rank+1]
             target.getting_sliced = true
             G.GAME.joker_buffer = G.GAME.joker_buffer - 1
@@ -938,12 +992,13 @@ HPR.StellarJoker {
                     return true
                 end
             })
-            return nil, true
+            if not context.forcetrigger then return nil, true end
         end
-        if context.joker_main and card.ability.extra.xmult ~= 1 then
+        if context.joker_main and card.ability.extra.xmult ~= 1 or context.forcetrigger then
             return { xmult = card.ability.extra.xmult }
         end
-    end
+    end,
+    forcetrigger_compat = true,
 }
 
 HPR.StellarJoker {
@@ -1024,7 +1079,7 @@ HPR.StellarJoker {
         return { vars = { card.ability.extra }}
     end,
     calculate = function (self, card, context)
-        if context.individual and not context.end_of_round and context.cardarea == G.hand and context.other_card:is_face() then
+        if context.individual and not context.end_of_round and context.cardarea == G.hand and context.other_card:is_face() or (context.forcetrigger and context.full_hand) then
             if not context.other_card.debuff then
                 local face_count = 0
                 for _, c in ipairs(context.full_hand) do
@@ -1037,7 +1092,8 @@ HPR.StellarJoker {
                 return { message = localize("k_debuffed") }
             end
         end
-    end
+    end,
+    forcetrigger_compat = true,
 }
 
 HPR.StellarJoker {
@@ -1069,5 +1125,18 @@ HPR.StellarJoker {
                 colour = G.C.RARITY.hpr_stellar
             }
         end
+    end,
+    forcetrigger = function (self, card, context)
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                for _ = 1, card.ability.extra.cards do
+                    SMODS.add_card{ set = "Joker", key_append = self.key }
+                end
+                G.hand_text_area.blind_chips:juice_up()
+                G.hand_text_area.game_chips:juice_up()
+                play_sound('tarot1')
+                return true
+            end
+        }))
     end
 }
