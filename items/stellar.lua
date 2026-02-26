@@ -142,7 +142,8 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_baron = "j_hpr_royalty",
     j_shoot_the_moon = "j_hpr_royalty",
     j_blue_joker = "j_hpr_conjurer",
-    j_mr_bones = "j_hpr_guardian"
+    j_mr_bones = "j_hpr_guardian",
+    j_riff_raff = "j_hpr_buffoon"
 }
 
 HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'log', 'sin', 'cos', 'tan' }

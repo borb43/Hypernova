@@ -574,7 +574,8 @@ SMODS.Joker {
             }))
             return nil, true
         end
-    end
+    end,
+    hpr_ascension_key = "j_hpr_buffoon"
 }
 
 SMODS.Joker {
@@ -810,6 +811,7 @@ SMODS.Joker {
         end
     end,
     forcetrigger_compat = true,
+    hpr_ascension_key = "j_hpr_buffoon"
 }
 
 SMODS.Joker {

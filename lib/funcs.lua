@@ -250,11 +250,3 @@ function HPR.should_spawn_superboss()
     do return false end
     return G.GAME.round_resets.ante >= 24 and not G.GAME.hpr_superboss_beaten
 end
-
-function HPR.deck_or_sleeve(key)
-    if G.GAME.selected_back and G.GAME.selected_back.effect.center.key == "b_" .. key or G.GAME.selected_sleeve == "sleeve_"..key then return true end
-    for _, k in ipairs(G.GAME.entr_bought_decks or {}) do
-        if k == "b_" .. key or k == "sleeve_" .. key then return true end
-    end
-    return false
-end
