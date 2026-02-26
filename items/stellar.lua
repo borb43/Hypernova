@@ -143,7 +143,8 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_shoot_the_moon = "j_hpr_royalty",
     j_blue_joker = "j_hpr_conjurer",
     j_mr_bones = "j_hpr_guardian",
-    j_riff_raff = "j_hpr_buffoon"
+    j_riff_raff = "j_hpr_buffoon",
+    j_sixth_sense = "j_hpr_master"
 }
 
 HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'log', 'sin', 'cos', 'tan' }
@@ -416,16 +417,17 @@ HPR.StellarJoker {
                 func = function ()
                     G.E_MANAGER:add_event(Event{
                         func = function ()
-                            SMODS.add_card{
+                            local c = SMODS.add_card{
                                 set = 'Consumeables',
                                 key_append = "hpr_master",
                                 edition = "e_negative",
                                 area = G.consumeables
                             }
+                            Spectrallib.manipulate(c, { type = "X", value = card.ability.extra })
                             return true
                         end
                     })
-                    SMODS.calculate_effect({ message = localize("k_hpr_plus_consumable"), colour = G.C.DARK_EDITION }, context.blueprint_card or card)
+                    SMODS.calculate_effect({ message = localize("k_hpr_plus_consumable"), colour = G.C.DARK_EDITION }, card)
                     return true
                 end
             })
@@ -442,8 +444,10 @@ HPR.StellarJoker {
             end
         })
     end,
+    config = { extra = 2 },
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.e_negative
+        return { vars = {card.ability.extra}}
     end
 }
 

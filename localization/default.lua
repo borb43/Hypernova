@@ -292,11 +292,8 @@ local descriptions = {
             text = {
                 {"All {C:attention}consumables{} and {C:attention}Booster",
                 "{C:attention}Packs{} in the shop are {C:attention}free"},
-                {"Creates a {C:dark_edition}Negative {C:attention}Consumable",
-                "when blind is selected"},
-                {"{C:legendary,E:1}Rare Consumables{} can",
-                "appear from any {C:attention}random",
-                "{C:attention}card{} creation sources"}
+                {"Creates a {C:dark_edition}Negative {C:attention}Consumable{} with",
+                "{X:dark_edition,C:white}X#1#{} values when blind is selected"},
             }
         },
         j_hpr_potassium = {

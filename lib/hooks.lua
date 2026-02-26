@@ -1,8 +1,5 @@
 local create_card_ref = create_card --hook for applying perma bonuses to cards (for stacking and mass production)
 create_card = function(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
-	if not soulable and not forced_key and next(SMODS.find_card("j_hpr_master")) then
-		soulable = true
-	end
 	if (next(SMODS.find_card("j_hpr_missing")) or next(SMODS.find_card("j_hpr_apostrophe_m"))) and (SMODS.ConsumableTypes[_type] or _type == "Tarot_Planet") then
 		_type = "Consumeables"
 	end
