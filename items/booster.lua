@@ -584,7 +584,7 @@ SMODS.Booster {
         return { set = "Joker", rarity = "hpr_awesome", area = G.pack_cards, skip_materialize = true, soulable = true, key_append = "hpr_awesome_buf" }
     end,
     in_pool = function (self, args)
-        return HPR.deck_or_sleeve("hpr_experiment")
+        return Spectrallib.deck_or_sleeve("hpr_experiment")
     end,
     get_weight = function (self)
         return self.weight * (G.GAME.hpr_awesome_pack_mod or 1)
