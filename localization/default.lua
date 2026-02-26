@@ -1009,8 +1009,8 @@ local descriptions = {
             text = {
                 "Scored {C:attention}8s{} have a recursive",
                 "{C:green}#1# in #2#{} chance to retrigger",
-                "Reduces {C:green}numerator{} by {C:green}1{} for",
-                "every consecutive success"
+                "{C:green}-1 {C:attention}base {C:green}numerator{} for every",
+                "consecutive success"
             }
         },
         j_hpr_disintegration_loop = {
