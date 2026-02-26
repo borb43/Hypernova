@@ -17,7 +17,7 @@ HPR.BossJoker {
         return { vars = { card.ability.extra.discard, card.ability.extra.reps }}
     end,
     calculate = function (self, card, context)
-        if context.press_play then
+        if context.press_play or context.forcetrigger then
             G.E_MANAGER:add_event(Event{
                 func = function ()
                     local b = false
@@ -58,7 +58,8 @@ HPR.BossJoker {
             return { repetitions = card.ability.extra.reps }
         end
     end,
-    boss_key = "bl_hook"
+    boss_key = "bl_hook",
+    forcetrigger_compat = true,
 }
 
 HPR.BossJoker {
@@ -112,13 +113,14 @@ HPR.BossJoker {
         return { vars = {card.ability.extra}}
     end,
     calculate = function (self, card, context)
-        if context.setting_blind and context.blind.boss then
+        if context.setting_blind and context.blind.boss or context.forcetrigger and G.GAME.blind.in_blind then
             HPR.mod_blind_amount(card.ability.extra)
             ease_discard(G.GAME.current_round.discards_left * (card.ability.extra-1) )
             ease_hands_played(G.GAME.current_round.hands_left * (card.ability.extra - 1))
         end
     end,
-    boss_key = "bl_wall"
+    boss_key = "bl_wall",
+    forcetrigger_compat = true,
 }
 
 HPR.BossJoker {
@@ -155,7 +157,7 @@ HPR.BossJoker {
                 colour = G.C.RED
             }
         end
-        if context.joker_main then
+        if context.joker_main or context.forcetrigger then
             local chips = card.ability.extra.chips
             local mult = card.ability.extra.mult
             return {
@@ -164,7 +166,8 @@ HPR.BossJoker {
             }
         end
     end,
-    boss_key = "bl_arm"
+    boss_key = "bl_arm",
+    forcetrigger_compat = true,
 }
 
 HPR.BossJoker {
@@ -175,12 +178,13 @@ HPR.BossJoker {
         return { vars = {card.ability.extra}}
     end,
     calculate = function (self, card, context)
-        if context.individual and context.cardarea == G.play then
+        if context.individual and context.cardarea == G.play or context.forcetrigger then
             return { mult = card.ability.extra }
         end
         if context.debuff_card and context.debuff_card:is_suit("Clubs") then return { debuff = true } end
     end,
-    boss_key = "bl_club"
+    boss_key = "bl_club",
+    forcetrigger_compat = true,
 }
 
 HPR.BossJoker {
@@ -232,9 +236,10 @@ HPR.BossJoker {
         if context.debuff_card and context.debuff_card:is_suit("Spades") then
             return { debuff = true }
         end
-        if context.individual and context.cardarea == G.play then
+        if context.individual and context.cardarea == G.play or context.forcetrigger then
             return { chips = card.ability.extra}
         end
     end,
-    boss_key = "bl_goad"
+    boss_key = "bl_goad",
+    forcetrigger_compat = true
 }

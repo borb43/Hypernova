@@ -5,7 +5,7 @@ SMODS.Joker { --fusion reactor, balances before scoring
     rarity = 2,
     cost = 7,
     blueprint_compat = true,
-    demicoloncompat = true,
+    forcetrigger_compat = true,
     calculate = function(self, card, context)
         if context.initial_scoring_step or context.forcetrigger then
             return {
@@ -142,7 +142,7 @@ SMODS.Joker { --gambling addict, scales from probability rolls
     rarity = 3,
     cost = 10,
     blueprint_compat = true,
-    demicoloncompat = true,
+    forcetrigger_compat = true,
     perishable_compat = false,
     calculate = function(self, card, context)
         if context.pseudorandom_result then
@@ -197,7 +197,7 @@ SMODS.Joker { --fortune cookie, guarantees 6 probabilities and then creates a ne
     end,
     rarity = 2,
     cost = 6,
-    demicoloncompat = true,
+    forcetrigger_compat = true,
     eternal_compat = false,
     pools = { ["Food"] = true },
     calculate = function(self, card, context)
@@ -239,10 +239,10 @@ SMODS.Joker {
     pos = { x = 0, y = 0 },
     rarity = 1,
     cost = 5,
-    demicoloncompat = true,
+    forcetrigger_compat = true,
     blueprint_compat = true,
     calculate = function (self, card, context)
-        if (context.after or context.forcetrigger) and #G.hand.cards > 0 then
+        if (context.after or context.forcetrigger) and G.hand and #G.hand.cards > 0 then
             local _card = pseudorandom_element(G.hand.cards, "hpr_bungus") or {}
             assert(SMODS.modify_rank(_card, 1, true))
             return {
@@ -318,7 +318,7 @@ SMODS.Joker {
         return { vars = { n, d }}
     end,
     calculate = function (self, card, context)
-        if context.individual and context.cardarea == G.play and
+        if (context.individual and context.cardarea == G.play or context.forcetrigger) and
             #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
             if (context.other_card:get_id() == 7) and SMODS.pseudorandom_probability(card, 'hpr_7_ball', 1, card.ability.extra) then
                 G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
@@ -347,7 +347,8 @@ SMODS.Joker {
     hpr_credits = {
         code = {"Eris"},
         idea = {"Eris"}
-    }
+    },
+    forcetrigger_compat = true,
 }
 
 SMODS.Joker {
@@ -391,7 +392,7 @@ SMODS.Joker {
                 denominator = context.denominator + card.ability.extra.bonus
             }
         end
-        if context.skipping_booster and not context.blueprint then
+        if context.skipping_booster and not context.blueprint or context.forcetrigger then
             SMODS.scale_card(card, {
                 ref_table = card.ability.extra,
                 ref_value = "bonus",
@@ -405,7 +406,8 @@ SMODS.Joker {
         code = {"Eris"},
         idea = {"Eris"}
     },
-    hpr_ascension_key = "j_hpr_lucky"
+    hpr_ascension_key = "j_hpr_lucky",
+    forcetrigger_compat = true,
 }
 
 SMODS.Joker {
@@ -415,13 +417,13 @@ SMODS.Joker {
     rarity = 1,
     cost = 5,
     blueprint_compat = true,
-    demicoloncompat = true,
+    forcetrigger_compat = true,
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = G.P_TAGS.tag_ethereal
         return { vars = { localize { type = 'name_text', set = 'Tag', key = 'tag_ethereal' } } }
     end,
     calculate = function (self, card, context)
-        if context.end_of_round and context.beat_boss and context.main_eval then
+        if context.end_of_round and context.beat_boss and context.main_eval or context.forcetrigger then
             G.E_MANAGER:add_event(Event({
                 func = (function()
                     add_tag(Tag('tag_ethereal'))
@@ -446,9 +448,9 @@ SMODS.Joker {
     rarity = 1,
     cost = 5,
     blueprint_compat = true,
-    demicoloncompat = true,
+    forcetrigger_compat = true,
     calculate = function (self, card, context)
-        if context.end_of_round and context.main_eval and context.beat_boss then
+        if context.end_of_round and context.main_eval and context.beat_boss or context.forcetrigger then
             G.E_MANAGER:add_event(Event{
                 func = function ()
                     SMODS.add_card{
@@ -539,8 +541,7 @@ SMODS.Joker {
                                 return true
                             end
                         }))
-                        SMODS.calculate_effect({ message = localize('k_plus_joker'), colour = G.C.FILTER },
-                            context.blueprint_card or card)
+                        SMODS.calculate_effect({ message = localize('k_plus_joker'), colour = G.C.FILTER }, card)
                         return true
                     end)
                 }))
@@ -551,6 +552,27 @@ SMODS.Joker {
             card.ability.extra.rank1 = pseudorandom_element(SMODS.Ranks, "hpr_meme_rank1").key
             card.ability.extra.rank2 = pseudorandom_element(SMODS.Ranks, "hpr_meme_rank2").key
             return { message = localize("k_reset")}
+        end
+        if context.forcetrigger and #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+            G.GAME.joker_buffer = G.GAME.joker_buffer + 1
+            G.E_MANAGER:add_event(Event({
+                func = (function()
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            SMODS.add_card {
+                                set = 'Joker',
+                                key_append = 'hpr_new_meme'
+                            }
+                            G.GAME.joker_buffer = 0
+                            return true
+                        end
+                    }))
+                    SMODS.calculate_effect({ message = localize('k_plus_joker'), colour = G.C.FILTER },
+                        context.blueprint_card or card)
+                    return true
+                end)
+            }))
+            return nil, true
         end
     end
 }
@@ -584,7 +606,7 @@ SMODS.Joker {
     cost = 7,
     blueprint_compat = true,
     calculate = function (self, card, context)
-        if context.end_of_round and context.main_eval and context.beat_boss and SMODS.last_hand_oneshot then
+        if context.end_of_round and context.main_eval and context.beat_boss and SMODS.last_hand_oneshot or context.forcetrigger then
             G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
             G.E_MANAGER:add_event(Event({
                 func = (function()
@@ -610,7 +632,8 @@ SMODS.Joker {
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.c_aura
         return { vars = { localize{ type = "name_text", key = "c_aura", set = "Spectral"}}}
-    end
+    end,
+    forcetrigger_compat = true,
 }
 
 SMODS.Joker {
@@ -668,12 +691,13 @@ SMODS.Joker {
         return { vars = { card.ability.extra }}
     end,
     calculate = function (self, card, context)
-        if context.individual and context.other_card:is_suit("Diamonds") and context.cardarea == G.play then
+        if context.individual and context.other_card:is_suit("Diamonds") and context.cardarea == G.play or context.forcetrigger then
             return {
                 xmult = card.ability.extra
             }
         end
-    end
+    end,
+    forcetrigger_compat = true,
 }
 
 SMODS.Joker {
@@ -718,8 +742,10 @@ SMODS.Joker {
             end
             if p then return { xmult = card.ability.extra } end
         end
+        if context.forcetrigger then return { xmult = card.ability.extra } end
     end,
-    pools = { wee = true }
+    pools = { wee = true },
+    forcetrigger_compat = true,
 }
 
 SMODS.Joker {
@@ -733,7 +759,7 @@ SMODS.Joker {
         info_queue[#info_queue+1] = { set = 'Other', key = 'perishable', vars = { G.GAME.perishable_rounds, G.GAME.perishable_rounds }}
     end,
     calculate = function (self, card, context)
-        if context.end_of_round and context.main_eval and context.beat_boss then
+        if context.end_of_round and context.main_eval and context.beat_boss or context.forcetrigger then
             local c = G.jokers.cards[#G.jokers.cards]
             if c and c.config.center.key ~= "j_hpr_copier" then
                 G.E_MANAGER:add_event(Event{
@@ -765,7 +791,7 @@ SMODS.Joker {
         info_queue[#info_queue+1] = { set = "Other", key = "rental", vars = { G.GAME.rental_rate }}
     end,
     calculate = function (self, card, context)
-        if context.selling_self and (#G.jokers.cards + G.GAME.joker_buffer) < G.jokers.config.card_limit then
+        if context.selling_self and (#G.jokers.cards + G.GAME.joker_buffer) < G.jokers.config.card_limit or context.forcetrigger then
             G.GAME.joker_buffer = (G.GAME.joker_buffer or 0) + 1
             G.E_MANAGER:add_event(Event{
                 func = function ()
@@ -782,7 +808,8 @@ SMODS.Joker {
             })
             return { message = localize("k_plus_joker"), colour = G.C.RARITY[3] }
         end
-    end
+    end,
+    forcetrigger_compat = true,
 }
 
 SMODS.Joker {
@@ -793,12 +820,13 @@ SMODS.Joker {
     cost = 4,
     blueprint_compat = true,
     calculate = function (self, card, context)
-        if context.joker_main then
+        if context.joker_main or context.forcetrigger and hand_chips then
             return {
                 mult = (hand_chips or 0)^(1/3)
             }
         end
-    end
+    end,
+    forcetrigger_compat = true,
 }
 
 SMODS.Joker {
@@ -832,7 +860,7 @@ SMODS.Joker {
         return { vars = { card.ability.extra.rounds, card.ability.extra.cards }}
     end,
     calculate = function (self, card, context)
-        if context.end_of_round and context.main_eval and not context.retrigger_joker then
+        if (context.end_of_round and context.main_eval or context.forcetrigger) and not context.retrigger_joker then
             card.ability.extra.rounds = card.ability.extra.rounds - 1
             if card.ability.extra.rounds <= 0 then
                 for _ = 1, card.ability.extra.cards do
@@ -945,7 +973,7 @@ SMODS.Joker {
         return { vars = { card.ability.extra, card.ability.extra*two }}
     end,
     calculate = function (self, card, context)
-        if context.joker_main then
+        if context.joker_main or context.forcetrigger then
             local two = 0
             for _, c in ipairs(G.playing_cards) do
                 if c:get_id() == 2 then two = two+1 end
@@ -955,7 +983,8 @@ SMODS.Joker {
             end
         end
     end,
-    pools = { wee = true }
+    pools = { wee = true },
+    forcetrigger_compat = true,
 }
 
 SMODS.Joker {
@@ -972,7 +1001,7 @@ SMODS.Joker {
         return { vars = { card.ability.extra.mult, n, d }}
     end,
     calculate = function (self, card, context)
-        if context.individual and context.cardarea == G.play and context.other_card:get_id() == 2 then
+        if context.individual and context.cardarea == G.play and context.other_card:get_id() == 2 or context.forcetrigger then
             return { mult = card.ability.extra.mult }
         end
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then
@@ -993,7 +1022,8 @@ SMODS.Joker {
         return not G.GAME.pool_flags.hpr_wee_michel_extinct
     end,
     pools = { wee = true, Food = true },
-    hpr_ascension_key = "j_hpr_potassium"
+    hpr_ascension_key = "j_hpr_potassium",
+    forcetrigger_compat = true,
 }
 
 SMODS.Joker {
@@ -1010,7 +1040,7 @@ SMODS.Joker {
         return { vars = { card.ability.extra.xmult, n, d }}
     end,
     calculate = function (self, card, context)
-        if context.individual and context.cardarea == G.play and context.other_card:get_id() == 2 then
+        if context.individual and context.cardarea == G.play and context.other_card:get_id() == 2 or context.forcetrigger then
             return { xmult = card.ability.extra.xmult }
         end
         if context.destroy_card and context.cardarea == G.play and context.destroy_card:get_id() == 2 and SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds ) then
@@ -1021,7 +1051,8 @@ SMODS.Joker {
         return G.GAME.pool_flags.hpr_wee_michel_extinct
     end,
     pools = { wee = true, Food = true },
-    hpr_ascension_key = "j_hpr_potassium"
+    hpr_ascension_key = "j_hpr_potassium",
+    forcetrigger_compat = true,
 }
 
 SMODS.Joker {
@@ -1071,7 +1102,7 @@ SMODS.Joker {
         return{vars={n,d}}
     end,
     calculate = function (self, card, context)
-        if context.individual and context.cardarea == G.play and context.other_card:get_id() == 2 and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit and SMODS.pseudorandom_probability(card,self.key,1,card.ability.extra) then
+        if context.individual and context.cardarea == G.play and context.other_card:get_id() == 2 and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit and SMODS.pseudorandom_probability(card,self.key,1,card.ability.extra) or context.forcetrigger then
             G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
             return {
                 extra = {
@@ -1094,7 +1125,8 @@ SMODS.Joker {
             }
         end
     end,
-    pools = { wee = true, Meme = true }
+    pools = { wee = true, Meme = true },
+    forcetrigger_compat = true,
 }
 
 SMODS.Joker {
@@ -1160,14 +1192,15 @@ SMODS.Joker {
         return{ vars = {card.ability.extra.xmult, n, d }}
     end,
     calculate = function (self, card, context)
-        if context.joker_main then
+        if context.joker_main or context.forcetrigger then
             return { xmult = card.ability.extra.xmult }
         end
         if context.destroy_card and not context.blueprint and context.destroy_card == context.scoring_hand[1] and SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds) then
             context.destroy_card.hpr_force_shatter = true
             return { remove = true }
         end
-    end
+    end,
+    forcetrigger_compat = true,
 }
 
 SMODS.Joker {
@@ -1183,7 +1216,7 @@ SMODS.Joker {
         return { vars = { card.ability.extra.chips, card.ability.extra.discards } }
     end,
     calculate = function (self, card, context)
-        if context.joker_main then
+        if context.joker_main or context.forcetrigger then
             return { chips = card.ability.extra.chips }
         end
         if context.discard and not context.blueprint then
@@ -1194,7 +1227,8 @@ SMODS.Joker {
             end
         end
     end,
-    no_pool_flag = "hpr_ceramic_shattered"
+    no_pool_flag = "hpr_ceramic_shattered",
+    forcetrigger_compat = true,
 }
 
 SMODS.Joker {
@@ -1210,14 +1244,15 @@ SMODS.Joker {
         return { vars = { card.ability.extra.xchip, card.ability.extra.max_discard }}
     end,
     calculate = function (self, card, context)
-        if context.joker_main then
+        if context.joker_main or context.forcetrigger then
             return { xchips = card.ability.extra.xchip }
         end
         if context.pre_discard and #context.full_hand > card.ability.extra.max_discard then
             SMODS.destroy_cards(card)
         end
     end,
-    yes_pool_flag = "hpr_ceramic_shattered"
+    yes_pool_flag = "hpr_ceramic_shattered",
+    forcetrigger_compat = true,
 }
 
 SMODS.Joker {
@@ -1296,7 +1331,15 @@ SMODS.Joker {
         end
         return two_tally > 0 and card.ability.extra.dollars * two_tally or nil
     end,
-    pools = { wee = true }
+    pools = { wee = true },
+    forcetrigger = function (self, card, context)
+        local dollars = self:calc_dollar_bonus(card)
+        if dollars ~= 0 then
+            G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + dollars
+            return { dollars = dollars, func = HPR.event_presets.reset_dollar_buffer }
+        end
+    end,
+    forcetrigger_compat = true,
 }
 
 SMODS.Joker {
@@ -1310,13 +1353,14 @@ SMODS.Joker {
         return { vars = { card.ability.extra.xmult, card.ability.extra.xchip }}
     end,
     calculate = function (self, card, context)
-        if context.individual and context.cardarea == G.play and context.other_card:get_id() == 2 then
+        if context.individual and context.cardarea == G.play and context.other_card:get_id() == 2 or context.forcetrigger then
             return {
                 xmult = card.ability.extra.xmult,
                 xchips = card.ability.extra.xchip
             }
         end
-    end
+    end,
+    forcetrigger_compat = true,
 }
 
 SMODS.Joker {
@@ -1364,11 +1408,12 @@ SMODS.Joker {
                 colour = G.C.FILTER
             }
         end
-        if context.selling_self then
+        if context.selling_self and card.ability.extra.current > card.ability.extra.rounds or context.forcetrigger then
             G.hand:change_size(card.ability.extra.h_size)
             return { message = localize{type = "variable", key = "a_handsize", vars = {card.ability.extra.h_size}}}
         end
-    end
+    end,
+    forcetrigger_compat = true,
 }
 
 SMODS.Joker {
@@ -1391,7 +1436,9 @@ SMODS.Joker {
                 }
             end
         end
-    end
+        if context.forcetrigger then return {xmult = card.ability.extra} end
+    end,
+    forcetrigger_compat = true,
 }
 
 SMODS.Joker {

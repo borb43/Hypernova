@@ -6,12 +6,12 @@ SMODS.Joker {
     rarity = 4,
     cost = 20,
     blueprint_compat = true,
-    demicoloncompat = true,
+    forcetrigger_compat = true,
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'e_negative_consumable', set = 'Edition', config = { extra = 1 } }
     end,
     calculate = function (self, card, context)
-        if context.setting_blind and context.blind.boss then
+        if context.setting_blind and context.blind.boss or context.forcetrigger then
             local planets = {}
             for _, c in ipairs(G.consumeables.cards) do
                 if c.ability.set == "Planet" and not SMODS.is_eternal(c, card) then planets[#planets+1] = c end
@@ -28,6 +28,7 @@ SMODS.Joker {
                         return true
                     end
                 })
+                return nil, true
             end
         end
         if context.before then
