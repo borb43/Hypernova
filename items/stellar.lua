@@ -1005,20 +1005,14 @@ HPR.StellarJoker {
 HPR.StellarJoker {
     key = "ascendant",
     blueprint_compat = true,
-    config = { extra = 0.05 },
+    config = { extra = { xchips = 0.025, xmult = 0.05 } },
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra }}
+        return { vars = { card.ability.extra.xchips, card.ability.extra.xmult }}
     end,
     calculate = function (self, card, context)
-        if context.individual and not context.end_of_round then
-            if context.cardarea == G.play or context.cardarea == 'unscored' then
-                context.other_card.ability.perma_x_chips = context.other_card.ability.perma_x_chips + card.ability.extra
-                return { message = localize("k_upgrade_ex"), colour = G.C.BLUE }
-            end
-            if context.cardarea == G.hand then
-                context.other_card.ability.perma_h_x_chips = context.other_card.ability.perma_h_x_chips + card.ability.extra
-                return{ message = localize("k_upgrade_ex"), colour = G.C.BLUE }
-            end
+        if context.individual and context.cardarea == G.play then
+            context.other_card.ability.perma_x_chips = context.other_card.ability.perma_x_chips + card.ability.extra.xchips
+            return { message = localize("k_upgrade_ex"), colour = G.C.BLUE }
         end
         if context.before and #context.full_hand == 1 and G.GAME.current_round.hands_played == 0 then
             local c = context.full_hand[1]
@@ -1029,8 +1023,7 @@ HPR.StellarJoker {
             }
         end
         if context.discard then
-            context.other_card.ability.perma_x_mult = context.other_card.ability.perma_x_mult + card.ability.extra
-            context.other_card.ability.perma_h_x_mult = context.other_card.ability.perma_h_x_mult + card.ability.extra
+            context.other_card.ability.perma_x_mult = context.other_card.ability.perma_x_mult + card.ability.extra.xmult
             return { message = localize("k_upgrade_ex"), colour = G.C.RED }
         end
     end
