@@ -65,7 +65,11 @@ HPR.prophecy {
     end,
     in_pool = function (self, args)
         return not args or args.source ~= "hpr_ignorance"
-    end
+    end,
+    force_use = function (self, card, area)
+        self:use(card, area)
+    end,
+    forcetrigger_compat = true,
 }
 
 HPR.prophecy {
@@ -84,6 +88,14 @@ HPR.prophecy {
         return G.hand and #G.hand.cards > 0 and G.hand.highlighted and #G.hand.highlighted > 0 and level_sum >= #G.hand.highlighted
     end,
     use = function(self, card, area, copier)
+        local level_sum = 0
+        if G.GAME and G.GAME.hands then
+            for _, t in pairs(G.GAME.hands) do
+                level_sum = level_sum + (t.level - 1)
+            end
+        end
+        if level_sum <= 0 then return end
+        local highlighted = Spectrallib.get_highlighted_cards({ G.hand }, card, 1, level_sum, nil, self.key.."_forcetrigger")
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.4,
@@ -93,39 +105,39 @@ HPR.prophecy {
                 return true
             end
         }))
-        for i = 1, #G.hand.highlighted do
-            local percent = 1.15 - (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
+        for i = 1, #highlighted do
+            local percent = 1.15 - (i - 0.999) / (#highlighted - 0.998) * 0.3
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 0.15,
                 func = function()
-                    G.hand.highlighted[i]:flip()
+                    highlighted[i]:flip()
                     play_sound('card1', percent)
-                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
+                    highlighted[i]:juice_up(0.3, 0.3)
                     return true
                 end
             }))
         end
         delay(0.2)
-        for i = 1, #G.hand.highlighted do
+        for i = 1, #highlighted do
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 0.1,
                 func = function()
-                    G.hand.highlighted[i]:set_ability(card.ability.mod_conv)
+                    highlighted[i]:set_ability(card.ability.mod_conv)
                     return true
                 end
             }))
         end
-        for i = 1, #G.hand.highlighted do
-            local percent = 0.85 + (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
+        for i = 1, #highlighted do
+            local percent = 0.85 + (i - 0.999) / (#highlighted - 0.998) * 0.3
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 0.15,
                 func = function()
-                    G.hand.highlighted[i]:flip()
+                    highlighted[i]:flip()
                     play_sound('tarot2', percent, 0.6)
-                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
+                    highlighted[i]:juice_up(0.3, 0.3)
                     return true
                 end
             }))
@@ -148,6 +160,10 @@ HPR.prophecy {
             SMODS.smart_level_up_hand(card, HPR.get_random_hand(true, self.key, in_pool))
         end
     end,
+    forcetrigger_compat = true,
+    force_use = function (self, card, area)
+        self:use(card, area)
+    end
 }
 
 HPR.prophecy {
@@ -180,6 +196,10 @@ HPR.prophecy {
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = { set = "Other", key = "perishable", vars = { G.GAME.perishable_rounds, G.GAME.perishable_rounds }}
         info_queue[#info_queue+1] = G.P_CENTERS.e_negative
+    end,
+    forcetrigger_compat = true,
+    force_use = function (self, card, area)
+        self:use(card, area)
     end
 }
 
@@ -209,7 +229,11 @@ HPR.prophecy {
         })
         G.GAME.rental_rate = G.GAME.rental_rate + G.GAME.hpr_tome_plus
         G.GAME.hpr_tome_plus = G.GAME.hpr_tome_plus + 1
-    end
+    end,
+    force_use = function (self, card, area)
+        self:use(card, area)
+    end,
+    forcetrigger_compat = true
 }
 
 HPR.prophecy {
@@ -268,7 +292,11 @@ HPR.prophecy {
                 end
             })
         end
-    end
+    end,
+    force_use = function (self, card, area)
+        self:use(card, area)
+    end,
+    forcetrigger_compat = true,
 }
 
 HPR.prophecy {
@@ -464,7 +492,11 @@ HPR.prophecy {
             })
             delay(1)
         end
-    end
+    end,
+    force_use = function (self, card, area)
+        self:use(card, area)
+    end,
+    forcetrigger_compat = true,
 }
 
 HPR.prophecy {
@@ -477,7 +509,8 @@ HPR.prophecy {
         return #highlighted == 1 and highlighted[1].ability.set ~= "Booster"
     end,
     use = function (self, card, area, copier)
-        local cards = HPR.get_all_highlighted(card, { "hand", "jokers", "consumeables", "shop_jokers", "shop_booster", "shop_vouchers", "pack_cards" })
+        local t = remove_nils({G.hand, G.jokers, G.consumeables, G.shop_jokers, G.shop_booster, G.shop_vouchers, G.pack_cards})
+        local cards = Spectrallib.get_highlighted_cards(t, card, 1, 1, nil, self.key.."_forcetrigger")
         for _, c in ipairs(cards) do
             local key = c.config.center.key
             local set = c.ability.set

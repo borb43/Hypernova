@@ -17,6 +17,7 @@ HPR.moon = SMODS.Consumable:extend({
     pos = { x = 0, y = 0 },
     cost = 4,
     use = function (self, card, area, copier)
+        local highlighted = Spectrallib.get_highlighted_cards({ G.hand }, card, 1, card.ability.max_highlighted, nil, self.key.."_forcetrigger" )
         G.E_MANAGER:add_event(Event({
             func = function()
                 play_sound("tarot1")
@@ -24,8 +25,8 @@ HPR.moon = SMODS.Consumable:extend({
                 return true
             end
         }))
-        for i = 1, #G.hand.highlighted do
-            local _card = G.hand.highlighted[i]
+        for i = 1, #highlighted do
+            local _card = highlighted[i]
             if self.apply_bonus then self:apply_bonus(card, _card) end
             G.E_MANAGER:add_event(Event({
                 trigger = "after",
@@ -47,6 +48,7 @@ HPR.moon = SMODS.Consumable:extend({
         }))
     end,
     bulk_use = function (self, card, area, copier, number)
+        local highlighted = Spectrallib.get_highlighted_cards({ G.hand }, card, card.ability.max_highlighted, nil, self.key.."_forcetrigger" )
         G.E_MANAGER:add_event(Event({
             func = function ()
                 play_sound("tarot1")
@@ -54,8 +56,8 @@ HPR.moon = SMODS.Consumable:extend({
                 return true
             end
         }))
-        for i = 1, #G.hand.highlighted do
-            local _card = G.hand.highlighted[i]
+        for i = 1, #highlighted do
+            local _card = highlighted[i]
             for _ = 1, number do
                 if self.apply_bonus then self:apply_bonus(card, _card) end
             end
@@ -79,40 +81,13 @@ HPR.moon = SMODS.Consumable:extend({
         }))
     end,
     force_use = function (self, card, area)
-        local cards = Cryptid and Cryptid.get_highlighted_cards({ G.hand }, card, 1, card.ability.max_highlighted, function(card) return not card.edition and not card.will_be_editioned end )
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                play_sound("tarot1")
-                card:juice_up(0.3, 0.5)
-                return true
-            end
-        }))
-        for i = 1, #cards do
-            local _card = cards[i]
-            if self.apply_bonus then self:apply_bonus(card, _card) end
-            G.E_MANAGER:add_event(Event({
-                trigger = "after",
-                delay = 0.1,
-                func = function()
-                    _card:juice_up()
-                    return true
-                end
-            }))
-        end
-        delay(0.5)
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            delay = 0.2,
-            func = function()
-                G.hand:unhighlight_all()
-                return true
-            end
-        }))
+        self:use(card, area)
     end,
     hpr_credits = {
         code = {"Eris"},
         idea = {"Eris"}
-    }
+    },
+    forcetrigger_compat = true,
 })
 
 HPR.moon {
@@ -296,6 +271,7 @@ SMODS.Consumable {
         return { vars = { card.ability.max_highlighted }}
     end,
     use = function (self, card, area, copier)
+        local highlighted = Spectrallib.get_highlighted_cards({ G.hand }, card, 1, card.ability.max_highlighted, nil, self.key .. "_forcetrigger" )
         G.E_MANAGER:add_event(Event({
             func = function()
                 play_sound("tarot1")
@@ -303,8 +279,8 @@ SMODS.Consumable {
                 return true
             end
         }))
-        for i = 1, #G.hand.highlighted do
-            local _card = G.hand.highlighted[i]
+        for i = 1, #highlighted do
+            local _card = highlighted[i]
             G.E_MANAGER:add_event(Event({
                 trigger = "after",
                 delay = 0.1,
@@ -326,40 +302,13 @@ SMODS.Consumable {
         }))
     end,
     force_use = function (self, card, area)
-        local cards = Cryptid and Cryptid.get_highlighted_cards({ G.hand }, card, 1, card.ability.max_highlighted, function(card) return not card.edition and not card.will_be_editioned end )
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                play_sound("tarot1")
-                card:juice_up(0.3, 0.5)
-                return true
-            end
-        }))
-        for i = 1, #cards do
-            local _card = cards[i]
-            G.E_MANAGER:add_event(Event({
-                trigger = "after",
-                delay = 0.1,
-                func = function()
-                    _card:set_edition("e_negative")
-                    _card:juice_up()
-                    return true
-                end
-            }))
-        end
-        delay(0.5)
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            delay = 0.2,
-            func = function()
-                G.hand:unhighlight_all()
-                return true
-            end
-        }))
+        self:use(card, area)
     end,
     hidden = true,
     soul_set = "hpr_moons",
     hpr_credits = {
         idea = {"Eris"},
         code = {"Eris"}
-    }
+    },
+    forcetrigger_compat = true,
 }

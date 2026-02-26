@@ -1138,5 +1138,6 @@ HPR.StellarJoker {
                 return true
             end
         }))
-    end
+    end,
+    forcetrigger_compat = true
 }

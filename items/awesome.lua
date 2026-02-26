@@ -15,7 +15,7 @@ HPR.AwesomeJoker = SMODS.Joker:extend({
 HPR.AwesomeJoker{
     key = "voucherman",
     calculate = function (self, card, context)
-        if context.buying_card and context.card.ability.set == "Voucher" then
+        if context.buying_card and context.card.ability.set == "Voucher" or context.forcetrigger then
             local res = pseudorandom(self.key, 1, 9)
             if res == 1 then --piratesoftware speech bubble
                 change_shop_size(1)
@@ -51,24 +51,25 @@ HPR.AwesomeJoker{
             end
         end
     end,
+    forcetrigger_compat = true,
 }
 
 HPR.AwesomeJoker {
     key = "true_balance",
     calculate = function (self, card, context)
-        if context.setting_blind then
+        if context.setting_blind or context.forcetrigger then
             local hands = G.GAME.current_round.hands_left
             local discards = G.GAME.current_round.discards_left
             local target = (hands+discards)/2
             ease_hands_played(-hands+target)
             ease_discard(-discards+target)
-            return {
+            if not context.forcetrigger then return {
                 message = localize("k_balanced"),
                 sound = "gong",
                 volume = 0.3,
                 pitch = 0.94,
                 colour = {0.8, 0.45, 0.85, 1}
-            }
+            } end
         end
         if context.individual and not context.end_of_round and HPR.is_any(context.cardarea, {G.play, G.hand, "unscored"}) then
             -- +chip/mult
@@ -91,7 +92,7 @@ HPR.AwesomeJoker {
                 colour = {0.8, 0.45, 0.85, 1}
             }
         end
-        if context.joker_main then
+        if context.joker_main or context.forcetrigger then
             return { balance = true }
         end
     end
