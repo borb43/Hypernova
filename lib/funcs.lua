@@ -250,3 +250,11 @@ function HPR.should_spawn_superboss()
     do return false end
     return G.GAME.round_resets.ante >= 24 and not G.GAME.hpr_superboss_beaten
 end
+
+function HPR.rarity_to_string(rarity)
+    if rarity == 1 then return "Common" end
+    if rarity == 2 then return "Uncommon" end
+    if rarity == 3 then return "Rare" end
+    if rarity == 4 then return "Legendary" end
+    return rarity
+end

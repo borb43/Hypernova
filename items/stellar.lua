@@ -1146,13 +1146,16 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "buffoon",
-    config = { extra = { cards = 2, common = 4, uncommon = 3, rare = 2, other = 1.5 }},
+    config = { extra = { cards = 2, values = {common = 3, uncommon = 2, rare = 1.5, other = 1.25}, scoring = {common = 10, uncommon = 1.5, rare = 1.1} }},
     loc_vars = function (self, info_queue, card)
         local cae = card.ability.extra
-        return { vars = { cae.cards, cae.common, cae.uncommon, cae.rare, cae.other }}
+        local mods = card.ability.extra.values
+        local mults = card.ability.extra.scoring
+        return { vars = { cae.cards, mods.common, mods.uncommon, mods.rare, mods.other, mults.common, mults.uncommon, mults.rare }}
     end,
     calculate = function (self, card, context)
         if (context.setting_blind or context.forcetrigger) and #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+            local mods = card.ability.extra.values
             local to_create = math.min(card.ability.extra.cards, G.jokers.config.card_limit - (#G.jokers.cards + G.GAME.joker_buffer))
             G.GAME.joker_buffer = G.GAME.joker_buffer + to_create
             G.E_MANAGER:add_event(Event{
@@ -1166,23 +1169,37 @@ HPR.StellarJoker {
                         }
                     end
                     for _, c in ipairs(cards) do
-                        local rarity = c.config.center.rarity
-                        if rarity == 1 then
-                            Spectrallib.manipulate(c, { type = "X", value = card.ability.extra.common })
-                        elseif rarity == 2 then
-                            Spectrallib.manipulate(c, { type = "X", value = card.ability.extra.uncommon })
-                        elseif rarity == 3 then
-                            Spectrallib.manipulate(c, { type = "X", value = card.ability.extra.rare })
-                        elseif rarity and SMODS.Rarities[rarity] and not (SMODS.Rarities[rarity].weight and SMODS.Rarities[rarity].weight <= 0 or not SMODS.Rarities[rarity].weight) then
-                            Spectrallib.manipulate(c, { type = "X", value = card.ability.extra.other })
+                        local rarity = HPR.rarity_to_string(c.config.center.rarity)
+                        local weight = rarity and SMODS.Rarities[rarity] and SMODS.Rarities[rarity].default_weight or 0
+                        if weight >= SMODS.Rarities.Common.default_weight then
+                            Spectrallib.manipulate(c, { value = mods.common, type = "X" })
+                        elseif weight >= SMODS.Rarities.Uncommon.default_weight then
+                            Spectrallib.manipulate(c, { value = mods.uncommon, type = "X"})
+                        elseif weight >= SMODS.Rarities.Rare.default_weight then
+                            Spectrallib.manipulate(c, { value = mods.rare, type = "X" })
+                        else
+                            Spectrallib.manipulate(c, { value = mods.other, type = "X" })
                         end
                     end
+                    G.GAME.joker_buffer = 0
                     return true
                 end
             })
             return {
                 message = localize("k_plus_joker"),
             }
+        end
+        if context.other_joker and context.other_joker ~= card then
+            local mults = card.ability.extra.scoring
+            local rarity = HPR.rarity_to_string(context.other_joker.config.center.rarity)
+            local weight = rarity and (SMODS.Rarities[rarity].default_weight or 0) or math.huge
+            if weight >= SMODS.Rarities.Common.default_weight then
+                return { mult = mults.common }
+            elseif weight >= SMODS.Rarities.Uncommon.default_weight then
+                return { xmult = mults.uncommon }
+            else
+                return { emult = mults.rare }
+            end
         end
     end
 }

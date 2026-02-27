@@ -1028,12 +1028,14 @@ local descriptions = {
             text = {
                 {"When {C:attention}Blind{} is selected, creates",
                 "{C:attention}#1# {C:dark_edition}editioned {C:attention}Jokers{} with increased",
-                "values based on their {C:attention}rarity"},
+                "values based on their base {C:attention}rarity weight"},
+                {"Other Jokers trigger {C:mult}Mult",
+                "based on their base {C:attention}rarity weight"},
                 {
-                    "{C:common}Common{}: {X:dark_edition,C:white}X#2#",
-                    "{C:uncommon}Uncommon{}: {X:dark_edition,C:white}X#3#",
-                    "{C:rare}Rare{}: {X:dark_edition,C:white}X#4#",
-                    "{C:attention}Other {s:0.8}(with base weight >0){}: {X:dark_edition,C:white}X#5#"
+                    "Weight>={C:common}Common{}: {X:dark_edition,C:white}X#2#{} values | {C:mult}+#6#{} Mult",
+                    "Weight>={C:uncommon}Uncommon{}: {X:dark_edition,C:white}X#3#{} values | {X:mult,C:white}X#7#{} Mult",
+                    "Weight>={C:rare}Rare{}: {X:dark_edition,C:white}X#4#{} values | {X:slib_emult,C:white}^#8#{} Mult",
+                    "Weight<{C:rare}Rare{}: {X:dark_edition,C:white}X#5#{} values | {X:slib_emult,C:white}^#8#{} Mult"
                 }
             }
         }
