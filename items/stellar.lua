@@ -145,7 +145,8 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_riff_raff = "j_hpr_buffoon",
     j_sixth_sense = "j_hpr_master",
     j_business = "j_hpr_mask",
-    j_caino = "j_hpr_destroyer"
+    j_caino = "j_hpr_destroyer",
+    j_baseball = "j_hpr_buffoon"
 }
 
 HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'log', 'sin', 'cos', 'tan' }
