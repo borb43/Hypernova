@@ -55,7 +55,7 @@ SMODS.Enhancement {
                     return true
                 end
             })
-            return { message = localize("k_plus_tag") }
+            return { message = localize{ type = "variable", key = "a_tag", vars = {1}} }
         end
     end,
     weight = 0.5
