@@ -1003,8 +1003,11 @@ HPR.StellarJoker {
             SMODS.calculate_effect({ message = localize{ type = "variable", key = "a_powmult", vars = {card.ability.extra.emult}}, colour = Spectrallib.emult })
             if not context.forcetrigger then return nil, true end
         end
-        if context.joker_main and card.ability.extra.emult ~= 1 or context.forcetrigger then
-            return { emult = card.ability.extra.emult }
+        if (context.joker_main or context.forcetrigger) and (card.ability.extra.emult ~= 1 or card.ability.extra.echips ~= 1) then
+            return {
+                emult = card.ability.extra.emult ~= 1 and card.ability.extra.emult or nil,
+                echips = card.ability.extra.echips ~= 1 and card.ability.extra.echips or nil,
+            }
         end
         if context.remove_playing_cards then
             local r = context.removed
