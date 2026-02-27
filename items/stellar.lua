@@ -144,7 +144,8 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_mr_bones = "j_hpr_guardian",
     j_riff_raff = "j_hpr_buffoon",
     j_sixth_sense = "j_hpr_master",
-    j_business = "j_hpr_mask"
+    j_business = "j_hpr_mask",
+    j_caino = "j_hpr_destroyer"
 }
 
 HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'log', 'sin', 'cos', 'tan' }
@@ -973,9 +974,9 @@ HPR.StellarJoker {
 HPR.StellarJoker {
     key = "destroyer",
     blueprint_compat = true,
-    config = { extra = { emult = 1, mod = 0.05 }},
+    config = { extra = { emult = 1, mod = 0.05, echips = 1, chip_mod = 0.001 }},
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra.emult, card.ability.extra.mod*100 }}
+        return { vars = { card.ability.extra.emult, card.ability.extra.mod*100, card.ability.extra.echips, card.ability.extra.chip_mod*100 }}
     end,
     calculate = function (self, card, context)
         if (context.setting_blind or context.forcetrigger) and not context.blueprint and card.area and card.rank and card.area.cards[card.rank+1] and not SMODS.is_eternal(card.area.cards[card.rank+1], card) and not card.area.cards[card.rank+1].getting_sliced then
@@ -988,23 +989,37 @@ HPR.StellarJoker {
                     SMODS.scale_card(card, {
                         ref_table = card.ability.extra,
                         ref_value = "emult",
-                        scalar_table = target,
-                        scalar_value = "sell_cost",
-                        message_key = "a_emult",
-                        message_colour = Spectrallib.emult,
+                        scalar_value = "mod",
                         block_overrides = { scalar = true },
                         operation = function (ref_table, ref_value, initial, change)
-                            ref_table[ref_value] = initial + change * card.ability.extra.mod
-                        end
+                            ref_table[ref_value] = initial + change * target.sell_cost
+                        end,
+                        no_message = true
                     })
                     target:start_dissolve({G.C.HPR_STLR}, nil, 1.6)
                     return true
                 end
             })
+            SMODS.calculate_effect({ message = localize{ type = "variable", key = "a_powmult", vars = {card.ability.extra.emult}}, colour = Spectrallib.emult })
             if not context.forcetrigger then return nil, true end
         end
         if context.joker_main and card.ability.extra.emult ~= 1 or context.forcetrigger then
             return { emult = card.ability.extra.emult }
+        end
+        if context.remove_playing_cards then
+            local r = context.removed
+            for _, c in ipairs(r) do
+                SMODS.scale_card(card, {
+                    ref_table = card.ability.extra,
+                    ref_value = "echips",
+                    scalar_value = "chip_mod",
+                    operation = function (ref_table, ref_value, initial, change)
+                        ref_table[ref_value] = initial + change * c:get_chip_bonus()
+                    end,
+                    no_message = true
+                })
+            end
+            return { message = localize{ type = "variable", key = "a_powchips", vars = { card.ability.extra.echips}, colour = Spectrallib.echips }}
         end
     end,
     forcetrigger_compat = true,

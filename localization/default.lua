@@ -578,11 +578,14 @@ local descriptions = {
         j_hpr_destroyer = {
             name = "S022 HYDRA",
             text = {
-                "When {C:attention}Blind{} is selected,",
+                {"When {C:attention}Blind{} is selected,",
                 "destroy joker to the right",
                 "and add {C:attention}#2#%{} of its sell value",
                 "to this Joker's {X:slib_emult,C:white}^Mult",
-                "{C:inactive}(Currently {X:slib_emult,C:white}^#1#{C:inactive} Mult)"
+                "{C:inactive}(Currently {X:slib_emult,C:white}^#1#{C:inactive} Mult)"},
+                {"This Joker gains {C:attention}#4#%{} of destroyed",
+                "{C:attention}playing card{} chips as {X:slib_echips,C:white}^Chips",
+                "{C:inactive}(Currently {X:slib_echips,C:white}^#3#{C:inactive} Chips)"}
             }
         },
         j_hpr_ascendant = {
