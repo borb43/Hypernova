@@ -475,6 +475,7 @@ HPR.StellarJoker {
                 if c.config.center_key ~= self.key then
                     any = true
                     if SMODS.pseudorandom_probability(card, self.key.."2", 1, card.ability.extra.odds2) then
+                        G.GAME.banned_keys[c.config.center_key] = true
                         SMODS.destroy_cards(c, nil, nil, true)
                         SMODS.calculate_effect({ message = localize("k_extinct_ex"), message_card = c }, card)
                     else
