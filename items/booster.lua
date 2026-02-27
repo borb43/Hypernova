@@ -564,6 +564,7 @@ SMODS.Booster {
 }
 --#endregion
 --#region misc buffoon packs
+--[[
 SMODS.Booster {
     key = "awesome",
     weight = 0.07,
@@ -589,7 +590,7 @@ SMODS.Booster {
     get_weight = function (self)
         return self.weight * (G.GAME.hpr_awesome_pack_mod or 1)
     end
-}
+}]]
 
 SMODS.Booster {
     key = "wee",

@@ -79,7 +79,7 @@ SMODS.Back {
     end,
     pools = { RedeemableBacks = true }
 }
-
+--[[
 SMODS.Back {
     key = "experiment",
     atlas = "placeholder",
@@ -93,4 +93,4 @@ SMODS.Back {
             G.GAME.hpr_awesome_pack_mod = 1
         end
     end
-}
+}]]
