@@ -299,10 +299,13 @@ local descriptions = {
         j_hpr_potassium = {
             name = "S003 POTASSIUM",
             text = {
-                "Scored cards give {X:red,C:white}X#1#{} Mult and have",
-                "a {C:green}#2# in #3#{} chance to be {C:red}banished",
-                "Adjacent jokers have a {C:green}#4# in #5#{} chance",
-                "to be {C:red}banished{} at the end of round"
+                {"{X:slib_emult,C:white}^#1#{} Mult"},
+                {
+                    "Played cards have a {C:green}#2# in #3#{} chance",
+                    "to be {C:attention}destroyed{} after scoring",
+                    "Other {C:attention}Jokers{} have a {C:green}#4# in #5#{} chance",
+                    "to be {C:red}banished{} at the end of round"
+                }
             }
         },
         j_hpr_crazy = {

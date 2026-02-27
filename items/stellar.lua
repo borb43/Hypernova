@@ -455,35 +455,34 @@ HPR.StellarJoker {
     key = "potassium",
     blueprint_compat = true,
     forcetrigger_compat = true,
-    config = { extra = { xmult = 3, odds1 = 3, odds2 = 6 }},
+    config = { extra = { emult = 1.5, odds1 = 6, odds2 = 10 }},
     loc_vars = function (self, info_queue, card)
         local e = card.ability.extra
         local numerator, denominator = SMODS.get_probability_vars(card, 1, e.odds1, self.key)
         local numerator2, denominator2 = SMODS.get_probability_vars(card, 1, e.odds2, self.key.."2")
-        return { vars = { e.xmult, numerator, denominator, numerator2, denominator2 }}
+        return { vars = { e.emult, numerator, denominator, numerator2, denominator2 }}
     end,
     calculate = function (self, card, context)
-        if context.individual and context.cardarea == G.play or context.forcetrigger then
-            return { xmult = card.ability.extra.xmult }
+        if context.joker_main or context.forcetrigger then
+            return { emult = card.ability.extra.emult }
         end
-        if context.destroy_card and not context.blueprint and not SMODS.is_eternal(context.destroy_card) and context.cardarea == G.play and SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds1) then
-            G.GAME.banned_keys[context.destroy_card.config.center.key] = true
-            return { remove = true }
+        if context.destroy_card and not context.blueprint and context.cardarea == G.play and SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds1) then
+            return { destroy = true }
         end
-        if context.end_of_round and card.area and card.rank and not context.blueprint or context.forcetrigger then
-            if card.area.cards[card.rank-1] and not SMODS.is_eternal(card.area.cards[card.rank-1]) and SMODS.pseudorandom_probability(card, self.key.."2", 1, card.ability.extra.odds2) then
-                G.GAME.banned_keys[card.area.cards[card.rank-1].config.center.key] = true
-                SMODS.calculate_effect({ message_card = card.area.cards[card.rank-1], message = localize("k_extinct_ex")}, card)
-            elseif card.area.cards[card.rank-1] then
-                SMODS.calculate_effect({ message_card = card.area.cards[card.rank-1], message = localize("k_safe_ex")}, card)
+        if context.end_of_round and context.main_eval and not context.blueprint then
+            local any
+            for _, c in ipairs(G.jokers.cards) do
+                if c.config.center_key ~= self.key then
+                    any = true
+                    if SMODS.pseudorandom_probability(card, self.key.."2", 1, card.ability.extra.odds2) then
+                        SMODS.destroy_cards(c, nil, nil, true)
+                        SMODS.calculate_effect({ message = localize("k_extinct_ex"), message_card = c }, card)
+                    else
+                        SMODS.calculate_effect({ message = localize("k_safe_ex"), message_card = c }, card)
+                    end
+                end
             end
-            if card.area.cards[card.rank+1] and not SMODS.is_eternal(card.area.cards[card.rank+1]) and SMODS.pseudorandom_probability(card, self.key.."2", 1, card.ability.extra.odds2) then
-                G.GAME.banned_keys[card.area.cards[card.rank+1].config.center.key] = true
-                SMODS.calculate_effect({ message_card = card.area.cards[card.rank+1], message = localize("k_extinct_ex")}, card)
-            elseif card.area.cards[card.rank+1] then
-                SMODS.calculate_effect({ message_card = card.area.cards[card.rank+1], message = localize("k_safe_ex")}, card)
-            end
-            return nil, true
+            if any then return nil, true end
         end
     end
 }
