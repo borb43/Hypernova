@@ -973,9 +973,9 @@ HPR.StellarJoker {
 HPR.StellarJoker {
     key = "destroyer",
     blueprint_compat = true,
-    config = { extra = { xmult = 1 }},
+    config = { extra = { emult = 1, mod = 0.05 }},
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra.xmult  }}
+        return { vars = { card.ability.extra.emult, card.ability.extra.mod*100 }}
     end,
     calculate = function (self, card, context)
         if (context.setting_blind or context.forcetrigger) and not context.blueprint and card.area and card.rank and card.area.cards[card.rank+1] and not SMODS.is_eternal(card.area.cards[card.rank+1], card) and not card.area.cards[card.rank+1].getting_sliced then
@@ -987,11 +987,15 @@ HPR.StellarJoker {
                     G.GAME.joker_buffer = 0
                     SMODS.scale_card(card, {
                         ref_table = card.ability.extra,
-                        ref_value = "xmult",
+                        ref_value = "emult",
                         scalar_table = target,
                         scalar_value = "sell_cost",
-                        message_key = "a_xmult",
-                        message_colour = G.C.MULT
+                        message_key = "a_emult",
+                        message_colour = Spectrallib.emult,
+                        block_overrides = { scalar = true },
+                        operation = function (ref_table, ref_value, initial, change)
+                            ref_table[ref_value] = initial + change * card.ability.extra.mod
+                        end
                     })
                     target:start_dissolve({G.C.HPR_STLR}, nil, 1.6)
                     return true
@@ -999,8 +1003,8 @@ HPR.StellarJoker {
             })
             if not context.forcetrigger then return nil, true end
         end
-        if context.joker_main and card.ability.extra.xmult ~= 1 or context.forcetrigger then
-            return { xmult = card.ability.extra.xmult }
+        if context.joker_main and card.ability.extra.emult ~= 1 or context.forcetrigger then
+            return { emult = card.ability.extra.emult }
         end
     end,
     forcetrigger_compat = true,
