@@ -1822,7 +1822,6 @@ local misc = {
         ph_hpr_plarva = "Saved by Pluripotent Larva",
         b_hpr_prophecy_cards = "Corrupted Cards",
         k_hpr_prophecy = "Corrupted",
-        k_plus_tag = "+1 Tag",
         k_hpr_awesome = "Awesome",
         k_hpr_plus_shop = "+1 Shop Slot",
         k_hpr_plus_csize = "+1 Consumable Slot",
