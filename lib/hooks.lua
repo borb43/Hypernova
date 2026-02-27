@@ -20,7 +20,7 @@ end
 local smcmb = SMODS.create_mod_badges
 function SMODS.create_mod_badges(obj, badges)
 	smcmb(obj, badges)
-	if not SMODS.config.no_mod_badges and obj and obj.hpr_credits then
+	if not SMODS.config.no_mod_badges and obj and type(obj.hpr_badge_info) == "table" then
 		local function calc_scale_fac(text)
 			local size = 0.9
 			local font = G.LANG.font
@@ -35,16 +35,14 @@ function SMODS.create_mod_badges(obj, badges)
 			local scale_fac = calced_text_width > max_text_width and max_text_width / calced_text_width or 1
 			return scale_fac
 		end
-		if obj.hpr_credits.art or obj.hpr_credits.code or obj.hpr_credits.idea then
+		if next(obj.hpr_badge_info) then
 			local scale_fac = {}
 			local min_scale_fac = 1
 			local strings = { HPR.display_name }
-			for _, v in ipairs({ "idea", "art", "code" }) do
-				if obj.hpr_credits[v] then
-					for i = 1, #obj.hpr_credits[v] do
-						strings[#strings + 1] =
-							localize({ type = "variable", key = "hpr_credits_" .. v, vars = { obj.hpr_credits[v][i] } })[1]
-					end
+			for _, v in ipairs(obj.hpr_badge_info) do
+				if v.key and v.vars then
+					local str = localize({ type = "variable", key = v.key, vars = v.vars })
+					strings[#strings + 1] = (type(str) == "table" and str[1]) or str
 				end
 			end
 			for i = 1, #strings do
@@ -79,7 +77,7 @@ function SMODS.create_mod_badges(obj, badges)
 								config = {
 									object = DynaText({
 										string = ct or "ERROR",
-										colours = { obj.hpr_credits and obj.hpr_credits.text_colour or G.C.WHITE },
+										colours = { G.C.WHITE },
 										silent = true,
 										float = true,
 										shadow = true,
@@ -94,16 +92,8 @@ function SMODS.create_mod_badges(obj, badges)
 					},
 				},
 			}
-			local function eq_col(x, y)
-				for i = 1, 4 do
-					if x[i] ~= y[i] then
-						return false
-					end
-				end
-				return true
-			end
 			for i = 1, #badges do
-				if eq_col(badges[i].nodes[1].config.colour, HEX("C09ED9")) then
+				if badges[i].nodes[1].nodes[2].config.object.string == HPR.display_name then --for SOME reason this works now
 					badges[i].nodes[1].nodes[2].config.object:remove()
 					badges[i] = hpr_badge
 					break

@@ -519,11 +519,11 @@ HPR.StellarJoker {
             return { mult = card.ability.extra.mult }
         end
     end,
-    hpr_credits = {
-        code = {"Eris"},
-        idea = {"Eris"},
-        art = {"Eris"}
-    }
+    hpr_badge_info = {
+        { key = "credits_code", vars = {"Eris"} },
+        { key = "credits_art", vars = {"Eris"}},
+        { key = "credits_idea", vars = {"Eris"}},
+    },
 }
 
 HPR.StellarJoker {
@@ -557,11 +557,11 @@ HPR.StellarJoker {
             return { chips = card.ability.extra.chips }
         end
     end,
-    hpr_credits = {
-        code = {"Eris"},
-        idea = {"Eris"},
-        art = {"Eris"}
-    }
+    hpr_badge_info = {
+        { key = "credits_code", vars = {"Eris"} },
+        { key = "credits_art", vars = {"Eris"}},
+        { key = "credits_idea", vars = {"Eris"}},
+    },
 }
 
 HPR.StellarJoker {
@@ -889,11 +889,11 @@ HPR.StellarJoker {
             return { xmult = card.ability.extra.xmult }
         end
     end,
-    hpr_credits = {
-        code = {"Eris"},
-        idea = {"Eris"},
-        art = {"Eris"}
-    }
+    hpr_badge_info = {
+        { key = "credits_code", vars = {"Eris"} },
+        { key = "credits_art", vars = {"Eris"}},
+        { key = "credits_idea", vars = {"Eris"}},
+    },
 }
 
 HPR.StellarJoker {

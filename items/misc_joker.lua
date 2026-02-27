@@ -13,8 +13,8 @@ SMODS.Joker { --fusion reactor, balances before scoring
             }
         end
     end,
-    hpr_credits = {
-        idea = {"Eris"}
+    hpr_badge_info = {
+        { key = "credits_idea", vars = {"Eris" }},
     }
 }
 
@@ -39,11 +39,11 @@ SMODS.Joker { --growth, increases potency of other joker effects
             })
         end
     end,
-    hpr_credits = {
-        code = {"Eris"},
-        idea = {"Eris"},
-        art = {"Eris"}
-    },
+    hpr_badge_info = {
+        { key = "credits_code", vars = {"Eris"} },
+        { key = "credits_art", vars = {"Eris" }},
+        { key = "credits_idea", vars = {"Eris" }},
+    }
 }
 
 
@@ -97,10 +97,10 @@ SMODS.Joker { -- solar flare, levels up not most played hands and destroys some 
             end
         end
     end,
-    hpr_credits = {
-        art = {"Codifyd"},
-        code = {"Eris"},
-        idea = {"Codifyd"}
+    hpr_badge_info = {
+        { key = "credits_code", vars = {"Eris"} },
+        { key = "credits_art", vars = {"Codifyd"}},
+        { key = "credits_idea", vars = {"Codifyd"}},
     },
     hpr_ascension_key = "j_hpr_observatorium"
 }
@@ -123,9 +123,9 @@ SMODS.Joker { --tipping scales, increases numerator and denominator of probabili
             }
         end
     end,
-    hpr_credits = {
-        code = {"Eris"},
-        idea = {"Eris"}
+    hpr_badge_info = {
+        { key = "credits_code", vars = {"Eris"} },
+        { key = "credits_idea", vars = {"Eris" }},
     },
     hpr_ascension_key = "j_hpr_lucky"
 }
@@ -181,10 +181,10 @@ SMODS.Joker { --gambling addict, scales from probability rolls
             }
         end
     end,
-    hpr_credits = {
-        code = {"Eris"},
-        idea = {"Eris"}
-    }
+    hpr_badge_info = {
+        { key = "credits_code", vars = {"Eris"} },
+        { key = "credits_idea", vars = {"Eris" }},
+    },
 }
 
 SMODS.Joker { --fortune cookie, guarantees 6 probabilities and then creates a negative tarot
@@ -225,10 +225,9 @@ SMODS.Joker { --fortune cookie, guarantees 6 probabilities and then creates a ne
                 end
             }))
         end
-    end,
-    hpr_credits = {
-        code = {"Eris"},
-        idea = {"Eris"}
+    end,hpr_badge_info = {
+        { key = "credits_code", vars = {"Eris"} },
+        { key = "credits_idea", vars = {"Eris" }},
     },
     hpr_ascension_key = "j_hpr_lucky"
 }
@@ -259,10 +258,10 @@ SMODS.Joker {
             }
         end
     end,
-    hpr_credits = {
-        code = {"Eris"},
-        idea = {"Eris"}
-    }
+    hpr_badge_info = {
+        { key = "credits_code", vars = {"Eris"} },
+        { key = "credits_idea", vars = {"Eris" }},
+    },
 }
 
 SMODS.Joker {
@@ -279,11 +278,10 @@ SMODS.Joker {
         else
             return { key = self.key .. "_none" }
         end
-    end,
-    hpr_credits = {
-        code = {"Eris"},
-        idea = {"Eris"}
-    }
+    end,hpr_badge_info = {
+        { key = "credits_code", vars = {"Eris"} },
+        { key = "credits_idea", vars = {"Eris" }},
+    },
 }
 
 SMODS.Joker {
@@ -298,10 +296,9 @@ SMODS.Joker {
     remove_from_deck = function (self, card, from_debuff)
         G.GAME.modifiers.booster_choice_mod = (G.GAME.modifiers.booster_choice_mod or 0) - 1000
     end,
-    hpr_credits = {
-        code = {"Eris"},
-        idea = {"Eris"}
-    }
+    hpr_badge_info = {
+        { key = "credits_idea", vars = {"Eris" }},
+    },
 }
 
 SMODS.Joker {
@@ -344,9 +341,8 @@ SMODS.Joker {
             end
         end
     end,
-    hpr_credits = {
-        code = {"Eris"},
-        idea = {"Eris"}
+    hpr_badge_info = {
+        { key = "credits_idea", vars = {"Eris" }},
     },
     forcetrigger_compat = true,
 }
@@ -402,9 +398,10 @@ SMODS.Joker {
             return nil, true
         end
     end,
-    hpr_credits = {
-        code = {"Eris"},
-        idea = {"Eris"}
+    hpr_badge_info = {
+        { key = "credits_code", vars = {"Eris"} },
+        { key = "credits_art", vars = {"Eris"}},
+        { key = "credits_idea", vars = {"Eris"}},
     },
     hpr_ascension_key = "j_hpr_lucky",
     forcetrigger_compat = true,
@@ -435,10 +432,9 @@ SMODS.Joker {
             return nil, true
         end
     end,
-    hpr_credits = {
-        code = {"Eris"},
-        idea = {"Eris"}
-    }
+    hpr_badge_info = {
+        { key = "credits_idea", vars = {"Eris"}},
+    },
 }
 
 SMODS.Joker {
@@ -467,10 +463,9 @@ SMODS.Joker {
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.e_negative
     end,
-    hpr_credits = {
-        code = {"Eris"},
-        idea = {"Eris"}
-    }
+    hpr_badge_info = {
+        { key = "credits_idea", vars = {"Eris"}},
+    },
 }
 
 SMODS.Joker {
@@ -930,10 +925,10 @@ SMODS.Joker {
         G.hand:change_size(-card.ability.extra)
     end,
     pools = { Food = true },
-    hpr_credits = {
-        idea = {"Eris"},
-        code = {"Eris"},
-    }
+    hpr_badge_info = {
+        { key = "credits_code", vars = {"Eris"} },
+        { key = "credits_idea", vars = {"Eris"}},
+    },
 }
 
 SMODS.Joker {

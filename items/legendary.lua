@@ -51,9 +51,9 @@ SMODS.Joker {
         end
     end,
     pronouns = "any_all",
-    hpr_credits = {
-        code = {"Eris"},
-        idea = {"Eris"},
-        art = {"Eris"}
+    hpr_badge_info = {
+        { key = "credits_code", vars = {"Eris"} },
+        { key = "credits_art", vars = {"Eris" }},
+        { key = "credits_idea", vars = {"Eris" }},
     }
 }
