@@ -965,6 +965,7 @@ HPR.StellarJoker {
     forcetrigger = function (self, card, context)
         card.FORCETRIGGER = true
         local d = self:calc_dollar_bonus(card)
+        card.FORCETRIGGER = nil
         if d ~= 0 then
             G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + d
             return { dollars = d, func = HPR.event_presets.reset_dollar_buffer }

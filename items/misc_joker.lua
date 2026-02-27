@@ -1453,7 +1453,8 @@ SMODS.Joker {
             context.other_card.ability.perma_p_dollars = context.other_card.ability.perma_p_dollars + card.ability.extra
             return { message = localize("k_upgrade_ex"), colour = G.C.MONEY, message_card = context.other_card }
         end
-    end
+    end,
+    hpr_ascension_key = "j_hpr_ascendant"
 }
 
 SMODS.Joker {
@@ -1503,7 +1504,8 @@ SMODS.Joker {
             end
             if any then return nil, true end
         end
-    end
+    end,
+    hpr_ascension_key = "j_hpr_observatorium"
 }
 
 SMODS.Joker {
