@@ -292,3 +292,39 @@ HPR.BossJoker {
         end
     end
 }
+
+HPR.BossJoker {
+    key = "manacle",
+    pos = { x = 0, y = 2 },
+    config = { extra = { h_size = 1, csl = 2}},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.h_size, card.ability.extra.csl }}
+    end,
+    calculate = function (self, card, context)
+        local penalty, should = card.ability.extra.penalty_active, HPR.should_boss_downside()
+        if penalty and not should then
+            G.hand:change_size(card.ability.extra.h_size)
+            card.ability.extra.penalty_active = false
+        end
+        if should and not penalty then
+            G.hand:change_size(-card.ability.extra.h_size)
+            card.ability.extra.penalty_active = true
+        end
+    end,
+    add_to_deck = function (self, card, from_debuff)
+        if HPR.should_boss_downside() and not card.ability.extra.penalty_active then
+            G.hand:change_size(-card.ability.extra.h_size)
+            card.ability.extra.penalty_active = true
+        end
+        SMODS.change_play_limit(card.ability.extra.csl)
+        SMODS.change_discard_limit(card.ability.extra.csl)
+    end,
+    remove_from_deck = function (self, card, from_debuff)
+        if card.ability.extra.penalty_active then
+            G.hand:change_size(card.ability.extra.h_size)
+            card.ability.extra.penalty_active = false
+        end
+        SMODS.change_play_limit(-card.ability.extra.csl)
+        SMODS.change_discard_limit(-card.ability.extra.csl)
+    end
+}

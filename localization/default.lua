@@ -1068,6 +1068,13 @@ local descriptions = {
                 "{C:money}$#1#{} when scored",
                 "{C:diamonds}Diamonds{} are debuffed"
             }
+        },
+        j_hpr_manacle = {
+            name = "The Manacle",
+            text = {
+                "{C:red}-#1#{} Hand Size,",
+                "{C:attention}+#2#{} Card Selection Limit"
+            }
         }
     },
     Other = {
