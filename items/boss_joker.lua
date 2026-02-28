@@ -529,3 +529,19 @@ HPR.BossJoker {
         end
     end
 }
+
+HPR.BossJoker {
+    key = "mark",
+    pos = { x = 4, y = 3 },
+    config = { extra = 0.1 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.extra}}
+    end,
+    calculate = function (self, card, context)
+        if context.stay_flipped and context.to_area == G.hand and context.other_card:is_face() then
+            context.other_card.ability.perma_h_x_mult = context.other_card.ability.perma_h_x_mult + card.ability.extra
+            if HPR.should_boss_downside() then return { stay_flipped = true } end
+        end
+    end,
+    boss_key = "bl_mark"
+}

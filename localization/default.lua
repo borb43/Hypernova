@@ -1152,6 +1152,13 @@ local descriptions = {
                 "are halved, {C:hpr_balance}balances",
                 "{C:chips}Chips{} and {C:mult}Mult{} in scoring"
             }
+        },
+        j_hpr_mark = {
+            name = "The Mark",
+            text = {
+                "{C:attention}Face{} cards are drawn face down",
+                "and gain {X:mult,C:white}X#1#{} held in hand Mult",
+            }
         }
     },
     Other = {
