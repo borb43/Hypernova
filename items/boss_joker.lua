@@ -438,5 +438,6 @@ HPR.BossJoker {
         if context.before and context.full_hand[1] and G.GAME.current_round.hands_played == 0 then
             context.full_hand[1]:set_seal("Red")
         end
-    end
+    end,
+    boss_key = "bl_pillar"
 }
