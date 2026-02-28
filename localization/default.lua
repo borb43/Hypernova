@@ -918,7 +918,7 @@ local descriptions = {
             name = "The Chicken",
             text = {
                 {"All {C:attention}Grilled Chicken{} Jokers",
-                "give {X:mult,C:white}X#1#{} Mult, debuffs all",
+                "give {X:mult,C:white}X#1#{} Mult, {C:red}debuffs{} all",
                 "non-{C:attention}Grilled Chicken{} Jokers"},
                 {"Replace all future {C:attention}Food{} Jokers",
                 "with {C:attention}Grilled Chicken{} variants"}
@@ -957,7 +957,7 @@ local descriptions = {
             text = {
                 "Played cards give",
                 "{C:mult}+#1#{} Mult when scored",
-                "{C:clubs}Clubs{} are debuffed"
+                "{C:clubs}Clubs{} are {C:red}debuffed"
             }
         },
         j_hpr_fish = {
@@ -981,7 +981,7 @@ local descriptions = {
             text = {
                 "Played cards give",
                 "{C:chips}+#1#{} Chips when scored",
-                "{C:spades}Spades{} are debuffed"
+                "{C:spades}Spades{} are {C:red}debuffed"
             }
         },
         j_hpr_guardian = {
@@ -1066,7 +1066,7 @@ local descriptions = {
             text = {
                 "Played cards give",
                 "{C:money}$#1#{} when scored",
-                "{C:diamonds}Diamonds{} are debuffed"
+                "{C:diamonds}Diamonds{} are {C:red}debuffed"
             }
         },
         j_hpr_manacle = {
@@ -1100,7 +1100,7 @@ local descriptions = {
             text = {
                 "Played cards give",
                 "{X:mult,C:white}X#1#{} Mult when scored",
-                "{C:attention}Face{} cards are debuffed"
+                "{C:attention}Face{} cards are {C:red}debuffed"
             }
         },
         j_hpr_serpent = {
