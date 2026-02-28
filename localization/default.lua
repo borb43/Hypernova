@@ -1302,20 +1302,6 @@ local descriptions = {
         }
     },
     Tag = {
-        tag_hpr_mini_charm = {
-            name = "Mini Charm Tag",
-            text = {
-                "Immediately open a",
-                "free {C:tarot}Arcana Pack"
-            }
-        },
-        tag_hpr_mini_meteor = {
-            name = "Mini Meteor Tag",
-            text = {
-                "Immediately open a",
-                "free {C:planet}Celestial Pack"
-            }
-        },
         tag_hpr_boss = {
             name = "Boss Tag",
             text = {
@@ -1442,8 +1428,9 @@ local descriptions = {
         v_hpr_tarot_shipment = {
             name = "Tarot Shipments",
             text = {
-                "Gain a free {C:tarot}#1#",
-                "at the end of the shop"
+                "Creates an {C:tarot}Arcana Pack",
+                "at the end of the shop",
+                "{C:inactive}(Does not need room)"
             }
         },
         v_hpr_tarot_augment = {
@@ -1457,8 +1444,9 @@ local descriptions = {
         v_hpr_planet_shipment = {
             name = "Planet Shipments",
             text = {
-                "Gain a free {C:planet}#1#",
-                "at the end of the shop"
+                "Creates a {C:planet}Celestial Pack",
+                "at the end of the shop",
+                "{C:inactive}(Does not need room)"
             }
         },
         v_hpr_planet_augment = {

@@ -283,17 +283,16 @@ HPR.BranchingVoucher{
     requires = {"v_tarot_tycoon"},
     exclusive = "v_hpr_tarot_augment",
     loc_vars = function (self, info_queue, card)
-        info_queue[#info_queue+1] = G.P_TAGS.tag_hpr_mini_charm
-        local name = localize{ type = "name_text", key = "tag_hpr_mini_charm", set = "Tag" }
-        return { vars = {name}}
+        info_queue[#info_queue+1] = G.P_CENTERS.p_arcana_normal_1
     end,
     calculate = function (self, card, context)
         if context.ending_shop then
             G.E_MANAGER:add_event(Event({
                 func = function()
-                    add_tag(Tag('tag_hpr_mini_charm'))
-                    play_sound('generic1', 0.9 + math.random() * 0.1, 0.8)
-                    play_sound('holo1', 1.2 + math.random() * 0.1, 0.4)
+                    SMODS.add_card{
+                        key = "p_arcana_normal_"..pseudorandom(self.key.."_pack_type", 1, 4),
+                        area = G.consumeables
+                    }
                     return true
                 end
             }))
@@ -332,17 +331,16 @@ HPR.BranchingVoucher{
     requires = {"v_planet_tycoon"},
     exclusive = "v_hpr_planet_augment",
     loc_vars = function (self, info_queue, card)
-        info_queue[#info_queue+1] = G.P_TAGS.tag_hpr_mini_meteor
-        local name = localize{ type = "name_text", key = "tag_hpr_mini_meteor", set = "Tag" }
-        return { vars = {name}}
+        info_queue[#info_queue+1] = G.P_CENTERS.p_celestial_normal_1
     end,
     calculate = function (self, card, context)
         if context.ending_shop then
             G.E_MANAGER:add_event(Event({
                 func = function()
-                    add_tag(Tag('tag_hpr_mini_meteor'))
-                    play_sound('generic1', 0.9 + math.random() * 0.1, 0.8)
-                    play_sound('holo1', 1.2 + math.random() * 0.1, 0.4)
+                    SMODS.add_card{
+                        key = "p_celestial_normal_"..pseudorandom(self.key.."_pack_type", 1, 4),
+                        area = G.consumeables
+                    }
                     return true
                 end
             }))
