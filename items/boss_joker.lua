@@ -345,3 +345,21 @@ HPR.BossJoker {
     end,
     boss_key = "bl_manacle"
 }
+
+HPR.BossJoker {
+    key = "eye",
+    pos = { x = 1, y = 2 },
+    calculate = function (self, card, context)
+        if context.debuff_hand and not context.blueprint and G.GAME.hands[context.scoring_name].played_this_round > (context.check and 0 or 1) then
+            return { debuff = true, debuff_text = localize("no_repeat_hands") }
+        end
+        if context.before then
+            return {
+                level_up = true,
+                message = localize('k_level_up_ex')
+            }
+        end
+    end,
+    boss_key = "bl_eye",
+    blueprint_compat = true,
+}

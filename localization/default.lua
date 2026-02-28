@@ -1075,6 +1075,15 @@ local descriptions = {
                 "{C:red}-#1#{} Hand Size,",
                 "{C:attention}+#2#{} Card Selection Limit"
             }
+        },
+        j_hpr_eye = {
+            name = "The Eye",
+            text = {
+                "Must not play repeat",
+                "hand types in a round",
+                "{C:attention}Level up{} each played",
+                "{C:attention}poker hand"
+            }
         }
     },
     Other = {
@@ -1865,7 +1874,8 @@ local misc = {
         k_level_down = "Level Down",
         k_plus_joker_q = "+1 Joker?",
         k_inactive = "inactive",
-        ph_hpr_stellar_revive = "Blessed by the stars"
+        ph_hpr_stellar_revive = "Blessed by the stars",
+        no_repeat_hands = "No repeat hand types per round"
     },
     high_scores = {},
     labels = {
@@ -1901,7 +1911,7 @@ local misc = {
         hpr_card_integrated = "#1# Integrated",
         hpr_n_cards = "#1# Cards",
         a_discards = "+#1# Discards",
-        play_x_cards = "Must play #1# cards"
+        play_x_cards = "Must play #1# cards",
     },
     v_text = {},
 }
