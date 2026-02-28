@@ -1102,6 +1102,14 @@ local descriptions = {
                 "{X:mult,C:white}X#1#{} Mult when scored",
                 "{C:attention}Face{} cards are debuffed"
             }
+        },
+        j_hpr_serpent = {
+            name = "The Serpent",
+            text = {
+                "After hand is played",
+                "or discarded, always",
+                "draw {C:attention}#1#{} cards"
+            }
         }
     },
     Other = {

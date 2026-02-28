@@ -408,3 +408,22 @@ HPR.BossJoker {
     end,
     boss_key = "bl_plant"
 }
+
+HPR.BossJoker {
+    key = "serpent",
+    pos = { x = 4, y = 2 },
+    config = { extra = 3 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra }}
+    end,
+    calculate = function (self, card, context)
+        if context.press_play or context.pre_discard then
+            card.ability.prepped = true
+        end
+        if context.hand_drawn then card.ability.prepped = nil end
+        if context.drawing_cards and card.ability.prepped then
+            return { cards_to_draw = card.ability.extra }
+        end
+    end,
+    boss_key = "bl_serpent"
+}
