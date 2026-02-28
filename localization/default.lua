@@ -1215,6 +1215,16 @@ local descriptions = {
                 {"Takes the cube root",
                 "of base {C:chips}Chips{} and {C:mult}Mult"}
             }
+        },
+        j_hpr_final_mist = {
+            name = "Malachite Mist",
+            text = {
+                {"All other {C:attention}Jokers{} are {C:red}debuffed"},
+                {"{C:attention}+#1#{} Consumable slots, fills all",
+                "Consumable slots with random",
+                "{C:attention}consumables{} when {C:attention}Blind{} is selected"},
+                {"All {C:attention}level ups{} are {C:attention}tripled"}
+            }
         }
     },
     Other = {

@@ -792,3 +792,47 @@ HPR.BossJoker {
     forcetrigger_compat = true, blueprint_compat = true,
     boss_key = "bl_hpr_final_horse"
 }
+
+HPR.BossJoker {
+    key = "final_mist",
+    pos = { x = 1, y = 5 },
+    config = { extra = 3 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.extra}}
+    end,
+    calculate = function (self, card, context)
+        if context.debuff_card and context.debuff_card.area == G.jokers and context.debuff_card ~= card then
+            return { debuff = true }
+        end
+        if (context.setting_blind or context.forcetrigger) and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+            local to_create = G.consumeables.config.card_limit - (#G.consumeables.cards + G.GAME.consumeable_buffer)
+            G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + to_create
+            if to_create > 0 then
+                G.E_MANAGER:add_event(Event{
+                    func = function ()
+                        for _ = 1, to_create do
+                            SMODS.add_card{
+                                set = "Consumeables",
+                                key_append = self.key,
+                                area = G.consumeables
+                            }
+                        end
+                        return true
+                    end
+                })
+            end
+            return nil, true
+        end
+        if context.card_added and not context.blueprint then
+            SMODS.recalc_debuff(context.card)
+        end
+    end,
+    add_to_deck = function (self, card, from_debuff)
+        G.consumeables:change_size(card.ability.extra)
+    end,
+    remove_from_deck = function (self, card, from_debuff)
+        G.consumeables:change_size(-card.ability.extra)
+    end,
+    forcetrigger_compat = true, blueprint_compat = true,
+    boss_key = "bl_hpr_final_mist"
+}

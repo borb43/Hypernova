@@ -183,6 +183,8 @@ end
 ]]
 local level_up_handref = level_up_hand
 function level_up_hand(card, hand, instant, amount)
+	amount = amount or 1
+	amount = amount * (3 ^ #SMODS.find_card("j_hpr_final_mist"))
 	level_up_handref(card, hand, instant, amount)
 	amount = amount or 1
 	SMODS.calculate_context({
@@ -451,4 +453,30 @@ function G.FUNCS.play_cards_from_highlighted(e)
 		end
 	end
 	play_ref(e)
+end
+
+local level_up_suitref = Spectrallib.level_suit
+function Spectrallib.level_suit(suit, card, amt, chips_override)
+	amt = amt or 1
+	amt = amt * (3 ^ #SMODS.find_card("j_hpr_final_mist"))
+	level_up_suitref(suit, card, amt, chips_override)
+end
+
+local l_chipsmult_ref = Spectrallib.l_chipsmult
+function Spectrallib.l_chipsmult(hand, card, l_chips, l_mult, instant)
+	l_chips = l_chips * (3 ^ #SMODS.find_card("j_hpr_final_mist"))
+	l_mult = l_mult * (3 ^ #SMODS.find_card("j_hpr_final_mist"))
+	l_chipsmult_ref(hand, card, l_chips, l_mult, instant)
+end
+
+local xl_chips_ref = Spectrallib.xl_chips
+function Spectrallib.xl_chips(hand, card, l_chips, instant)
+	l_chips = l_chips ^ (3 ^ #SMODS.find_card("j_hpr_final_mist"))
+	xl_chips_ref(hand, card, l_chips, instant)
+end
+
+local xl_mult_ref = Spectrallib.xl_mult
+function Spectrallib.xl_mult(hand, card, l_mult, instant)
+	l_mult = l_mult ^ (3 ^ #SMODS.find_card("j_hpr_final_mist"))
+	xl_mult_ref(hand, card, l_mult, instant)
 end
