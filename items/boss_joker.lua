@@ -287,7 +287,7 @@ HPR.BossJoker {
                 func = HPR.event_presets.reset_dollar_buffer
             }
         end
-        if context.debuff_card and context.debuff_card.is_suit and context.debuff_card:is_suit("Diamonds") then
+        if context.debuff_card and context.debuff_card.is_suit and context.debuff_card:is_suit("Diamonds") and HPR.should_boss_downside() then
             return { debuff = true }
         end
     end
