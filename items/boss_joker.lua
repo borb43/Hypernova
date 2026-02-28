@@ -527,7 +527,10 @@ HPR.BossJoker {
         if context.joker_main or context.forcetrigger then
             return { balance = true }
         end
-    end
+    end,
+    boss_key = "bl_flint",
+    blueprint_compat = true,
+    forcetrigger_compat = true
 }
 
 HPR.BossJoker {
