@@ -117,6 +117,7 @@ HPR.BossJoker {
             if HPR.should_boss_downside() then HPR.mod_blind_amount(card.ability.extra) end
             ease_discard(G.GAME.current_round.discards_left * (card.ability.extra-1) )
             ease_hands_played(G.GAME.current_round.hands_left * (card.ability.extra - 1))
+            return nil, true
         end
     end,
     boss_key = "bl_wall",

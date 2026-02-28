@@ -1231,7 +1231,7 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "hunter",
-    config = { extra = 3 },
+    config = { extra = 2 },
     blueprint_compat = true,
     forcetrigger_compat = true,
     loc_vars = function (self, info_queue, card)
