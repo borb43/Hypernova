@@ -647,7 +647,9 @@ HPR.BossJoker {
             card.ability.extra.active = true
             return { message = localize("k_reset")}
         end
-    end
+    end,
+    boss_key = "bl_final_leaf",
+    blueprint_compat = true,
 }
 
 HPR.BossJoker {
@@ -682,7 +684,8 @@ HPR.BossJoker {
             end
             return nil, true
         end
-    end
+    end,
+    boss_key = "bl_final_vessel"
 }
 
 HPR.BossJoker {
@@ -694,8 +697,8 @@ HPR.BossJoker {
     end,
     calculate = function (self, card, context)
         local id = "hpr_heart_target"..card.ability.hpr_heart_num
-        if context.press_play then card.ability.prepped = true end
-        if (context.hand_drawn or context.end_of_round and context.main_eval) and card.ability.prepped and not context.retrigger_joker and not context.blueprint then
+        if context.press_play and not context.blueprint then card.ability.prepped = true end
+        if (context.hand_drawn or context.end_of_round and context.main_eval) and not context.blueprint and card.ability.prepped and not context.retrigger_joker and not context.blueprint then
             card.ability.prepped = false
             local targets = {}
             for _, v in ipairs(G.jokers.cards) do
@@ -715,10 +718,10 @@ HPR.BossJoker {
                 return { message = localize("k_disabled_ex"), colour = G.C.RED, message_card = target }
             end
         end
-        if context.debuff_card and context.debuff_card.ability[id] then
+        if context.debuff_card and not context.blueprint and context.debuff_card.ability[id] then
             return { debuff = true }
         end
-        if (context.other_joker and context.other_joker.debuff) or (context.other_consumeable and context.other_consumeable.debuff) then
+        if (context.other_joker and context.other_joker.debuff) or (context.other_consumeable and context.other_consumeable.debuff) or context.forcetrigger then
             return { xmult = card.ability.extra }
         end
     end,
@@ -726,5 +729,8 @@ HPR.BossJoker {
         G.GAME.hpr_heart_num = (G.GAME.hpr_heart_num or 0)
         card.ability.hpr_heart_num = G.GAME.hpr_heart_num
         G.GAME.hpr_heart_num = G.GAME.hpr_heart_num + 1
-    end
+    end,
+    boss_key = "bl_final_heart",
+    blueprint_compat = true,
+    forcetrigger_compat = true,
 }
