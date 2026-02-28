@@ -1188,6 +1188,15 @@ local descriptions = {
                 "{C:attention}#3#{} Consumable cards with {X:dark_edition,C:white}X#2#{} values",
                 "{C:inactive}(Must have room)"
             }
+        },
+        j_hpr_final_heart = {
+            name = "Crimson Heart",
+            text = {
+                {"{C:red}Debuff{} a different random",
+                "{C:attention}Joker{} after each hand"},
+                {"{C:red}Debuffed {C:attention}non-playing{} cards",
+                "each give {X:mult,C:white}X#1#{} Mult"}
+            }
         }
     },
     Other = {

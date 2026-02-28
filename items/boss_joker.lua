@@ -685,3 +685,47 @@ HPR.BossJoker {
         end
     end
 }
+
+HPR.BossJoker {
+    key = "final_heart",
+    pos = { x = 3, y = 4 },
+    config = { extra = 4 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra }}
+    end,
+    calculate = function (self, card, context)
+        local id = "hpr_heart_target"..card.ability.hpr_heart_num
+        if context.press_play then card.ability.prepped = true end
+        if (context.hand_drawn or context.end_of_round and context.main_eval) and card.ability.prepped and not context.retrigger_joker and not context.blueprint then
+            card.ability.prepped = false
+            local targets = {}
+            for _, v in ipairs(G.jokers.cards) do
+                if v.config.center.key ~= self.key and not v.ability[id] and not v.debuff then
+                    targets[#targets+1] = v
+                end
+            end
+            local target = pseudorandom_element(targets, self.key)
+            if target then
+                for _, c in ipairs(G.jokers.cards) do
+                    c.ability[id] = nil
+                    SMODS.recalc_debuff(c)
+                end
+                target.ability[id] = true
+                SMODS.recalc_debuff(target)
+                card:juice_up()
+                return { message = localize("k_disabled_ex"), colour = G.C.RED, message_card = target }
+            end
+        end
+        if context.debuff_card and context.debuff_card.ability[id] then
+            return { debuff = true }
+        end
+        if (context.other_joker and context.other_joker.debuff) or (context.other_consumeable and context.other_consumeable.debuff) then
+            return { xmult = card.ability.extra }
+        end
+    end,
+    set_ability = function (self, card, initial, delay_sprites)
+        G.GAME.hpr_heart_num = (G.GAME.hpr_heart_num or 0)
+        card.ability.hpr_heart_num = G.GAME.hpr_heart_num
+        G.GAME.hpr_heart_num = G.GAME.hpr_heart_num + 1
+    end
+}
