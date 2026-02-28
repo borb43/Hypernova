@@ -17,7 +17,7 @@ HPR.BossJoker {
         return { vars = { card.ability.extra.discard, card.ability.extra.reps }}
     end,
     calculate = function (self, card, context)
-        if context.press_play or context.forcetrigger then
+        if (context.press_play or context.forcetrigger) and HPR.should_boss_downside() then
             G.E_MANAGER:add_event(Event{
                 func = function ()
                     local b = false
@@ -75,7 +75,7 @@ HPR.BossJoker {
                     break
                 end
             end
-            if reset then
+            if reset and HPR.should_boss_downside() then
                 ease_dollars(-G.GAME.dollars)
             else
                 G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + hand_played
@@ -99,7 +99,7 @@ HPR.BossJoker {
     calculate = function (self, card, context)
         if context.stay_flipped and context.to_area == G.hand and G.GAME.current_round.discards_used == 0 and G.GAME.current_round.hands_played == 0 then
             context.other_card.ability.perma_mult = context.other_card.ability.perma_mult + card.ability.extra
-            return { stay_flipped = true }
+            if HPR.should_boss_downside() then return { stay_flipped = true } end
         end
     end,
     boss_key = "bl_house"
@@ -114,7 +114,7 @@ HPR.BossJoker {
     end,
     calculate = function (self, card, context)
         if context.setting_blind and context.blind.boss or context.forcetrigger and G.GAME.blind.in_blind then
-            HPR.mod_blind_amount(card.ability.extra)
+            if HPR.should_boss_downside() then HPR.mod_blind_amount(card.ability.extra) end
             ease_discard(G.GAME.current_round.discards_left * (card.ability.extra-1) )
             ease_hands_played(G.GAME.current_round.hands_left * (card.ability.extra - 1))
         end
@@ -134,7 +134,7 @@ HPR.BossJoker {
     calculate = function (self, card, context)
         if context.stay_flipped and context.to_area == G.hand and SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds) then
             context.other_card.ability.perma_x_mult = context.other_card.ability.perma_x_mult + card.ability.extra.xmult
-            return { stay_flipped = true }
+            if HPR.should_boss_downside() then return { stay_flipped = true } end
         end
     end,
     boss_key = "bl_wheel"
@@ -151,11 +151,13 @@ HPR.BossJoker {
         if context.before and G.GAME.hands[context.scoring_name].level > 1 then
             card.ability.extra.chips = card.ability.extra.chips + G.GAME.hands[context.scoring_name].l_chips
             card.ability.extra.mult = card.ability.extra.mult + G.GAME.hands[context.scoring_name].l_mult
-            return {
-                level_up = -1,
-                message = localize("k_level_down"),
-                colour = G.C.RED
-            }
+            if HPR.should_boss_downside() then
+                return {
+                    level_up = -1,
+                    message = localize("k_level_down"),
+                    colour = G.C.RED
+                }
+            end
         end
         if context.joker_main or context.forcetrigger then
             local chips = card.ability.extra.chips
@@ -181,7 +183,7 @@ HPR.BossJoker {
         if context.individual and context.cardarea == G.play or context.forcetrigger then
             return { mult = card.ability.extra }
         end
-        if context.debuff_card and context.debuff_card:is_suit("Clubs") then return { debuff = true } end
+        if context.debuff_card and context.debuff_card:is_suit("Clubs") and HPR.should_boss_downside() then return { debuff = true } end
     end,
     boss_key = "bl_club",
     forcetrigger_compat = true,
@@ -198,7 +200,7 @@ HPR.BossJoker {
         if context.press_play then card.ability.prepped = true end
         if context.stay_flipped and card.ability.prepped then
             context.other_card.ability.perma_bonus = context.other_card.ability.perma_bonus + card.ability.extra
-            return { stay_flipped = true }
+            if HPR.should_boss_downside() then return { stay_flipped = true } end
         end
         if context.hand_drawn or context.setting_blind then card.ability.prepped = nil end
     end,
@@ -213,7 +215,7 @@ HPR.BossJoker{
         return { vars = {card.ability.extra}}
     end,
     calculate = function (self, card, context)
-        if context.debuff_hand and #context.full_hand ~= card.ability.extra then
+        if context.debuff_hand and #context.full_hand ~= card.ability.extra and HPR.should_boss_downside() then
             return {
                 debuff = true,
                 debuff_text = localize{ type = "variable", vars = {card.ability.extra}, key = "play_x_cards"},
@@ -233,7 +235,7 @@ HPR.BossJoker {
         return{ vars = {card.ability.extra}}
     end,
     calculate = function (self, card, context)
-        if context.debuff_card and context.debuff_card:is_suit("Spades") then
+        if context.debuff_card and context.debuff_card:is_suit("Spades") and HPR.should_boss_downside() then
             return { debuff = true }
         end
         if context.individual and context.cardarea == G.play or context.forcetrigger then

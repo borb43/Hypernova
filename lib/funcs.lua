@@ -258,3 +258,7 @@ function HPR.rarity_to_string(rarity)
     if rarity == 4 then return "Legendary" end
     return rarity
 end
+
+function HPR.should_boss_downside()
+    return true
+end
