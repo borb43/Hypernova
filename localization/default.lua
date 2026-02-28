@@ -1046,7 +1046,7 @@ local descriptions = {
             name = "S029 HUNTER",
             text = {
                 {"Disables effect of every {C:attention}Boss Blind"},
-                {"{C:hpr_boss}Boss{} Jokers have no downside",
+                {"Regular {C:hpr_boss}Boss{} Jokers have no downside",
                 "and give {C:money}$#1#{} when triggered"},
                 {"Always get a {C:hpr_boss}Boss{} Joker after",
                 "the {C:attention}Boss Blind{} if possible"}

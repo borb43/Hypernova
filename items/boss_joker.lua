@@ -553,7 +553,7 @@ HPR.BossJoker {
     key = "final_acorn",
     pos = { x = 0, y = 4 },
     calculate = function (self, card, context)
-        if (context.setting_blind or context.forcetrigger) and HPR.should_boss_downside() and not context.blueprint then
+        if (context.setting_blind or context.forcetrigger) and not context.blueprint then
             if #G.jokers.cards > 0 then
                 G.jokers:unhighlight_all()
                 for _, joker in ipairs(G.jokers.cards) do
@@ -594,7 +594,7 @@ HPR.BossJoker {
                 end
             end
         end
-        if context.end_of_round and context.main_eval and HPR.should_boss_downside() then
+        if context.end_of_round and context.main_eval then
             G.E_MANAGER:add_event(Event{
                 func = function ()
                     for _, c in ipairs(G.jokers.cards) do
@@ -624,14 +624,14 @@ HPR.BossJoker {
         return { vars = { localize(active and "k_active" or "k_inactive"), card.ability.extra.reps }}
     end,
     calculate = function (self, card, context)
-        if context.debuff_card and not context.blueprint and context.debuff_card.playing_card and card.ability.extra.active and HPR.should_boss_downside() then
+        if context.debuff_card and not context.blueprint and context.debuff_card.playing_card and card.ability.extra.active then
             return { debuff = true }
         end
         if context.repetition and context.cardarea == G.play and card.ability.extra.reps > 0 and not card.ability.extra.active then
             return { repetitions = card.ability.extra.reps }
         end
         if context.selling_card and context.card ~= card and not context.blueprint and context.card.ability.set == "Joker" then
-            if card.ability.extra.active and HPR.should_boss_downside() then
+            if card.ability.extra.active then
                 card.ability.extra.active = false
                 for _, c in ipairs(G.playing_cards) do
                     SMODS.recalc_debuff(c)
@@ -660,10 +660,9 @@ HPR.BossJoker {
     calculate = function (self, card, context)
         if (context.setting_blind and context.blind.boss or context.forcetrigger) then
             local stuff
-            if HPR.should_boss_downside() then HPR.mod_blind_amount(card.ability.extra.b_size) stuff = true end
+            HPR.mod_blind_amount(card.ability.extra.b_size)
             local to_create = math.min(card.ability.extra.cards, G.consumeables.config.card_limit - (#G.consumeables.cards + G.GAME.consumeable_buffer))
             if to_create > 0 then
-                stuff = true
                 G.E_MANAGER:add_event(Event{
                     func = function ()
                         local cards = {}
@@ -681,7 +680,7 @@ HPR.BossJoker {
                     end
                 })
             end
-            if stuff then return nil, true end
+            return nil, true
         end
     end
 }
