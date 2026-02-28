@@ -1166,7 +1166,7 @@ local descriptions = {
                 {"{C:attention}Flips and shuffles{} all Jokers",
                 "when {C:attention}Blind{} is selected, unflips",
                 "all Jokers at end of round"},
-                {"{C:attention}Retriggers{} adjacent jokers"}
+                {"{C:attention}Retriggers{} all jokers"}
             }
         },
         j_hpr_final_leaf = {

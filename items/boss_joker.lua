@@ -606,10 +606,8 @@ HPR.BossJoker {
                 end
             })
         end
-        if context.retrigger_joker_check and not context.retrigger_joker and card.area and card.rank then
-            if context.other_card == card.area.cards[card.rank+1] or context.other_card == card.area.cards[card.rank-1] then
-                return { repetitions = 1 }
-            end
+        if context.retrigger_joker_check and context.other_card.ability and context.other_card.ability.set == "Joker" then
+            return { repetitions = 1 }
         end
     end,
     forcetrigger_compat = true, -- :3
