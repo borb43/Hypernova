@@ -190,7 +190,7 @@ HPR.BossJoker {
         if context.individual and context.cardarea == G.play or context.forcetrigger then
             return { mult = card.ability.extra }
         end
-        if context.debuff_card and not context.blueprint and context.debuff_card:is_suit("Clubs") and HPR.should_boss_downside() then return { debuff = true } end
+        if context.debuff_card and not context.blueprint and context.debuff_card:is_suit("Clubs", true) and HPR.should_boss_downside() then return { debuff = true } end
     end,
     boss_key = "bl_club",
     forcetrigger_compat = true,
@@ -245,7 +245,7 @@ HPR.BossJoker {
         return{ vars = {card.ability.extra}}
     end,
     calculate = function (self, card, context)
-        if context.debuff_card and not context.blueprint and context.debuff_card:is_suit("Spades") and HPR.should_boss_downside() then
+        if context.debuff_card and not context.blueprint and context.debuff_card:is_suit("Spades", true) and HPR.should_boss_downside() then
             return { debuff = true }
         end
         if context.individual and context.cardarea == G.play or context.forcetrigger then
@@ -300,7 +300,7 @@ HPR.BossJoker {
                 func = HPR.event_presets.reset_dollar_buffer
             }
         end
-        if context.debuff_card and not context.blueprint and context.debuff_card.is_suit and context.debuff_card:is_suit("Diamonds") and HPR.should_boss_downside() then
+        if context.debuff_card and not context.blueprint and context.debuff_card.is_suit and context.debuff_card:is_suit("Diamonds", true) and HPR.should_boss_downside() then
             return { debuff = true }
         end
     end,
