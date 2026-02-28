@@ -1110,6 +1110,15 @@ local descriptions = {
                 "or discarded, always",
                 "draw {C:attention}#1#{} cards"
             }
+        },
+        j_hpr_pillar = {
+            name = "The Pillar",
+            text = {
+                "First played card each",
+                "round gains a {C:red}Red Seal",
+                "Cards played previously",
+                "in current ante are {C:red}debuffed"
+            }
         }
     },
     Other = {

@@ -427,3 +427,16 @@ HPR.BossJoker {
     end,
     boss_key = "bl_serpent"
 }
+
+HPR.BossJoker {
+    key = "pillar",
+    pos = { x = 5, y = 2 },
+    calculate = function (self, card, context)
+        if context.debuff_card and HPR.should_boss_downside() and context.debuff_card.ability.played_this_ante then
+            return { debuff = true }
+        end
+        if context.before and context.full_hand[1] and G.GAME.current_round.hands_played == 0 then
+            context.full_hand[1]:set_seal("Red")
+        end
+    end
+}
