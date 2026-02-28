@@ -548,3 +548,71 @@ HPR.BossJoker {
     end,
     boss_key = "bl_mark"
 }
+
+HPR.BossJoker {
+    key = "final_acorn",
+    pos = { x = 0, y = 4 },
+    calculate = function (self, card, context)
+        if (context.setting_blind or context.forcetrigger) and HPR.should_boss_downside() and not context.blueprint then
+            if #G.jokers.cards > 0 then
+                G.jokers:unhighlight_all()
+                for _, joker in ipairs(G.jokers.cards) do
+                    joker:flip()
+                end
+                if #G.jokers.cards > 1 then
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'after',
+                        delay = 0.2,
+                        func = function()
+                            G.E_MANAGER:add_event(Event({
+                                func = function()
+                                    G.jokers:shuffle('hpr_aajk')
+                                    play_sound('cardSlide1', 0.85)
+                                    return true
+                                end,
+                            }))
+                            delay(0.15)
+                            G.E_MANAGER:add_event(Event({
+                                func = function()
+                                    G.jokers:shuffle('hpr_aajk')
+                                    play_sound('cardSlide1', 1.15)
+                                    return true
+                                end
+                            }))
+                            delay(0.15)
+                            G.E_MANAGER:add_event(Event({
+                                func = function()
+                                    G.jokers:shuffle('hpr_aajk')
+                                    play_sound('cardSlide1', 1)
+                                    return true
+                                end
+                            }))
+                            delay(0.5)
+                            return true
+                        end
+                    }))
+                end
+            end
+        end
+        if context.end_of_round and context.main_eval and HPR.should_boss_downside() then
+            G.E_MANAGER:add_event(Event{
+                func = function ()
+                    for _, c in ipairs(G.jokers.cards) do
+                        if c.facing == "back" then
+                            c:flip()
+                        end
+                    end
+                    return true
+                end
+            })
+        end
+        if context.retrigger_joker_check and not context.retrigger_joker and card.area and card.rank then
+            if context.other_card == card.area.cards[card.rank+1] or context.other_card == card.area.cards[card.rank-1] then
+                return { repetitions = 1 }
+            end
+        end
+    end,
+    forcetrigger_compat = true, -- :3
+    blueprint_compat = true,
+    boss_key = "bl_final_acorn"
+}

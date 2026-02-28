@@ -1159,6 +1159,15 @@ local descriptions = {
                 "{C:attention}Face{} cards are drawn face down",
                 "and gain {X:mult,C:white}X#1#{} held in hand Mult",
             }
+        },
+        j_hpr_final_acorn = {
+            name = "Amber Acorn",
+            text = {
+                {"{C:attention}Flips and shuffles{} all Jokers",
+                "when {C:attention}Blind{} is selected, unflips",
+                "all Jokers at end of round"},
+                {"{C:attention}Retriggers{} adjacent jokers"}
+            }
         }
     },
     Other = {
