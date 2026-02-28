@@ -478,7 +478,7 @@ HPR.BossJoker {
         return { vars = { n, d, card.ability.extra.xmult }}
     end,
     calculate = function (self, card, context)
-        if context.individual and context.cardarea == G.play and SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds) then
+        if context.individual and context.cardarea == G.play and SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds) or context.forcetrigger then
             return { xmult = card.ability.extra.xmult }
         end
         if context.debuff_card and not context.blueprint and HPR.should_boss_downside() and context.debuff_card.is_suit and context.debuff_card:is_suit("Hearts", true) then
