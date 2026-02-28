@@ -770,3 +770,25 @@ HPR.BossJoker {
     boss_key = "bl_final_bell",
     blueprint_compat = true,
 }
+
+HPR.BossJoker {
+    key = "final_horse",
+    pos = { x = 0, y = 5 },
+    config = { extra = 1.3 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.extra}}
+    end,
+    calculate = function (self, card, context)
+        if context.modify_hand then
+            mult = mod_mult(mult^(1/3))
+            hand_chips = mod_chips(hand_chips^(1/3))
+            update_hand_text({ sound = 'chips2', modded = true }, { chips = hand_chips, mult = mult })
+            return nil, true
+        end
+        if context.joker_main or context.forcetrigger then
+            return { emult = card.ability.extra }
+        end
+    end,
+    forcetrigger_compat = true, blueprint_compat = true,
+    boss_key = "bl_hpr_final_horse"
+}

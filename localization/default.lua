@@ -1207,6 +1207,14 @@ local descriptions = {
                 "Joker are retriggered",
                 "{C:attention}#1#{} times"}
             }
+        },
+        j_hpr_final_horse = {
+            name = "Heliotrope Horse",
+            text = {
+                {"{X:slib_emult,C:white}^#1#{} Mult"},
+                {"Takes the cube root",
+                "of base {C:chips}Chips{} and {C:mult}Mult"}
+            }
         }
     },
     Other = {
