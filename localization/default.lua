@@ -1179,6 +1179,15 @@ local descriptions = {
                 "additional {C:attention}Joker{} sold this round",
                 "{C:inactive}(Currently {C:attention}#2#{C:inactive} retriggers)"}
             }
+        },
+        j_hpr_final_vessel = {
+            name = "Violet Vessel",
+            text = {
+                "When {C:attention}Boss Blind{} is selected,",
+                "{C:red}X#1#{} Blind size and creates up to",
+                "{C:attention}#3#{} Consumable cards with {X:dark_edition,C:white}X#2#{} values",
+                "{C:inactive}(Must have room)"
+            }
         }
     },
     Other = {

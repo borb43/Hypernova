@@ -649,3 +649,39 @@ HPR.BossJoker {
         end
     end
 }
+
+HPR.BossJoker {
+    key = "final_vessel",
+    pos = { x = 2, y = 4 },
+    config = { extra = { b_size = 3, value = 2, cards = 2 }},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.b_size, card.ability.extra.value, card.ability.extra.cards }}
+    end,
+    calculate = function (self, card, context)
+        if (context.setting_blind and context.blind.boss or context.forcetrigger) then
+            local stuff
+            if HPR.should_boss_downside() then HPR.mod_blind_amount(card.ability.extra.b_size) stuff = true end
+            local to_create = math.min(card.ability.extra.cards, G.consumeables.config.card_limit - (#G.consumeables.cards + G.GAME.consumeable_buffer))
+            if to_create > 0 then
+                stuff = true
+                G.E_MANAGER:add_event(Event{
+                    func = function ()
+                        local cards = {}
+                        for _ = 1, to_create do
+                            cards[#cards+1] = SMODS.add_card{
+                                set = "Consumeables",
+                                area = G.consumeables,
+                                key_append = self.key
+                            }
+                        end
+                        for _, c in ipairs(cards) do
+                            Spectrallib.manipulate(c, { value = card.ability.extra.value, type = "X" })
+                        end
+                        return true
+                    end
+                })
+            end
+            if stuff then return nil, true end
+        end
+    end
+}
