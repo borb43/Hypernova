@@ -1144,6 +1144,14 @@ local descriptions = {
                 "Lose {C:money}$#1#{} per card played",
                 "Played cards gain {X:chips,C:white}X#2#{} Chips"
             }
+        },
+        j_hpr_flint = {
+            name = "The Flint",
+            text = {
+                "Base {C:chips}Chips{} and {C:mult}Mult",
+                "are halved, {C:hpr_balance}balances",
+                "{C:chips}Chips{} and {C:mult}Mult{} in scoring"
+            }
         }
     },
     Other = {

@@ -513,3 +513,19 @@ HPR.BossJoker {
     boss_key = "bl_tooth",
     blueprint_compat = true,
 }
+
+HPR.BossJoker {
+    key = "flint",
+    pos = { x = 3, y = 3 },
+    calculate = function (self, card, context)
+        if (context.modify_hand or context.forcetrigger) and HPR.should_boss_downside() then
+            mult = mod_mult(math.max(math.floor(mult * 0.5 + 0.5), 1))
+            hand_chips = mod_chips(math.max(math.floor(hand_chips * 0.5 + 0.5), 0))
+            update_hand_text({ sound = 'chips2', modded = true }, { chips = hand_chips, mult = mult })
+            return nil, true --:troll:
+        end
+        if context.joker_main or context.forcetrigger then
+            return { balance = true }
+        end
+    end
+}
