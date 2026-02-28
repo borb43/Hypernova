@@ -1197,6 +1197,16 @@ local descriptions = {
                 {"{C:red}Debuffed {C:attention}non-playing{} cards",
                 "each give {X:mult,C:white}X#1#{} Mult"}
             }
+        },
+        j_hpr_final_bell = {
+            name = "Cerulean Bell",
+            text = {
+                {"One card always {C:attention}forced",
+                "to be selcted"},
+                {"Cards selected by this",
+                "Joker are retriggered",
+                "{C:attention}#1#{} times"}
+            }
         }
     },
     Other = {

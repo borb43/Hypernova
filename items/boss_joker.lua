@@ -734,3 +734,39 @@ HPR.BossJoker {
     blueprint_compat = true,
     forcetrigger_compat = true,
 }
+
+HPR.BossJoker {
+    key = "final_bell",
+    pos = { x = 4, y = 4 },
+    config = { extra = 5 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.extra}}
+    end,
+    calculate = function (self, card, context)
+        if context.hand_drawn and not context.blueprint then
+            local any_forced = nil
+            for _, playing_card in ipairs(G.hand.cards) do
+                if playing_card.ability.forced_selection then
+                    any_forced = true
+                end
+            end
+            if not any_forced then
+                G.hand:unhighlight_all()
+                local forced_card = pseudorandom_element(G.hand.cards, 'hpr_cerulean')
+                forced_card.ability.forced_selection = true
+                forced_card.ability.hpr_bell_targeted = true
+                G.hand:add_to_highlighted(forced_card)
+            end
+        end
+        if context.repetition and context.other_card.ability.hpr_bell_targeted then
+            return { repetitions = card.ability.extra }
+        end
+        if context.after and not context.blueprint then
+            for _, c in ipairs(G.playing_cards) do
+                c.ability.hpr_bell_targeted = nil
+            end
+        end
+    end,
+    boss_key = "bl_final_bell",
+    blueprint_compat = true,
+}
