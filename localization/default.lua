@@ -1128,6 +1128,15 @@ local descriptions = {
                 "discards equal to {X:red,C:white}X#1#",
                 "the removed hands"
             }
+        },
+        j_hpr_head = {
+            name = "The Head",
+            text = {
+                "Played cards have a",
+                "{C:green}#1# in #2#{} chance to give",
+                "{X:mult,C:white}X#3#{} Mult when scored",
+                "{C:hearts}Hearts{} are {C:red}debuffed"
+            }
         }
     },
     Other = {
