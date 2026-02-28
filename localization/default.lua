@@ -1084,6 +1084,16 @@ local descriptions = {
                 "{C:attention}Level up{} each played",
                 "{C:attention}poker hand"
             }
+        },
+        j_hpr_mouth = {
+            name = "The Mouth",
+            text = {
+                "{X:mult,C:white}X#1#{} Mult",
+                "Must only play first",
+                "{C:attention}poker hand{} played in",
+                "each round",
+                "{C:inactive}(Currently #2#)"
+            }
         }
     },
     Other = {
@@ -1875,7 +1885,7 @@ local misc = {
         k_plus_joker_q = "+1 Joker?",
         k_inactive = "inactive",
         ph_hpr_stellar_revive = "Blessed by the stars",
-        no_repeat_hands = "No repeat hand types per round"
+        no_repeat_hands = "No repeat hand types per round",
     },
     high_scores = {},
     labels = {
@@ -1912,6 +1922,7 @@ local misc = {
         hpr_n_cards = "#1# Cards",
         a_discards = "+#1# Discards",
         play_x_cards = "Must play #1# cards",
+        must_play_x = "Must play #1#"
     },
     v_text = {},
 }

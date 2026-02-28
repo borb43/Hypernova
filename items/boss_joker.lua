@@ -363,3 +363,29 @@ HPR.BossJoker {
     boss_key = "bl_eye",
     blueprint_compat = true,
 }
+
+HPR.BossJoker {
+    key = "mouth",
+    blueprint_compat = true, forcetrigger_compat = true,
+    pos = { x = 2, y = 2 },
+    config = { extra = { xmult = 5 }},
+    loc_vars = function (self, info_queue, card)
+        local hand_text = card.ability.extra.mouth_hand and localize(card.ability.extra.mouth_hand, "poker_hands") or localize("k_none")
+        return { vars = { card.ability.extra.xmult, hand_text }}
+    end,
+    calculate = function (self, card, context)
+        if context.before and HPR.should_boss_downside() and not context.blueprint then
+            card.ability.extra.mouth_hand = context.scoring_name
+        end
+        if context.debuff_hand and not context.blueprint and card.ability.extra.mouth_hand and context.scoring_name ~= card.ability.extra.mouth_hand and HPR.should_boss_downside() then
+            return { debuff = true, debuff_text = localize{ type = "variable", key = "must_play_x", vars = {localize(card.ability.extra.mouth_hand, "poker_hands")} }}
+        end
+        if context.joker_main or context.forcetrigger then
+            return { xmult = card.ability.extra.xmult }
+        end
+        if (context.end_of_round and context.main_eval or context.setting_blind) and not context.blueprint then
+            card.ability.extra.mouth_hand = nil
+        end
+    end,
+    boss_key = "bl_mouth",
+}
