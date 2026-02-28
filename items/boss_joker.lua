@@ -246,3 +246,28 @@ HPR.BossJoker {
     boss_key = "bl_goad",
     forcetrigger_compat = true
 }
+
+HPR.BossJoker {
+    key = "water",
+    pos = { x = 4, y = 1 },
+    config = { extra = 2 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.extra}}
+    end,
+    calculate = function (self, card, context)
+        if context.setting_blind then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    local d_amt = G.GAME.current_round.discards_left
+                    if HPR.should_boss_downside() then ease_discard(-d_amt, nil, true) end
+                    ease_hands_played(d_amt * card.ability.extra)
+                    SMODS.calculate_effect(
+                        { message = localize { type = 'variable', key = 'a_hands', vars = { d_amt * card.ability.extra } } },
+                        context.blueprint_card or card)
+                    return true
+                end
+            }))
+            return nil, true
+        end
+    end
+}

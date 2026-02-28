@@ -1051,6 +1051,15 @@ local descriptions = {
                 {"Always get a {C:hpr_boss}Boss{} Joker after",
                 "the {C:attention}Boss Blind{} if possible"}
             }
+        },
+        j_hpr_water = {
+            name = "The Water",
+            text = {
+                "When {C:attention}Blind{} is selected,",
+                "{C:attention}lose all discards{} and gain",
+                "hands equal to {X:blue,C:white}X#1#{} the",
+                "removed discards"
+            }
         }
     },
     Other = {
