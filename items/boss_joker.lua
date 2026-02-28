@@ -389,3 +389,22 @@ HPR.BossJoker {
     end,
     boss_key = "bl_mouth",
 }
+
+HPR.BossJoker {
+    key = "plant",
+    blueprint_compat = true, forcetrigger_compat = true,
+    pos = { x = 3, y = 2 },
+    config = { extra = 1.5 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra }}
+    end,
+    calculate = function (self, card, context)
+        if context.debuff_card and not context.blueprint and HPR.should_boss_downside() and context.debuff_card.is_face and context.debuff_card:is_face(true) then
+            return { debuff = true }
+        end
+        if context.individual and context.cardarea == G.play or context.forcetrigger then
+            return { xmult = card.ability.extra }
+        end
+    end,
+    boss_key = "bl_plant"
+}

@@ -1094,6 +1094,14 @@ local descriptions = {
                 "each round",
                 "{C:inactive}(Currently #2#)"
             }
+        },
+        j_hpr_plant = {
+            name = "The Plant",
+            text = {
+                "Played cards give",
+                "{X:mult,C:white}X#1#{} Mult when scored",
+                "{C:attention}Face{} cards are debuffed"
+            }
         }
     },
     Other = {
