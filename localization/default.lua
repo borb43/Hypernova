@@ -1041,6 +1041,16 @@ local descriptions = {
                     "Weight<{C:rare}Rare{}: {X:dark_edition,C:white}X#5#{} values | {X:slib_emult,C:white}^#8#{} Mult"
                 }
             }
+        },
+        j_hpr_hunter = {
+            name = "S029 HUNTER",
+            text = {
+                {"Disables effect of every {C:attention}Boss Blind"},
+                {"{C:hpr_boss}Boss{} Jokers have no downside",
+                "and give {C:money}$#1#{} when triggered"},
+                {"Always get a {C:hpr_boss}Boss{} Joker after",
+                "the {C:attention}Boss Blind{} if possible"}
+            }
         }
     },
     Other = {

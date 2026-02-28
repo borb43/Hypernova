@@ -260,5 +260,6 @@ function HPR.rarity_to_string(rarity)
 end
 
 function HPR.should_boss_downside()
+    if next(SMODS.find_card("j_hpr_hunter")) then return false end
     return true
 end

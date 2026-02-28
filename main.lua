@@ -24,7 +24,7 @@ HPR.calculate = function(self, context)
         for _, c in pairs(G.P_CENTERS) do
             if c.boss_key == key then pass = true end
         end
-        if key and pass and pseudorandom("hpr_boss_joker_spawn") < 0.15 then
+        if key and pass and (next(SMODS.find_card("j_hpr_hunter")) or pseudorandom("hpr_boss_joker_spawn") < 0.15) then
             G.E_MANAGER:add_event(Event{
                 func = function ()
                     G.GAME.last_hpr_boss_tag_key = key
@@ -201,7 +201,7 @@ if Cryptid then
 end
 
 SMODS.current_mod.optional_features = {
-    --post_trigger = true,
+    post_trigger = true,
     retrigger_joker = true
 }
 

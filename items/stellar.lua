@@ -1228,3 +1228,43 @@ HPR.StellarJoker {
         end
     end
 }
+
+HPR.StellarJoker {
+    key = "hunter",
+    config = { extra = 3 },
+    blueprint_compat = true,
+    forcetrigger_compat = true,
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.extra}}
+    end,
+    calculate = function (self, card, context)
+        if context.setting_blind and not context.blueprint and context.blind.boss then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            G.GAME.blind:disable()
+                            play_sound('timpani')
+                            delay(0.4)
+                            return true
+                        end
+                    }))
+                    SMODS.calculate_effect({ message = localize('ph_boss_disabled') }, card)
+                    return true
+                end
+            }))
+            return nil, true
+        end
+        if context.post_trigger and context.other_card.is_rarity and context.other_card:is_rarity("hpr_boss") then
+            G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra
+            return { dollars = card.ability.extra, func = HPR.event_presets.reset_dollar_buffer }
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if G.GAME.blind and G.GAME.blind.boss and not G.GAME.blind.disabled then
+            G.GAME.blind:disable()
+            play_sound('timpani')
+            SMODS.calculate_effect({ message = localize('ph_boss_disabled') }, card)
+        end
+    end
+}
