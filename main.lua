@@ -37,6 +37,9 @@ HPR.calculate = function(self, context)
             })
         end
     end
+    if context.prevent_tag_trigger and context.other_context.type == "tag_add" and context.other_context.tag.key == "tag_hpr_boss" then
+        return { prevent_trigger = true }
+    end
 end
 
 HPR.post_load = function ()

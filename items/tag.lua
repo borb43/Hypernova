@@ -4,7 +4,7 @@ SMODS.Tag {
     atlas = "tag",
     pos = { x = 0, y = 0 },
     loc_vars = function (self, info_queue, tag)
-        return { vars = { tag.ability.boss_key and localize{type = "name_text", key = tag.ability.boss_key, set = "Blind" } or "[Blind]" }}
+        return { vars = { tag.ability.boss_key and localize{type = "name_text", key = tag.ability.boss_key, set = "Blind" } or "["..localize("b_blind").."]" }}
     end,
     apply = function (self, tag, context)
         if context.type == "store_joker_create" and tag.ability.boss_key then
