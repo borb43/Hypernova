@@ -27,7 +27,12 @@ SMODS.Consumable {
         return G.jokers and G.jokers.highlighted and #G.jokers.highlighted == 1
     end,
     use = function (self, card, area, copier)
-        local highlighted = Spectrallib.get_highlighted_cards({ G.jokers }, card, 1, 1, nil, self.key.."_forcetrigger")
+        local function blacklist(c)
+            local asc = HPR.get_ascension(c)
+            if asc and G.P_CENTERS[asc] then return true end
+            return false
+        end
+        local highlighted = Spectrallib.get_highlighted_cards({ G.jokers }, card, 1, 1, blacklist, self.key.."_forcetrigger")
         G.E_MANAGER:add_event(Event{
             trigger = 'after',
             delay = 0.4,
