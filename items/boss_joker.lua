@@ -468,3 +468,23 @@ HPR.BossJoker {
     blueprint_compat = true, forcetrigger_compat = true,
     boss_key = "bl_needle"
 }
+
+HPR.BossJoker {
+    key = "head",
+    pos = { x = 1, y = 3 },
+    config = { extra = { xmult = 1.5, odds = 2 }},
+    loc_vars = function (self, info_queue, card)
+        local n,d = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, self.key)
+        return { vars = { n, d, card.ability.extra.xmult }}
+    end,
+    calculate = function (self, card, context)
+        if context.individual and context.cardarea == G.play and SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds) then
+            return { xmult = card.ability.extra.xmult }
+        end
+        if context.debuff_card and not context.blueprint and HPR.should_boss_downside() and context.debuff_card.is_suit and context.debuff_card:is_suit("Hearts", true) then
+            return { debuff = true }
+        end
+    end,
+    blueprint_compat = true, forcetrigger_compat = true,
+    boss_key = "bl_head"
+}
