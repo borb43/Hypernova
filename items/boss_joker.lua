@@ -488,3 +488,28 @@ HPR.BossJoker {
     blueprint_compat = true, forcetrigger_compat = true,
     boss_key = "bl_head"
 }
+
+HPR.BossJoker {
+    key = "tooth",
+    pos = { x = 2, y = 3 },
+    config = { extra = { dollars = 1, xchip = 0.1 }},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.dollars, card.ability.extra.xchip }}
+    end,
+    calculate = function (self, card, context)
+        if context.before then
+            local s = HPR.should_boss_downside()
+            for _, c in ipairs(context.full_hand) do
+                local effect = { message = localize("k_upgrade_ex"), colour = G.C.CHIPS, message_card = c }
+                if s then
+                    effect.extra = { dollars = -card.ability.extra.dollars, func = HPR.event_presets.reset_dollar_buffer, message_card = c }
+                    G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) - card.ability.extra.dollars
+                end
+                c.ability.perma_x_chips = c.ability.perma_x_chips + card.ability.extra.xchip
+                SMODS.calculate_effect(effect, card)
+            end
+        end
+    end,
+    boss_key = "bl_tooth",
+    blueprint_compat = true,
+}

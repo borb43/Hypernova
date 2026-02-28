@@ -1137,6 +1137,13 @@ local descriptions = {
                 "{X:mult,C:white}X#3#{} Mult when scored",
                 "{C:hearts}Hearts{} are {C:red}debuffed"
             }
+        },
+        j_hpr_tooth = {
+            name = "The Tooth",
+            text = {
+                "Lose {C:money}$#1#{} per card played",
+                "Played cards gain {X:chips,C:white}X#2#{} Chips"
+            }
         }
     },
     Other = {
