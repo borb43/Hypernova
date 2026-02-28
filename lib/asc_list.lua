@@ -78,5 +78,8 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_sixth_sense = "j_hpr_master",
     j_business = "j_hpr_mask",
     j_caino = "j_hpr_destroyer",
-    j_baseball = "j_hpr_buffoon"
+    j_baseball = "j_hpr_buffoon",
+    j_chicot = "j_hpr_hunter",
+    j_luchador = "j_hpr_hunter",
+    j_matador = "j_hpr_hunter"
 }
