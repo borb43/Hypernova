@@ -1168,6 +1168,17 @@ local descriptions = {
                 "all Jokers at end of round"},
                 {"{C:attention}Retriggers{} adjacent jokers"}
             }
+        },
+        j_hpr_final_leaf = {
+            name = "Verdant Leaf",
+            text = {
+                {"All playing cards are {C:red}debuffed",
+                "if no {C:attention}Joker{} was sold this round",
+                "{C:inactive}(Currently #1#)"},
+                {"{C:attention}Retrigger{} all played cards once per",
+                "additional {C:attention}Joker{} sold this round",
+                "{C:inactive}(Currently {C:attention}#2#{C:inactive} retriggers)"}
+            }
         }
     },
     Other = {
