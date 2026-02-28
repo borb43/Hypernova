@@ -1119,6 +1119,15 @@ local descriptions = {
                 "Cards played previously",
                 "in current ante are {C:red}debuffed"
             }
+        },
+        j_hpr_needle = {
+            name = "The Needle",
+            text = {
+                "When {C:attention}Blind{} is selected,",
+                "set hands to {C:attention}1{} and gain",
+                "discards equal to {X:red,C:white}X#1#",
+                "the removed hands"
+            }
         }
     },
     Other = {

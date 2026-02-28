@@ -441,3 +441,30 @@ HPR.BossJoker {
     end,
     boss_key = "bl_pillar"
 }
+
+HPR.BossJoker {
+    key = "needle",
+    pos = { x = 0, y = 3 },
+    config = { extra = 2 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.extra}}
+    end,
+    calculate = function (self, card, context)
+        if context.setting_blind or context.forcetrigger then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    local h_amt = G.GAME.current_round.hands_left - 1
+                    if HPR.should_boss_downside() then ease_hands_played(-h_amt) end
+                    ease_discard(h_amt * card.ability.extra, nil, true)
+                    SMODS.calculate_effect(
+                        { message = localize { type = 'variable', key = 'a_discards', vars = { h_amt * card.ability.extra } } },
+                        context.blueprint_card or card)
+                    return true
+                end
+            }))
+            return nil, true
+        end
+    end,
+    blueprint_compat = true, forcetrigger_compat = true,
+    boss_key = "bl_needle"
+}
