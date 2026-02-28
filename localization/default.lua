@@ -1060,6 +1060,14 @@ local descriptions = {
                 "hands equal to {X:blue,C:white}X#1#{} the",
                 "removed discards"
             }
+        },
+        j_hpr_window = {
+            name = "The Window",
+            text = {
+                "Played cards give",
+                "{C:money}$#1#{} when scored",
+                "{C:diamonds}Diamonds{} are debuffed"
+            }
         }
     },
     Other = {

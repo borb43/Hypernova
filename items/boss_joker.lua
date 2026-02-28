@@ -271,3 +271,24 @@ HPR.BossJoker {
         end
     end
 }
+
+HPR.BossJoker {
+    key = "window",
+    pos = { x = 5, y = 1 },
+    config = { extra = 1 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra}}
+    end,
+    calculate = function (self, card, context)
+        if context.individual and context.cardarea == G.play then
+            G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra
+            return {
+                dollars = card.ability.extra,
+                func = HPR.event_presets.reset_dollar_buffer
+            }
+        end
+        if context.debuff_card and context.debuff_card.is_suit and context.debuff_card:is_suit("Diamonds") then
+            return { debuff = true }
+        end
+    end
+}
