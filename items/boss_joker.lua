@@ -60,6 +60,7 @@ HPR.BossJoker {
     end,
     boss_key = "bl_hook",
     forcetrigger_compat = true,
+    blueprint_compat = true,
 }
 
 HPR.BossJoker {
@@ -86,7 +87,8 @@ HPR.BossJoker {
             end
         end
     end,
-    boss_key = "bl_ox"
+    boss_key = "bl_ox",
+    blueprint_compat = true,
 }
 
 HPR.BossJoker {
@@ -102,7 +104,8 @@ HPR.BossJoker {
             if HPR.should_boss_downside() then return { stay_flipped = true } end
         end
     end,
-    boss_key = "bl_house"
+    boss_key = "bl_house",
+    blueprint_compat = true,
 }
 
 HPR.BossJoker {
@@ -122,6 +125,7 @@ HPR.BossJoker {
     end,
     boss_key = "bl_wall",
     forcetrigger_compat = true,
+    blueprint_compat = true,
 }
 
 HPR.BossJoker {
@@ -138,7 +142,8 @@ HPR.BossJoker {
             if HPR.should_boss_downside() then return { stay_flipped = true } end
         end
     end,
-    boss_key = "bl_wheel"
+    boss_key = "bl_wheel",
+    blueprint_compat = true,
 }
 
 HPR.BossJoker {
@@ -149,7 +154,7 @@ HPR.BossJoker {
         return {vars = { card.ability.extra.chips, card.ability.extra.mult }}
     end,
     calculate = function (self, card, context)
-        if context.before and G.GAME.hands[context.scoring_name].level > 1 then
+        if context.before and G.GAME.hands[context.scoring_name].level > 1 and not context.blueprint then
             card.ability.extra.chips = card.ability.extra.chips + G.GAME.hands[context.scoring_name].l_chips
             card.ability.extra.mult = card.ability.extra.mult + G.GAME.hands[context.scoring_name].l_mult
             if HPR.should_boss_downside() then
@@ -171,6 +176,7 @@ HPR.BossJoker {
     end,
     boss_key = "bl_arm",
     forcetrigger_compat = true,
+    blueprint_compat = true
 }
 
 HPR.BossJoker {
@@ -184,10 +190,11 @@ HPR.BossJoker {
         if context.individual and context.cardarea == G.play or context.forcetrigger then
             return { mult = card.ability.extra }
         end
-        if context.debuff_card and context.debuff_card:is_suit("Clubs") and HPR.should_boss_downside() then return { debuff = true } end
+        if context.debuff_card and not context.blueprint and context.debuff_card:is_suit("Clubs") and HPR.should_boss_downside() then return { debuff = true } end
     end,
     boss_key = "bl_club",
     forcetrigger_compat = true,
+    blueprint_compat = true,
 }
 
 HPR.BossJoker {
@@ -203,9 +210,10 @@ HPR.BossJoker {
             context.other_card.ability.perma_bonus = context.other_card.ability.perma_bonus + card.ability.extra
             if HPR.should_boss_downside() then return { stay_flipped = true } end
         end
-        if context.hand_drawn or context.setting_blind then card.ability.prepped = nil end
+        if (context.hand_drawn or context.setting_blind) and not context.blueprint then card.ability.prepped = nil end
     end,
-    boss_key = "bl_fish"
+    boss_key = "bl_fish",
+    blueprint_compat = true,
 }
 
 HPR.BossJoker{
@@ -216,7 +224,7 @@ HPR.BossJoker{
         return { vars = {card.ability.extra}}
     end,
     calculate = function (self, card, context)
-        if context.debuff_hand and #context.full_hand ~= card.ability.extra and HPR.should_boss_downside() then
+        if context.debuff_hand and not context.blueprint and #context.full_hand ~= card.ability.extra and HPR.should_boss_downside() then
             return {
                 debuff = true,
                 debuff_text = localize{ type = "variable", vars = {card.ability.extra}, key = "play_x_cards"},
@@ -225,7 +233,8 @@ HPR.BossJoker{
         end
         if context.repetition and context.cardarea == G.play then return { repetitions = 1 } end
     end,
-    boss_key = "bl_psychic"
+    boss_key = "bl_psychic",
+    blueprint_compat = true,
 }
 
 HPR.BossJoker {
@@ -236,7 +245,7 @@ HPR.BossJoker {
         return{ vars = {card.ability.extra}}
     end,
     calculate = function (self, card, context)
-        if context.debuff_card and context.debuff_card:is_suit("Spades") and HPR.should_boss_downside() then
+        if context.debuff_card and not context.blueprint and context.debuff_card:is_suit("Spades") and HPR.should_boss_downside() then
             return { debuff = true }
         end
         if context.individual and context.cardarea == G.play or context.forcetrigger then
@@ -244,7 +253,8 @@ HPR.BossJoker {
         end
     end,
     boss_key = "bl_goad",
-    forcetrigger_compat = true
+    forcetrigger_compat = true,
+    blueprint_compat = true
 }
 
 HPR.BossJoker {
@@ -255,7 +265,7 @@ HPR.BossJoker {
         return { vars = {card.ability.extra}}
     end,
     calculate = function (self, card, context)
-        if context.setting_blind then
+        if context.setting_blind or context.forcetrigger then
             G.E_MANAGER:add_event(Event({
                 func = function()
                     local d_amt = G.GAME.current_round.discards_left
@@ -269,7 +279,10 @@ HPR.BossJoker {
             }))
             return nil, true
         end
-    end
+    end,
+    boss_key = "bl_water",
+    forcetrigger_compat = true,
+    blueprint_compat = true,
 }
 
 HPR.BossJoker {
@@ -280,17 +293,20 @@ HPR.BossJoker {
         return { vars = { card.ability.extra}}
     end,
     calculate = function (self, card, context)
-        if context.individual and context.cardarea == G.play then
+        if context.individual and context.cardarea == G.play or context.forcetrigger then
             G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra
             return {
                 dollars = card.ability.extra,
                 func = HPR.event_presets.reset_dollar_buffer
             }
         end
-        if context.debuff_card and context.debuff_card.is_suit and context.debuff_card:is_suit("Diamonds") and HPR.should_boss_downside() then
+        if context.debuff_card and not context.blueprint and context.debuff_card.is_suit and context.debuff_card:is_suit("Diamonds") and HPR.should_boss_downside() then
             return { debuff = true }
         end
-    end
+    end,
+    boss_key = "bl_window",
+    forcetrigger_compat = true,
+    blueprint_compat = true,
 }
 
 HPR.BossJoker {
@@ -326,5 +342,6 @@ HPR.BossJoker {
         end
         SMODS.change_play_limit(-card.ability.extra.csl)
         SMODS.change_discard_limit(-card.ability.extra.csl)
-    end
+    end,
+    boss_key = "bl_manacle"
 }
