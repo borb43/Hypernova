@@ -2,7 +2,7 @@
 
 This is my silly little mod where i add basically whatever i feel like!
 
-NOTE: currently in a pre-release state!
+If you run into any issues, check if the issue is already known below, and if not create an issue about it on the Issues page
 
 # IMPORTANT:
 Any releases *after* version 0.5.0 will REQUIRE [SpectralLib](https://github.com/SpectralPack/Spectrallib/releases/latest), make sure to download it here
@@ -22,3 +22,9 @@ The mod currently adds:
     - 4 Lunar packs, containing **Moon** cards
     - 4 Erratic packs, containing **random** cards
 - 2 Sleeves (Crossmod with [CardSleeves](https://github.com/larswijn/CardSleeves/releases/latest))
+
+# Known issues
+## Crash along the lines of "attempt to compare number with table"
+This is an incompatibility crash with the Talisman mod. Uninstall it if possible, otherwise replace it with [Amulet](https://github.com/frostice482/amulet/releases/tag/3.4.1), which has the exact same functionality without this crash.
+
+Do note that Amulet is incompatible with the Multiplayer mod.
