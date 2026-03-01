@@ -6,7 +6,12 @@ SMODS.Rarity {
 HPR.BossJoker = SMODS.Joker:extend{
     rarity = "hpr_boss",
     cost = 10,
-    atlas = "hpr_boss_joker"
+    atlas = "hpr_boss_joker",
+    hpr_badge_info = {
+        { key = "credits_code", vars = {"Eris"} },
+        { key = "credits_art", vars = {"Eris"} },
+        { key = "credits_idea", vars = {"Eris"} },
+    }
 }
 
 HPR.BossJoker {
@@ -650,6 +655,11 @@ HPR.BossJoker {
     end,
     boss_key = "bl_final_leaf",
     blueprint_compat = true,
+    hpr_badge_info = {
+        { key = "credits_code", vars = {"Eris"}},
+        { key = "credits_art", vars = {"Eris"}},
+        { key = "credits_idea", vars = {"notmario."}}
+    }
 }
 
 HPR.BossJoker {
