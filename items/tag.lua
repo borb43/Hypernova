@@ -41,3 +41,28 @@ SMODS.Tag {
         return false
     end
 }
+
+SMODS.Tag {
+    key = "deck",
+    atlas = "tag",
+    pos = { x = 1, y = 0 },
+    apply = function (self, tag, context)
+        if context.type == "voucher_add" then
+            tag:yep("+", G.C.SET.Back, function ()
+                local back = SMODS.create_card{
+                    set = "Back",
+                    area = G.shop_vouchers,
+                    key_append = "hpr_deck_tag"
+                }
+                back.shop_voucher = true
+                create_shop_card_ui(back, "Voucher", G.shop_vouchers)
+                back:start_materialize()
+                G.shop_vouchers:emplace(back)
+                G.shop_vouchers.config.card_limit = #G.shop_vouchers.cards
+                back.from_tag = true
+                return true
+            end)
+            tag.triggered = true
+        end
+    end
+}

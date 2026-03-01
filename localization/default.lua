@@ -1519,6 +1519,14 @@ local descriptions = {
                 "for {C:attention}#1#{} to the",
                 "next shop"
             }
+        },
+        tag_hpr_deck = {
+            name = "Deck Tag",
+            text = {
+                "Adds a {C:attention}Deck{} to the",
+                "Voucher area of",
+                "the next shop"
+            }
         }
     },
     Tarot = {
