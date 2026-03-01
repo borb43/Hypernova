@@ -1542,6 +1542,14 @@ local descriptions = {
                 "{C:hpr_erratic_col}Mega Erratic Pack{}",
                 "with a random {C:dark_edition}edition"
             }
+        },
+        tag_hpr_green = {
+            name = "Green Tag",
+            text = {
+                "Next base edition shop",
+                "Joker is free and",
+                "becomes {C:dark_edition}Green",
+            }
         }
     },
     Tarot = {
