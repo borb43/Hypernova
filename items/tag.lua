@@ -108,6 +108,7 @@ SMODS.Tag {
 
 SMODS.Tag {
     key = "green",
+    atlas = "tag",
     pos = { x = 3, y = 0 },
     loc_vars = function (self, info_queue, tag)
         info_queue[#info_queue+1] = G.P_CENTERS.e_hpr_green
