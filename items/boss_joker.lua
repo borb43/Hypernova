@@ -902,5 +902,6 @@ HPR.BossJoker {
         if context.destroy_card and context.cardarea == G.hand then
             return { remove = true }
         end
-    end
+    end,
+    boss_key = "bl_hpr_final_bomb"
 }
