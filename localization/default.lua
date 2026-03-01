@@ -2058,8 +2058,4 @@ local misc = {
     v_text = {},
 }
 
-if next(SMODS.find_mod("Cryptid")) then
-    descriptions.Joker.j_hpr_gambler.text[#descriptions.Joker.j_hpr_gambler.text+1] = "{C:inactive}(Currently X#3# Scaling){}"
-end
-
 return {descriptions = descriptions, misc = misc}

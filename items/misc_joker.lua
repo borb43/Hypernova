@@ -135,9 +135,9 @@ SMODS.Joker { --gambling addict, scales from probability rolls
     key = "gambler",
     atlas = "placeholder",
     pos = { x = 2, y = 0 },
-    config = { extra = { chips = 0, mult = 0, multiplier = 1 } },
+    config = { extra = { chips = 0, mult = 0, } },
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.chips, card.ability.extra.mult, card.ability.extra.multiplier } }
+        return { vars = { card.ability.extra.chips, card.ability.extra.mult } }
     end,
     rarity = 3,
     cost = 10,
@@ -150,27 +150,19 @@ SMODS.Joker { --gambling addict, scales from probability rolls
                 SMODS.scale_card(card, {
                     ref_table = card.ability.extra,
                     ref_value = "chips",
-                    scalar_value = "multiplier",
-                    operation = function(ref_table, ref_value, initial, change)
-                        ref_table[ref_value] = initial + change * context.denominator
-                    end,
-                    message = {
-                        colour = G.C.CHIPS,
-                        message_key = "a_chips"
-                    }
+                    scalar_table = context,
+                    scalar_value = "denominator",
+                    message_colour = G.C.CHIPS,
+                    block_overrides = { scalar = true }
                 })
             elseif context.result then
                 SMODS.scale_card(card, {
                     ref_table = card.ability.extra,
                     ref_value = "mult",
-                    scalar_value = "multiplier",
-                    operation = function(ref_table, ref_value, initial, change)
-                        ref_table[ref_value] = initial + change * context.denominator
-                    end,
-                    message = {
-                        colour = G.C.MULT,
-                        message_key = "a_mult"
-                    }
+                    scalar_table = context,
+                    scalar_value = "denominator",
+                    message_colour = G.C.MULT,
+                    block_overrides = { scalar = true }
                 })
             end
         end
