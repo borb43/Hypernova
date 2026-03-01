@@ -64,7 +64,8 @@ SMODS.Tag {
             end)
             tag.triggered = true
         end
-    end
+    end,
+    min_ante = 2
 }
 
 SMODS.Tag {
