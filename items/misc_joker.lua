@@ -279,6 +279,7 @@ SMODS.Joker {
         { key = "credits_idea", vars = {"Eris" }},
     },
     blueprint_compat = false,
+    enhancement_gate = "m_stone"
 }
 
 SMODS.Joker {
