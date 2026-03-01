@@ -194,7 +194,7 @@ SMODS.Gradient {
 }
 
 local erratic_create_card = function (self, card, i)
-    local pool = HPR.poll_set("hpr_erratic", {"Consumeables", "Joker", "Playing Card"}, HPR.get_generic_rare_sets(), 0.1)
+    local pool = HPR.poll_set("hpr_erratic", {"Consumeables", "Joker", "Playing Card", "Booster"}, HPR.get_generic_rare_sets(), 0.1)
     return {
         set = pool,
         seal = pool == "Playing Card" and SMODS.poll_seal{type_key = "hpr_erratic_seal"} or nil,
