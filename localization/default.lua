@@ -1251,6 +1251,11 @@ local descriptions = {
                 {"Destroys all held",
                 "in hand cards"}
             }
+        },
+        j_hpr_man = {
+            text = {
+                "*Well, there is a man here."
+            }
         }
     },
     Other = {
@@ -2074,6 +2079,7 @@ local misc = {
         k_inactive = "inactive",
         ph_hpr_stellar_revive = "Blessed by the stars",
         no_repeat_hands = "No repeat hand types per round",
+        k_plus_egg = "+1 Egg"
     },
     high_scores = {},
     labels = {

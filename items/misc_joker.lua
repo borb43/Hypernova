@@ -1522,3 +1522,31 @@ SMODS.Joker {
         end
     end
 }
+
+SMODS.Joker {
+    key = "man",
+    rarity = 2,
+    cost = 7,
+    atlas = "joker",
+    pos = { x = 2, y = 1 },
+    loc_vars = function (self, info_queue, card)
+        return { background_colour = G.C.BLACK, text_colour = G.C.WHITE }
+    end,
+    calculate = function (self, card, context)
+        if context.end_of_round and context.main_eval then
+            G.E_MANAGER:add_event(Event{
+                func = function ()
+                    SMODS.add_card{
+                        key = "j_egg",
+                        no_edition = true,
+                        area = G.jokers,
+                        set = "Joker",
+                        key_append = self.key
+                    }
+                    return true
+                end
+            })
+            return { message = localize("k_plus_egg") }
+        end
+    end
+}
