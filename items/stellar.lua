@@ -119,7 +119,7 @@ HPR.error_context = {
 
 HPR.StellarJoker {
     key = "missing",
-    blueprint_compat = true,
+    
     loc_vars = function (self, info_queue, card)
         return {
             main_start = {
@@ -301,7 +301,7 @@ SMODS.Enhancement{
 HPR.StellarJoker {
     key = "observatorium",
     config = { extra = { chips = 0, mult = 0 }},
-    blueprint_compat = true,
+    
     forcetrigger_compat = true,
     perishable_compat = false,
     calculate = function (self, card, context)
@@ -334,7 +334,7 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "master",
-    blueprint_compat = true,
+    
     forcetrigger_compat = true,
     calculate = function (self, card, context)
         if context.setting_blind or context.forcetrigger then
@@ -378,7 +378,7 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "potassium",
-    blueprint_compat = true,
+    
     forcetrigger_compat = true,
     config = { extra = { emult = 1.5, odds1 = 6, odds2 = 10 }},
     loc_vars = function (self, info_queue, card)
@@ -415,7 +415,7 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "crazy",
-    blueprint_compat = true,
+    
     forcetrigger_compat = true,
     pos = { x = 2, y = 0 },
     soul_pos = { x = 3, y = 0 },
@@ -453,7 +453,7 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "crafty",
-    blueprint_compat = true,
+    
     forcetrigger_compat = true,
     pos = { x = 4, y = 0},
     soul_pos = { x = 5, y = 0 },
@@ -498,7 +498,8 @@ HPR.StellarJoker {
         if context.repetition and context.cardarea == G.play then
             return { repetitions = 1 }
         end
-    end
+    end,
+    
 }
 
 HPR.StellarJoker {
@@ -534,6 +535,7 @@ HPR.StellarJoker {
         end
     end,
     forcetrigger_compat = true,
+    
 }
 
 HPR.StellarJoker {
@@ -563,6 +565,7 @@ HPR.StellarJoker {
         end
     end,
     forcetrigger_compat = true,
+    
 }
 
 HPR.StellarJoker {
@@ -606,7 +609,8 @@ HPR.StellarJoker {
 }
 
 HPR.StellarJoker { --literally everything this does is a hook lmfao
-    key = "shorthand"
+    key = "shorthand",
+    blueprint_compat = false,
 }
 
 HPR.StellarJoker {
@@ -623,7 +627,7 @@ HPR.StellarJoker {
                 message = localize("k_upgrade_ex")
             }
         end
-    end
+    end,
 }
 
 HPR.StellarJoker {
@@ -781,6 +785,7 @@ HPR.StellarJoker {
         G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante or G.GAME.round_resets.ante
         G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante + card.ability.extra
     end,
+    blueprint_compat = false,
 }
 
 HPR.StellarJoker {
@@ -791,7 +796,6 @@ HPR.StellarJoker {
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.xmult, card.ability.extra.scale }}
     end,
-    blueprint_compat = true,
     forcetrigger_compat = true,
     calculate = function (self, card, context)
         if context.before and not context.blueprint then
@@ -827,7 +831,6 @@ HPR.StellarJoker {
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.xmult, card.ability.extra.chips, card.ability.extra.dollar }}
     end,
-    blueprint_compat = true,
     forcetrigger_compat = true,
     calculate = function (self, card, context)
         if context.repetition and context.other_card:is_face() then
@@ -850,7 +853,6 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "numeric",
-    blueprint_compat = true,
     calculate = function (self, card, context)
         if context.individual and context.cardarea == G.play and not context.other_card:is_face() and not SMODS.has_no_rank(context.other_card) then
             local base_chips = HPR.get_base_chips(context.other_card)
@@ -872,14 +874,12 @@ HPR.StellarJoker {
     calc_dollar_bonus = function (self, card)
         local amt = math.floor(G.GAME.dollars/card.ability.extra.per)
         amt = math.min(amt, card.ability.extra.cap)
-        if not card.FORCETRIGGER then
-            SMODS.scale_card(card, {
-                ref_table = card.ability.extra,
-                ref_value = "cap",
-                scalar_value = "scale",
-                message_colour = G.C.MONEY
-            })
-        end
+        SMODS.scale_card(card, {
+            ref_table = card.ability.extra,
+            ref_value = "cap",
+            scalar_value = "scale",
+            message_colour = G.C.MONEY
+        })
         if amt > 0 then return amt end
     end,
     loc_vars = function (self, info_queue, card)
@@ -887,18 +887,19 @@ HPR.StellarJoker {
     end,
     forcetrigger = function (self, card, context)
         card.FORCETRIGGER = true
-        local d = self:calc_dollar_bonus(card)
+        local d = math.floor(G.GAME.dollars/card.ability.extra.per)
+        d = math.min(d, card.ability.extra.cap)
         card.FORCETRIGGER = nil
         if d ~= 0 then
             G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + d
             return { dollars = d, func = HPR.event_presets.reset_dollar_buffer }
         end
-    end
+    end,
+    blueprint_compat = true,
 }
 
 HPR.StellarJoker {
     key = "destroyer",
-    blueprint_compat = true,
     config = { extra = { emult = 1, mod = 0.05, echips = 1, chip_mod = 0.001 }},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.emult, card.ability.extra.mod*100, card.ability.extra.echips, card.ability.extra.chip_mod*100 }}
@@ -934,7 +935,7 @@ HPR.StellarJoker {
                 echips = card.ability.extra.echips ~= 1 and card.ability.extra.echips or nil,
             }
         end
-        if context.remove_playing_cards then
+        if context.remove_playing_cards and not context.blueprint then
             local r = context.removed
             for _, c in ipairs(r) do
                 SMODS.scale_card(card, {
@@ -955,7 +956,6 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "ascendant",
-    blueprint_compat = true,
     config = { extra = { xchips = 0.025, xmult = 0.05 } },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.xchips, card.ability.extra.xmult }}
@@ -982,7 +982,6 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "mimic",
-    blueprint_compat = true,
     calculate = function (self, card, context)
         if context.retrigger_joker_check and not context.retrigger_joker and card.area and card.rank then
             if context.other_card == card.area.cards[card.rank+1] or context.other_card == card.area.cards[card.rank-1] then
@@ -1084,7 +1083,8 @@ HPR.StellarJoker {
             end
         }))
     end,
-    forcetrigger_compat = true
+    forcetrigger_compat = true,
+    blueprint_compat = false,
 }
 
 HPR.StellarJoker {
@@ -1150,7 +1150,6 @@ HPR.StellarJoker {
 HPR.StellarJoker {
     key = "hunter",
     config = { extra = 2 },
-    blueprint_compat = true,
     forcetrigger_compat = true,
     loc_vars = function (self, info_queue, card)
         return { vars = {card.ability.extra}}

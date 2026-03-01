@@ -65,7 +65,6 @@ HPR.BossJoker {
     end,
     boss_key = "bl_hook",
     forcetrigger_compat = true,
-    blueprint_compat = true,
 }
 
 HPR.BossJoker {
@@ -93,7 +92,6 @@ HPR.BossJoker {
         end
     end,
     boss_key = "bl_ox",
-    blueprint_compat = true,
 }
 
 HPR.BossJoker {
@@ -106,11 +104,10 @@ HPR.BossJoker {
     calculate = function (self, card, context)
         if context.stay_flipped and context.to_area == G.hand and G.GAME.current_round.discards_used == 0 and G.GAME.current_round.hands_played == 0 then
             context.other_card.ability.perma_mult = context.other_card.ability.perma_mult + card.ability.extra
-            if HPR.should_boss_downside() then return { stay_flipped = true } end
+            if HPR.should_boss_downside() and not context.blueprint then return { stay_flipped = true } end
         end
     end,
     boss_key = "bl_house",
-    blueprint_compat = true,
 }
 
 HPR.BossJoker {
@@ -130,7 +127,6 @@ HPR.BossJoker {
     end,
     boss_key = "bl_wall",
     forcetrigger_compat = true,
-    blueprint_compat = true,
 }
 
 HPR.BossJoker {
@@ -148,7 +144,6 @@ HPR.BossJoker {
         end
     end,
     boss_key = "bl_wheel",
-    blueprint_compat = true,
 }
 
 HPR.BossJoker {
@@ -181,7 +176,6 @@ HPR.BossJoker {
     end,
     boss_key = "bl_arm",
     forcetrigger_compat = true,
-    blueprint_compat = true
 }
 
 HPR.BossJoker {
@@ -199,7 +193,6 @@ HPR.BossJoker {
     end,
     boss_key = "bl_club",
     forcetrigger_compat = true,
-    blueprint_compat = true,
 }
 
 HPR.BossJoker {
@@ -213,12 +206,11 @@ HPR.BossJoker {
         if context.press_play then card.ability.prepped = true end
         if context.stay_flipped and card.ability.prepped then
             context.other_card.ability.perma_bonus = context.other_card.ability.perma_bonus + card.ability.extra
-            if HPR.should_boss_downside() then return { stay_flipped = true } end
+            if HPR.should_boss_downside() and not context.blueprint then return { stay_flipped = true } end
         end
         if (context.hand_drawn or context.setting_blind) and not context.blueprint then card.ability.prepped = nil end
     end,
     boss_key = "bl_fish",
-    blueprint_compat = true,
 }
 
 HPR.BossJoker{
@@ -239,7 +231,6 @@ HPR.BossJoker{
         if context.repetition and context.cardarea == G.play then return { repetitions = 1 } end
     end,
     boss_key = "bl_psychic",
-    blueprint_compat = true,
 }
 
 HPR.BossJoker {
@@ -259,7 +250,6 @@ HPR.BossJoker {
     end,
     boss_key = "bl_goad",
     forcetrigger_compat = true,
-    blueprint_compat = true
 }
 
 HPR.BossJoker {
@@ -287,7 +277,6 @@ HPR.BossJoker {
     end,
     boss_key = "bl_water",
     forcetrigger_compat = true,
-    blueprint_compat = true,
 }
 
 HPR.BossJoker {
@@ -311,7 +300,6 @@ HPR.BossJoker {
     end,
     boss_key = "bl_window",
     forcetrigger_compat = true,
-    blueprint_compat = true,
 }
 
 HPR.BossJoker {
@@ -348,7 +336,8 @@ HPR.BossJoker {
         SMODS.change_play_limit(-card.ability.extra.csl)
         SMODS.change_discard_limit(-card.ability.extra.csl)
     end,
-    boss_key = "bl_manacle"
+    boss_key = "bl_manacle",
+    blueprint_compat = false
 }
 
 HPR.BossJoker {
@@ -366,12 +355,11 @@ HPR.BossJoker {
         end
     end,
     boss_key = "bl_eye",
-    blueprint_compat = true,
 }
 
 HPR.BossJoker {
     key = "mouth",
-    blueprint_compat = true, forcetrigger_compat = true,
+    forcetrigger_compat = true,
     pos = { x = 2, y = 2 },
     config = { extra = { xmult = 5 }},
     loc_vars = function (self, info_queue, card)
@@ -397,7 +385,7 @@ HPR.BossJoker {
 
 HPR.BossJoker {
     key = "plant",
-    blueprint_compat = true, forcetrigger_compat = true,
+    forcetrigger_compat = true,
     pos = { x = 3, y = 2 },
     config = { extra = 1.5 },
     loc_vars = function (self, info_queue, card)
@@ -430,7 +418,8 @@ HPR.BossJoker {
             return { cards_to_draw = card.ability.extra }
         end
     end,
-    boss_key = "bl_serpent"
+    boss_key = "bl_serpent",
+    blueprint_compat = false,
 }
 
 HPR.BossJoker {
@@ -444,7 +433,8 @@ HPR.BossJoker {
             context.full_hand[1]:set_seal("Red")
         end
     end,
-    boss_key = "bl_pillar"
+    boss_key = "bl_pillar",
+    blueprint_compat = false,
 }
 
 HPR.BossJoker {
@@ -470,7 +460,7 @@ HPR.BossJoker {
             return nil, true
         end
     end,
-    blueprint_compat = true, forcetrigger_compat = true,
+    forcetrigger_compat = true,
     boss_key = "bl_needle"
 }
 
@@ -490,7 +480,7 @@ HPR.BossJoker {
             return { debuff = true }
         end
     end,
-    blueprint_compat = true, forcetrigger_compat = true,
+    forcetrigger_compat = true,
     boss_key = "bl_head"
 }
 
@@ -516,7 +506,6 @@ HPR.BossJoker {
         end
     end,
     boss_key = "bl_tooth",
-    blueprint_compat = true,
 }
 
 HPR.BossJoker {
@@ -534,7 +523,6 @@ HPR.BossJoker {
         end
     end,
     boss_key = "bl_flint",
-    blueprint_compat = true,
     forcetrigger_compat = true
 }
 
@@ -548,10 +536,10 @@ HPR.BossJoker {
     calculate = function (self, card, context)
         if context.stay_flipped and context.to_area == G.hand and context.other_card:is_face() then
             context.other_card.ability.perma_h_x_mult = context.other_card.ability.perma_h_x_mult + card.ability.extra
-            if HPR.should_boss_downside() then return { stay_flipped = true } end
+            if HPR.should_boss_downside() and not context.blueprint then return { stay_flipped = true } end
         end
     end,
-    boss_key = "bl_mark"
+    boss_key = "bl_mark",
 }
 
 HPR.BossJoker {
@@ -616,7 +604,6 @@ HPR.BossJoker {
         end
     end,
     forcetrigger_compat = true, -- :3
-    blueprint_compat = true,
     boss_key = "bl_final_acorn"
 }
 
@@ -654,7 +641,6 @@ HPR.BossJoker {
         end
     end,
     boss_key = "bl_final_leaf",
-    blueprint_compat = true,
     hpr_badge_info = {
         { key = "credits_code", vars = {"Eris"}},
         { key = "credits_art", vars = {"Eris"}},
@@ -671,7 +657,6 @@ HPR.BossJoker {
     end,
     calculate = function (self, card, context)
         if (context.setting_blind and context.blind.boss or context.forcetrigger) then
-            local stuff
             HPR.mod_blind_amount(card.ability.extra.b_size)
             local to_create = math.min(card.ability.extra.cards, G.consumeables.config.card_limit - (#G.consumeables.cards + G.GAME.consumeable_buffer))
             if to_create > 0 then
@@ -695,7 +680,8 @@ HPR.BossJoker {
             return nil, true
         end
     end,
-    boss_key = "bl_final_vessel"
+    boss_key = "bl_final_vessel",
+    forcetrigger_compat = true
 }
 
 HPR.BossJoker {
@@ -741,7 +727,6 @@ HPR.BossJoker {
         G.GAME.hpr_heart_num = G.GAME.hpr_heart_num + 1
     end,
     boss_key = "bl_final_heart",
-    blueprint_compat = true,
     forcetrigger_compat = true,
 }
 
@@ -778,7 +763,6 @@ HPR.BossJoker {
         end
     end,
     boss_key = "bl_final_bell",
-    blueprint_compat = true,
 }
 
 HPR.BossJoker {
@@ -799,7 +783,7 @@ HPR.BossJoker {
             return { emult = card.ability.extra }
         end
     end,
-    forcetrigger_compat = true, blueprint_compat = true,
+    forcetrigger_compat = true,
     boss_key = "bl_hpr_final_horse"
 }
 
@@ -843,7 +827,7 @@ HPR.BossJoker {
     remove_from_deck = function (self, card, from_debuff)
         G.consumeables:change_size(-card.ability.extra)
     end,
-    forcetrigger_compat = true, blueprint_compat = true,
+    forcetrigger_compat = true,
     boss_key = "bl_hpr_final_mist"
 }
 
@@ -859,7 +843,8 @@ HPR.BossJoker {
             end
         end
     end,
-    boss_key = "bl_hpr_final_splash"
+    boss_key = "bl_hpr_final_splash",
+    blueprint_compat = false,
 }
 
 HPR.BossJoker {
@@ -885,7 +870,8 @@ HPR.BossJoker {
         ease_hands_played(card.ability.extra.penalty)
         ease_discard(card.ability.extra.penalty)
     end,
-    boss_key = "bl_hpr_final_globe"
+    boss_key = "bl_hpr_final_globe",
+    blueprint_compat = false,
 }
 
 HPR.BossJoker {
@@ -899,9 +885,9 @@ HPR.BossJoker {
         if context.repetition and context.cardarea == G.play then
             return { repetitions = card.ability.extra }
         end
-        if context.destroy_card and context.cardarea == G.hand then
+        if context.destroy_card and context.cardarea == G.hand and not context.blueprint then
             return { remove = true }
         end
     end,
-    boss_key = "bl_hpr_final_bomb"
+    boss_key = "bl_hpr_final_bomb",
 }

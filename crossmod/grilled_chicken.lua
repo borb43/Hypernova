@@ -4,7 +4,7 @@ SMODS.Joker {
     pos = { x = 5, y = 0 },
     rarity = "hpr_boss",
     cost = 10,
-    blueprint_compat = true,
+    
     config = { extra = { xmult = 3 }},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.xmult }}
@@ -36,7 +36,7 @@ SMODS.Joker {
     soul_pos = { x = 1, y = 0 },
     rarity = "hpr_stellar",
     cost = 30,
-    blueprint_compat = true,
+    
     pools = { Food = true, ["Grilled Chicken"] = true },
     config = { extra = { threshold = 2 }},
     loc_vars = function (self, info_queue, card)
@@ -80,7 +80,7 @@ SMODS.Joker {
     soul_pos = { x = 1, y = 1 },
     cost = 10,
     rarity = "hpr_awesome",
-    blueprint_compat = true,
+    
     config = { extra = { xmult = 4 }},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.xmult }}

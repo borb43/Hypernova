@@ -4,7 +4,7 @@ SMODS.Joker { --fusion reactor, balances before scoring
     pos = { x = 1, y = 0 },
     rarity = 2,
     cost = 7,
-    blueprint_compat = true,
+    
     forcetrigger_compat = true,
     calculate = function(self, card, context)
         if context.initial_scoring_step or context.forcetrigger then
@@ -43,7 +43,8 @@ SMODS.Joker { --growth, increases potency of other joker effects
         { key = "credits_code", vars = {"Eris"} },
         { key = "credits_art", vars = {"Eris" }},
         { key = "credits_idea", vars = {"Eris" }},
-    }
+    },
+    blueprint_compat = false,
 }
 
 
@@ -57,7 +58,7 @@ SMODS.Joker { -- solar flare, levels up not most played hands and destroys some 
     end,
     rarity = 3,
     cost = 10,
-    blueprint_compat = true,
+    
     calculate = function(self, card, context)
         if context.before and G.GAME.current_round.hands_played == 0 then
             local _handname, _played = 'High Card', -1
@@ -127,7 +128,8 @@ SMODS.Joker { --tipping scales, increases numerator and denominator of probabili
         { key = "credits_code", vars = {"Eris"} },
         { key = "credits_idea", vars = {"Eris" }},
     },
-    hpr_ascension_key = "j_hpr_lucky"
+    hpr_ascension_key = "j_hpr_lucky",
+    blueprint_compat = false,
 }
 
 
@@ -141,7 +143,7 @@ SMODS.Joker { --gambling addict, scales from probability rolls
     end,
     rarity = 3,
     cost = 10,
-    blueprint_compat = true,
+    
     forcetrigger_compat = true,
     perishable_compat = false,
     calculate = function(self, card, context)
@@ -221,7 +223,8 @@ SMODS.Joker { --fortune cookie, guarantees 6 probabilities and then creates a ne
         { key = "credits_code", vars = {"Eris"} },
         { key = "credits_idea", vars = {"Eris" }},
     },
-    hpr_ascension_key = "j_hpr_lucky"
+    hpr_ascension_key = "j_hpr_lucky",
+    blueprint_compat = false,
 }
 
 SMODS.Joker {
@@ -231,7 +234,7 @@ SMODS.Joker {
     rarity = 1,
     cost = 5,
     forcetrigger_compat = true,
-    blueprint_compat = true,
+    
     calculate = function (self, card, context)
         if (context.after or context.forcetrigger) and G.hand and #G.hand.cards > 0 then
             local _card = pseudorandom_element(G.hand.cards, "hpr_bungus") or {}
@@ -270,10 +273,12 @@ SMODS.Joker {
         else
             return { key = self.key .. "_none" }
         end
-    end,hpr_badge_info = {
+    end,
+    hpr_badge_info = {
         { key = "credits_code", vars = {"Eris"} },
         { key = "credits_idea", vars = {"Eris" }},
     },
+    blueprint_compat = false,
 }
 
 SMODS.Joker {
@@ -291,6 +296,7 @@ SMODS.Joker {
     hpr_badge_info = {
         { key = "credits_idea", vars = {"Eris" }},
     },
+    blueprint_compat = false,
 }
 
 SMODS.Joker {
@@ -299,7 +305,7 @@ SMODS.Joker {
     pos = { x = 2, y = 0 },
     rarity = 2,
     cost = 7,
-    blueprint_compat = true,
+    
     config = { extra = 7 },
     pools = { Meme = true },
     loc_vars = function (self, info_queue, card)
@@ -309,7 +315,7 @@ SMODS.Joker {
     calculate = function (self, card, context)
         if (context.individual and context.cardarea == G.play or context.forcetrigger) and
             #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
-            if (context.other_card:get_id() == 7) and SMODS.pseudorandom_probability(card, 'hpr_7_ball', 1, card.ability.extra) then
+            if context.forcetrigger or context.other_card:get_id() == 7 and SMODS.pseudorandom_probability(card, 'hpr_7_ball', 1, card.ability.extra) then
                 G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
                 return {
                     extra = {
@@ -345,7 +351,7 @@ SMODS.Joker {
     pos = { x = 2, y = 0 },
     rarity = 3,
     cost = 9,
-    blueprint_compat = true,
+    
     config = { extra = { chip_min = 1, chip_max = 20, mult_min = 1, mult_max = 6 }},
     loc_vars = function (self, info_queue, card)
         local e = card.ability.extra
@@ -396,7 +402,7 @@ SMODS.Joker {
         { key = "credits_idea", vars = {"Eris"}},
     },
     hpr_ascension_key = "j_hpr_lucky",
-    forcetrigger_compat = true,
+    forcetrigger_compat = true, blueprint_compat = false,
 }
 
 SMODS.Joker {
@@ -405,7 +411,7 @@ SMODS.Joker {
     pos = { x = 0, y = 0 },
     rarity = 1,
     cost = 5,
-    blueprint_compat = true,
+    
     forcetrigger_compat = true,
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = G.P_TAGS.tag_ethereal
@@ -435,7 +441,7 @@ SMODS.Joker {
     pos = { x = 0, y = 0 },
     rarity = 1,
     cost = 5,
-    blueprint_compat = true,
+    
     forcetrigger_compat = true,
     calculate = function (self, card, context)
         if context.end_of_round and context.main_eval and context.beat_boss or context.forcetrigger then
@@ -475,6 +481,7 @@ SMODS.Joker {
             card.ability.extra.active = true
         end
     end,
+    blueprint_compat = false,
 }
 
 SMODS.Joker {
@@ -487,6 +494,7 @@ SMODS.Joker {
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra }}
     end,
+    blueprint_compat = false,
 }
 
 SMODS.Joker {
@@ -495,7 +503,7 @@ SMODS.Joker {
     pos = { x = 0, y = 0 },
     rarity = 1,
     cost = 6,
-    blueprint_compat = true,
+    
     pools = { Meme = true },
     config = { extra = { rank1 = "6", rank2 = "7" }},
     loc_vars = function (self, info_queue, card)
@@ -562,7 +570,8 @@ SMODS.Joker {
             return nil, true
         end
     end,
-    hpr_ascension_key = "j_hpr_buffoon"
+    hpr_ascension_key = "j_hpr_buffoon",
+    immutable = true, forcetrigger_compat = true,
 }
 
 SMODS.Joker {
@@ -583,7 +592,8 @@ SMODS.Joker {
         end
     end,
     pools = { wee = true },
-    hpr_ascension_key = "j_hpr_ascendant"
+    hpr_ascension_key = "j_hpr_ascendant",
+    blueprint_compat = false, forcetrigger_compat = false
 }
 
 SMODS.Joker {
@@ -592,7 +602,7 @@ SMODS.Joker {
     pos = { x = 1, y = 0 },
     rarity = 2,
     cost = 7,
-    blueprint_compat = true,
+    
     calculate = function (self, card, context)
         if context.end_of_round and context.main_eval and context.beat_boss and SMODS.last_hand_oneshot or context.forcetrigger then
             G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
@@ -633,15 +643,17 @@ SMODS.Joker {
     eternal_compat = false,
     calculate = function (self, card, context)
         if context.game_over and not context.blueprint and context.main_eval then
-            local all_eternal = true
+            local eternal_count = 0
             for _, c in ipairs(G.consumeables.cards) do
-                if not SMODS.is_eternal(c) then all_eternal = false end
+                if not SMODS.is_eternal(c) then eternal_count = eternal_count + 1 end
             end
-            if all_eternal and #G.consumeables.cards >= G.consumeables.config.card_limit then return end
+            G.GAME.consumeable_buffer = G.GAME.consumeable_buffer - (#G.consumeables.cards - eternal_count)
             SMODS.destroy_cards(G.consumeables.cards)
+            if #G.consumeables.cards + G.GAME.consumeable_buffer >= G.consumeables.config.card_limit then return end
+            local to_create = G.consumeables.config.card_limit - (#G.consumeables.cards + G.GAME.consumeable_buffer)
             G.E_MANAGER:add_event(Event{
                 func = function ()
-                    for _ = 1, G.consumeables.config.card_limit - #G.consumeables.cards - G.GAME.consumeable_buffer do
+                    for _ = 1, to_create do
                         SMODS.add_card{
                             set = "Spectral",
                             stickers = {"eternal"},
@@ -659,12 +671,37 @@ SMODS.Joker {
                 colour = G.C.HPR_STLR
             }
         end
+        if context.forcetrigger then
+            local eternal_count = 0
+            for _, c in ipairs(G.consumeables.cards) do
+                if not SMODS.is_eternal(c) then eternal_count = eternal_count + 1 end
+            end
+            G.GAME.consumeable_buffer = G.GAME.consumeable_buffer - (#G.consumeables.cards - eternal_count)
+            SMODS.destroy_cards(G.consumeables.cards)
+            if #G.consumeables.cards + G.GAME.consumeable_buffer >= G.consumeables.config.card_limit then return end
+            local to_create = G.consumeables.config.card_limit - (#G.consumeables.cards + G.GAME.consumeable_buffer)
+            G.E_MANAGER:add_event(Event{
+                func = function ()
+                    for _ = 1, to_create do
+                        SMODS.add_card{
+                            set = "Spectral",
+                            stickers = {"eternal"},
+                            key_append = "hpr_plarva",
+                            force_stickers = true
+                        }
+                    end
+                    return true
+                end
+            })
+        end
     end,
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = { key = "eternal", set = "Other"}
     end,
     inversion = "j_mr_bones",
-    hpr_ascension_key = "j_hpr_guardian"
+    hpr_ascension_key = "j_hpr_guardian",
+    blueprint_compat = false,
+    forcetrigger_compat = true,
 }
 
 SMODS.Joker {
@@ -673,7 +710,7 @@ SMODS.Joker {
     pos = { x = 0, y = 0 },
     rarity = 1,
     cost = 6,
-    blueprint_compat = true,
+    
     config = { extra = 1.2 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra }}
@@ -694,7 +731,7 @@ SMODS.Joker {
     pos = { x = 2, y = 0 },
     rarity = 3,
     cost = 8,
-    blueprint_compat = true,
+    
     config = { extra = 3 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra }}
@@ -714,7 +751,7 @@ SMODS.Joker {
     display_size = { w = 71 * 0.7, h = 95/1.2 * 0.7 },
     rarity = 1,
     cost = 3,
-    blueprint_compat = true,
+    
     config = { extra = 2 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra }}
@@ -764,7 +801,9 @@ SMODS.Joker {
             end
         end
     end,
-    hpr_ascension_key = "j_hpr_mimic"
+    hpr_ascension_key = "j_hpr_mimic",
+    blueprint_compat = false,
+    forcetrigger_compat = true,
 }
 
 SMODS.Joker {
@@ -798,7 +837,8 @@ SMODS.Joker {
         end
     end,
     forcetrigger_compat = true,
-    hpr_ascension_key = "j_hpr_buffoon"
+    hpr_ascension_key = "j_hpr_buffoon",
+    blueprint_compat = false,
 }
 
 SMODS.Joker {
@@ -807,7 +847,7 @@ SMODS.Joker {
     pos = { x = 0, y = 0 },
     rarity = 1,
     cost = 4,
-    blueprint_compat = true,
+    
     calculate = function (self, card, context)
         if context.joker_main or context.forcetrigger and hand_chips then
             return {
@@ -834,7 +874,8 @@ SMODS.Joker {
         G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante or G.GAME.round_resets.ante
         G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante + 1
     end,
-    hpr_ascension_key = "j_hpr_circus"
+    hpr_ascension_key = "j_hpr_circus",
+    blueprint_compat = false,
 }
 
 SMODS.Joker {
@@ -871,7 +912,8 @@ SMODS.Joker {
                 return { message = localize{ type = "variable", key = "a_remaining", vars = { card.ability.extra.rounds} }}
             end
         end
-    end
+    end,
+    blueprint_compat = false,
 }
 
 SMODS.Joker {
@@ -921,6 +963,7 @@ SMODS.Joker {
         { key = "credits_code", vars = {"Eris"} },
         { key = "credits_idea", vars = {"Eris"}},
     },
+    blueprint_compat = false
 }
 
 SMODS.Joker {
@@ -939,7 +982,8 @@ SMODS.Joker {
     remove_from_deck = function (self, card, from_debuff)
         G.GAME.common_mod = (G.GAME.common_mod or 1) / card.ability.extra
     end,
-    inversion = "j_oops"
+    inversion = "j_oops",
+    blueprint_compat = false,
 }
 
 SMODS.Joker {
@@ -948,7 +992,7 @@ SMODS.Joker {
     display_size = { w = 71 * 0.7, h = 95 * 0.7 },
     rarity = 2,
     cost = 7,
-    blueprint_compat = true,
+    
     config = { extra = 10 },
     loc_vars = function (self, info_queue, card)
         local two = 0
@@ -978,7 +1022,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "petit_michel",
-    blueprint_compat = true,
+    
     eternal_compat = false,
     rarity = 1,
     cost = 5,
@@ -1017,7 +1061,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "averagedish",
-    blueprint_compat = true,
+    
     eternal_compat = false,
     rarity = 3,
     cost = 8,
@@ -1032,7 +1076,7 @@ SMODS.Joker {
         if context.individual and context.cardarea == G.play and context.other_card:get_id() == 2 or context.forcetrigger then
             return { xmult = card.ability.extra.xmult }
         end
-        if context.destroy_card and context.cardarea == G.play and context.destroy_card:get_id() == 2 and SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds ) then
+        if context.destroy_card and not context.blueprint and context.cardarea == G.play and context.destroy_card:get_id() == 2 and SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds ) then
             return { remove = true }
         end
     end,
@@ -1046,7 +1090,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "mealy_apple",
-    blueprint_compat = true,
+    
     eternal_compat = false,
     rarity = 1,
     cost = 5,
@@ -1061,7 +1105,7 @@ SMODS.Joker {
             context.other_card.ability.perma_mult = context.other_card.ability.perma_mult + card.ability.extra.mult
             local c=context.other_card
             SMODS.calculate_effect({ message = localize("k_upgrade_ex"), message_card = c, juice_card = card, colour = G.C.MULT }, card)
-            if context.other_card == context.full_hand[#context.full_hand] then
+            if context.other_card == context.full_hand[#context.full_hand] and not context.blueprint then
                 card.ability.extra.discards = card.ability.extra.discards - 1
                 if card.ability.extra.discards <= 0 then
                     SMODS.destroy_cards(card, nil, nil, true)
@@ -1077,7 +1121,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "2_ball",
-    blueprint_compat = true,
+    
     rarity = 2,
     cost = 6,
     atlas = "joker",
@@ -1087,7 +1131,6 @@ SMODS.Joker {
     loc_vars = function (self, info_queue, card)
         local n,d=SMODS.get_probability_vars(card,1,card.ability.extra,self.key)
         info_queue[#info_queue+1] = G.P_CENTERS.e_hpr_green
-        info_queue[#info_queue+1] = G.P_CENTERS.c_hpr_green
         return{vars={n,d}}
     end,
     calculate = function (self, card, context)
@@ -1165,12 +1208,13 @@ SMODS.Joker {
         }
         return { main_start = main_start, main_end = main_end }
     end,
-    hpr_ascension_key = "j_hpr_missing"
+    hpr_ascension_key = "j_hpr_missing",
+    blueprint_compat = false,
 }
 
 SMODS.Joker {
     key = "glass_shard",
-    blueprint_compat = true,
+    
     rarity = 1,
     cost = 6,
     atlas = "placeholder",
@@ -1194,7 +1238,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "ceramic",
-    blueprint_compat = true,
+    
     eternal_compat = false,
     rarity = 1,
     cost = 5,
@@ -1222,7 +1266,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "fine_china",
-    blueprint_compat = true,
+    
     eternal_compat = false,
     rarity = 1,
     cost = 8,
@@ -1236,7 +1280,7 @@ SMODS.Joker {
         if context.joker_main or context.forcetrigger then
             return { xchips = card.ability.extra.xchip }
         end
-        if context.pre_discard and #context.full_hand > card.ability.extra.max_discard then
+        if context.pre_discard and #context.full_hand > card.ability.extra.max_discard and not context.blueprint then
             SMODS.destroy_cards(card)
         end
     end,
@@ -1256,7 +1300,7 @@ SMODS.Joker {
         return { vars = {card.ability.extra, card.ability.extra ~= 1 and "s" or ""}}
     end,
     calculate = function (self, card, context)
-        if context.end_of_round and context.main_eval then
+        if context.end_of_round and context.main_eval or context.forcetrigger then -- :3
             card.ability.extra = card.ability.extra + 1
             if card.ability.extra >= 5 then
                 SMODS.destroy_cards(card, nil, nil, true)
@@ -1268,12 +1312,13 @@ SMODS.Joker {
             end
         end
     end,
-    hpr_ascension_key = "j_hpr_shorthand"
+    hpr_ascension_key = "j_hpr_shorthand",
+    blueprint_compat = false, forcetrigger_compat = true
 }
 
 SMODS.Joker {
     key = "superfluid",
-    blueprint_compat = true, --i guess bro
+     --i guess bro
     rarity = 2,
     cost = 8,
     atlas = "placeholder",
@@ -1328,7 +1373,7 @@ SMODS.Joker {
             return { dollars = dollars, func = HPR.event_presets.reset_dollar_buffer }
         end
     end,
-    forcetrigger_compat = true,
+    forcetrigger_compat = true, blueprint_compat = false
 }
 
 SMODS.Joker {
@@ -1349,7 +1394,7 @@ SMODS.Joker {
             }
         end
     end,
-    forcetrigger_compat = true,
+    forcetrigger_compat = true, 
 }
 
 SMODS.Joker {
@@ -1368,7 +1413,8 @@ SMODS.Joker {
             return { repetitions = 1 }
         end
     end,
-    hpr_ascension_key = "j_hpr_mimic"
+    hpr_ascension_key = "j_hpr_mimic",
+    
 }
 
 SMODS.Joker {
@@ -1397,12 +1443,12 @@ SMODS.Joker {
                 colour = G.C.FILTER
             }
         end
-        if context.selling_self and card.ability.extra.current > card.ability.extra.rounds or context.forcetrigger then
+        if context.selling_self and card.ability.extra.current >= card.ability.extra.rounds or context.forcetrigger then
             G.hand:change_size(card.ability.extra.h_size)
             return { message = localize{type = "variable", key = "a_handsize", vars = {card.ability.extra.h_size}}}
         end
     end,
-    forcetrigger_compat = true,
+    forcetrigger_compat = true, blueprint_compat = false
 }
 
 SMODS.Joker {
@@ -1427,7 +1473,7 @@ SMODS.Joker {
         end
         if context.forcetrigger then return {xmult = card.ability.extra} end
     end,
-    forcetrigger_compat = true,
+    forcetrigger_compat = true, 
 }
 
 SMODS.Joker {
@@ -1446,7 +1492,8 @@ SMODS.Joker {
             return { message = localize("k_upgrade_ex"), colour = G.C.MONEY, message_card = context.other_card }
         end
     end,
-    hpr_ascension_key = "j_hpr_ascendant"
+    hpr_ascension_key = "j_hpr_ascendant",
+    
 }
 
 SMODS.Joker {
@@ -1470,7 +1517,8 @@ SMODS.Joker {
                 return { repetitions = reps }
             end
         end
-    end
+    end,
+    
 }
 
 SMODS.Joker {
@@ -1483,7 +1531,7 @@ SMODS.Joker {
         if context.before then
             local any
             for _, c in ipairs(context.full_hand) do
-                if c:get_id() == 8 then
+                if c:get_id() == 8 and not c.debuff then
                     any = true
                     local hand = HPR.get_random_hand(false, self.key)
                     SMODS.calculate_effect({
@@ -1497,7 +1545,8 @@ SMODS.Joker {
             if any then return nil, true end
         end
     end,
-    hpr_ascension_key = "j_hpr_observatorium"
+    hpr_ascension_key = "j_hpr_observatorium",
+    
 }
 
 SMODS.Joker {
@@ -1520,7 +1569,8 @@ SMODS.Joker {
                 return { modify = i }
             end
         end
-    end
+    end,
+    blueprint_compat = false,
 }
 
 SMODS.Joker {
@@ -1548,5 +1598,6 @@ SMODS.Joker {
             })
             return { message = localize("k_plus_egg") }
         end
-    end
+    end,
+    
 }

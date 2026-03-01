@@ -5,7 +5,7 @@ SMODS.Joker {
     soul_pos = { x = 1, y = 2 },
     rarity = "entr_reverse_legendary",
     cost = 20,
-    blueprint_compat = true,
+    
     config = { extra = { asc = 0.25, xasc = 0.05 }},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.asc, card.ability.extra.xasc }}

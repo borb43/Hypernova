@@ -5,7 +5,7 @@ SMODS.Joker {
     soul_pos = { x = 1, y = 1 },
     rarity = 4,
     cost = 20,
-    blueprint_compat = true,
+    blueprint_compat = false,
     forcetrigger_compat = true,
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'e_negative_consumable', set = 'Edition', config = { extra = 1 } }
@@ -55,5 +55,5 @@ SMODS.Joker {
         { key = "credits_code", vars = {"Eris"} },
         { key = "credits_art", vars = {"Eris" }},
         { key = "credits_idea", vars = {"Eris" }},
-    }
+    },
 }
