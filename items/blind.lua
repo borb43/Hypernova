@@ -40,7 +40,7 @@ SMODS.Blind {
     boss = { showdown = true, min = 1 },
     boss_colour = HEX("F4C430"),
     calculate = function (self, blind, context)
-        if context.modify_scoring_hand and not next(SMODS.get_enhancements(context.other_card) or {}) then
+        if context.modify_scoring_hand and not next(SMODS.get_enhancements(context.other_card) or {}) and not blind.disabled then
             return { remove_from_hand = true }
         end
     end
@@ -80,7 +80,7 @@ SMODS.Blind {
     boss = { showdown = true, min = 1 },
     boss_colour = HEX("3E2F28"),
     calculate = function (self, blind, context)
-        if context.destroy_card and context.cardarea == G.hand then
+        if not blind.disabled and context.destroy_card and context.cardarea == G.hand then
             return { remove = true }
         end
     end
