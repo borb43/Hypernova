@@ -1225,6 +1225,14 @@ local descriptions = {
                 "{C:attention}consumables{} when {C:attention}Blind{} is selected"},
                 {"All {C:attention}level ups{} are {C:attention}tripled"}
             }
+        },
+        j_hpr_final_splash = {
+            name = "Saffron Splash",
+            text = {
+                "{C:attention}Unenhanced{} cards do not score",
+                "{C:attention}Enhanced{} cards always score",
+                "when {C:attention}played{} or {C:attention}held in hand"
+            }
         }
     },
     Other = {

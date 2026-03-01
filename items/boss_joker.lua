@@ -846,3 +846,18 @@ HPR.BossJoker {
     forcetrigger_compat = true, blueprint_compat = true,
     boss_key = "bl_hpr_final_mist"
 }
+
+HPR.BossJoker {
+    key = "final_splash",
+    pos = { x = 2, y = 5 },
+    calculate = function (self, card, context)
+        if context.modify_scoring_hand then
+            if next(SMODS.get_enhancements(context.other_card) or {}) then
+                return { add_to_hand = true }
+            else
+                return { remove_from_hand = true }
+            end
+        end
+    end,
+    boss_key = "bl_hpr_final_splash"
+}
