@@ -887,3 +887,20 @@ HPR.BossJoker {
     end,
     boss_key = "bl_hpr_final_globe"
 }
+
+HPR.BossJoker {
+    key = "final_bomb",
+    pos = { x = 4, y = 5 },
+    config = { extra = 3 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.extra}}
+    end,
+    calculate = function (self, card, context)
+        if context.repetition and context.cardarea == G.play then
+            return { repetitions = card.ability.extra }
+        end
+        if context.destroy_card and context.cardarea == G.hand then
+            return { remove = true }
+        end
+    end
+}

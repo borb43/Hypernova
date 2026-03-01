@@ -1242,6 +1242,15 @@ local descriptions = {
                 {"{C:attention}+#2#{} Shop slots and",
                 "Consumable slots"}
             }
+        },
+        j_hpr_final_bomb = {
+            name = "Bark Bomb",
+            text = {
+                {"Retriggers all played",
+                "cards {C:attention}#1#{} time#<s>1#"},
+                {"Destroys all held",
+                "in hand cards"}
+            }
         }
     },
     Other = {
