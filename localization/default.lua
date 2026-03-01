@@ -1299,6 +1299,13 @@ local descriptions = {
                 "{C:hpr_erratic_col}#1#{} random cards"
             }
         },
+        p_hpr_erratic_mega_no_var = { --hardcoded loc_vars desc for tag
+            name = "Mega Erratic Pack",
+            text = {
+                "Select {C:hpr_erratic_col}2{} of up to",
+                "{C:hpr_erratic_col}5{} random cards"
+            }
+        },
         card_extra_eff_mod = {
             text = {
                 "{X:dark_edition,C:white}X#1#{} {C:chips}Chips{}, {C:mult}Mult{} and {C:money}${} effects",
@@ -1526,6 +1533,14 @@ local descriptions = {
                 "Adds a {C:attention}Deck{} to the",
                 "Voucher area of",
                 "the next shop"
+            }
+        },
+        tag_hpr_chaos = {
+            name = "Chaos Tag",
+            text = {
+                "Gives a free",
+                "{C:hpr_erratic_col}Mega Erratic Pack{}",
+                "with a random {C:dark_edition}edition"
             }
         }
     },

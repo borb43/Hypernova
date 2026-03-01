@@ -66,3 +66,41 @@ SMODS.Tag {
         end
     end
 }
+
+SMODS.Tag {
+    key = "chaos",
+    atlas = "tag",
+    pos = { x = 2, y = 0 },
+    loc_vars = function (self, info_queue, tag)
+        info_queue[#info_queue+1] = { set = "Other", key = "p_hpr_erratic_mega_no_var", vars = {} }
+    end,
+    apply = function (self, tag, context)
+        if context.type == 'new_blind_choice' then
+            local lock = tag.ID
+            G.CONTROLLER.locks[lock] = true
+            tag:yep('+', SMODS.Gradients.hpr_erratic_col, function()
+                local booster = SMODS.create_card { key = "p_hpr_erratic_mega_1", area = G.play }
+                local ed_pool = {}
+                for _, ed in ipairs(G.P_CENTER_POOLS.Edition) do
+                    if ed.key ~= "e_base" and not (ed.config and ed.config.card_limit) then
+                        ed_pool[#ed_pool+1] = ed.key
+                    end
+                end
+                local edition = SMODS.poll_edition{ options = ed_pool, guaranteed = true, key = "hpr_chaos_tag" }
+                booster:set_edition(edition or "e_foil", true, true)
+                booster.T.x = G.play.T.x + G.play.T.w / 2 - G.CARD_W * 1.27 / 2
+                booster.T.y = G.play.T.y + G.play.T.h / 2 - G.CARD_H * 1.27 / 2
+                booster.T.w = G.CARD_W * 1.27
+                booster.T.h = G.CARD_H * 1.27
+                booster.cost = 0
+                booster.from_tag = true
+                G.FUNCS.use_card({ config = { ref_table = booster } })
+                booster:start_materialize()
+                G.CONTROLLER.locks[lock] = nil
+                return true
+            end)
+            tag.triggered = true
+            return true
+        end
+    end
+}
