@@ -861,3 +861,29 @@ HPR.BossJoker {
     end,
     boss_key = "bl_hpr_final_splash"
 }
+
+HPR.BossJoker {
+    key = "final_globe",
+    pos = { x = 3, y = 5 },
+    config = { extra = { boost = 2, penalty = 1 }},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.penalty, card.ability.extra.boost }}
+    end,
+    add_to_deck = function (self, card, from_debuff)
+        change_shop_size(card.ability.extra.boost)
+        G.consumeables:change_size(card.ability.extra.boost)
+        G.GAME.round_resets.hands = G.GAME.round_resets.hands - card.ability.extra.penalty
+        G.GAME.round_resets.discards = G.GAME.round_resets.discards - card.ability.extra.penalty
+        ease_hands_played(-card.ability.extra.penalty)
+        ease_discard(-card.ability.extra.penalty)
+    end,
+    remove_from_deck = function (self, card, from_debuff)
+        change_shop_size(-card.ability.extra.boost)
+        G.consumeables:change_size(-card.ability.extra.boost)
+        G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.penalty
+        G.GAME.round_resets.discards = G.GAME.round_resets.discards + card.ability.extra.penalty
+        ease_hands_played(card.ability.extra.penalty)
+        ease_discard(card.ability.extra.penalty)
+    end,
+    boss_key = "bl_hpr_final_globe"
+}

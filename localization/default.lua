@@ -1233,6 +1233,15 @@ local descriptions = {
                 "{C:attention}Enhanced{} cards always score",
                 "when {C:attention}played{} or {C:attention}held in hand"
             }
+        },
+        j_hpr_final_globe = {
+            name = "Golden Globe",
+            text = {
+                {"{C:red}-#1#{} Hand#<s>1#, Discard#<s>1#",
+                "and Hand size"},
+                {"{C:attention}+#2#{} Shop slots and",
+                "Consumable slots"}
+            }
         }
     },
     Other = {
