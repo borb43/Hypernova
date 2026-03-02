@@ -4,7 +4,6 @@ SMODS.Joker { --fusion reactor, balances before scoring
     pos = { x = 1, y = 0 },
     rarity = 2,
     cost = 7,
-    
     forcetrigger_compat = true,
     calculate = function(self, card, context)
         if context.initial_scoring_step or context.forcetrigger then
@@ -58,7 +57,6 @@ SMODS.Joker { -- solar flare, levels up not most played hands and destroys some 
     end,
     rarity = 3,
     cost = 10,
-    
     calculate = function(self, card, context)
         if context.before and G.GAME.current_round.hands_played == 0 then
             local _handname, _played = 'High Card', -1
@@ -143,7 +141,6 @@ SMODS.Joker { --gambling addict, scales from probability rolls
     end,
     rarity = 3,
     cost = 10,
-    
     forcetrigger_compat = true,
     perishable_compat = false,
     calculate = function(self, card, context)
@@ -234,7 +231,6 @@ SMODS.Joker {
     rarity = 1,
     cost = 5,
     forcetrigger_compat = true,
-    
     calculate = function (self, card, context)
         if (context.after or context.forcetrigger) and G.hand and #G.hand.cards > 0 then
             local _card = pseudorandom_element(G.hand.cards, "hpr_bungus") or {}
@@ -306,7 +302,6 @@ SMODS.Joker {
     pos = { x = 2, y = 0 },
     rarity = 2,
     cost = 7,
-    
     config = { extra = 7 },
     pools = { Meme = true },
     loc_vars = function (self, info_queue, card)
@@ -352,7 +347,6 @@ SMODS.Joker {
     pos = { x = 2, y = 0 },
     rarity = 3,
     cost = 9,
-    
     config = { extra = { chip_min = 1, chip_max = 20, mult_min = 1, mult_max = 6 }},
     loc_vars = function (self, info_queue, card)
         local e = card.ability.extra
@@ -412,7 +406,6 @@ SMODS.Joker {
     pos = { x = 0, y = 0 },
     rarity = 1,
     cost = 5,
-    
     forcetrigger_compat = true,
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = G.P_TAGS.tag_ethereal
@@ -442,7 +435,6 @@ SMODS.Joker {
     pos = { x = 0, y = 0 },
     rarity = 1,
     cost = 5,
-    
     forcetrigger_compat = true,
     calculate = function (self, card, context)
         if context.end_of_round and context.main_eval and context.beat_boss or context.forcetrigger then
@@ -504,7 +496,6 @@ SMODS.Joker {
     pos = { x = 0, y = 0 },
     rarity = 1,
     cost = 6,
-    
     pools = { Meme = true },
     config = { extra = { rank1 = "6", rank2 = "7" }},
     loc_vars = function (self, info_queue, card)
@@ -603,7 +594,6 @@ SMODS.Joker {
     pos = { x = 1, y = 0 },
     rarity = 2,
     cost = 7,
-    
     calculate = function (self, card, context)
         if context.end_of_round and context.main_eval and context.beat_boss and SMODS.last_hand_oneshot or context.forcetrigger then
             G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
@@ -711,7 +701,6 @@ SMODS.Joker {
     pos = { x = 0, y = 0 },
     rarity = 1,
     cost = 6,
-    
     config = { extra = 1.2 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra }}
@@ -732,7 +721,6 @@ SMODS.Joker {
     pos = { x = 2, y = 0 },
     rarity = 3,
     cost = 8,
-    
     config = { extra = 3 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra }}
@@ -752,7 +740,6 @@ SMODS.Joker {
     display_size = { w = 71 * 0.7, h = 95/1.2 * 0.7 },
     rarity = 1,
     cost = 3,
-    
     config = { extra = 2 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra }}
@@ -848,7 +835,6 @@ SMODS.Joker {
     pos = { x = 0, y = 0 },
     rarity = 1,
     cost = 4,
-    
     calculate = function (self, card, context)
         if context.joker_main or context.forcetrigger and hand_chips then
             return {
@@ -993,7 +979,6 @@ SMODS.Joker {
     display_size = { w = 71 * 0.7, h = 95 * 0.7 },
     rarity = 2,
     cost = 7,
-    
     config = { extra = 10 },
     loc_vars = function (self, info_queue, card)
         local two = 0
@@ -1023,7 +1008,6 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "petit_michel",
-    
     eternal_compat = false,
     rarity = 1,
     cost = 5,
@@ -1062,7 +1046,6 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "averagedish",
-    
     eternal_compat = false,
     rarity = 3,
     cost = 8,
@@ -1091,7 +1074,6 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "mealy_apple",
-    
     eternal_compat = false,
     rarity = 1,
     cost = 5,
@@ -1122,7 +1104,6 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "2_ball",
-    
     rarity = 2,
     cost = 6,
     atlas = "joker",
@@ -1215,7 +1196,6 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "glass_shard",
-    
     rarity = 1,
     cost = 6,
     atlas = "placeholder",
@@ -1239,7 +1219,6 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "ceramic",
-    
     eternal_compat = false,
     rarity = 1,
     cost = 5,
@@ -1267,7 +1246,6 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "fine_china",
-    
     eternal_compat = false,
     rarity = 1,
     cost = 8,
@@ -1319,7 +1297,6 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "superfluid",
-     --i guess bro
     rarity = 2,
     cost = 8,
     atlas = "placeholder",
@@ -1395,7 +1372,7 @@ SMODS.Joker {
             }
         end
     end,
-    forcetrigger_compat = true, 
+    forcetrigger_compat = true,
 }
 
 SMODS.Joker {
@@ -1415,7 +1392,6 @@ SMODS.Joker {
         end
     end,
     hpr_ascension_key = "j_hpr_mimic",
-    
 }
 
 SMODS.Joker {
@@ -1474,7 +1450,7 @@ SMODS.Joker {
         end
         if context.forcetrigger then return {xmult = card.ability.extra} end
     end,
-    forcetrigger_compat = true, 
+    forcetrigger_compat = true,
 }
 
 SMODS.Joker {
@@ -1494,7 +1470,6 @@ SMODS.Joker {
         end
     end,
     hpr_ascension_key = "j_hpr_ascendant",
-    
 }
 
 SMODS.Joker {
@@ -1519,7 +1494,6 @@ SMODS.Joker {
             end
         end
     end,
-    
 }
 
 SMODS.Joker {
@@ -1547,7 +1521,6 @@ SMODS.Joker {
         end
     end,
     hpr_ascension_key = "j_hpr_observatorium",
-    
 }
 
 SMODS.Joker {
