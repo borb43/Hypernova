@@ -25,35 +25,38 @@ HPR.SuitPlanet = SMODS.Consumable:extend{
     set_card_type_badge = function (self, card, badges)
         badges[#badges+1] = create_badge(localize("k_hidden_realm"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
     end,
-    atlas = "hpr_placeholder",
-    pos = { x = 4, y = 3 },
+    atlas = "hpr_consumable",
 }
 
 HPR.SuitPlanet {
     key = "coast",
-    config = { level_suit = "Diamonds", suit_chips = 10 }
+    config = { level_suit = "Diamonds", suit_chips = 10 },
+    pos = { x = 0, y = 0 },
 }
 
 HPR.SuitPlanet {
     key = "neural",
-    config = { level_suit = "Clubs", suit_chips = 10 }
+    config = { level_suit = "Clubs", suit_chips = 10 },
+    pos = { x = 1, y = 0 },
 }
 
 HPR.SuitPlanet {
     key = "limbo",
-    config = { level_suit = "Spades", suit_chips = 10 }
+    config = { level_suit = "Spades", suit_chips = 10 },
+    pos = { x = 2, y = 0 },
 }
 
 HPR.SuitPlanet {
     key = "bulwark",
-    config = { level_suit = "Hearts", suit_chips = 10 }
+    config = { level_suit = "Hearts", suit_chips = 10 },
+    pos = { x = 3, y = 0 },
 }
 
 SMODS.Consumable {
     key = "planetarium",
     set = "Spectral",
-    atlas = "placeholder",
-    pos = { x = 2, y = 2 },
+    atlas = "consumable",
+    pos = { x = 4, y = 0 },
     hidden = true,
     soul_set = "Planet",
     config = { extra = 3 },
