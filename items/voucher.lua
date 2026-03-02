@@ -568,4 +568,35 @@ HPR.BranchingVoucher{
     requires = {"v_hpr_massprod"},
     exclusive = "v_hpr_falsified"
 }
+
+HPR.BranchingVoucher{
+    key = "decked_out",
+    requires = {"v_hpr_order_chaos"},
+    exclusive = "v_hpr_master_chaos",
+    loc_vars = function (self, info_queue, card)
+        local k = self.key
+        if next(SMODS.find_mod("CardSleeves")) then
+            k = self.key .. "_casl"
+        end
+        return { key = k }
+    end
+}
+HPR.BranchingVoucher{
+    key = "master_chaos",
+    requires = {"v_hpr_order_chaos"},
+    exclusive = "v_hpr_decked_out",
+    loc_vars = function (self, info_queue, card)
+        local key, count = "c_fool", -1
+        for k, v in pairs(G.GAME.consumeable_usage or {}) do
+            if v.count > count then
+                key = k
+                count = v.count
+            end
+        end
+        local set = G.P_CENTERS[key].set
+        local name = localize{ type = "name_text", set = set, key = key }
+        local colour = G.C.SECONDARY_SET[set]
+        return { vars = {name, colours = {colour}}}
+    end
+}
 --#endregion

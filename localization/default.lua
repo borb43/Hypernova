@@ -1890,8 +1890,32 @@ local descriptions = {
         v_hpr_order_chaos = {
             name = "Ordered Chaos",
             text = {
-                "Consumable cards and",
-                "Vouchers can be taken"
+                "{C:attention}Consumable{} cards and",
+                "{C:attention}Vouchers{} can be taken",
+                "out of {C:hpr_erratic_col}Erratic Packs"
+            }
+        },
+        v_hpr_decked_out = {
+            name = "Decked Out",
+            text = {
+                "{C:attention}Decks{} may appear in",
+                "any of the {C:hpr_erratic_col}Erratic Packs"
+            }
+        },
+        v_hpr_decked_out_casl = {
+            name = "Decked Out",
+            text = {
+                "{C:attention}Decks{} and {C:attention}Sleeves{} may appear",
+                "in any of the {C:hpr_erratic_col}Erratic Packs"
+            }
+        },
+        v_hpr_master_chaos = {
+            name = "Mastered Chaos",
+            text = {
+                "{C:hpr_erratic_col}Erratic Packs{} always",
+                "contain your most",
+                "used {C:attention}Consumable{} card",
+                "{C:inactive}(Currently {V:1}#1#{C:inactive})"
             }
         }
     },

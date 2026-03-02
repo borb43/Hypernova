@@ -58,7 +58,7 @@ end
 
 function HPR.get_generic_rare_sets()
     local t = {"Voucher"}
-    if Entropy then
+    if G.GAME.used_vouchers.v_hpr_decked_out then
         t[#t+1] = "Back"
         if CardSleeves then
             t[#t+1] = "Sleeve"

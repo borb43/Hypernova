@@ -194,6 +194,22 @@ SMODS.Gradient {
 }
 
 local erratic_create_card = function (self, card, i)
+    if i == 1 and G.GAME.used_vouchers.v_hpr_master_chaos then
+        local key, count = "c_fool", -1
+        for k, v in pairs(G.GAME.consumeable_usage or {}) do
+            if v.count > count then
+                key = k
+                count = v.count
+            end
+        end
+        return {
+            set = "Consumeables",
+            area = G.pack_cards,
+            key_append = "hpr_erratic_card2",
+            skip_materialize = true,
+            key = key
+        }
+    end
     local pool = HPR.poll_set("hpr_erratic", {"Consumeables", "Joker", "Playing Card", G.GAME.used_vouchers.v_hpr_recursion and "Booster" or nil}, HPR.get_generic_rare_sets(), 0.1)
     return {
         set = pool,
