@@ -1879,6 +1879,20 @@ local descriptions = {
                 "or packs may appear with",
                 "permanent {C:money}${} bonuses"
             }
+        },
+        v_hpr_recursion = {
+            name = "Recursion",
+            text = {
+                "{C:hpr_erratic_col}Erratic Packs{} may contain",
+                "other {C:attention}Booster Packs"
+            }
+        },
+        v_hpr_order_chaos = {
+            name = "Ordered Chaos",
+            text = {
+                "Consumable cards and",
+                "Vouchers can be taken"
+            }
         }
     },
     hpr_moons = {
@@ -2130,7 +2144,8 @@ local misc = {
         no_repeat_hands = "No repeat hand types per round",
         k_plus_egg = "+1 Egg",
         k_hidden_realm = "Hidden Realm",
-        k_all_suits = "All Suits"
+        k_all_suits = "All Suits",
+        b_hpr_take = "TAKE"
     },
     high_scores = {},
     labels = {

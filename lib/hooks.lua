@@ -480,3 +480,18 @@ function Spectrallib.xl_mult(hand, card, l_mult, instant)
 	l_mult = l_mult ^ (3 ^ #SMODS.find_card("j_hpr_final_mist"))
 	xl_mult_ref(hand, card, l_mult, instant)
 end
+
+local needs_pull_ref = Spectrallib.needs_pull_button
+function Spectrallib.needs_pull_button(card)
+	if HPR.can_pull(card) and SMODS.OPENED_BOOSTER.config.center.kind == "hpr_erratic" and G.GAME.used_vouchers.v_hpr_order_chaos and (card.ability.consumeable or card.ability.set == "Voucher") then
+		return localize("b_hpr_take")
+	end
+	return needs_pull_ref(card)
+end
+local can_pull_ref = Spectrallib.can_be_pulled
+function Spectrallib.can_be_pulled(card)
+	if HPR.can_pull(card) and SMODS.OPENED_BOOSTER.config.center.kind == "hpr_erratic" and G.GAME.used_vouchers.v_hpr_order_chaos and (card.ability.consumeable or card.ability.set == "Voucher") then
+		return true
+	end
+	return can_pull_ref(card)
+end
