@@ -430,7 +430,7 @@ local disable_ref = Blind.disable
 function Blind:disable()
 	if not self.config.blind.hpr_no_avoid then disable_ref(self) end
 end
-
+--[[
 local blind_ui_ref = create_UIBox_blind_select
 function create_UIBox_blind_select()
 	if HPR.should_spawn_superboss() then
@@ -444,7 +444,7 @@ function get_new_boss()
 	if HPR.should_spawn_superboss() then return "bl_hpr_true_final_star_p1" end
 	return new_boss_ref()
 end
-
+]]
 local play_ref = G.FUNCS.play_cards_from_highlighted
 function G.FUNCS.play_cards_from_highlighted(e)
 	if not (G.play and G.play.cards[1]) then

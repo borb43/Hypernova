@@ -259,11 +259,6 @@ function HPR.rarity_to_string(rarity)
     return rarity
 end
 
-function HPR.should_boss_downside()
-    if next(SMODS.find_card("j_hpr_hunter")) then return false end
-    return true
-end
-
 function HPR.can_pull(card)
     if not SMODS.OPENED_BOOSTER then return false end
     local c = card.config.center
