@@ -25,7 +25,7 @@ SMODS.Blind {
     boss = { showdown = true, min = 1 },
     boss_colour = HEX("0BDA51"),
     calculate = function (self, blind, context)
-        if not blind.disabled and context.debuff_card and context.debuff_card.area and context.debuff_card.area.config.type == "jokers" then
+        if not blind.disabled and context.debuff_card and context.debuff_card.area and context.debuff_card.area == G.jokers then
             return { debuff = true }
         end
     end

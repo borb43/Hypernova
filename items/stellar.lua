@@ -24,7 +24,7 @@ SMODS.Consumable {
     pos = { x = 2, y = 2 },
     hidden = true,
     can_use = function (self, card)
-        return G.jokers and G.jokers.highlighted and #G.jokers.highlighted == 1
+        return G.jokers and G.jokers.highlighted and #G.jokers.highlighted == 1 and HPR.get_ascension(G.jokers.highlighted[1]) ~= nil
     end,
     use = function (self, card, area, copier)
         local function blacklist(c)

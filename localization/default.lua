@@ -1265,6 +1265,15 @@ local descriptions = {
                 "contains any {V:1}#1#{},",
                 "{s:0.8}suit changes at end of round"
             }
+        },
+        j_hpr_arm = {
+            name = "The Arm",
+            text = {
+                "Level down each played",
+                "poker hand and gains",
+                "the lost {C:chips}Chips{} and {C:mult}Mult",
+                "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#2#{C:inactive} Mult)"
+            }
         }
     },
     Other = {
@@ -1302,7 +1311,7 @@ local descriptions = {
         p_hpr_erratic_pack_jumbo = {
             name = "#3# Erratic Pack",
             text = {
-                "Select {C:hpr_erratic_col}#@#{} of up to",
+                "Select {C:hpr_erratic_col}#2#{} of up to",
                 "{C:hpr_erratic_col}#1#{} random cards"
             }
         },

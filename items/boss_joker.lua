@@ -104,7 +104,7 @@ HPR.BossJoker {
     calculate = function (self, card, context)
         if context.stay_flipped and context.to_area == G.hand and G.GAME.current_round.discards_used == 0 and G.GAME.current_round.hands_played == 0 then
             context.other_card.ability.perma_mult = context.other_card.ability.perma_mult + card.ability.extra
-            if not context.blueprint then return { stay_flipped = true } end
+            if not context.blueprint then return { stay_flipped = true, no_retrigger = true } end
         end
     end,
     boss_key = "bl_house",
@@ -140,7 +140,7 @@ HPR.BossJoker {
     calculate = function (self, card, context)
         if context.stay_flipped and context.to_area == G.hand and SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds) then
             context.other_card.ability.perma_x_mult = context.other_card.ability.perma_x_mult + card.ability.extra.xmult
-            if not context.blueprint then return { stay_flipped = true } end
+            if not context.blueprint then return { stay_flipped = true, no_retrigger = true } end
         end
     end,
     boss_key = "bl_wheel",
@@ -187,7 +187,7 @@ HPR.BossJoker {
         if context.individual and context.cardarea == G.play or context.forcetrigger then
             return { mult = card.ability.extra }
         end
-        if context.debuff_card and not context.blueprint and context.debuff_card:is_suit("Clubs", true) then return { debuff = true } end
+        if context.debuff_card and not context.blueprint and context.debuff_card:is_suit("Clubs", true) then return { debuff = true, no_retrigger = true } end
     end,
     boss_key = "bl_club",
     forcetrigger_compat = true,
@@ -204,7 +204,7 @@ HPR.BossJoker {
         if context.press_play then card.ability.prepped = true end
         if context.stay_flipped and card.ability.prepped then
             context.other_card.ability.perma_bonus = context.other_card.ability.perma_bonus + card.ability.extra
-            if not context.blueprint then return { stay_flipped = true } end
+            if not context.blueprint then return { stay_flipped = true, no_retrigger = true } end
         end
         if (context.hand_drawn or context.setting_blind) and not context.blueprint then card.ability.prepped = nil end
     end,
@@ -223,7 +223,7 @@ HPR.BossJoker{
             return {
                 debuff = true,
                 debuff_text = localize{ type = "variable", vars = {card.ability.extra}, key = "play_x_cards"},
-                no_juice = context.check
+                no_retrigger = true
             }
         end
         if context.repetition and context.cardarea == G.play then return { repetitions = 1 } end
@@ -240,7 +240,7 @@ HPR.BossJoker {
     end,
     calculate = function (self, card, context)
         if context.debuff_card and not context.blueprint and context.debuff_card:is_suit("Spades", true) then
-            return { debuff = true }
+            return { debuff = true, no_retrigger = true }
         end
         if context.individual and context.cardarea == G.play or context.forcetrigger then
             return { chips = card.ability.extra}
@@ -293,7 +293,7 @@ HPR.BossJoker {
             }
         end
         if context.debuff_card and not context.blueprint and context.debuff_card.is_suit and context.debuff_card:is_suit("Diamonds", true) then
-            return { debuff = true }
+            return { debuff = true, no_retrigger = true }
         end
     end,
     boss_key = "bl_window",
@@ -326,7 +326,7 @@ HPR.BossJoker {
     pos = { x = 1, y = 2 },
     calculate = function (self, card, context)
         if context.debuff_hand and not context.blueprint and G.GAME.hands[context.scoring_name].played_this_round > (context.check and 0 or 1) then
-            return { debuff = true, debuff_text = localize("no_repeat_hands") }
+            return { debuff = true, debuff_text = localize("no_repeat_hands"), no_retrigger = true }
         end
         if context.before then
             return {
@@ -352,7 +352,7 @@ HPR.BossJoker {
             card.ability.extra.mouth_hand = context.scoring_name
         end
         if context.debuff_hand and not context.blueprint and card.ability.extra.mouth_hand and context.scoring_name ~= card.ability.extra.mouth_hand then
-            return { debuff = true, debuff_text = localize{ type = "variable", key = "must_play_x", vars = {localize(card.ability.extra.mouth_hand, "poker_hands")} }}
+            return { debuff = true, debuff_text = localize{ type = "variable", key = "must_play_x", vars = {localize(card.ability.extra.mouth_hand, "poker_hands")} }, no_retrigger = true }
         end
         if context.joker_main or context.forcetrigger then
             return { xmult = card.ability.extra.xmult }
@@ -374,7 +374,7 @@ HPR.BossJoker {
     end,
     calculate = function (self, card, context)
         if context.debuff_card and not context.blueprint and context.debuff_card.is_face and context.debuff_card:is_face(true) then
-            return { debuff = true }
+            return { debuff = true,  }
         end
         if context.individual and context.cardarea == G.play or context.forcetrigger then
             return { xmult = card.ability.extra }
@@ -408,7 +408,7 @@ HPR.BossJoker {
     pos = { x = 5, y = 2 },
     calculate = function (self, card, context)
         if context.debuff_card and context.debuff_card.ability.played_this_ante then
-            return { debuff = true }
+            return { debuff = true, no_retrigger = true }
         end
         if context.before and context.full_hand[1] and G.GAME.current_round.hands_played == 0 then
             context.full_hand[1]:set_seal("Red")
@@ -458,7 +458,7 @@ HPR.BossJoker {
             return { xmult = card.ability.extra.xmult }
         end
         if context.debuff_card and not context.blueprint and context.debuff_card.is_suit and context.debuff_card:is_suit("Hearts", true) then
-            return { debuff = true }
+            return { debuff = true, no_retrigger = true }
         end
     end,
     forcetrigger_compat = true,
@@ -515,7 +515,7 @@ HPR.BossJoker {
     calculate = function (self, card, context)
         if context.stay_flipped and context.to_area == G.hand and context.other_card:is_face() then
             context.other_card.ability.perma_h_x_mult = context.other_card.ability.perma_h_x_mult + card.ability.extra
-            if not context.blueprint then return { stay_flipped = true } end
+            if not context.blueprint then return { stay_flipped = true, no_retrigger = true } end
         end
     end,
     boss_key = "bl_mark",
@@ -596,7 +596,7 @@ HPR.BossJoker {
     end,
     calculate = function (self, card, context)
         if context.debuff_card and not context.blueprint and context.debuff_card.playing_card and card.ability.extra.active then
-            return { debuff = true }
+            return { debuff = true, no_retrigger = true }
         end
         if context.repetition and context.cardarea == G.play and card.ability.extra.reps > 0 and not card.ability.extra.active then
             return { repetitions = card.ability.extra.reps }
@@ -694,7 +694,7 @@ HPR.BossJoker {
             end
         end
         if context.debuff_card and not context.blueprint and context.debuff_card.ability[id] then
-            return { debuff = true }
+            return { debuff = true, no_retrigger = true }
         end
         if (context.other_joker and context.other_joker.debuff) or (context.other_consumeable and context.other_consumeable.debuff) or context.forcetrigger then
             return { xmult = card.ability.extra }
@@ -775,7 +775,7 @@ HPR.BossJoker {
     end,
     calculate = function (self, card, context)
         if context.debuff_card and context.debuff_card.area == G.jokers and context.debuff_card ~= card then
-            return { debuff = true }
+            return { debuff = true, no_retrigger = true }
         end
         if (context.setting_blind or context.forcetrigger) and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
             local to_create = G.consumeables.config.card_limit - (#G.consumeables.cards + G.GAME.consumeable_buffer)
