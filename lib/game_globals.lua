@@ -14,6 +14,16 @@ local function reset_hpr_cavepaint()
     end
 end
 
+local function reset_hpr_quiz()
+    local valid_cards = {}
+    for _, card in ipairs(G.playing_cards) do
+        if not SMODS.has_no_suit(card) then
+            valid_cards[#valid_cards+1] = card
+        end
+    end
+    local c = pseudorandom_element(valid_cards, "hpr_quiz"..G.GAME.round_resets.ante)
+    G.GAME.current_round.hpr_quiz_suit = Spectrallib.safe_get(c, "base", "suit") or "Spades"
+end
 
 HPR.reset_game_globals = function (run_start)
     if run_start then
@@ -23,6 +33,7 @@ HPR.reset_game_globals = function (run_start)
         G.GAME.hpr_awesome_pack_mod = 1
     end
     reset_hpr_cavepaint()
+    reset_hpr_quiz()
 end
 
 HPR.stellar_gradient = SMODS.Gradient {

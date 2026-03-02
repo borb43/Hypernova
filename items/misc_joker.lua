@@ -1573,5 +1573,34 @@ SMODS.Joker {
             return { message = localize("k_plus_egg") }
         end
     end,
-    
+}
+
+SMODS.Joker {
+    key = "quiz",
+    rarity = 2,
+    cost = 6,
+    atlas = "joker",
+    pos = { x = 3, y = 1 },
+    loc_vars = function (self, info_queue, card)
+        local s = G.GAME.current_round.hpr_quiz_suit or "Spades"
+        return { vars = { localize(s, "suits_plural"), colours = { G.C.SUITS[s] }}}
+    end,
+    calculate = function (self, card, context)
+        if context.before and G.GAME.current_round.hpr_quiz_suit then
+            local p = false
+            local s = G.GAME.current_round.hpr_quiz_suit
+            for _, c in ipairs(context.scoring_hand) do
+                if c:is_suit(s) then p = true break end
+            end
+            if p then
+                return {
+                    message = localize("k_level_up_ex"),
+                    func = function ()
+                        Spectrallib.level_suit(s, card, 1)
+                        return true
+                    end
+                }
+            end
+        end
+    end
 }
