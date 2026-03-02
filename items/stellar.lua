@@ -900,7 +900,7 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "destroyer",
-    config = { extra = { emult = 1, mod = 0.05, echips = 1, chip_mod = 0.001 }},
+    config = { extra = { emult = 1, mod = 0.05, echips = 1, chip_mod = 0.01 }},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.emult, card.ability.extra.mod*100, card.ability.extra.echips, card.ability.extra.chip_mod*100 }}
     end,
@@ -943,7 +943,7 @@ HPR.StellarJoker {
                     ref_value = "echips",
                     scalar_value = "chip_mod",
                     operation = function (ref_table, ref_value, initial, change)
-                        ref_table[ref_value] = initial + change * c:get_chip_bonus()
+                        ref_table[ref_value] = initial + change * HPR.get_base_chips(c)
                     end,
                     no_message = true
                 })
