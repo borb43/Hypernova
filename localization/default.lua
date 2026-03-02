@@ -1434,7 +1434,40 @@ local descriptions = {
             }
         }
     },
-    Planet = {},
+    Planet = {
+        c_hpr_coast = {
+            name = "Gilded Coast",
+            text = {
+                "({V:1}lvl.#1#{}) Level up",
+                "{V:2}#2#",
+                "{C:chips}+#3#{} Chips"
+            }
+        },
+        c_hpr_neural = {
+            name = "Neural Sanctum",
+            text = {
+                "({V:1}lvl.#1#{}) Level up",
+                "{V:2}#2#",
+                "{C:chips}+#3#{} Chips"
+            }
+        },
+        c_hpr_limbo = {
+            name = "A Moment, Whole",
+            text = {
+                "({V:1}lvl.#1#{}) Level up",
+                "{V:2}#2#",
+                "{C:chips}+#3#{} Chips"
+            }
+        },
+        c_hpr_bulwark = {
+            name = "Bulwark's Ambry",
+            text = {
+                "({V:1}lvl.#1#{}) Level up",
+                "{V:2}#2#",
+                "{C:chips}+#3#{} Chips"
+            }
+        }
+    },
     Spectral = {
         c_hpr_pulsar = {
             name = "Pulsar",
@@ -1450,6 +1483,13 @@ local descriptions = {
                 "its {C:hpr_stellar,E:1}Stellar{} counterpart"
             }
         },
+        c_hpr_planetarium = {
+            name = "The Planetarium",
+            text = {
+                "Upgrade every",
+                "{E:1,C:legendary}suit{} by {C:attention}#1#{} level#<s>1#"
+            }
+        }
     },
     Stake = {},
     Sleeve = {
@@ -2079,7 +2119,9 @@ local misc = {
         k_inactive = "inactive",
         ph_hpr_stellar_revive = "Blessed by the stars",
         no_repeat_hands = "No repeat hand types per round",
-        k_plus_egg = "+1 Egg"
+        k_plus_egg = "+1 Egg",
+        k_hidden_realm = "Hidden Realm",
+        k_all_suits = "All Suits"
     },
     high_scores = {},
     labels = {

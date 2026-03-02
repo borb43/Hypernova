@@ -311,6 +311,7 @@ for _, file in ipairs(files) do
 end
 
 assert(SMODS.load_file("items/modifier.lua"))()
+assert(SMODS.load_file("items/consumable.lua"))()
 assert(SMODS.load_file("items/prophecy.lua"))()
 assert(SMODS.load_file("items/moon.lua"))()
 assert(SMODS.load_file("items/booster.lua"))()

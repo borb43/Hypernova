@@ -456,10 +456,10 @@ function G.FUNCS.play_cards_from_highlighted(e)
 end
 
 local level_up_suitref = Spectrallib.level_suit
-function Spectrallib.level_suit(suit, card, amt, chips_override)
+function Spectrallib.level_suit(suit, card, amt, chips_override, instant)
 	amt = amt or 1
 	amt = amt * (3 ^ #SMODS.find_card("j_hpr_final_mist"))
-	level_up_suitref(suit, card, amt, chips_override)
+	level_up_suitref(suit, card, amt, chips_override, instant)
 end
 
 local l_chipsmult_ref = Spectrallib.l_chipsmult
