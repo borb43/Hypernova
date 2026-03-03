@@ -584,7 +584,7 @@ local descriptions = {
                 "to this Joker's {X:slib_emult,C:white}^Mult",
                 "{C:inactive}(Currently {X:slib_emult,C:white}^#1#{C:inactive} Mult)"},
                 {"This Joker gains {C:attention}#4#%{} of destroyed",
-                "{C:attention}playing card{} chips as {X:slib_echips,C:white}^Chips",
+                "{C:attention}playing card's{} rank as {X:slib_echips,C:white}^Chips",
                 "{C:inactive}(Currently {X:slib_echips,C:white}^#3#{C:inactive} Chips)"}
             }
         },
