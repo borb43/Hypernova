@@ -1362,53 +1362,12 @@ local descriptions = {
                 "Permanent {C:green}+#1#{} denominator"
             }
         },
-        undiscovered_hpr_prophecy = {
-            name = "Not Discovered",
-            text = {
-                "Purchase or use",
-                "this card in an",
-                "unseeded run to",
-                "learn what it does"
-            }
-        },
         hpr_negative_seal = {
             name = "Negative Seal",
             text = {
                 "{C:dark_edition}+#1#{} Hand Size",
                 "until end of round",
                 "when scored"
-            }
-        },
-        p_hpr_abyssal_normal = {
-            name = "Abyssal Pack",
-            text = {
-                "Choose {C:attention}#2#{} of up to",
-                "{C:attention}#1# {C:hpr_prophecy}Corrupted{} cards to",
-                "add to your consumables"
-            }
-        },
-        p_hpr_abyssal_jumbo = {
-            name = "Jumbo Abyssal Pack",
-            text = {
-                "Choose {C:attention}#2#{} of up to",
-                "{C:attention}#1# {C:hpr_prophecy}Corrupted{} cards to",
-                "add to your consumables"
-            }
-        },
-        p_hpr_abyssal_mega = {
-            name = "Mega Abyssal Pack",
-            text = {
-                "Choose {C:attention}#2#{} of up to",
-                "{C:attention}#1# {C:hpr_prophecy}Corrupted{} cards to",
-                "add to your consumables"
-            }
-        },
-        hpr_integrate_tooltip = {
-            name = "Integrate",
-            text = {
-                "{C:hpr_prophecy}Integrated{} cards may",
-                "appear in any future",
-                "{C:hpr_prophecy}Abyssal Packs"
             }
         },
         p_hpr_awesome = {
@@ -2028,92 +1987,6 @@ local descriptions = {
             }
         }
     },
-    hpr_prophecy = {
-        c_hpr_tome = {
-            name = "Tome",
-            text = {
-                "Creates a {C:attention}Rental{} copy",
-                "of a random {C:attention}Joker",
-                "Permanently increases",
-                "{C:attention}Rental{} cost by {C:red}$#1#",
-                "{C:inactive}(Must have room)"
-            }
-        },
-        c_hpr_ignorance = {
-            name = "Ignorance",
-            text = {
-                "Creates {C:attention}#2# Eternal",
-                "cards of the last used",
-                "{C:attention}card type",
-                "{C:inactive}Currently: {V:1}#1#"
-            }
-        },
-        c_hpr_blessing = {
-            name = "Blessing",
-            text = {
-                "Converts selected cards",
-                "to {C:attention}#1#s{}. {C:red}Level down",
-                "a random hand for each",
-                "selected card",
-                "{s:0.8,C:inactive}(Requires enough levels available to remove)"
-            }
-        },
-        c_hpr_divide = {
-            name = "Divide",
-            text = {
-                "Creates {C:dark_edition}Negative {C:attention}Perishable",
-                "copies of all your non-",
-                "{C:attention}Perishable{} Jokers",
-                "All future {C:attention}Perishable",
-                "Jokers last {C:attention}1{} less round",
-                "{C:inactive}(Minimum of {C:attention}1{C:inactive} round)"
-            }
-        },
-        c_hpr_collapse = {
-            name = "Collapse",
-            text = {
-                "{X:planet,C:white}X#2#{} the level of your",
-                "most played {C:attention}poker hand",
-                "The {C:planet}Planet{} card for your",
-                "most played {C:attention}poker hand",
-                "{C:red}can no longer appear",
-                "{C:inactive}Will target {C:attention}#1#",
-                "{C:inactive}(Max of {C:attention}+#3#{C:inactive} levels)"
-            }
-        },
-        c_hpr_silence = {
-            name = "Silence",
-            text = {
-                "Selected cards are converted",
-                "to {C:attention}#2#s{} and lose {C:mult}#1#",
-                "Mult for each selected card"
-            }
-        },
-        c_hpr_downpour = {
-            name = "Downpour",
-            text = {
-                "Selected cards are converted",
-                "to {C:attention}#2#s{} and lose {C:chips}#1#",
-                "Chips for each selected card"
-            }
-        },
-        c_hpr_wormhole = {
-            name = "Wormhole",
-            text = {
-                "Creates {C:attention}#1#{C:dark_edition} Negative{C:attention} Consumable",
-                "cards. The first {C:attention}#2#{} created cards",
-                "can {C:red}no longer appear{} this run"
-            }
-        },
-        c_hpr_integrate = {
-            name = "Integrate",
-            text = {
-                "{C:attention}Destroy{} and {C:hpr_prophecy}Integrate{} any",
-                "selected card. It will",
-                "{C:red}no longer appear{} otherwise"
-            }
-        }
-    }
 }
 local misc = {
     achievement_descriptions = {},
@@ -2150,8 +2023,6 @@ local misc = {
         k_plus_aura = "+1 Aura",
         k_saved_q = "Saved?",
         ph_hpr_plarva = "Saved by Pluripotent Larva",
-        b_hpr_prophecy_cards = "Corrupted Cards",
-        k_hpr_prophecy = "Corrupted",
         k_hpr_awesome = "Awesome",
         k_hpr_plus_shop = "+1 Shop Slot",
         k_hpr_plus_csize = "+1 Consumable Slot",
@@ -2185,7 +2056,6 @@ local misc = {
         hpr_moons = "Moon",
         hpr_diy = "DIY",
         hpr_stellar = "Stellar",
-        hpr_prophecy = "Corrupted",
         hpr_negative_seal = "Negative Seal",
         hpr_awesome = "Awesome",
         hpr_green = "Green",
@@ -2211,7 +2081,6 @@ local misc = {
         hpr_card_banned = "#1# Banished",
         a_hpr_green = "+#1# Green",
         a_hpr_green_minus = "-#1# Green",
-        hpr_card_integrated = "#1# Integrated",
         hpr_n_cards = "#1# Cards",
         a_discards = "+#1# Discards",
         play_x_cards = "Must play #1# cards",
