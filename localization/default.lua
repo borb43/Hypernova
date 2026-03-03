@@ -1471,8 +1471,10 @@ local descriptions = {
         c_hpr_planetarium = {
             name = "The Planetarium",
             text = {
-                "Upgrade every",
-                "{E:1,C:legendary}suit{} by {C:attention}#1#{} level#<s>1#"
+                "Level up",
+                "every {E:1,C:legendary}suit{}",
+                "{C:chips}+#1#{} Chips and",
+                "{C:mult}+#2#{} Mult"
             }
         }
     },

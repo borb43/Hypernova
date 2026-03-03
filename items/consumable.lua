@@ -71,9 +71,9 @@ SMODS.Consumable {
     pos = { x = 5, y = 0 },
     hidden = true,
     soul_set = "Planet",
-    config = { extra = 3 },
+    config = { extra = { chips = 10, mult = 1 } },
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra }}
+        return { vars = { card.ability.extra.chips, card.ability.extra.mult }}
     end,
     use = function (self, card, area, copier)
         update_hand_text({ sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3 },
@@ -88,7 +88,7 @@ SMODS.Consumable {
                 return true
             end
         }))
-        update_hand_text({ delay = 0 }, { mult = '+', StatusText = true })
+        update_hand_text({ delay = 0 }, { mult = '+'..number_format(card.ability.extra.mult), StatusText = true })
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.9,
@@ -98,7 +98,7 @@ SMODS.Consumable {
                 return true
             end
         }))
-        update_hand_text({ delay = 0 }, { chips = '+', StatusText = true })
+        update_hand_text({ delay = 0 }, { chips = '+'..number_format(card.ability.extra.chips), StatusText = true })
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.9,
@@ -109,12 +109,12 @@ SMODS.Consumable {
                 return true
             end
         }))
-        update_hand_text({ sound = 'button', volume = 0.7, pitch = 0.9, delay = 0 }, { level = '+'..number_format(card.ability.extra) })
+        update_hand_text({ sound = 'button', volume = 0.7, pitch = 0.9, delay = 0 }, { level = '+1' })
         delay(1.3)
         for _, key in ipairs(SMODS.Suit.obj_buffer) do
-            Spectrallib.level_suit(key, card, card.ability.extra, nil, 1, true)
+            Spectrallib.level_suit(key, card, 1, card.ability.extra.chips, card.ability.extra.mult, true)
         end
-        Spectrallib.level_suit("suitless", card, card.ability.extra, nil, 1, true)
+        Spectrallib.level_suit("suitless", card, 1, card.ability.extra.chips, card.ability.extra.mult, true)
         update_hand_text({ sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 }, { mult = 0, chips = 0, handname = '', level = '' })
     end,
     can_use = function (self, card)
