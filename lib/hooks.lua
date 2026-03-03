@@ -455,32 +455,6 @@ function G.FUNCS.play_cards_from_highlighted(e)
 	play_ref(e)
 end
 
-local level_up_suitref = Spectrallib.level_suit
-function Spectrallib.level_suit(suit, card, amt, chips_override, instant)
-	amt = amt or 1
-	amt = amt * (3 ^ #SMODS.find_card("j_hpr_final_mist"))
-	level_up_suitref(suit, card, amt, chips_override, instant)
-end
-
-local l_chipsmult_ref = Spectrallib.l_chipsmult
-function Spectrallib.l_chipsmult(hand, card, l_chips, l_mult, instant)
-	l_chips = l_chips * (3 ^ #SMODS.find_card("j_hpr_final_mist"))
-	l_mult = l_mult * (3 ^ #SMODS.find_card("j_hpr_final_mist"))
-	l_chipsmult_ref(hand, card, l_chips, l_mult, instant)
-end
-
-local xl_chips_ref = Spectrallib.xl_chips
-function Spectrallib.xl_chips(hand, card, l_chips, instant)
-	l_chips = l_chips ^ (3 ^ #SMODS.find_card("j_hpr_final_mist"))
-	xl_chips_ref(hand, card, l_chips, instant)
-end
-
-local xl_mult_ref = Spectrallib.xl_mult
-function Spectrallib.xl_mult(hand, card, l_mult, instant)
-	l_mult = l_mult ^ (3 ^ #SMODS.find_card("j_hpr_final_mist"))
-	xl_mult_ref(hand, card, l_mult, instant)
-end
-
 local needs_pull_ref = Spectrallib.needs_pull_button
 function Spectrallib.needs_pull_button(card)
 	if HPR.can_pull(card) and SMODS.OPENED_BOOSTER.config.center.kind == "hpr_erratic" and G.GAME.used_vouchers.v_hpr_order_chaos and (card.ability.consumeable or card.ability.set == "Voucher") then

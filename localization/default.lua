@@ -1223,7 +1223,7 @@ local descriptions = {
                 {"{C:attention}+#1#{} Consumable slots, fills all",
                 "Consumable slots with random",
                 "{C:attention}consumables{} when {C:attention}Blind{} is selected"},
-                {"All {C:attention}level ups{} are {C:attention}tripled"}
+                {"All hand {C:attention}level ups{} are {C:attention}tripled"}
             }
         },
         j_hpr_final_splash = {
@@ -1441,6 +1441,14 @@ local descriptions = {
             text = {
                 "({V:1}lvl.#1#{}) Level up",
                 "{V:2}#2#",
+                "{C:chips}+#3#{} Chips"
+            }
+        },
+        c_hpr_petrichor = {
+            name = "Petrichor V",
+            text = {
+                "({V:1}lvl.#1#{}) Level up",
+                "{C:attention}suitless{} cards",
                 "{C:chips}+#3#{} Chips"
             }
         }
