@@ -62,6 +62,14 @@ HPR.SuitPlanet {
     key = "petrichor",
     config = { level_suit = "suitless", suit_chips = 10 },
     pos = { x = 4, y = 0 },
+    in_pool = function (self, args)
+        if G.playing_cards then
+            for _, c in ipairs(G.playing_cards) do
+                if Spectrallib.true_suitless(c) then return true end
+            end
+        end
+        return false
+    end
 }
 
 SMODS.Consumable {
