@@ -23,6 +23,26 @@ HPR.SuitPlanet = SMODS.Consumable:extend{
     atlas = "hpr_consumable",
 }
 
+SMODS.Consumable {
+    key = "apworld",
+    set = "Planet",
+    config = { extra = 2 },
+    atlas = "consumable",
+    pos = { x = 0, y = 2 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.extra}}
+    end,
+    can_use = function (self, card)
+        return true
+    end,
+    use = function (self, card, area, copier)
+        SMODS.smart_level_up_hand(card, HPR.get_random_hand(nil, self.key, nil, "High Card"), false, math.floor(card.ability.extra or 1))
+    end,
+    set_card_type_badge = function (self, card, badges)
+        badges[#badges+1] = create_badge(localize("k_planet_q"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
+    end,
+}
+
 HPR.SuitPlanet {
     key = "coast",
     config = { level_suit = "Diamonds", suit_chips = 10 },
@@ -71,6 +91,26 @@ HPR.SuitPlanet {
         end
         return false
     end
+}
+
+SMODS.Consumable{
+    key = "simulacrum",
+    set = "Planet",
+    atlas = "consumable",
+    pos = { x = 1, y = 2 },
+    config = { extra = { chips = 10, mult = 1 }},
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.extra.chips, card.ability.extra.mult}}
+    end,
+    can_use = function (self, card)
+        return true
+    end,
+    use = function (self, card, area, copier)
+        Spectrallib.level_suit(HPR.get_random_level_suit(nil, self.key, "suitless"), card, 1, card.ability.extra.chips, card.ability.extra.mult, nil, true)
+    end,
+    set_card_type_badge = function (self, card, badges)
+        badges[#badges+1] = create_badge(localize("k_planet_void"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
+    end,
 }
 
 HPR.SuitPlanet {

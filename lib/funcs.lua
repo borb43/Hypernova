@@ -264,3 +264,18 @@ function HPR.can_pull(card)
     local c = card.config.center
     return not card:selectable_from_pack(SMODS.OPENED_BOOSTER) and not c.no_select and not c.hidden
 end
+
+function HPR.get_random_level_suit(force_suitless, seed, fallback)
+    if not force_suitless then
+        for _, c in ipairs(G.playing_cards or {}) do
+            if Spectrallib.true_suitless(c) then force_suitless = true break end
+        end
+    end
+    local suit_pool = {}
+    for _, key in ipairs(SMODS.Suit.obj_buffer) do
+        suit_pool[#suit_pool+1] = SMODS.Suits[key]
+    end
+    suit_pool[#suit_pool+1] = { key = "suitless", in_pool = function() return force_suitless end }
+    local res = pseudorandom_element(suit_pool, seed)
+    return res and res.key or fallback or "suitless"
+end

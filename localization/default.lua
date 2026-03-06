@@ -1491,6 +1491,23 @@ local descriptions = {
                 "{C:attention}suitless{} cards",
                 "{C:mult}+#3#{} Mult"
             }
+        },
+        c_hpr_apworld = {
+            name = "APWorld",
+            text = {
+                "Level up a",
+                "{C:attention}random hand",
+                "by {C:attention}#1#{} level#<s>1#"
+            }
+        },
+        c_hpr_simulacrum = {
+            name = "Simulacrum",
+            text = {
+                "Level up a",
+                "{C:attention}random suit",
+                "{C:chips}+#1#{} Chips and",
+                "{C:mult}+#2#{} Mult"
+            }
         }
     },
     Spectral = {
@@ -2099,7 +2116,8 @@ local misc = {
         k_plus_egg = "+1 Egg",
         k_hidden_realm = "Hidden Realm",
         k_all_suits = "All Suits",
-        b_hpr_take = "TAKE"
+        b_hpr_take = "TAKE",
+        k_planet_void = "?Pla??ne?t",
     },
     high_scores = {},
     labels = {
