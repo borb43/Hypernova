@@ -1604,3 +1604,38 @@ SMODS.Joker {
         end
     end
 }
+
+SMODS.Joker {
+    key = "zodiac",
+    rarity = 1,
+    cost = 5,
+    atlas = "placeholder",
+    pos = { x = 0, y = 0 },
+    config = { extra = { type = "High Card" }},
+    set_ability = function (self, card, initial, delay_sprites)
+        local seed = self.key
+        if card.area and card.area.config.type == "title" then
+            seed = "false_"..seed
+        end
+        card.ability.extra.type = HPR.get_random_hand(nil, self.key, nil, "High Card")
+    end,
+    calculate = function (self, card, context)
+        if context.joker_main and G.GAME.hands[card.ability.extra.type] then
+            local c, m = G.GAME.hands[card.ability.extra.type].chips, G.GAME.hands[card.ability.extra.type].mult
+            if c~=0 or m~=0 then
+                return {
+                    chips = c~=0 and c or nil,
+                    mult = m~=0 and m or nil
+                }
+            end
+        end
+        if context.end_of_round and context.main_eval then
+            card.ability.extra.type = HPR.get_random_hand(nil, self.key, nil, "High Card")
+            return { message = localize("k_reset")}
+        end
+    end,
+    loc_vars = function (self, info_queue, card)
+        local c, m = G.GAME.hands[card.ability.extra.type].chips, G.GAME.hands[card.ability.extra.type].mult
+        return { vars = { localize(card.ability.extra.type, "poker_hands"), c, m }}
+    end,
+}

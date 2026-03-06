@@ -1274,6 +1274,15 @@ local descriptions = {
                 "the lost {C:chips}Chips{} and {C:mult}Mult",
                 "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#2#{C:inactive} Mult)"
             }
+        },
+        j_hpr_zodiac = {
+            name = "Zodiac",
+            text = {
+                "Gives the base {C:chips}Chips",
+                "and {C:mult}Mult{} of {C:attention}#1#{},",
+                "{s:0.8}hand changes at end of round",
+                "{C:inactive}({C:chips}+#2#{C:inactive} Chips, {C:mult}+#3#{C:inactive} Mult)"
+            }
         }
     },
     Other = {
