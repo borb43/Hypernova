@@ -1030,15 +1030,15 @@ local descriptions = {
             name = "S028 BUFFOON",
             text = {
                 {"When {C:attention}Blind{} is selected, creates",
-                "{C:attention}#1# {C:dark_edition}editioned {C:attention}Jokers{} with increased",
-                "values based on their base {C:attention}rarity weight"},
-                {"Other Jokers trigger {C:mult}Mult",
-                "based on their base {C:attention}rarity weight"},
+                "{C:attention}#1# {C:dark_edition}editioned {C:attention}Jokers{} with",
+                "increased values based on their {C:attention}rarity"},
+                {"Other Jokers trigger {C:mult}Mult{}",
+                "based on their {C:attention}rarity"},
                 {
-                    "Weight>={C:common}Common{}: {X:dark_edition,C:white}X#2#{} values | {C:mult}+#6#{} Mult",
-                    "Weight>={C:uncommon}Uncommon{}: {X:dark_edition,C:white}X#3#{} values | {X:mult,C:white}X#7#{} Mult",
-                    "Weight>={C:rare}Rare{}: {X:dark_edition,C:white}X#4#{} values | {X:slib_emult,C:white}^#8#{} Mult",
-                    "Weight<{C:rare}Rare{}: {X:dark_edition,C:white}X#5#{} values | {X:slib_emult,C:white}^#8#{} Mult"
+                    "{C:common}Common{}: {X:dark_edition,C:white}X#2#{} values | {C:mult}+#5#{} Mult",
+                    "{C:uncommon}Uncommon{}: {X:dark_edition,C:white}X#3#{} values | {X:mult,C:white}X#6#{} Mult",
+                    "{C:rare}Rare{}: {X:dark_edition,C:white}X#4#{} values | {X:slib_emult,C:white}^#7#{} Mult",
+                    "Any rarer: N/A | {X:slib_emult,C:white}^#7#{} Mult"
                 }
             }
         },
