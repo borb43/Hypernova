@@ -345,12 +345,13 @@ local descriptions = {
         j_hpr_void = {
             name = "S008 VOID",
             text = {
-                "{X:mult,C:white}X#1#{} Mult for each {C:attention}unused space{} in",
-                "{C:attention}Joker{} slots, {C:attention}Consumable{} slots and",
-                "{C:attention}played{} hand, {C:attention}multiplied{} by the",
-                "amount of cards below {C:attention}#3#{} in",
-                "your {C:attention}full deck",
-                "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)"
+                {"{X:mult,C:white}X#1#{} Mult for each card",
+                "below {C:attention}#3#{} in your full deck",
+                "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)"},
+                {"{X:slib_emult,C:white}^#4#{} Mult for each unused",
+                "space in {C:attention}Joker{} slots, {C:attention}played",
+                "{C:attention}hand{}, and {C:attention}Consumable{} slots",
+                "{C:inactive}(Currently {X:slib_emult,C:white}^#5#{C:inactive} Mult)"}
             }
         },
         j_hpr_nimbus = {

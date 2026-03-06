@@ -540,32 +540,37 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "void",
-    config = { extra = { xmult_per = 0.5 }},
+    config = { extra = { xmult_per = 0.25, emult_per = 0.05 }},
     loc_vars = function (self, info_queue, card)
-        local amt = 0
-        if G.hand and G.consumeables and G.jokers and G.deck then
-            local hand = G.STATE == G.STATES.HAND_PLAYED and G.play.cards or G.hand.highlighted
-            amt = amt + G.GAME.starting_params.play_limit-#hand
-            amt = amt + (G.jokers.config.card_limit - #G.jokers.cards)
-            amt = amt + (G.consumeables.config.card_limit - #G.consumeables.cards)
-            amt = amt * math.max(1, G.GAME.starting_deck_size - #G.playing_cards)
-        else
-            amt = 1
+        local e, x = 1, 1
+        if G.playing_cards then
+            x = 1 + (G.GAME.starting_deck_size - #G.playing_cards)*card.ability.extra.xmult_per
+            x = math.max(x, 1)
+            local empty = 0
+            empty = empty + math.max(G.consumeables.config.card_limit - (G.GAME.consumeable_buffer + #G.consumeables.cards), 0)
+            empty = empty + math.max(G.jokers.config.card_limit - (G.GAME.joker_buffer + #G.jokers.cards), 0)
+            empty = empty + math.max(G.GAME.starting_params.play_limit - (G.STATE == G.STATES.HAND_PLAYED and #G.play.cards or #G.hand.highlighted), 0)
+            e = 1 + card.ability.extra.emult_per*empty
+            e = math.max(e, 1)
         end
-        return { vars = { card.ability.extra.xmult_per, amt*card.ability.extra.xmult_per, G.GAME.starting_deck_size or 52 }}
+        return { vars = {card.ability.extra.xmult_per, x, G.GAME.starting_deck_size or 52, card.ability.extra.emult_per, e,} }
     end,
     calculate = function (self, card, context)
         if context.joker_main or context.forcetrigger then
-            local amt = 0
-            amt = amt + G.GAME.starting_params.play_limit-#context.full_hand
-            amt = amt + (G.jokers.config.card_limit - #G.jokers.cards)
-            amt = amt + (G.consumeables.config.card_limit - #G.consumeables.cards)
-            amt = amt * math.max(1, G.GAME.starting_deck_size - #G.playing_cards)
-            if amt > 1 then return { xmult = math.max(amt * card.ability.extra.xmult_per,1) } end
+            x = 1 + (G.GAME.starting_deck_size - #G.playing_cards)*card.ability.extra.xmult_per
+            x = math.max(x, 1)
+            local empty = 0
+            empty = empty + math.max(G.consumeables.config.card_limit - (G.GAME.consumeable_buffer + #G.consumeables.cards), 0)
+            empty = empty + math.max(G.jokers.config.card_limit - (G.GAME.joker_buffer + #G.jokers.cards), 0)
+            empty = empty + math.max(G.GAME.starting_params.play_limit - (G.STATE == G.STATES.HAND_PLAYED and #G.play.cards or #G.hand.highlighted), 0)
+            e = 1 + card.ability.extra.emult_per*empty
+            e = math.max(e, 1)
+            if x~=1 or e~=1 then
+                return { xmult = x~=1 and x or nil, extra = e~=1 and { emult = e } or nil }
+            end
         end
     end,
     forcetrigger_compat = true,
-    
 }
 
 HPR.StellarJoker {
