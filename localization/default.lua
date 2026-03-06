@@ -1451,6 +1451,46 @@ local descriptions = {
                 "{C:attention}suitless{} cards",
                 "{C:chips}+#3#{} Chips"
             }
+        },
+        c_hpr_bazaar = {
+            name = "Bazaar Between Time",
+            text = {
+                "({V:1}lvl.#1#{}) Level up",
+                "{V:2}#2#",
+                "{C:mult}+#3#{} Mult"
+            }
+        },
+        c_hpr_computational = {
+            name = "Computational Exchange",
+            text = {
+                "({V:1}lvl.#1#{}) Level up",
+                "{V:2}#2#",
+                "{C:mult}+#3#{} Mult"
+            }
+        },
+        c_hpr_fractured = {
+            name = "A Moment, Fractured",
+            text = {
+                "({V:1}lvl.#1#{}) Level up",
+                "{V:2}#2#",
+                "{C:mult}+#3#{} Mult"
+            }
+        },
+        c_hpr_v_fields = {
+            name = "Void Fields",
+            text = {
+                "({V:1}lvl.#1#{}) Level up",
+                "{V:2}#2#",
+                "{C:mult}+#3#{} Mult"
+            }
+        },
+        c_hpr_commencement = {
+            name = "Commencement",
+            text = {
+                "({V:1}lvl.#1#{}) Level up",
+                "{C:attention}suitless{} cards",
+                "{C:mult}+#3#{} Mult"
+            }
         }
     },
     Spectral = {

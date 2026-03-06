@@ -1,3 +1,4 @@
+--#region planets
 HPR.SuitPlanet = SMODS.Consumable:extend{
     set = "Planet",
     cost = 3,
@@ -72,6 +73,60 @@ HPR.SuitPlanet {
     end
 }
 
+HPR.SuitPlanet {
+    key = "bazaar",
+    config = { level_suit = "Diamonds", suit_mult = 1 },
+    pos = { x = 0, y = 1 },
+    set_card_type_badge = function (self, card, badges)
+        badges[#badges+1] = create_badge(localize("k_hidden_realm"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
+    end,
+}
+
+HPR.SuitPlanet {
+    key = "computational",
+    config = { level_suit = "Clubs", suit_mult = 1 },
+    pos = { x = 1, y = 1 },
+    set_card_type_badge = function (self, card, badges)
+        badges[#badges+1] = create_badge(localize("k_hidden_realm"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
+    end,
+}
+
+HPR.SuitPlanet {
+    key = "fractured",
+    config = { level_suit = "Spades", suit_mult = 1 },
+    pos = { x = 2, y = 1 },
+    set_card_type_badge = function (self, card, badges)
+        badges[#badges+1] = create_badge(localize("k_hidden_realm"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
+    end,
+}
+
+HPR.SuitPlanet {
+    key = "v_fields",
+    config = { level_suit = "Hearts", suit_mult = 1 },
+    pos = { x = 3, y = 1 },
+    set_card_type_badge = function (self, card, badges)
+        badges[#badges+1] = create_badge(localize("k_hidden_realm"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
+    end,
+}
+
+HPR.SuitPlanet {
+    key = "commencement",
+    config = { level_suit = "suitless", suit_mult = 1 },
+    pos = { x = 4, y = 1 },
+    in_pool = function (self, args)
+        if G.playing_cards then
+            for _, c in ipairs(G.playing_cards) do
+                if Spectrallib.true_suitless(c) then return true end
+            end
+        end
+        return false
+    end,
+    set_card_type_badge = function (self, card, badges)
+        badges[#badges+1] = create_badge(localize("k_planet_q"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
+    end,
+}
+--#endregion
+--#region rare consumables
 SMODS.Consumable {
     key = "planetarium",
     set = "Spectral",
@@ -129,3 +184,4 @@ SMODS.Consumable {
         return true
     end,
 }
+--#endregion
