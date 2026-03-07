@@ -832,7 +832,7 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "mask",
-    config = { extra = { xmult = 2, chips = 100, dollar = 4 }},
+    config = { extra = { xmult = 1.5, chips = 30, dollar = 1 }},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.xmult, card.ability.extra.chips, card.ability.extra.dollar }}
     end,
@@ -842,16 +842,13 @@ HPR.StellarJoker {
             return { repetitions = 1 }
         end
         if context.individual and context.cardarea == G.play and context.other_card:is_face() or context.forcetrigger then
-            local res = pseudorandom("hpr_mask_effect",1,3)
-            if res == 1 then return { xmult = card.ability.extra.xmult } end
-            if res == 2 then return { chips = card.ability.extra.chips } end
-            if res == 3 then
-                G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra.dollar
-                return {
-                    dollars = card.ability.extra.dollar,
-                    func = HPR.event_presets.reset_dollar_buffer
-                }
-            end
+            G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra.dollar
+            return {
+                dollars = card.ability.extra.dollar,
+                func = HPR.event_presets.reset_dollar_buffer,
+                chips = card.ability.extra.chips,
+                xmult = card.ability.extra.xmult
+            }
         end
     end
 }

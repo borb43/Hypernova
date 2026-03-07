@@ -553,8 +553,8 @@ local descriptions = {
         j_hpr_mask = {
             name = "S019 MASK",
             text = {
-                "Played {C:attention}face{} cards randomly give",
-                "{X:mult,C:white}X#1#{} Mult, {C:chips}+#2#{} Chips or {C:money}$#3#{} when scored",
+                "Played {C:attention}face{} cards give",
+                "{X:mult,C:white}X#1#{} Mult, {C:chips}+#2#{} Chips and {C:money}$#3#{} when scored",
                 "Retriggers all {C:attention}face{} cards"
             }
         },
