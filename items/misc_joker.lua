@@ -1478,7 +1478,7 @@ SMODS.Joker {
     cost = 8,
     atlas = "placeholder",
     pos = { x = 2, y = 0 },
-    config = { extra = 8, immutable = 100 },
+    config = { extra = 5, immutable = 100 },
     loc_vars = function (self, info_queue, card)
         local n, d = SMODS.get_probability_vars(card, card.ability.extra, card.ability.extra, self.key)
         return { vars = {n,d}}
