@@ -689,17 +689,6 @@ local descriptions = {
                 "cards in your {C:attention}full{} deck"
             }
         },
-        j_hpr_voucherman = {
-            name = "Voucherman",
-            text = {
-                "Randomly increase",
-                "{C:blue}Hands{}, {C:red}Discards{}, {C:attention}Hand Size{},",
-                "{C:attention}Consumable slots{}, {C:dark_edition}Joker slots{},",
-                "{C:attention}Discard limit{}, {C:attention}Play limit{}, or",
-                "decrease {C:attention}Ante{} by {C:attention}1{} when",
-                "any {C:attention}Voucher{} is redeemed"
-            }
-        },
         j_hpr_royalty = {
             name = "S026 ROYALTY",
             text = {
@@ -814,16 +803,6 @@ local descriptions = {
             text = {
                 "{C:hpr_balance}Balances {C:chips}Chips{} and {C:mult}Mult",
                 "values of scored cards"
-            }
-        },
-        j_hpr_true_balance = {
-            name = "True Balance",
-            text = {
-                "{C:hpr_balance}Balances{} {C:chips}Chips{} and {C:mult}Mult",
-                "values of held and played cards",
-                "{C:hpr_balance}Balances {C:blue}Hands{} and {C:red}Discards",
-                "when {C:attention}blind{} is selected",
-                "{C:hpr_balance}Balances {C:chips}Chips{} and {C:mult}Mult"
             }
         },
         j_hpr_cloud_2 = {
