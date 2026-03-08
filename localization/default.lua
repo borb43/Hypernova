@@ -2128,6 +2128,7 @@ local misc = {
         k_all_suits = "All Suits",
         b_hpr_take = "TAKE",
         k_planet_void = "?Pla??ne?t",
+        k_hpr_elite = "Elite"
     },
     high_scores = {},
     labels = {
@@ -2140,7 +2141,8 @@ local misc = {
         hpr_dual_seal = "Dual Seal",
         hpr_bronze_seal = "Copper Seal",
         hpr_void_seal = "Void Seal",
-        hpr_boss = "Boss"
+        hpr_boss = "Boss",
+        hpr_elite = "Elite", --according to the wiki its k_hpr_elite but ive literally never had to do that so idk
     },
     poker_hand_descriptions = {},
     poker_hands = {},
