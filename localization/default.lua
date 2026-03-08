@@ -1263,6 +1263,15 @@ local descriptions = {
                 "{s:0.8}hand changes at end of round",
                 "{C:inactive}({C:chips}+#2#{C:inactive} Chips, {C:mult}+#3#{C:inactive} Mult)"
             }
+        },
+        j_hpr_cornucopia = {
+            name = "Cornucopia",
+            text = {
+                "{C:attention}+#1#{} Consumable slot#<s>1#",
+                "Fills all consumable slots",
+                "with random {C:attention}consumables{} for",
+                "the next {C:attention}#2#{} selected Blind#<s>2#"
+            }
         }
     },
     Other = {
@@ -2107,7 +2116,8 @@ local misc = {
         k_all_suits = "All Suits",
         b_hpr_take = "TAKE",
         k_planet_void = "?Pla??ne?t",
-        k_hpr_elite = "Elite"
+        k_hpr_elite = "Elite",
+        k_empty_ex = "Empty!"
     },
     high_scores = {},
     labels = {
