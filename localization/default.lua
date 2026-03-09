@@ -253,24 +253,6 @@ local descriptions = {
                 "after every hand"
             }
         },
-        j_hpr_cavepaint = {
-            name = "Cave Painting",
-            text = {
-                "{C:attention}Stone Cards{} mimic the rank",
-                "and suit of a random card",
-                "from your deck every round",
-                "Currently {C:attention}#1#{} of {V:1}#2#{}"
-            }
-        },
-        j_hpr_cavepaint_none = {
-            name = "Cave Painting",
-            text = {
-                "{C:attention}Stone Cards{} mimic the rank",
-                "and suit of a random card",
-                "from your deck every round",
-                "Currently None"
-            }
-        },
         j_hpr_observatorium = {
             name = "S001 OBSERVATORIUM",
             text = {
