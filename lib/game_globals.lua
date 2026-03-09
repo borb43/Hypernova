@@ -1,3 +1,23 @@
+local function reset_hpr_eris()
+    G.GAME.hpr_eris_card = { value = "Jack", suit = "Spades" }
+    local faces = {}
+    for _, k in pairs(SMODS.Ranks) do
+        if k.face then faces[#faces+1] = k end
+    end
+    local new_suit = pseudorandom_element(SMODS.Suits, "hpr_eris_suit")
+    local new_rank = pseudorandom_element(faces, "hpr_eris_rank")
+    local new_effect = pseudorandom_element({"red", "green", "blue", "cyan", "yellow", "magenta"}) --sprite colour doesnt actually change yet because still old sprite
+    if new_rank then
+        G.GAME.hpr_eris_card.value = new_rank.key
+        G.GAME.hpr_eris_card.id = new_rank.id
+    end
+    if new_suit then
+        G.GAME.hpr_eris_card.suit = new_suit.key
+    end
+    if new_effect then
+        G.GAME.hpr_eris_card.effect = new_effect
+    end
+end
 
 local function reset_hpr_quiz()
     local valid_cards = {}
@@ -14,6 +34,7 @@ HPR.reset_game_globals = function (run_start)
     if run_start then
         G.GAME.hpr_awesome_pack_mod = 1
     end
+    reset_hpr_eris()
     reset_hpr_quiz()
 end
 

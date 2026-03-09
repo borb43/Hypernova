@@ -279,3 +279,21 @@ function HPR.get_random_level_suit(force_suitless, seed, fallback)
     local res = pseudorandom_element(suit_pool, seed)
     return res and res.key or fallback or "suitless"
 end
+
+function HPR.base_suitless(card)
+    if card.base.suit == "entr_nilsuit" then return true end
+    local enh = SMODS.get_enhancements(card) or {}
+    for k in pairs(enh) do
+        if G.P_CENTERS[k] and G.P_CENTERS[k].has_no_suit or k == "m_stone" then return true end
+    end
+    return false
+end
+
+function HPR.base_rankless(card)
+    if card.base.value == "entr_nilrank" then return true end
+    local enh = SMODS.get_enhancements(card) or {}
+    for k in pairs(enh) do
+        if G.P_CENTERS[k] and G.P_CENTERS[k].has_no_rank or k == "m_stone" then return true end
+    end
+    return false
+end

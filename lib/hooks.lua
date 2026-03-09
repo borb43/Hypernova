@@ -392,3 +392,43 @@ function Spectrallib.can_be_pulled(card)
 	end
 	return can_pull_ref(card)
 end
+
+local no_rank_ref = SMODS.has_no_rank
+function SMODS.has_no_rank(card)
+	if next(SMODS.find_card("j_hpr_eris")) then
+		return false
+	end
+	return no_rank_ref(card)
+end
+
+local no_suit_ref = SMODS.has_no_suit
+function SMODS.has_no_suit(card)
+	if next(SMODS.find_card("j_hpr_eris")) then
+		return false
+	end
+	return no_suit_ref(card)
+end
+
+local get_id_ref = Card.get_id
+function Card:get_id()
+	if next(SMODS.find_card("j_hpr_eris")) and HPR.base_rankless(self) and G.GAME.hpr_eris_card and G.GAME.hpr_eris_card.id then
+		local old_id = self.base.id
+		self.base.id = G.GAME.hpr_eris_card.id
+		local res = get_id_ref(self)
+		self.base.id = old_id
+		return res
+	end
+	return get_id_ref(self)
+end
+
+local is_suit_ref = Card.is_suit
+function Card:is_suit(suit, bypass_debuff, flush_calc)
+	if next(SMODS.find_card("j_hpr_eris")) and HPR.base_suitless(self) and G.GAME.hpr_eris_card and G.GAME.hpr_eris_card.suit then
+		local old_suit = self.base.suit
+		self.base.suit = G.GAME.hpr_eris_card.suit
+		local res = is_suit_ref(self, suit, bypass_debuff, flush_calc)
+		self.base.suit = old_suit
+		return res
+	end
+	return is_suit_ref(self, suit, bypass_debuff, flush_calc)
+end
