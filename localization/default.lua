@@ -1272,6 +1272,13 @@ local descriptions = {
                 "with random {C:attention}consumables{} for",
                 "the next {C:attention}#2#{} selected Blind#<s>2#"
             }
+        },
+        j_hpr_golden_ratio = {
+            name = "Golden Ratio",
+            text = {
+                "Each played {C:attention}Ace{}, {C:attention}6{} or {C:attention}8",
+                "gives {C:money}$#1#{} when scored"
+            }
         }
     },
     Other = {

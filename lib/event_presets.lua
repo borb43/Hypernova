@@ -66,3 +66,5 @@ HPR.event_presets.reset_dollar_buffer = function ()
         end
     })
 end
+
+HPR.reset_dollar_buffer = HPR.event_presets.reset_dollar_buffer

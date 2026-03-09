@@ -45,3 +45,24 @@ SMODS.Joker {
         end
     end
 }
+
+SMODS.Joker {
+    key = "golden_ratio",
+    rarity = "hpr_elite",
+    cost = 15,
+    atlas = "placeholder",
+    pos = { x = 0, y = 1 },
+    config = { extra = 8 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.extra}}
+    end,
+    calculate = function (self, card, context)
+        if context.individual and context.cardarea == G.play and (context.other_card:get_id() == 14 or context.other_card:get_id() == 6 or context.other_card:get_id() == 8) or context.forcetrigger then
+            G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra
+            HPR.reset_dollar_buffer()
+            return {
+                dollars = card.ability.extra,
+            }
+        end
+    end
+}
