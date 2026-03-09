@@ -1573,7 +1573,7 @@ SMODS.Joker {
                 return {
                     message = localize("k_level_up_ex"),
                     func = function ()
-                        Spectrallib.level_suit(s, card, 1)
+                        Spectrallib.level_suit(s, card, 1, nil, nil, nil, true)
                         return true
                     end
                 }

@@ -1307,8 +1307,8 @@ local descriptions = {
         j_hpr_quiz = {
             name = "Quiz",
             text = {
-                "Level up {V:1}#1#{}",
-                "if scoring hand",
+                "Level up {V:1}#1#{} with",
+                "{C:chips}+10{} Chips if scoring hand",
                 "contains any {V:1}#1#{},",
                 "{s:0.8}suit changes at end of round"
             }
