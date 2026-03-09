@@ -1343,8 +1343,15 @@ local descriptions = {
         j_hpr_golden_ratio = {
             name = "Golden Ratio",
             text = {
-                "Each played {C:attention}Ace{}, {C:attention}6{} or {C:attention}8",
+                "Each played {C:attention}6{}, {C:attention}Ace{} or {C:attention}8",
                 "gives {C:money}$#1#{} when scored"
+            }
+        },
+        j_hpr_pie = {
+            name = "Pumpkin Pi",
+            text = {
+                "Each played {C:attention}3{}, {C:attention}Ace{} or {C:attention}4",
+                "gives {X:chips,C:white}X#1#{} Chips when scored"
             }
         }
     },

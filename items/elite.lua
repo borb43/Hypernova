@@ -66,3 +66,20 @@ SMODS.Joker {
         end
     end
 }
+
+SMODS.Joker {
+    key = "pie",
+    rarity = "hpr_elite",
+    cost = 15,
+    atlas = "placeholder",
+    pos = { x = 0, y = 1 },
+    config = { extra = 3.14 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {card.ability.extra}}
+    end,
+    calculate = function (self, card, context)
+        if context.individual and context.cardarea == G.play and (context.other_card:get_id() == 3 or context.other_card:get_id() == 14 or context.other_card:get_id() == 4) then
+            return { xchips = card.ability.extra }
+        end
+    end
+}
