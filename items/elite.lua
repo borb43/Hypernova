@@ -112,4 +112,5 @@ SMODS.Joker {
         end
     end,
     blueprint_compat = false,
+    hpr_ascension_key = "j_hpr_mimic"
 }
