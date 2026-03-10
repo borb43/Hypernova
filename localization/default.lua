@@ -1360,6 +1360,13 @@ local descriptions = {
                 "creates a {C:dark_edition}Negative{C:attention} Perishable",
                 "copy with no {C:attention}sell value"
             }
+        },
+        j_hpr_prospector = {
+            name = "Prospector",
+            text = {
+                "When round begins, draw",
+                "all {C:attention}Gold Cards{} to hand"
+            }
         }
     },
     Other = {

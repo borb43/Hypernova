@@ -114,3 +114,58 @@ SMODS.Joker {
     blueprint_compat = false,
     hpr_ascension_key = "j_hpr_mimic"
 }
+
+SMODS.Joker {
+    key = "prospector",
+    rarity = "hpr_elite",
+    cost = 15,
+    atlas = "placeholder",
+    pos = { x = 0, y = 1 },
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_CENTERS.m_gold
+    end,
+    calculate = function (self, card, context)
+        if context.first_hand_drawn and not context.retrigger_joker and not G.GAME.hpr_prospector_triggering then
+            G.GAME.hpr_prospector_triggering = true
+            G.E_MANAGER:add_event(Event{
+                func = function ()
+                    local golds = {}
+                    for _, c in ipairs(G.deck.cards) do
+                        if SMODS.has_enhancement(c, "m_gold") then
+                            golds[#golds+1] = c
+                        end
+                    end
+                    delay(0.3)
+                    SMODS.drawn_cards = {}
+                    for i = 1, #golds do
+                        draw_card(G.deck, G.hand, nil, "up", true, golds[i])
+                    end
+                    G.E_MANAGER:add_event(Event{ --i heart recreating smods functions because of limited functionality related to drawing specific cards
+                        trigger = "before",
+                        delay = 0.4,
+                        func = function ()
+                            if #SMODS.drawn_cards > 0 then
+                                SMODS.calculate_context({
+                                    first_hand_drawn = not G.GAME.current_round.any_hand_drawn and G.GAME.facing_blind,
+                                    hand_drawn = G.GAME.facing_blind and SMODS.drawn_cards, --literally why the fuck does lsp say this should be a boolean when the docs say its a table
+                                    other_drawn = not G.GAME.facing_blind and SMODS.drawn_cards,
+                                })
+                                SMODS.drawn_cards = {}
+                                if G.GAME.facing_blind then G.GAME.current_round.any_hand_drawn = true end
+                            end
+                            return true
+                        end
+                    })
+                    G.E_MANAGER:add_event(Event{
+                        func = function ()
+                            G.GAME.hpr_prospector_triggering = nil
+                            save_run()
+                            return true
+                        end
+                    })
+                    return true
+                end
+            })
+        end
+    end
+}
