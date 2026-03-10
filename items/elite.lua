@@ -83,3 +83,33 @@ SMODS.Joker {
         end
     end
 }
+
+SMODS.Joker {
+    key = "duplicator",
+    rarity = "hpr_elite",
+    cost = 15,
+    atlas = "placeholder",
+    pos = { x = 0, y = 1 },
+    loc_vars = function (self, info_queue, card)
+        if not (card.edition and card.edition.negative) then
+            info_queue[#info_queue+1] = G.P_CENTERS.e_negative
+        end
+        info_queue[#info_queue+1] = { key = "perishable", set = "Other", vars = { 5, 5 } }
+    end,
+    calculate = function (self, card, context)
+        if context.buying_card and context.card.ability.set == "Joker" then
+            local c = context.card
+            G.E_MANAGER:add_event(Event{
+                func = function ()
+                    local copy = copy_card(c)
+                    copy:set_edition("e_negative", true)
+                    copy:add_sticker("perishable", true)
+                    copy:add_to_deck()
+                    G.jokers:emplace(copy)
+                    return true
+                end
+            })
+        end
+    end,
+    blueprint_compat = false,
+}

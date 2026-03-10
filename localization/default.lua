@@ -1352,6 +1352,14 @@ local descriptions = {
                 "Each played {C:attention}3{}, {C:attention}Ace{} or {C:attention}4",
                 "gives {X:chips,C:white}X#1#{} Chips when scored"
             }
+        },
+        j_hpr_duplicator = {
+            name = "Substandard Duplicator",
+            text = {
+                "When a {C:attention}Joker{} is bought,",
+                "creates a {C:dark_edition}Negative{C:attention} Perishable",
+                "copy with no {C:attention}sell value"
+            }
         }
     },
     Other = {

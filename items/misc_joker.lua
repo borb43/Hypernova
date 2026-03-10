@@ -746,7 +746,7 @@ SMODS.Joker {
     cost = 10,
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.e_negative
-        info_queue[#info_queue+1] = { set = 'Other', key = 'perishable', vars = { G.GAME.perishable_rounds, G.GAME.perishable_rounds }}
+        info_queue[#info_queue+1] = { set = 'Other', key = 'perishable', vars = { 5, 5 }}
     end,
     calculate = function (self, card, context)
         if context.end_of_round and context.main_eval and context.beat_boss or context.forcetrigger then
