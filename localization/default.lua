@@ -1367,6 +1367,23 @@ local descriptions = {
                 "When round begins, draw",
                 "all {C:attention}Gold Cards{} to hand"
             }
+        },
+        j_hpr_evil_heat = {
+            name = "This Heat, an Evil Heat",
+            text = {
+                "Each scored {C:attention}10{} gives {X:mult,C:white}X#1#{} Mult",
+                "and then increases this by {X:mult,C:white}X#2#",
+                "Destroys played cards if {X:mult,C:white}XMult",
+                "is greater than {X:mult,C:white}X#3#{} after scoring",
+                "Resets after scoring"
+            }
+        },
+        j_hpr_ashes = {
+            name = "...then Fell the Ashes",
+            text = {
+                "{C:attention}Aces{} count as any {C:attention}suit",
+                "Randomizes played {C:attention}Aces"
+            }
         }
     },
     Other = {

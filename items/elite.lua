@@ -169,3 +169,62 @@ SMODS.Joker {
         end
     end
 }
+
+SMODS.Joker {
+    key = "evil_heat",
+    rarity = "hpr_elite",
+    cost = 15,
+    atlas = "placeholder",
+    pos = { x = 0, y = 1 },
+    config = { extra = { xmult = 1, gain = 0.25, heat_max = 3 }},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.xmult, card.ability.extra.gain, card.ability.extra.heat_max }}
+    end,
+    calculate = function (self, card, context)
+        if context.individual and context.cardarea == G.play and context.other_card:get_id() == 10 then
+            local ret = { xmult = card.ability.extra.xmult }
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "xmult",
+                scalar_value = "gain",
+                no_message = true,
+            })
+            if ret.xmult ~= 1 then
+                return ret
+            end
+        end
+        if context.destroy_card and (context.cardarea == G.play or context.cardarea == "unscored") and card.ability.extra.xmult >= card.ability.extra.heat_max then
+            return { remove = true }
+        end
+        if context.after then
+            card.ability.extra.xmult = 1
+        end
+    end
+}
+
+SMODS.Joker {
+    key = "ashes",
+    rarity = "hpr_elite",
+    cost = 15,
+    atlas = "placeholder",
+    pos = { x = 0, y = 1 },
+    calculate = function (self, card, context)
+        if context.before then
+            local enh_pool = SMODS.shallow_copy(get_current_pool("Enhanced"))
+            for k in ipairs(enh_pool) do
+                if enh_pool[k] ~= "UNAVAILABLE" and (enh_pool[k] == "m_stone" or G.P_CENTERS[enh_pool[k]].has_no_rank or G.P_CENTERS[enh_pool[k]].replace_base_card) then
+                    enh_pool[k] = "UNAVAILABLE"
+                end
+            end
+            for _, c in ipairs(context.scoring_hand) do
+                if c:get_id() == 14 then
+                    c:set_ability(SMODS.poll_enhancement{ options = enh_pool, guaranteed = true, key_append = "hpr_ashes_enh" } or "c_base", nil, true)
+                    c:set_seal(SMODS.poll_seal{ guaranteed = true, type_key = "hpr_ashes_seal" })
+                    c:set_edition(SMODS.poll_edition{ guaranteed = true, type_key = "hpr_ashes_ed"}, nil, nil, true)
+                end
+            end
+        end
+    end
+}
+
+--more encore jokers after they get added so hopefully an elite joker for each rank will exist

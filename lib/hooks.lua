@@ -436,3 +436,11 @@ function Card:is_suit(suit, bypass_debuff, flush_calc)
 	end
 	return is_suit_ref(self, suit, bypass_debuff, flush_calc)
 end
+
+local any_suit_ref = SMODS.has_any_suit
+function SMODS.has_any_suit(card)
+	if next(SMODS.find_card("j_hpr_ashes")) and card:get_id() == 14 then
+		return true
+	end
+	return any_suit_ref(card)
+end
