@@ -301,14 +301,13 @@ SMODS.Enhancement{
 HPR.StellarJoker {
     key = "observatorium",
     config = { extra = { chips = 0, mult = 0 }},
-    
     forcetrigger_compat = true,
     perishable_compat = false,
     calculate = function (self, card, context)
         if context.hpr_level_up_hand and not context.blueprint and (context.chips > 0 or context.mult > 0) then
             card.ability.extra.chips = card.ability.extra.chips + math.max(context.chips, 0)
             card.ability.extra.mult = card.ability.extra.mult + math.max(context.mult, 0)
-            for _, c in pairs(G.playing_cards) do
+            for _, c in ipairs(G.playing_cards) do
                 c.ability.perma_bonus = c.ability.perma_bonus + math.max(context.chips, 0)
                 c.ability.perma_mult = c.ability.perma_mult + math.max(context.mult, 0)
             end
@@ -318,6 +317,19 @@ HPR.StellarJoker {
                 }
             else
                 return nil, true
+            end
+        end
+        if context.hpr_other_modify_hand and context.func then
+            local chips = HPR.contains(context.parameters, "chips")
+            local mult = HPR.contains(context.parameters, "mult")
+            if chips then card.ability.extra.chips = math.max(context.func(card.ability.extra.chips,context.hand_type,"chips") or 0, card.ability.extra.chips) end
+            if mult then card.ability.extra.mult = math.max(context.func(card.ability.extra.mult,context.hand_type,"mult") or 0, card.ability.extra.mult) end
+            for _, c in ipairs(G.playing_cards) do
+                if chips then c.ability.perma_bonus = math.max(context.func(c.ability.perma_bonus,context.hand_type,"chips") or 0, c.ability.perma_bonus) end
+                if mult then c.ability.perma_mult = math.max(context.func(c.ability.perma_mult,context.hand_type,"chips") or 0, c.ability.perma_mult) end
+            end
+            if (chips or mult) and not context.instant then
+                return { message = localize("k_upgrade_ex") }
             end
         end
         if context.joker_main or context.forcetrigger then

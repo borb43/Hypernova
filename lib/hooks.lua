@@ -121,6 +121,25 @@ function level_up_hand(card, hand, instant, amount)
 	})
 end
 
+local upgrade_hands_ref = SMODS.upgrade_poker_hands
+function SMODS.upgrade_poker_hands(args)
+	upgrade_hands_ref(args)
+	if args.func then
+		local hands = type(args.hands) == "table" and args.hands or {args.hands}
+		for _, hand in ipairs(hands) do
+			SMODS.calculate_context{
+				hpr_other_modify_hand = true,
+				parameters = args.parameters or SMODS.Scoring_Parameter.obj_buffer,
+				instant = args.instant,
+				func = args.func,
+				other_card = args.from,
+				levels = type(args.level_up)=="number" and args.level_up or args.level_up and 1 or 0,
+				hand_type = hand,
+			}
+		end
+	end
+end
+
 local set_cost_ref = Card.set_cost
 function Card:set_cost()
 	if self.area and self.area.type == "shop" and not self.ability.hpr_samples_triggered then

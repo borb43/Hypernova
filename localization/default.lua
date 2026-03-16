@@ -344,7 +344,7 @@ local descriptions = {
                 "When a hand's {C:chips}Chips{} or {C:mult}Mult",
                 "are {C:attention}leveled up{}, upgrade this",
                 "Joker and all cards in your",
-                "{C:attention}full deck{} by the same amount",
+                "{C:attention}full deck{} in the same manner",
                 "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#2#{C:inactive} Mult)"
             }
         },
