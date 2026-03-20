@@ -427,7 +427,6 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "crazy",
-    forcetrigger_compat = true,
     pos = { x = 2, y = 0 },
     soul_pos = { x = 3, y = 0 },
     config = { extra = { mult = 1 }},
@@ -468,7 +467,6 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "crafty",
-    forcetrigger_compat = true,
     pos = { x = 4, y = 0},
     soul_pos = { x = 5, y = 0 },
     config = { extra = { chips = 5 }},
