@@ -427,33 +427,36 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "crazy",
-    
     forcetrigger_compat = true,
     pos = { x = 2, y = 0 },
     soul_pos = { x = 3, y = 0 },
-    config = { extra = { mult = 0, scale = 4 }},
+    config = { extra = { mult = 1 }},
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra.mult, card.ability.extra.scale }}
+        return { vars = { card.ability.extra.mult }}
     end,
     calculate = function (self, card, context)
         if context.before and not context.blueprint then
-            local hands = 0
-            for _, hand in pairs(context.poker_hands) do
-                if next(hand) then hands = hands + 1 end
+            local hands = {}
+            for k, hand in pairs(context.poker_hands) do
+                if next(hand) then hands[#hands+1] = k end
             end
-            if hands > 0 then
-                SMODS.scale_card(card, {
-                    ref_table = card.ability.extra,
-                    ref_value = "mult",
-                    scalar_value = "scale",
-                    operation = function (ref_table, ref_value, initial, change)
-                        ref_table[ref_value] = initial + change * hands
-                    end,
-                })
-            end
-        end
-        if context.joker_main or context.forcetrigger then
-            return { mult = card.ability.extra.mult }
+            local count = #hands
+            local m = card.ability.extra.mult
+            return {
+                message = localize("k_upgrade_ex"),
+                colour = G.C.MULT,
+                func = function ()
+                    SMODS.upgrade_poker_hands{
+                        from = card,
+                        parameters = {"mult"},
+                        level_up = false,
+                        hands = hands,
+                        func = function (base, hand, param)
+                            return base + count*m
+                        end
+                    }
+                end
+            }
         end
     end,
     hpr_badge_info = {
@@ -465,33 +468,36 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "crafty",
-    
     forcetrigger_compat = true,
     pos = { x = 4, y = 0},
     soul_pos = { x = 5, y = 0 },
-    config = { extra = { chips = 0, scale = 20 }},
+    config = { extra = { chips = 5 }},
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra.chips, card.ability.extra.scale }}
+        return { vars = { card.ability.extra.chips }}
     end,
     calculate = function (self, card, context)
         if context.before and not context.blueprint then
-            local hands = 0
-            for _, hand in pairs(context.poker_hands) do
-                if next(hand) then hands = hands + 1 end
+            local hands = {}
+            for k, hand in pairs(context.poker_hands) do
+                if next(hand) then hands[#hands+1] = k end
             end
-            if hands > 0 then
-                SMODS.scale_card(card, {
-                    ref_table = card.ability.extra,
-                    ref_value = "chips",
-                    scalar_value = "scale",
-                    operation = function (ref_table, ref_value, initial, change)
-                        ref_table[ref_value] = initial + change * hands
-                    end,
-                })
-            end
-        end
-        if context.joker_main or context.forcetrigger then
-            return { chips = card.ability.extra.chips }
+            local count = #hands
+            local m = card.ability.extra.chips
+            return {
+                message = localize("k_upgrade_ex"),
+                colour = G.C.MULT,
+                func = function ()
+                    SMODS.upgrade_poker_hands{
+                        from = card,
+                        parameters = {"chips"},
+                        level_up = false,
+                        hands = hands,
+                        func = function (base, hand, param)
+                            return base + count*m
+                        end
+                    }
+                end
+            }
         end
     end,
     hpr_badge_info = {

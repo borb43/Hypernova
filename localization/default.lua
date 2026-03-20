@@ -378,19 +378,17 @@ local descriptions = {
         j_hpr_crazy = {
             name = "S004 CRAZY",
             text = {
-                "This joker gains {C:mult}+#2#{} Mult for",
-                "every {C:attention}unique poker hand{} contained",
-                "in played hand",
-                "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
+                "All {C:attention}poker hands{} contained in",
+                "played hand gain {C:mult}+#1#{} Mult for",
+                "each {C:attention}unique{} contained {C:attention}poker hand"
             }
         },
         j_hpr_crafty = {
             name = "S005 CRAFTY",
             text = {
-                "This joker gains {C:chips}+#2#{} Chips for",
-                "every {C:attention}unique poker hand{} contained",
-                "in played hand",
-                "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips)"
+                "All {C:attention}poker hands{} contained in",
+                "played hand gain {C:chips}+#1#{} Chips for",
+                "each {C:attention}unique{} contained {C:attention}poker hand"
             }
         },
         j_hpr_storm = {
