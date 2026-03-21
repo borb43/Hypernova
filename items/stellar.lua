@@ -427,8 +427,11 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "crazy",
-    pos = { x = 2, y = 0 },
-    soul_pos = { x = 3, y = 0 },
+    pos = { x = 3, y = 0 },
+    soul_pos = {
+        x = 4, y = 0,
+        extra = { x = 5, y = 0 }
+    },
     config = { extra = { mult = 1 }},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.mult }}
@@ -467,8 +470,11 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "crafty",
-    pos = { x = 4, y = 0},
-    soul_pos = { x = 5, y = 0 },
+    pos = { x = 6, y = 0 },
+    soul_pos = {
+        x = 7, y = 0,
+        extra = { x = 8, y = 0 }
+    },
     config = { extra = { chips = 5 }},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.chips }}
@@ -636,6 +642,11 @@ HPR.StellarJoker { --literally everything this does is a hook lmfao
 
 HPR.StellarJoker {
     key = "diamond",
+    pos = { x = 0, y = 1 },
+    soul_pos = {
+        x = 1, y = 1,
+        extra = { x = 2, y = 1 },
+    },
     config = { extra = { mult = 3, dollars = 1 }},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.mult, card.ability.extra.dollars }}
@@ -653,6 +664,11 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "heart",
+    pos = { x = 3, y = 1 },
+    soul_pos = {
+        x = 4, y = 1,
+        extra = { x = 5, y = 1 }
+    },
     config = { extra = { mult = 3, xmult = 1.5 }},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.mult, card.ability.extra.xmult }}
@@ -671,6 +687,11 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "spade",
+    pos = { x = 6, y = 1 },
+    soul_pos = {
+        x = 7, y = 1,
+        extra = { x = 8, y = 1 }
+    },
     config = { extra = { mult = 3, chips = 50 }},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.mult, card.ability.extra.chips }}
@@ -688,6 +709,11 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "club",
+    pos = { x = 9, y = 1 },
+    soul_pos = {
+        x = 10, y = 1,
+        extra = { x = 11, y = 1 }
+    },
     config = { extra = { multiplier = 2 }},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.multiplier }}
@@ -811,8 +837,11 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "unity",
-    pos = { x = 6, y = 0 },
-    soul_pos = { x = 7, y = 0 },
+    pos = { x = 9, y = 0 },
+    soul_pos = {
+        x = 10, y = 0,
+        --extra = { x = 11, y = 0 }
+    },
     config = { extra = { xmult = 1, scale = 0.1}},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.xmult, card.ability.extra.scale }}
