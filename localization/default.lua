@@ -1382,6 +1382,13 @@ local descriptions = {
                 "{C:attention}Aces{} count as any {C:attention}suit",
                 "Randomizes played {C:attention}Aces"
             }
+        },
+        j_hpr_execution = {
+            name = "Executioner's Axe",
+            text = {
+                "{C:attention}Banishes{} a random {C:attention}Joker",
+                "at the end of the {C:attention}shop",
+            }
         }
     },
     Other = {

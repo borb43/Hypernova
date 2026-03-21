@@ -1616,3 +1616,31 @@ SMODS.Joker {
         return { vars = { localize(card.ability.extra.type, "poker_hands"), c, m }}
     end,
 }
+
+SMODS.Joker {
+    key = "execution",
+    rarity = 2, --probably
+    cost = 7,
+    atlas = "placeholder",
+    pos = { x = 1, y = 0 },
+    calculate = function (self, card, context)
+        if context.ending_shop then
+            local pool = {}
+            for _, cent in ipairs(G.P_CENTER_POOLS.Joker) do
+                if not G.GAME.banned_keys[cent.key] and cent.key ~= self.key and cent.unlocked then
+                    pool[#pool+1] = cent.key
+                end
+            end
+            if next(pool) then
+                local kill = pseudorandom_element(pool, "hpr_execution")
+                local name_text = localize{ type = "name_text", set = "Joker", key = kill }
+                G.GAME.banned_keys[kill] = true
+                return {
+                    message = localize{ type = "variable", key = "hpr_card_banned", vars = {name_text} },
+                    colour = G.C.RED,
+                    sound = "slice1",
+                }
+            end
+        end
+    end
+}
