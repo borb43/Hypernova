@@ -984,19 +984,6 @@ local descriptions = {
                 "with {C:attention}Grilled Chicken{} variants"}
             }
         },
-        j_hpr_awesomechicken = {
-            name = "{C:hpr_awesome}AWESOME{} Fucking Chicken",
-            text = {
-                {
-                    "{X:mult,C:white}X#1#{} Mult",
-                    "When {C:attention}Blind{} is selected, converts",
-                    "Joker to the right into a {C:attention}Grilled",
-                    "{C:attention}Chicken{} of the respective rarity"
-                },
-                {"Replace all future {C:attention}Food{} Jokers",
-                "with {C:attention}Grilled Chicken{} variants"}
-            }
-        },
         j_hpr_club_boss = {
             name = "The Club",
             text = {
