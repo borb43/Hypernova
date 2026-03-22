@@ -443,30 +443,35 @@ local descriptions = {
         j_hpr_diamond = {
             name = "S011 DIAMOND",
             text = {
-                "{C:diamonds}Diamond{} cards {C:attention}permanently{} gain",
-                "{C:mult}+#1#{} Mult and {C:money}$#2#{} when scored"
+                {"Each played {C:diamonds}Diamond{} card",
+                "gives {X:mult,C:white}X#1#{} Mult when scored"},
+                {"Earn {C:money}$#2#{} at end of round for",
+                "every {C:diamonds}Diamond{} card in full deck",
+                "{C:inactive}(Currently {C:money}$#3#{C:inactive})"}
             }
         },
         j_hpr_heart = {
             name = "S012 HEART",
             text = {
-                "{C:hearts}Heart{} cards give {X:mult,C:white}X1.5{} Mult and",
-                "{C:attention}permanently{} gain {C:mult}+3{} Mult when scored"
+                "Each scored {C:hearts}Heart{} card",
+                "has a {C:green}#1# in #2#{} chance to",
+                "give {X:slib_emult,C:white}^#4#{} Mult, else {X:mult,C:white}X#3#{} Mult"
             }
         },
         j_hpr_spade = {
             name = "S013 SPADE",
             text = {
-                "{C:spades}Spade{} cards {C:attention}permanently{} gain",
-                "{C:mult}+#1#{} Mult and {C:chips}+#2#{} chips when scored"
+                "Each scored {C:spades}Spade{} card gives",
+                "{X:purple,C:white}X#3#{} Chips and Mult and",
+                "gains {C:mult}+#1#{} Mult and {C:chips}+#2#{} Chips"
             }
         },
         j_hpr_club = {
             name = "S014 CLUB",
             text = {
-                "{C:clubs}Club{} cards permanently gain",
-                "{C:mult}Mult{} equal to {X:mult,C:white}#1#X{} their {C:attention}rank's",
-                "base {C:chips}Chips{} when scored"
+                "Played {C:clubs}Clubs{} level up {C:clubs}Clubs",
+                "with {C:chips}+#1#{} Chips and {C:mult}+#2#{} Mult",
+                "Scored {C:clubs}Clubs{} give {X:mult,C:white}X#3#{} Mult"
             }
         },
         j_hpr_executive_card = {

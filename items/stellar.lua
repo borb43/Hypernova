@@ -647,19 +647,32 @@ HPR.StellarJoker {
         x = 1, y = 1,
         extra = { x = 2, y = 1 },
     },
-    config = { extra = { mult = 3, dollars = 1 }},
+    config = { extra = { mult = 1.5, dollars = 2 }},
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra.mult, card.ability.extra.dollars }}
+        local count = 0
+        if G.playing_cards then
+            for _, c in ipairs(G.playing_cards) do
+                if c:is_suit("Diamonds") then count = count + 1 end
+            end
+        end
+        return { vars = { card.ability.extra.mult, card.ability.extra.dollars, count * card.ability.extra.dollars }}
     end,
     calculate = function (self, card, context)
         if context.individual and context.cardarea == G.play and context.other_card:is_suit("Diamonds") then
-            context.other_card.ability.perma_mult = context.other_card.ability.perma_mult + card.ability.extra.mult
-            context.other_card.ability.perma_p_dollars = context.other_card.ability.perma_p_dollars + card.ability.extra.dollars
             return {
-                message = localize("k_upgrade_ex")
+                xmult = card.ability.extra.mult
             }
         end
     end,
+    calc_dollar_bonus = function (self, card)
+        local count = 0
+        for _, c in ipairs(G.playing_cards) do
+            if c:is_suit("Diamonds") then count = count + 1 end
+        end
+        if count > 0 then
+            return count * card.ability.extra.dollars
+        end
+    end
 }
 
 HPR.StellarJoker {
@@ -669,18 +682,19 @@ HPR.StellarJoker {
         x = 4, y = 1,
         extra = { x = 5, y = 1 }
     },
-    config = { extra = { mult = 3, xmult = 1.5 }},
+    config = { extra = { odds = 3, xmult = 1.5, emult = 1.1 }},
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra.mult, card.ability.extra.xmult }}
+        local n,d = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, self.key)
+        return { vars = { n, d, card.ability.extra.xmult, card.ability.extra.emult }}
     end,
     calculate = function (self, card, context)
-        if context.individual and context.cardarea == G.play and context.other_card:is_suit("Hearts") then
-            context.other_card.ability.perma_mult = context.other_card.ability.perma_mult + card.ability.extra.mult
-            return {
-                xmult = card.ability.extra.xmult
-            }
+        if context.individual and context.cardarea == G.play and context.other_card:is_suit("Hearts") or context.forcetrigger then
+            if SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds) then
+                return { emult = card.ability.extra.emult }
+            else
+                return { xmult = card.ability.extra.xmult }
+            end
         end
-        if context.forcetrigger then return { xmult = card.ability.extra.xmult } end
     end,
     forcetrigger_compat = true,
 }
@@ -692,16 +706,20 @@ HPR.StellarJoker {
         x = 7, y = 1,
         extra = { x = 8, y = 1 }
     },
-    config = { extra = { mult = 3, chips = 50 }},
+    config = { extra = { mult = 4, chips = 30, xstuff = 1.25 }},
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra.mult, card.ability.extra.chips }}
+        return { vars = { card.ability.extra.mult, card.ability.extra.chips, card.ability.extra.xstuff }}
     end,
     calculate = function (self, card, context)
         if context.individual and context.cardarea == G.play and context.other_card:is_suit("Spades") then
             context.other_card.ability.perma_mult = context.other_card.ability.perma_mult + card.ability.extra.mult
             context.other_card.ability.perma_bonus = context.other_card.ability.perma_bonus + card.ability.extra.chips
             return {
-                message = localize("k_upgrade_ex")
+                message = localize("k_upgrade_ex"),
+                extra = {
+                    xchips = card.ability.extra.xstuff,
+                    xmult = card.ability.extra.xstuff
+                }
             }
         end
     end
@@ -714,21 +732,26 @@ HPR.StellarJoker {
         x = 10, y = 1,
         extra = { x = 11, y = 1 }
     },
-    config = { extra = { multiplier = 2 }},
+    config = { extra = { chips = 10, mult = 1, xmult = 1.5 }},
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra.multiplier }}
+        return { vars = { card.ability.extra.chips, card.ability.extra.mult, card.ability.extra.xmult }}
     end,
     calculate = function (self, card, context)
         if context.individual and context.cardarea == G.play and context.other_card:is_suit("Clubs") then
-            local base_chips = 0
-            if not SMODS.has_no_rank(context.other_card) then
-                base_chips = context.other_card.base.nominal
-            end
-            context.other_card.ability.perma_mult = context.other_card.ability.perma_mult + card.ability.extra.multiplier * base_chips
             return {
-                message = localize("k_upgrade_ex"),
-                colour = G.C.MULT
+                xmult = card.ability.extra.xmult
             }
+        end
+        if context.before then
+            local b = false
+            for _, c in ipairs(context.full_hand) do
+                if c:is_suit("Clubs") then
+                    b = true
+                    SMODS.calculate_effect({ message = localize("k_level_up_ex"), message_card = c }, card)
+                    Spectrallib.level_suit("Clubs", card, 1, card.ability.extra.chips, card.ability.extra.mult, nil, true)
+                end
+            end
+            if b then return nil, true end
         end
     end
 }
