@@ -900,24 +900,28 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "mask",
-    config = { extra = { xmult = 1.5, chips = 30, dollar = 1 }},
+    config = { extra = { xmult = 2, dollar = 1 }},
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra.xmult, card.ability.extra.chips, card.ability.extra.dollar }}
+        local count = 0
+        if G.playing_cards then
+            for _, c in ipairs(G.playing_cards) do
+                if c:is_face() then count = count + 1 end
+            end
+        end
+        return { vars = { card.ability.extra.xmult, card.ability.extra.dollar, card.ability.extra.dollar * count }}
     end,
     forcetrigger_compat = true,
     calculate = function (self, card, context)
-        if context.repetition and context.other_card:is_face() then
-            return { repetitions = 1 }
+        if context.individual and (context.cardarea == G.play or context.cardarea == G.hand) and not context.other_card.debuff and not context.end_of_round and context.other_card:is_face() or context.forcetrigger then
+            return { xmult = card.ability.extra.xmult }
         end
-        if context.individual and context.cardarea == G.play and context.other_card:is_face() or context.forcetrigger then
-            G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra.dollar
-            return {
-                dollars = card.ability.extra.dollar,
-                func = HPR.event_presets.reset_dollar_buffer,
-                chips = card.ability.extra.chips,
-                xmult = card.ability.extra.xmult
-            }
+    end,
+    calc_dollar_bonus = function (self, card)
+        local count = 0
+        for _, c in ipairs(G.playing_cards) do
+            if c:is_face() then count = count + 1 end
         end
+        if count > 0 then return card.ability.extra.dollar * count end
     end
 }
 
@@ -1084,30 +1088,6 @@ HPR.StellarJoker {
             }
         end
     end,
-}
-
-HPR.StellarJoker {
-    key = "royalty",
-    config = { extra = 1 },
-    loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra }}
-    end,
-    calculate = function (self, card, context)
-        if context.individual and not context.end_of_round and context.cardarea == G.hand and context.other_card:is_face() or (context.forcetrigger and context.full_hand) then
-            if not context.other_card.debuff then
-                local face_count = 0
-                for _, c in ipairs(context.full_hand) do
-                    if c:is_face() then face_count = face_count + 1 end
-                end
-                if face_count ~= 0 then
-                    return { xmult = 1 + face_count*card.ability.extra }
-                end
-            else
-                return { message = localize("k_debuffed") }
-            end
-        end
-    end,
-    forcetrigger_compat = true,
 }
 
 HPR.StellarJoker {

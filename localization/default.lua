@@ -623,9 +623,12 @@ local descriptions = {
         j_hpr_mask = {
             name = "S019 MASK",
             text = {
-                "Played {C:attention}face{} cards give",
-                "{X:mult,C:white}X#1#{} Mult, {C:chips}+#2#{} Chips and {C:money}$#3#{} when scored",
-                "Retriggers all {C:attention}face{} cards"
+                "Scored and held in hand",
+                "{C:attention}face{} cards give {X:mult,C:white}X#2#{} Mult",
+                "Earn {C:money}$#2#{} at end of round",
+                "for every {C:attention}face{} card in",
+                "your {C:attention}full{} deck",
+                "{C:inactive}(Currently {C:money}$#3#{C:inactive})"
             }
         },
         j_hpr_numeric = {
@@ -757,14 +760,6 @@ local descriptions = {
                 "After {C:attention}#1#{} rounds, {C:red}self destructs",
                 "and adds random {C:dark_edition}editions{} to {C:attention}#2#",
                 "cards in your {C:attention}full{} deck"
-            }
-        },
-        j_hpr_royalty = {
-            name = "S026 ROYALTY",
-            text = {
-                "Held in hand {C:attention}face{} cards",
-                "give {X:mult,C:white}X#1#{} Mult for each",
-                "played {C:attention}face{} card"
             }
         },
         j_hpr_paint_bucket = {
@@ -1035,7 +1030,7 @@ local descriptions = {
             }
         },
         j_hpr_guardian = {
-            name = "S027 GUARDIAN",
+            name = "S026 GUARDIAN",
             text = {
                 "{C:attention}Prevents death{} once",
                 "per {C:attention}Ante{} and creates",
@@ -1076,7 +1071,7 @@ local descriptions = {
             }
         },
         j_hpr_buffoon = {
-            name = "S028 BUFFOON",
+            name = "S027 BUFFOON",
             text = {
                 {"When {C:attention}Blind{} is selected, creates",
                 "{C:attention}#1# {C:dark_edition}editioned {C:attention}Jokers{} with",
@@ -1092,7 +1087,7 @@ local descriptions = {
             }
         },
         j_hpr_hunter = {
-            name = "S029 HUNTER",
+            name = "S028 HUNTER",
             text = {
                 {"Disables effect of every {C:attention}Boss Blind"},
                 {"{C:hpr_boss}Boss{} Jokers give",
