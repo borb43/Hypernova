@@ -1056,11 +1056,24 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "mimic",
+    config = { extra = { rep = 1, scale = 1 } },
+    loc_vars = function (self, info_queue, card)
+        local n,d = SMODS.get_probability_vars(card, 1, card.ability.extra.rep, self.key)
+        return { vars = { card.ability.extra.rep, card.ability.extra.scale, n, d }}
+    end,
     calculate = function (self, card, context)
         if context.retrigger_joker_check and not context.retrigger_joker and card.area and card.rank then
-            if context.other_card == card.area.cards[card.rank+1] or context.other_card == card.area.cards[card.rank-1] then
-                return { repetitions = 1 }
+            if context.other_card == card.area.cards[card.rank+1] then
+                return { repetitions = card.ability.extra.rep }
             end
+        end
+        if context.end_of_round and context.main_eval and SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.rep) then
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "rep",
+                scalar_value = "scale",
+            })
+            return nil, true
         end
     end
 }
