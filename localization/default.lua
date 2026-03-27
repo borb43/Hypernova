@@ -1624,7 +1624,7 @@ local descriptions = {
             }
         },
         c_hpr_ascender = {
-            name = "Ascension",
+            name = "Divinity",
             text = {
                 "{C:hpr_stellar}Ascends{} one eligible {C:attention}Joker{} to",
                 "its {C:hpr_stellar,E:1}Stellar{} counterpart"
