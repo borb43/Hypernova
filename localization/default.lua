@@ -18,7 +18,7 @@ local descriptions = {
             name = "Cosmic Deck",
             text = {
                 "Start the run with",
-                "an {T:c_hpr_ascender,C:spectral}#1#{} card"
+                "a {T:c_hpr_ascender,C:spectral}#1#{} card"
             }
         },
         b_hpr_treasury = {
@@ -35,18 +35,6 @@ local descriptions = {
                 "may be {C:dark_edition}Negative"
             }
         },
-        b_hpr_experiment = {
-            name = "Deck of Experiments",
-            text = {
-                "The {C:hpr_awesome,T:p_hpr_awesome}AWESOME Buffoon Pack",
-                "may appear in the shop",
-                "Spawn rate {C:attention}doubles{} when",
-                "{C:attention}Boss Blind{} is defeated,",
-                "resets when an",
-                "{C:hpr_awesome}AWESOME Buffoon Pack{}",
-                "is bought"
-            }
-        }
     },
     Blind = {
         bl_hpr_final_horse = {
@@ -1672,7 +1660,7 @@ local descriptions = {
             name = "Cosmic Sleeve",
             text = {
                 "Start the run with",
-                "an {T:c_hpr_ascender,C:spectral}#1#{} card"
+                "a {T:c_hpr_ascender,C:spectral}#1#{} card"
             }
         },
         sleeve_hpr_cosmic_alt = {
