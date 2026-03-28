@@ -521,36 +521,63 @@ HPR.StellarJoker {
             return { repetitions = 1 }
         end
     end,
-    
 }
 
 HPR.StellarJoker {
     key = "straightaway",
-    config = { extra = { xmult = 1, gain = 0.15 }},
+    config = { extra = { xmult = 1, gain = 0.15, gain_gain = 0.05 }},
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'e_negative_consumable', set = 'Edition', config = { extra = 1 } }
-        return { vars = { card.ability.extra.xmult, card.ability.extra.gain }}
+        return { vars = { card.ability.extra.xmult, card.ability.extra.gain, card.ability.extra.gain_gain }}
     end,
     calculate = function (self, card, context)
-        if context.before and next(context.poker_hands["Straight"]) or context.forcetrigger then
-            SMODS.scale_card(card, {
-                ref_table = card.ability.extra,
-                ref_value = "xmult",
-                scalar_value = "gain",
-                message_key = "a_xmult",
-                message_colour = G.C.MULT
-            })
-            G.E_MANAGER:add_event(Event{
-                func = function ()
-                    SMODS.add_card({
-                        set = "Consumeables",
-                        edition = "e_negative"
+        if context.before or context.forcetrigger then
+            local b
+            if context.forcetrigger or context.poker_hands and next(context.poker_hands["Straight Flush"]) then
+                b=true
+                SMODS.scale_card(card, {
+                    ref_table = card.ability.extra,
+                    ref_value = "gain",
+                    scalar_value = "gain_gain"
+                })
+                if G.GAME.consumeable_buffer + #G.consumeables.cards < G.consumeables.config.card_limit then
+                    G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+                    G.E_MANAGER:add_event(Event{
+                        func = function ()
+                            G.GAME.consumeable_buffer = 0
+                            SMODS.add_card{
+                                set = "Voucher",
+                                area = G.consumeables,
+                                key_append = "hpr_straightaway_voucher"
+                            }
+                            return true
+                        end
                     })
-                    return true
+                    SMODS.calculate_effect({ message = localize("k_hpr_plus_voucher") }, card)
                 end
-            })
-            local t = { message = localize("k_hpr_plus_consumable") }
-            if context.forcetrigger then SMODS.calculate_effect(t, card) else return t end
+            end
+            if context.forcetrigger or context.poker_hands and next(context.poker_hands["Straight"]) then
+                b=true
+                SMODS.scale_card(card, {
+                    ref_table = card.ability.extra,
+                    ref_value = "xmult",
+                    scalar_value = "gain",
+                    message_key = "a_xmult",
+                    message_colour = G.C.MULT
+                })
+                G.E_MANAGER:add_event(Event{
+                    func = function ()
+                        SMODS.add_card({
+                            set = "Consumeables",
+                            edition = "e_negative",
+                            key_append = "hpr_straightaway_cons"
+                        })
+                        return true
+                    end
+                })
+                SMODS.calculate_effect({ message = localize("k_hpr_plus_consumable") }, card)
+            end
+            if b and not context.forcetrigger then return nil, true end
         end
         if (context.joker_main or context.forcetrigger) and card.ability.extra.xmult ~= 1 then
             return { xmult = card.ability.extra.xmult }

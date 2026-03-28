@@ -350,10 +350,14 @@ local descriptions = {
         j_hpr_straightaway = {
             name = "S007 STRAIGHTAWAY",
             text = {
-                "If played hand contains a {C:attention}Straight",
+                {"If played hand contains a {C:attention}Straight",
                 "this Joker gains {X:mult,C:white}X#2#{} Mult and",
                 "creates a {C:dark_edition}Negative {C:attention}Consumable{} card",
-                "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
+                "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"},
+                {"If played hand contains a {C:attention}Straight",
+                "{C:attention}Flush{}, increase scaling by {X:mult,C:white}X#3#{} and",
+                "create a random {C:attention}Voucher",
+                "{C:inactive}(Must have room)"}
             }
         },
         j_hpr_void = {
@@ -2173,7 +2177,8 @@ local misc = {
         b_hpr_take = "TAKE",
         k_planet_void = "?Pla??ne?t",
         k_hpr_elite = "Elite",
-        k_empty_ex = "Empty!"
+        k_empty_ex = "Empty!",
+        k_hpr_plus_voucher = "+1 Voucher"
     },
     high_scores = {},
     labels = {
