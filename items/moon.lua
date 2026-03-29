@@ -87,6 +87,18 @@ HPR.moon = SMODS.Consumable:extend({
 })
 
 HPR.moon {
+    key = "io",
+    config = { extra = 45, max_highlighted = 2 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra, card.ability.max_highlighted }}
+    end,
+    pos = { x = 1, y = 0 },
+    apply_bonus = function (self, card, other_card)
+        other_card.ability.perma_bonus = other_card.ability.perma_bonus + card.ability.extra
+    end
+}
+
+HPR.moon {
     key = "deimos",
     config = { extra = 6, max_highlighted = 2 },
     loc_vars = function (self, info_queue, card)
@@ -104,14 +116,65 @@ HPR.moon {
 }
 
 HPR.moon {
-    key = "io",
-    config = { extra = 45, max_highlighted = 2 },
+    key = "hyperion",
+    config = { extra = 0.2, max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra, card.ability.max_highlighted }}
     end,
-    pos = { x = 1, y = 0 },
+    pos = { x = 5, y = 0 },
     apply_bonus = function (self, card, other_card)
-        other_card.ability.perma_bonus = other_card.ability.perma_bonus + card.ability.extra
+        other_card.ability.perma_x_chips = other_card.ability.perma_x_chips + card.ability.extra
+    end
+}
+
+HPR.moon {
+    key = "europa",
+    config = { extra = 0.2, max_highlighted = 1 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra, card.ability.max_highlighted }}
+    end,
+    pos = { x = 4, y = 0 },
+    hpr_badge_info = {
+        { key = "credits_code", vars = {"Eris"} },
+        { key = "credits_art", vars = {"LFMoth"}},
+        { key = "credits_idea", vars = {"Eris"}},
+    },
+    apply_bonus = function (self, card, other_card)
+        other_card.ability.perma_x_mult = other_card.ability.perma_x_mult + card.ability.extra
+    end
+}
+
+HPR.moon {
+    key = "nibiru",
+    config = { extra = 2, max_highlighted = 1 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra, card.ability.max_highlighted }}
+    end,
+    pos = { x = 3, y = 1 },
+    set_card_type_badge = function (self, card, badges)
+        badges[#badges+1] = create_badge(localize("k_hpr_moon_q"),
+        get_type_colour(card.config.center or card.config, card), SMODS.ConsumableTypes.hpr_moons.text_colour,
+        1.2)
+    end,
+    apply_bonus = function (self, card, other_card)
+        other_card.ability.perma_p_dollars = other_card.ability.perma_p_dollars + card.ability.extra
+    end
+}
+
+HPR.moon {
+    key = "asteroid",
+    config = { extra = 0.2, max_highlighted = 2 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra, card.ability.max_highlighted }}
+    end,
+    pos = { x = 4, y = 1 },
+    set_card_type_badge = function (self, card, badges)
+        badges[#badges+1] = create_badge(localize("k_hpr_moon_q"),
+        get_type_colour(card.config.center or card.config, card), SMODS.ConsumableTypes.hpr_moons.text_colour,
+        1.2)
+    end,
+    apply_bonus = function (self, card, other_card)
+        other_card.ability.perma_x_score = other_card.ability.perma_x_score + card.ability.extra
     end
 }
 
@@ -145,35 +208,6 @@ HPR.moon {
 }
 
 HPR.moon {
-    key = "europa",
-    config = { extra = 0.2, max_highlighted = 1 },
-    loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra, card.ability.max_highlighted }}
-    end,
-    pos = { x = 4, y = 0 },
-    hpr_badge_info = {
-        { key = "credits_code", vars = {"Eris"} },
-        { key = "credits_art", vars = {"LFMoth"}},
-        { key = "credits_idea", vars = {"Eris"}},
-    },
-    apply_bonus = function (self, card, other_card)
-        other_card.ability.perma_x_mult = other_card.ability.perma_x_mult + card.ability.extra
-    end
-}
-
-HPR.moon {
-    key = "hyperion",
-    config = { extra = 0.2, max_highlighted = 1 },
-    loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra, card.ability.max_highlighted }}
-    end,
-    pos = { x = 5, y = 0 },
-    apply_bonus = function (self, card, other_card)
-        other_card.ability.perma_x_chips = other_card.ability.perma_x_chips + card.ability.extra
-    end
-}
-
-HPR.moon {
     key = "titania",
     config = { extra = 0.2, max_highlighted = 2 },
     loc_vars = function (self, info_queue, card)
@@ -199,7 +233,7 @@ HPR.moon {
 
 HPR.moon {
     key = "styx",
-    config = { extra = 2, max_highlighted = 1 },
+    config = { extra = 3, max_highlighted = 1 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra, card.ability.max_highlighted }}
     end,
@@ -209,52 +243,19 @@ HPR.moon {
     end
 }
 
-HPR.moon {
-    key = "nibiru",
-    config = { extra = 1, max_highlighted = 1 },
-    loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra, card.ability.max_highlighted }}
-    end,
-    pos = { x = 3, y = 1 },
-    set_card_type_badge = function (self, card, badges)
-        badges[#badges+1] = create_badge(localize("k_hpr_moon_q"),
-        get_type_colour(card.config.center or card.config, card), SMODS.ConsumableTypes.hpr_moons.text_colour,
-        1.2)
-    end,
-    apply_bonus = function (self, card, other_card)
-        other_card.ability.perma_p_dollars = other_card.ability.perma_p_dollars + card.ability.extra
-    end
-}
 
 HPR.moon {
-    key = "asteroid",
-    config = { extra = 1, max_highlighted = 2 },
-    loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra, card.ability.max_highlighted }}
-    end,
-    pos = { x = 4, y = 1 },
-    set_card_type_badge = function (self, card, badges)
-        badges[#badges+1] = create_badge(localize("k_hpr_moon_q"),
-        get_type_colour(card.config.center or card.config, card), SMODS.ConsumableTypes.hpr_moons.text_colour,
-        1.2)
-    end,
-    apply_bonus = function (self, card, other_card)
-        other_card.ability.hpr_num_bonus = other_card.ability.hpr_num_bonus + card.ability.extra
-    end
-}
---[[
-HPR.moon {
     key = "dysnomia",
-    config = { extra = 0.2, max_highlighted = 1 },
+    config = { extra = 0.2, max_highlighted = 2 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra, card.ability.max_highlighted }}
     end,
     pos = { x = 5, y = 1 },
     apply_bonus = function (self, card, other_card)
-        other_card.ability.perma_eff_mod = other_card.ability.perma_eff_mod + card.ability.extra
+        other_card.ability.perma_h_x_score = other_card.ability.perma_h_x_score + card.ability.extra
     end
 }
-]]
+
 SMODS.Consumable {
     key = "pulsar",
     set = "Spectral",

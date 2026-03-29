@@ -2074,15 +2074,15 @@ local descriptions = {
         c_hpr_asteroid = {
             name = "Asteroid",
             text = {
-                "Permanently adds {C:green}+#1#{} numerator",
-                "to {C:attention}#2#{} selected card"
+                "Permanently adds {X:purple,C:white}X#1#{} Score",
+                "to up to {C:attention}#2#{} selected cards"
             }
         },
         c_hpr_dysnomia = {
             name = "Dysnomia",
             text = {
-                "Permanently boosts the {C:chips}Chips{}, {C:mult}Mult{} and {C:money}${}",
-                "effects of {C:attention}#2#{} selected card by {X:dark_edition,C:white}X#1#{}"
+                "Permanently adds {X:purple,C:white}X#1#{} held in hand",
+                "Score to up to {C:attention}#2#{} selected cards"
             }
         },
         c_hpr_titania = {

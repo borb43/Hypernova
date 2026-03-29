@@ -20,13 +20,6 @@ HPR.generate_compat_msg = function(card, other_card, compat_flag, args) --genera
     }
 end
 
-Card.get_hpr_eff_mod = function(self)
-    local extra_eff_mod = self.ability.perma_eff_mod ~= 0 and self.ability.perma_eff_mod + 1 or nil
-    if extra_eff_mod then
-        return (extra_eff_mod or 1)
-    end
-end
-
 function HPR.poll_erratic_set(seed) --returns a random set, along with additional information if applicable (`set` always, `seal` and `edition` if playing card)
     seed = seed or "hpr_erratic"
     if pseudorandom(seed) < 0.9 then

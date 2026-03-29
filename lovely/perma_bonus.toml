@@ -9,7 +9,6 @@ target = "card.lua"
 pattern = "bonus_chips = bonus_chips ~= 0 and bonus_chips or nil,"
 position = "after"
 payload = '''
-bonus_eff_mod = self.ability.perma_eff_mod ~= 0 and (self.ability.perma_eff_mod + 1) or nil,
 hpr_num_bonus = self.ability.hpr_num_bonus ~= 0 and self.ability.hpr_num_bonus or nil,
 hpr_denom_bonus = self.ability.hpr_denom_bonus ~= 0 and self.ability.hpr_denom_bonus or nil,
 '''
@@ -22,7 +21,6 @@ target = "card.lua"
 pattern = "perma_repetitions = self.ability and self.ability.perma_repetitions or 0,"
 position = "after"
 payload = '''
-perma_eff_mod = self.ability and self.ability.perma_eff_mod or 0,
 hpr_num_bonus = self.ability and self.ability.hpr_num_bonus or 0,
 hpr_denom_bonus = self.ability and self.ability.hpr_denom_bonus or 0,
 hpr_times_played = self.ability and self.ability.hpr_times_played or 0,
@@ -40,9 +38,6 @@ if specific_vars and specific_vars.bonus_repetitions then
 '''
 position = "after"
 payload = '''
-if specific_vars and specific_vars.bonus_eff_mod then
-    localize{type = "other", key = "card_extra_eff_mod", nodes = desc_nodes, vars = {specific_vars.bonus_eff_mod}}
-end
 if specific_vars and specific_vars.hpr_num_bonus then
     localize{type = "other", key = "hpr_num_bonus", nodes = desc_nodes, vars = {specific_vars.hpr_num_bonus}}
 end
