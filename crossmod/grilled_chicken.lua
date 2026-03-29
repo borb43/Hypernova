@@ -1,33 +1,3 @@
-SMODS.Joker {
-    key = "bosschicken",
-    atlas = "placeholder",
-    pos = { x = 5, y = 0 },
-    rarity = "hpr_boss",
-    cost = 10,
-    
-    config = { extra = { xmult = 3 }},
-    loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra.xmult }}
-    end,
-    in_pool = function (self, args)
-        if G.jokers then
-            for _, area in ipairs(SMODS.get_card_areas("jokers")) do
-                if area.cards then
-                    for _, v in area.cards do if MyDreamJournal.is_grilled_chicken(v) then return true end end
-                end
-            end
-        end
-    end,
-    calculate = function (self, card, context)
-        if context.other_joker and MyDreamJournal.is_grilled_chicken(context.other_joker) then
-            return { xmult = card.ability.extra.xmult }
-        end
-        if context.debuff_card and not MyDreamJournal.is_grilled_chicken(context.debuff_card) then
-            return { debuff = true }
-        end
-    end,
-    pools = { Food = true, ["Grilled Chicken"] = true }
-}
 
 SMODS.Joker {
     key = "stellarchicken",

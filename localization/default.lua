@@ -869,64 +869,6 @@ local descriptions = {
                 "each give {X:mult,C:white}X#1#{} Mult"
             }
         },
-        j_hpr_hook = {
-            name = "The Hook",
-            text = {
-                {
-                    "Discard {C:attention}#1#{} random cards",
-                    "in hand when hand is played"
-                },
-                {
-                    "Retriggers all {C:attention}on-discard",
-                    "effects {C:attention}#2#{} times",
-                    "{C:inactive,s:0.8}(Playing card effects excluded)"
-                }
-            }
-        },
-        j_hpr_ox = {
-            name = "The Ox",
-            text = {
-                "If {C:attention}poker hand{} is {C:attention}not{} your",
-                "most played, earn number of",
-                "times it has been played this",
-                "run as money, otherwise",
-                "sets money to {C:money}$0"
-            }
-        },
-        j_hpr_house = {
-            name = "The House",
-            text = {
-                "Cards in first drawn hand",
-                "are drawn face down and",
-                "permanently gain {C:mult}+#1#{} Mult"
-            }
-        },
-        j_hpr_wall = {
-            name = "The Wall",
-            text = {
-                "When {C:attention}Boss Blind{} is",
-                "selected, {X:hpr_dual_gradient,C:white}X#1#{} Hands,",
-                "Discards and Blind Size"
-            }
-        },
-        j_hpr_wheel = {
-            name = "The Wheel",
-            text = {
-                "{C:green}#1# in #2#{} cards are",
-                "drawn face down and",
-                "gain {X:mult,C:white}X#3#{} Mult"
-            }
-        },
-        j_hpr_bosschicken = {
-            name = "The Chicken",
-            text = {
-                {"All {C:attention}Grilled Chicken{} Jokers",
-                "give {X:mult,C:white}X#1#{} Mult, {C:red}debuffs{} all",
-                "non-{C:attention}Grilled Chicken{} Jokers"},
-                {"Replace all future {C:attention}Food{} Jokers",
-                "with {C:attention}Grilled Chicken{} variants"}
-            }
-        },
         j_hpr_stellarchicken = {
             name = "SDX001 GRILLED CHICKEN",
             text = {
@@ -940,38 +882,6 @@ local descriptions = {
                 },
                 {"Replace all future {C:attention}Food{} Jokers",
                 "with {C:attention}Grilled Chicken{} variants"}
-            }
-        },
-        j_hpr_club_boss = {
-            name = "The Club",
-            text = {
-                "Played cards give",
-                "{C:mult}+#1#{} Mult when scored",
-                "{C:clubs}Clubs{} are {C:red}debuffed"
-            }
-        },
-        j_hpr_fish = {
-            name = "The Fish",
-            text = {
-                "Cards are drawn face",
-                "down and gain {C:chips}+#1#{} Chips",
-                "after each hand"
-            }
-        },
-        j_hpr_psychic = {
-            name = "The Psychic",
-            text = {
-                "Must play {C:attention}#1#{} cards",
-                "Retriggers all",
-                "and scoring cards"
-            }
-        },
-        j_hpr_goad = {
-            name = "The Goad",
-            text = {
-                "Played cards give",
-                "{C:chips}+#1#{} Chips when scored",
-                "{C:spades}Spades{} are {C:red}debuffed"
             }
         },
         j_hpr_guardian = {
@@ -1041,206 +951,6 @@ local descriptions = {
                 "the {C:attention}Boss Blind{} if possible"}
             }
         },
-        j_hpr_water = {
-            name = "The Water",
-            text = {
-                "When {C:attention}Blind{} is selected,",
-                "{C:attention}lose all discards{} and gain",
-                "hands equal to {X:blue,C:white}X#1#{} the",
-                "removed discards"
-            }
-        },
-        j_hpr_window = {
-            name = "The Window",
-            text = {
-                "Played cards give",
-                "{C:money}$#1#{} when scored",
-                "{C:diamonds}Diamonds{} are {C:red}debuffed"
-            }
-        },
-        j_hpr_manacle = {
-            name = "The Manacle",
-            text = {
-                "{C:red}-#1#{} Hand Size,",
-                "{C:attention}+#2#{} Card Selection Limit"
-            }
-        },
-        j_hpr_eye = {
-            name = "The Eye",
-            text = {
-                "Must not play repeat",
-                "hand types in a round",
-                "{C:attention}Level up{} each played",
-                "{C:attention}poker hand"
-            }
-        },
-        j_hpr_mouth = {
-            name = "The Mouth",
-            text = {
-                "{X:mult,C:white}X#1#{} Mult",
-                "Must only play first",
-                "{C:attention}poker hand{} played in",
-                "each round",
-                "{C:inactive}(Currently #2#)"
-            }
-        },
-        j_hpr_plant = {
-            name = "The Plant",
-            text = {
-                "Played cards give",
-                "{X:mult,C:white}X#1#{} Mult when scored",
-                "{C:attention}Face{} cards are {C:red}debuffed"
-            }
-        },
-        j_hpr_serpent = {
-            name = "The Serpent",
-            text = {
-                "After hand is played",
-                "or discarded, always",
-                "draw {C:attention}#1#{} cards"
-            }
-        },
-        j_hpr_pillar = {
-            name = "The Pillar",
-            text = {
-                "First played card each",
-                "round gains a {C:red}Red Seal",
-                "Cards played previously",
-                "in current ante are {C:red}debuffed"
-            }
-        },
-        j_hpr_needle = {
-            name = "The Needle",
-            text = {
-                "When {C:attention}Blind{} is selected,",
-                "set hands to {C:attention}1{} and gain",
-                "discards equal to {X:red,C:white}X#1#",
-                "the removed hands"
-            }
-        },
-        j_hpr_head = {
-            name = "The Head",
-            text = {
-                "Played cards have a",
-                "{C:green}#1# in #2#{} chance to give",
-                "{X:mult,C:white}X#3#{} Mult when scored",
-                "{C:hearts}Hearts{} are {C:red}debuffed"
-            }
-        },
-        j_hpr_tooth = {
-            name = "The Tooth",
-            text = {
-                "Lose {C:money}$#1#{} per card played",
-                "Played cards gain {X:chips,C:white}X#2#{} Chips"
-            }
-        },
-        j_hpr_flint = {
-            name = "The Flint",
-            text = {
-                "Base {C:chips}Chips{} and {C:mult}Mult",
-                "are halved, {C:hpr_balance}balances",
-                "{C:chips}Chips{} and {C:mult}Mult{} in scoring"
-            }
-        },
-        j_hpr_mark = {
-            name = "The Mark",
-            text = {
-                "{C:attention}Face{} cards are drawn face down",
-                "and gain {X:mult,C:white}X#1#{} held in hand Mult",
-            }
-        },
-        j_hpr_final_acorn = {
-            name = "Amber Acorn",
-            text = {
-                {"{C:attention}Flips and shuffles{} all Jokers",
-                "when {C:attention}Blind{} is selected, unflips",
-                "all Jokers at end of round"},
-                {"{C:attention}Retriggers{} all jokers"}
-            }
-        },
-        j_hpr_final_leaf = {
-            name = "Verdant Leaf",
-            text = {
-                {"All playing cards are {C:red}debuffed",
-                "if no {C:attention}Joker{} was sold this round",
-                "{C:inactive}(Currently #1#)"},
-                {"{C:attention}Retrigger{} all played cards once per",
-                "additional {C:attention}Joker{} sold this round",
-                "{C:inactive}(Currently {C:attention}#2#{C:inactive} retriggers)"}
-            }
-        },
-        j_hpr_final_vessel = {
-            name = "Violet Vessel",
-            text = {
-                "When {C:attention}Boss Blind{} is selected,",
-                "{C:red}X#1#{} Blind size and creates up to",
-                "{C:attention}#3#{} Consumable cards with {X:dark_edition,C:white}X#2#{} values",
-                "{C:inactive}(Must have room)"
-            }
-        },
-        j_hpr_final_heart = {
-            name = "Crimson Heart",
-            text = {
-                {"{C:red}Debuff{} a different random",
-                "{C:attention}Joker{} after each hand"},
-                {"{C:red}Debuffed {C:attention}non-playing{} cards",
-                "each give {X:mult,C:white}X#1#{} Mult"}
-            }
-        },
-        j_hpr_final_bell = {
-            name = "Cerulean Bell",
-            text = {
-                {"One card always {C:attention}forced",
-                "to be selcted"},
-                {"Cards selected by this",
-                "Joker are retriggered",
-                "{C:attention}#1#{} times"}
-            }
-        },
-        j_hpr_final_horse = {
-            name = "Heliotrope Horse",
-            text = {
-                {"{X:slib_emult,C:white}^#1#{} Mult"},
-                {"Takes the cube root",
-                "of base {C:chips}Chips{} and {C:mult}Mult"}
-            }
-        },
-        j_hpr_final_mist = {
-            name = "Malachite Mist",
-            text = {
-                {"All other {C:attention}Jokers{} are {C:red}debuffed"},
-                {"{C:attention}+#1#{} Consumable slots, fills all",
-                "Consumable slots with random",
-                "{C:attention}consumables{} when {C:attention}Blind{} is selected"},
-                {"All hand {C:attention}level ups{} are {C:attention}tripled"}
-            }
-        },
-        j_hpr_final_splash = {
-            name = "Saffron Splash",
-            text = {
-                "{C:attention}Unenhanced{} cards do not score",
-                "{C:attention}Enhanced{} cards always score",
-                "when {C:attention}played{} or {C:attention}held in hand"
-            }
-        },
-        j_hpr_final_globe = {
-            name = "Golden Globe",
-            text = {
-                {"{C:red}-#1#{} Hand#<s>1#, Discard#<s>1#",
-                "and Hand size"},
-                {"{C:attention}+#2#{} Shop slots and",
-                "Consumable slots"}
-            }
-        },
-        j_hpr_final_bomb = {
-            name = "Bark Bomb",
-            text = {
-                {"Retriggers all played",
-                "cards {C:attention}#1#{} time#<s>1#"},
-                {"Destroys all held",
-                "in hand cards"}
-            }
-        },
         j_hpr_man = {
             text = {
                 "*Well, there is a man here."
@@ -1253,15 +963,6 @@ local descriptions = {
                 "{C:chips}+10{} Chips if scoring hand",
                 "contains any {V:1}#1#{},",
                 "{s:0.8}suit changes at end of round"
-            }
-        },
-        j_hpr_arm = {
-            name = "The Arm",
-            text = {
-                "Level down each played",
-                "poker hand and gains",
-                "the lost {C:chips}Chips{} and {C:mult}Mult",
-                "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#2#{C:inactive} Mult)"
             }
         },
         j_hpr_zodiac = {
@@ -1676,14 +1377,6 @@ local descriptions = {
         }
     },
     Tag = {
-        tag_hpr_boss = {
-            name = "Boss Tag",
-            text = {
-                "Adds the {C:hpr_boss}Boss{} Joker",
-                "for {C:attention}#1#{} to the",
-                "next shop"
-            }
-        },
         tag_hpr_deck = {
             name = "Deck Tag",
             text = {
@@ -2175,7 +1868,6 @@ local misc = {
         k_hpr_abyssal_pack = "Abyssal Pack",
         k_hpr_awesome_pack = "AWESOME Pack",
         k_plus_hpr_moon = "+1 Moon",
-        k_hpr_boss = "Boss",
         k_level_down = "Level Down",
         k_plus_joker_q = "+1 Joker?",
         k_inactive = "inactive",
@@ -2202,7 +1894,6 @@ local misc = {
         hpr_dual_seal = "Dual Seal",
         hpr_bronze_seal = "Copper Seal",
         hpr_void_seal = "Void Seal",
-        hpr_boss = "Boss",
         hpr_elite = "Elite", --according to the wiki its k_hpr_elite but ive literally never had to do that so idk
     },
     poker_hand_descriptions = {},

@@ -18,28 +18,6 @@ HPR.calculate = function(self, context)
             end
         end
     end
-    if context.end_of_round and context.main_eval and G.GAME.blind and G.GAME.blind.boss then
-        local key = G.GAME.blind.config and G.GAME.blind.config.blind.key
-        local pass
-        for _, c in pairs(G.P_CENTERS) do
-            if c.boss_key == key then pass = true end
-        end
-        if key and pass and (next(SMODS.find_card("j_hpr_hunter")) or pseudorandom("hpr_boss_joker_spawn") < 0.15) then
-            G.E_MANAGER:add_event(Event{
-                func = function ()
-                    G.GAME.last_hpr_boss_tag_key = key
-                    local tag = Tag("tag_hpr_boss", false, "Small")
-                    add_tag(tag)
-                    play_sound('generic1', 0.9 + math.random() * 0.1, 0.8)
-                    play_sound('polychrome1', 1.2 + math.random() * 0.1, 0.4)
-                    return true
-                end
-            })
-        end
-    end
-    if context.prevent_tag_trigger and context.other_context.type == "tag_add" and context.other_context.tag.key == "tag_hpr_boss" then
-        return { prevent_trigger = true }
-    end
 end
 
 HPR.post_load = function ()
@@ -284,12 +262,6 @@ SMODS.Atlas {
     py = 34,
 }
 
-SMODS.Atlas {
-    key = "boss_joker",
-    path = "boss_joker.png",
-    px = 71, py = 95
-}
-
 if CardSleeves then
     SMODS.Atlas { --placeholder at 0,0
         key = "sleeve",
@@ -316,7 +288,6 @@ assert(SMODS.load_file("items/moon.lua"))()
 assert(SMODS.load_file("items/booster.lua"))()
 assert(SMODS.load_file("items/misc_joker.lua"))()
 assert(SMODS.load_file("items/elite.lua"))()
-assert(SMODS.load_file("items/boss_joker.lua"))()
 assert(SMODS.load_file("items/legendary.lua"))()
 assert(SMODS.load_file("items/tag.lua"))()
 
