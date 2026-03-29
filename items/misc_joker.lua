@@ -316,6 +316,7 @@ SMODS.Joker {
         { key = "credits_idea", vars = {"Eris" }},
     },
     forcetrigger_compat = true,
+    hpr_ascension_key = "j_hpr_master",
 }
 
 SMODS.Joker {
@@ -600,6 +601,7 @@ SMODS.Joker {
         return { vars = { localize{ type = "name_text", key = "c_aura", set = "Spectral"}}}
     end,
     forcetrigger_compat = true,
+    hpr_ascension_key = "j_hpr_master",
 }
 
 SMODS.Joker {
@@ -1118,6 +1120,7 @@ SMODS.Joker {
     end,
     pools = { wee = true, Meme = true },
     forcetrigger_compat = true,
+    hpr_ascension_key = "j_hpr_master",
 }
 
 SMODS.Joker {

@@ -81,5 +81,8 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_baseball = "j_hpr_buffoon",
     j_chicot = "j_hpr_hunter",
     j_luchador = "j_hpr_hunter",
-    j_matador = "j_hpr_hunter"
+    j_matador = "j_hpr_hunter",
+    j_8_ball = "j_hpr_master",
+    j_hallucination = "j_hpr_master",
+    j_diet_cola = "j_hpr_master",
 }
