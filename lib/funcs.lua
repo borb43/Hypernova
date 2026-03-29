@@ -301,3 +301,13 @@ function HPR.base_rankless(card)
     end
     return false
 end
+
+function HPR.scale_score_to_ante(base, ante) --this should probably do more than just multiply the base but whatever ill figure it out later
+    ante = ante or G.GAME.round_resets.ante or 1
+    if ante < 1 then
+        return base * 0.5
+    end
+    local amount = base * (2^(ante-1))^1.1
+    amount = amount - amount%(10^math.floor(math.log10(amount)-1))
+    return amount
+end

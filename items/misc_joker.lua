@@ -1,3 +1,21 @@
+SMODS.Joker {
+    key = "clown",
+    atlas = "placeholder",
+    pos = { x = 0, y = 0 },
+    rarity = 1,
+    cost = 2,
+    forcetrigger_compat = true,
+    config = { extra = 150 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra, HPR.scale_score_to_ante(card.ability.extra) }}
+    end,
+    calculate = function (self, card, context)
+        if context.joker_main or context.forcetrigger then
+            return { score = HPR.scale_score_to_ante(card.ability.extra) }
+        end
+    end,
+}
+
 SMODS.Joker { --fusion reactor, balances before scoring
     key = "fusion",
     atlas = "placeholder",

@@ -1334,6 +1334,14 @@ local descriptions = {
                 "{C:attention}Banishes{} a random {C:attention}Joker",
                 "at the end of the {C:attention}shop",
             }
+        },
+        j_hpr_clown = {
+            name = "Clown",
+            text = {
+                "{C:purple}+#1#{} Score,",
+                "Scales with ante",
+                "{C:inactive}(Currently {C:purple}+#2#{C:inactive})"
+            }
         }
     },
     Other = {
