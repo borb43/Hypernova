@@ -149,18 +149,6 @@ function Card:set_cost()
 		end
 	end
     set_cost_ref(self)
-    if next(SMODS.find_card("j_hpr_master")) then
-        local y = false
-        y = self.ability.set == "Booster" or not not SMODS.ConsumableTypes[self.ability.set]
-        if not y then
-            for _, center in ipairs(G.P_CENTER_POOLS.Consumeables) do
-                if center.key == self.config.center.key then y = true end
-            end
-        end
-        if y then
-            self.cost = 0
-        end
-    end
 	if G.GAME.hpr_cost_reduction then
 		self.cost = self.cost - G.GAME.hpr_cost_reduction
 	end

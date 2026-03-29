@@ -119,10 +119,21 @@ function HPR.poll_tag(seed, key_append, options)
     local selected_tag = pseudorandom_element(tag_pool, seed)
     local it = 1
     while selected_tag == 'UNAVAILABLE' do
-        it = it + 1
         selected_tag = pseudorandom_element(tag_pool, seed.."_resample"..it)
+        it = it + 1
     end
     return selected_tag
+end
+
+function HPR.poll_obj(seed, type)
+    local pool = get_current_pool(type, nil, nil, seed)
+    local selected = pseudorandom_element(pool, seed)
+    local it = 1
+    while selected == "UNAVAILABLE" do
+        selected = pseudorandom_element(pool, seed.."_resample"..it)
+        it = it + 1
+    end
+    return selected
 end
 
 function HPR.awesome_fucking_banish(destroyer_key, to_banish) --single key for destroyer (defaults to j_ceremonial) and a table of keys for to_banish

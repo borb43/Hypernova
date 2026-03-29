@@ -346,46 +346,73 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "master",
-    
     forcetrigger_compat = true,
+    config = { extra = { odds = 2, create = 2 } },
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = { key = 'e_negative_consumable', set = 'Edition', config = { extra = 1 } }
+        local n,d = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, self.key)
+        return { vars = {card.ability.extra.create,n,d}}
+    end,
     calculate = function (self, card, context)
-        if context.setting_blind or context.forcetrigger then
+        if context.setting_blind then
+            local boosters = math.min(card.ability.extra.create, G.consumeables.config.card_limit - (#G.consumeables.cards + G.GAME.consumeable_buffer))
+            boosters = math.max(boosters,0)
+            local tags = card.ability.extra.create
+            G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + boosters
             G.E_MANAGER:add_event(Event{
-                func = function ()
-                    G.E_MANAGER:add_event(Event{
-                        func = function ()
-                            local c = SMODS.add_card{
-                                set = 'Consumeables',
-                                key_append = "hpr_master",
-                                edition = "e_negative",
-                                area = G.consumeables
-                            }
-                            Spectrallib.manipulate(c, { type = "X", value = card.ability.extra })
-                            return true
-                        end
-                    })
-                    SMODS.calculate_effect({ message = localize("k_hpr_plus_consumable"), colour = G.C.DARK_EDITION }, card)
+                func = function (n)
+                    for _ = 1, tags do
+                        add_tag(Tag(HPR.poll_tag("hpr_master_tag")))
+                    end
+                    play_sound('generic1', 0.9 + math.random() * 0.1, 0.8)
+                    play_sound('holo1', 1.2 + math.random() * 0.1, 0.4)
+                    for _ = 1, boosters do
+                        SMODS.add_card{
+                            set = "Booster",
+                            key_append = "hpr_master_pack",
+                            area = G.consumeables,
+                        }
+                    end
                     return true
                 end
             })
             return nil, true
         end
-    end,
-    add_to_deck = function (self, card, from_debuff)
-        G.E_MANAGER:add_event(Event{
-            func = function ()
-                for _,v in pairs(G.I.CARD) do
-                    if v.set_cost then v:set_cost() end
+        if context.before then
+            local b
+            for _, c in ipairs(context.full_hand) do
+                if not c:is_face() and not c.ability.consumeable then
+                    b = true
+                    local cons = HPR.poll_obj("hpr_master_enh", "Consumeables")
+                    c:set_ability(cons, nil, true)
+                    G.E_MANAGER:add_event(Event{
+                        func = function (n)
+                            c:juice_up()
+                            return true
+                        end
+                    })
                 end
-                return true
             end
-        })
+            if b then
+                return { message = localize("k_hpr_enhanced_q") }
+            end
+        end
+        if context.individual and context.cardarea == G.play or context.using_consumeable then
+            local c = context.other_card or context.consumeable
+            if c.ability.consumeable and not (c.edition and c.edition.negative) and SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds) then
+                G.E_MANAGER:add_event(Event{
+                    func = function (n)
+                        local copy = copy_card(c)
+                        copy:set_edition("e_negative", true)
+                        copy:add_to_deck()
+                        G.consumeables:emplace(copy)
+                        return true
+                    end
+                })
+                return { message = localize("k_duplicated_ex") }
+            end
+        end
     end,
-    config = { extra = 2 },
-    loc_vars = function (self, info_queue, card)
-        info_queue[#info_queue+1] = G.P_CENTERS.e_negative
-        return { vars = {card.ability.extra}}
-    end
 }
 
 HPR.StellarJoker {

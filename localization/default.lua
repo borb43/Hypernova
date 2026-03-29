@@ -306,10 +306,12 @@ local descriptions = {
         j_hpr_master = {
             name = "S002 MASTER",
             text = {
-                {"All {C:attention}consumables{} and {C:attention}Booster",
-                "{C:attention}Packs{} in the shop are {C:attention}free"},
-                {"Creates a {C:dark_edition}Negative {C:attention}Consumable{} with",
-                "{X:dark_edition,C:white}X#1#{} values when blind is selected"},
+                {"Creates {C:attention}#1#{} random {C:attention}Tags{} and {C:attention}Booster",
+                "{C:attention}Packs{} when {C:attention}Blind{} is selected"},
+                {"Played non-{C:attention}face{} cards become",
+                "random {C:attention}consumables{}, {C:green}#2# in #3#{} chance",
+                "when a non-{C:dark_edition}Negative{C:attention} consumable{} is",
+                "used or scored to create a {C:dark_edition}Negative{} copy"}
             }
         },
         j_hpr_potassium = {
@@ -2178,7 +2180,8 @@ local misc = {
         k_planet_void = "?Pla??ne?t",
         k_hpr_elite = "Elite",
         k_empty_ex = "Empty!",
-        k_hpr_plus_voucher = "+1 Voucher"
+        k_hpr_plus_voucher = "+1 Voucher",
+        k_hpr_enhanced_q = "Enhanced?"
     },
     high_scores = {},
     labels = {
