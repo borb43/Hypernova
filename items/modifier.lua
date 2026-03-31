@@ -2,7 +2,7 @@ SMODS.Enhancement{
     key = "purpur",
     atlas = "enhancers",
     pos = { x = 2, y = 0 },
-    config = { extra = 150 },
+    config = { extra = 30 }, --probably need a better scaling func for this to work well
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra, HPR.scale_score_to_ante(card.ability.extra) }}
     end,
