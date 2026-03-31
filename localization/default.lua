@@ -113,6 +113,14 @@ local descriptions = {
             text = {
                 "{C:dark_edition}?????"
             }
+        },
+        m_hpr_purpur = {
+            name = "Purpur Card",
+            text = {
+                "{C:purple}+#1#{} Score,",
+                "scales with {C:attention}Ante",
+                "{C:inactive}(Currently {C:purple}+#2#{C:inactive})"
+            }
         }
     },
     Joker = {

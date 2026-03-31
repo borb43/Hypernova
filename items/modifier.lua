@@ -1,3 +1,17 @@
+SMODS.Enhancement{
+    key = "purpur",
+    atlas = "enhancers",
+    pos = { x = 2, y = 0 },
+    config = { extra = 150 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra, HPR.scale_score_to_ante(card.ability.extra) }}
+    end,
+    calculate = function (self, card, context)
+        if context.main_scoring and context.cardarea == G.play then
+            return { score = HPR.scale_score_to_ante(card.ability.extra) }
+        end
+    end
+}
 
 SMODS.Enhancement {
     key = "ripple",
