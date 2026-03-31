@@ -108,21 +108,6 @@ local descriptions = {
                 "{C:attention}permanently{} gain {C:mult}+#1#{} Mult"
             }
         },
-        m_hpr_silver = {
-            name = "Silver Card",
-            text = {
-                "Creates a random {C:attention}Tag",
-                "when held in hand",
-                "at the end of round"
-            }
-        },
-        m_hpr_lunar = {
-            name = "Lunar Card",
-            text = {
-                "{C:green}#1# in #2#{} chance to level",
-                "up hand when played"
-            }
-        },
         m_hpr_error_enh = {
             name = "[MISSING]",
             text = {

@@ -43,44 +43,6 @@ SMODS.Enhancement {
     weight = 1.5
 }
 
-SMODS.Enhancement {
-    key = "silver",
-    atlas = "enhancers",
-    pos = { x = 2, y = 0 },
-    calculate = function (self, card, context)
-        if context.playing_card_end_of_round and context.cardarea == G.hand then
-            G.E_MANAGER:add_event(Event{
-                func = function ()
-                    add_tag(Tag(HPR.poll_tag("hpr_silver"), false, "Small"))
-                    return true
-                end
-            })
-            return { message = localize{ type = "variable", key = "a_tag", vars = {1}} }
-        end
-    end,
-    weight = 0.5
-}
-
-SMODS.Enhancement {
-    key = "lunar",
-    atlas = "enhancers",
-    pos = { x = 3, y = 0 },
-    config = { extra = 2 },
-    loc_vars = function (self, info_queue, card)
-        local n, d = SMODS.get_probability_vars(card, 1, card.ability.extra, "hpr_lunar")
-        return { vars = { n, d }}
-    end,
-    calculate = function (self, card, context)
-        if context.before and context.cardarea == G.play and SMODS.pseudorandom_probability(card, "hpr_lunar", 1, card.ability.extra) then
-            return {
-                level_up = true,
-                message = localize("k_level_up_ex")
-            }
-        end
-    end,
-    weight = 1
-}
-
 SMODS.Seal {
     key = "negative",
     pos = { x = 4, y = 4 },
