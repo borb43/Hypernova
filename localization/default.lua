@@ -121,6 +121,16 @@ local descriptions = {
                 "scales with {C:attention}Ante",
                 "{C:inactive}(Currently {C:purple}+#2#{C:inactive})"
             }
+        },
+        m_hpr_relic = {
+            name = "Relic Card",
+            text = {
+                "No rank or suit",
+                "{X:purple,C:white}X#1#{} Score for each",
+                "level on {V:1}#3#{} ({V:2}lvl.#4#{}),",
+                "{s:0.8}suit changes each round",
+                "{C:inactive}(Currently {X:purple,C:white}X#2#{C:inactive} Score)"
+            }
         }
     },
     Joker = {

@@ -57,6 +57,29 @@ SMODS.Enhancement {
     weight = 1.5
 }
 
+SMODS.Enhancement{
+    key = "relic",
+    atlas = "enhancers",
+    pos = { x = 3, y = 0 },
+    config = { extra = 0.25 },
+    loc_vars = function (self, info_queue, card)
+        local suit = G.GAME.current_round.hpr_relic_suit or "Spades"
+        local level = Spectrallib.safe_get(G.GAME.SuitBuffs, suit, "level") or 1
+        return { vars = { card.ability.extra, 1 + card.ability.extra*level, localize(suit, "suits_plural"), level, colours = { G.C.SUITS[suit], level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, level)] } }}
+    end,
+    calculate = function (self, card, context)
+        if context.main_scoring and context.cardarea == G.play then
+            local suit = G.GAME.current_round.hpr_relic_suit or "Spades"
+            local level = Spectrallib.safe_get(G.GAME.SuitBuffs, suit, "level") or 1
+            local score = 1 + card.ability.extra*level
+            if score ~= 1 then
+                return { xscore = score }
+            end
+        end
+    end,
+    no_rank = true, no_suit = true, replace_base_card = true, always_scores = true,
+}
+
 SMODS.Seal {
     key = "negative",
     pos = { x = 4, y = 4 },

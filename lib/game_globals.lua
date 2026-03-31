@@ -30,12 +30,17 @@ local function reset_hpr_quiz()
     G.GAME.current_round.hpr_quiz_suit = Spectrallib.safe_get(c, "base", "suit") or "Spades"
 end
 
+local function reset_relic_card()
+    G.GAME.current_round.hpr_relic_suit = (pseudorandom_element(SMODS.Suits, "hpr_relic_card"..G.GAME.round_resets.ante) or {}).key or "Spades"
+end
+
 HPR.reset_game_globals = function (run_start)
     if run_start then
         G.GAME.hpr_awesome_pack_mod = 1
     end
     reset_hpr_eris()
     reset_hpr_quiz()
+    reset_relic_card()
 end
 
 HPR.stellar_gradient = SMODS.Gradient {
