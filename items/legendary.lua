@@ -80,6 +80,7 @@ SMODS.Joker {
             end
         end
     end,
+    attributes = { "suit", "rank", "mod_chance", "discard", "tarot", "mult", "chips", "modify_card", "economy" }, --le mayo
     pronouns = "any_all",
     hpr_badge_info = {
         { key = "credits_code", vars = {"Eris"} },

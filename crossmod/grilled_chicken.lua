@@ -6,7 +6,6 @@ SMODS.Joker {
     soul_pos = { x = 1, y = 0 },
     rarity = "hpr_stellar",
     cost = 30,
-    
     pools = { Food = true, ["Grilled Chicken"] = true },
     config = { extra = { threshold = 2 }},
     loc_vars = function (self, info_queue, card)
@@ -22,7 +21,7 @@ SMODS.Joker {
         end
     end,
     calculate = function (self, card, context)
-        if context.retrigger_joker_check and MyDreamJournal.is_grilled_chicken(context.other_card) then
+        if context.retrigger_joker_check and MyDreamJournal.is_grilled_chicken(context.other_card) and not context.other_context.retrigger_joker_check then
             local rep_amt = math.floor(G.GAME.round_resets.ante / card.ability.extra.threshold)
             if rep_amt > 0 then
                 return { repetitions = rep_amt }
@@ -40,5 +39,6 @@ SMODS.Joker {
             })
             return { message = localize("k_plus_joker") }
         end
-    end
+    end,
+    attributes = { "food", "retrigger", "joker", "generation", },
 }

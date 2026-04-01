@@ -5,6 +5,10 @@ SMODS.ConsumableType {
     secondary_colour = HEX("5d15d1"),
 }
 
+SMODS.Attribute {
+    key = "hpr_moons",
+}
+
 SMODS.UndiscoveredSprite {
     key = "hpr_moons",
     atlas = "moons",

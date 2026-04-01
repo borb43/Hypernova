@@ -253,6 +253,7 @@ HPR.StellarJoker {
         if dollars ~= 0 then ret.dollars = dollars end
         return ret
     end,
+    attributes = { "economy", "xchips", "xmult", "emult", "echips", "hand_size", "modify_card", "hands", "discards" }, --quite a few
     forcetrigger_compat = true,
 }
 
@@ -339,6 +340,7 @@ HPR.StellarJoker {
             }
         end
     end,
+    attributes = { "space", "chips", "mult", "modify_card" },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.chips, card.ability.extra.mult, card.ability.extra.asc }}
     end,
@@ -413,11 +415,11 @@ HPR.StellarJoker {
             end
         end
     end,
+    attributes = { "rank", "generation", },
 }
 
 HPR.StellarJoker {
     key = "potassium",
-    
     forcetrigger_compat = true,
     config = { extra = { emult = 1.5, odds1 = 6, odds2 = 10 }},
     loc_vars = function (self, info_queue, card)
@@ -449,7 +451,8 @@ HPR.StellarJoker {
             end
             if any then return nil, true end
         end
-    end
+    end,
+    attributes = { "emult", "destroy_card", "chance", },
 }
 
 HPR.StellarJoker {
@@ -488,6 +491,7 @@ HPR.StellarJoker {
             }
         end
     end,
+    --attributes = { "mult", },
     hpr_badge_info = {
         { key = "credits_code", vars = {"Eris"} },
         { key = "credits_art", vars = {"Eris"}},
@@ -531,6 +535,7 @@ HPR.StellarJoker {
             }
         end
     end,
+    --attributes = { "chips", },
     hpr_badge_info = {
         { key = "credits_code", vars = {"Eris"} },
         { key = "credits_art", vars = {"Eris"}},
@@ -548,6 +553,7 @@ HPR.StellarJoker {
             return { repetitions = 1 }
         end
     end,
+    attributes = { "passive", "retrigger", },
 }
 
 HPR.StellarJoker {
@@ -610,8 +616,8 @@ HPR.StellarJoker {
             return { xmult = card.ability.extra.xmult }
         end
     end,
+    attributes = { "hand_type", "generation", "scaling", "xmult", },
     forcetrigger_compat = true,
-    
 }
 
 HPR.StellarJoker {
@@ -633,6 +639,7 @@ HPR.StellarJoker {
     end,
     calculate = function (self, card, context)
         if context.joker_main or context.forcetrigger then
+            local e, x = 1, 1
             x = 1 + (G.GAME.starting_deck_size - #G.playing_cards)*card.ability.extra.xmult_per
             x = math.max(x, 1)
             local empty = 0
@@ -646,6 +653,7 @@ HPR.StellarJoker {
             end
         end
     end,
+    attributes = { "emult", "xmult", "joker_slot", },
     forcetrigger_compat = true,
 }
 
@@ -686,12 +694,14 @@ HPR.StellarJoker {
         end
         return total
     end,
+    attributes = { "economy", "rank", "nine", "modify_card", }, --this joker is probably getting cut but doing this anyway
     forcetrigger_compat = true,
 }
 
 HPR.StellarJoker { --literally everything this does is a hook lmfao
     key = "shorthand",
     blueprint_compat = false,
+    attributes = { "passive", "hand_type" },
 }
 
 HPR.StellarJoker {
@@ -726,7 +736,8 @@ HPR.StellarJoker {
         if count > 0 then
             return count * card.ability.extra.dollars
         end
-    end
+    end,
+    attributes = { "economy", "suit", "diamonds", "xmult", },
 }
 
 HPR.StellarJoker {
@@ -750,6 +761,7 @@ HPR.StellarJoker {
             end
         end
     end,
+    attributes = { "emult", "xmult", "chance", "suit", "hearts" },
     forcetrigger_compat = true,
 }
 
@@ -776,7 +788,8 @@ HPR.StellarJoker {
                 }
             }
         end
-    end
+    end,
+    attributes = { "mult", "chips", "xmult", "xchips", "suit", "spades", "modify_card", },
 }
 
 HPR.StellarJoker {
@@ -807,7 +820,8 @@ HPR.StellarJoker {
             end
             if b then return nil, true end
         end
-    end
+    end,
+    attributes = { "xmult", "suit", "clubs", },
 }
 
 HPR.StellarJoker {
@@ -832,6 +846,7 @@ HPR.StellarJoker {
             return { xmult = card.ability.extra }
         end
     end,
+    attributes = { "xmult", "enhancements", "suit", },
     forcetrigger_compat = true,
 }
 
@@ -872,6 +887,7 @@ HPR.StellarJoker {
             }
         end
     end,
+    attributes = { "generation", "xmult", "scaling", },
     forcetrigger_compat = true,
 }
 
@@ -909,6 +925,7 @@ HPR.StellarJoker {
         G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante or G.GAME.round_resets.ante
         G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante + card.ability.extra
     end,
+    attributes = { "hand_size", "hands", "discard", "reroll", },
     blueprint_compat = false,
 }
 
@@ -945,6 +962,7 @@ HPR.StellarJoker {
             return { xmult = card.ability.extra.xmult }
         end
     end,
+    attributes = { "xmult", "scaling", },
     hpr_badge_info = {
         { key = "credits_code", vars = {"Eris"} },
         { key = "credits_art", vars = {"Eris"}},
@@ -976,7 +994,8 @@ HPR.StellarJoker {
             if c:is_face() then count = count + 1 end
         end
         if count > 0 then return card.ability.extra.dollar * count end
-    end
+    end,
+    attributes = { "xmult", "econ", "face", },
 }
 
 HPR.StellarJoker {
@@ -993,7 +1012,8 @@ HPR.StellarJoker {
             end
             return nil, true
         end
-    end
+    end,
+    attributes = { "chips", "mult", "modify_card", },
 }
 
 HPR.StellarJoker {
@@ -1014,15 +1034,14 @@ HPR.StellarJoker {
         return { vars = { card.ability.extra.cap, card.ability.extra.per, card.ability.extra.scale }}
     end,
     forcetrigger = function (self, card, context)
-        card.FORCETRIGGER = true
         local d = math.floor(G.GAME.dollars/card.ability.extra.per)
         d = math.min(d, card.ability.extra.cap)
-        card.FORCETRIGGER = nil
         if d ~= 0 then
             G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + d
             return { dollars = d, func = HPR.event_presets.reset_dollar_buffer }
         end
     end,
+    attributes = { "economy", "scaling", },
     blueprint_compat = true,
 }
 
@@ -1079,6 +1098,7 @@ HPR.StellarJoker {
             return { message = localize{ type = "variable", key = "a_powchips", vars = { card.ability.extra.echips}, colour = Spectrallib.echips }}
         end
     end,
+    attributes = { "destroy_card", "echips", "emult", "scaling", },
     forcetrigger_compat = true,
 }
 
@@ -1105,7 +1125,8 @@ HPR.StellarJoker {
             context.other_card.ability.perma_x_mult = context.other_card.ability.perma_x_mult + card.ability.extra.xmult
             return { message = localize("k_upgrade_ex"), colour = G.C.RED }
         end
-    end
+    end,
+    attributes = { "modify_card", "retrigger", "xmult", "xchips", },
 }
 
 HPR.StellarJoker {
@@ -1129,7 +1150,8 @@ HPR.StellarJoker {
             })
             return nil, true
         end
-    end
+    end,
+    attributes = { "retrigger", "joker", "chance", "scaling", },
 }
 
 HPR.StellarJoker {
@@ -1155,6 +1177,7 @@ HPR.StellarJoker {
             }
         end
     end,
+    attributes = { "modify_card", "mod_chance", },
 }
 
 HPR.StellarJoker {
@@ -1202,6 +1225,7 @@ HPR.StellarJoker {
             end
         }))
     end,
+    attributes = { "prevents_death", "generation", "joker", },
     forcetrigger_compat = true,
     blueprint_compat = false,
 }
@@ -1261,7 +1285,8 @@ HPR.StellarJoker {
                 return { emult = mults.rare }
             end
         end
-    end
+    end,
+    attributes = { "joker", "mult", "xmult", "emult", "modify_card", },
 }
 
 HPR.StellarJoker {
@@ -1300,5 +1325,6 @@ HPR.StellarJoker {
             play_sound('timpani')
             SMODS.calculate_effect({ message = localize('ph_boss_disabled') }, card)
         end
-    end
+    end,
+    attributes = { "economy", }, --this one def needs a rework but whatever 
 }
