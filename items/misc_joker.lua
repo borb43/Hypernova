@@ -451,7 +451,7 @@ SMODS.Joker {
             G.E_MANAGER:add_event(Event{
                 func = function ()
                     SMODS.add_card{
-                        set = "Food",
+                        attributes = { "food" },
                         edition = "e_negative",
                         area = G.jokers, --change to poll object but idk how
                     }
