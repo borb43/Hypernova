@@ -33,7 +33,8 @@ SMODS.Joker { --fusion reactor, balances before scoring
     end,
     hpr_badge_info = {
         { key = "credits_idea", vars = {"Eris" }},
-    }
+    },
+    attributes = { "balance" }
 }
 
 SMODS.Joker { --growth, increases potency of other joker effects
