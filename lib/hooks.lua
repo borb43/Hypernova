@@ -251,13 +251,13 @@ function SMODS.get_probability_vars(trigger_obj, base_numerator, base_denominato
 	end
 	return prob_vars_ref(trigger_obj, base_numerator, base_denominator, identifier, from_roll, no_mod)
 end
-
+--[[
 local is_eternal_ref = SMODS.is_eternal
 function SMODS.is_eternal(card, trigger)
 	if card.ability.consumeable and card.ability.eternal then return true end
 	return is_eternal_ref(card, trigger)
 end
-
+]]
 local prob_ref = SMODS.pseudorandom_probability
 function SMODS.pseudorandom_probability(trigger_obj, seed, base_numerator, base_denominator, identifier, no_mod)
 	local res = prob_ref(trigger_obj, seed, base_numerator, base_denominator, identifier, no_mod)

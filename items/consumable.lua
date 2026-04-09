@@ -174,6 +174,7 @@ SMODS.Consumable {
     pos = { x = 5, y = 0 },
     hidden = true,
     soul_set = "Planet",
+    cost = 4,
     config = { extra = { chips = 10, mult = 1 } },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.chips, card.ability.extra.mult }}
