@@ -305,6 +305,6 @@ if next(SMODS.find_mod("MyDreamJournal")) then
     assert(SMODS.load_file("crossmod/grilled_chicken.lua"))()
 end
 
-if CardSleeves then
+if next(SMODS.find_mod("CardSleeves")) then
     assert(SMODS.load_file("crossmod/sleeve.lua"))()
 end

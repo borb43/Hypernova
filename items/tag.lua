@@ -5,7 +5,7 @@ SMODS.Tag {
     pos = { x = 1, y = 0 },
     apply = function (self, tag, context)
         if context.type == "voucher_add" then
-            tag:yep("+", G.C.SET.Back, function ()
+            tag:yep("+", G.C.FILTER, function ()
                 local back = SMODS.create_card{
                     set = "Back",
                     area = G.shop_vouchers,
@@ -24,6 +24,33 @@ SMODS.Tag {
     end,
     min_ante = 2
 }
+
+if next(SMODS.find_mod("CardSleeves")) then
+    SMODS.Tag {
+        key = "sleeve",
+        atlas = "tag",
+        pos = { x = 0, y = 0 },
+        apply = function (self, tag, context)
+            if context.type == "voucher_add" then
+                tag:yep("+", G.C.FILTER, function ()
+                    local back = SMODS.create_card{
+                        set = "Sleeve",
+                        area = G.shop_vouchers,
+                        key_append = "hpr_sleeve_tag"
+                    }
+                    back.shop_voucher = true
+                    create_shop_card_ui(back, "Voucher", G.shop_vouchers)
+                    back:start_materialize()
+                    G.shop_vouchers:emplace(back)
+                    G.shop_vouchers.config.card_limit = #G.shop_vouchers.cards
+                    back.from_tag = true
+                    return true
+                end)
+                tag.triggered = true
+            end
+        end
+    }
+end
 
 SMODS.Tag {
     key = "chaos",

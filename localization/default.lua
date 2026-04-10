@@ -1403,6 +1403,14 @@ local descriptions = {
                 "Joker is free and",
                 "becomes {C:dark_edition}Green",
             }
+        },
+        tag_hpr_sleeve = {
+            name = "Sleeve Tag",
+            text = {
+                "Adds a {C:attention}Sleeve{} to the",
+                "Voucher area of",
+                "the next shop"
+            }
         }
     },
     Tarot = {
