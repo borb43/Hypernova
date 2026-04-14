@@ -78,7 +78,7 @@ HPR.post_load = function ()
 end
 
 HPR.post_create_card = function (card, area, soulable, key_append)
-    if (card.ability.set == "Default" or card.ability.set == "Enhanced") and area and (area.config.type == "shop" or area == G.pack_cards) then
+    if card.playing_card and area and (area.config.type == "shop" or area == G.pack_cards) then
         if G.GAME and G.GAME.used_vouchers.v_hpr_stacking then
             if pseudorandom("hpr_stacking") < 0.5 then card.ability.perma_bonus = card.ability.perma_bonus + pseudorandom("hpr_stacking_buff"..(key_append or ""), 10, 60) end
             if pseudorandom("hpr_stacking") < 0.5 then card.ability.perma_h_chips = card.ability.perma_h_chips + pseudorandom("hpr_stacking_buff"..(key_append or ""), 10, 60) end
@@ -91,20 +91,10 @@ HPR.post_create_card = function (card, area, soulable, key_append)
             if pseudorandom("hpr_stacking2") < 0.25 then card.ability.perma_x_mult = card.ability.perma_x_mult + (pseudorandom("hpr_stacking_buff2"..(key_append or ""), 1, 10)/5) end
             if pseudorandom("hpr_stacking2") < 0.25 then card.ability.perma_h_x_mult = card.ability.perma_h_x_mult + (pseudorandom("hpr_stacking_buff2"..(key_append or ""), 1, 5)/10) end
         end
-        if G.GAME and G.GAME.used_vouchers.v_hpr_falsified then
-            if pseudorandom("hpr_stacking3") < 0.2 then card.ability.perma_repetitions = card.ability.perma_repetitions + 1 end
-        end
-        if G.GAME and G.GAME.used_vouchers.v_hpr_fool_gold then
-            if pseudorandom("hpr_stacking4") < 0.2 then card.ability.perma_h_dollars = card.ability.perma_h_dollars + pseudorandom("hpr_stacking_buff4"..(key_append or ""),1,6) end
-            if pseudorandom("hpr_stacking4") < 0.2 then card.ability.perma_p_dollars = card.ability.perma_p_dollars + pseudorandom("hpr_stacking_buff4"..(key_append or ""),1,4) end
-        end
     end
     if card.ability.consumeable and not card.edition and G.GAME.modifiers.hpr_neg_consumable_rate and pseudorandom((key_append or "").."neg_consumable_deck") < G.GAME.modifiers.hpr_neg_consumable_rate then
 		card:set_edition("e_negative")
 	end
-    if area and G.GAME.used_vouchers.v_hpr_graviton and (area.config.type == "shop" or area == G.pack_cards) and not card.edition and card.is_rarity and card:is_rarity(1) and pseudorandom((key_append or "").."hpr_graviton") < 0.05 then
-        card:set_edition("e_negative")
-    end
 end
 
 local mod_path = HPR.path

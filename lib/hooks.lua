@@ -3,15 +3,6 @@ create_card = function(_type, area, legendary, _rarity, skip_materialize, soulab
 	if (next(SMODS.find_card("j_hpr_missing")) or next(SMODS.find_card("j_hpr_apostrophe_m"))) and (SMODS.ConsumableTypes[_type] or _type == "Tarot_Planet") then
 		_type = "Consumeables"
 	end
-	if G.GAME.used_vouchers.v_hpr_void_cradle and _type == "Tarot" and key_append ~= "ar1" and not forced_key and pseudorandom("hpr_void_cradle") < 0.2 then
-		_type = "Spectral"
-	end
-	if G.GAME.used_vouchers.v_hpr_astrology and (_type == "Planet" or _type == "Tarot") and not forced_key then
-		_type = "Tarot_Planet"
-	end
-	if G.GAME.used_vouchers.v_hpr_magician and _type == "Default" and area and (area.config.type == "shop" or area == G.pack_cards) then
-		set = "Enhanced"
-	end
     local ret_card = create_card_ref(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
     HPR.post_create_card(ret_card, area, soulable, key_append)
     return ret_card
@@ -142,17 +133,8 @@ end
 
 local set_cost_ref = Card.set_cost
 function Card:set_cost()
-	if self.area and self.area.type == "shop" and not self.ability.hpr_samples_triggered then
-		self.ability.hpr_samples_triggered = true
-		if G.GAME.used_vouchers and G.GAME.used_vouchers.v_hpr_samples and pseudorandom("hpr_samples") < 0.3 then
-			self.ability.couponed = true
-		end
-	end
     set_cost_ref(self)
-	if G.GAME.hpr_cost_reduction then
-		self.cost = self.cost - G.GAME.hpr_cost_reduction
-	end
-	if self.ability.hpr_no_value then
+	if self.ability.hpr_no_value then --idk what i added this for but ig im keeping it to be safe
 		self.sell_cost = 0 + (self.ability.extra_value or 0)
 	else
 		self.sell_cost = math.max(1, math.floor(self.cost / 2)) + (self.ability.extra_value or 0)
@@ -191,19 +173,12 @@ end
 
 local score_card_ref = SMODS.score_card
 function SMODS.score_card(card, context)
-	if not G.scorehand and context.cardarea == G.hand and (next(SMODS.find_card("j_hpr_storm")) or next(SMODS.get_enhancements(card) or {}) and next(SMODS.find_card("j_hpr_final_splash"))) then
+	if not G.scorehand and context.cardarea == G.hand and next(SMODS.find_card("j_hpr_storm")) then
 		G.scorehand = true
 		context.cardarea = G.play
 		SMODS.score_card(card, context)
 		G.scorehand = nil
 		context.cardarea = G.hand
-	end
-	if not G.scorehand and context.cardarea == "unscored" and G.GAME.used_vouchers.v_hpr_magic_wand then
-		G.scorehand = true
-		context.cardarea = G.hand
-		SMODS.score_card(card, context)
-		G.scorehand = nil
-		context.cardarea = "unscored"
 	end
 	return score_card_ref(card, context)
 end
