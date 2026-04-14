@@ -93,7 +93,7 @@ function SMODS.create_mod_badges(obj, badges)
 				},
 			}
 			for i = 1, #badges do
-				if badges[i].nodes[1].nodes[2].config.object.string == HPR.display_name then --for SOME reason this works now
+				if badges[i].nodes[1].config.colour == HPR.badge_colour then
 					badges[i].nodes[1].nodes[2].config.object:remove()
 					badges[i] = hpr_badge
 					break
