@@ -95,23 +95,6 @@ function SMODS.create_mod_badges(obj, badges)
 end
 --#endregion
 
-local level_up_handref = level_up_hand
-function level_up_hand(card, hand, instant, amount)
-	amount = amount or 1
-	amount = amount * (3 ^ #SMODS.find_card("j_hpr_final_mist"))
-	level_up_handref(card, hand, instant, amount)
-	amount = amount or 1
-	SMODS.calculate_context({
-		hpr_level_up_hand = true,
-		other_card = card,
-		hand_type = hand,
-		instant = instant,
-		chips = G.GAME.hands[hand].l_chips * amount,
-		mult = G.GAME.hands[hand].l_mult * amount,
-		levels = amount
-	})
-end
-
 local upgrade_hands_ref = SMODS.upgrade_poker_hands
 function SMODS.upgrade_poker_hands(args)
 	upgrade_hands_ref(args)
