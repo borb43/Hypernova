@@ -368,7 +368,7 @@ SMODS.Joker {
             return { message = localize("k_upgrade_ex")}
         end
     end,
-    attributes = { "modify_card", "chips", "mult" },
+    attributes = { "modify_card", "chips", "mult", "perma_bonus" },
     hpr_ascension_key = "j_hpr_ascendant"
 }
 
@@ -598,8 +598,7 @@ SMODS.Joker {
             }
         end
     end,
-    pools = { wee = true },
-    attributes = { "modify_card", "retrigger", "rank", "two", "hands" },
+    attributes = { "modify_card", "retrigger", "rank", "two", "hands", "wee", "perma_bonus" },
     hpr_ascension_key = "j_hpr_ascendant",
     blueprint_compat = false, forcetrigger_compat = false
 }
@@ -778,8 +777,7 @@ SMODS.Joker {
         end
         if context.forcetrigger then return { xmult = card.ability.extra } end
     end,
-    attributes = { "rank", "two", "xmult" },
-    pools = { wee = true },
+    attributes = { "rank", "two", "xmult", "wee" },
     forcetrigger_compat = true,
 }
 
@@ -1030,8 +1028,7 @@ SMODS.Joker {
             end
         end
     end,
-    attributes = { "chips", "full_deck", "two", "rank" },
-    pools = { wee = true },
+    attributes = { "chips", "full_deck", "two", "rank", "wee" },
     forcetrigger_compat = true,
 }
 
@@ -1068,8 +1065,8 @@ SMODS.Joker {
     in_pool = function (self, args)
         return not G.GAME.pool_flags.hpr_wee_michel_extinct
     end,
-    pools = { wee = true, Food = true },
-    attributes = { "mult", "rank", "two", "chance", "food" },
+    pools = { Food = true },
+    attributes = { "mult", "rank", "two", "chance", "food", "wee" },
     hpr_ascension_key = "j_hpr_potassium",
     forcetrigger_compat = true,
 }
@@ -1097,8 +1094,8 @@ SMODS.Joker {
     in_pool = function (self, args)
         return G.GAME.pool_flags.hpr_wee_michel_extinct
     end,
-    pools = { wee = true, Food = true },
-    attributes = { "food", "xmult", "two", "rank", "chance", "destroy_card" },
+    pools = { Food = true },
+    attributes = { "food", "xmult", "two", "rank", "chance", "destroy_card", "wee" },
     hpr_ascension_key = "j_hpr_potassium",
     forcetrigger_compat = true,
 }
@@ -1130,7 +1127,7 @@ SMODS.Joker {
         end
     end,
     pools = { Food = true },
-    attributes = { "food", "mult", "discard", "modify_card"},
+    attributes = { "food", "mult", "discard", "modify_card", "perma_bonus"},
     hpr_ascension_key = "j_hpr_ascendant"
 }
 
@@ -1171,8 +1168,8 @@ SMODS.Joker {
             }
         end
     end,
-    pools = { wee = true, Meme = true },
-    attributes = { "chance", "generation", "tarot", "two", "rank" },
+    pools = { Meme = true },
+    attributes = { "chance", "generation", "tarot", "two", "rank", "wee" },
     forcetrigger_compat = true,
     hpr_ascension_key = "j_hpr_master",
 }
@@ -1356,7 +1353,7 @@ SMODS.Joker {
             }
         end
     end,
-    attributes = { "modify_card" },
+    attributes = { "modify_card", "perma_bonus" },
 }
 
 SMODS.Joker {
@@ -1383,8 +1380,7 @@ SMODS.Joker {
         end
         return two_tally > 0 and card.ability.extra.dollars * two_tally or nil
     end,
-    pools = { wee = true },
-    attributes = { "economy", "rank", "two", "full_deck" },
+    attributes = { "economy", "rank", "two", "full_deck", "wee" },
     forcetrigger = function (self, card, context)
         local dollars = self:calc_dollar_bonus(card)
         if dollars ~= 0 then
@@ -1413,7 +1409,7 @@ SMODS.Joker {
             }
         end
     end,
-    attributes = { "two", "rank", "xchips", "xmult" },
+    attributes = { "two", "rank", "xchips", "xmult", "wee" },
     forcetrigger_compat = true,
 }
 
@@ -1479,14 +1475,12 @@ SMODS.Joker {
     pos = { x = 6, y = 14 },
     display_size = { w = 71 * 0.7, h = 95 * 0.7 },
     config = { extra = 1.5 },
-    pools = { wee = true },
     loc_vars = function (self, info_queue, card)
         return { vars = {card.ability.extra} }
     end,
     calculate = function (self, card, context)
         if context.other_joker and context.other_joker ~= card then
-            local p = context.other_joker.config.center.pools
-            if p and p.wee then
+            if context.other_joker:has_attribute("wee") then
                 return {
                     xmult = card.ability.extra
                 }
@@ -1494,7 +1488,7 @@ SMODS.Joker {
         end
         if context.forcetrigger then return {xmult = card.ability.extra} end
     end,
-    attributes = { "joker", "xmult", },
+    attributes = { "joker", "xmult", "wee" },
     forcetrigger_compat = true,
 }
 
@@ -1514,7 +1508,7 @@ SMODS.Joker {
             return { message = localize("k_upgrade_ex"), colour = G.C.MONEY, message_card = context.other_card }
         end
     end,
-    attributes = { "economy", "modify_card", "rank", "eight", "enhancements" },
+    attributes = { "economy", "modify_card", "rank", "eight", "enhancements", "perma_bonus" },
     hpr_ascension_key = "j_hpr_ascendant",
 }
 

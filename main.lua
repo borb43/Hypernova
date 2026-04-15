@@ -33,17 +33,6 @@ HPR.post_load = function ()
         end
     end]]
     -- center function hooks
-    for _, c in pairs(G.P_CENTERS) do
-        if c.pools and c.pools.wee then
-            local ref = c.set_badges
-            c.set_badges = function (self, card, badges)
-                if ref then ref(self, card, badges) end
-                if self.discovered then
-                    badges[#badges+1] = create_badge(localize("k_hpr_wee"), G.C.HPR_WEE, G.C.WHITE, 1)
-                end
-            end
-        end
-    end
     local ref = G.P_CENTERS.e_negative.get_weight
     G.P_CENTERS.e_negative.get_weight = function (self)
         local base_weight = ref and ref(self) or self.weight
@@ -159,14 +148,10 @@ SMODS.ObjectType {
     }
 }
 
-if Cryptid then
-    SMODS.ObjectType{
-        key = "Meme",
-        cards = {
-            "j_wee"
-        }
-    }
-end
+SMODS.Attribute {
+    key = "wee",
+    cards = { "j_wee" }
+}
 
 SMODS.current_mod.optional_features = {
     post_trigger = true,
