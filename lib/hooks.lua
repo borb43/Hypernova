@@ -242,21 +242,17 @@ function SMODS.pseudorandom_probability(trigger_obj, seed, base_numerator, base_
 		identifier = identifier or seed,
 		hpr_retrigger_probability = true
 	}, effects)
-	for i = 1, #effects do
-		local eff = effects[i] and effects[i].jokers
-		while eff do
-			if eff.repetitions then
-				for _ = 1, eff.repetitions do
-					local new_res = prob_ref(trigger_obj, seed, base_numerator, base_denominator, identifier, no_mod)
-					if not eff.no_message then card_eval_status_text(eff.message_card or eff.card or trigger_obj, "extra", nil, nil, nil, { message = eff.message or localize("k_again_ex"), colour = eff.colour or G.C.GREEN }) end
-					res = res or new_res
-				end
-			else
-				sendWarnMessage("Found effect table during repetition check with no assigned repetitions", "Hypernova")
+	HPR.parse_effect_table(effects, function (eff)
+		if eff.repetitions then
+			for _ = 1, eff.repetitions do
+				local new_res = prob_ref(trigger_obj, seed, base_numerator, base_denominator, identifier, no_mod)
+				if not eff.no_message then card_eval_status_text(eff.message_card or eff.card or trigger_obj, "extra", nil, nil, nil, { message = eff.message or localize("k_again_ex"), colour = eff.colour or G.C.GREEN }) end
+				res = res or new_res
 			end
-			eff = eff.extra
+		else
+			sendWarnMessage("Found effect table during repetition check with no assigned repetitions", "Hypernova")
 		end
-	end
+	end)
 	return res
 end
 
@@ -271,17 +267,6 @@ function poll_edition(_key, _mod, _no_neg, _guaranteed, _options)
 	_mod = _mod or 1
 	_mod = _mod * (G.GAME.hpr_edition_rate or 1)
 	return ed(_key, _mod, _no_neg, _guaranteed, _options)
-end
-
-HPR.consts.green_mult = 0.95
-local gba = get_blind_amount
-function get_blind_amount(ante)
-	local base = gba(ante)
-	local mult = 1
-	if G.GAME.hpr_stasis then
-		mult = mult * G.GAME.hpr_stasis^(G.GAME.round_resets.blind_ante or G.GAME.round_resets.ante)
-	end
-	return math.floor(base * mult)
 end
 
 local shatter_ref = SMODS.shatters

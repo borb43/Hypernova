@@ -210,7 +210,7 @@ local erratic_create_card = function (self, card, i)
             key = key
         }
     end
-    local pool = HPR.poll_set("hpr_erratic", {"Consumeables", "Joker", "Playing Card", G.GAME.used_vouchers.v_hpr_recursion and "Booster" or nil}, HPR.get_generic_rare_sets(), 0.1)
+    local pool = HPR.poll_set("hpr_erratic", {"Consumeables", "Joker", "Playing Card", G.GAME.used_vouchers.v_hpr_recursion and "Booster" or nil}, {"Voucher"}, 0.1)
     return {
         set = pool,
         seal = pool == "Playing Card" and SMODS.poll_seal{type_key = "hpr_erratic_seal"} or nil,

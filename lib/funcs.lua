@@ -49,17 +49,6 @@ function HPR.poll_erratic_set(seed) --returns a random set, along with additiona
     end
 end
 
-function HPR.get_generic_rare_sets()
-    local t = {"Voucher"}
-    if G.GAME.used_vouchers.v_hpr_decked_out then
-        t[#t+1] = "Back"
-        if CardSleeves then
-            t[#t+1] = "Sleeve"
-        end
-    end
-    return t
-end
-
 function HPR.poll_set(seed, opts, rare_opts, rare_rate, p_card_edition, p_card_seal) --returns a random set from the given ones along with additional create_card information
     local set
     if rare_rate and rare_opts and next(rare_opts) and pseudorandom(seed) < rare_rate then
@@ -310,4 +299,17 @@ function HPR.scale_score_to_ante(base, ante) --this should probably do more than
     local amount = base * (2^(ante-1))^1.1
     amount = amount - amount%(10^math.floor(math.log10(amount)-1))
     return amount
+end
+
+---Parses the given calculate return tables one at a time, including returned `extra` tables
+---@param effect table|table[] Outputted table from SMODS.calculate_context, or another table in the same structure.
+---@param func fun(eff) Function that is run for each parsed effect table
+function HPR.parse_effect_table(effect, func)
+    for i = 1, #effect do
+        local eff = Spectrallib.safe_get(effect, i, "jokers")
+        while eff do
+            func(eff)
+            eff = eff.extra
+        end
+    end
 end
