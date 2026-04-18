@@ -1264,23 +1264,6 @@ local descriptions = {
                 "{C:mult}+#3#{} Mult"
             }
         },
-        c_hpr_apworld = {
-            name = "APWorld",
-            text = {
-                "Level up a",
-                "{C:attention}random hand",
-                "by {C:attention}#1#{} level#<s>1#"
-            }
-        },
-        c_hpr_simulacrum = {
-            name = "Simulacrum",
-            text = {
-                "Level up a",
-                "{C:attention}random suit",
-                "{C:chips}+#1#{} Chips and",
-                "{C:mult}+#2#{} Mult"
-            }
-        }
     },
     Spectral = {
         c_hpr_pulsar = {
