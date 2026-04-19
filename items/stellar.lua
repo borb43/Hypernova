@@ -334,11 +334,9 @@ HPR.StellarJoker {
 HPR.StellarJoker {
     key = "master",
     forcetrigger_compat = true,
-    config = { extra = { odds = 2, create = 2 } },
+    config = { extra = { create = 2 } },
     loc_vars = function (self, info_queue, card)
-        info_queue[#info_queue+1] = { key = 'e_negative_consumable', set = 'Edition', config = { extra = 1 } }
-        local n,d = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, self.key)
-        return { vars = {card.ability.extra.create,n,d}}
+        return { vars = {card.ability.extra.create }}
     end,
     calculate = function (self, card, context)
         if context.setting_blind then
@@ -368,7 +366,7 @@ HPR.StellarJoker {
         if context.before then
             local b
             for _, c in ipairs(context.full_hand) do
-                if not c:is_face() and not c.ability.consumeable then
+                if not c:is_face() and c.config.center_key == "c_base" then
                     b = true
                     local cons = HPR.poll_obj("hpr_master_enh", "Consumeables")
                     c:set_ability(cons, nil, true)
@@ -382,21 +380,6 @@ HPR.StellarJoker {
             end
             if b then
                 return { message = localize("k_hpr_enhanced_q") }
-            end
-        end
-        if context.individual and context.cardarea == G.play or context.using_consumeable then
-            local c = context.other_card or context.consumeable
-            if c.ability.consumeable and not (c.edition and c.edition.negative) and SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds) then
-                G.E_MANAGER:add_event(Event{
-                    func = function (n)
-                        local copy = copy_card(c)
-                        copy:set_edition("e_negative", true)
-                        copy:add_to_deck()
-                        G.consumeables:emplace(copy)
-                        return true
-                    end
-                })
-                return { message = localize("k_duplicated_ex") }
             end
         end
     end,
@@ -1273,7 +1256,7 @@ HPR.StellarJoker {
     end,
     attributes = { "joker", "mult", "xmult", "emult", "modify_card", },
 }
-
+--[[
 HPR.StellarJoker {
     key = "hunter",
     config = { extra = 2 },
@@ -1313,3 +1296,4 @@ HPR.StellarJoker {
     end,
     attributes = { "economy", }, --this one def needs a rework but whatever 
 }
+]]

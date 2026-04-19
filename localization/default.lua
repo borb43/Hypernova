@@ -311,10 +311,8 @@ local descriptions = {
             text = {
                 {"Creates {C:attention}#1#{} random {C:attention}Tags{} and {C:attention}Booster",
                 "{C:attention}Packs{} when {C:attention}Blind{} is selected"},
-                {"Played non-{C:attention}face{} cards become",
-                "random {C:attention}consumables{}, {C:green}#2# in #3#{} chance",
-                "when a non-{C:dark_edition}Negative{C:attention} consumable{} is",
-                "used or scored to create a {C:dark_edition}Negative{} copy"}
+                {"Played unenhanced non-{C:attention}face{} cards",
+                "become random {C:attention}consumables{} when played"}
             }
         },
         j_hpr_potassium = {
