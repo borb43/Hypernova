@@ -20,6 +20,18 @@ HPR.calculate = function(self, context)
     end
 end
 
+HPR.menu_cards = function ()
+    return {
+        { set = "hpr_moons" },
+        func = function ()
+            if math.random() < 0.01 then
+                G.title_top.cards[1]:set_edition("e_hpr_green", true, true)
+            end
+            return true
+        end
+    }
+end
+
 HPR.post_load = function ()
     --[[
     if Entropy and G.FUNCS.use_joker then
