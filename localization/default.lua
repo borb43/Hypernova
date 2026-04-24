@@ -659,9 +659,9 @@ local descriptions = {
         j_hpr_tiny_graph = {
             name = "Memory",
             text = {
-                "First played {C:attention}2",
-                "gives {X:mult,C:white}X#1#{} Mult",
-                "when scored"
+                "First played {C:attention}2{},",
+                "{C:attention}3{}, {C:attention}4{}, or {C:attention}5{} gives",
+                "{X:mult,C:white}X#1#{} Mult when scored"
             }
         },
         j_hpr_copier = {

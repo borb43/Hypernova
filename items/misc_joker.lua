@@ -746,10 +746,10 @@ SMODS.Joker {
         return { vars = { card.ability.extra }}
     end,
     calculate = function (self, card, context)
-        if context.individual and context.cardarea == G.play and context.other_card:get_id() == 2 then
+        if context.individual and context.cardarea == G.play and (context.other_card:get_id() == 2 or context.other_card:get_id() == 3 or context.other_card:get_id() == 4 or context.other_card:get_id() == 5) then
             local p = false
             for _, c in ipairs(context.scoring_hand) do
-                if c:get_id() == 2 then
+                if c:get_id() == 2 or c:get_id() == 3 or c:get_id() == 4 or c:get_id() == 5 then
                     p = c == context.other_card
                     break
                 end
@@ -758,7 +758,7 @@ SMODS.Joker {
         end
         if context.forcetrigger then return { xmult = card.ability.extra } end
     end,
-    attributes = { "rank", "two", "xmult", "wee" },
+    attributes = { "rank", "two", "xmult", "wee", "three", "four", "five" },
     forcetrigger_compat = true,
 }
 
