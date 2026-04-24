@@ -114,17 +114,6 @@ function SMODS.upgrade_poker_hands(args)
 	end
 end
 
-local set_cost_ref = Card.set_cost
-function Card:set_cost()
-    set_cost_ref(self)
-	if self.ability.hpr_no_value then --idk what i added this for but ig im keeping it to be safe
-		self.sell_cost = 0 + (self.ability.extra_value or 0)
-	else
-		self.sell_cost = math.max(1, math.floor(self.cost / 2)) + (self.ability.extra_value or 0)
-	end
-	self.sell_cost_label = self.facing == 'back' and '?' or self.sell_cost
-end
-
 local scie = SMODS.calculate_individual_effect
 function SMODS.calculate_individual_effect(effect, scored_card, key, amount, from_edition)
 	if HPR.findany(key, "mult", "chip") and not effect.hpr_no_mod then
