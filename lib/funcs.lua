@@ -313,3 +313,25 @@ function HPR.parse_effect_table(effect, func)
         end
     end
 end
+
+--checks if a card exists in any area where it can be accessed by the player
+function HPR.card_active(key)
+    local areas = {}
+    areas[#areas+1] = G.jokers
+    if areas[1] ~= G.consumeables then areas[#areas+1] = G.consumeables end
+    areas[#areas+1] = G.shop_jokers
+    areas[#areas+1] = G.shop_vouchers
+    areas[#areas+1] = G.shop_booster
+    areas[#areas+1] = G.pack_cards
+    areas[#areas+1] = G.hand
+    for _, v in ipairs(areas) do
+        if v and v.cards then
+            for _, card in ipairs(v.cards) do
+                if card.config.center_key == key then
+                    return true
+                end
+            end
+        end
+    end
+    return false
+end
