@@ -1457,8 +1457,8 @@ SMODS.Joker {
     display_size = { w = 71 * 0.7, h = 95 * 0.7 },
     calculate = function (self, card, context)
         if context.retrigger_joker_check and not context.other_context.retrigger_joker_check then
-            local scale = Spectrallib.safe_get(context.other_card.children, "center", "scale")
-            if scale and (scale.x < 71 or scale.y < 95) then
+            local scale = context.other_card.T
+            if scale and (scale.w < G.CARD_W or scale.h < G.CARD_H) then
                 return {repetitions = 1}
             end
         end
