@@ -1451,26 +1451,19 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "softball",
-    rarity = 2,
+    rarity = 3,
     cost = 7,
     pos = { x = 6, y = 14 },
     display_size = { w = 71 * 0.7, h = 95 * 0.7 },
-    config = { extra = 1.5 },
-    loc_vars = function (self, info_queue, card)
-        return { vars = {card.ability.extra} }
-    end,
     calculate = function (self, card, context)
-        if context.other_joker and context.other_joker ~= card then
-            if context.other_joker:has_attribute("wee") then
-                return {
-                    xmult = card.ability.extra
-                }
+        if context.retrigger_joker_check and not context.other_context.retrigger_joker_check then
+            local scale = Spectrallib.safe_get(context.other_card.children, "center", "scale")
+            if scale and (scale.x < 71 or scale.y < 95) then
+                return {repetitions = 1}
             end
         end
-        if context.forcetrigger then return {xmult = card.ability.extra} end
     end,
-    attributes = { "joker", "xmult", "wee" },
-    forcetrigger_compat = true,
+    attributes = { "joker", "retrigger", "wee" },
 }
 
 SMODS.Joker {

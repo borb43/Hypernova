@@ -858,8 +858,9 @@ local descriptions = {
         j_hpr_softball = {
             name = "Softball Card",
             text = {
-                "Other {C:hpr_wee}Wee{} Jokers",
-                "each give {X:mult,C:white}X#1#{} Mult"
+                "Retriggers all {C:attention}Jokers",
+                "that are {C:attention}smaller{} than",
+                "the standard card size"
             }
         },
         j_hpr_stellarchicken = {
