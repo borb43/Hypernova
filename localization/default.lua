@@ -114,14 +114,6 @@ local descriptions = {
                 "{C:dark_edition}?????"
             }
         },
-        m_hpr_purpur = {
-            name = "Purpur Card",
-            text = {
-                "{C:purple}+#1#{} Score,",
-                "scales with {C:attention}Ante",
-                "{C:inactive}(Currently {C:purple}+#2#{C:inactive})"
-            }
-        },
         m_hpr_relic = {
             name = "Relic Card",
             text = {
@@ -1037,14 +1029,6 @@ local descriptions = {
                 "at the end of the {C:attention}shop",
             }
         },
-        j_hpr_clown = {
-            name = "Clown",
-            text = {
-                "{C:purple}+#1#{} Score,",
-                "Scales with ante",
-                "{C:inactive}(Currently {C:purple}+#2#{C:inactive})"
-            }
-        }
     },
     Other = {
         p_hpr_lunar_pack = {
