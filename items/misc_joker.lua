@@ -1458,7 +1458,7 @@ SMODS.Joker {
     calculate = function (self, card, context)
         if context.retrigger_joker_check and not context.other_context.retrigger_joker_check then
             local scale = context.other_card.T
-            if scale and (scale.w < G.CARD_W or scale.h < G.CARD_H) then
+            if scale and scale.w*scale.h < G.CARD_H*G.CARD_W then
                 return {repetitions = 1}
             end
         end
