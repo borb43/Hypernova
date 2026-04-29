@@ -32,9 +32,9 @@ SMODS.Booster {
     config = { extra = 2, choose = 1 },
     group_key = "k_lunar_pack",
     loc_vars = function(self, info_queue, card)
-        local cfg = (card and card.ability) or self.config or {}
+        local v = SMODS.Booster.loc_vars(self, info_queue, card) or {vars={}}
         return {
-            vars = { cfg.choose, cfg.extra },
+            vars = v.vars,
             key = "p_hpr_lunar_pack"
         }
     end,
@@ -72,9 +72,9 @@ SMODS.Booster {
     config = { extra = 2, choose = 1 },
     group_key = "k_lunar_pack",
     loc_vars = function(self, info_queue, card)
-        local cfg = (card and card.ability) or self.config or {}
+        local v = SMODS.Booster.loc_vars(self, info_queue, card) or {vars={}}
         return {
-            vars = { cfg.choose, cfg.extra },
+            vars = v.vars,
             key = "p_hpr_lunar_pack"
         }
     end,
@@ -112,9 +112,9 @@ SMODS.Booster {
     config = { extra = 4, choose = 1 },
     group_key = "k_lunar_pack",
     loc_vars = function(self, info_queue, card)
-        local cfg = (card and card.ability) or self.config or {}
+        local v = SMODS.Booster.loc_vars(self, info_queue, card) or {vars={}}
         return {
-            vars = { cfg.choose, cfg.extra },
+            vars = v.vars,
             key = "p_hpr_lunar_pack_jumbo"
         }
     end,
@@ -152,9 +152,9 @@ SMODS.Booster {
     config = { extra = 4, choose = 2 },
     group_key = "k_lunar_pack",
     loc_vars = function(self, info_queue, card)
-        local cfg = (card and card.ability) or self.config or {}
+        local v = SMODS.Booster.loc_vars(self, info_queue, card) or {vars={}}
         return {
-            vars = { cfg.choose, cfg.extra },
+            vars = v.vars,
             key = "p_hpr_lunar_pack_mega"
         }
     end,
@@ -250,9 +250,9 @@ SMODS.Booster {
     config = { extra = 3, choose = 1 },
     group_key = "k_erratic_pack",
     loc_vars = function (self, info_queue, card)
-        local cfg = (card and card.ability) or self.config or {}
+        local v = SMODS.Booster.loc_vars(self, info_queue, card) or {vars={}}
         return {
-            vars = { cfg.extra, cfg.choose },
+            vars = v.vars,
             key = "p_hpr_erratic_pack"
         }
     end,
@@ -291,9 +291,9 @@ SMODS.Booster {
     config = { extra = 3, choose = 1 },
     group_key = "k_erratic_pack",
     loc_vars = function (self, info_queue, card)
-        local cfg = (card and card.ability) or self.config or {}
+        local v = SMODS.Booster.loc_vars(self, info_queue, card) or {vars={}}
         return {
-            vars = { cfg.extra, cfg.choose },
+            vars = v.vars,
             key = "p_hpr_erratic_pack"
         }
     end,
@@ -332,9 +332,10 @@ SMODS.Booster {
     config = { extra = 5, choose = 1 },
     group_key = "k_erratic_pack",
     loc_vars = function (self, info_queue, card)
-        local cfg = (card and card.ability) or self.config or {}
+        local v = SMODS.Booster.loc_vars(self, info_queue, card) or {vars={}}
+        v.vars[#v.vars+1] = localize(HPR.erratic_jumbos[math.random(1, #HPR.erratic_jumbos)])
         return {
-            vars = { cfg.extra, cfg.choose, localize(HPR.erratic_jumbos[math.random(1, #HPR.erratic_jumbos)]) },
+            vars = v.vars,
             key = "p_hpr_erratic_pack_jumbo"
         }
     end,
@@ -373,9 +374,10 @@ SMODS.Booster {
     config = { extra = 5, choose = 2 },
     group_key = "k_erratic_pack",
     loc_vars = function (self, info_queue, card)
-        local cfg = (card and card.ability) or self.config or {}
+        local v = SMODS.Booster.loc_vars(self, info_queue, card) or {vars={}}
+        v.vars[#v.vars+1] = localize(HPR.erratic_megas[math.random(1, #HPR.erratic_jumbos)])
         return {
-            vars = { cfg.extra, cfg.choose, localize(HPR.erratic_megas[math.random(1, #HPR.erratic_jumbos)]) },
+            vars = v.vars,
             key = "p_hpr_erratic_pack_mega"
         }
     end,
