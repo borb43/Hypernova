@@ -564,7 +564,7 @@ local descriptions = {
                 "{C:attention}Prevents death{} and {C:attention}destroys{} all held",
                 "{C:attention}Consumables{}, then fills Consumable",
                 "slots with {C:attention}Eternal {C:spectral}Spectral{} cards",
-                "{C:red}Must have room to activate",
+                "{C:red}Must have room to revive",
                 "{C:red}self destructs"
             }
         },
