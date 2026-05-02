@@ -283,7 +283,7 @@ local descriptions = {
             }
         },
         j_hpr_observatorium = {
-            name = "S001 OBSERVATORIUM",
+            name = "OBSERVATORIUM",
             text = {
                 "When a hand's {C:chips}Chips{} or {C:mult}Mult",
                 "are {C:attention}leveled up{}, upgrade this",
@@ -299,7 +299,7 @@ local descriptions = {
             }
         },
         j_hpr_master = {
-            name = "S002 MASTER",
+            name = "MASTER",
             text = {
                 {"Creates {C:attention}#1#{} random {C:attention}Tags{} and {C:attention}Booster",
                 "{C:attention}Packs{} when {C:attention}Blind{} is selected"},
@@ -308,7 +308,7 @@ local descriptions = {
             }
         },
         j_hpr_potassium = {
-            name = "S003 POTASSIUM",
+            name = "POTASSIUM",
             text = {
                 {"{X:slib_emult,C:white}^#1#{} Mult"},
                 {
@@ -320,7 +320,7 @@ local descriptions = {
             }
         },
         j_hpr_crazy = {
-            name = "S004 CRAZY",
+            name = "CRAZY",
             text = {
                 "All {C:attention}poker hands{} contained in",
                 "played hand gain {C:mult}+#1#{} Mult for",
@@ -328,7 +328,7 @@ local descriptions = {
             }
         },
         j_hpr_crafty = {
-            name = "S005 CRAFTY",
+            name = "CRAFTY",
             text = {
                 "All {C:attention}poker hands{} contained in",
                 "played hand gain {C:chips}+#1#{} Chips for",
@@ -336,14 +336,14 @@ local descriptions = {
             }
         },
         j_hpr_storm = {
-            name = "S006 STORM",
+            name = "STORM",
             text = {
                 "All {C:attention}played{} and {C:attention}held{} cards score",
                 "{C:attention}Retrigger{} all scored cards"
             }
         },
         j_hpr_straightaway = {
-            name = "S007 STRAIGHTAWAY",
+            name = "STRAIGHTAWAY",
             text = {
                 {"If played hand contains a {C:attention}Straight",
                 "this Joker gains {X:mult,C:white}X#2#{} Mult and",
@@ -356,7 +356,7 @@ local descriptions = {
             }
         },
         j_hpr_void = {
-            name = "S008 VOID",
+            name = "VOID",
             text = {
                 {"{X:mult,C:white}X#1#{} Mult for each card",
                 "below {C:attention}#3#{} in your full deck",
@@ -368,7 +368,7 @@ local descriptions = {
             }
         },
         j_hpr_nimbus = {
-            name = "S009 NIMBUS",
+            name = "NIMBUS",
             text = {
                 "Scored and held in hand {C:attention}9s{} gain",
                 "{C:money}$#1#{} respective to their {C:attention}area{}",
@@ -378,7 +378,7 @@ local descriptions = {
             }
         },
         j_hpr_shorthand = {
-            name = "S010 SHORTHAND",
+            name = "SHORTHAND",
             text = {
                 {"All {C:attention}Flushes{} and {C:attention}Straights{}",
                 "can be made with {C:attention}3{} cards"},
@@ -389,7 +389,7 @@ local descriptions = {
             }
         },
         j_hpr_diamond = {
-            name = "S011 DIAMOND",
+            name = "DIAMOND",
             text = {
                 {"Each played {C:diamonds}Diamond{} card",
                 "gives {X:mult,C:white}X#1#{} Mult when scored"},
@@ -399,7 +399,7 @@ local descriptions = {
             }
         },
         j_hpr_heart = {
-            name = "S012 HEART",
+            name = "HEART",
             text = {
                 "Each scored {C:hearts}Heart{} card",
                 "has a {C:green}#1# in #2#{} chance to",
@@ -407,7 +407,7 @@ local descriptions = {
             }
         },
         j_hpr_spade = {
-            name = "S013 SPADE",
+            name = "SPADE",
             text = {
                 "Each scored {C:spades}Spade{} card gives",
                 "{X:purple,C:white}X#3#{} Chips and Mult and",
@@ -415,7 +415,7 @@ local descriptions = {
             }
         },
         j_hpr_club = {
-            name = "S014 CLUB",
+            name = "CLUB",
             text = {
                 "Played {C:clubs}Clubs{} level up {C:clubs}Clubs",
                 "with {C:chips}+#1#{} Chips and {C:mult}+#2#{} Mult",
@@ -470,7 +470,7 @@ local descriptions = {
             }
         },
         j_hpr_wild = {
-            name = "S015 WILD",
+            name = "WILD",
             text = {
                 "Each played {V:1}#2#{} card becomes",
                 "{C:attention}Wild{} and {C:dark_edition}Polychrome{} and gives",
@@ -479,7 +479,7 @@ local descriptions = {
             }
         },
         j_hpr_stone = {
-            name = "S016 STONE",
+            name = "STONE",
             text = {
                 {"Creates a {C:attention}Stone{} card and converts",
                 "a random card in deck to {C:attention}Stone",
@@ -492,7 +492,7 @@ local descriptions = {
             }
         },
         j_hpr_conjurer = {
-            name = "S016 CONJURER",
+            name = "CONJURER",
             text = {
                 "Adds {C:attention}#3# free Mega Standard Packs{} to each shop",
                 "This Joker gains {X:mult,C:white}X#2#{} Mult when",
@@ -501,7 +501,7 @@ local descriptions = {
             }
         },
         j_hpr_circus = {
-            name = "S017 IRRADIANT",
+            name = "IRRADIANT",
             text = {
                 "Increases {C:dark_edition}ALL{} your stats by {C:attention}#1#{},",
                 "reduces Ante by {C:attention}#1#{} while held",
@@ -509,7 +509,7 @@ local descriptions = {
             }
         },
         j_hpr_unity = {
-            name = "S018 UNITY",
+            name = "UNITY",
             text = {
                 "This joker gains {X:mult,C:white}X#2#{} Mult for",
                 "every {C:attention}unique poker hand{} contained",
@@ -569,7 +569,7 @@ local descriptions = {
             }
         },
         j_hpr_mask = {
-            name = "S019 MASK",
+            name = "MASK",
             text = {
                 "Scored and held in hand",
                 "{C:attention}face{} cards give {X:mult,C:white}X#2#{} Mult",
@@ -580,7 +580,7 @@ local descriptions = {
             }
         },
         j_hpr_numeric = {
-            name = "S020 NUMERIC",
+            name = "NUMERIC",
             text = {
                 "When any non-{C:attention}face{} card is scored",
                 "all other {C:attention}played{} cards permanently",
@@ -589,7 +589,7 @@ local descriptions = {
             }
         },
         j_hpr_payload = {
-            name = "S021 PAYLOAD",
+            name = "PAYLOAD",
             text = {
                 "Earn {C:money}$1{} at the end of round",
                 "for every {C:money}$#2#{} you have, up to",
@@ -598,7 +598,7 @@ local descriptions = {
             }
         },
         j_hpr_destroyer = {
-            name = "S022 HYDRA",
+            name = "HYDRA",
             text = {
                 {"When {C:attention}Blind{} is selected,",
                 "destroy joker to the right",
@@ -611,7 +611,7 @@ local descriptions = {
             }
         },
         j_hpr_ascendant = {
-            name = "S023 ASCENDANT",
+            name = "ASCENDANT",
             text = {
                 {
                     "All {C:attention}scored{} cards gain {X:chips,C:white}X#1#{} Chips",
@@ -625,7 +625,7 @@ local descriptions = {
             }
         },
         j_hpr_mimic = {
-            name = "S024 MIMIC",
+            name = "MIMIC",
             text = {
                 "Retriggers Joker to the",
                 "right {C:attention}#1#{} time#<s>1#, {C:green}#3# in #4#{} chance",
@@ -634,7 +634,7 @@ local descriptions = {
             }
         },
         j_hpr_lucky = {
-            name = "S025 LUCKY",
+            name = "LUCKY",
             text = {
                 "{C:green,E:1}Probabilities{} on {C:attention}Blinds{} are {C:attention}nullified",
                 "When a {C:green,E:1}probability{} rolls for a card,",
@@ -864,7 +864,7 @@ local descriptions = {
             }
         },
         j_hpr_stellarchicken = {
-            name = "SDX001 GRILLED CHICKEN",
+            name = "GRILLED CHICKEN",
             text = {
                 {
                     "Retriggers all Grilled Chicken",
@@ -879,7 +879,7 @@ local descriptions = {
             }
         },
         j_hpr_guardian = {
-            name = "S026 GUARDIAN",
+            name = "GUARDIAN",
             text = {
                 "{C:attention}Prevents death{} once",
                 "per {C:attention}Ante{} and creates",
@@ -920,7 +920,7 @@ local descriptions = {
             }
         },
         j_hpr_buffoon = {
-            name = "S027 BUFFOON",
+            name = "BUFFOON",
             text = {
                 {"When {C:attention}Blind{} is selected, creates",
                 "{C:attention}#1# {C:dark_edition}editioned {C:attention}Jokers{} with",
@@ -936,7 +936,7 @@ local descriptions = {
             }
         },
         j_hpr_hunter = {
-            name = "S028 HUNTER",
+            name = "HUNTER",
             text = {
                 {"Disables effect of every {C:attention}Boss Blind"},
                 {"{C:hpr_boss}Boss{} Jokers give",

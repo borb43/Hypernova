@@ -311,3 +311,9 @@ function SMODS.has_any_suit(card)
 	end
 	return any_suit_ref(card)
 end
+
+local loc_ref = init_localization
+function init_localization(...)
+	HPR.post_loc()
+	return loc_ref(...)
+end

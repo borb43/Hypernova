@@ -9,7 +9,13 @@ SMODS.Rarity {
     pools = { Joker = true }
 }
 
-HPR.StellarJoker = SMODS.Joker:extend({
+HPR.STELLAR_INDEX = 0
+function HPR.StellarJoker(args)
+    args.stellar_num = HPR.STELLAR_INDEX
+    HPR.STELLAR_INDEX = HPR.STELLAR_INDEX + 1
+    return HPR.new_stellar(args)
+end
+HPR.new_stellar = SMODS.Joker:extend({
     atlas = "hpr_stellar",
     pos = { x = 0, y = 0 },
     soul_pos = { x = 1, y = 0 },

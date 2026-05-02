@@ -98,6 +98,31 @@ HPR.post_create_card = function (card, area, soulable, key_append)
 	end
 end
 
+HPR.post_loc = function ()
+    for k, desc in pairs(G.localization.descriptions.Joker) do
+        print(k)
+        local i = G.P_CENTERS[k] and G.P_CENTERS[k].stellar_num or nil
+        if i and i~=0 and desc.name then
+            local new_name = type(desc.name)=="table" and desc.name[1] or desc.name
+            print(new_name)
+            local prepend
+            if i < 10 then
+                prepend = "00"..i
+            elseif i < 100 then
+                prepend = "0"..i
+            else
+                prepend = tostring(i)
+            end
+            new_name = "S"..prepend.." "..new_name
+            if type(desc.name)=="table" then
+                desc.name[1] = new_name
+            else
+                desc.name = new_name
+            end
+        end
+    end
+end
+
 local mod_path = HPR.path
 
 HPR.erratic_colours = {
