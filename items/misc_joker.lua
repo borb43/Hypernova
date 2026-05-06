@@ -1453,12 +1453,13 @@ SMODS.Joker {
     key = "softball",
     rarity = 3,
     cost = 7,
-    pos = { x = 6, y = 14 },
+    atlas = "placeholder",
+    pos = { x = 2, y = 0 },
     display_size = { w = 71 * 0.7, h = 95 * 0.7 },
     calculate = function (self, card, context)
         if context.retrigger_joker_check and not context.other_context.retrigger_joker_check then
             local scale = context.other_card.T
-            if scale and scale.w*scale.h < G.CARD_H*G.CARD_W then
+            if scale and (scale.w < G.CARD_W or scale.h < G.CARD_H) then
                 return {repetitions = 1}
             end
         end

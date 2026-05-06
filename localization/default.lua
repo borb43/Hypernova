@@ -856,11 +856,12 @@ local descriptions = {
             }
         },
         j_hpr_softball = {
-            name = "Softball Card",
+            name = "Small Packages",
             text = {
                 "Retriggers all {C:attention}Jokers",
                 "that are {C:attention}smaller{} than",
-                "the standard card size"
+                "the standard card size",
+                "{C:inactive,s:0.8}Small Packages excluded"
             }
         },
         j_hpr_stellarchicken = {
