@@ -8,6 +8,6 @@
 	"main_file": "main.lua",
 	"priority": 0,
 	"badge_colour": "C09ED9",
-	"version": "0.5.0a",
-	"dependencies": ["Steamodded (>=1.0.0~BETA-1620a)", "Spectrallib"]
+	"version": "0.5.0b",
+	"dependencies": ["Steamodded (>=1.0.0~BETA-1620a)", "Spectrallib (>=1.1.6)"]
 }
