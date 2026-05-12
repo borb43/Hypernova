@@ -100,11 +100,9 @@ end
 
 HPR.post_loc = function ()
     for k, desc in pairs(G.localization.descriptions.Joker) do
-        print(k)
         local i = G.P_CENTERS[k] and G.P_CENTERS[k].stellar_num or nil
         if i and i~=0 and desc.name then
             local new_name = type(desc.name)=="table" and desc.name[1] or desc.name
-            print(new_name)
             local prepend
             if i < 10 then
                 prepend = "00"..i
