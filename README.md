@@ -5,7 +5,7 @@ This is my silly little mod where i add basically whatever i feel like!
 If you run into any issues, check if the issue is already known below, and if not create an issue about it on the Issues page
 
 # IMPORTANT:
-Any releases *after* version 0.5.0 will REQUIRE [SpectralLib](https://github.com/SpectralPack/Spectrallib/releases/latest), make sure to download it here
+This mod REQUIRES [SpectralLib](https://github.com/SpectralPack/Spectrallib/releases/latest), make sure to download it here.
 
 The mod currently adds:
 - 30 Jokers
