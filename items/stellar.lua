@@ -340,56 +340,90 @@ HPR.StellarJoker {
 HPR.StellarJoker {
     key = "master",
     forcetrigger_compat = true,
-    config = { extra = { create = 2 } },
+    config = { extra = { rank = "Ace", hand_type = "High Card", consumable = nil } },
     loc_vars = function (self, info_queue, card)
-        return { vars = {card.ability.extra.create }}
+        local consumable = card.ability.extra.consumable and G.P_CENTERS[card.ability.extra.consumable] or nil
+        local loc_name = consumable and localize{ type = "name_text", key = consumable.key, set = consumable.set } or localize("k_none")
+        local col = consumable and G.C.SECONDARY_SET[consumable.set] or G.C.FILTER
+        local loc_rank = localize(card.ability.extra.rank, "ranks")
+        local loc_hand = localize(card.ability.extra.hand_type, "poker_hands")
+        if consumable then info_queue[#info_queue+1] = consumable end
+        info_queue[#info_queue+1] = { set = "Edition", key = "e_negative_consumable", config = { extra = 1 } }
+        return { vars = { loc_name, loc_rank, loc_hand, colours = {col} }}
     end,
     calculate = function (self, card, context)
-        if context.setting_blind then
-            local boosters = math.min(card.ability.extra.create, G.consumeables.config.card_limit - (#G.consumeables.cards + G.GAME.consumeable_buffer))
-            boosters = math.max(boosters,0)
-            local tags = card.ability.extra.create
-            G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + boosters
-            G.E_MANAGER:add_event(Event{
-                func = function (n)
-                    for _ = 1, tags do
-                        add_tag(Tag(HPR.poll_tag("hpr_master_tag")))
-                    end
-                    play_sound('generic1', 0.9 + math.random() * 0.1, 0.8)
-                    play_sound('holo1', 1.2 + math.random() * 0.1, 0.4)
-                    for _ = 1, boosters do
+        if context.joker_main and card.ability.extra.consumable then
+            local check = false
+            if next(context.poker_hands[card.ability.extra.hand_type]) then
+                check = true
+            end
+            for _, c in ipairs(context.scoring_hand) do
+                if c:get_id() == SMODS.Ranks[card.ability.extra.rank].id then
+                    check = true break
+                end
+            end
+            if check then
+                local consumable = G.P_CENTERS[card.ability.extra.consumable]
+                G.E_MANAGER:add_event(Event{
+                    func = function (n)
                         SMODS.add_card{
-                            set = "Booster",
-                            key_append = "hpr_master_pack",
-                            area = G.consumeables,
+                            key = consumable.key,
+                            set = consumable.set,
+                            key_append = "hpr_master_card",
+                            edition = "e_negative"
                         }
+                        return true
                     end
-                    return true
-                end
-            })
-            return nil, true
+                })
+                return {
+                    message = localize{ type = "variable", key = "hpr_plus_any", vars = { localize{ type = "name_text", key = consumable.key, set = consumable.set } }},
+                    colour = G.C.SECONDARY_SET[consumable.set],
+                }
+            end
         end
-        if context.before then
-            local b
-            for _, c in ipairs(context.full_hand) do
-                if not c:is_face() and c.config.center_key == "c_base" then
-                    b = true
-                    local cons = HPR.poll_obj("hpr_master_enh", "Consumeables")
-                    c:set_ability(cons, nil, true)
-                    G.E_MANAGER:add_event(Event{
-                        func = function (n)
-                            c:juice_up()
-                            return true
-                        end
-                    })
+        if context.end_of_round and context.main_eval then
+            local valid_cards = {}
+            for _, v in ipairs(G.playing_cards) do
+                if not SMODS.has_no_rank(v) then
+                    valid_cards[#valid_cards+1] = v
                 end
             end
-            if b then
-                return { message = localize("k_hpr_enhanced_q") }
+            local c = pseudorandom_element(valid_cards, "hpr_master_reset_rank")
+            if c then
+                card.ability.extra.rank = c.base.value
             end
+            card.ability.extra.hand_type = HPR.get_random_hand(nil, "hpr_master_reset_hand", function(v) return v ~= card.ability.extra.hand_type end)
+            return { message = localize("k_reset_ex") }
         end
     end,
-    attributes = { "rank", "generation", },
+    set_ability = function (self, card, from_debuff)
+        local f = HPR.false_area(card.area)
+        if G.playing_cards then
+            local valid_cards = {}
+            for _, v in ipairs(G.playing_cards) do
+                if not SMODS.has_no_rank(v) then
+                    valid_cards[#valid_cards+1] = v
+                end
+            end
+            local c = pseudorandom_element(valid_cards, f and "false_hpr_master" or "hpr_master_reset_rank")
+            if c then
+                card.ability.extra.rank = c.base.value
+            end
+        end
+        card.ability.extra.hand_type = HPR.get_random_hand(nil, f and "false_hpr_master" or "hpr_master_reset_hand")
+    end,
+    can_use = function (self, card)
+        return #Spectrallib.get_highlighted_cards({ G.consumeables }, card, 1, 1) == 1
+    end,
+    use = function (self, card)
+        local cards = Spectrallib.get_highlighted_cards({ G.consumeables }, card, 1, 1, nil, "hpr_master_forcetrigger")
+        local c = cards[1]
+        if c then
+            card.ability.extra.consumable = c.config.center_key
+            SMODS.destroy_cards(c)
+        end
+    end,
+    attributes = { "rank", "generation", "hand_type" },
 }
 
 HPR.StellarJoker {
@@ -529,7 +563,7 @@ HPR.StellarJoker {
     end,
     attributes = { "passive", "retrigger", },
 }
-
+--[[
 HPR.StellarJoker {
     key = "straightaway",
     config = { extra = { xmult = 1, gain = 0.15, gain_gain = 0.05 }},
@@ -593,7 +627,7 @@ HPR.StellarJoker {
     attributes = { "hand_type", "generation", "scaling", "xmult", },
     forcetrigger_compat = true,
 }
-
+]]
 HPR.StellarJoker {
     key = "void",
     config = { extra = { xmult_per = 0.25, emult_per = 0.05 }},

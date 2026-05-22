@@ -314,6 +314,13 @@ function HPR.parse_effect_table(effect, func)
     end
 end
 
+function HPR.false_area(area)
+    if type(area) == "table" and (area.config.type == "title" or area.config.type == "title_2") then
+        return true
+    end
+    return false
+end
+
 --checks if a card exists in any area where it can be accessed by the player
 function HPR.card_active(key)
     local areas = {}

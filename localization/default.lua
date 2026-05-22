@@ -301,10 +301,17 @@ local descriptions = {
         j_hpr_master = {
             name = "MASTER",
             text = {
-                {"Creates {C:attention}#1#{} random {C:attention}Tags{} and {C:attention}Booster",
-                "{C:attention}Packs{} when {C:attention}Blind{} is selected"},
-                {"Played unenhanced non-{C:attention}face{} cards",
-                "become random {C:attention}consumables{} when played"}
+                {
+                    "Creates a {C:dark_edition}Negative {V:1}#1#",
+                    "if scoring hand contains a",
+                    "{C:attention}#2#{} or a {C:attention}#3#{},",
+                    "{s:0.8}rank and hand change each round"
+                },
+                {
+                    "Use this Joker to {C:attention}destroy{} a",
+                    "selected {C:attention}consumable{} and set it",
+                    "as the card for this Joker to create"
+                },
             }
         },
         j_hpr_potassium = {
@@ -1622,7 +1629,8 @@ local misc = {
         hpr_n_cards = "#1# Cards",
         a_discards = "+#1# Discards",
         play_x_cards = "Must play #1# cards",
-        must_play_x = "Must play #1#"
+        must_play_x = "Must play #1#",
+        hpr_plus_any = "+1 #1#",
     },
     v_text = {},
 }
