@@ -5,7 +5,7 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_space = "j_hpr_observatorium",
     j_misprint = "j_hpr_missing",
     j_cartomancer = "j_hpr_master",
-    j_astronomer = "j_hpr_master",
+    j_astronomer = "j_hpr_observatorium",
     j_gros_michel = "j_hpr_potassium",
     j_cavendish = "j_hpr_potassium",
     j_jolly = "j_hpr_crazy",
@@ -82,7 +82,5 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     --j_chicot = "j_hpr_hunter",
     --j_luchador = "j_hpr_hunter",
     --j_matador = "j_hpr_hunter",
-    j_8_ball = "j_hpr_master",
     j_hallucination = "j_hpr_master",
-    j_diet_cola = "j_hpr_master",
 }
