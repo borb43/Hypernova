@@ -293,9 +293,17 @@ local descriptions = {
             }
         },
         j_hpr_missing = {
-            name = "S{C:hpr_super_gay}-nan ?{}ERR{C:hpr_super_gay}??{}OR",
+            name = "S-nan ERROR",
             text = {
-                ""
+                {
+                    "{element:1} {element:2} {element:3} when",
+                    "a card is scored"
+                },
+                {
+                    "Use this Joker to",
+                    "{element:4} up to",
+                    "{C:attention}#1#{} selected cards"
+                }
             }
         },
         j_hpr_master = {
@@ -1594,7 +1602,17 @@ local misc = {
         k_hpr_elite = "Elite",
         k_empty_ex = "Empty!",
         k_hpr_plus_voucher = "+1 Voucher",
-        k_hpr_enhanced_q = "Enhanced?"
+        k_hpr_enhanced_q = "Enhanced?",
+        --strings used by ERROR stellar
+        k_chips = "Chips",
+        k_glop = "Glop",
+        k_score = "Score",
+        k_uses = "Uses",
+        k_enhance = "Enhance",
+        k_seal = "Seal",
+        k_upgrade = "Upgrade",
+        k_debuff = "Debuff",
+        k_destroy = "Destroy",
     },
     high_scores = {},
     labels = {

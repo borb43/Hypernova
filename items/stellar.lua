@@ -78,36 +78,8 @@ SMODS.Consumable {
     forcetrigger_compat = true,
 }
 
-HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%', '==', '~=', '>', '<', '>=', '<=', 'or', 'and', 'not', '#', 'log', 'sin', 'cos', 'tan' }
-HPR.error_numbers = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '21', '41', '61', '67', '69', '84', '404', '420', 'nan', 'inf', 'i', 'e', 'pi', '666', '999', '-1', '23', '80085' }
-HPR.error_other = {
-    { string = "Chips", colour = G.C.CHIPS },
-    { string = "Mult", colour = G.C.MULT },
-    { string = "Dollars", colour = G.C.MONEY },
-    { string = "Hand size", colour = G.C.FILTER },
-    { string = "Hands", colour = G.C.BLUE },
-    { string = "Discards", colour = G.C.RED },
-    { string = "Vouchers", colour = G.C.SECONDARY_SET.Voucher },
-    { string = "Boosters", colour = G.C.SECONDARY_SET.Booster },
-    { string = "Slots", colour = G.C.DARK_EDITION },
-    { string = "Hearts", colour = G.C.SUITS.Hearts },
-    { string = "Diamonds", colour = G.C.SUITS.Diamonds },
-    { string = "Spades", colour = G.C.SUITS.Spades },
-    { string = "Clubs", colour = G.C.SUITS.Clubs },
-    { string = "Tarots", colour = G.C.SECONDARY_SET.Tarot },
-    { string = "Planets", colour = G.C.SECONDARY_SET.Planet },
-    { string = "Spectrals", colour = G.C.SECONDARY_SET.Spectral },
-    { string = "Common", colour = G.C.RARITY[1] },
-    { string = "Uncommon", colour = G.C.RARITY[2] },
-    { string = "Rare", colour = G.C.RARITY[3] },
-    { string = "Blind Size", colour = G.C.FILTER },
-    { string = "Rerolls", colour = G.C.GREEN },
-    { string = "Levels", colour = G.C.SECONDARY_SET.Planet },
-    { string = "Enhanced", colour = G.C.SECONDARY_SET.Enhanced },
-    { string = "Tags", colour = G.C.FILTER },
-    { string = "Faces", colour = G.C.FILTER },
-    { string = "Score", colour = HEX('7b559c') }
-}
+HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%' }
+HPR.error_numbers = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '21', '41', '61', '67', '69', '84', '404', '420', 'nan', 'inf', 'i', 'e', 'pi'}
 HPR.error_context = {
     "context.before",
     "context.individual",
@@ -125,141 +97,170 @@ HPR.error_context = {
 
 HPR.StellarJoker {
     key = "missing",
-    
+    config = { extra = { uses = 4 }},
     loc_vars = function (self, info_queue, card)
-        return {
-            main_start = {
-                {
-                    n = G.UIT.O,
-                    config = {
-                        object = DynaText({
-                            string = HPR.error_ops,
-                            colours = { HPR.gay },
-                            pop_in_rate = 9999999,
-                            silent = true,
-                            random_element = true,
-                            pop_delay = 0.3,
-                            scale = 0.32,
-                            min_cycle_time = 0
-                        })
-                    },
-                },
-                {
-                    n = G.UIT.O,
-                    config = {
-                        object = DynaText({
-                            string = HPR.error_numbers,
-                            colours = { HPR.gay },
-                            pop_in_rate = 9999999,
-                            silent = true,
-                            random_element = true,
-                            pop_delay = 0.351,
-                            scale = 0.32,
-                            min_cycle_time = 0
-                        })
-                    },
-                },
-                {
-                    n = G.UIT.O,
-                    config = {
-                        object = DynaText({
-                            string = HPR.error_other,
-                            colours = { G.C.UI.TEXT_DARK },
-                            pop_in_rate = 9999999,
-                            silent = true,
-                            random_element = true,
-                            pop_delay = 0.299,
-                            scale = 0.32,
-                            min_cycle_time = 0
-                        })
-                    },
-                },
-                {
-                    n = G.UIT.T,
-                    config = {
-                        text = " when",
+        local error_other = {
+            { string = localize("k_chips"), colour = G.C.CHIPS },
+            { string = localize("k_mult"),  colour = G.C.MULT },
+            { string = localize("k_glop"),  colour = G.C.GREEN },
+            { string = localize("k_score"), colour = G.C.PURPLE },
+            { string = localize("k_uses"),  colour = G.C.FILTER },
+        }
+        local use_effects = {
+            { string = localize("k_enhance"), colour = G.C.SECONDARY_SET.Enhanced },
+            { string = localize("k_seal"), colour = G.C.FILTER },
+            { string = localize("k_edition"), colour = G.C.DARK_EDITION },
+            { string = localize("k_debuff"), colour = G.C.RED },
+            { string = localize("k_destroy"), colour = G.C.FILTER },
+            { string = localize("k_suit"), colour = G.C.FILTER },
+            { string = localize("k_rank"), colour = G.C.FILTER },
+        }
+        local elements = {
+            --cycling random operator
+            {
+                n = G.UIT.O,
+                config = {
+                    object = DynaText({
+                        string = HPR.error_ops,
+                        colours = { G.C.DARK_EDITION },
+                        pop_in_rate = 9999999,
+                        silent = true,
+                        random_element = true,
+                        pop_delay = 0.3,
                         scale = 0.32,
-                        colour = G.C.UI.TEXT_DARK
-                    },
+                        min_cycle_time = 0
+                    })
                 },
             },
-            main_end = {
-                {
-                    n = G.UIT.O,
-                    config = {
-                        object = DynaText({
-                            string = HPR.error_context,
-                            colours = { G.C.FILTER },
-                            pop_in_rate = 9999999,
-                            silent = true,
-                            random_element = true,
-                            pop_delay = 0.3,
-                            scale = 0.32,
-                            min_cycle_time = 0
-                        })
-                    },
+            --cycling random number
+            {
+                n = G.UIT.O,
+                config = {
+                    object = DynaText({
+                        string = HPR.error_numbers,
+                        colours = { HPR.gay },
+                        pop_in_rate = 9999999,
+                        silent = true,
+                        random_element = true,
+                        pop_delay = 0.351,
+                        scale = 0.32,
+                        min_cycle_time = 0
+                    })
                 },
-            }
+            },
+            --cycling random effect
+            {
+                n = G.UIT.O,
+                config = {
+                    object = DynaText({
+                        string = error_other,
+                        colours = { G.C.UI.TEXT_DARK },
+                        pop_in_rate = 9999999,
+                        silent = true,
+                        random_element = true,
+                        pop_delay = 0.299,
+                        scale = 0.32,
+                        min_cycle_time = 0
+                    })
+                },
+            },
+            --cycling use effect
+            {
+                n = G.UIT.O,
+                config = {
+                    object = DynaText({
+                        string = use_effects,
+                        colours = { G.C.UI.TEXT_DARK },
+                        pop_in_rate = 9999999,
+                        silent = true,
+                        random_element = true,
+                        pop_delay = 0.310,
+                        scale = 0.32,
+                        min_cycle_time = 0
+                    })
+                },
+            },
+        }
+        return {
+            vars = { card.ability.extra.uses, elements = elements }
         }
     end,
-    calc_dollar_bonus = function (self, card)
-        local dollars = pseudorandom("hpr_error_cashout",-3,9)
-        if dollars ~= 0 then return dollars end
-    end,
     calculate = function (self, card, context)
-        if context.setting_blind then
-            ease_discard(pseudorandom("hpr_error_discard", -1, 3))
-            ease_hands_played(pseudorandom("hpr_error_hands", -1, 3))
-            local h = pseudorandom("hpr_error_h_size", 0, 2)
-            G.hand:change_size(h)
-            G.GAME.round_resets.temp_handsize = (G.GAME.round_resets.temp_handsize or 0) + h
-            return { message = localize("hpr_generic_q")}
-        end
-        if context.joker_main then
-            local res = pseudorandom("hpr_error_effect", 1, 5)
+        if context.individual and context.cardarea == G.play or context.forcetrigger then
+            local res = pseudorandom("hpr_error_effect", 1, 6)
             if res == 1 then return { xchips = pseudorandom("hpr_error_amt",15,30)/10 } end
             if res == 2 then return { xmult = pseudorandom("hpr_error_amt",15,30)/10 } end
             if res == 3 then return { echips = pseudorandom("hpr_error_amt",105,115)/100 } end
-            if res == 4 then return { emult = pseudorandom("hpr_error_amt",110,125)/100 } end
-            if res == 5 then return { balance = true } end
+            if res == 4 then return { emult = pseudorandom("hpr_error_amt",110,120)/100 } end
+            if res == 5 then return { xscore = pseudorandom("hpr_error_amt",20, 40)/10 } end
+            if res == 6 then
+                local v = pseudorandom("hpr_error_amt",1,5)
+                card.ability.extra.uses = card.ability.extra.uses + v
+                return { message = "+"..v }
+            end
         end
-        if context.before then
-            local any = false
-            for _, c in ipairs(context.full_hand) do
-                if SMODS.pseudorandom_probability(card, self.key, 1, 7) then
-                    any = true
-                    c:set_ability("m_hpr_error_enh", nil, true)
-                    G.E_MANAGER:add_event(Event{
-                        func = function ()
-                            c:juice_up() return true
-                        end
-                    })
+    end,
+    can_use = function (self, card)
+        local cards = Spectrallib.get_highlighted_cards({ G.hand }, card, 1, card.ability.extra.uses)
+        return card.ability.extra.uses > 0 and #cards > 0 and #cards <= card.ability.extra.uses
+    end,
+    use = function (self, card)
+        local cards = Spectrallib.get_highlighted_cards({ G.hand }, card, 1, card.ability.extra.uses)
+        card.ability.extra.uses = math.max(card.ability.extra.uses - #cards, 0)
+        local effect = pseudorandom_element({"enh","seal","ed","debf","dstry","suit","rank"}, "hpr_error_use_effect")
+        if effect == "enh" then
+            local enhancement = SMODS.poll_enhancement{ guaranteed = true, type_key = "hpr_error_use_val"}
+            Spectrallib.flip_then(cards, function (c)
+                c:set_ability(enhancement)
+            end)
+        elseif effect == "seal" then
+            local seal = SMODS.poll_seal{ guaranteed = true, type_key = "hpr_error_use_val" }
+            Spectrallib.flip_then(cards, function (c)
+                c:set_seal(seal, nil, true)
+            end)
+        elseif effect == "ed" then
+            local edition = SMODS.poll_edition{ guaranteed = true, type_key = "hpr_error_use_val" }
+            Spectrallib.flip_then(cards, function (c)
+                c:set_edition(edition, true)
+            end)
+        elseif effect == "debf" then
+            Spectrallib.flip_then(cards, function (c)
+                SMODS.debuff_card(c, true, "HPR_ERROR_DEBUFF")
+            end)
+        elseif effect == "dstry" then
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.4,
+                func = function()
+                    play_sound('tarot1')
+                    card:juice_up(0.3, 0.5)
+                    return true
                 end
-            end
-            if any then
-                return { message = localize("hpr_generic_q") }
-            end
+            }))
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.2,
+                func = function()
+                    SMODS.destroy_cards(cards)
+                    return true
+                end
+            }))
+        elseif effect == "suit" then
+            local suit = pseudorandom_element(SMODS.Suit.obj_buffer, "hpr_error_use_val")
+            Spectrallib.flip_then(cards, function (c)
+                assert(SMODS.change_base(c, suit))
+            end)
+        elseif effect == "rank" then
+            local rank = pseudorandom_element(SMODS.Rank.obj_buffer, "hpr_error_use_val")
+            Spectrallib.flip_then(cards, function (c)
+                assert(SMODS.change_base(c, nil, rank))
+            end)
         end
     end,
-    forcetrigger = function (self, card, context)
-        local ret = { extra = {} }
-        ret.extra.message = localize("hpr_generic_q")
-        local res = pseudorandom("hpr_error_effect",1,5)
-        if res == 1 then ret.xchips = pseudorandom("hpr_error_amt",15,30)/10 end
-        if res == 2 then ret.xmult = pseudorandom("hpr_error_amt",15,30)/10 end
-        if res == 3 then ret.echips = pseudorandom("hpr_error_amt",105,115)/100 end
-        if res == 4 then ret.emult = pseudorandom("hpr_error_amt",110,125)/100 end
-        if res == 5 then ret.balance = true end
-        ease_discard(pseudorandom("hpr_error_discard", -1, 3))
-        ease_hands_played(pseudorandom("hpr_error_hands", -1, 3))
-        local h = pseudorandom("hpr_error_h_size", 0, 2)
-        G.hand:change_size(h)
-        G.GAME.round_resets.temp_handsize = (G.GAME.round_resets.temp_handsize or 0) + h
-        local dollars = self:calc_dollar_bonus(card)
-        if dollars ~= 0 then ret.dollars = dollars end
-        return ret
-    end,
-    attributes = { "economy", "xchips", "xmult", "emult", "echips", "hand_size", "modify_card", "hands", "discards" }, --quite a few
+    use_button_config = {
+        key = "lalala this key doesnt exist so itll say error" --(fitting isnt it)
+    },
+    attributes = { "xchips", "xmult", "emult", "echips", "xscore", "destroy_card", "modify_card", "enhancement", "seal", "edition" },
     forcetrigger_compat = true,
 }
 
