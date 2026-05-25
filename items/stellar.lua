@@ -188,11 +188,11 @@ HPR.StellarJoker {
     calculate = function (self, card, context)
         if context.individual and context.cardarea == G.play or context.forcetrigger then
             local res = pseudorandom("hpr_error_effect", 1, 6)
-            if res == 1 then return { xchips = pseudorandom("hpr_error_amt",15,30)/10 } end
-            if res == 2 then return { xmult = pseudorandom("hpr_error_amt",15,30)/10 } end
+            if res == 1 then return { xchips = pseudorandom("hpr_error_amt",15,25)/10 } end
+            if res == 2 then return { xmult = pseudorandom("hpr_error_amt",15,25)/10 } end
             if res == 3 then return { echips = pseudorandom("hpr_error_amt",105,115)/100 } end
             if res == 4 then return { emult = pseudorandom("hpr_error_amt",110,120)/100 } end
-            if res == 5 then return { xscore = pseudorandom("hpr_error_amt",20, 40)/10 } end
+            if res == 5 then return { xscore = pseudorandom("hpr_error_amt",20, 30)/10 } end
             if res == 6 then
                 local v = pseudorandom("hpr_error_amt",1,5)
                 card.ability.extra.uses = card.ability.extra.uses + v
@@ -261,48 +261,6 @@ HPR.StellarJoker {
         key = "lalala this key doesnt exist so itll say error" --(fitting isnt it)
     },
     attributes = { "xchips", "xmult", "emult", "echips", "xscore", "destroy_card", "modify_card", "enhancement", "seal", "edition" },
-    forcetrigger_compat = true,
-}
-
-SMODS.Enhancement{
-    key = "error_enh",
-    atlas = "stellar",
-    pos = { x = 0, y = 0 },
-    weight = 0,
-    in_pool = function (self, args)
-        return false
-    end,
-    calculate = function (self, card, context)
-        if context.playing_card_end_of_round then
-            local dollars = pseudorandom("hpr_error_cashout",-3,9)
-            G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + dollars
-            local t = {
-                dollars = dollars,
-                func = HPR.event_presets.reset_dollar_buffer
-            }
-            if not context.forcetrigger then
-                return t
-            else
-                SMODS.calculate_effect(t, card)
-            end
-        end
-        if context.main_scoring and context.cardarea == G.play or context.forcetrigger then
-            local res = pseudorandom("hpr_error_effect", 1, 5)
-            if res == 1 then return { chips = pseudorandom("hpr_error_amt",30,150)} end
-            if res == 2 then return { mult = pseudorandom("hpr_error_amt",5,40)} end
-            if res == 3 then return { xchips = pseudorandom("hpr_error_amt",15,30)/10 } end
-            if res == 4 then return { xmult = pseudorandom("hpr_error_amt",15,30)/10 } end
-            if res == 5 then return { swap = true, message = localize("k_swapped_ex") } end
-        end
-    end,
-    no_collection = true,
-    no_rank = true,
-    always_scores = true,
-    replace_base_card = true,
-    any_suit = true,
-    set_badges = function (self, card, badges)
-        badges[#badges+1] = create_badge(localize("k_hpr_stellar"), HPR.stellar_gradient, G.C.UI.TEXT_LIGHT, 1.2)
-    end,
     forcetrigger_compat = true,
 }
 

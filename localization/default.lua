@@ -108,12 +108,6 @@ local descriptions = {
                 "{C:attention}permanently{} gain {C:mult}+#1#{} Mult"
             }
         },
-        m_hpr_error_enh = {
-            name = "[MISSING]",
-            text = {
-                "{C:dark_edition}?????"
-            }
-        },
         m_hpr_relic = {
             name = "Relic Card",
             text = {
