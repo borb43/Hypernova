@@ -611,12 +611,13 @@ local descriptions = {
             text = {
                 {"When {C:attention}Blind{} is selected,",
                 "destroy joker to the right",
-                "and add {C:attention}#2#%{} of its sell value",
-                "to this Joker's {X:slib_emult,C:white}^Mult",
-                "{C:inactive}(Currently {X:slib_emult,C:white}^#1#{C:inactive} Mult)"},
-                {"This Joker gains {C:attention}#4#%{} of destroyed",
-                "{C:attention}playing card's{} rank as {X:slib_echips,C:white}^Chips",
-                "{C:inactive}(Currently {X:slib_echips,C:white}^#3#{C:inactive} Chips)"}
+                "and add its {C:attention}sell value",
+                "to this Joker's {C:attention}Uses",},
+                {"Use this Joker to destroy",
+                "up to {C:attention}#3#{} selected cards",
+                "and gain {X:slib_echips,C:white}^#2#{} Chips for each",
+                "destroyed card",
+                "{C:inactive}(Currently {X:slib_echips,C:white}^#1#{C:inactive} Chips)"}
             }
         },
         j_hpr_ascendant = {

@@ -1014,9 +1014,9 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "destroyer",
-    config = { extra = { emult = 1, mod = 0.05, echips = 1, chip_mod = 0.01 }},
+    config = { extra = { echips = 1, chip_mod = 0.01, uses = 0 }},
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra.emult, card.ability.extra.mod*100, card.ability.extra.echips, card.ability.extra.chip_mod*100 }}
+        return { vars = { card.ability.extra.echips, card.ability.extra.chip_mod, card.ability.extra.uses }}
     end,
     calculate = function (self, card, context)
         if (context.setting_blind or context.forcetrigger) and not context.blueprint and card.area and card.rank and card.area.cards[card.rank+1] and not SMODS.is_eternal(card.area.cards[card.rank+1], card) and not card.area.cards[card.rank+1].getting_sliced then
@@ -1026,46 +1026,65 @@ HPR.StellarJoker {
             G.E_MANAGER:add_event(Event{
                 func = function ()
                     G.GAME.joker_buffer = 0
-                    SMODS.scale_card(card, {
-                        ref_table = card.ability.extra,
-                        ref_value = "emult",
-                        scalar_value = "mod",
-                        block_overrides = { scalar = true },
-                        operation = function (ref_table, ref_value, initial, change)
-                            ref_table[ref_value] = initial + change * target.sell_cost
-                        end,
-                        no_message = true
-                    })
+                    card.ability.extra.uses = card.ability.extra.uses + target.sell_cost
                     target:start_dissolve({G.C.HPR_STLR}, nil, 1.6)
+                    play_sound('slice1', 0.96 + math.random() * 0.08)
                     return true
                 end
             })
-            SMODS.calculate_effect({ message = localize{ type = "variable", key = "a_powmult", vars = {card.ability.extra.emult}}, colour = Spectrallib.emult })
-            if not context.forcetrigger then return nil, true end
+            if not context.forcetrigger then
+                return nil, true
+            else
+                return { message = "+"..target.sell_cost }
+            end
         end
-        if (context.joker_main or context.forcetrigger) and (card.ability.extra.emult ~= 1 or card.ability.extra.echips ~= 1) then
+        if (context.joker_main or context.forcetrigger) and card.ability.extra.echips ~= 1 then
             return {
-                emult = card.ability.extra.emult ~= 1 and card.ability.extra.emult or nil,
-                echips = card.ability.extra.echips ~= 1 and card.ability.extra.echips or nil,
+                echips = card.ability.extra.echips,
             }
         end
-        if context.remove_playing_cards and not context.blueprint then
-            local r = context.removed
-            for _, c in ipairs(r) do
-                SMODS.scale_card(card, {
-                    ref_table = card.ability.extra,
-                    ref_value = "echips",
-                    scalar_value = "chip_mod",
-                    operation = function (ref_table, ref_value, initial, change)
-                        ref_table[ref_value] = initial + change * HPR.get_base_chips(c)
-                    end,
-                    no_message = true
-                })
-            end
-            return { message = localize{ type = "variable", key = "a_powchips", vars = { card.ability.extra.echips}, colour = Spectrallib.echips }}
-        end
     end,
-    attributes = { "destroy_card", "echips", "emult", "scaling", },
+    can_use = function (self, card)
+        local blacklist = function (c)
+            return not SMODS.is_eternal(c)
+        end
+        local cards = Spectrallib.get_highlighted_cards({ G.hand }, card, 1, card.ability.extra.uses, blacklist)
+        return card.ability.extra.uses > 0 and #cards > 0 and #cards <= card.ability.extra.uses
+    end,
+    use = function (self, card)
+        local blacklist = function (c)
+            return not SMODS.is_eternal(c)
+        end
+        local cards = Spectrallib.get_highlighted_cards({ G.hand }, card, 1, card.ability.extra.uses, blacklist)
+        local amt = #cards
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                SMODS.destroy_cards(cards)
+                return true
+            end
+        }))
+        SMODS.scale_card(card, {
+            ref_table = card.ability.extra,
+            ref_value = "echips",
+            scalar_value = "chip_mod",
+            operation = function (ref_table, ref_value, initial, change)
+                ref_table[ref_value] = initial + change*amt
+            end,
+            message_colour = Spectrallib.echips
+        })
+    end,
+    attributes = { "destroy_card", "echips", "scaling", },
     forcetrigger_compat = true,
 }
 
