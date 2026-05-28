@@ -691,7 +691,7 @@ SMODS.Joker {
     blueprint_compat = false,
     forcetrigger_compat = true,
 }
-
+--[[
 SMODS.Joker {
     key = "ult_meal",
     atlas = "placeholder",
@@ -710,7 +710,7 @@ SMODS.Joker {
     attributes = { "retrigger" }, -- i THINK? this technically isnt modifying probabilty so
     hpr_ascension_key = "j_hpr_lucky",
 }
-
+]]
 SMODS.Joker {
     key = "tiny_graph",
     pos = { x = 2, y = 13 },

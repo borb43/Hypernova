@@ -204,7 +204,7 @@ function SMODS.is_eternal(card, trigger)
 	if card.ability.consumeable and card.ability.eternal then return true end
 	return is_eternal_ref(card, trigger)
 end
-]]
+
 local prob_ref = SMODS.pseudorandom_probability
 function SMODS.pseudorandom_probability(trigger_obj, seed, base_numerator, base_denominator, identifier, no_mod)
 	local res = prob_ref(trigger_obj, seed, base_numerator, base_denominator, identifier, no_mod)
@@ -227,7 +227,7 @@ function SMODS.pseudorandom_probability(trigger_obj, seed, base_numerator, base_
 	end)
 	return res
 end
-
+]]
 local inj = SMODS.injectItems
 function SMODS.injectItems(...)
 	inj(...)
