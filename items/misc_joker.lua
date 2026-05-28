@@ -138,12 +138,12 @@ SMODS.Joker { --tipping scales, increases numerator and denominator of probabili
 SMODS.Joker { --gambling addict, scales from probability rolls
     key = "gambler",
     atlas = "placeholder",
-    pos = { x = 2, y = 0 },
-    config = { extra = { chips = 0, mult = 0, } },
+    pos = { x = 1, y = 0 },
+    config = { extra = { chips = 0, mult = 0, chip_gain = 1, mult_gain = 1 } },
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.chips, card.ability.extra.mult } }
+        return { vars = { card.ability.extra.chips, card.ability.extra.mult, card.ability.extra.chip_gain, card.ability.extra.mult_gain } }
     end,
-    rarity = 3,
+    rarity = 2,
     cost = 10,
     forcetrigger_compat = true,
     perishable_compat = false,
@@ -153,8 +153,7 @@ SMODS.Joker { --gambling addict, scales from probability rolls
                 SMODS.scale_card(card, {
                     ref_table = card.ability.extra,
                     ref_value = "chips",
-                    scalar_table = context,
-                    scalar_value = "denominator",
+                    scalar_value = "chip_gain",
                     message_colour = G.C.CHIPS,
                     block_overrides = { scalar = true }
                 })
@@ -162,8 +161,7 @@ SMODS.Joker { --gambling addict, scales from probability rolls
                 SMODS.scale_card(card, {
                     ref_table = card.ability.extra,
                     ref_value = "mult",
-                    scalar_table = context,
-                    scalar_value = "denominator",
+                    scalar_value = "mult_gain",
                     message_colour = G.C.MULT,
                     block_overrides = { scalar = true }
                 })

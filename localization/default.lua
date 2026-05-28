@@ -152,10 +152,10 @@ local descriptions = {
         j_hpr_gambler = {
             name = "Gambling Addict",
             text = {
-                "When a {C:attention}listed {C:green}probability{} succeeds,",
-                "gains {C:mult}Mult{} equal to {C:green}denominator",
-                "When a {C:attention}listed {C:green}probability{} fails,",
-                "gains {C:chips}Chips{} equal to {C:green}denominator",
+                "Gains {C:chips}+#3#{} Chip#<s>3# when a",
+                "{C:green}probability{} fails",
+                "Gains {C:mult}+#4#{} Mult when a",
+                "{C:green}probability{} succeeds",
                 "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#2#{C:inactive} Mult)"
             }
         },
