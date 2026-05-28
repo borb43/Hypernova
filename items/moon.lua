@@ -212,18 +212,6 @@ HPR.moon {
 }
 
 HPR.moon {
-    key = "titania",
-    config = { extra = 0.2, max_highlighted = 2 },
-    loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra, card.ability.max_highlighted }}
-    end,
-    pos = { x = 0, y = 1 },
-    apply_bonus = function (self, card, other_card)
-        other_card.ability.perma_h_x_mult = other_card.ability.perma_h_x_mult + card.ability.extra
-    end
-}
-
-HPR.moon {
     key = "triton",
     config = { extra = 0.2, max_highlighted = 2 },
     loc_vars = function (self, info_queue, card)
@@ -232,6 +220,18 @@ HPR.moon {
     pos = { x = 1, y = 1 },
     apply_bonus = function (self, card, other_card)
         other_card.ability.perma_h_x_chips = other_card.ability.perma_h_x_chips + card.ability.extra
+    end
+}
+
+HPR.moon {
+    key = "titania",
+    config = { extra = 0.2, max_highlighted = 2 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra, card.ability.max_highlighted }}
+    end,
+    pos = { x = 0, y = 1 },
+    apply_bonus = function (self, card, other_card)
+        other_card.ability.perma_h_x_mult = other_card.ability.perma_h_x_mult + card.ability.extra
     end
 }
 

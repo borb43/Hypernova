@@ -467,7 +467,7 @@ local descriptions = {
         j_hpr_ghost = {
             name = "Ghost Joker",
             text = {
-                "Creates a {C:spectral}#1#{} when",
+                "Creates an {C:spectral}#1#{} when",
                 "{C:attention}Boss Blind{} is defeated"
             }
         },
@@ -652,13 +652,6 @@ local descriptions = {
                 "{C:green,E:1}numerators{} and {C:green,E:1}denominators",
             }
         },
-        j_hpr_diamond_shape_with_a_dot_inside = {
-            name = "Diamond Shape with a Dot Inside",
-            text = {
-                "Each played {C:diamonds}Diamond{} card",
-                "gives {X:mult,C:white}X#1#{} Mult when scored"
-            }
-        },
         j_hpr_ult_meal = {
             name = "Ultimate Meal",
             text = {
@@ -761,7 +754,7 @@ local descriptions = {
             name = "Average Sized Cavendish",
             text = {
                 "Each played {C:attention}2{} gives",
-                "{X:mult,C:white}X#2#{} Mult when scored",
+                "{X:mult,C:white}X#1#{} Mult when scored",
                 "and has a {C:green}#2# in #3#{} chance",
                 "to be destroyed"
             }

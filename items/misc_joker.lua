@@ -695,27 +695,6 @@ SMODS.Joker {
 }
 
 SMODS.Joker {
-    key = "diamond_shape_with_a_dot_inside",
-    atlas = "placeholder",
-    pos = { x = 0, y = 0 },
-    rarity = 1,
-    cost = 6,
-    config = { extra = 1.2 },
-    loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra }}
-    end,
-    calculate = function (self, card, context)
-        if context.individual and context.other_card:is_suit("Diamonds") and context.cardarea == G.play or context.forcetrigger then
-            return {
-                xmult = card.ability.extra
-            }
-        end
-    end,
-    attributes = { "diamond", "suit", "xmult" },
-    forcetrigger_compat = true,
-}
-
-SMODS.Joker {
     key = "ult_meal",
     atlas = "placeholder",
     pos = { x = 2, y = 0 },
@@ -984,7 +963,7 @@ SMODS.Joker {
     key = "blue_wee",
     pos = { x = 7, y = 10 },
     display_size = { w = 71 * 0.7, h = 95 * 0.7 },
-    rarity = 2,
+    rarity = 1,
     cost = 7,
     config = { extra = 10 },
     loc_vars = function (self, info_queue, card)
