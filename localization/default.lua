@@ -97,7 +97,7 @@ local descriptions = {
             text = {
                 "When played and {C:attention}scoring{},",
                 "all other {C:attention}scoring{} cards",
-                "{C:attention}permanently{} gain {C:chips}+#1#{} Chips"
+                "{C:attention}permanently{} gain {C:chips}+#1#{} Chip#<s>1#"
             }
         },
         m_hpr_storm = {
@@ -146,7 +146,7 @@ local descriptions = {
             name = "Solar Flare",
             text = {
                 "If first hand of round {C:attention}not{} your most played,",
-                "{C:attention}upgrade{} it and {C:red}destroy {C:attention}#1#{} played cards",
+                "{C:attention}upgrade{} it and {C:red}destroy {C:attention}#1#{} played card#<s>1#",
             }
         },
         j_hpr_gambler = {
@@ -163,7 +163,7 @@ local descriptions = {
             name = "Fortune Cookie",
             text = {
                 "The next {C:attention}#1# listed",
-                "{C:green,E:1}probabilities{} are guaranteed",
+                "{C:green,E:1}probabilit#<ies,y>1#{} #<are,is>1# guaranteed",
                 "Creates a {C:dark_edition}Negative {C:Tarot}Tarot{} card",
                 "when eaten"
             }
@@ -219,7 +219,7 @@ local descriptions = {
                 },
                 {
                     "Each {C:attention}#1#{} of {V:1}#2#{} gains",
-                    "{C:chips}+#4#{} Chips when scored or held",
+                    "{C:chips}+#4#{} Chip#<s>4# when scored or held",
                     "{s:0.8}Rank, suit and effect changes at end of round"
                 }
             }
@@ -283,7 +283,7 @@ local descriptions = {
                 "are {C:attention}leveled up{}, upgrade this",
                 "Joker and all cards in your",
                 "{C:attention}full deck{} in the same manner",
-                "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#2#{C:inactive} Mult)"
+                "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chip#<s>1#, {C:mult}+#2#{C:inactive} Mult)"
             }
         },
         j_hpr_missing = {
@@ -340,7 +340,7 @@ local descriptions = {
             name = "CRAFTY",
             text = {
                 "All {C:attention}poker hands{} contained in",
-                "played hand gain {C:chips}+#1#{} Chips for",
+                "played hand gain {C:chips}+#1#{} Chip#<s>1# for",
                 "each {C:attention}unique{} contained {C:attention}poker hand"
             }
         },
@@ -427,7 +427,7 @@ local descriptions = {
             name = "CLUB",
             text = {
                 "Played {C:clubs}Clubs{} level up {C:clubs}Clubs",
-                "with {C:chips}+#1#{} Chips and {C:mult}+#2#{} Mult",
+                "with {C:chips}+#1#{} Chip#<s>1# and {C:mult}+#2#{} Mult",
                 "Scored {C:clubs}Clubs{} give {X:mult,C:white}X#3#{} Mult"
             }
         },
@@ -487,23 +487,10 @@ local descriptions = {
                 "{s:0.8}suit changes at end of round",
             }
         },
-        j_hpr_stone = {
-            name = "STONE",
-            text = {
-                {"Creates a {C:attention}Stone{} card and converts",
-                "a random card in deck to {C:attention}Stone",
-                "when blind is selected"},
-                {"Played {C:attention}Stone{} cards gain a",
-                "random {C:attention}Seal{} and {C:dark_edition}Edition"},
-                {"{X:chips,C:white}X#2#{} Chips for each {C:attention}Stone{}",
-                "card in your {C:attention}full deck",
-                "{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)"}
-            }
-        },
         j_hpr_conjurer = {
             name = "CONJURER",
             text = {
-                "Adds {C:attention}#3# free Mega Standard Packs{} to each shop",
+                "Adds {C:attention}#3# free Mega Standard Pack#<s>3#{} to each shop",
                 "This Joker gains {X:mult,C:white}X#2#{} Mult when",
                 "a {C:attention}playing card{} is added to your deck",
                 "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
@@ -711,7 +698,7 @@ local descriptions = {
         j_hpr_good_bomb = {
             name = "Good Bomb",
             text = {
-                "After {C:attention}#1#{} rounds, {C:red}self destructs",
+                "After {C:attention}#1#{} round#<s>1#, {C:red}self destructs",
                 "and adds random {C:dark_edition}editions{} to {C:attention}#2#",
                 "cards in your {C:attention}full{} deck"
             }
@@ -736,9 +723,9 @@ local descriptions = {
         j_hpr_blue_wee = {
             name = "Blue Baby",
             text = {
-                "{C:chips}+#1#{} Chips for each",
+                "{C:chips}+#1#{} Chip#<s>1# for each",
                 "{C:attention}2{} in your full deck",
-                "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)"
+                "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chip#<s>2#)"
             }
         },
         j_hpr_petit_michel = {
@@ -795,9 +782,9 @@ local descriptions = {
         j_hpr_ceramic = {
             name = "Ceramic",
             text = {
-                "{C:chips}+#1#{} Chips",
+                "{C:chips}+#1#{} Chip#<s>1#",
                 "Breaks after {C:attention}#2#",
-                "cards discarded"
+                "card#<s>2# discarded"
             }
         },
         j_hpr_fine_china = {
@@ -805,7 +792,7 @@ local descriptions = {
             text = {
                 "{X:chips,C:white}X#1#{} Chips",
                 "Breaks when discarding",
-                "more than {C:attention}#2#{} cards at once"
+                "more than {C:attention}#2#{} card#<s>2# at once"
             }
         },
         j_hpr_butterfinger = {
@@ -813,7 +800,7 @@ local descriptions = {
             text = {
                 "All {C:attention}Straights{} and",
                 "{C:attention}Flushes{} can be made",
-                "with {C:attention}#1#{} card#2#. Increases",
+                "with {C:attention}#1#{} card#<s>1#. Increases",
                 "by {C:attention}1{} at end of round"
             }
         },
@@ -852,7 +839,7 @@ local descriptions = {
         j_hpr_sprout = {
             name = "Bean Sprout",
             text = {
-                "After {C:attention}#2#{} rounds, sell",
+                "After {C:attention}#2#{} round#<s>2#, sell",
                 "this card to permanently",
                 "gain {C:attention}+#1#{} hand size",
                 "{C:inactive}(Currently {C:attention}#3#{C:inactive}/#2#)"
@@ -969,7 +956,7 @@ local descriptions = {
                 "Gives the base {C:chips}Chips",
                 "and {C:mult}Mult{} of {C:attention}#1#{},",
                 "{s:0.8}hand changes at end of round",
-                "{C:inactive}({C:chips}+#2#{C:inactive} Chips, {C:mult}+#3#{C:inactive} Mult)"
+                "{C:inactive}({C:chips}+#2#{C:inactive} Chip#<s>2#, {C:mult}+#3#{C:inactive} Mult)"
             }
         },
         j_hpr_cornucopia = {
@@ -1040,7 +1027,7 @@ local descriptions = {
             name = "Lunar Pack",
             text = {
                 "Select {C:attention}#1#{} of up to",
-                "{C:attention}#2# {C:hpr_moons}Moon{} cards to",
+                "{C:attention}#2# {C:hpr_moons}Moon{} card#<s>2# to",
                 "be used immediately"
             }
         },
@@ -1048,7 +1035,7 @@ local descriptions = {
             name = "Jumbo Lunar Pack",
             text = {
                 "Select {C:attention}#1#{} of up to",
-                "{C:attention}#2# {C:hpr_moons}Moon{} cards to",
+                "{C:attention}#2# {C:hpr_moons}Moon{} card#<s>2# to",
                 "be used immediately"
             }
         },
@@ -1056,7 +1043,7 @@ local descriptions = {
             name = "Mega Lunar Pack",
             text = {
                 "Select {C:attention}#1#{} of up to",
-                "{C:attention}#2# {C:hpr_moons}Moon{} cards to",
+                "{C:attention}#2# {C:hpr_moons}Moon{} card#<s>2# to",
                 "be used immediately"
             }
         },
@@ -1064,21 +1051,21 @@ local descriptions = {
             name = "Erratic Pack",
             text = {
                 "Select {C:hpr_erratic_col}#1#{} of up to",
-                "{C:hpr_erratic_col}#2#{} random cards"
+                "{C:hpr_erratic_col}#2#{} random card#<s>2#"
             }
         },
         p_hpr_erratic_pack_jumbo = {
             name = "#3# Erratic Pack",
             text = {
                 "Select {C:hpr_erratic_col}#1#{} of up to",
-                "{C:hpr_erratic_col}#2#{} random cards"
+                "{C:hpr_erratic_col}#2#{} random card#<s>2#"
             }
         },
         p_hpr_erratic_pack_mega = {
             name = "#3# Erratic Pack",
             text = {
                 "Select {C:hpr_erratic_col}#1#{} of up to",
-                "{C:hpr_erratic_col}#2#{} random cards"
+                "{C:hpr_erratic_col}#2#{} random card#<s>2#"
             }
         },
         p_hpr_erratic_mega_no_var = { --hardcoded loc_vars desc for tag
@@ -1129,26 +1116,12 @@ local descriptions = {
                 "when scored"
             }
         },
-        p_hpr_awesome = {
-            name = "{C:hpr_awesome}AWESOME{} Buffoon Pack",
-            text = {
-                "Choose {C:attention}#1#{} of up to",
-                "{C:attention}#2#{C:hpr_awesome} AWESOME{} Jokers"
-            }
-        },
-        p_hpr_wee = {
-            name = "Wee Buffoon Pack",
-            text = {
-                "Choose {C:attention}#1#{} of up to",
-                "{C:attention}#2# {C:hpr_wee}Wee{} Joker cards"
-            }
-        },
         hpr_dual_seal = {
             name = "Dual Seal",
             text = {
-                "{C:red}+#1#{} Discard",
+                "{C:red}+#1#{} Discard#<s>1#",
                 "when scored",
-                "{C:blue}+#2#{} Hand when",
+                "{C:blue}+#2#{} Hand#<s>2# when",
                 "discarded"
             }
         },
@@ -1157,7 +1130,7 @@ local descriptions = {
             text = {
                 "If this is the {C:attention}only",
                 "played card, destroy it",
-                "and gain {C:attention}+#1#{} consumable slot"
+                "and gain {C:attention}+#1#{} consumable slot#<s>1#"
             }
         },
         hpr_void_seal = {
@@ -1176,7 +1149,7 @@ local descriptions = {
             text = {
                 "({V:1}lvl.#1#{}) Level up",
                 "{V:2}#2#",
-                "{C:chips}+#3#{} Chips"
+                "{C:chips}+#3#{} Chip#<s>3#"
             }
         },
         c_hpr_neural = {
@@ -1184,7 +1157,7 @@ local descriptions = {
             text = {
                 "({V:1}lvl.#1#{}) Level up",
                 "{V:2}#2#",
-                "{C:chips}+#3#{} Chips"
+                "{C:chips}+#3#{} Chip#<s>3#"
             }
         },
         c_hpr_limbo = {
@@ -1192,7 +1165,7 @@ local descriptions = {
             text = {
                 "({V:1}lvl.#1#{}) Level up",
                 "{V:2}#2#",
-                "{C:chips}+#3#{} Chips"
+                "{C:chips}+#3#{} Chip#<s>3#"
             }
         },
         c_hpr_bulwark = {
@@ -1200,7 +1173,7 @@ local descriptions = {
             text = {
                 "({V:1}lvl.#1#{}) Level up",
                 "{V:2}#2#",
-                "{C:chips}+#3#{} Chips"
+                "{C:chips}+#3#{} Chip#<s>3#"
             }
         },
         c_hpr_petrichor = {
@@ -1208,7 +1181,7 @@ local descriptions = {
             text = {
                 "({V:1}lvl.#1#{}) Level up",
                 "{C:attention}suitless{} cards",
-                "{C:chips}+#3#{} Chips"
+                "{C:chips}+#3#{} Chip#<s>3#"
             }
         },
         c_hpr_bazaar = {
@@ -1383,14 +1356,6 @@ local descriptions = {
             }
         }
     },
-    Tarot = {
-        c_hpr_green = {
-            name = "The Green",
-            text = {
-                "{C:mult}Greens{} 1 selected card"
-            }
-        }
-    },
     Voucher = {
         v_hpr_stacking = {
             name = "Stacking",
@@ -1429,98 +1394,98 @@ local descriptions = {
             name = "Styx",
             text = {
                 "Permanently adds {C:money}$#1#{} at the end of",
-                "round to {C:attention}#2#{} selected card"
+                "round to {C:attention}#2#{} selected card#<s>2#"
             }
         },
         c_hpr_deimos = {
             name = "Deimos",
             text = {
                 "Permanently adds {C:mult}+#1#{} Mult to",
-                "up to {C:attention}#2#{} selected cards",
+                "up to {C:attention}#2#{} selected card#<s>2#",
             }
         },
         c_hpr_io = {
             name = "Io",
             text = {
                 "Permanently adds {C:chips}+#1#{} Chips to",
-                "up to {C:attention}#2#{} selected cards"
+                "up to {C:attention}#2#{} selected card#<s>2#"
             }
         },
         c_hpr_moon = {
             name = "Luna",
             text = {
                 "Permanently adds {C:chips}+#1#{} held in hand",
-                "Chips to up to {C:attention}#2#{} selected cards"
+                "Chips to up to {C:attention}#2#{} selected card#<s>2#"
             }
         },
         c_hpr_europa = {
             name = "Europa",
             text = {
                 "Permanently adds {X:mult,C:white}X#1#{} Mult",
-                "to up to {C:attention}#2#{} selected cards"
+                "to up to {C:attention}#2#{} selected card#<s>2#"
             }
         },
         c_hpr_phobos = {
             name = "Phobos",
             text = {
                 "Permanently adds {C:mult}+#1#{} held in hand",
-                "Mult to up to {C:attention}#2#{} selected cards"
+                "Mult to up to {C:attention}#2#{} selected card#<s>2#"
             }
         },
         c_hpr_triton = {
             name = "Triton",
             text = {
                 "Permanently adds {X:chips,C:white}X#1#{} held in hand",
-                "Chips to up to {C:attention}#2#{} selected cards"
+                "Chips to up to {C:attention}#2#{} selected card#<s>2#"
             }
         },
         c_hpr_nibiru = {
             name = "Nibiru",
             text = {
                 "Permanently adds {C:money}$#1#{} to",
-                "{C:attention}#2#{} selected card"
+                "{C:attention}#2#{} selected card#<s>2#"
             }
         },
         c_hpr_asteroid = {
             name = "Asteroid",
             text = {
                 "Permanently adds {X:purple,C:white}X#1#{} Score",
-                "to up to {C:attention}#2#{} selected cards"
+                "to up to {C:attention}#2#{} selected card#<s>2#"
             }
         },
         c_hpr_dysnomia = {
             name = "Dysnomia",
             text = {
                 "Permanently adds {X:purple,C:white}X#1#{} held in hand",
-                "Score to up to {C:attention}#2#{} selected cards"
+                "Score to up to {C:attention}#2#{} selected card#<s>2#"
             }
         },
         c_hpr_titania = {
             name = "Titania",
             text = {
                 "Permanently adds {X:mult,C:white}X#1#{} held in hand",
-                "Mult to up to {C:attention}#2#{} selected cards"
+                "Mult to up to {C:attention}#2#{} selected card#<s>2#"
             }
         },
         c_hpr_hyperion = {
             name = "Hyperion",
             text = {
                 "Permanently adds {X:chips,C:white}X#1#{} Chips",
-                "to up to {C:attention}#2#{} selected cards"
+                "to up to {C:attention}#2#{} selected card#<s>2#"
             }
         },
         c_hpr_greip = {
             name = "Greip",
             text = {
                 "Permanently adds {C:glop}+#1#{} Glop",
-                "to up to {C:attention}#2#{} selected cards"
+                "to up to {C:attention}#2#{} selected card#<s>2#"
             }
         },
         c_hpr_gerd = {
             name = "Gerd",
             text = {
                 "Permanently adds {C:glop}+#1#{} held in hand",
-                "Glop to up to {C:attention}#2#{} selected cards"
+                "Glop to up to {C:attention}#2#{} selected card#<s>2#"
             }
         }
     },

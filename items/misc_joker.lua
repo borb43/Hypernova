@@ -1269,7 +1269,7 @@ SMODS.Joker {
     pos = { x = 1, y = 0 },
     config = { extra = 1 },
     loc_vars = function (self, info_queue, card)
-        return { vars = {card.ability.extra, card.ability.extra ~= 1 and "s" or ""}}
+        return { vars = {card.ability.extra}}
     end,
     calculate = function (self, card, context)
         if context.end_of_round and context.main_eval or context.forcetrigger then -- :3
