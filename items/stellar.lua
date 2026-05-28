@@ -1142,26 +1142,43 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "lucky",
-    config = { extra = 0.1 },
+    config = { immutable = 1, extra = 1, },
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra }}
+        return { vars = { card.ability.immutable, card.ability.extra }}
     end,
     calculate = function (self, card, context)
-        if context.mod_probability and not context.blueprint then
-            if context.trigger_obj and context.trigger_obj.config and context.trigger_obj.config.blind then
-                return { numerator = 0 }
+        if context.mod_probability then
+            return { numerator = context.numerator * card.ability.immutable }
+        end
+        if context.end_of_round and context.main_eval and context.beat_boss then
+            local new_val = pseudorandom("hpr_lucky_d6",1,6)
+            card.ability.immutable = new_val
+            if new_val == 1 then -- +1 consumable slot
+                G.consumeables:change_size(card.ability.extra)
+                return { colour = G.C.FILTER, message = localize{ key = "a_consumable_slot", type = "variable", vars = {card.ability.extra} }}
+            elseif new_val == 2 then -- +1 discard
+                G.GAME.round_resets.discards = G.GAME.round_resets.discards + card.ability.extra
+                ease_discard(card.ability.extra)
+                return { colour = G.C.RED, message = localize{ key = "a_discards", type = "variable", vars = {card.ability.extra} } }
+            elseif new_val == 3 then -- +1 hand
+                G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra
+                ease_hands_played(card.ability.extra)
+                return { colour = G.C.BLUE, message = localize{ key = "a_hands", type = "variable", vars = {card.ability.extra} }}
+            elseif new_val == 4 then -- +1 hand size
+                G.hand:change_size(card.ability.extra)
+                return { colour = G.C.FILTER, message = localize{ key = "a_handsize", type = "variable", vars = {card.ability.extra} }}
+            elseif new_val == 5 then -- -1 ante
+                ease_ante(-card.ability.extra)
+                return { colour = G.C.FILTER, message = localize{ key = "a_ante_minus", type = "variable", vars = {card.ability.extra} }}
+            elseif new_val == 6 then -- +1 joker slot
+                G.jokers:change_size(card.ability.extra)
+                return { colour = G.C.DARK_EDITION, message = localize{ key = "a_joker_slot", type = "variable", vars = {card.ability.extra} }}
             end
         end
-        if context.pseudorandom_result and context.trigger_obj.ability and context.trigger_obj.ability.hpr_num_bonus and context.trigger_obj.ability.hpr_denom_bonus then
-            local c = context.trigger_obj
-            c.ability.hpr_num_bonus = c.ability.hpr_num_bonus + card.ability.extra
-            c.ability.hpr_denom_bonus = c.ability.hpr_denom_bonus + card.ability.extra
-            return {
-                message = localize("k_upgrade_ex"),
-                colour = G.C.GREEN,
-                message_card = context.trigger_obj
-            }
-        end
+    end,
+    set_ability = function (self, card)
+        local f = HPR.false_area(card.area)
+        card.ability.immutable = pseudorandom(f and "false_hpr_d6" or "hpr_lucky_initial_d6",1,6)
     end,
     attributes = { "modify_card", "mod_chance", },
 }

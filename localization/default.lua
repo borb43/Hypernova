@@ -633,10 +633,25 @@ local descriptions = {
         j_hpr_lucky = {
             name = "LUCKY",
             text = {
-                "{C:green,E:1}Probabilities{} on {C:attention}Blinds{} are {C:attention}nullified",
-                "When a {C:green,E:1}probability{} rolls for a card,",
-                "it permanently gains {C:green}+#1# {C:attention}listed",
-                "{C:green,E:1}numerators{} and {C:green,E:1}denominators",
+                {
+                    "All {C:attention}listed {C:green}probabilities",
+                    "are multiplied by {X:green,C:white}X#1#",
+                    "{C:inactive}(ex: {C:green}1 in 15{C:inactive} -> {C:green}#1# in 15{C:inactive})"
+                },
+                {
+                    "All {C:attention}scoring{} effects gain a",
+                    "fixed {C:attention}30%{} chance to {C:attention}crit{},",
+                    "doubling the effect"
+                },
+                {
+                    "When {C:attention}Boss Blind{} is defeated, rolls",
+                    "a {C:green}D6{} for the new probability multiplier",
+                    "and a random {C:attention}permanent benefit{}:",
+                    "1: {C:attention}+#2#{} Consumable slot#<s>2#",
+                    "2: {C:red}+#2#{} Discard#<s>2# | 3: {C:blue}+#2#{} Hand#<s>2#",
+                    "4: {C:attention}+#2#{} Hand Size | 5: {C:attention}-#2#{} Ante",
+                    "6: {C:dark_edition}+#2#{} Joker Slot"
+                }
             }
         },
         j_hpr_ult_meal = {
@@ -1526,16 +1541,6 @@ local misc = {
         k_saved_q = "Saved?",
         ph_hpr_plarva = "Saved by Pluripotent Larva",
         k_hpr_awesome = "Awesome",
-        k_hpr_plus_shop = "+1 Shop Slot",
-        k_hpr_plus_csize = "+1 Consumable Slot",
-        k_hpr_plus_hand = "+1 Hand",
-        k_hpr_plus_discard = "+1 Discard",
-        k_hpr_plus_jsize = "+1 Joker Slot",
-        k_hpr_minus_ante = "-1 Ante",
-        k_hpr_plus_hsize = "+1 Hand Size",
-        k_hpr_plus_psize = "+1 Play limit",
-        k_hpr_plus_dsize = "+1 Discard limit",
-        k_hpr_plus_consumable = "+1 Consumable",
         k_hpr_painted_ex = "Painted!",
         k_hpr_wee = "Wee",
         k_hpr_green = "Green",
@@ -1602,6 +1607,9 @@ local misc = {
         play_x_cards = "Must play #1# cards",
         must_play_x = "Must play #1#",
         hpr_plus_any = "+1 #1#",
+        a_consumable_slot = "+#1# Consumable Slots",
+        a_ante_minus = "-#1# Ante",
+        a_joker_slot = "+#1# Joker Slots",
     },
     v_text = {},
 }

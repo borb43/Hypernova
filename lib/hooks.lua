@@ -116,11 +116,24 @@ end
 
 local scie = SMODS.calculate_individual_effect
 function SMODS.calculate_individual_effect(effect, scored_card, key, amount, from_edition)
+	local is_scoring = false
+	local changed = false
+	for k in pairs(SMODS.Scoring_Parameters) do
+		if key:find(k) then
+			is_scoring = true
+			break
+		end
+	end
+	if key:find("asc") then
+		is_scoring = true
+	end
 	if HPR.findany(key, "mult", "chip") and not effect.hpr_no_mod then
 		for _, c in ipairs(SMODS.find_card("j_hpr_growth")) do
+			changed = true
 			amount = amount * c.ability.extra.eff_mod
 		end
 		if next(SMODS.find_card("j_hpr_antiderivative")) and string.find(key, "mult") and not HPR.findany(key:lower(), "x", "e") then
+			changed = true
 			local multi = 0
 			for _, c in ipairs(SMODS.find_card("j_hpr_antiderivative")) do
 				multi = math.max(multi, c.ability.extra)
@@ -131,6 +144,7 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
 		end
 		for _, c in ipairs(SMODS.find_card("j_hpr_derivative")) do
 			if HPR.findany(key, "X", "x") and key:find("mult") and not key:find("xlog") and c.ability.extra.active then
+				changed = true
 				key = key:gsub("x_", "")
 				key = key:gsub("X", "")
 				key = key:gsub("x", "")
@@ -139,6 +153,14 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
 				break
 			end
 		end
+	end
+	if is_scoring and next(SMODS.find_card("j_hpr_lucky")) and pseudorandom("hpr_lucky_crit")<0.30 then
+		changed = true
+		amount = amount*2
+	end
+	if changed and key:sub(-4) == "_mod" then
+		key = key:sub(0,-5)
+		effect.message = nil
 	end
 	return scie(effect, scored_card, key, amount, from_edition)
 end
