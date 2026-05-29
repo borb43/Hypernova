@@ -984,6 +984,7 @@ HPR.StellarJoker {
         end
     end,
     attributes = { "xmult", "econ", "face", },
+    hpr_loc_keys = { "j_hpr_mask", "j_hpr_mask_pb" }
 }
 
 HPR.StellarJoker {
