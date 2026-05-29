@@ -832,15 +832,9 @@ SMODS.Joker {
     pos = { x = 0, y = 0 },
     rarity = 1,
     cost = 5,
-    add_to_deck = function (self, card, from_debuff)
-        ease_ante(-1)
-        G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante or G.GAME.round_resets.ante
-        G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante - 1
-    end,
-    remove_from_deck = function (self, card, from_debuff)
-        ease_ante(1)
-        G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante or G.GAME.round_resets.ante
-        G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante + 1
+    config = { extra = 1 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra }}
     end,
     hpr_ascension_key = "j_hpr_circus",
     blueprint_compat = false,

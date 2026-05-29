@@ -697,7 +697,8 @@ local descriptions = {
         j_hpr_fossil = {
             name = "Fossilized Joker",
             text = {
-                "{C:attention}-1{} Ante while held"
+                "{C:attention}Score requirement{} for",
+                "Blinds is {C:attention}#1#{} Ante lower"
             }
         },
         j_hpr_evil_eris = {

@@ -339,3 +339,13 @@ function init_localization(...)
 	HPR.post_loc()
 	return loc_ref(...)
 end
+
+local gba = get_blind_amount
+function get_blind_amount(ante)
+	if not G.SETTINGS.paused and G.STAGE == G.STAGES.RUN then
+		for _, c in ipairs(SMODS.find_card("j_hpr_fossil")) do
+			ante = ante - math.floor(c.ability.extra)
+		end
+	end
+	return gba(ante)
+end
