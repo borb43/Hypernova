@@ -983,7 +983,7 @@ SMODS.Joker {
     attributes = { "chips", "full_deck", "two", "rank", "wee" },
     forcetrigger_compat = true,
 }
-
+--[[
 SMODS.Joker {
     key = "petit_michel",
     eternal_compat = false,
@@ -1051,7 +1051,7 @@ SMODS.Joker {
     hpr_ascension_key = "j_hpr_potassium",
     forcetrigger_compat = true,
 }
-
+]]
 SMODS.Joker {
     key = "mealy_apple",
     eternal_compat = false,
@@ -1059,7 +1059,7 @@ SMODS.Joker {
     cost = 5,
     atlas = "placeholder",
     pos = {x=0,y=0},
-    config = { extra = { mult = 1, discards = 8 }},
+    config = { extra = { mult = 2, discards = 10 }},
     loc_vars = function (self, info_queue, card)
         return{ vars = { card.ability.extra.mult, card.ability.extra.discards, card.ability.extra.discards ~= 1 and "s" or "" }}
     end,
