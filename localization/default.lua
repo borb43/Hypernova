@@ -565,14 +565,41 @@ local descriptions = {
             }
         },
         j_hpr_mask = {
-            name = "MASK",
+            name = "ROYALTY",
             text = {
-                "Scored and held in hand",
-                "{C:attention}face{} cards give {X:mult,C:white}X#2#{} Mult",
-                "Earn {C:money}$#2#{} at end of round",
-                "for every {C:attention}face{} card in",
-                "your {C:attention}full{} deck",
-                "{C:inactive}(Currently {C:money}$#3#{C:inactive})"
+                {
+                    "{C:attention}Jacks{} in the discard pile",
+                    "give {X:mult,C:white}X#1#{} Mult"
+                },
+                {
+                    "{C:attention}Queens{} each give {C:gold}$#2#",
+                    "when held in hand"
+                },
+                {
+                    "Retriggers scored",
+                    "{C:attention}Kings #3#{} times"
+                },
+            }
+        },
+        j_hpr_mask_pb = { --apostle thing when you have them
+            name = "ROYALTY",
+            text = {
+                {
+                    "{C:attention}Jacks{} in the discard pile",
+                    "give {X:mult,C:white}X#1#{} Mult"
+                },
+                {
+                    "{C:attention}Queens{} each give {C:gold}$#2#",
+                    "when held in hand"
+                },
+                {
+                    "Retriggers scored",
+                    "{C:attention}Kings #3#{} times"
+                },
+                {
+                    "{C:attention}Apostles{} trigger",
+                    "all three effects"
+                }
             }
         },
         j_hpr_numeric = {

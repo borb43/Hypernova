@@ -939,28 +939,49 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "mask",
-    config = { extra = { xmult = 2, dollar = 1 }},
+    config = { extra = { xmult = 1.5, dollar = 3, reps = 3 }},
     loc_vars = function (self, info_queue, card)
-        local count = 0
-        if G.playing_cards then
-            for _, c in ipairs(G.playing_cards) do
-                if c:is_face() then count = count + 1 end
+        local key = self.key
+        if next(SMODS.find_mod("paperback")) then
+            local a = false
+            for _, v in ipairs(G.playing_cards or {}) do
+                if PB_UTIL.is_rank(v, 'paperback_Apostle') then a = true end --thank you paperback
+            end
+            if a then
+                key = key.."_pb"
             end
         end
-        return { vars = { card.ability.extra.xmult, card.ability.extra.dollar, card.ability.extra.dollar * count }}
+        return { vars = { card.ability.extra.xmult, card.ability.extra.dollar, card.ability.extra.reps }, key = key }
     end,
     forcetrigger_compat = true,
     calculate = function (self, card, context)
-        if context.individual and (context.cardarea == G.play or context.cardarea == G.hand) and not context.other_card.debuff and not context.end_of_round and context.other_card:is_face() or context.forcetrigger then
-            return { xmult = card.ability.extra.xmult }
+        if context.individual and not context.end_of_round and not context.other_card.debuff then
+            local id = context.other_card:get_id()
+            local a = Spectrallib.safe_get(SMODS.Ranks,"paperback_Apostle","id")
+            if context.cardarea == G.discard and (id == 11 or id == a) then
+                return { xmult = card.ability.extra.xmult }
+            end
+            if context.cardarea == G.hand and (id == 12 or id == a) then
+                G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra.dollar
+                return {
+                    dollars = card.ability.extra.dollar,
+                    func = function()
+                        G.E_MANAGER:add_event(Event({
+                            func = function()
+                                G.GAME.dollar_buffer = 0
+                                return true
+                            end
+                        }))
+                    end
+                }
+            end
         end
-    end,
-    calc_dollar_bonus = function (self, card)
-        local count = 0
-        for _, c in ipairs(G.playing_cards) do
-            if c:is_face() then count = count + 1 end
+        if context.repetition and context.cardarea == G.play then
+            local id = context.other_card:get_id()
+            if id == 13 or id == Spectrallib.safe_get(SMODS.Ranks,"paperback_Apostle","id") then
+                return { repetitions = card.ability.extra.reps }
+            end
         end
-        if count > 0 then return card.ability.extra.dollar * count end
     end,
     attributes = { "xmult", "econ", "face", },
 }

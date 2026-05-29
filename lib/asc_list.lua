@@ -83,4 +83,6 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     --j_luchador = "j_hpr_hunter",
     --j_matador = "j_hpr_hunter",
     j_hallucination = "j_hpr_master",
+    j_hit_the_road = "j_hpr_mask",
+    j_reserved_parking = "j_hpr_mask",
 }

@@ -190,7 +190,10 @@ SMODS.Attribute {
 
 SMODS.current_mod.optional_features = {
     post_trigger = true,
-    retrigger_joker = true
+    retrigger_joker = true,
+    cardareas = {
+        discard = true,
+    }
 }
 
 SMODS.Atlas {
