@@ -1,3 +1,5 @@
+do return end
+
 HPR.extra_tabs = function ()
     return HPR.tab_storage
 end
