@@ -299,7 +299,7 @@ HPR.StellarJoker {
 HPR.StellarJoker {
     key = "master",
     forcetrigger_compat = true,
-    config = { extra = { rank = "Ace", hand_type = "High Card", consumable = nil } },
+    config = { extra = { rank = "Ace", hand_type = "High Card", consumable = nil, multiuse = 1, scale = 1 } },
     loc_vars = function (self, info_queue, card)
         local consumable = card.ability.extra.consumable and G.P_CENTERS[card.ability.extra.consumable] or nil
         local loc_name = consumable and localize{ type = "name_text", key = consumable.key, set = consumable.set } or localize("k_none")
@@ -308,7 +308,7 @@ HPR.StellarJoker {
         local loc_hand = localize(card.ability.extra.hand_type, "poker_hands")
         if consumable then info_queue[#info_queue+1] = consumable end
         info_queue[#info_queue+1] = { set = "Edition", key = "e_negative_consumable", config = { extra = 1 } }
-        return { vars = { loc_name, loc_rank, loc_hand, colours = {col} }}
+        return { vars = { loc_name, loc_rank, loc_hand, card.ability.extra.multiuse, card.ability.extra.scale, colours = {col} }}
     end,
     calculate = function (self, card, context)
         if context.joker_main and card.ability.extra.consumable then
@@ -325,12 +325,13 @@ HPR.StellarJoker {
                 local consumable = G.P_CENTERS[card.ability.extra.consumable]
                 G.E_MANAGER:add_event(Event{
                     func = function (n)
-                        SMODS.add_card{
+                        local c = SMODS.add_card{
                             key = consumable.key,
                             set = consumable.set,
                             key_append = "hpr_master_card",
                             edition = "e_negative"
                         }
+                        c.ability.cry_multiuse = (c.ability.cry_multiuse or 0) + card.ability.extra.multiuse
                         return true
                     end
                 })
@@ -341,33 +342,26 @@ HPR.StellarJoker {
             end
         end
         if context.end_of_round and context.main_eval then
-            local valid_cards = {}
-            for _, v in ipairs(G.playing_cards) do
-                if not SMODS.has_no_rank(v) then
-                    valid_cards[#valid_cards+1] = v
-                end
-            end
-            local c = pseudorandom_element(valid_cards, "hpr_master_reset_rank")
+            local c = pseudorandom_element(SMODS.Ranks, f and "false_hpr_master" or "hpr_master_reset_rank")
             if c then
-                card.ability.extra.rank = c.base.value
+                card.ability.extra.rank = c.key
             end
             card.ability.extra.hand_type = HPR.get_random_hand(nil, "hpr_master_reset_hand", function(v) return v ~= card.ability.extra.hand_type end)
-            return { message = localize("k_reset_ex") }
+            if context.beat_boss and card.ability.extra.consumable then
+                SMODS.scale_card(card, {
+                    ref_table = card.ability.extra,
+                    ref_value = "multiuse",
+                    scalar_value = "scale",
+                })
+                return nil, true
+            end
         end
     end,
     set_ability = function (self, card, from_debuff)
         local f = HPR.false_area(card.area)
-        if G.playing_cards then
-            local valid_cards = {}
-            for _, v in ipairs(G.playing_cards) do
-                if not SMODS.has_no_rank(v) then
-                    valid_cards[#valid_cards+1] = v
-                end
-            end
-            local c = pseudorandom_element(valid_cards, f and "false_hpr_master" or "hpr_master_reset_rank")
-            if c then
-                card.ability.extra.rank = c.base.value
-            end
+        local c = pseudorandom_element(SMODS.Ranks, f and "false_hpr_master" or "hpr_master_reset_rank")
+        if c then
+            card.ability.extra.rank = c.key
         end
         card.ability.extra.hand_type = HPR.get_random_hand(nil, f and "false_hpr_master" or "hpr_master_reset_hand")
     end,
@@ -379,6 +373,7 @@ HPR.StellarJoker {
         local c = cards[1]
         if c then
             card.ability.extra.consumable = c.config.center_key
+            card.ability.extra.multiuse = 1
             SMODS.destroy_cards(c)
         end
     end,

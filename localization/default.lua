@@ -305,14 +305,21 @@ local descriptions = {
             text = {
                 {
                     "Creates a {C:dark_edition}Negative {V:1}#1#",
-                    "if scoring hand contains a",
+                    "with multiuse {C:attention}#4#{} if",
+                    "scoring hand contains a",
                     "{C:attention}#2#{} or a {C:attention}#3#{},",
                     "{s:0.8}rank and hand change each round"
                 },
                 {
+                    "Increase multiuse",
+                    "by {C:attention}#5#{} when Boss Blind",
+                    "is defeated"
+                },
+                {
                     "Use this Joker to {C:attention}destroy{} a",
                     "selected {C:attention}consumable{} and set it",
-                    "as the card for this Joker to create"
+                    "as the card for this Joker to create",
+                    "{C:attention}Resets{} multiuse amount"
                 },
             }
         },
