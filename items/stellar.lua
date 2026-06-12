@@ -303,12 +303,25 @@ HPR.StellarJoker {
     loc_vars = function (self, info_queue, card)
         local consumable = card.ability.extra.consumable and G.P_CENTERS[card.ability.extra.consumable] or nil
         local loc_name = consumable and localize{ type = "name_text", key = consumable.key, set = consumable.set } or localize("k_none")
-        local col = consumable and G.C.SECONDARY_SET[consumable.set] or G.C.FILTER
+        local col = consumable and G.C.SECONDARY_SET[consumable.set] or G.C.RED
+        local main_end = {
+            n = G.UIT.C,
+            config = { align = "bm", padding = 0.02 },
+            nodes = {
+                {
+                    n = G.UIT.C,
+                    config = { align = "m", colour = col, r = 0.05, padding = 0.05 },
+                    nodes = {
+                        { n = G.UIT.T, config = { text = ' ' .. loc_name .. ' ', colour = G.C.UI.TEXT_LIGHT, scale = 0.3, shadow = true } },
+                    }
+                }
+            }
+        }
         local loc_rank = localize(card.ability.extra.rank, "ranks")
         local loc_hand = localize(card.ability.extra.hand_type, "poker_hands")
         if consumable then info_queue[#info_queue+1] = consumable end
         info_queue[#info_queue+1] = { set = "Edition", key = "e_negative_consumable", config = { extra = 1 } }
-        return { vars = { loc_name, loc_rank, loc_hand, card.ability.extra.multiuse, card.ability.extra.scale, colours = {col} }}
+        return { vars = { loc_rank, loc_hand, card.ability.extra.multiuse, card.ability.extra.scale, elements = { main_end } }}
     end,
     calculate = function (self, card, context)
         if context.joker_main and card.ability.extra.consumable then

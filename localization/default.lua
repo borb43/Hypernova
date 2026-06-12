@@ -304,22 +304,22 @@ local descriptions = {
             name = "MASTER",
             text = {
                 {
-                    "Creates a {C:dark_edition}Negative {V:1}#1#",
-                    "with multiuse {C:attention}#4#{} if",
-                    "scoring hand contains a",
-                    "{C:attention}#2#{} or a {C:attention}#3#{},",
-                    "{s:0.8}rank and hand change each round"
+                    "Creates a {C:dark_edition}Negative{} copy of the",
+                    "last consumable destroyed by this",
+                    "with multiuse {C:attention}#3#{} if scoring hand",
+                    "contains a {C:attention}#1#{} or a {C:attention}#2#{},",
+                    "{s:0.8}rank and hand change each round",
+                    " {element:1} ",
                 },
                 {
                     "Increase multiuse",
-                    "by {C:attention}#5#{} when Boss Blind",
-                    "is defeated"
+                    "by {C:attention}#4#{} when Boss Blind",
+                    "is defeated",
                 },
                 {
                     "Use this Joker to {C:attention}destroy{} a",
-                    "selected {C:attention}consumable{} and set it",
-                    "as the card for this Joker to create",
-                    "{C:attention}Resets{} multiuse amount"
+                    "selected {C:attention}consumable{} and",
+                    "{C:attention}reset{} multiuse amount",
                 },
             }
         },
