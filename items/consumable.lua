@@ -24,43 +24,43 @@ HPR.SuitPlanet = SMODS.Consumable:extend{
 }
 
 HPR.SuitPlanet {
-    key = "coast",
+    key = "centauri",
     config = { level_suit = "Diamonds", suit_chips = 10 },
     pos = { x = 0, y = 0 },
     set_card_type_badge = function (self, card, badges)
-        badges[#badges+1] = create_badge(localize("k_hidden_realm"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
+        badges[#badges+1] = create_badge(localize("k_exoplanet"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
     end,
 }
 
 HPR.SuitPlanet {
-    key = "neural",
+    key = "ross",
     config = { level_suit = "Clubs", suit_chips = 10 },
     pos = { x = 1, y = 0 },
     set_card_type_badge = function (self, card, badges)
-        badges[#badges+1] = create_badge(localize("k_hidden_realm"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
+        badges[#badges+1] = create_badge(localize("k_exoplanet"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
     end,
 }
 
 HPR.SuitPlanet {
-    key = "limbo",
+    key = "luyten",
     config = { level_suit = "Spades", suit_chips = 10 },
     pos = { x = 2, y = 0 },
     set_card_type_badge = function (self, card, badges)
-        badges[#badges+1] = create_badge(localize("k_hidden_realm"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
+        badges[#badges+1] = create_badge(localize("k_exoplanet"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
     end,
 }
 
 HPR.SuitPlanet {
-    key = "bulwark",
+    key = "teegarden",
     config = { level_suit = "Hearts", suit_chips = 10 },
     pos = { x = 3, y = 0 },
     set_card_type_badge = function (self, card, badges)
-        badges[#badges+1] = create_badge(localize("k_hidden_realm"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
+        badges[#badges+1] = create_badge(localize("k_exoplanet"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
     end,
 }
 
 HPR.SuitPlanet {
-    key = "petrichor",
+    key = "wolf",
     config = { level_suit = "suitless", suit_chips = 10 },
     pos = { x = 4, y = 0 },
     in_pool = function (self, args)
@@ -74,43 +74,43 @@ HPR.SuitPlanet {
 }
 
 HPR.SuitPlanet {
-    key = "bazaar",
+    key = "gleise",
     config = { level_suit = "Diamonds", suit_mult = 1 },
     pos = { x = 0, y = 1 },
     set_card_type_badge = function (self, card, badges)
-        badges[#badges+1] = create_badge(localize("k_hidden_realm"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
+        badges[#badges+1] = create_badge(localize("k_exoplanet"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
     end,
 }
 
 HPR.SuitPlanet {
-    key = "computational",
+    key = "hd_numbers",
     config = { level_suit = "Clubs", suit_mult = 1 },
     pos = { x = 1, y = 1 },
     set_card_type_badge = function (self, card, badges)
-        badges[#badges+1] = create_badge(localize("k_hidden_realm"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
+        badges[#badges+1] = create_badge(localize("k_exoplanet"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
     end,
 }
 
 HPR.SuitPlanet {
-    key = "fractured",
+    key = "virginis",
     config = { level_suit = "Spades", suit_mult = 1 },
     pos = { x = 2, y = 1 },
     set_card_type_badge = function (self, card, badges)
-        badges[#badges+1] = create_badge(localize("k_hidden_realm"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
+        badges[#badges+1] = create_badge(localize("k_exoplanet"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
     end,
 }
 
 HPR.SuitPlanet {
-    key = "v_fields",
+    key = "L_numbers",
     config = { level_suit = "Hearts", suit_mult = 1 },
     pos = { x = 3, y = 1 },
     set_card_type_badge = function (self, card, badges)
-        badges[#badges+1] = create_badge(localize("k_hidden_realm"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
+        badges[#badges+1] = create_badge(localize("k_exoplanet"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
     end,
 }
 
 HPR.SuitPlanet {
-    key = "commencement",
+    key = "trappist",
     config = { level_suit = "suitless", suit_mult = 1 },
     pos = { x = 4, y = 1 },
     in_pool = function (self, args)
@@ -128,7 +128,7 @@ HPR.SuitPlanet {
 --#endregion
 --#region rare consumables
 SMODS.Consumable {
-    key = "planetarium",
+    key = "big_crunch",
     set = "Spectral",
     atlas = "consumable",
     pos = { x = 5, y = 0 },

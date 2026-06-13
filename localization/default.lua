@@ -1194,80 +1194,80 @@ local descriptions = {
         }
     },
     Planet = {
-        c_hpr_coast = {
-            name = "Gilded Coast",
+        c_hpr_centauri = {
+            name = "Proxima Centauri b",
             text = {
                 "({V:1}lvl.#1#{}) Level up",
                 "{V:2}#2#",
                 "{C:chips}+#3#{} Chip#<s>3#"
             }
         },
-        c_hpr_neural = {
-            name = "Neural Sanctum",
+        c_hpr_ross = {
+            name = "Ross 128 b",
             text = {
                 "({V:1}lvl.#1#{}) Level up",
                 "{V:2}#2#",
                 "{C:chips}+#3#{} Chip#<s>3#"
             }
         },
-        c_hpr_limbo = {
-            name = "A Moment, Whole",
+        c_hpr_luyten = {
+            name = "Luyten b",
             text = {
                 "({V:1}lvl.#1#{}) Level up",
                 "{V:2}#2#",
                 "{C:chips}+#3#{} Chip#<s>3#"
             }
         },
-        c_hpr_bulwark = {
-            name = "Bulwark's Ambry",
+        c_hpr_teegarden = {
+            name = "Teegarden c",
             text = {
                 "({V:1}lvl.#1#{}) Level up",
                 "{V:2}#2#",
                 "{C:chips}+#3#{} Chip#<s>3#"
             }
         },
-        c_hpr_petrichor = {
-            name = "Petrichor V",
+        c_hpr_wolf = {
+            name = "Wolf 1061 c",
             text = {
                 "({V:1}lvl.#1#{}) Level up",
                 "{C:attention}suitless{} cards",
                 "{C:chips}+#3#{} Chip#<s>3#"
             }
         },
-        c_hpr_bazaar = {
-            name = "Bazaar Between Time",
+        c_hpr_gleise = {
+            name = "Gleise 876 d",
             text = {
                 "({V:1}lvl.#1#{}) Level up",
                 "{V:2}#2#",
                 "{C:mult}+#3#{} Mult"
             }
         },
-        c_hpr_computational = {
-            name = "Computational Exchange",
+        c_hpr_hd_numbers = {
+            name = "HD 219134 b",
             text = {
                 "({V:1}lvl.#1#{}) Level up",
                 "{V:2}#2#",
                 "{C:mult}+#3#{} Mult"
             }
         },
-        c_hpr_fractured = {
-            name = "A Moment, Fractured",
+        c_hpr_virginis = {
+            name = "61 Virginis b",
             text = {
                 "({V:1}lvl.#1#{}) Level up",
                 "{V:2}#2#",
                 "{C:mult}+#3#{} Mult"
             }
         },
-        c_hpr_v_fields = {
-            name = "Void Fields",
+        c_hpr_L_numbers = {
+            name = "L 98-59 c",
             text = {
                 "({V:1}lvl.#1#{}) Level up",
                 "{V:2}#2#",
                 "{C:mult}+#3#{} Mult"
             }
         },
-        c_hpr_commencement = {
-            name = "Commencement",
+        c_hpr_trappist = {
+            name = "Trappist-1f",
             text = {
                 "({V:1}lvl.#1#{}) Level up",
                 "{C:attention}suitless{} cards",
@@ -1290,8 +1290,8 @@ local descriptions = {
                 "its {C:hpr_stellar,E:1}Stellar{} counterpart"
             }
         },
-        c_hpr_planetarium = {
-            name = "The Planetarium",
+        c_hpr_big_crunch = {
+            name = "Big Crunch",
             text = {
                 "Level up",
                 "every {E:1,C:legendary}suit{}",
@@ -1588,7 +1588,7 @@ local misc = {
         ph_hpr_stellar_revive = "Blessed by the stars",
         no_repeat_hands = "No repeat hand types per round",
         k_plus_egg = "+1 Egg",
-        k_hidden_realm = "Hidden Realm",
+        k_exoplanet = "Exoplanet",
         k_all_suits = "All Suits",
         b_hpr_take = "TAKE",
         k_planet_void = "?Pla??ne?t",
