@@ -101,11 +101,9 @@ SMODS.Joker {
             local c = context.card
             G.E_MANAGER:add_event(Event{
                 func = function ()
-                    local copy = copy_card(c)
+                    local copy = SMODS.copy_card(c, { strip_edition = true })
                     copy:set_edition("e_negative", true)
                     copy:add_sticker("perishable", true)
-                    copy:add_to_deck()
-                    G.jokers:emplace(copy)
                     return true
                 end
             })

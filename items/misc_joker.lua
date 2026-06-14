@@ -202,7 +202,7 @@ SMODS.Joker { --fortune cookie, guarantees 6 probabilities and then creates a ne
                     G.E_MANAGER:add_event(Event({
                         func = function()
                             SMODS.add_card { set = 'Tarot', edition = 'e_negative' }
-                            SMODS.destroy_cards(card, nil, nil, true)
+                            SMODS.destroy_cards(card, { pinch_anim = true })
                             return true
                         end
                     }))
@@ -755,11 +755,9 @@ SMODS.Joker {
             if c and c.config.center.key ~= "j_hpr_copier" then
                 G.E_MANAGER:add_event(Event{
                     func = function ()
-                        local copy = copy_card(c)
+                        local copy = SMODS.copy_card(c, { strip_edition = true })
                         copy:set_edition('e_negative', true)
                         copy:add_sticker('perishable', true)
-                        copy:add_to_deck()
-                        G.jokers:emplace(copy)
                         return true
                     end
                 })
@@ -910,7 +908,7 @@ SMODS.Joker {
             if enh ~= 0 then
                 return { message = localize("k_hpr_painted_ex") }
             else
-                SMODS.destroy_cards(card, nil, nil, true)
+                SMODS.destroy_cards(card, { pinch_anim = true })
                 return { message = localize("k_drank_ex") }
             end
         end
@@ -1002,7 +1000,7 @@ SMODS.Joker {
         end
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then
             if SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds) then
-                SMODS.destroy_cards(card, nil, nil, true)
+                SMODS.destroy_cards(card, { pinch_anim = true }) unused but i guess for if i bring this back
                 G.GAME.pool_flags.hpr_wee_michel_extinct = true
                 return {
                     message = localize('k_extinct_ex')
@@ -1071,7 +1069,7 @@ SMODS.Joker {
             if context.other_card == context.full_hand[#context.full_hand] and not context.blueprint then
                 card.ability.extra.discards = card.ability.extra.discards - 1
                 if card.ability.extra.discards <= 0 then
-                    SMODS.destroy_cards(card, nil, nil, true)
+                    SMODS.destroy_cards(card, { pinch_anim = true })
                     SMODS.calculate_effect({message = localize("k_eaten_ex")}, card)
                 end
             end
@@ -1269,7 +1267,7 @@ SMODS.Joker {
         if context.end_of_round and context.main_eval or context.forcetrigger then -- :3
             card.ability.extra = card.ability.extra + 1
             if card.ability.extra >= 5 then
-                SMODS.destroy_cards(card, nil, nil, true)
+                SMODS.destroy_cards(card, { pinch_anim = true })
                 return {
                     message = localize("k_eaten_ex")
                 }

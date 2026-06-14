@@ -271,19 +271,13 @@ function SMODS.shatters(card)
 	return shatter_ref(card)
 end
 
-local needs_pull_ref = Spectrallib.needs_pull_button
-function Spectrallib.needs_pull_button(card)
-	if HPR.can_pull(card) and SMODS.OPENED_BOOSTER.config.center.kind == "hpr_erratic" and G.GAME.used_vouchers.v_hpr_order_chaos and (card.ability.consumeable or card.ability.set == "Voucher") then
-		return localize("b_hpr_take")
+local card_selectable_ref = Card.selectable_from_pack
+function Card:selectable_from_pack(pack)
+	local orig_area, orig_usable = card_selectable_ref(self, pack)
+	if HPR.can_pull(self) and pack and pack.kind == "hpr_erratic" and G.GAME.used_vouchers.v_hpr_order_chaos and (self.ability.consumeable or self.ability.set == "Voucher") then
+		return orig_area or "consumeables", true
 	end
-	return needs_pull_ref(card)
-end
-local can_pull_ref = Spectrallib.can_be_pulled
-function Spectrallib.can_be_pulled(card)
-	if HPR.can_pull(card) and SMODS.OPENED_BOOSTER.config.center.kind == "hpr_erratic" and G.GAME.used_vouchers.v_hpr_order_chaos and (card.ability.consumeable or card.ability.set == "Voucher") then
-		return true
-	end
-	return can_pull_ref(card)
+	return orig_area, orig_usable
 end
 
 local no_rank_ref = SMODS.has_no_rank

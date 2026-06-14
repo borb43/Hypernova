@@ -255,7 +255,7 @@ end
 function HPR.can_pull(card)
     if not SMODS.OPENED_BOOSTER then return false end
     local c = card.config.center
-    return not card:selectable_from_pack(SMODS.OPENED_BOOSTER) and not c.no_select and not c.hidden
+    return not c.no_select and not c.hidden
 end
 
 function HPR.get_random_level_suit(force_suitless, seed, fallback)
