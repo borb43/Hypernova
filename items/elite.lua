@@ -43,7 +43,8 @@ SMODS.Joker {
                 return { message = localize("k_empty_ex") }
             end
         end
-    end
+    end,
+    attributes = { "consumable", "consumable_slot" }
 }
 
 SMODS.Joker {
@@ -64,7 +65,8 @@ SMODS.Joker {
                 dollars = card.ability.extra,
             }
         end
-    end
+    end,
+    attributes = { "ace", "six", "eight", "economy", "rank" }
 }
 
 SMODS.Joker {
@@ -81,7 +83,8 @@ SMODS.Joker {
         if context.individual and context.cardarea == G.play and (context.other_card:get_id() == 3 or context.other_card:get_id() == 14 or context.other_card:get_id() == 4) then
             return { xchips = card.ability.extra }
         end
-    end
+    end,
+    attributes = { "xchips", "three", "ace", "four", "rank" }
 }
 
 SMODS.Joker {
@@ -110,7 +113,8 @@ SMODS.Joker {
         end
     end,
     blueprint_compat = false,
-    hpr_ascension_key = "j_hpr_mimic"
+    hpr_ascension_key = "j_hpr_mimic",
+    attributes = { "generation", "joker", "edition" }
 }
 
 SMODS.Joker {
@@ -165,7 +169,8 @@ SMODS.Joker {
                 end
             })
         end
-    end
+    end,
+    attributes = { "enhancement" }
 }
 
 SMODS.Joker {
@@ -197,7 +202,8 @@ SMODS.Joker {
         if context.after then
             card.ability.extra.xmult = 1
         end
-    end
+    end,
+    attributes = { "destroy_card", "ten", "xmult", "rank" }
 }
 
 SMODS.Joker {
@@ -222,7 +228,8 @@ SMODS.Joker {
                 end
             end
         end
-    end
+    end,
+    attributes = {"modify_card","ace","seal","editions","enhancement"}
 }
 
 --more encore jokers after they get added so hopefully an elite joker for each rank will exist
