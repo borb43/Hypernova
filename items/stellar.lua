@@ -680,6 +680,56 @@ HPR.StellarJoker { --literally everything this does is a hook lmfao
 }
 
 HPR.StellarJoker {
+    key = "prideful",
+    config = { extra = 1 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra }}
+    end,
+    calculate = function (self, card, context)
+        if context.first_hand_drawn and not context.blueprint then
+            local eval = function() return G.GAME.current_round.hands_played == 0 and not G.RESET_JIGGLES end
+            juice_card_until(card, eval, true)
+        end
+        if context.before and G.GAME.current_round.hands_played == 0 then
+            local suit_tbl = {}
+            for _, c in ipairs(context.full_hand) do
+                for _, suit in ipairs(SMODS.Suit.obj_buffer) do
+                    if not suit_tbl[suit] and c:is_suit(suit) then suit_tbl[suit] = true end
+                end
+                if not suit_tbl.suitless and Spectrallib.true_suitless(c) then suit_tbl.suitless = true end
+            end
+            return {
+                message = localize("k_level_up_ex"),
+                func = function ()
+                    for k in pairs(suit_tbl) do
+                        Spectrallib.level_suit(k, card, 1, 0, card.ability.extra, nil, true)
+                    end
+                end
+            }
+        end
+        if context.repetition then
+            local lv_total = 0
+            for _, suit in ipairs(SMODS.Suit.obj_buffer) do
+                if context.other_card:is_suit(suit) then
+                    lv_total = lv_total + (Spectrallib.safe_get(G.GAME.SuitBuffs, suit, "level") or 0)
+                end
+            end
+            if Spectrallib.true_suitless(context.other_card) then
+                lv_total = lv_total + G.GAME.SuitBuffs.suitless.level
+            end
+            local reps = math.floor(math.log(lv_total))
+            if reps>0 then
+                return {
+                    repetitions = reps
+                }
+            end
+        end
+    end,
+    attributes = { "mult", "suit_level", "retrigger", "hands", }
+}
+
+--[[
+HPR.StellarJoker {
     key = "diamond",
     pos = { x = 0, y = 1 },
     soul_pos = {
@@ -824,7 +874,7 @@ HPR.StellarJoker {
     attributes = { "xmult", "enhancements", "suit", },
     forcetrigger_compat = true,
 }
-
+]]
 HPR.StellarJoker {
     key = "conjurer",
     config = { extra = { xmult = 1, gain = 0.25, packs = 2 }},

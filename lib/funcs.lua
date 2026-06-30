@@ -342,3 +342,9 @@ function HPR.card_active(key)
     end
     return false
 end
+
+function HPR.table_size(t)
+    local i = 0
+    for _ in pairs(t) do i = i+1 end
+    return i
+end

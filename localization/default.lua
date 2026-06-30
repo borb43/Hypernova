@@ -1071,6 +1071,21 @@ local descriptions = {
                 "at the end of the {C:attention}shop",
             }
         },
+        j_hpr_prideful = {
+            name = "PRIDEFUL",
+            text = {
+                {
+                    "Levels up each {C:attention}suit{} played",
+                    "in the {C:attention}first hand{} of round",
+                    "{C:inactive}({C:mult}+#1#{C:inactive} Mult)"
+                },
+                {
+                    "Retriggers played cards",
+                    "equal to {C:attention}ln(suit level)",
+                    "{C:inactive}(Rounds down)",
+                }
+            }
+        },
     },
     Other = {
         p_hpr_lunar_pack = {
