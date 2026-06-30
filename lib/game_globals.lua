@@ -31,7 +31,7 @@ local function reset_suits()
         end
     end
     for _, val in ipairs(suits_to_reset) do
-        local c = pseudorandom_element(valid_cards, "hpr_quiz"..G.GAME.round_resets.ante)
+        local c = pseudorandom_element(valid_cards, val..G.GAME.round_resets.ante)
         G.GAME.current_round[val] = Spectrallib.safe_get(c, "base", "suit") or "Spades"
     end
 end
