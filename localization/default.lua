@@ -354,8 +354,13 @@ local descriptions = {
         j_hpr_storm = {
             name = "STORM",
             text = {
-                "All {C:attention}played{} and {C:attention}held{} cards score",
-                "{C:attention}Retrigger{} all scored cards"
+                {
+                    "All cards {C:attention}played{}, {C:attention}held in hand,",
+                    "or in {C:attention}discard pile{} always score",
+                },
+                {
+                    "{C:attention}Retriggers{} all scored cards"
+                }
             }
         },
         j_hpr_straightaway = {
