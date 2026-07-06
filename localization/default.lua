@@ -304,23 +304,21 @@ local descriptions = {
             name = "MASTER",
             text = {
                 {
-                    "Creates a {C:dark_edition}Negative{} copy of the",
-                    "last consumable destroyed by this",
-                    "with multiuse {C:attention}#3#{} if scoring hand",
-                    "contains a {C:attention}#1#{} or a {C:attention}#2#{},",
-                    "{s:0.8}rank and hand change each round",
-                    " {element:1} ",
+                    "Creates an {C:attention}enhanced{} card with",
+                    "a {C:hpr_bronze}Copper Seal{} when any",
+                    "{C:attention}Booster Pack{} is skipped",
                 },
                 {
-                    "Increase multiuse",
-                    "by {C:attention}#4#{} when Boss Blind",
-                    "is defeated",
+                    "This {C:attention}Joker{} and all held",
+                    "{C:attention}consumables{} gain {C:attention}+#1#{} use",
+                    "when {C:attention}Boss Blind{} is defeated"
                 },
                 {
-                    "Use this Joker to {C:attention}destroy{} a",
-                    "selected {C:attention}consumable{} and",
-                    "{C:attention}reset{} multiuse amount",
-                },
+                    "Use this Joker to copy a",
+                    "selected {C:attention}Voucher{} or {C:attention}Booster",
+                    "to your consumable slots",
+                    "{C:inactive}(Currently {C:attention}#2#{C:inactive} uses)"
+                }
             }
         },
         j_hpr_potassium = {

@@ -20,7 +20,6 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_crafty = "j_hpr_crafty",
     j_splash = "j_hpr_storm",
     j_selzer = "j_hpr_storm",
-    --j_runner = "j_hpr_straightaway",
     j_superposition = "j_hpr_master",
     j_seance = "j_hpr_master",
     j_half = "j_hpr_void",
