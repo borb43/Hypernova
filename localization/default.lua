@@ -1086,6 +1086,22 @@ local descriptions = {
                 }
             }
         },
+        j_hpr_prism = {
+            name = "PRISM",
+            text = {
+                {
+                    "Each played {V:1}#4#{} card gives",
+                    "{X:mult,C:white}X#3#{} Mult and increases cashout",
+                    "this round by {C:money}$#2#{} when scored",
+                    "{C:inactive}(Currently {C:money}$#1#{C:inactive})",
+                    "{s:0.8}suit changes at end of round",
+                },
+                {
+                    "{C:attention}Wild Cards{} always score",
+                    "if played or held in hand",
+                }
+            }
+        }
     },
     Other = {
         p_hpr_lunar_pack = {

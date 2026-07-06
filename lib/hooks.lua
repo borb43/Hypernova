@@ -165,9 +165,19 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
 	return scie(effect, scored_card, key, amount, from_edition)
 end
 
+--wether the given card should be forced to score from other areas via a hook, used for simplifying code
+function HPR.force_card_score(card, context)
+	if next(SMODS.find_card("j_hpr_storm")) and context.cardarea == G.hand then
+		return true
+	end
+	if next(SMODS.find_card("j_hpr_prism")) and context.cardarea == G.hand and SMODS.has_enhancement(card, "m_wild") then
+		return true
+	end
+end
+
 local score_card_ref = SMODS.score_card
 function SMODS.score_card(card, context)
-	if not G.scorehand and context.cardarea == G.hand and next(SMODS.find_card("j_hpr_storm")) then
+	if not G.scorehand and HPR.force_card_score(card, context) then
 		G.scorehand = true
 		context.cardarea = G.play
 		SMODS.score_card(card, context)

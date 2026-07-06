@@ -728,6 +728,40 @@ HPR.StellarJoker {
     attributes = { "mult", "suit_level", "retrigger", "hands", }
 }
 
+HPR.StellarJoker {
+    key = "prism",
+    config = { extra = { dollars = 0, xmult = 1.5, d_gain = 1 }},
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_CENTERS.m_wild
+        local suit = G.GAME.current_round.hpr_prism_suit or "Spades"
+        return { vars = { card.ability.extra.dollars, card.ability.extra.d_gain, card.ability.extra.xmult, localize(suit, "suits_singular"), colours = { G.C.SUITS[suit] } }}
+    end,
+    calculate = function (self, card, context)
+        if context.individual and context.cardarea == G.play and context.other_card:is_suit(G.GAME.current_round.hpr_prism_suit) then
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "dollars",
+                scalar_value = "d_gain",
+                message_colour = G.C.MONEY,
+            })
+            return {
+                xmult = card.ability.extra.xmult
+            }
+        end
+        if context.modify_scoring_hand and SMODS.has_enhancement(context.other_card, "m_wild") then
+            return { add_to_hand = true }
+        end
+    end,
+    calc_dollar_bonus = function (self, card)
+        if card.ability.extra.dollars ~= 0 then
+            local d = card.ability.extra.dollars
+            card.ability.extra.dollars = 0
+            SMODS.calculate_effect({ message = localize("k_reset") }, card)
+            return d
+        end
+    end
+}
+
 --[[
 HPR.StellarJoker {
     key = "diamond",

@@ -21,6 +21,7 @@ end
 
 local suits_to_reset = {
     "hpr_quiz_suit",
+    "hpr_prism_suit",
 }
 
 local function reset_suits()
