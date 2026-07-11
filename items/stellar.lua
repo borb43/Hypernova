@@ -914,35 +914,41 @@ HPR.StellarJoker {
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra } }
     end,
-    add_to_deck = function (self, card, from_debuff)
-        G.hand:change_size(card.ability.extra)
-        G.consumeables:change_size(card.ability.extra)
-        ease_hands_played(card.ability.extra)
-        G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra
-        ease_discard(card.ability.extra)
-        G.GAME.round_resets.discards = G.GAME.round_resets.discards + card.ability.extra
-        SMODS.change_play_limit(card.ability.extra)
-        SMODS.change_discard_limit(card.ability.extra)
-        change_shop_size(card.ability.extra)
-        ease_ante(-card.ability.extra)
-        G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante or G.GAME.round_resets.ante
-        G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante - card.ability.extra
+    calculate = function (self, card, context)
+        if context.individual and context.cardarea == G.play and context.other_card:is_suit_shade("dark") then
+            return {
+                message = localize{type = "variable", key = "a_discards", vars = {card.ability.extra}},
+                func = function ()
+                    ease_discard(card.ability.extra)
+                end,
+                colour = G.C.RED
+            }
+        end
+        if context.discard and context.other_card:is_suit_shade("light") then
+            return {
+                message = localize{type = "variable", key = "a_hands", vars = {card.ability.extra}},
+                func = function ()
+                    ease_hands_played(card.ability.extra)
+                end,
+                colour = G.C.BLUE
+            }
+        end
+        if context.before then
+            return {
+                message = localize{ type = "variable", key = "a_handsize", vars = { card.ability.extra }},
+                func = function ()
+                    G.E_MANAGER:add_event(Event{
+                        func = function ()
+                            G.GAME.round_resets.temp_handsize = (G.GAME.round_resets.temp_handsize or 0) + card.ability.extra
+                            G.hand:change_size(card.ability.extra)
+                            return true
+                        end,
+                    })
+                end
+            }
+        end
     end,
-    remove_from_deck = function (self, card, from_debuff)
-        G.hand:change_size(-card.ability.extra)
-        G.consumeables:change_size(-card.ability.extra)
-        ease_hands_played(-card.ability.extra)
-        G.GAME.round_resets.hands = G.GAME.round_resets.hands - card.ability.extra
-        ease_discard(-card.ability.extra)
-        G.GAME.round_resets.discards = G.GAME.round_resets.discards - card.ability.extra
-        SMODS.change_play_limit(-card.ability.extra)
-        SMODS.change_discard_limit(-card.ability.extra)
-        change_shop_size(-card.ability.extra)
-        ease_ante(card.ability.extra)
-        G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante or G.GAME.round_resets.ante
-        G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante + card.ability.extra
-    end,
-    attributes = { "hand_size", "hands", "discard", "reroll", },
+    attributes = { "hand_size", "hands", "discard", "suit", },
     blueprint_compat = false,
 }
 
@@ -1032,8 +1038,23 @@ HPR.StellarJoker {
                 return { repetitions = card.ability.extra.reps }
             end
         end
+        if context.forcetrigger then
+            G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra.dollar
+            return {
+                dollars = card.ability.extra.dollar,
+                xmult = card.ability.extra.xmult,
+                func = function()
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            G.GAME.dollar_buffer = 0
+                            return true
+                        end
+                    }))
+                end
+            }
+        end
     end,
-    attributes = { "xmult", "econ", "face", },
+    attributes = { "xmult", "econ", "face", "retrigger", "king", "queen", "jack", },
     hpr_loc_keys = { "j_hpr_mask", "j_hpr_mask_pb" }
 }
 

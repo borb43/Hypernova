@@ -9,6 +9,6 @@
 	"priority": 0,
 	"badge_colour": "C09ED9",
 	"version": "0.5.1~dev",
-	"dependencies": ["Steamodded (>=1.0.0~BETA-1814a)", "Spectrallib (>=1.1.6)"],
+	"dependencies": ["Steamodded (>=1.0.0~BETA-1827b)", "Spectrallib (>=1.1.6)"],
 	"icon_path": "modicon.png"
 }

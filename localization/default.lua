@@ -509,9 +509,18 @@ local descriptions = {
         j_hpr_circus = {
             name = "IRRADIANT",
             text = {
-                "Increases {C:dark_edition}ALL{} your stats by {C:attention}#1#{},",
-                "reduces Ante by {C:attention}#1#{} while held",
-                "{C:inactive}(Joker Slots excluded)",
+                {
+                    "Scored {C:spades}dark{} suits give",
+                    "{C:red}+#1#{} discard#<s>1# this round",
+                },
+                {
+                    "Discarded {C:diamonds}light{} suits",
+                    "give {C:blue}+#1#{} hand#<s>1# this round",
+                },
+                {
+                    "{C:attention}+#1#{} Hand Size this round",
+                    "when hand is played"
+                }
             }
         },
         j_hpr_unity = {
