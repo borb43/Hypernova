@@ -590,47 +590,6 @@ HPR.StellarJoker {
     forcetrigger_compat = true,
 }
 
-HPR.StellarJoker {
-    key = "nimbus",
-    config = { extra = { dollars = 1 }},
-    loc_vars = function (self, info_queue, card)
-        local total = 0
-        for _, c in ipairs(G.playing_cards or {}) do
-            if c:get_id() == 9 then total = total + c:get_p_dollars() + c:get_h_dollars() end
-        end
-        return { vars = { card.ability.extra.dollars, total }}
-    end,
-    calculate = function (self, card, context)
-        if context.individual and not context.end_of_round and context.other_card:get_id() == 9 then
-            if context.cardarea == G.play then
-                context.other_card.ability.perma_p_dollars = context.other_card.ability.perma_p_dollars + card.ability.extra.dollars
-            elseif context.cardarea == G.hand then
-                context.other_card.ability.perma_h_dollars = context.other_card.ability.perma_h_dollars + card.ability.extra.dollars
-            end
-            return {
-                message = localize("k_upgrade_ex"),
-                colour = G.C.MONEY
-            }
-        end
-        if context.forcetrigger then
-            local d = self:calc_dollar_bonus(card)
-            if d ~= 0 then
-                G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + d
-                return { dollars = d, func = HPR.event_presets.reset_dollar_buffer }
-            end
-        end
-    end,
-    calc_dollar_bonus = function (self, card)
-        local total = 0
-        for _, c in ipairs(G.playing_cards) do
-            if c:get_id() == 9 then total = total + c:get_p_dollars() + c:get_h_dollars() end
-        end
-        return total
-    end,
-    attributes = { "economy", "rank", "nine", "modify_card", }, --this joker is probably getting cut but doing this anyway
-    forcetrigger_compat = true,
-}
-
 HPR.StellarJoker { --literally everything this does is a hook lmfao
     key = "shorthand",
     blueprint_compat = false,
@@ -1082,16 +1041,25 @@ HPR.StellarJoker {
     calc_dollar_bonus = function (self, card)
         local amt = math.floor(G.GAME.dollars/card.ability.extra.per)
         amt = math.min(amt, card.ability.extra.cap)
-        SMODS.scale_card(card, {
-            ref_table = card.ability.extra,
-            ref_value = "cap",
-            scalar_value = "scale",
-            message_colour = G.C.MONEY
-        })
         if amt > 0 then return amt end
     end,
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra.cap, card.ability.extra.per, card.ability.extra.scale }}
+        local rank_loc = localize(G.GAME.current_round.hpr_payload_rank or "Ace", "ranks")
+        return { vars = { card.ability.extra.cap, card.ability.extra.per, card.ability.extra.scale, rank_loc }}
+    end,
+    calculate = function (self, card, context)
+        if context.individual and context.cardarea == G.play and context.other_card:get_id() == (SMODS.Ranks[G.GAME.current_round.hpr_payload_rank] or {}).id then
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "cap",
+                scalar_value = "scale",
+                no_message = true, --this is for timing purposes
+            })
+            return {
+                message = localize("k_upgrade_ex"),
+                colour = G.C.MONEY,
+            }
+        end
     end,
     forcetrigger = function (self, card, context)
         local d = math.floor(G.GAME.dollars/card.ability.extra.per)

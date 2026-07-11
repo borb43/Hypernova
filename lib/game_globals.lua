@@ -23,6 +23,9 @@ local suits_to_reset = {
     "hpr_quiz_suit",
     "hpr_prism_suit",
 }
+local ranks_to_reset = {
+    "hpr_payload_rank",
+}
 
 local function reset_suits()
     local valid_cards = {}
@@ -36,6 +39,18 @@ local function reset_suits()
         G.GAME.current_round[val] = Spectrallib.safe_get(c, "base", "suit") or "Spades"
     end
 end
+local function reset_ranks()
+    local valid_cards = {}
+    for _, card in ipairs(G.playing_cards) do
+        if not SMODS.has_no_rank(card) then
+            valid_cards[#valid_cards+1] = card
+        end
+    end
+    for _, val in ipairs(ranks_to_reset) do
+        local c = pseudorandom_element(valid_cards, val..G.GAME.round_resets.ante)
+        G.GAME.current_round[val] = Spectrallib.safe_get(c, "base", "value") or "Ace"
+    end
+end
 
 local function reset_relic_card()
     G.GAME.current_round.hpr_relic_suit = (pseudorandom_element(SMODS.Suits, "hpr_relic_card"..G.GAME.round_resets.ante) or {}).key or "Spades"
@@ -47,6 +62,7 @@ HPR.reset_game_globals = function (run_start)
     end
     reset_hpr_eris()
     reset_suits()
+    reset_ranks()
     reset_relic_card()
 end
 

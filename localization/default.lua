@@ -633,10 +633,16 @@ local descriptions = {
         j_hpr_payload = {
             name = "PAYLOAD",
             text = {
-                "Earn {C:money}$1{} at the end of round",
-                "for every {C:money}$#2#{} you have, up to",
-                "a maximum of {C:money}$#1#{}, then increase",
-                "this limit by {C:money}$#3#"
+                {
+                    "Earn {C:money}$1{} at the end of round",
+                    "for every {C:money}$#2#{} you have,",
+                    "up to a maximum of {C:money}$#1#{}",
+                },
+                {
+                    "Limit increases by {C:money}$#3#{}",
+                    "when a {C:attention}#4#{} is scored,",
+                    "{s:0.8}rank changes each round"
+                },
             }
         },
         j_hpr_destroyer = {

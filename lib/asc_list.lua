@@ -58,6 +58,7 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_rocket = "j_hpr_payload",
     j_to_the_moon = "j_hpr_payload",
     j_satellite = "j_hpr_payload",
+    j_mail = "j_hpr_payload",
     j_odd_todd = "j_hpr_numeric",
     j_even_steven = "j_hpr_numeric",
     j_scholar = "j_hpr_numeric",
