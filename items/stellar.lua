@@ -1422,5 +1422,5 @@ HPR.StellarJoker {
             end
         end
     end,
-    attributes = { "economy", }, --this one def needs a rework but whatever 
+    attributes = { "generation", "tags", "boss_blind", "xblindsize", }, --this one def needs a rework but whatever 
 }
