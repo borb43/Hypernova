@@ -1366,44 +1366,61 @@ HPR.StellarJoker {
     end,
     attributes = { "joker", "mult", "xmult", "emult", "modify_card", },
 }
---[[
+
 HPR.StellarJoker {
     key = "hunter",
-    config = { extra = 2 },
+    config = { extra = { xblindsize = 0.2, tags = 6, } },
     forcetrigger_compat = true,
     loc_vars = function (self, info_queue, card)
-        return { vars = {card.ability.extra}}
+        return { vars = { card.ability.extra.xblindsize, card.ability.extra.tags }}
     end,
     calculate = function (self, card, context)
-        if context.setting_blind and not context.blueprint and context.blind.boss then
-            G.E_MANAGER:add_event(Event({
-                func = function()
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            G.GAME.blind:disable()
-                            play_sound('timpani')
-                            delay(0.4)
-                            return true
-                        end
-                    }))
-                    SMODS.calculate_effect({ message = localize('ph_boss_disabled') }, card)
-                    return true
-                end
-            }))
-            return nil, true
+        if (context.setting_blind or context.forcetrigger) and not context.blueprint then
+            if context.blind.boss and not context.forcetrigger then
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        G.E_MANAGER:add_event(Event({
+                            func = function()
+                                G.GAME.blind:disable()
+                                play_sound('timpani')
+                                delay(0.4)
+                                return true
+                            end
+                        }))
+                        SMODS.calculate_effect({ message = localize('ph_boss_disabled') }, card)
+                        return true
+                    end
+                }))
+                return nil, true
+            else
+                return {
+                    xblindsize = card.ability.extra.xblindsize,
+                }
+            end
         end
-        if context.post_trigger and context.other_card.is_rarity and context.other_card:is_rarity("hpr_boss") then
-            G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra
-            return { dollars = card.ability.extra, func = HPR.event_presets.reset_dollar_buffer }
+        if context.round_eval and G.GAME.last_blind and G.GAME.last_blind.boss then
+            for _ = 1, card.ability.extra.tags do
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        add_tag({ key = SMODS.poll_object { type = "Tag", seed = "hpr_hunter_tag", } })
+                        play_sound('generic1', 0.9 + math.random() * 0.1, 0.8)
+                        play_sound('holo1', 1.2 + math.random() * 0.1, 0.4)
+                        return true
+                    end
+                }))
+            end
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        if G.GAME.blind and G.GAME.blind.boss and not G.GAME.blind.disabled then
-            G.GAME.blind:disable()
-            play_sound('timpani')
-            SMODS.calculate_effect({ message = localize('ph_boss_disabled') }, card)
+        if G.GAME.blind and G.GAME.blind.in_blind and not G.GAME.blind.disabled then
+            if G.GAME.blind.boss then
+                G.GAME.blind:disable()
+                play_sound('timpani')
+                SMODS.calculate_effect({ message = localize('ph_boss_disabled') }, card)
+            else
+                SMODS.calculate_effect({ xblindsize = card.ability.extra.xblindsize }, card)
+            end
         end
     end,
     attributes = { "economy", }, --this one def needs a rework but whatever 
 }
-]]

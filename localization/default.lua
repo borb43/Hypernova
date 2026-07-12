@@ -1004,11 +1004,18 @@ local descriptions = {
         j_hpr_hunter = {
             name = "HUNTER",
             text = {
-                {"Disables effect of every {C:attention}Boss Blind"},
-                {"{C:hpr_boss}Boss{} Jokers give",
-                "{C:money}$#1#{} when triggered"},
-                {"Always get a {C:hpr_boss}Boss{} Joker after",
-                "the {C:attention}Boss Blind{} if possible"}
+                {
+                    "Disables the effect",
+                    "of every {C:attention}Boss Blind"
+                },
+                {
+                    "When {C:attention}non-Boss{} Blind is",
+                    "selected, {X:blind,C:white}X#1#{} Blind Size"
+                },
+                {
+                    "Creates {C:attention}#2#{} random Tags",
+                    "when {C:attention}Boss Blind{} is defeated"
+                }
             }
         },
         j_hpr_man = {
