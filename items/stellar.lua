@@ -828,7 +828,7 @@ HPR.StellarJoker {
 ]]
 HPR.StellarJoker {
     key = "conjurer",
-    config = { extra = { xchips = 0.25, xblindsize = 0.1 }},
+    config = { extra = { xchips = 0.25, xblindsize = 0.2 }},
     loc_vars = function (self, info_queue, card)
         local negatives = 0
         if G.playing_cards then
