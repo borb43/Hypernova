@@ -41,6 +41,7 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_marble = "j_hpr_conjurer",
     j_hologram = "j_hpr_conjurer",
     j_certificate = "j_hpr_conjurer",
+    j_drivers_license = "j_hpr_conjurer",
     j_juggler = "j_hpr_circus",
     j_drunkard = "j_hpr_circus",
     j_merry_andy = "j_hpr_circus",
