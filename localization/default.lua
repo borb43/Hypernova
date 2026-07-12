@@ -501,14 +501,10 @@ local descriptions = {
             name = "CONJURER",
             text = {
                 {
-                    "Use this Joker to add {C:dark_edition}Negative",
-                    "and {X:blind,C:white}+X#5#{} held in hand Blind Size",
-                    "to a selected {C:attention}playing card"
-                },
-                {
-                    "This Joker gains {C:attention}#4#{} use#<s>4#",
-                    "when {C:attention}Boss Blind{} is defeated",
-                    "{C:inactive}(Currently {C:attention}#3#{C:inactive} uses)"
+                    "If played hand is only {C:attention}1{} card,",
+                    "adds a {C:dark_edition}Negative{} copy with",
+                    "{X:blind,C:white}+X#3#{} held in hand Blind Size",
+                    "to your hand",
                 },
                 {
                     "{X:chips,C:white}X#1#{} Chips per {C:dark_edition}Negative",

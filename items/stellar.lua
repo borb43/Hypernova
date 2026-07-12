@@ -828,7 +828,7 @@ HPR.StellarJoker {
 ]]
 HPR.StellarJoker {
     key = "conjurer",
-    config = { extra = { xchips = 0.25, uses = 0, use_gain = 1, xblindsize = 0.2 }},
+    config = { extra = { xchips = 0.25, xblindsize = 0.1 }},
     loc_vars = function (self, info_queue, card)
         local negatives = 0
         if G.playing_cards then
@@ -839,22 +839,9 @@ HPR.StellarJoker {
             end
         end
         info_queue[#info_queue+1] = { set = "Edition", key = "e_negative_playing_card", config = { extra = 1 } }
-        return { vars = { card.ability.extra.xchips, 1 + card.ability.extra.xchips*negatives, card.ability.extra.uses, card.ability.extra.use_gain, card.ability.extra.xblindsize }}
+        return { vars = { card.ability.extra.xchips, 1 + card.ability.extra.xchips*negatives, card.ability.extra.xblindsize }}
     end,
     calculate = function (self, card, context)
-        if (context.end_of_round and context.main_eval and context.beat_boss or context.forcetrigger) and not context.blueprint then
-            SMODS.scale_card(card, {
-                ref_table = card.ability.extra,
-                ref_value = "uses",
-                scalar_value = "use_gain",
-                no_message = true,
-            })
-            if not context.forcetrigger then
-                return {
-                    message = "+" .. number_format(card.ability.extra.use_gain)
-                }
-            end
-        end
         if context.joker_main or context.forcetrigger then
             local negatives = 0
             for _, c in ipairs(G.playing_cards) do
@@ -864,37 +851,37 @@ HPR.StellarJoker {
             end
             if negatives ~= 0 then
                 return {
-                    xchips = 1 + card.ability.extra.xchips
+                    xchips = 1 + card.ability.extra.xchips*negatives
                 }
             end
         end
-    end,
-    can_use = function (self, card)
-        local function b(c)
-            return not c.edition
-        end
-        local cards = Spectrallib.get_highlighted_cards({ G.hand }, card, 1, 1, b)
-        return #cards == 1 and card.ability.extra.uses > 0
-    end,
-    use = function (self, card)
-        local function b(c)
-            return not c.edition
-        end
-        local cards = Spectrallib.get_highlighted_cards({ G.hand }, card, 1, 1, b)
-        local c = cards[1]
-        if c then
-            card.ability.extra.uses = card.ability.extra.uses - 1
-            c.ability.perma_h_x_blind_size = c.ability.perma_h_x_blind_size + card.ability.extra.xblindsize
-            G.E_MANAGER:add_event(Event{
-                func = function (n)
-                    c:set_edition("e_negative", true)
-                    card:juice_up(0.3, 0.5)
+        if context.before and #context.full_hand == 1 then
+            local card_copied = SMODS.copy_card(context.full_hand[1], { area = G.hand })
+            card_copied:set_edition("e_negative", true, true)
+            card_copied.ability.perma_h_x_blind_size = card_copied.ability.perma_h_x_blind_size + card.ability.extra.xblindsize
+            card_copied.states.visible = nil
+
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    card_copied:start_materialize()
                     return true
                 end
-            })
+            }))
+            return {
+                message = localize('k_copied_ex'),
+                colour = G.C.DARK_EDITION,
+                func = function() -- This is for timing purposes, it runs after the message
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            SMODS.calculate_context({ playing_card_added = true, cards = { card_copied } })
+                            return true
+                        end
+                    }))
+                end
+            }
         end
     end,
-    attributes = { "generation", "xmult", "scaling", },
+    attributes = { "generation", "xchips", "perma_bonus", "xblindsize", "playing_card", "editions", },
     forcetrigger_compat = true,
 }
 
