@@ -9,18 +9,18 @@ local lunar_create_card = function (self, card, i)
     }
 end
 
-local lunar_hallucinations_compat = {
-    colour = HEX("5d15d1"),
-    loc_key = "hpr_plus_moon",
-    create = function ()
-        SMODS.add_card{
+local lunar_hallucinations_compat = function (self, caller, args)
+    return {
+        create_card_args = {
             set = "hpr_moons",
-            area = G.consumeables,
-            key_append = "diha",
-            edition = 'e_negative'
+            key_append = "hpr_lunar_pack",
+        },
+        ret_table = {
+            message = localize("k_plus_hpr_moon"),
+            colour = G.C.SECONDARY_SET.hpr_moons,
         }
-    end
-}
+    }
+end
 
 SMODS.Booster {
     key = "lunar_normal_1",
@@ -59,7 +59,7 @@ SMODS.Booster {
     end,
     create_card = lunar_create_card,
     draw_hand = true,
-    cry_digital_hallucinations = lunar_hallucinations_compat,
+    dcry_diha_compat = lunar_hallucinations_compat,
 }
 
 SMODS.Booster {
@@ -99,7 +99,7 @@ SMODS.Booster {
     end,
     create_card = lunar_create_card,
     draw_hand = true,
-    cry_digital_hallucinations = lunar_hallucinations_compat,
+    dcry_diha_compat = lunar_hallucinations_compat,
 }
 
 SMODS.Booster {
@@ -139,7 +139,7 @@ SMODS.Booster {
     end,
     create_card = lunar_create_card,
     draw_hand = true,
-    cry_digital_hallucinations = lunar_hallucinations_compat,
+    dcry_diha_compat = lunar_hallucinations_compat,
 }
 
 SMODS.Booster {
@@ -179,7 +179,7 @@ SMODS.Booster {
     end,
     create_card = lunar_create_card,
     draw_hand = true,
-    cry_digital_hallucinations = lunar_hallucinations_compat,
+    dcry_diha_compat = lunar_hallucinations_compat,
 }
 --#endregion
 --#region erratic packs
@@ -194,6 +194,7 @@ SMODS.Gradient {
 }
 
 local erratic_create_card = function (self, card, i)
+    --[[
     if i == 1 and G.GAME.used_vouchers.v_hpr_master_chaos then
         local key, count = "c_fool", -1
         for k, v in pairs(G.GAME.consumeable_usage or {}) do
@@ -210,11 +211,22 @@ local erratic_create_card = function (self, card, i)
             key = key
         }
     end
-    local pool = HPR.poll_set("hpr_erratic", {"Consumeables", "Joker", "Playing Card", G.GAME.used_vouchers.v_hpr_recursion and "Booster" or nil}, {"Voucher"}, 0.1)
+    ]]
+    local sets = { "Consumeables", "Joker", "Playing Card", }
+    local rare_sets = { "Voucher", }
+    if G.GAME.used_vouchers.v_hpr_recursion then
+        sets[#sets+1] = "Booster"
+    end
+    local set = "Joker"
+    if pseudorandom("hpr_erratic_voucher") < 0.1 then
+        set = pseudorandom_element(rare_sets, "hpr_erratic")
+    else
+        set = pseudorandom_element(sets, "hpr_erratic")
+    end
     return {
-        set = pool,
-        seal = pool == "Playing Card" and SMODS.poll_seal{type_key = "hpr_erratic_seal"} or nil,
-        edition = pool == "Playing Card" and SMODS.poll_edition{type_key = "hpr_erratic_edition"} or nil,
+        set = set,
+        seal = set == "Playing Card" and SMODS.poll_seal{type_key = "hpr_erratic_seal"} or nil,
+        edition = set == "Playing Card" and SMODS.poll_edition{type_key = "hpr_erratic_edition"} or nil,
         skip_materialize = true,
         soulable = true,
         area = G.pack_cards,
@@ -222,23 +234,61 @@ local erratic_create_card = function (self, card, i)
     }
 end
 
-local erratic_hallucinations_compat = {
-    colour = SMODS.Gradients.hpr_erratic_col,
-    loc_key = "hpr_plus_q",
-    create = function ()
-        local pool_roll = pseudorandom_element({"Joker", "Playing Card", "Consumeables"}, "hpr_erratic_diha") --idk where to put vouchers so they arent here
-        local area
-        if pool_roll == "Joker" then area = G.jokers end
-        if pool_roll == "Consumeables" then area = G.consumeables end
-        if pool_roll == "Playing Card" then area = G.deck end
-        SMODS.add_card{
-            set = pool_roll,
-            area = area,
-            edition = 'e_negative',
-            key_append = "diha"
-        }
+local erratic_hallucinations_compat = function (self, caller, args)
+    local pcards = true
+    if args and args.no_playing_card then
+        pcards = false
     end
-}
+    local sets = {"Consumeables", "Joker",}
+    local rare_sets = {"Voucher",}
+    if pcards then
+        sets[#sets+1] = "Playing Card"
+    end
+    if G.GAME.used_vouchers.v_hpr_recursion then
+        sets[#sets+1] = "Booster"
+    end
+    local set = "Joker"
+    if pseudorandom("hpr_erratic_voucher2") < 0.1 then
+        set = pseudorandom_element(rare_sets, "hpr_erratic2")
+    else
+        set = pseudorandom_element(sets, "hpr_erratic2")
+    end
+    local area = G.consumeables
+    if set == "Playing Card" then
+        area = G.deck
+    elseif set == "Joker" then
+        area = G.jokers
+    end
+    local msg = "hpr_plus_q"
+    if set == "Playing Card" then
+        msg = "hpr_plus_pcard"
+    elseif set == "Consumeables" then
+        msg = "slib_plus_consumable"
+    elseif set == "Joker" then
+        msg = "k_plus_joker"
+    elseif set == "Voucher" then
+        msg = "slib_plus_voucher"
+    end
+    return {
+        create_card_args = {
+            key_append = "hpr_erratic_card",
+            set = set,
+            area = area,
+            seal = set == "Playing Card" and SMODS.poll_seal{type_key = "hpr_erratic_seal"} or nil,
+            edition = set == "Playing Card" and SMODS.poll_edition{type_key = "hpr_erratic_edition"} or nil,
+        },
+        ret_table = {
+            message = localize(msg),
+            colour = SMODS.Gradients.hpr_erratic_col,
+        },
+    }
+end
+
+local update_erratic = function (self, dt)
+    ease_colour(G.C.DYN_UI.MAIN, SMODS.Gradients.hpr_erratic_col)
+    ease_background_colour({ new_colour = SMODS.Gradients.hpr_erratic_col, special_colour = G.C.BLACK, contrast = 2 })
+    SMODS.Booster.update_pack(self, dt)
+end
 
 SMODS.Booster {
     key = "erratic_normal_1",
@@ -275,9 +325,10 @@ SMODS.Booster {
         G.booster_pack_sparkles.fade_alpha = 1
         G.booster_pack_sparkles:fade(1, 0)
     end,
+    update_pack = update_erratic,
     create_card = erratic_create_card,
     pronouns = "any_all",
-    cry_digital_hallucinations = erratic_hallucinations_compat,
+    dcry_diha_compat = erratic_hallucinations_compat,
     draw_hand = true
 }
 
@@ -316,9 +367,10 @@ SMODS.Booster {
         G.booster_pack_sparkles.fade_alpha = 1
         G.booster_pack_sparkles:fade(1, 0)
     end,
+    update_pack = update_erratic,
     create_card = erratic_create_card,
     pronouns = "any_all",
-    cry_digital_hallucinations = erratic_hallucinations_compat,
+    dcry_diha_compat = erratic_hallucinations_compat,
     draw_hand = true
 }
 
@@ -358,9 +410,10 @@ SMODS.Booster {
         G.booster_pack_sparkles.fade_alpha = 1
         G.booster_pack_sparkles:fade(1, 0)
     end,
+    update_pack = update_erratic,
     create_card = erratic_create_card,
     pronouns = "any_all",
-    cry_digital_hallucinations = erratic_hallucinations_compat,
+    dcry_diha_compat = erratic_hallucinations_compat,
     draw_hand = true
 }
 
@@ -400,9 +453,10 @@ SMODS.Booster {
         G.booster_pack_sparkles.fade_alpha = 1
         G.booster_pack_sparkles:fade(1, 0)
     end,
+    update_pack = update_erratic,
     create_card = erratic_create_card,
     pronouns = "any_all",
-    cry_digital_hallucinations = erratic_hallucinations_compat,
+    dcry_diha_compat = erratic_hallucinations_compat,
     draw_hand = true
 }
 --#endregion

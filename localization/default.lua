@@ -1659,6 +1659,7 @@ local misc = {
         k_empty_ex = "Empty!",
         k_hpr_plus_voucher = "+1 Voucher",
         k_hpr_enhanced_q = "Enhanced?",
+        hpr_plus_pcard = "+1 Card",
         --strings used by ERROR stellar
         k_chips = "Chips",
         k_glop = "Glop",
