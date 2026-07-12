@@ -828,39 +828,70 @@ HPR.StellarJoker {
 ]]
 HPR.StellarJoker {
     key = "conjurer",
-    config = { extra = { xmult = 1, gain = 0.25, packs = 2 }},
+    config = { extra = { xchips = 0.25, uses = 0, use_gain = 1, xblindsize = 0.2 }},
     loc_vars = function (self, info_queue, card)
-        info_queue[#info_queue+1] = G.P_CENTERS.p_standard_mega_1
-        return { vars = { card.ability.extra.xmult, card.ability.extra.gain, card.ability.extra.packs }}
+        local negatives = 0
+        if G.playing_cards then
+            for _, c in ipairs(G.playing_cards) do
+                if c.edition and c.edition.key == "e_negative" then
+                    negatives = negatives + 1
+                end
+            end
+        end
+        info_queue[#info_queue+1] = { set = "Edition", key = "e_negative_playing_card", config = { extra = 1 } }
+        return { vars = { card.ability.extra.xchips, 1 + card.ability.extra.xchips*negatives, card.ability.extra.uses, card.ability.extra.use_gain, card.ability.extra.xblindsize }}
     end,
     calculate = function (self, card, context)
-        if context.starting_shop or (context.forcetrigger and G.STATE == G.STATES.SHOP) then --i hope this is safe?
+        if (context.end_of_round and context.main_eval and context.beat_boss or context.forcetrigger) and not context.blueprint then
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "uses",
+                scalar_value = "use_gain",
+                no_message = true,
+            })
+            if not context.forcetrigger then
+                return {
+                    message = "+" .. number_format(card.ability.extra.use_gain)
+                }
+            end
+        end
+        if context.joker_main or context.forcetrigger then
+            local negatives = 0
+            for _, c in ipairs(G.playing_cards) do
+                if c.edition and c.edition.key == "e_negative" then
+                    negatives = negatives + 1
+                end
+            end
+            if negatives ~= 0 then
+                return {
+                    xchips = 1 + card.ability.extra.xchips
+                }
+            end
+        end
+    end,
+    can_use = function (self, card)
+        local function b(c)
+            return not c.edition
+        end
+        local cards = Spectrallib.get_highlighted_cards({ G.hand }, card, 1, 1, b)
+        return #cards == 1 and card.ability.extra.uses > 0
+    end,
+    use = function (self, card)
+        local function b(c)
+            return not c.edition
+        end
+        local cards = Spectrallib.get_highlighted_cards({ G.hand }, card, 1, 1, b)
+        local c = cards[1]
+        if c then
+            card.ability.extra.uses = card.ability.extra.uses - 1
+            c.ability.perma_h_x_blind_size = c.ability.perma_h_x_blind_size + card.ability.extra.xblindsize
             G.E_MANAGER:add_event(Event{
-                func = function ()
-                    for i = 1, card.ability.extra.packs do
-                        local c = SMODS.add_booster_to_shop("p_standard_mega_"..pseudorandom("hpr_conjurer"..i,1,2))
-                        c.ability.couponed = true
-                        c:set_cost()
-                    end
+                func = function (n)
+                    c:set_edition("e_negative", true)
+                    card:juice_up(0.3, 0.5)
                     return true
                 end
             })
-        end
-        if context.playing_card_added then
-            local amt = #context.cards
-            SMODS.scale_card(card, {
-                ref_table = card.ability.extra,
-                ref_value = "xmult",
-                scalar_value = "gain",
-                operation = function (ref_table, ref_value, initial, change)
-                    ref_table[ref_value] = initial + change * amt
-                end
-            })
-        end
-        if (context.joker_main or context.forcetrigger) and card.ability.extra.xmult ~= 1 then
-            return {
-                xmult = card.ability.extra.xmult
-            }
         end
     end,
     attributes = { "generation", "xmult", "scaling", },
@@ -934,9 +965,7 @@ HPR.StellarJoker {
                     ref_table = card.ability.extra,
                     ref_value = "xmult",
                     scalar_value = "scale",
-                    operation = function (ref_table, ref_value, initial, change)
-                        ref_table[ref_value] = initial + change * hands
-                    end,
+                    scalar_factor = hands,
                 })
             end
         end
@@ -1139,9 +1168,7 @@ HPR.StellarJoker {
             ref_table = card.ability.extra,
             ref_value = "echips",
             scalar_value = "chip_mod",
-            operation = function (ref_table, ref_value, initial, change)
-                ref_table[ref_value] = initial + change*amt
-            end,
+            scalar_factor = amt,
             message_colour = Spectrallib.echips
         })
     end,

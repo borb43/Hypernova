@@ -500,10 +500,21 @@ local descriptions = {
         j_hpr_conjurer = {
             name = "CONJURER",
             text = {
-                "Adds {C:attention}#3# free Mega Standard Pack#<s>3#{} to each shop",
-                "This Joker gains {X:mult,C:white}X#2#{} Mult when",
-                "a {C:attention}playing card{} is added to your deck",
-                "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
+                {
+                    "Use this Joker to add {C:dark_edition}Negative",
+                    "and {X:blind,C:white}+X#5#{} held in hand Blind Size",
+                    "to a selected {C:attention}playing card"
+                },
+                {
+                    "This Joker gains {C:attention}#4#{} use#<s>4#",
+                    "when {C:attention}Boss Blind{} is defeated",
+                    "{C:inactive}(Currently {C:attention}#3#{C:inactive} uses)"
+                },
+                {
+                    "{X:chips,C:white}X#1#{} Chips per {C:dark_edition}Negative",
+                    "card in your {C:attention}full deck",
+                    "{C:inactive}(Currently {X:chips,C:white}X#2#{C:inactive} Chips)"
+                }
             }
         },
         j_hpr_circus = {
