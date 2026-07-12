@@ -348,3 +348,13 @@ function HPR.table_size(t)
     for _ in pairs(t) do i = i+1 end
     return i
 end
+
+function HPR.area_from_set(set)
+    local t = {
+        Enhanced = "deck",
+        Default = "deck",
+        ["Playing Card"] = "deck",
+        Joker = "jokers",
+    }
+    return t[set] or "consumeables"
+end

@@ -58,7 +58,7 @@ end
 
 HPR.reset_game_globals = function (run_start)
     if run_start then
-        G.GAME.hpr_awesome_pack_mod = 1
+        G.GAME.hpr_universe_pack_pool = {}
     end
     reset_hpr_eris()
     reset_suits()
@@ -71,7 +71,8 @@ HPR.stellar_gradient = SMODS.Gradient {
     colours = {
         HEX("010052"),
         HEX("520052")
-    }
+    },
+    cycle = 5,
 }
 
 HPR.gay = SMODS.Gradient {

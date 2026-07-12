@@ -1424,3 +1424,90 @@ HPR.StellarJoker {
     end,
     attributes = { "generation", "tags", "boss_blind", "xblindsize", }, --this one def needs a rework but whatever 
 }
+
+HPR.StellarJoker {
+    key = "boosted",
+    blueprint_compat = false,
+    config = { extra = { b_size = 0, gain = 1, uses = 0, use_mod = 1, max_highlighted = 5, } },
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_CENTERS.p_hpr_universe
+        return { vars = { card.ability.extra.b_size, card.ability.extra.gain, card.ability.extra.uses, card.ability.extra.use_mod, card.ability.extra.max_highlighted }}
+    end,
+    calculate = function (self, card, context)
+        if context.skipping_booster and context.booster.kind == "hpr_universe" and not context.blueprint then
+            G.GAME.modifiers.booster_size_mod = (G.GAME.modifiers.booster_size_mod or 0) - card.ability.extra.b_size
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "b_size",
+                scalar_value = "gain",
+            })
+            G.GAME.modifiers.booster_size_mod = (G.GAME.modifiers.booster_size_mod or 0) + card.ability.extra.b_size
+            return nil, true
+        end
+        if context.end_of_round and context.main_eval and context.beat_boss then
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "uses",
+                scalar_value = "use_mod",
+                no_message = true
+            })
+            return {
+                message = "+"..card.ability.extra.use_mod
+            }
+        end
+    end,
+    add_to_deck = function (self, card, from_debuff)
+        G.GAME.modifiers.booster_size_mod = (G.GAME.modifiers.booster_size_mod or 0) + card.ability.extra.b_size
+    end,
+    remove_from_deck = function (self, card, from_debuff)
+        G.GAME.modifiers.booster_size_mod = (G.GAME.modifiers.booster_size_mod or 0) - card.ability.extra.b_size
+    end,
+    can_use = function (self, card)
+        if card.ability.extra.uses <= 0 then
+            return false
+        end
+        local areas = { G.hand, G.jokers, G.consumeables, }
+        areas[#areas+1] = G.shop_jokers
+        areas[#areas+1] = G.shop_booster
+        areas[#areas+1] = G.shop_vouchers
+        areas[#areas+1] = G.pack_cards
+        local function blacklist(c)
+            return Spectrallib.safe_get(c, "config", "center", "kind") ~= "hpr_universe"
+        end
+        local cards = Spectrallib.get_highlighted_cards(areas, card, 1, card.ability.extra.max_highlighted, blacklist)
+        return #cards > 0 and #cards <= card.ability.extra.max_highlighted
+    end,
+    use = function (self, card)
+        card.ability.extra.uses = card.ability.extra.uses - 1
+        local areas = { G.hand, G.jokers, G.consumeables, }
+        areas[#areas+1] = G.shop_jokers
+        areas[#areas+1] = G.shop_booster
+        areas[#areas+1] = G.shop_vouchers
+        areas[#areas+1] = G.pack_cards
+        local function blacklist(c)
+            return Spectrallib.safe_get(c, "config", "center", "kind") ~= "hpr_universe"
+        end
+        local cards = Spectrallib.get_highlighted_cards(areas, card, 1, card.ability.extra.max_highlighted, blacklist)
+        for _, c in ipairs(cards) do
+            local t = {
+                edition = c.edition and c.edition.key or nil,
+                seal = c.seal,
+                key = c.config.center_key,
+                set = c.ability.set,
+                no_edition = true,
+                rank = c.base and c.base.value or nil,
+                suit = c.base and c.base.suit or nil,
+            }
+            for k in pairs(SMODS.Stickers) do
+                if c.ability[k] or (k == "pinned" and c.pinned) then
+                    t.stickers = t.stickers or {}
+                    t.stickers[#t.stickers+1] = k
+                    t.force_stickers = true
+                end
+            end
+            G.GAME.hpr_universe_pack_pool[#G.GAME.hpr_universe_pack_pool+1] = t
+        end
+        card:juice_up()
+    end,
+    attributes = { "booster", }
+}

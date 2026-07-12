@@ -460,3 +460,93 @@ SMODS.Booster {
     draw_hand = true
 }
 --#endregion
+
+SMODS.Booster{
+    key = "universe",
+    weight = 1,
+    kind = "hpr_universe",
+    cost = 8,
+    atlas = "booster",
+    pos = { x = 0, y = 1, },
+    config = { extra = 5, choose = 2, },
+    group_key = "k_hpr_universe_pack",
+    --no_collection = true,
+    ease_background_colour = function (self)
+        ease_colour(G.C.DYN_UI.MAIN, HPR.stellar_gradient)
+        ease_background_colour({ new_colour = HPR.stellar_gradient, special_colour = G.C.BLACK, contrast = 2 })
+    end,
+    update_pack = function (self, dt)
+        ease_colour(G.C.DYN_UI.MAIN, HPR.stellar_gradient)
+        ease_background_colour({ new_colour = HPR.stellar_gradient, special_colour = G.C.BLACK, contrast = 2 })
+        SMODS.Booster.update_pack(self, dt)
+    end,
+    particles = function(self)
+        G.booster_pack_stars = Particles(1, 1, 0, 0, {
+            timer = 0.07,
+            scale = 0.1,
+            initialize = true,
+            lifespan = 15,
+            speed = 0.1,
+            padding = -4,
+            attach = G.ROOM_ATTACH,
+            colours = { HPR.badge_colour, G.C.ORANGE, G.C.FILTER, },
+            fill = true
+        })
+        G.booster_pack_meteors = Particles(1, 1, 0, 0, {
+            timer = 2,
+            scale = 0.05,
+            lifespan = 1.5,
+            speed = 4,
+            attach = G.ROOM_ATTACH,
+            colours = { G.C.WHITE, G.C.GOLD, },
+            fill = true
+        })
+    end,
+    create_card = function (self, card, i)
+        local function pool(v, args)
+            return not G.GAME.banned_keys[v.key]
+        end
+        local args = pseudorandom_element(G.GAME.hpr_universe_pack_pool, "hpr_universe", { in_pool = pool })
+        if args then
+            args.key_append = "hpr_universe_card"
+            args.skip_materialize = true
+            args.area = G.pack_cards
+            return args
+        else
+            return {
+                set = "Joker",
+                key = "j_joker",
+                area = G.pack_cards,
+                skip_materialize = true,
+            }
+        end
+    end,
+    dcry_diha_compat = function (self, caller, args)
+        local pcards = true
+        if args and args.no_playing_card then
+            pcards = false
+        end
+        local function pool(v, args2)
+            return not G.GAME.banned_keys[v.key] and (pcards or v.set ~= "Playing Card" or v.set ~= "Enhanced" or v.set ~= "Default")
+        end
+        local args2 = pseudorandom_element(G.GAME.hpr_universe_pack_pool, "hpr_universe2", { in_pool = pool })
+        if args2 then
+            args2.key_append = "hpr_universe_card"
+            args2.area = G[HPR.area_from_set(args2.set)] or G.consumeables
+            return args2
+        else
+            return {
+                set = "Joker",
+                key = "j_joker",
+                area = G.jokers
+            }
+        end
+    end,
+    in_pool = function (self, args)
+        if next(SMODS.find_card("j_hpr_boosted")) then
+            return true
+        end
+        return false
+    end,
+    draw_hand = true,
+}

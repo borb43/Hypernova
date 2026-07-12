@@ -1133,6 +1133,26 @@ local descriptions = {
                     "if played or held in hand",
                 }
             }
+        },
+        j_hpr_boosted = {
+            name = "BOOSTED",
+            text = {
+                {
+                    "{C:hpr_stellar}Universe Packs{} may appear in the shop",
+                    "Use this Joker to add up to any {C:attention}#5#{} selected",
+                    "card#<s>5# to the {C:hpr_stellar}Universe Pack{} card pool",
+                    "{C:inactive}({C:hpr_stellar}Universe Packs{C:inactive} excluded)"
+                },
+                {
+                    "This Joker gains {C:attention}#4#{} use#<s>4#",
+                    "when {C:attention}Boss Blind{} is defeated",
+                    "{C:inactive}(Currently {C:attention}#3#{C:inactive} uses)"
+                },
+                {
+                    "Booster Packs contain {C:attention}#1#{} additional card#<s>1#",
+                    "Increases by {C:attention}#2#{} when a {C:hpr_stellar}Universe Pack{} is skipped"
+                }
+            }
         }
     },
     Other = {
@@ -1253,6 +1273,14 @@ local descriptions = {
                 "when played and scoring",
                 "on first hand of round",
                 "{C:inactive}(Must have room)"
+            }
+        },
+        p_hpr_universe = {
+            name = "Universe Pack",
+            text = {
+                "Choose {C:attention}#1#{} of up to",
+                "{C:attention}#2#{} cards drawn from",
+                "a {C:hpr_stellar,E:1}custom pool",
             }
         }
     },
@@ -1660,6 +1688,7 @@ local misc = {
         k_hpr_plus_voucher = "+1 Voucher",
         k_hpr_enhanced_q = "Enhanced?",
         hpr_plus_pcard = "+1 Card",
+        k_hpr_universe_pack = "Universe Pack",
         --strings used by ERROR stellar
         k_chips = "Chips",
         k_glop = "Glop",
