@@ -164,7 +164,7 @@ end
 
 function HPR.get_random_hand(include_hidden, seed, in_pool, fallback)
     local hands = {}
-    for name in pairs(G.GAME.hands) do
+    for _,name in ipairs(G.handlist) do
         if include_hidden or SMODS.is_poker_hand_visible(name) then
             hands[#hands+1] = name
         end
