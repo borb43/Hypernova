@@ -354,35 +354,50 @@ HPR.StellarJoker {
 HPR.StellarJoker {
     key = "potassium",
     forcetrigger_compat = true,
-    config = { extra = { emult = 1.5, odds1 = 6, odds2 = 10 }},
+    config = { extra = { emult = 1.5, odds1 = 6 }},
     loc_vars = function (self, info_queue, card)
         local e = card.ability.extra
         local numerator, denominator = SMODS.get_probability_vars(card, 1, e.odds1, self.key)
-        local numerator2, denominator2 = SMODS.get_probability_vars(card, 1, e.odds2, self.key.."2")
-        return { vars = { e.emult, numerator, denominator, numerator2, denominator2 }}
+        return { vars = { numerator, denominator }}
     end,
     calculate = function (self, card, context)
-        if context.joker_main or context.forcetrigger then
-            return { emult = card.ability.extra.emult }
-        end
         if context.destroy_card and not context.blueprint and context.cardarea == G.play and SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds1) then
             return { destroy = true }
         end
-        if context.end_of_round and context.main_eval and not context.blueprint then
-            local any
-            for _, c in ipairs(G.jokers.cards) do
-                if c.config.center_key ~= self.key then
-                    any = true
-                    if SMODS.pseudorandom_probability(card, self.key.."2", 1, card.ability.extra.odds2) then
-                        G.GAME.banned_keys[c.config.center_key] = true
-                        SMODS.destroy_cards(c, { pinch_anim = true })
-                        SMODS.calculate_effect({ message = localize("k_extinct_ex"), message_card = c }, card)
-                    else
-                        SMODS.calculate_effect({ message = localize("k_safe_ex"), message_card = c }, card)
-                    end
+        if context.individual and context.cardarea == G.play and next(SMODS.get_enhancements(context.other_card)) then
+            for c in Spectrallib.iter.areacards(G.jokers) do
+                if c:has_attribute("food") then
+                    Spectrallib.forcetrigger {
+                        card = c,
+                        context = context,
+                        colour = G.C.RARITY.hpr_stellar,
+                    }
                 end
             end
-            if any then return nil, true end
+            return nil, true
+        end
+    end,
+    calc_scaling = function (self, card, other_card, initial_value, scalar_value, args)
+        if other_card:has_attribute("food") then
+            if args.operation == "+" or args.operation == "-" or not args.operation then
+                return {
+                    override_scalar_value = {
+                        value = -scalar_value
+                    },
+                    override_message = {
+                        message = localize("k_upgrade_ex")
+                    }
+                }
+            elseif args.operation == "X" then
+                return {
+                    override_scalar_value = {
+                        value = 1/scalar_value
+                    },
+                    override_message = {
+                        message = localize("k_upgrade_ex")
+                    }
+                }
+            end
         end
     end,
     attributes = { "emult", "destroy_card", "chance", },

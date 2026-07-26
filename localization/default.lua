@@ -322,14 +322,21 @@ local descriptions = {
             }
         },
         j_hpr_potassium = {
-            name = "POTASSIUM",
+            name = "FEAST",
             text = {
-                {"{X:slib_emult,C:white}^#1#{} Mult"},
                 {
-                    "Played cards have a {C:green}#2# in #3#{} chance",
-                    "to be {C:attention}destroyed{} after scoring",
-                    "Other {C:attention}Jokers{} have a {C:green}#4# in #5#{} chance",
-                    "to be {C:red}banished{} at the end of round"
+                    "Scored {C:attention}enhanced{} cards",
+                    "{C:hpr_stellar}forcetrigger{} all owned",
+                    "{C:attention}food Jokers{}"
+                },
+                {
+                    "{C:attention}Scored{} cards have a",
+                    "{C:green}#1# in #2#{} chance to be",
+                    "{C:red}destroyed"
+                },
+                {
+                    "{C:attention}Food Jokers{} scale",
+                    "in {C:attention}reverse"
                 }
             }
         },

@@ -61,6 +61,9 @@ end
 
 function HPR.get_ascension(card)
     local center = card.config and card.config.center or card
+    if center.hpr_ascension_key or HPR.vanilla_ascensions[center.key] then
+        return HPR.vanilla_ascensions[center.key] or center.hpr_ascension_key or nil
+    end
     if MyDreamJournal and MyDreamJournal.is_grilled_chicken(center.key) then
         return "j_hpr_stellarchicken"
     end
@@ -70,8 +73,8 @@ function HPR.get_ascension(card)
     if center.effect == "Cry Type Chips" then
         return "j_hpr_crafty"
     end
-    if center.key then
-        return HPR.vanilla_ascensions[center.key] or center.hpr_ascension_key or nil
+    if SMODS.has_attribute(center, "food") then
+        return "j_hpr_potassium"
     end
     return nil
 end
