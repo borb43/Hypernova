@@ -86,4 +86,6 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_hit_the_road = "j_hpr_mask",
     j_reserved_parking = "j_hpr_mask",
     j_red_card = "j_hpr_boosted",
+    j_acrobat = "j_hpr_guardian",
+    j_dusk = "j_hpr_guardian",
 }

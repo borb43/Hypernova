@@ -1260,13 +1260,9 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "guardian",
-    config = { extra = { active = true }},
+    config = { extra = { active = true, hands = 1, emult = 1, emult_gain = 0.1 }},
     loc_vars = function (self, info_queue, card)
-        if not (card.edition and card.edition.negative) then
-            info_queue[#info_queue+1] = G.P_CENTERS.e_negative
-        end
-        info_queue[#info_queue+1] = { set = "Other", key = "eternal", config = {} }
-        return { vars = { localize(card.ability.extra.active and "k_active" or "k_inactive") }}
+        return { vars = { localize(card.ability.extra.active and "k_active" or "k_inactive"), card.ability.extra.hands, card.ability.extra.emult, card.ability.extra.emult_gain }}
     end,
     calculate = function (self, card, context)
         if context.ante_change and SMODS.ante_end then
@@ -1276,10 +1272,10 @@ HPR.StellarJoker {
             card.ability.extra.active = false
             G.E_MANAGER:add_event(Event({
                 func = function()
-                    SMODS.add_card{ set = "Joker", key_append = self.key, edition = "e_negative", stickers = {"eternal"}, force_stickers = true, }
                     G.hand_text_area.blind_chips:juice_up()
                     G.hand_text_area.game_chips:juice_up()
                     play_sound('tarot1')
+                    G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.hands --no ease hands played because your hands are getting reset anyway
                     return true
                 end
             }))
@@ -1289,19 +1285,30 @@ HPR.StellarJoker {
                 colour = G.C.RARITY.hpr_stellar
             }
         end
+        if context.before then
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "emult",
+                scalar_value = "emult_gain",
+                no_message = true,
+            })
+        end
+        if context.end_of_round and context.main_eval and not context.blueprint and not context.retrigger_joker and card.ability.extra.emult ~= 1 then
+            card.ability.extra.emult = 1
+            return {
+                message = localize("k_reset")
+            }
+        end
+        if context.joker_main then
+            return {
+                emult = card.ability.extra.emult
+            }
+        end
     end,
     forcetrigger = function (self, card, context)
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                for _ = 1, card.ability.extra.cards do
-                    SMODS.add_card{ set = "Joker", key_append = self.key }
-                end
-                G.hand_text_area.blind_chips:juice_up()
-                G.hand_text_area.game_chips:juice_up()
-                play_sound('tarot1')
-                return true
-            end
-        }))
+        G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.hands
+        ease_hands_played(card.ability.extra.hands)
+        return { emult = card.ability.extra.emult }
     end,
     attributes = { "prevents_death", "generation", "joker", },
     forcetrigger_compat = true,

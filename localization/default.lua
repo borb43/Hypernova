@@ -945,12 +945,15 @@ local descriptions = {
             }
         },
         j_hpr_guardian = {
-            name = "GUARDIAN",
+            name = "FINALE",
             text = {
-                "{C:attention}Prevents death{} once",
-                "per {C:attention}Ante{} and creates",
-                "a {C:dark_edition}Negative {C:attention}Eternal Joker",
-                "{C:inactive}(Currently #1#)"
+                {"{C:attention}Prevents death{} once",
+                "per {C:attention}Ante{}, granting",
+                "{C:blue}+#2#{} Hand#<s>2# permanently",
+                "{C:inactive}(Currently #1#)"},
+                {"{X:slib_emult,C:white}^#4#{} Mult per hand",
+                "played this round",
+                "{C:inactive}(Currently {X:slib_emult,C:white}^#3#{C:inactive} Mult)"}
             }
         },
         j_hpr_hurtbreak = {
@@ -1676,7 +1679,7 @@ local misc = {
         k_level_down = "Level Down",
         k_plus_joker_q = "+1 Joker?",
         k_inactive = "inactive",
-        ph_hpr_stellar_revive = "Blessed by the stars",
+        ph_hpr_stellar_revive = "GRAND FINALE",
         no_repeat_hands = "No repeat hand types per round",
         k_plus_egg = "+1 Egg",
         k_exoplanet = "Exoplanet",
