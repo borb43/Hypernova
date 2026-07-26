@@ -364,7 +364,7 @@ local descriptions = {
                     "or in {C:attention}discard pile{} always score",
                 },
                 {
-                    "{C:attention}Retriggers{} all scored cards"
+                    "{C:attention}Retriggers{} all {C:attention}playing{} cards"
                 }
             }
         },

@@ -497,7 +497,7 @@ HPR.StellarJoker {
         if context.modify_scoring_hand and not context.blueprint then
             return { add_to_hand = true }
         end
-        if context.repetition and context.cardarea == G.play then
+        if context.repetition then
             return { repetitions = 1 }
         end
     end,
