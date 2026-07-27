@@ -1163,6 +1163,24 @@ local descriptions = {
                     "Increases by {C:attention}#2#{} when a {C:hpr_stellar}Universe Pack{} is skipped"
                 }
             }
+        },
+        j_hpr_enchant = {
+            name = "ENCHANT",
+            text = {
+                {
+                    "{C:attention}Enhanced{} cards give",
+                    "{X:purple,C:white}X#1#{} Score when scored",
+                    "or held in hand"
+                },
+                {
+                    "{C:attention}Retrigger{} all {C:attention}playing",
+                    "cards with a {C:attention}seal"
+                },
+                {
+                    "Cards with an {C:dark_edition}edition",
+                    "{C:hpr_balance}balance {C:chips}Chips{} and {C:mult}Mult"
+                }
+            }
         }
     },
     Other = {

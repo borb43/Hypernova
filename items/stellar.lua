@@ -1533,3 +1533,30 @@ HPR.StellarJoker {
     end,
     attributes = { "booster", }
 }
+
+HPR.StellarJoker {
+    key = "enchant",
+    config = { extra = { xscore = 1.5 } },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.xscore }}
+    end,
+    calculate = function (self, card, context)
+        if context.repetition and context.other_card:get_seal() then
+            return { repetitions = 1 }
+        end
+        if (context.other_joker or {}).edition or (context.other_consumeable or {}).edition then
+            return { balance = true }
+        end
+        if context.individual and (context.cardarea == G.play or context.cardarea == G.hand) and not context.end_of_round then
+            local ret = {}
+            if context.other_card.edition then
+                ret.balance = true
+            end
+            if next(SMODS.get_enhancements(context.other_card)) then
+                ret.xscore = card.ability.extra.xscore
+            end
+            if next(ret) then return ret end
+        end
+    end,
+    attributes = { "xscore", "balance", "retrigger", }
+}
