@@ -539,10 +539,16 @@ local descriptions = {
         j_hpr_unity = {
             name = "THUNDER",
             text = {
-                "This joker gains {X:mult,C:white}X#2#{} Mult for",
-                "every {C:attention}unique poker hand{} contained",
-                "in played hand",
-                "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
+                {
+                    "Swaps {C:hpr_balance}#1#%{} of {C:chips}Chips{} and {C:mult}Mult",
+                    "for each {C:attention}unique poker hand",
+                    "contained in played hand",
+                },
+                {
+                    "Last played {C:attention}poker hand{} of",
+                    "round gains {X:chips,C:white}X#2#{} Chips and",
+                    "{X:mult,C:white}X#2#{} Mult at end of round"
+                }
             }
         },
         j_hpr_derivative = {

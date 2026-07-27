@@ -957,28 +957,46 @@ HPR.StellarJoker {
         x = 10, y = 0,
         --extra = { x = 11, y = 0 }
     },
-    config = { extra = { xmult = 1, scale = 0.1}},
+    config = { extra = { swap_portion = 0.05, xchult = 1.2, }},
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra.xmult, card.ability.extra.scale }}
+        return { vars = { Spectrallib.clamp(card.ability.extra.swap_portion, 0, 1)*100, card.ability.extra.xchult }}
     end,
     forcetrigger_compat = true,
     calculate = function (self, card, context)
-        if context.before and not context.blueprint then
+        if context.joker_main or (context.forcetrigger and context.poker_hands) then
             local hands = 0
             for _, hand in pairs(context.poker_hands) do
                 if next(hand) then hands = hands + 1 end
             end
-            if hands > 0 then
-                SMODS.scale_card(card, {
-                    ref_table = card.ability.extra,
-                    ref_value = "xmult",
-                    scalar_value = "scale",
-                    scalar_factor = hands,
-                })
+            local val = Spectrallib.clamp(card.ability.extra.swap_portion*hands, 0, 1)
+            if val > 0 then
+                return {
+                    cry_broken_swap = val,
+                }
             end
         end
-        if (context.joker_main or context.forcetrigger) and card.ability.extra.xmult ~= 1 then
-            return { xmult = card.ability.extra.xmult }
+        if context.end_of_round and context.main_eval and G.GAME.hands[G.GAME.last_hand_played] then
+            local mul = card.ability.extra.xchult
+            local h = G.GAME.last_hand_played
+            return {
+                message = localize("k_upgrade_ex"),
+                colour = G.C.MULT,
+                func = function ()
+                    SMODS.upgrade_poker_hands{
+                        from = card,
+                        hands = h,
+                        parameters = {"chips", "mult"},
+                        StatusText = {
+                            text = "X"..number_format(mul),
+                            cover_colour = G.C.RARITY.hpr_stellar,
+                        },
+                        level_up = false,
+                        func = function (base, hand, param, level_up)
+                            return base*mul
+                        end,
+                    }
+                end
+            }
         end
     end,
     attributes = { "xmult", "scaling", },
