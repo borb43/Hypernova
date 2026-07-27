@@ -1319,6 +1319,12 @@ HPR.StellarJoker {
                 emult = card.ability.extra.emult
             }
         end
+        if context.skip_blind and not context.blueprint and not context.retrigger_joker then
+            card.ability.extra.active = false
+            return {
+                message = localize("k_disabled_ex")
+            }
+        end
     end,
     forcetrigger = function (self, card, context)
         G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.hands
