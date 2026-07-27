@@ -44,7 +44,8 @@ SMODS.Joker {
             end
         end
     end,
-    attributes = { "consumable", "consumable_slot" }
+    attributes = { "consumable", "consumable_slot" },
+    hpr_ascension_key = "j_hpr_master",
 }
 
 SMODS.Joker {

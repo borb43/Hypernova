@@ -304,11 +304,6 @@ local descriptions = {
             name = "MASTER",
             text = {
                 {
-                    "Creates an {C:attention}enhanced{} card with",
-                    "a {C:hpr_bronze}Copper Seal{} when any",
-                    "{C:attention}Booster Pack{} is skipped",
-                },
-                {
                     "This {C:attention}Joker{} and all held",
                     "{C:attention}consumables{} gain {C:attention}+#1#{} use",
                     "when {C:attention}Boss Blind{} is defeated"

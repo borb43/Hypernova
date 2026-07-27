@@ -834,7 +834,6 @@ SMODS.Joker {
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra }}
     end,
-    hpr_ascension_key = "j_hpr_circus",
     blueprint_compat = false,
 }
 
@@ -1628,6 +1627,7 @@ SMODS.Joker {
         return { vars = { localize(card.ability.extra.type, "poker_hands"), c, m }}
     end,
     attributes = { "hand_type", "chips", "mult", },
+    hpr_ascension_key = "j_hpr_observatorium",
 }
 
 SMODS.Joker {

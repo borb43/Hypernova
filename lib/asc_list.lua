@@ -24,7 +24,7 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_seance = "j_hpr_master",
     j_half = "j_hpr_void",
     j_stencil = "j_hpr_void",
-    j_cloud_9 = "j_hpr_nimbus",
+    j_cloud_9 = "j_hpr_payload",
     j_four_fingers = "j_hpr_shorthand",
     j_shortcut = "j_hpr_shorthand",
     j_greedy_joker = "j_hpr_prideful",
@@ -98,5 +98,5 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_stone = "j_hpr_enchant",
     j_drivers_license = "j_hpr_enchant",
     j_glass = "j_hpr_enchant",
-    j_steel = "j_hpr_enchant",
+    j_steel_joker = "j_hpr_enchant",
 }

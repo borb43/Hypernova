@@ -305,20 +305,6 @@ HPR.StellarJoker {
         return { vars = { card.ability.extra.multiuse, card.ability.extra.uses }}
     end,
     calculate = function (self, card, context)
-        if context.skipping_booster then
-            G.E_MANAGER:add_event(Event{
-                func = function (n)
-                    SMODS.add_card {
-                        set = "Enhanced",
-                        area = G.deck,
-                        key_append = "hpr_master",
-                        seal = "hpr_bronze",
-                    }
-                    return true
-                end
-            })
-            return nil, true
-        end
         if context.end_of_round and context.main_eval and context.beat_boss and not context.game_over then
             G.E_MANAGER:add_event(Event{ --event to account for stuff created in events before this joker
                 func = function (n)
