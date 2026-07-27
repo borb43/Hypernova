@@ -399,14 +399,18 @@ local descriptions = {
             }
         },
         j_hpr_shorthand = {
-            name = "SHORTHAND",
+            name = "UNITY",
             text = {
-                {"All {C:attention}Flushes{} and {C:attention}Straights{}",
-                "can be made with {C:attention}3{} cards"},
-                {"{C:attention}Pairs{} and {C:attention}X of a Kind{} hands",
-                "can be made with {C:attention}1{} fewer card"},
-                {"{C:attention}Straights{} may have gaps of {C:attention}1",
-                "card and may {C:attention}wrap around"}
+                {
+                    "{C:attention}+#1#{} Card Selection Limit",
+                    "{C:attention}+#2#{} Hand size",
+                },
+                {
+                    "All cards count as {C:attention}face",
+                    "cards and as any {C:attention}suit,",
+                    "cards cannot be {C:red}debuffed",
+                    "or drawn {C:attention}face down"
+                },
             }
         },
         j_hpr_diamond = {
@@ -533,7 +537,7 @@ local descriptions = {
             }
         },
         j_hpr_unity = {
-            name = "UNITY",
+            name = "THUNDER",
             text = {
                 "This joker gains {X:mult,C:white}X#2#{} Mult for",
                 "every {C:attention}unique poker hand{} contained",

@@ -591,9 +591,29 @@ HPR.StellarJoker {
     forcetrigger_compat = true,
 }
 
-HPR.StellarJoker { --literally everything this does is a hook lmfao
+HPR.StellarJoker {
     key = "shorthand",
     blueprint_compat = false,
+    config = { extra = { csl = 999, h_size = 10 } },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.csl, card.ability.extra.h_size }}
+    end,
+    add_to_deck = function (self, card, from_debuff)
+        Spectrallib.change_selection_limit(card.ability.extra.csl)
+        G.hand:change_size(card.ability.extra.h_size)
+    end,
+    remove_from_deck = function (self, card, from_debuff)
+        Spectrallib.change_selection_limit(-card.ability.extra.csl)
+        G.hand:change_size(-card.ability.extra.h_size)
+    end,
+    calculate = function (self, card, context)
+        if context.debuff_card then
+            return { prevent_debuff = true, no_retrigger = true }
+        end
+        if context.stay_flipped then
+            return { prevent_stay_flipped = true, no_retrigger = true }
+        end
+    end,
     attributes = { "passive", "hand_type" },
 }
 

@@ -99,4 +99,6 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_drivers_license = "j_hpr_enchant",
     j_glass = "j_hpr_enchant",
     j_steel_joker = "j_hpr_enchant",
+    j_smeared = "j_hpr_shorthand",
+    j_pareidolia = "j_hpr_shorthand",
 }

@@ -198,28 +198,7 @@ function SMODS.four_fingers(hand_type)
 		end
 		results[#results+1] = min
 	end
-	if next(SMODS.find_card("j_hpr_shorthand")) then
-		results[#results+1] = 3
-	end
 	return math.min(fingies_ref(hand_type), unpack(results))
-end
-
-local x_same_ref = get_X_same
-function get_X_same(num, hand, or_more)
-	num = num - #SMODS.find_card("j_hpr_shorthand")
-	return x_same_ref(num, hand, or_more)
-end
-
-local shortcut_ref = SMODS.shortcut
-function SMODS.shortcut()
-	if next(SMODS.find_card("j_hpr_shorthand")) then return true end
-	return shortcut_ref()
-end
-
-local wrap_ref = SMODS.wrap_around_straight
-function SMODS.wrap_around_straight()
-	if next(SMODS.find_card("j_hpr_shorthand")) then return true end
-	return wrap_ref()
 end
 
 local prob_vars_ref = SMODS.get_probability_vars
@@ -332,10 +311,18 @@ end
 
 local any_suit_ref = SMODS.has_any_suit
 function SMODS.has_any_suit(card)
-	if next(SMODS.find_card("j_hpr_ashes")) and card:get_id() == 14 then
+	if next(SMODS.find_card("j_hpr_ashes")) and card:get_id() == 14 or next(SMODS.find_card("j_hpr_shorthand")) then
 		return true
 	end
 	return any_suit_ref(card)
+end
+
+local face_ref = Card.is_face
+function Card:is_face(from_boss)
+	if next(SMODS.find_card("j_hpr_shorthand")) then
+		return true
+	end
+	return face_ref(self, from_boss)
 end
 
 local loc_ref = init_localization
