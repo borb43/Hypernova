@@ -668,7 +668,7 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "prism",
-    config = { extra = { dollars = 0, xmult = 1.5, d_gain = 1 }},
+    config = { extra = { dollars = 0, xmult = 2, d_gain = 1 }},
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.m_wild
         local suit = G.GAME.current_round.hpr_prism_suit or "Spades"
