@@ -1657,3 +1657,30 @@ SMODS.Joker {
         end
     end
 }
+
+SMODS.Joker {
+    key = "shrine",
+    rarity = 2,
+    cost = 7,
+    atlas = "placeholder",
+    pos = { x = 1, y = 0, },
+    calculate = function (self, card, context)
+        if context.selling_card and context.card.ability.set == "Tarot" and (G.GAME.consumeable_buffer or 0) + #G.consumeables.cards - 1 < G.consumeables.config.card_limit then
+            G.GAME.consumeable_buffer = (G.GAME.consumeable_buffer or 0) + 1
+            G.E_MANAGER:add_event(Event{
+                func = function (n)
+                    G.GAME.consumeable_buffer = 0
+                    SMODS.add_card{
+                        set = "hpr_moons",
+                        key_append = "hpr_lunar_shrine",
+                    }
+                    return true
+                end
+            })
+            return {
+                message = localize("k_plus_hpr_moon"),
+                colour = G.C.SECONDARY_SET.hpr_moons,
+            }
+        end
+    end
+}

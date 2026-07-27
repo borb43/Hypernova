@@ -1187,6 +1187,13 @@ local descriptions = {
                     "{C:hpr_balance}balance {C:chips}Chips{} and {C:mult}Mult"
                 }
             }
+        },
+        j_hpr_shrine = {
+            name = "Lunar Offering",
+            text = {
+                "Creates a {C:hpr_moons}Moon{} card when",
+                "a {C:tarot}Tarot{} card is sold"
+            }
         }
     },
     Other = {
