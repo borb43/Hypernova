@@ -69,8 +69,8 @@ end
 HPR.stellar_gradient = SMODS.Gradient {
     key = "stellar",
     colours = {
-        HEX("010052"),
-        HEX("520052")
+        HEX("120052"),
+        HEX("520052"),
     },
     cycle = 5,
 }

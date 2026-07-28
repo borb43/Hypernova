@@ -104,7 +104,7 @@ SMODS.Joker { -- solar flare, levels up not most played hands and destroys some 
         { key = "credits_art", vars = {"Codifyd"}},
         { key = "credits_idea", vars = {"Codifyd"}},
     },
-    hpr_ascension_key = "j_hpr_observatorium"
+    hpr_ascension_key = "j_hpr_stardust"
 }
 
 SMODS.Joker { --tipping scales, increases numerator and denominator of probabilities
@@ -1505,7 +1505,7 @@ SMODS.Joker {
         end
     end,
     attributes = { "space", "rank", "eight", },
-    hpr_ascension_key = "j_hpr_observatorium",
+    hpr_ascension_key = "j_hpr_stardust",
 }
 
 SMODS.Joker {

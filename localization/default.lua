@@ -1193,6 +1193,20 @@ local descriptions = {
                 "Creates a {C:hpr_moons}Moon{} card when",
                 "a {C:tarot}Tarot{} card is sold"
             }
+        },
+        j_hpr_stardust = {
+            name = "STARDUST",
+            text = {
+                {
+                    "Each played {C:attention}poker hand{} gains",
+                    "{X:chips,C:white}X#1#{} Chips and {X:mult,C:white}X#1#{} Mult",
+                },
+                {
+                    "The first {C:attention}discarded{} poker hand",
+                    "each round gains {X:slib_echips,C:white}^#2#{} Chips",
+                    "and {X:slib_emult,C:white}^#2#{} Mult"
+                }
+            }
         }
     },
     Other = {

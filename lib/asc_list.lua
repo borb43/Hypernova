@@ -2,7 +2,7 @@
 HPR.vanilla_ascensions = { --ASCENSION LIST
     j_supernova = "j_hpr_observatorium",
     j_constellation = "j_hpr_observatorium",
-    j_space = "j_hpr_observatorium",
+    j_space = "j_hpr_stardust",
     j_misprint = "j_hpr_missing",
     j_cartomancer = "j_hpr_master",
     j_astronomer = "j_hpr_observatorium",
@@ -99,4 +99,5 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_steel_joker = "j_hpr_enchant",
     j_smeared = "j_hpr_shorthand",
     j_pareidolia = "j_hpr_shorthand",
+    j_burnt = "j_hpr_stardust",
 }

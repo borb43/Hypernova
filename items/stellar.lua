@@ -1610,3 +1610,57 @@ HPR.StellarJoker {
     end,
     attributes = { "xscore", "balance", "retrigger", }
 }
+
+HPR.StellarJoker {
+    key = "stardust",
+    config = { extra = { xchult = 1.25, echult = 1.1, }},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.xchult, card.ability.extra.echult, }}
+    end,
+    calculate = function (self, card, context)
+        if context.pre_discard and G.GAME.current_round.discards_used <= 0 and not context.hook then
+            local text, _ = G.FUNCS.get_poker_hand_info(G.hand.highlighted)
+            local m = card.ability.extra.echult
+            return {
+                message = localize("k_upgrade_ex"),
+                func = function ()
+                    SMODS.upgrade_poker_hands{
+                        from = card,
+                        hands = text,
+                        parameters = {"chips", "mult"},
+                        StatusText = {
+                            text = "^"..number_format(m),
+                            cover_colour = G.C.RARITY.hpr_stellar,
+                        },
+                        level_up = false,
+                        func = function (base, hand, param, level_up)
+                            return base^m
+                        end,
+                    }
+                end
+            }
+        end
+        if context.before then
+            local text = context.scoring_name
+            local m = card.ability.extra.xchult
+            return {
+                message = localize("k_upgrade_ex"),
+                func = function ()
+                    SMODS.upgrade_poker_hands{
+                        from = card,
+                        hands = text,
+                        parameters = {"chips", "mult"},
+                        StatusText = {
+                            text = "X"..number_format(m),
+                            cover_colour = G.C.RARITY.hpr_stellar,
+                        },
+                        level_up = false,
+                        func = function (base, hand, param, level_up)
+                            return base*m
+                        end,
+                    }
+                end
+            }
+        end
+    end
+}
