@@ -101,10 +101,10 @@ end
 HPR.post_loc = function ()
     for _, center in pairs(G.P_CENTER_POOLS.Joker) do
         local i = center.stellar_num
-        if i and i ~= 0 then
+        if i then
             for _, key in ipairs(center.hpr_loc_keys or { center.key }) do
                 local desc = G.localization.descriptions.Joker[key]
-                if desc.name then
+                if desc and desc.name then
                     local new_name = type(desc.name) == "table" and desc.name[1] or desc.name
                     local prepend
                     if i < 10 then

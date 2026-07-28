@@ -287,7 +287,7 @@ local descriptions = {
             }
         },
         j_hpr_missing = {
-            name = "S-nan ERROR",
+            name = "MISSING",
             text = {
                 {
                     "{element:1} {element:2} {element:3} when",
