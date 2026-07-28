@@ -695,8 +695,11 @@ HPR.StellarJoker {
     calc_dollar_bonus = function (self, card)
         if card.ability.extra.dollars ~= 0 then
             local d = card.ability.extra.dollars
-            card.ability.extra.dollars = 0
-            SMODS.calculate_effect({ message = localize("k_reset") }, card)
+            SMODS.reset_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "dollars",
+                reset_value = 0,
+            })
             return d
         end
     end,
@@ -1353,10 +1356,12 @@ HPR.StellarJoker {
             })
         end
         if context.end_of_round and context.main_eval and not context.blueprint and not context.retrigger_joker and card.ability.extra.emult ~= 1 then
-            card.ability.extra.emult = 1
-            return {
-                message = localize("k_reset")
-            }
+            SMODS.reset_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "emult",
+                reset_value = 1,
+            })
+            return { no_retrigger = true }
         end
         if context.joker_main then
             return {
