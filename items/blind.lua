@@ -13,7 +13,7 @@ SMODS.Blind {
             hand_chips = mod_chips(hand_chips^(1/3))
             update_hand_text({ sound = 'chips2', modded = true }, { chips = hand_chips, mult = mult })
         end
-    end
+    end,
 }
 
 SMODS.Blind {
@@ -28,7 +28,8 @@ SMODS.Blind {
         if not blind.disabled and context.debuff_card and context.debuff_card.area and context.debuff_card.area == G.jokers then
             return { debuff = true }
         end
-    end
+    end,
+    attributes = { "debuff", "joker", }
 }
 
 SMODS.Blind {
@@ -43,7 +44,8 @@ SMODS.Blind {
         if context.modify_scoring_hand and not next(SMODS.get_enhancements(context.other_card) or {}) and not blind.disabled then
             return { remove_from_hand = true }
         end
-    end
+    end,
+    attributes = { "enhancements", }
 }
 
 SMODS.Blind {
@@ -68,7 +70,8 @@ SMODS.Blind {
         if not G.GAME.blind.disabled then
             G.hand:change_size(1)
         end
-    end
+    end,
+    attributes = { "hands", "discard", "hand_size", }
 }
 
 SMODS.Blind {
@@ -83,5 +86,6 @@ SMODS.Blind {
         if not blind.disabled and context.destroy_card and context.cardarea == G.hand then
             return { remove = true }
         end
-    end
+    end,
+    attributes = { "destroy_card", }
 }

@@ -8,6 +8,7 @@ SMODS.Voucher { --stacking, gives cards a chance to spawn with perma chips and m
         { key = "credits_art", vars = {"Eris"}},
         { key = "credits_idea", vars = {"Eris"}},
     },
+    attributes = { "shop", "perma_bonus", "chips", "mult", "playing_card" },
 }
 
 SMODS.Voucher { --mass production, lets xmult and xchip bonuses spawn
@@ -19,6 +20,7 @@ SMODS.Voucher { --mass production, lets xmult and xchip bonuses spawn
         { key = "credits_code", vars = {"Eris"} },
         { key = "credits_idea", vars = {"Eris"}},
     },
+    attributes = { "shop", "perma_bonus", "xchips", "xmult", "playing_card" },
 }
 
 SMODS.Voucher {
@@ -29,6 +31,7 @@ SMODS.Voucher {
         { key = "credits_code", vars = {"Eris"} },
         { key = "credits_idea", vars = {"Eris"}},
     },
+    attributes = { "booster", }
 }
 
 SMODS.Voucher {
@@ -40,5 +43,6 @@ SMODS.Voucher {
         { key = "credits_code", vars = {"Eris"} },
         { key = "credits_idea", vars = {"Eris"}},
     },
+    attributes = { "booster", "consumable", "voucher" }
 }
 --#endregion

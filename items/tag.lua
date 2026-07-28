@@ -22,7 +22,8 @@ SMODS.Tag {
             tag.triggered = true
         end
     end,
-    min_ante = 2
+    min_ante = 2,
+    attributes = { "shop", "backs", }
 }
 
 if next(SMODS.find_mod("CardSleeves")) then
@@ -48,7 +49,9 @@ if next(SMODS.find_mod("CardSleeves")) then
                 end)
                 tag.triggered = true
             end
-        end
+        end,
+        min_ante = 2,
+        attributes = { "shop", "sleeves", }
     }
 end
 
@@ -87,7 +90,8 @@ SMODS.Tag {
             tag.triggered = true
             return true
         end
-    end
+    end,
+    attributes = { "booster", "editions" }
 }
 
 SMODS.Tag {
@@ -118,5 +122,6 @@ SMODS.Tag {
     end,
     in_pool = function(self, args)
         return G.P_CENTERS["e_hpr_green"].discovered
-    end
+    end,
+    attributes = { "editions", "joker", "shop", }
 }

@@ -30,6 +30,7 @@ HPR.SuitPlanet {
     set_card_type_badge = function (self, card, badges)
         badges[#badges+1] = create_badge(localize("k_exoplanet"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
     end,
+    attributes = { "suit_level", "space", "suit", "diamonds" }
 }
 
 HPR.SuitPlanet {
@@ -39,6 +40,7 @@ HPR.SuitPlanet {
     set_card_type_badge = function (self, card, badges)
         badges[#badges+1] = create_badge(localize("k_exoplanet"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
     end,
+    attributes = { "suit_level", "space", "suit", "clubs" }
 }
 
 HPR.SuitPlanet {
@@ -48,6 +50,7 @@ HPR.SuitPlanet {
     set_card_type_badge = function (self, card, badges)
         badges[#badges+1] = create_badge(localize("k_exoplanet"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
     end,
+    attributes = { "suit_level", "space", "suit", "spades" }
 }
 
 HPR.SuitPlanet {
@@ -57,6 +60,7 @@ HPR.SuitPlanet {
     set_card_type_badge = function (self, card, badges)
         badges[#badges+1] = create_badge(localize("k_exoplanet"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
     end,
+    attributes = { "suit_level", "space", "suit", "hearts", }
 }
 
 HPR.SuitPlanet {
@@ -70,7 +74,8 @@ HPR.SuitPlanet {
             end
         end
         return false
-    end
+    end,
+    attributes = { "suit_level", "space", "suit", }
 }
 
 HPR.SuitPlanet {
@@ -80,6 +85,7 @@ HPR.SuitPlanet {
     set_card_type_badge = function (self, card, badges)
         badges[#badges+1] = create_badge(localize("k_exoplanet"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
     end,
+    attributes = { "suit_level", "space", "suit", "diamonds" }
 }
 
 HPR.SuitPlanet {
@@ -89,6 +95,7 @@ HPR.SuitPlanet {
     set_card_type_badge = function (self, card, badges)
         badges[#badges+1] = create_badge(localize("k_exoplanet"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
     end,
+    attributes = { "suit_level", "space", "suit", "clubs" }
 }
 
 HPR.SuitPlanet {
@@ -98,6 +105,7 @@ HPR.SuitPlanet {
     set_card_type_badge = function (self, card, badges)
         badges[#badges+1] = create_badge(localize("k_exoplanet"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
     end,
+    attributes = { "suit_level", "space", "suit", "spades" }
 }
 
 HPR.SuitPlanet {
@@ -107,6 +115,7 @@ HPR.SuitPlanet {
     set_card_type_badge = function (self, card, badges)
         badges[#badges+1] = create_badge(localize("k_exoplanet"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
     end,
+    attributes = { "suit_level", "space", "suit", "hearts" }
 }
 
 HPR.SuitPlanet {
@@ -124,6 +133,7 @@ HPR.SuitPlanet {
     set_card_type_badge = function (self, card, badges)
         badges[#badges+1] = create_badge(localize("k_planet_q"), get_type_colour(card.config.center or card.config, card), G.C.WHITE, 1.2)
     end,
+    attributes = { "suit_level", "space", "suit", }
 }
 --#endregion
 --#region rare consumables
@@ -184,5 +194,6 @@ SMODS.Consumable {
     can_use = function (self, card)
         return true
     end,
+    attributes = { "space", "suit_level", "suit", }
 }
 --#endregion

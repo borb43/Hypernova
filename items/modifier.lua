@@ -18,7 +18,8 @@ SMODS.Enhancement {
             return nil, true
         end
     end,
-    weight = 1.5
+    weight = 1.5,
+    attributes = { "chips", "perma_bonus", "modify_card", }
 }
 
 SMODS.Enhancement {
@@ -40,7 +41,8 @@ SMODS.Enhancement {
             return nil, true
         end
     end,
-    weight = 1.5
+    weight = 1.5,
+    attributes = { "mult", "perma_bonus", "modify_card", }
 }
 
 SMODS.Enhancement{
@@ -64,6 +66,7 @@ SMODS.Enhancement{
         end
     end,
     no_rank = true, no_suit = true, replace_base_card = true, always_scores = true,
+    attributes = { "xscore", "suit_level", "suit", }
 }
 
 SMODS.Seal {
@@ -77,7 +80,7 @@ SMODS.Seal {
     calculate = function (self, card, context)
         if context.main_scoring and context.cardarea == G.play then
             return {
-                message = localize{ type = "variable", key = "a_handsize", vars = { 1 }},
+                message = localize{ type = "variable", key = "a_handsize", vars = { card.ability.seal.extra }},
                 colour = G.C.DARK_EDITION,
                 func = function ()
                     G.E_MANAGER:add_event(Event{
@@ -99,6 +102,7 @@ SMODS.Seal {
             G.shared_seals[card.seal]:draw_shader('negative_shine', nil, card.ARGS.send_to_shader, nil, card.children.center)
         end
     end,
+    attributes = { "hand_size" }
 }
 
 SMODS.Seal {
@@ -129,7 +133,8 @@ SMODS.Seal {
                 colour = G.C.RED
             }
         end
-    end
+    end,
+    attributes = { "hands", "discard", }
 }
 
 SMODS.Seal {
@@ -157,7 +162,8 @@ SMODS.Seal {
             G.shared_seals[card.seal]:draw_shader('dissolve', nil, nil, nil, card.children.center)
             G.shared_seals[card.seal]:draw_shader('voucher', nil, card.ARGS.send_to_shader, nil, card.children.center)
         end
-    end
+    end,
+    attributes = { "consumable_slot", "destroy_card", }
 }
 
 SMODS.Seal{
@@ -180,7 +186,8 @@ SMODS.Seal{
             return { message = localize("k_plus_hpr_moon"), colour = G.C.SECONDARY_SET.hpr_moons }
         end
     end,
-    badge_colour = HEX("5d15d1")
+    badge_colour = HEX("5d15d1"),
+    attributes = { "hpr_moon", "generation" }
 }
 
 SMODS.Shader{
@@ -233,8 +240,8 @@ SMODS.Edition{
                     ref_value = "green",
                     scalar_value = "add",
                     operation = '-',
-                    message_key = "a_hpr_green_minus",
-                    message_colour = G.C.HPR_ULTRAGREEN
+                    message_key = "a_mult_minus",
+                    message_colour = G.C.MULT,
                 })
             end
             if context.before then
@@ -242,8 +249,8 @@ SMODS.Edition{
                     ref_table = card.edition.extra,
                     ref_value = "green",
                     scalar_value = "add",
-                    message_key = "a_hpr_green",
-                    message_colour = G.C.HPR_ULTRAGREEN
+                    message_key = "a_mult",
+                    message_colour = G.C.MULT,
                 })
             end
             if context.pre_joker and card.edition.extra.green ~= 0 then
@@ -254,5 +261,6 @@ SMODS.Edition{
         end
     end,
     in_shop = true,
-    weight = 4
+    weight = 4,
+    attributes = { "scaling", "mult", "discard", } --same as green joker
 }

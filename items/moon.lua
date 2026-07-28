@@ -99,7 +99,8 @@ HPR.moon {
     pos = { x = 1, y = 0 },
     apply_bonus = function (self, card, other_card)
         other_card.ability.perma_bonus = other_card.ability.perma_bonus + card.ability.extra
-    end
+    end,
+    attributes = { "modify_card", "perma_bonus", "space", "chips" }
 }
 
 HPR.moon {
@@ -116,7 +117,8 @@ HPR.moon {
     },
     apply_bonus = function (self, card, other_card)
         other_card.ability.perma_mult = other_card.ability.perma_mult + card.ability.extra
-    end
+    end,
+    attributes = { "modify_card", "perma_bonus", "space", "mult" }
 }
 
 HPR.moon {
@@ -128,7 +130,8 @@ HPR.moon {
     pos = { x = 5, y = 0 },
     apply_bonus = function (self, card, other_card)
         other_card.ability.perma_x_chips = other_card.ability.perma_x_chips + card.ability.extra
-    end
+    end,
+    attributes = { "modify_card", "perma_bonus", "space", "xchips" }
 }
 
 HPR.moon {
@@ -145,7 +148,8 @@ HPR.moon {
     },
     apply_bonus = function (self, card, other_card)
         other_card.ability.perma_x_mult = other_card.ability.perma_x_mult + card.ability.extra
-    end
+    end,
+    attributes = { "modify_card", "perma_bonus", "space", "xmult" }
 }
 
 HPR.moon {
@@ -162,7 +166,8 @@ HPR.moon {
     end,
     apply_bonus = function (self, card, other_card)
         other_card.ability.perma_p_dollars = other_card.ability.perma_p_dollars + card.ability.extra
-    end
+    end,
+    attributes = { "modify_card", "perma_bonus", "space", "economy" }
 }
 
 HPR.moon {
@@ -179,7 +184,8 @@ HPR.moon {
     end,
     apply_bonus = function (self, card, other_card)
         other_card.ability.perma_x_score = other_card.ability.perma_x_score + card.ability.extra
-    end
+    end,
+    attributes = { "modify_card", "perma_bonus", "space", "xscore"}
 }
 
 HPR.moon {
@@ -191,7 +197,8 @@ HPR.moon {
     pos = { x = 2, y = 0 },
     apply_bonus = function (self, card, other_card)
         other_card.ability.perma_h_chips = other_card.ability.perma_h_chips + card.ability.extra
-    end
+    end,
+    attributes = { "modify_card", "perma_bonus", "space", "chips"}
 }
 
 HPR.moon {
@@ -208,7 +215,8 @@ HPR.moon {
     },
     apply_bonus = function (self, card, other_card)
         other_card.ability.perma_h_mult = other_card.ability.perma_h_mult + card.ability.extra
-    end
+    end,
+    attributes = { "modify_card", "perma_bonus", "space", "mult"}
 }
 
 HPR.moon {
@@ -220,7 +228,8 @@ HPR.moon {
     pos = { x = 1, y = 1 },
     apply_bonus = function (self, card, other_card)
         other_card.ability.perma_h_x_chips = other_card.ability.perma_h_x_chips + card.ability.extra
-    end
+    end,
+    attributes = { "modify_card", "perma_bonus", "space", "xchips"}
 }
 
 HPR.moon {
@@ -232,7 +241,8 @@ HPR.moon {
     pos = { x = 0, y = 1 },
     apply_bonus = function (self, card, other_card)
         other_card.ability.perma_h_x_mult = other_card.ability.perma_h_x_mult + card.ability.extra
-    end
+    end,
+    attributes = { "modify_card", "perma_bonus", "space", "xmult"}
 }
 
 HPR.moon {
@@ -244,7 +254,8 @@ HPR.moon {
     pos = { x = 2, y = 1 },
     apply_bonus = function (self, card, other_card)
         other_card.ability.perma_h_dollars = other_card.ability.perma_h_dollars + card.ability.extra
-    end
+    end,
+    attributes = { "modify_card", "perma_bonus", "space", "economy"}
 }
 
 
@@ -257,13 +268,15 @@ HPR.moon {
     pos = { x = 5, y = 1 },
     apply_bonus = function (self, card, other_card)
         other_card.ability.perma_h_x_score = other_card.ability.perma_h_x_score + card.ability.extra
-    end
+    end,
+    attributes = { "modify_card", "perma_bonus", "space", "xscore"}
 }
 
 SMODS.Consumable {
     key = "pulsar",
     set = "Spectral",
     atlas = "moons",
+    cost = 4,
     pos = { x = 6, y = 0 },
     soul_pos = { x= 7, y = 0 },
     config = { max_highlighted = 1 },
@@ -313,4 +326,5 @@ SMODS.Consumable {
         { key = "credits_idea", vars = {"Eris"}},
     },
     forcetrigger_compat = true,
+    attributes = { "modify_card", "editions", "space", }
 }

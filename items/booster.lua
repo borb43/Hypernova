@@ -60,6 +60,7 @@ SMODS.Booster {
     create_card = lunar_create_card,
     draw_hand = true,
     dcry_diha_compat = lunar_hallucinations_compat,
+    attributes = { "hpr_moons", "normal", }
 }
 
 SMODS.Booster {
@@ -100,6 +101,7 @@ SMODS.Booster {
     create_card = lunar_create_card,
     draw_hand = true,
     dcry_diha_compat = lunar_hallucinations_compat,
+    attributes = { "hpr_moons", "normal", }
 }
 
 SMODS.Booster {
@@ -140,6 +142,7 @@ SMODS.Booster {
     create_card = lunar_create_card,
     draw_hand = true,
     dcry_diha_compat = lunar_hallucinations_compat,
+    attributes = { "hpr_moons", "jumbo", }
 }
 
 SMODS.Booster {
@@ -180,6 +183,7 @@ SMODS.Booster {
     create_card = lunar_create_card,
     draw_hand = true,
     dcry_diha_compat = lunar_hallucinations_compat,
+    attributes = { "hpr_moons", "mega", }
 }
 --#endregion
 --#region erratic packs
@@ -329,7 +333,8 @@ SMODS.Booster {
     create_card = erratic_create_card,
     pronouns = "any_all",
     dcry_diha_compat = erratic_hallucinations_compat,
-    draw_hand = true
+    draw_hand = true,
+    attributes = { "consumable", "joker", "playing_card", "voucher", "normal" }
 }
 
 SMODS.Booster {
@@ -371,7 +376,8 @@ SMODS.Booster {
     create_card = erratic_create_card,
     pronouns = "any_all",
     dcry_diha_compat = erratic_hallucinations_compat,
-    draw_hand = true
+    draw_hand = true,
+    attributes = { "consumable", "joker", "playing_card", "voucher", "normal" }
 }
 
 SMODS.Booster {
@@ -414,7 +420,8 @@ SMODS.Booster {
     create_card = erratic_create_card,
     pronouns = "any_all",
     dcry_diha_compat = erratic_hallucinations_compat,
-    draw_hand = true
+    draw_hand = true,
+    attributes = { "consumable", "joker", "playing_card", "voucher", "jumbo" }
 }
 
 SMODS.Booster {
@@ -457,7 +464,8 @@ SMODS.Booster {
     create_card = erratic_create_card,
     pronouns = "any_all",
     dcry_diha_compat = erratic_hallucinations_compat,
-    draw_hand = true
+    draw_hand = true,
+    attributes = { "consumable", "joker", "playing_card", "voucher", "mega" }
 }
 --#endregion
 

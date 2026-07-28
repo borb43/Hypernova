@@ -28,9 +28,11 @@ SMODS.Consumable {
     set = "Spectral",
     atlas = "placeholder",
     pos = { x = 2, y = 2 },
+    cost = 4,
     hidden = true,
     can_use = function (self, card)
-        return G.jokers and G.jokers.highlighted and #G.jokers.highlighted == 1 and HPR.get_ascension(G.jokers.highlighted[1]) ~= nil
+        local highlighted = Spectrallib.get_highlighted_cards({ G.jokers }, card, 1, 1)
+        return #highlighted == 1 and not not G.P_CENTERS[HPR.get_ascension(highlighted[1])]
     end,
     use = function (self, card, area, copier)
         local function blacklist(c)
@@ -76,6 +78,7 @@ SMODS.Consumable {
         self:use(card, area)
     end,
     forcetrigger_compat = true,
+    attributes = { "rarity", "joker", }
 }
 
 HPR.error_ops = { '+', '-', '=', '..', 'X', '/', '^', '%' }
