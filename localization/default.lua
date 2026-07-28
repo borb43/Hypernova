@@ -508,14 +508,13 @@ local descriptions = {
             text = {
                 {
                     "If played hand is only {C:attention}1{} card,",
-                    "adds a {C:dark_edition}Negative{} copy with",
-                    "{X:blind,C:white}+X#3#{} held in hand Blind Size",
-                    "to your hand",
+                    "adds a {C:dark_edition}Negative{} copy to hand",
                 },
                 {
-                    "{X:chips,C:white}X#1#{} Chips per {C:dark_edition}Negative",
-                    "card in your {C:attention}full deck",
-                    "{C:inactive}(Currently {X:chips,C:white}X#2#{C:inactive} Chips)"
+                    "If played hand is {C:attention}not{} 1 card,",
+                    "all {C:attention}scored{} cards gain a random",
+                    "{C:attention}enhancement{}, {C:attention}seal{} and {C:dark_edition}edition{} if",
+                    "they do not have one"
                 }
             }
         },
@@ -1728,6 +1727,7 @@ local misc = {
         k_empty_ex = "Empty!",
         k_hpr_plus_voucher = "+1 Voucher",
         k_hpr_enhanced_q = "Enhanced?",
+        k_enhanced_ex = "Enhanced!",
         hpr_plus_pcard = "+1 Card",
         k_hpr_universe_pack = "Universe Pack",
         --strings used by ERROR stellar

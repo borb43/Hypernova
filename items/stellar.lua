@@ -849,60 +849,70 @@ HPR.StellarJoker {
 ]]
 HPR.StellarJoker {
     key = "conjurer",
-    config = { extra = { xchips = 0.25, xblindsize = 0.2 }},
     loc_vars = function (self, info_queue, card)
-        local negatives = 0
-        if G.playing_cards then
-            for _, c in ipairs(G.playing_cards) do
-                if c.edition and c.edition.key == "e_negative" then
-                    negatives = negatives + 1
-                end
-            end
-        end
         info_queue[#info_queue+1] = { set = "Edition", key = "e_negative_playing_card", config = { extra = 1 } }
-        return { vars = { card.ability.extra.xchips, 1 + card.ability.extra.xchips*negatives, card.ability.extra.xblindsize }}
     end,
     calculate = function (self, card, context)
-        if context.joker_main or context.forcetrigger then
-            local negatives = 0
-            for _, c in ipairs(G.playing_cards) do
-                if c.edition and c.edition.key == "e_negative" then
-                    negatives = negatives + 1
-                end
-            end
-            if negatives ~= 0 then
-                return {
-                    xchips = 1 + card.ability.extra.xchips*negatives
-                }
-            end
-        end
-        if context.before and #context.full_hand == 1 then
-            local card_copied = SMODS.copy_card(context.full_hand[1], { area = G.hand })
-            card_copied:set_edition("e_negative", true, true)
-            card_copied.ability.perma_h_x_blind_size = card_copied.ability.perma_h_x_blind_size + card.ability.extra.xblindsize
-            card_copied.states.visible = nil
+        if context.before then
+            if #context.full_hand == 1 then
+                local card_copied = SMODS.copy_card(context.full_hand[1], { area = G.hand })
+                card_copied:set_edition("e_negative", true, true)
+                card_copied.states.visible = nil
 
-            G.E_MANAGER:add_event(Event({
-                func = function()
-                    card_copied:start_materialize()
-                    return true
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        card_copied:start_materialize()
+                        return true
+                    end
+                }))
+                return {
+                    message = localize('k_copied_ex'),
+                    colour = G.C.DARK_EDITION,
+                    func = function() -- This is for timing purposes, it runs after the message
+                        G.E_MANAGER:add_event(Event({
+                            func = function()
+                                SMODS.calculate_context({ playing_card_added = true, cards = { card_copied } })
+                                return true
+                            end
+                        }))
+                    end
+                }
+            else
+                local did_stuff = false
+                for c in Spectrallib.iter.areacards(context.scoring_hand) do
+                    local this_did_stuff = false
+                    if c.config.center_key == "c_base" then
+                        did_stuff, this_did_stuff = true, true
+                        c:set_ability(SMODS.poll_enhancement{ guaranteed = true, type_key = "hpr_conjurer_enh" }, nil, true)
+                    end
+                    if not c.seal then
+                        did_stuff, this_did_stuff = true, true
+                        c:set_seal(SMODS.poll_seal{ guaranteed = true, type_key = "hpr_conjurer_seal" })
+                    end
+                    if not c.edition then
+                        did_stuff, this_did_stuff = true, true
+                        c:set_edition(SMODS.poll_edition{ guaranteed = true, type_key = "hpr_conjurer_ed", no_negative = true, })
+                    end
+                    if this_did_stuff then
+                        G.E_MANAGER:add_event(Event{
+                            func = function (n)
+                                c:juice_up()
+                                return true
+                            end
+                        })
+                    end
                 end
-            }))
-            return {
-                message = localize('k_copied_ex'),
-                colour = G.C.DARK_EDITION,
-                func = function() -- This is for timing purposes, it runs after the message
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            SMODS.calculate_context({ playing_card_added = true, cards = { card_copied } })
-                            return true
-                        end
-                    }))
+                if did_stuff then
+                    return {
+                        message = localize("k_enhanced_ex"),
+                        colour = G.C.DARK_EDITION,
+                        no_retrigger = true,
+                    }
                 end
-            }
+            end
         end
     end,
-    attributes = { "generation", "xchips", "perma_bonus", "xblindsize", "playing_card", "editions", },
+    attributes = { "generation", "playing_card", "editions", "enhancements", "seals", "modify_card" },
     forcetrigger_compat = true,
 }
 
