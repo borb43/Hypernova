@@ -301,11 +301,10 @@ HPR.StellarJoker {
     forcetrigger_compat = true,
     config = { extra = { multiuse = 1, uses = 0 } },
     loc_vars = function (self, info_queue, card)
-        info_queue[#info_queue+1] = G.P_SEALS.hpr_bronze
         return { vars = { card.ability.extra.multiuse, card.ability.extra.uses }}
     end,
     calculate = function (self, card, context)
-        if context.end_of_round and context.main_eval and context.beat_boss and not context.game_over then
+        if context.ending_shop then
             G.E_MANAGER:add_event(Event{ --event to account for stuff created in events before this joker
                 func = function (n)
                     for _, c in ipairs(G.consumeables.cards) do
@@ -334,13 +333,13 @@ HPR.StellarJoker {
             area = G.consumeables
         })
     end,
-    attributes = { "generation", "seals", "multiuse", "vouchers", "booster", "scaling", "consumable", },
+    attributes = { "multiuse", "vouchers", "booster", "scaling", "consumable", },
 }
 
 HPR.StellarJoker {
     key = "potassium",
     forcetrigger_compat = true,
-    config = { extra = { emult = 1.5, odds1 = 6 }},
+    config = { extra = { odds1 = 6 }},
     loc_vars = function (self, info_queue, card)
         local e = card.ability.extra
         local numerator, denominator = SMODS.get_probability_vars(card, 1, e.odds1, self.key)
@@ -386,7 +385,7 @@ HPR.StellarJoker {
             end
         end
     end,
-    attributes = { "emult", "destroy_card", "chance", },
+    attributes = { "destroy_card", "chance", "food", "forcetrigger", "enhancements", },
 }
 
 HPR.StellarJoker {
@@ -425,7 +424,7 @@ HPR.StellarJoker {
             }
         end
     end,
-    --attributes = { "mult", },
+    attributes = { "hand_type", },
     hpr_badge_info = {
         { key = "credits_code", vars = {"Eris"} },
         { key = "credits_art", vars = {"Eris"}},
@@ -469,7 +468,7 @@ HPR.StellarJoker {
             }
         end
     end,
-    --attributes = { "chips", },
+    attributes = { "hand_type", },
     hpr_badge_info = {
         { key = "credits_code", vars = {"Eris"} },
         { key = "credits_art", vars = {"Eris"}},
@@ -587,7 +586,7 @@ HPR.StellarJoker {
             end
         end
     end,
-    attributes = { "emult", "xmult", "joker_slot", },
+    attributes = { "emult", "xmult", "joker_slot", "consumable_slot", },
     forcetrigger_compat = true,
 }
 
@@ -614,7 +613,7 @@ HPR.StellarJoker {
             return { prevent_stay_flipped = true, no_retrigger = true }
         end
     end,
-    attributes = { "passive", "hand_type" },
+    attributes = { "passive", "hand_size", },
 }
 
 HPR.StellarJoker {
@@ -697,7 +696,8 @@ HPR.StellarJoker {
             SMODS.calculate_effect({ message = localize("k_reset") }, card)
             return d
         end
-    end
+    end,
+    attributes = { "scaling", "economy", "xmult", "reset", }
 }
 
 --[[
@@ -1009,7 +1009,7 @@ HPR.StellarJoker {
             }
         end
     end,
-    attributes = { "xmult", "scaling", },
+    attributes = { "swap", "hand_type", },
     hpr_badge_info = {
         { key = "credits_code", vars = {"Eris"} },
         { key = "credits_art", vars = {"Eris"}},
@@ -1134,7 +1134,7 @@ HPR.StellarJoker {
             return { dollars = d, func = HPR.event_presets.reset_dollar_buffer }
         end
     end,
-    attributes = { "economy", "scaling", },
+    attributes = { "economy", "scaling", "rank", },
     blueprint_compat = true,
 }
 
@@ -1152,16 +1152,23 @@ HPR.StellarJoker {
             G.E_MANAGER:add_event(Event{
                 func = function ()
                     G.GAME.joker_buffer = 0
-                    card.ability.extra.uses = card.ability.extra.uses + target.sell_cost
+                    SMODS.scale_card(card, {
+                        ref_table = card.ability.extra,
+                        ref_value = "uses",
+                        scalar_table = target,
+                        scalar_value = "sell_cost",
+                        block_overrides = {
+                            scalar = true
+                        },
+                        no_message = true,
+                    })
                     target:start_dissolve({G.C.HPR_STLR}, nil, 1.6)
                     play_sound('slice1', 0.96 + math.random() * 0.08)
                     return true
                 end
             })
             if not context.forcetrigger then
-                return nil, true
-            else
-                return { message = "+"..target.sell_cost }
+                return { message = "+"..number_format(target.sell_cost) }
             end
         end
         if (context.joker_main or context.forcetrigger) and card.ability.extra.echips ~= 1 then
@@ -1208,7 +1215,7 @@ HPR.StellarJoker {
             message_colour = Spectrallib.echips
         })
     end,
-    attributes = { "destroy_card", "echips", "scaling", },
+    attributes = { "destroy_card", "echips", "scaling", "position", },
     forcetrigger_compat = true,
 }
 
@@ -1236,7 +1243,7 @@ HPR.StellarJoker {
             return { message = localize("k_upgrade_ex"), colour = G.C.RED }
         end
     end,
-    attributes = { "modify_card", "retrigger", "xmult", "xchips", },
+    attributes = { "modify_card", "retrigger", "xmult", "xchips", "perma_bonus", },
 }
 
 HPR.StellarJoker {
@@ -1266,45 +1273,45 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "lucky",
-    config = { immutable = 1, extra = 1, },
+    config = { extra = { immutable = 1, mod = 1, crit_rate = 0.3 }, },
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.immutable, card.ability.extra }}
+        return { vars = { card.ability.extra.immutable, card.ability.extra.mod, card.ability.extra.crit_rate * 100 }}
     end,
     calculate = function (self, card, context)
         if context.mod_probability then
-            return { numerator = context.numerator * card.ability.immutable }
+            return { numerator = context.numerator * card.ability.extra.immutable }
         end
         if context.end_of_round and context.main_eval and context.beat_boss then
             local new_val = pseudorandom("hpr_lucky_d6",1,6)
-            card.ability.immutable = new_val
+            card.ability.extra.immutable = new_val
             if new_val == 1 then -- +1 consumable slot
-                G.consumeables:change_size(card.ability.extra)
-                return { colour = G.C.FILTER, message = localize{ key = "a_consumable_slot", type = "variable", vars = {card.ability.extra} }}
+                G.consumeables:change_size(card.ability.extra.mod)
+                return { colour = G.C.FILTER, message = localize{ key = "a_consumable_slot", type = "variable", vars = {card.ability.extra.mod} }}
             elseif new_val == 2 then -- +1 discard
-                G.GAME.round_resets.discards = G.GAME.round_resets.discards + card.ability.extra
-                ease_discard(card.ability.extra)
-                return { colour = G.C.RED, message = localize{ key = "a_discards", type = "variable", vars = {card.ability.extra} } }
+                G.GAME.round_resets.discards = G.GAME.round_resets.discards + card.ability.extra.mod
+                ease_discard(card.ability.extra.mod)
+                return { colour = G.C.RED, message = localize{ key = "a_discards", type = "variable", vars = {card.ability.extra.mod} } }
             elseif new_val == 3 then -- +1 hand
-                G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra
-                ease_hands_played(card.ability.extra)
-                return { colour = G.C.BLUE, message = localize{ key = "a_hands", type = "variable", vars = {card.ability.extra} }}
+                G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.mod
+                ease_hands_played(card.ability.extra.mod)
+                return { colour = G.C.BLUE, message = localize{ key = "a_hands", type = "variable", vars = {card.ability.extra.mod} }}
             elseif new_val == 4 then -- +1 hand size
-                G.hand:change_size(card.ability.extra)
-                return { colour = G.C.FILTER, message = localize{ key = "a_handsize", type = "variable", vars = {card.ability.extra} }}
+                G.hand:change_size(card.ability.extra.mod)
+                return { colour = G.C.FILTER, message = localize{ key = "a_handsize", type = "variable", vars = {card.ability.extra.mod} }}
             elseif new_val == 5 then -- -1 ante
-                ease_ante(-card.ability.extra)
-                return { colour = G.C.FILTER, message = localize{ key = "a_ante_minus", type = "variable", vars = {card.ability.extra} }}
+                ease_ante(-card.ability.extra.mod)
+                return { colour = G.C.FILTER, message = localize{ key = "a_ante_minus", type = "variable", vars = {card.ability.extra.mod} }}
             elseif new_val == 6 then -- +1 joker slot
-                G.jokers:change_size(card.ability.extra)
-                return { colour = G.C.DARK_EDITION, message = localize{ key = "a_joker_slot", type = "variable", vars = {card.ability.extra} }}
+                G.jokers:change_size(card.ability.extra.mod)
+                return { colour = G.C.DARK_EDITION, message = localize{ key = "a_joker_slot", type = "variable", vars = {card.ability.extra.mod} }}
             end
         end
     end,
     set_ability = function (self, card)
         local f = HPR.false_area(card.area)
-        card.ability.immutable = pseudorandom(f and "false_hpr_d6" or "hpr_lucky_initial_d6",1,6)
+        card.ability.extra.immutable = pseudorandom(f and "false_hpr_d6" or "hpr_lucky_initial_d6",1,6)
     end,
-    attributes = { "modify_card", "mod_chance", },
+    attributes = { "mod_chance", "consumable_slot", "discards", "hands", "hand_size", "ante", "joker_slot" },
 }
 
 HPR.StellarJoker {
@@ -1365,7 +1372,7 @@ HPR.StellarJoker {
         ease_hands_played(card.ability.extra.hands)
         return { emult = card.ability.extra.emult }
     end,
-    attributes = { "prevents_death", "generation", "joker", },
+    attributes = { "prevents_death", "hands", "emult", "scaling", "reset", },
     forcetrigger_compat = true,
     blueprint_compat = false,
 }

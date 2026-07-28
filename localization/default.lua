@@ -306,7 +306,7 @@ local descriptions = {
                 {
                     "This {C:attention}Joker{} and all held",
                     "{C:attention}consumables{} gain {C:attention}+#1#{} use",
-                    "when {C:attention}Boss Blind{} is defeated"
+                    "at the end of the {C:attention}shop"
                 },
                 {
                     "Use this Joker to copy a",
@@ -710,7 +710,7 @@ local descriptions = {
                 },
                 {
                     "All {C:attention}scoring{} effects gain a",
-                    "fixed {C:attention}30%{} chance to {C:attention}crit{},",
+                    "fixed {C:attention}#3#%{} chance to {C:attention}crit{},",
                     "doubling the effect"
                 },
                 {

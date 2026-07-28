@@ -154,9 +154,15 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
 			end
 		end
 	end
-	if is_scoring and next(SMODS.find_card("j_hpr_lucky")) and pseudorandom("hpr_lucky_crit")<0.30 then
-		changed = true
-		amount = amount*2
+	if is_scoring then
+		local crit_rate = 0
+		for c in Spectrallib.iter.areacards(SMODS.find_card("j_hpr_lucky")) do
+			crit_rate = crit_rate + c.ability.extra.crit_rate
+		end
+		if crit_rate > 0 and pseudorandom("hpr_lucky_crit")<crit_rate then
+			changed = true
+			amount = amount * 2
+		end
 	end
 	if changed and key:sub(-4) == "_mod" then
 		key = key:sub(0,-5)
