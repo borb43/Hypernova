@@ -1770,3 +1770,19 @@ SMODS.Joker {
     end,
     attributes = { "food", "scaling", }
 }
+
+SMODS.Joker {
+    key = "shrewd_scale",
+    rarity = 3,
+    cost = 8,
+    atlas = "placeholder",
+    pos = { x = 2, y = 0 },
+    blueprint_compat = false,
+    calc_scaling = function (self, card, other_card, scaling_value, scalar_value, args)
+        return {
+            override_scalar_value = {
+                value = scaling_value * 2
+            }
+        }
+    end,
+}

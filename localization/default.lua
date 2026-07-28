@@ -1245,7 +1245,13 @@ local descriptions = {
                     "when triggered"
                 }
             }
-        }
+        },
+        j_hpr_shrewd_scale = {
+            name = "Shrewd Scales",
+            text = {
+                "{C:attention}Doubles{} all {C:attention}scaling{} effects"
+            }
+        },
     },
     Other = {
         p_hpr_lunar_pack = {
