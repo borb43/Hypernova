@@ -124,7 +124,7 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
 			break
 		end
 	end
-	if key:find("asc") then
+	if key:find("asc") or key:find("chip") then
 		is_scoring = true
 	end
 	if HPR.findany(key, "mult", "chip") and not effect.hpr_no_mod then
@@ -167,6 +167,9 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
 	if changed and key:sub(-4) == "_mod" then
 		key = key:sub(0,-5)
 		effect.message = nil
+		if key:sub(-4) == "chip" then --if key ends in `chip` (because _mod returns use singular chip)
+			key = key:gsub("chip", "chips")
+		end
 	end
 	return scie(effect, scored_card, key, amount, from_edition)
 end
