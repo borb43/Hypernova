@@ -80,7 +80,7 @@ SMODS.Joker { -- solar flare, levels up not most played hands and destroys some 
                 end
                 return {
                     level_up = 1,
-                    message = localize("k_upgrade_ex"),
+                    message = localize("k_level_up_ex"),
                     colour = G.C.GREEN
                 }
             end
