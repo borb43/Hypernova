@@ -1228,6 +1228,23 @@ local descriptions = {
                     "{s:0.8}hand changes every round"
                 }
             }
+        },
+        j_hpr_salt_barrel = {
+            name = "Barrel of Salt",
+            text = {
+                {
+                    "When a card {C:attention}resets{},",
+                    "it retains {C:attention}#1#%{} of the",
+                    "the original value",
+                    "All {C:attention}negative scaling",
+                    "is reduced by {C:attention}#1#%",
+                    "{s:0.8}Barrel of Salt excluded",
+                },
+                {
+                    "Reduces by {C:attention}#2#%",
+                    "when triggered"
+                }
+            }
         }
     },
     Other = {
@@ -1775,6 +1792,7 @@ local misc = {
         k_upgrade = "Upgrade",
         k_debuff = "Debuff",
         k_destroy = "Destroy",
+        k_preserved_ex = "Preserved!",
     },
     high_scores = {},
     labels = {
