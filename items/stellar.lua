@@ -1664,3 +1664,59 @@ HPR.StellarJoker {
         end
     end
 }
+
+HPR.StellarJoker {
+    key = "mark",
+    config = { extra = { dollars = 5, emult = 1.1, hand_type = "High Card", }},
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+                card.ability.extra.dollars,
+                localize(G.GAME.current_round.hpr_mark_suit or "Spades", "suits_plural"),
+                card.ability.extra.emult,
+                localize(G.GAME.current_round.hpr_mark_rank or "Ace", "ranks"),
+                localize(card.ability.extra.hand_type, "poker_hands"),
+                colours = { G.C.SUITS[G.GAME.current_round.hpr_mark_suit or "Spades"] }
+            }
+        }
+    end,
+    set_ability = function (self, card, initial, delay_sprites)
+        card.ability.extra.hand_type = HPR.get_random_hand(nil, HPR.false_area(card.area) and "false_hpr_mark" or "hpr_mark_hand")
+    end,
+    calculate = function (self, card, context)
+        if context.joker_main and context.scoring_name == card.ability.extra.hand_type then
+            return {
+                balance = true,
+            }
+        end
+        if context.discard and context.other_card:is_suit(G.GAME.current_round.hpr_mark_suit) then
+            G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra.dollars
+            return {
+                dollars = card.ability.extra.dollars,
+                func = function()
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            G.GAME.dollar_buffer = 0
+                            return true
+                        end
+                    }))
+                end
+            }
+        end
+        if context.individual and context.cardarea == G.play and context.other_card:get_id() == Spectrallib.safe_get(SMODS.Ranks, G.GAME.current_round.hpr_mark_rank, "id") then
+            return {
+                emult = card.ability.extra.emult
+            }
+        end
+        if context.end_of_round and not context.game_over and context.main_eval and not context.blueprint then
+            local function p(v)
+                return v ~= card.ability.extra.hand_type
+            end
+            card.ability.extra.hand_type = HPR.get_random_hand(nil, "hpr_mark_hand", p)
+            return {
+                message = localize("k_reset_ex"),
+                no_retrigger = true,
+            }
+        end
+    end
+}

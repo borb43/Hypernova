@@ -1207,6 +1207,27 @@ local descriptions = {
                     "and {X:slib_emult,C:white}^#2#{} Mult"
                 }
             }
+        },
+        j_hpr_mark = {
+            name = "MARK",
+            text = {
+                {
+                    "Earn {C:money}$#1#{} for each",
+                    "discarded {V:1}#2#{} card",
+                    "{s:0.8}suit changes every round",
+                },
+                {
+                    "Each played {C:attention}#4#{} gives",
+                    "{X:emult,C:white}^#3#{} Mult when scored",
+                    "{s:0.8}rank changes every round"
+                },
+                {
+                    "If played poker hand",
+                    "is a {C:attention}#5#{}, {C:hpr_balance}balances",
+                    "{C:chips}Chips{} and {C:mult}Mult",
+                    "{s:0.8}hand changes every round"
+                }
+            }
         }
     },
     Other = {

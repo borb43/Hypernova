@@ -22,9 +22,11 @@ end
 local suits_to_reset = {
     "hpr_quiz_suit",
     "hpr_prism_suit",
+    "hpr_mark_suit",
 }
 local ranks_to_reset = {
     "hpr_payload_rank",
+    "hpr_mark_rank",
 }
 
 local function reset_suits()
