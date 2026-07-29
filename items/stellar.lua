@@ -1025,7 +1025,7 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "mask",
-    config = { extra = { xmult = 1.5, dollar = 3, reps = 3 }},
+    config = { extra = { xmult = 2, dollar = 3, reps = 3 }},
     loc_vars = function (self, info_queue, card)
         local key = self.key
         if next(SMODS.find_mod("paperback")) then
