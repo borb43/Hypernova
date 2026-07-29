@@ -1655,7 +1655,8 @@ SMODS.Joker {
                 }
             end
         end
-    end
+    end,
+    hpr_ascension_key = "j_hpr_destroyer",
 }
 
 SMODS.Joker {
