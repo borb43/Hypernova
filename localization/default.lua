@@ -1245,7 +1245,7 @@ local descriptions = {
         j_hpr_shrewd_scale = {
             name = "Shrewd Scales",
             text = {
-                "{C:attention}Doubles{} all {C:attention}scaling{} effects"
+                "{C:attention}Doubles{} all card {C:attention}scaling{}"
             }
         },
     },
