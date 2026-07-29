@@ -42,7 +42,7 @@ SMODS.Back {
     end,
     pools = { RedeemableBacks = true }
 }
-
+--[[
 SMODS.Back {
     key = "cosmic",
     atlas = "placeholder",
@@ -53,7 +53,7 @@ SMODS.Back {
     end,
     pools = { RedeemableBacks = true }
 }
-
+]]
 SMODS.Back {
     key = "treasury",
     atlas = "placeholder",
