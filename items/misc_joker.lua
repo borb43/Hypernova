@@ -71,7 +71,7 @@ SMODS.Joker { -- solar flare, levels up not most played hands and destroys some 
             if context.scoring_name ~= _handname then
                 local options = {}
                 for _, c in ipairs(G.play.cards) do
-                    if not SMODS.is_eternal(c) then options[#options+1] = c end
+                    if not SMODS.is_eternal(c, card) then options[#options+1] = c end
                 end
                 for _ = 1, math.min(card.ability.extra.destroyed, #options) do
                     local roll, pos = pseudorandom_element(options, "hpr_solar")
@@ -632,7 +632,7 @@ SMODS.Joker {
         if context.game_over and not context.blueprint and context.main_eval then
             local eternal_count = 0
             for _, c in ipairs(G.consumeables.cards) do
-                if not SMODS.is_eternal(c) then eternal_count = eternal_count + 1 end
+                if SMODS.is_eternal(c, card) then eternal_count = eternal_count + 1 end
             end
             G.GAME.consumeable_buffer = G.GAME.consumeable_buffer - (#G.consumeables.cards - eternal_count)
             SMODS.destroy_cards(G.consumeables.cards)
@@ -661,7 +661,7 @@ SMODS.Joker {
         if context.forcetrigger then
             local eternal_count = 0
             for _, c in ipairs(G.consumeables.cards) do
-                if not SMODS.is_eternal(c) then eternal_count = eternal_count + 1 end
+                if SMODS.is_eternal(c, card) then eternal_count = eternal_count + 1 end
             end
             G.GAME.consumeable_buffer = G.GAME.consumeable_buffer - (#G.consumeables.cards - eternal_count)
             SMODS.destroy_cards(G.consumeables.cards)
