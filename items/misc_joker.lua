@@ -1,7 +1,7 @@
 SMODS.Joker { --fusion reactor, balances before scoring
     key = "fusion",
-    atlas = "placeholder",
-    pos = { x = 1, y = 0 },
+    atlas = "joker",
+    pos = { x = 4, y = 1 },
     rarity = 2,
     cost = 7,
     forcetrigger_compat = true,
