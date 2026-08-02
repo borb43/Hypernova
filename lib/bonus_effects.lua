@@ -21,6 +21,8 @@ HPR.buffoon_effect_pool = {
     {key = "slib_type_mult", min = 12, max = 50,},
     {key = "slib_type_xmult", min = 20, max = 50, factor = 0.1, },
     {key = "slib_s_mult", min = 6, max = 20,},
+    {key = "hpr_odds_levelup", min = 2, max = 5,},
+    {key = "hpr_consumable_on_select"},
 }
 
 function HPR.poll_buffoon_effect(seed)
@@ -34,3 +36,47 @@ function HPR.poll_buffoon_effect(seed)
     end
     return eff_table.key, config
 end
+
+Spectrallib.BonusEffect{
+    key = "odds_levelup",
+    loc_vars = function (self, info_queue, card, eff_table)
+        local n, d = SMODS.get_probability_vars(self, 1, eff_table.config.extra, "hpr_levelup_bonus")
+        return { vars = { n, d }}
+    end,
+    calculate = function (self, card, eff_table, context)
+        if context.before and SMODS.pseudorandom_probability(card, "hpr_levelup_bonus", 1, eff_table.config.extra) then
+            return {
+                level_up = true,
+                message = localize("k_upgrade_ex")
+            }
+        end
+    end,
+    attributes = { "chance", "hand_level", }
+}
+
+Spectrallib.BonusEffect{
+    key = "consumable_on_select",
+    calculate = function (self, card, eff_table, context)
+        if context.setting_blind and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+            G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+            G.E_MANAGER:add_event(Event({
+                func = (function()
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            SMODS.add_card {
+                                set = 'Consumeables',
+                                key_append = 'hpr_consumable_bonuseffect'
+                            }
+                            G.GAME.consumeable_buffer = 0
+                            return true
+                        end
+                    }))
+                    SMODS.calculate_effect({ message = localize('slib_plus_consumable') },
+                        context.blueprint_card or card)
+                    return true
+                end)
+            }))
+            return nil, true
+        end
+    end
+}

@@ -1370,7 +1370,21 @@ local descriptions = {
                 "{C:attention}#2#{} cards drawn from",
                 "a {C:hpr_stellar,E:1}custom pool",
             }
-        }
+        },
+        sbe_hpr_odds_levelup = {
+            text = {
+                "{C:green}#1# in #2#{} chance to",
+                "upgrade level of",
+                "played {C:attention}poker hand{}",
+            }
+        },
+        sbe_hpr_consumable_on_select = {
+            text = {
+                "Create a {C:attention}Consumable{} card",
+                "when {C:attention}Blind{} is selected",
+                "{C:inactive}(Must have room)",
+            },
+        },
     },
     Planet = {
         c_hpr_centauri = {
