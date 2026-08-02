@@ -1,10 +1,10 @@
 HPR.buffoon_effect_pool = {
     {key = "slib_chips", min = 40, max = 150,},
     {key = "slib_xchips", min = 15, max = 35, factor = 0.1, },
-    {key = "slib_echips", min = 105, max = 140, factor = 0.01, },
+    {key = "slib_echips", min = 105, max = 125, factor = 0.01, },
     {key = "slib_mult", min = 8, max = 30, },
     {key = "slib_xmult", min = 15, max = 35, factor = 0.1, },
-    {key = "slib_emult", min = 110, max = 150, factor = 0.01, },
+    {key = "slib_emult", min = 110, max = 130, factor = 0.01, },
     {key = "slib_score", get_config = function (seed)
         local ante = G.GAME.round_resets.ante or 1
         return { extra = pseudorandom(seed, 50, 150) * 2^ante }
@@ -21,7 +21,7 @@ HPR.buffoon_effect_pool = {
     {key = "slib_type_mult", min = 12, max = 50,},
     {key = "slib_type_xmult", min = 20, max = 50, factor = 0.1, },
     {key = "slib_s_mult", min = 6, max = 20,},
-    {key = "hpr_odds_levelup", min = 2, max = 5,},
+    {key = "hpr_odds_levelup", min = 3, max = 6,},
     {key = "hpr_consumable_on_select"},
 }
 
