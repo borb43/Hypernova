@@ -16,6 +16,7 @@ HPR.buffoon_effect_pool = {
     {key = "hpr_consumable_on_select"},
     {key = "hpr_chad", min = 1, max = 4,},
     {key = "hpr_rank_repetition"},
+    {key = "hpr_on_sell_voucher"},
 }
 
 function HPR.poll_buffoon_effect(seed)
@@ -81,7 +82,7 @@ Spectrallib.BonusEffect{
         return { vars = { eff_table.config.extra }}
     end,
     calculate = function (self, card, eff_table, context)
-        if context.repetition and context.other_card == context.scoring_hand[1] then
+        if context.repetition and context.cardarea == G.play and context.other_card == context.scoring_hand[1] then
             return {
                 repetitions = eff_table.config.extra
             }
@@ -89,6 +90,10 @@ Spectrallib.BonusEffect{
     end
 }
 
+local attr_to_rank = {
+    two = "2", three = "3", four = "4", five = "5", six = "6",
+    seven = "7", eight = "8", nine = "9", ten = "10",
+}
 Spectrallib.BonusEffect{
     key = "rank_repetition",
     on_apply = function (self, card, eff_table)
@@ -113,5 +118,32 @@ Spectrallib.BonusEffect{
                 return { repetitions = 1 }
             end
         end
-    end
+    end,
+    has_attribute = function (self, card, eff_table, attribute)
+        for i = 1, 3 do
+            local r = eff_table.config["rank"..i]
+            if attr_to_rank[r] == attribute or r:lower() == attribute then
+                return true
+            end
+        end
+    end,
+    attributes = { "rank", "retrigger", }
+}
+
+Spectrallib.BonusEffect{
+    key = "on_sell_voucher",
+    calculate = function (self, card, eff_table, context)
+        if context.selling_self and (G.consumeables.config.card_limit > (#G.consumeables.cards + G.GAME.consumeable_buffer) or card.area == G.consumeables) then
+            Spectrallib.event(function ()
+                SMODS.add_card{
+                    set = "Voucher",
+                    key_append = "hpr_on_sell_voucher",
+                    area = G.consumeables
+                }
+                return true
+            end)
+            return { message = localize("slib_plus_voucher") }
+        end
+    end,
+    attributes = { "voucher", "generation", "on_sell", }
 }

@@ -1397,6 +1397,12 @@ local descriptions = {
                 "Retriggers all scored",
                 "{C:attention}#1#s{}, {C:attention}#2#s{} and {C:attention}#3#s"
             }
+        },
+        sbe_hpr_on_sell_voucher = {
+            text = {
+                "Sell this card to",
+                "create a {C:attention}Voucher",
+            }
         }
     },
     Planet = {
