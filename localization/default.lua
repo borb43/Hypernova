@@ -1385,6 +1385,19 @@ local descriptions = {
                 "{C:inactive}(Must have room)",
             },
         },
+        sbe_hpr_chad = {
+            text = {
+                "Retrigger {C:attention}first{} played",
+                "card used in scoring",
+                "{C:attention}#1#{} additional times",
+            }
+        },
+        sbe_hpr_rank_repetition = {
+            text = {
+                "Retriggers all scored",
+                "{C:attention}#1#s{}, {C:attention}#2#s{} and {C:attention}#3#s"
+            }
+        }
     },
     Planet = {
         c_hpr_centauri = {
