@@ -999,17 +999,11 @@ local descriptions = {
         j_hpr_buffoon = {
             name = "BUFFOON",
             text = {
-                {"When {C:attention}Blind{} is selected, creates",
-                "{C:attention}#1# {C:dark_edition}editioned {C:attention}Jokers{} with",
-                "increased values based on their {C:attention}rarity"},
-                {"Other Jokers trigger {C:mult}Mult{}",
-                "based on their {C:attention}rarity"},
-                {
-                    "{C:common}Common{}: {X:dark_edition,C:white}X#2#{} values | {C:mult}+#5#{} Mult",
-                    "{C:uncommon}Uncommon{}: {X:dark_edition,C:white}X#3#{} values | {X:mult,C:white}X#6#{} Mult",
-                    "{C:rare}Rare{}: {X:dark_edition,C:white}X#4#{} values | {X:slib_emult,C:white}^#7#{} Mult",
-                    "Any rarer: N/A | {X:slib_emult,C:white}^#7#{} Mult"
-                }
+                {"When Blind is selected, fill",
+                "Joker Slots with random {C:attention}Jokers",
+                "with {C:attention}#1#{} random {C:hpr_stellar}bonus effect#<s>1#",},
+                {"Increase effect count by {C:attention}#2#",
+                "when {C:attention}Boss Blind{} is defeated"},
             }
         },
         j_hpr_hunter = {
