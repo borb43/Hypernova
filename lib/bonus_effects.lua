@@ -78,5 +78,6 @@ Spectrallib.BonusEffect{
             }))
             return nil, true
         end
-    end
+    end,
+    attributes = { "generation", "consumable" }
 }
