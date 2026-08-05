@@ -1559,6 +1559,9 @@ SMODS.Joker {
             return { message = localize("k_plus_egg") }
         end
     end,
+    in_pool = function (self, args)
+        return not args or args.source ~= "sho"
+    end,
     attributes = { "generation", "joker", },
 }
 
