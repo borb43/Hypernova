@@ -1571,9 +1571,10 @@ SMODS.Joker {
     cost = 6,
     atlas = "joker",
     pos = { x = 3, y = 1 },
+    config = { extra = { chips = 10 }},
     loc_vars = function (self, info_queue, card)
         local s = G.GAME.current_round.hpr_quiz_suit or "Spades"
-        return { vars = { localize(s, "suits_plural"), colours = { G.C.SUITS[s] }}}
+        return { vars = { localize(s, "suits_plural"), card.ability.extra.chips, colours = { G.C.SUITS[s] }}}
     end,
     calculate = function (self, card, context)
         if context.before and G.GAME.current_round.hpr_quiz_suit then
@@ -1586,7 +1587,7 @@ SMODS.Joker {
                 return {
                     message = localize("k_level_up_ex"),
                     func = function ()
-                        Spectrallib.level_suit(s, card, 1, nil, nil, nil, true)
+                        Spectrallib.level_suit(s, card, 1, card.ability.extra.chips, nil, nil, true)
                         return true
                     end
                 }
