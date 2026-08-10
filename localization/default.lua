@@ -339,7 +339,7 @@ local descriptions = {
             name = "CRAZY",
             text = {
                 "All {C:attention}poker hands{} contained in",
-                "played hand gain {C:mult}+#1#{} Mult for",
+                "played hand gain {X:mult,C:white}X#1#{} Mult for",
                 "each {C:attention}unique{} contained {C:attention}poker hand"
             }
         },
@@ -347,7 +347,7 @@ local descriptions = {
             name = "CRAFTY",
             text = {
                 "All {C:attention}poker hands{} contained in",
-                "played hand gain {C:chips}+#1#{} Chip#<s>1# for",
+                "played hand gain {X:chips,C:white}X#1#{} Chips for",
                 "each {C:attention}unique{} contained {C:attention}poker hand"
             }
         },
@@ -544,9 +544,8 @@ local descriptions = {
                     "contained in played hand",
                 },
                 {
-                    "Last played {C:attention}poker hand{} of",
-                    "round gains {X:chips,C:white}X#2#{} Chips and",
-                    "{X:mult,C:white}X#2#{} Mult at end of round"
+                    "Final played {C:attention}poker hand{} each",
+                    "round gains {X:slib_emult,C:white}^#2#{} Mult",
                 }
             }
         },
@@ -1193,8 +1192,7 @@ local descriptions = {
                 },
                 {
                     "The first {C:attention}discarded{} poker hand",
-                    "each round gains {X:slib_echips,C:white}^#2#{} Chips",
-                    "and {X:slib_emult,C:white}^#2#{} Mult"
+                    "each round gains {X:slib_emult,C:white}^#2#{} Mult",
                 }
             }
         },

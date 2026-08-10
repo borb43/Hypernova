@@ -392,7 +392,7 @@ HPR.StellarJoker {
         x = 4, y = 0,
         extra = { x = 5, y = 0 }
     },
-    config = { extra = { mult = 1 }},
+    config = { extra = { mult = 0.1 }},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.mult }}
     end,
@@ -403,7 +403,7 @@ HPR.StellarJoker {
                 if next(hand) then hands[#hands+1] = k end
             end
             local count = #hands
-            local m = card.ability.extra.mult
+            local m = 1 + card.ability.extra.mult*count
             return {
                 message = localize("k_upgrade_ex"),
                 colour = G.C.MULT,
@@ -413,8 +413,9 @@ HPR.StellarJoker {
                         parameters = {"mult"},
                         level_up = false,
                         hands = hands,
+                        StatusText = "X"..number_format(m),
                         func = function (base, hand, param)
-                            return base + count*m
+                            return base * m
                         end
                     }
                 end
@@ -436,7 +437,7 @@ HPR.StellarJoker {
         x = 7, y = 0,
         extra = { x = 8, y = 0 }
     },
-    config = { extra = { chips = 5 }},
+    config = { extra = { chips = 0.1 }},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.chips }}
     end,
@@ -447,7 +448,7 @@ HPR.StellarJoker {
                 if next(hand) then hands[#hands+1] = k end
             end
             local count = #hands
-            local m = card.ability.extra.chips
+            local m = 1+card.ability.extra.chips*count
             return {
                 message = localize("k_upgrade_ex"),
                 colour = G.C.MULT,
@@ -457,8 +458,9 @@ HPR.StellarJoker {
                         parameters = {"chips"},
                         level_up = false,
                         hands = hands,
+                        StatusText = "X"..number_format(m),
                         func = function (base, hand, param)
-                            return base + count*m
+                            return base * m
                         end
                     }
                 end
@@ -967,9 +969,9 @@ HPR.StellarJoker {
         x = 10, y = 0,
         --extra = { x = 11, y = 0 }
     },
-    config = { extra = { swap_portion = 0.05, xchult = 1.2, }},
+    config = { extra = { swap_portion = 0.05, echult = 1.25, }},
     loc_vars = function (self, info_queue, card)
-        return { vars = { Spectrallib.clamp(card.ability.extra.swap_portion, 0, 1)*100, card.ability.extra.xchult }}
+        return { vars = { Spectrallib.clamp(card.ability.extra.swap_portion, 0, 1)*100, card.ability.extra.echult }}
     end,
     forcetrigger_compat = true,
     calculate = function (self, card, context)
@@ -986,7 +988,7 @@ HPR.StellarJoker {
             end
         end
         if context.end_of_round and context.main_eval and G.GAME.hands[G.GAME.last_hand_played] then
-            local mul = card.ability.extra.xchult
+            local mul = card.ability.extra.echult
             local h = G.GAME.last_hand_played
             return {
                 message = localize("k_upgrade_ex"),
@@ -995,14 +997,21 @@ HPR.StellarJoker {
                     SMODS.upgrade_poker_hands{
                         from = card,
                         hands = h,
-                        parameters = {"chips", "mult"},
-                        StatusText = {
-                            text = "X"..number_format(mul),
-                            cover_colour = G.C.RARITY.hpr_stellar,
-                        },
+                        parameters = {"mult"},
+                        StatusText = function (hand, parameter)
+                            local ret = {
+                                text = "^"..number_format(mul),
+                            }
+                            if parameter == "chips" then
+                                ret.cover_colour = Spectrallib.echips
+                            elseif parameter == "mult" then
+                                ret.cover_colour = Spectrallib.emult
+                            end
+                            return ret
+                        end,
                         level_up = false,
                         func = function (base, hand, param, level_up)
-                            return base*mul
+                            return base^mul
                         end,
                     }
                 end
@@ -1556,7 +1565,7 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "stardust",
-    config = { extra = { xchult = 1.25, echult = 1.1, }},
+    config = { extra = { xchult = 1.4, echult = 1.25, }},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.xchult, card.ability.extra.echult, }}
     end,
@@ -1571,10 +1580,17 @@ HPR.StellarJoker {
                         from = card,
                         hands = text,
                         parameters = {"chips", "mult"},
-                        StatusText = {
-                            text = "^"..number_format(m),
-                            cover_colour = G.C.RARITY.hpr_stellar,
-                        },
+                        StatusText = function (hand, parameter)
+                            local ret = {
+                                text = "^"..number_format(m),
+                            }
+                            if parameter == "chips" then
+                                ret.cover_colour = Spectrallib.echips
+                            elseif parameter == "mult" then
+                                ret.cover_colour = Spectrallib.emult
+                            end
+                            return ret
+                        end,
                         level_up = false,
                         func = function (base, hand, param, level_up)
                             return base^m
@@ -1593,10 +1609,7 @@ HPR.StellarJoker {
                         from = card,
                         hands = text,
                         parameters = {"chips", "mult"},
-                        StatusText = {
-                            text = "X"..number_format(m),
-                            cover_colour = G.C.RARITY.hpr_stellar,
-                        },
+                        StatusText = "X"..number_format(m),
                         level_up = false,
                         func = function (base, hand, param, level_up)
                             return base*m
