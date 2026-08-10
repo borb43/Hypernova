@@ -600,7 +600,7 @@ local descriptions = {
                 "{C:red}self destructs"
             }
         },
-        j_hpr_mask = {
+        j_hpr_royalty = {
             name = "ROYALTY",
             text = {
                 {
@@ -615,27 +615,6 @@ local descriptions = {
                     "Retriggers scored",
                     "{C:attention}Kings #3#{} times"
                 },
-            }
-        },
-        j_hpr_mask_pb = { --apostle thing when you have them
-            name = "ROYALTY",
-            text = {
-                {
-                    "{C:attention}Jacks{} in the discard pile",
-                    "give {X:mult,C:white}X#1#{} Mult"
-                },
-                {
-                    "{C:attention}Queens{} each give {C:gold}$#2#",
-                    "when held in hand"
-                },
-                {
-                    "Retriggers scored",
-                    "{C:attention}Kings #3#{} times"
-                },
-                {
-                    "{C:attention}Apostles{} trigger",
-                    "all three effects"
-                }
             }
         },
         j_hpr_numeric = {
@@ -1232,12 +1211,16 @@ local descriptions = {
                 }
             }
         },
-        j_hpr_shrewd_scale = {
-            name = "Shrewd Scales",
+        j_hpr_mask = {
+            name = "MASK",
             text = {
-                "{C:attention}Doubles{} all card {C:attention}scaling{}"
+                "Scored {C:attention}face{} cards give",
+                "{X:slib_emult,C:white}^#1#{} Mult and {X:chips,C:white}X#3#{} Chips",
+                "{X:slib_emult,C:white}-^#2#{} Mult and {X:chips,C:white}+X#4#{} Chips",
+                "for each previously scored",
+                "{C:attention}face{} card during this hand"
             }
-        },
+        }
     },
     Other = {
         p_hpr_lunar_pack = {

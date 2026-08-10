@@ -1027,30 +1027,19 @@ HPR.StellarJoker {
 }
 
 HPR.StellarJoker {
-    key = "mask",
+    key = "royalty",
     config = { extra = { xmult = 2, dollar = 3, reps = 3 }},
     loc_vars = function (self, info_queue, card)
-        local key = self.key
-        if next(SMODS.find_mod("paperback")) then
-            local a = false
-            for _, v in ipairs(G.playing_cards or {}) do
-                if PB_UTIL.is_rank(v, 'paperback_Apostle') then a = true end --thank you paperback
-            end
-            if a then
-                key = key.."_pb"
-            end
-        end
-        return { vars = { card.ability.extra.xmult, card.ability.extra.dollar, card.ability.extra.reps }, key = key }
+        return { vars = { card.ability.extra.xmult, card.ability.extra.dollar, card.ability.extra.reps } }
     end,
     forcetrigger_compat = true,
     calculate = function (self, card, context)
         if context.individual and not context.end_of_round and not context.other_card.debuff then
             local id = context.other_card:get_id()
-            local a = Spectrallib.safe_get(SMODS.Ranks,"paperback_Apostle","id")
-            if context.cardarea == G.discard and (id == 11 or id == a) then
+            if context.cardarea == G.discard and (id == 11) then
                 return { xmult = card.ability.extra.xmult }
             end
-            if context.cardarea == G.hand and (id == 12 or id == a) then
+            if context.cardarea == G.hand and (id == 12) then
                 G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra.dollar
                 return {
                     dollars = card.ability.extra.dollar,
@@ -1067,7 +1056,7 @@ HPR.StellarJoker {
         end
         if context.repetition and context.cardarea == G.play then
             local id = context.other_card:get_id()
-            if id == 13 or id == Spectrallib.safe_get(SMODS.Ranks,"paperback_Apostle","id") then
+            if id == 13 then
                 return { repetitions = card.ability.extra.reps }
             end
         end
@@ -1088,7 +1077,6 @@ HPR.StellarJoker {
         end
     end,
     attributes = { "xmult", "econ", "face", "retrigger", "king", "queen", "jack", },
-    hpr_loc_keys = { "j_hpr_mask", "j_hpr_mask_pb" }
 }
 
 HPR.StellarJoker {
@@ -1695,9 +1683,61 @@ HPR.StellarJoker {
             end
             card.ability.extra.hand_type = HPR.get_random_hand(nil, "hpr_mark_hand", p)
             return {
-                message = localize("k_reset_ex"),
+                message = localize("k_reset"),
                 no_retrigger = true,
             }
+        end
+    end
+}
+
+HPR.StellarJoker {
+    key = "mask",
+    config = { extra = { emult = 1.25, loss = 0.05, xchips = 1, gain = 0.2 } },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.emult, card.ability.extra.loss, card.ability.extra.xchips, card.ability.extra.gain }}
+    end,
+    calculate = function (self, card, context)
+        if context.individual and context.cardarea == G.play and context.other_card:is_face() then
+            local ret = {
+                emult = card.ability.extra.emult ~= 1 and card.ability.extra.emult or nil,
+                xchips = card.ability.extra.xchips ~= 1 and card.ability.extra.xchips or nil,
+            }
+            if card.ability.extra.emult > 1 then
+                SMODS.scale_card(card, {
+                    ref_table = card.ability.extra,
+                    ref_value = "emult",
+                    scalar_value = "loss",
+                    no_message = true,
+                    operation = "-",
+                })
+                card.ability.extra.emult = math.max(card.ability.extra.emult, 1)
+            end
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "xchips",
+                scalar_value = "gain",
+                no_message = true,
+            })
+            return ret
+        end
+        if context.after then
+            if card.ability.extra.emult ~= 1.25 then
+                SMODS.reset_card(card, {
+                    ref_table = card.ability.extra,
+                    ref_value = "emult",
+                    reset_value = 1.25,
+                    no_message = true
+                })
+            end
+            if card.ability.extra.xchips ~= 1 then
+                SMODS.reset_card(card, {
+                    ref_table = card.ability.extra,
+                    ref_value = "xchips",
+                    reset_value = 1,
+                    no_message = true,
+                })
+            end
+            return { message = localize("k_reset" ) }
         end
     end
 }
