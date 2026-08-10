@@ -1538,29 +1538,54 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "enchant",
-    config = { extra = { xscore = 1.5 } },
+    config = { extra = { emult_per = 0.05, percent = 0.2 } },
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra.xscore }}
+        local enh_key, tied, tied_count, highest = nil, false, 1, 0
+        if G.playing_cards then
+            local enh_table = {}
+            for _, v in ipairs(G.playing_cards) do
+                for k in pairs(SMODS.get_enhancements(v)) do
+                    enh_table[k] = (enh_table[k] or 0) + 1
+                end
+            end
+            for k, v in pairs(enh_table) do
+                if v > highest then
+                    enh_key = k
+                    highest = v
+                    tied_count = 1
+                    tied = false
+                elseif v == highest then
+                    tied = true
+                    tied_count = tied_count + 1
+                end
+            end
+        end
+        local loc = tied and localize{ type = "variable", key = "n_way_tie", vars = {tied_count} } or enh_key and localize{ type = "name_text", set = "Enhanced", key = enh_key } or localize("k_none")
+        return { vars = { card.ability.extra.emult_per, loc, 1 + card.ability.extra.emult_per*highest, Spectrallib.clamp(card.ability.extra.percent,0,1)*100 }}
     end,
     calculate = function (self, card, context)
-        if context.repetition and context.other_card:get_seal() then
-            return { repetitions = 1 }
-        end
-        if (context.other_joker or {}).edition or (context.other_consumeable or {}).edition then
-            return { balance = true }
-        end
-        if context.individual and (context.cardarea == G.play or context.cardarea == G.hand) and not context.end_of_round then
-            local ret = {}
-            if context.other_card.edition then
-                ret.balance = true
+        if context.joker_main then
+            local enh_table = {}
+            for _, v in ipairs(G.playing_cards) do
+                for k in pairs(SMODS.get_enhancements(v)) do
+                    enh_table[k] = (enh_table[k] or 0) + 1
+                end
             end
-            if next(SMODS.get_enhancements(context.other_card)) then
-                ret.xscore = card.ability.extra.xscore
+            local highest = 0
+            for _, v in pairs(enh_table) do
+                highest = math.max(highest, v)
             end
-            if next(ret) then return ret end
+            if highest > 0 then
+                return { emult = 1 + card.ability.extra.emult_per*highest }
+            end
+        end
+        if (context.individual and context.cardarea == G.play and context.other_card or context.other_joker or context.other_consumeable or {}).edition then
+            return {
+                cry_broken_swap = card.ability.extra.percent
+            }
         end
     end,
-    attributes = { "xscore", "balance", "retrigger", }
+    attributes = { "emult", "swap", "enhancements" }
 }
 
 HPR.StellarJoker {

@@ -1162,17 +1162,15 @@ local descriptions = {
             name = "ENCHANT",
             text = {
                 {
-                    "{C:attention}Enhanced{} cards give",
-                    "{X:purple,C:white}X#1#{} Score when scored",
-                    "or held in hand"
+                    "{X:slib_emult,C:white}^#1#{} Mult for each card of",
+                    "the most frequent enhancement",
+                    "in your {C:attention}full deck",
+                    "{C:inactive}(Currently {C:attention}#2#{C:inactive}, {X:slib_emult,C:white}^#3#{C:inactive})"
                 },
                 {
-                    "{C:attention}Retrigger{} all {C:attention}playing",
-                    "cards with a {C:attention}seal"
-                },
-                {
-                    "Cards with an {C:dark_edition}edition",
-                    "{C:hpr_balance}balance {C:chips}Chips{} and {C:mult}Mult"
+                    "{C:attention}Jokers{}, {C:attention}Consumables{} and",
+                    "scored cards with {C:dark_edition}editions",
+                    "swap {C:hpr_balance}#4#%{} of {C:chips}Chips{} and {C:mult}Mult"
                 }
             }
         },
@@ -1859,6 +1857,7 @@ local misc = {
         a_consumable_slot = "+#1# Consumable Slots",
         a_ante_minus = "-#1# Ante",
         a_joker_slot = "+#1# Joker Slots",
+        n_way_tie = "#1#-way tie"
     },
     v_text = {},
 }
