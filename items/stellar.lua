@@ -364,23 +364,17 @@ HPR.StellarJoker {
             end
             return nil, true
         end
-    end,
-    calc_scaling = function (self, card, other_card, initial_value, scalar_value, args)
-        if other_card:has_attribute("food") then
-            if args.operation == "+" or args.operation == "-" or not args.operation then
+        if context.scaling_card and context.card:has_attribute("food") then
+            if context.operation == "+" or context.operation == "-" or not context.operation then
                 return {
-                    override_scalar_value = {
-                        value = -scalar_value
-                    },
+                    override_scalar = -context.scalar,
                     override_message = {
                         message = localize("k_upgrade_ex")
                     }
                 }
-            elseif args.operation == "X" then
+            elseif context.operation == "X" then
                 return {
-                    override_scalar_value = {
-                        value = 1/scalar_value
-                    },
+                    override_scalar = 1/context.scalar,
                     override_message = {
                         message = localize("k_upgrade_ex")
                     }

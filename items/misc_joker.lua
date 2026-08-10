@@ -1696,98 +1696,66 @@ SMODS.Joker {
     cost = 6,
     atlas = "placeholder",
     pos = { x = 1, y = 0 },
-    blueprint_compat = false,
     eternal_compat = false,
     config = { extra = { reduction = 1, loss = 0.05, }},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.reduction*100, card.ability.extra.loss*100, }}
     end,
-    calc_scaling = function (self, card, other_card, scaling_value, scalar_value, args)
-        if other_card.config.center == self or card.getting_sliced then
-            return
+    calculate = function (self, card, context)
+        if context.scaling_card and context.card.config.center ~= self and not card.getting_sliced then
+            local op = context.operation
+            local worked, new_value = false, nil
+            local multiplier = 1 - card.ability.extra.reduction
+            if (op == "+" or not op) and context.scalar < 0 or op == "-" and context.scalar > 0 then
+                worked = true
+                new_value = context.scalar * multiplier
+            elseif op == "X" and context.scalar < 1 and context.scalar > 0 then --not bothering with multipliers <0
+                worked = true
+                new_value = context.scalar ^ multiplier
+            end
+            if worked and new_value then
+                if not context.blueprint then
+                    SMODS.scale_card(card, {
+                        ref_table = card.ability.extra,
+                        ref_value = "reduction",
+                        scalar_value = "loss",
+                        no_message = true,
+                        operation = "-"
+                    })
+                end
+                local eaten = card.ability.extra.reduction <= 0
+                if eaten then
+                    card.getting_sliced = true
+                    SMODS.destroy_cards(card, { pinch_anim = true })
+                end
+                return {
+                    override_scalar = new_value,
+                    message = localize(eaten and "k_eaten_ex" or "k_preserved_ex")
+                }
+            end
         end
-        local multiplier = 1 - card.ability.extra.reduction
-        local op = args.operation
-        if (op == "+" or not op) and scalar_value < 0 or op == "-" and scalar_value > 0 then
-            SMODS.scale_card(card, {
-                ref_table = card.ability.extra,
-                ref_value = "reduction",
-                scalar_value = "loss",
-                no_message = true,
-                operation = "-",
-            })
+        if context.resetting_card and not card.getting_sliced and context.reset_value ~= context.initial_value then
+            local multiplier = card.ability.extra.reduction
+            local delta = context.initial_value - context.reset_value
+            if not context.blueprint then
+                SMODS.scale_card(card, {
+                    ref_table = card.ability.extra,
+                    ref_value = "reduction",
+                    scalar_value = "loss",
+                    no_message = true,
+                    operation = "-"
+                })
+            end
             local eaten = card.ability.extra.reduction <= 0
             if eaten then
                 card.getting_sliced = true
                 SMODS.destroy_cards(card, { pinch_anim = true })
             end
             return {
-                override_scalar_value = {
-                    value = scalar_value*multiplier
-                },
-                message = localize(eaten and "k_eaten_ex" or "k_preserved_ex")
-            }
-        elseif op == "X" and (scalar_value < 1) then
-            SMODS.scale_card(card, {
-                ref_table = card.ability.extra,
-                ref_value = "reduction",
-                scalar_value = "loss",
-                no_message = true,
-                operation = "-",
-            })
-            local eaten = card.ability.extra.reduction <= 0
-            if eaten then
-                card.getting_sliced = true
-                SMODS.destroy_cards(card, { pinch_anim = true })
-            end
-            return {
-                override_scalar_value = {
-                    value = scalar_value^multiplier
-                },
+                override_value = context.reset_value + delta*multiplier,
                 message = localize(eaten and "k_eaten_ex" or "k_preserved_ex")
             }
         end
-    end,
-    calc_resetting = function (self, card, other_card, initial_value, reset_value, args)
-        if card.getting_sliced or initial_value == reset_value then
-            return
-        end
-        local multiplier = 1 - card.ability.extra.reduction
-        local delta = initial_value - reset_value
-        SMODS.scale_card(card, {
-            ref_table = card.ability.extra,
-            ref_value = "reduction",
-            scalar_value = "loss",
-            no_message = true,
-            operation = "-",
-        })
-        local eaten = card.ability.extra.reduction <= 0
-        if eaten then
-            card.getting_sliced = true
-            SMODS.destroy_cards(card, { pinch_anim = true })
-        end
-        return {
-            override_value = {
-                value = initial_value + delta*multiplier
-            },
-            message = localize(eaten and "k_eaten_ex" or "k_preserved_ex")
-        }
     end,
     attributes = { "food", "scaling", }
-}
-
-SMODS.Joker {
-    key = "shrewd_scale",
-    rarity = 3,
-    cost = 8,
-    atlas = "placeholder",
-    pos = { x = 2, y = 0 },
-    blueprint_compat = false,
-    calc_scaling = function (self, card, other_card, scaling_value, scalar_value, args)
-        return {
-            override_scalar_value = {
-                value = scaling_value * 2
-            }
-        }
-    end,
 }

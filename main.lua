@@ -78,22 +78,23 @@ HPR.post_load = function ()
     end
 end
 
-HPR.post_create_card = function (card, area, soulable, key_append)
+HPR.post_create_card = function (card, area, soulable, key_append) --TODO: this doesnt fucking work apparently
+    local a = key_append or ""
     if card.playing_card and area and (area.config.type == "shop" or area == G.pack_cards) then
         if G.GAME and G.GAME.used_vouchers.v_hpr_stacking then
-            if pseudorandom("hpr_stacking") < 0.5 then card.ability.perma_bonus = card.ability.perma_bonus + pseudorandom("hpr_stacking_buff"..(key_append or ""), 10, 60) end
-            if pseudorandom("hpr_stacking") < 0.5 then card.ability.perma_h_chips = card.ability.perma_h_chips + pseudorandom("hpr_stacking_buff"..(key_append or ""), 10, 60) end
-            if pseudorandom("hpr_stacking") < 0.4 then card.ability.perma_mult = card.ability.perma_mult + pseudorandom("hpr_stacking_buff"..(key_append or ""), 2, 10) end
-            if pseudorandom("hpr_stacking") < 0.4 then card.ability.perma_h_mult = card.ability.perma_h_mult + pseudorandom("hpr_stacking_buff"..(key_append or ""), 2, 10) end
+            if pseudorandom("hpr_stacking"..a) < 0.5 then card.ability.perma_bonus = card.ability.perma_bonus + pseudorandom("hpr_stacking_buff"..a, 10, 60) end
+            if pseudorandom("hpr_stacking"..a) < 0.5 then card.ability.perma_h_chips = card.ability.perma_h_chips + pseudorandom("hpr_stacking_buff"..a, 10, 60) end
+            if pseudorandom("hpr_stacking"..a) < 0.4 then card.ability.perma_mult = card.ability.perma_mult + pseudorandom("hpr_stacking_buff"..a, 2, 10) end
+            if pseudorandom("hpr_stacking"..a) < 0.4 then card.ability.perma_h_mult = card.ability.perma_h_mult + pseudorandom("hpr_stacking_buff"..a, 2, 10) end
         end
         if G.GAME and G.GAME.used_vouchers.v_hpr_massprod then
-            if pseudorandom("hpr_stacking2") < 0.25 then card.ability.perma_x_chips = card.ability.perma_x_chips + (pseudorandom("hpr_stacking_buff2"..(key_append or ""), 1, 5)/10) end
-            if pseudorandom("hpr_stacking2") < 0.25 then card.ability.perma_h_x_chips = card.ability.perma_h_x_chips + (pseudorandom("hpr_stacking_buff2"..(key_append or ""), 1, 5)/10) end
-            if pseudorandom("hpr_stacking2") < 0.25 then card.ability.perma_x_mult = card.ability.perma_x_mult + (pseudorandom("hpr_stacking_buff2"..(key_append or ""), 1, 10)/5) end
-            if pseudorandom("hpr_stacking2") < 0.25 then card.ability.perma_h_x_mult = card.ability.perma_h_x_mult + (pseudorandom("hpr_stacking_buff2"..(key_append or ""), 1, 5)/10) end
+            if pseudorandom("hpr_stacking2"..a) < 0.25 then card.ability.perma_x_chips = card.ability.perma_x_chips + (pseudorandom("hpr_stacking_buff2"..a, 1, 5)/10) end
+            if pseudorandom("hpr_stacking2"..a) < 0.25 then card.ability.perma_h_x_chips = card.ability.perma_h_x_chips + (pseudorandom("hpr_stacking_buff2"..a, 1, 5)/10) end
+            if pseudorandom("hpr_stacking2"..a) < 0.25 then card.ability.perma_x_mult = card.ability.perma_x_mult + (pseudorandom("hpr_stacking_buff2"..a, 1, 10)/5) end
+            if pseudorandom("hpr_stacking2"..a) < 0.25 then card.ability.perma_h_x_mult = card.ability.perma_h_x_mult + (pseudorandom("hpr_stacking_buff2"..a, 1, 5)/10) end
         end
     end
-    if card.ability.consumeable and not card.edition and G.GAME.modifiers.hpr_neg_consumable_rate and pseudorandom((key_append or "").."neg_consumable_deck") < G.GAME.modifiers.hpr_neg_consumable_rate then
+    if card.ability.consumeable and not card.edition and G.GAME.modifiers.hpr_neg_consumable_rate and pseudorandom(a.."neg_consumable_deck") < G.GAME.modifiers.hpr_neg_consumable_rate then
 		card:set_edition("e_negative")
 	end
 end
