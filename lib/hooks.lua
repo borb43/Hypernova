@@ -4,7 +4,7 @@ create_card = function(_type, area, legendary, _rarity, skip_materialize, soulab
 		_type = "Consumeables"
 	end
     local ret_card = create_card_ref(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
-    HPR.post_create_card(ret_card, area, soulable, key_append)
+    HPR.post_create_card(ret_card, area, soulable, key_append, _type)
     return ret_card
 end
 --#region card credits

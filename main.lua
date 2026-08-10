@@ -78,9 +78,9 @@ HPR.post_load = function ()
     end
 end
 
-HPR.post_create_card = function (card, area, soulable, key_append) --TODO: this doesnt fucking work apparently
+HPR.post_create_card = function (card, area, soulable, key_append, _type)
     local a = key_append or ""
-    if card.playing_card and area and (area.config.type == "shop" or area == G.pack_cards) then
+    if (_type == "Base" or _type == "Enhanced") and area and (area.config.type == "shop" or area == G.pack_cards) then
         if G.GAME and G.GAME.used_vouchers.v_hpr_stacking then
             if pseudorandom("hpr_stacking"..a) < 0.5 then card.ability.perma_bonus = card.ability.perma_bonus + pseudorandom("hpr_stacking_buff"..a, 10, 60) end
             if pseudorandom("hpr_stacking"..a) < 0.5 then card.ability.perma_h_chips = card.ability.perma_h_chips + pseudorandom("hpr_stacking_buff"..a, 10, 60) end
