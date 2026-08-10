@@ -1099,21 +1099,25 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "payload",
-    config = { extra = { cap = 5, per = 5, scale = 1 } },
+    config = { extra = { portion = 0.1, scale = 0.05 } },
     calc_dollar_bonus = function (self, card)
-        local amt = math.floor(G.GAME.dollars/card.ability.extra.per)
-        amt = math.min(amt, card.ability.extra.cap)
+        local amt = math.floor(G.GAME.dollars*card.ability.extra.portion)
+        SMODS.reset_card(card, {
+            ref_table = card.ability.extra,
+            ref_value = "portion",
+            reset_value = 0.1,
+        })
         if amt > 0 then return amt end
     end,
     loc_vars = function (self, info_queue, card)
         local rank_loc = localize(G.GAME.current_round.hpr_payload_rank or "Ace", "ranks")
-        return { vars = { card.ability.extra.cap, card.ability.extra.per, card.ability.extra.scale, rank_loc }}
+        return { vars = { card.ability.extra.portion*100, card.ability.extra.scale*100, rank_loc }}
     end,
     calculate = function (self, card, context)
         if context.individual and context.cardarea == G.play and context.other_card:get_id() == (SMODS.Ranks[G.GAME.current_round.hpr_payload_rank] or {}).id then
             SMODS.scale_card(card, {
                 ref_table = card.ability.extra,
-                ref_value = "cap",
+                ref_value = "portion",
                 scalar_value = "scale",
                 no_message = true, --this is for timing purposes
             })
@@ -1124,8 +1128,7 @@ HPR.StellarJoker {
         end
     end,
     forcetrigger = function (self, card, context)
-        local d = math.floor(G.GAME.dollars/card.ability.extra.per)
-        d = math.min(d, card.ability.extra.cap)
+        local d = math.floor(G.GAME.dollars*card.ability.extra.portion)
         if d ~= 0 then
             G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + d
             return { dollars = d, func = HPR.event_presets.reset_dollar_buffer }

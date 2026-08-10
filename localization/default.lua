@@ -630,15 +630,16 @@ local descriptions = {
             name = "PAYLOAD",
             text = {
                 {
-                    "Earn {C:money}$1{} at the end of round",
-                    "for every {C:money}$#2#{} you have,",
-                    "up to a maximum of {C:money}$#1#{}",
+                    "Earn {X:money,C:white}#1#%{} of your current",
+                    "money at end of round",
+                    "{C:inactive}(Rounded down)",
                 },
                 {
-                    "Limit increases by {C:money}$#3#{}",
-                    "when a {C:attention}#4#{} is scored,",
-                    "{s:0.8}rank changes each round"
-                },
+                    "Increase percentage by",
+                    "{X:money,C:white}#2#%{} this round when",
+                    "a {C:attention}#3#{} is scored,",
+                    "{s:0.8}rank changes every round"
+                }
             }
         },
         j_hpr_destroyer = {
