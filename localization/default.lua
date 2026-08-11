@@ -289,15 +289,7 @@ local descriptions = {
         j_hpr_missing = {
             name = "MISSING",
             text = {
-                {
-                    "{element:1} {element:2} {element:3} when",
-                    "a card is scored"
-                },
-                {
-                    "Use this Joker to",
-                    "{element:4} up to",
-                    "{C:attention}#1#{} selected cards"
-                }
+                "{element:1}{element:2}{element:3}",
             }
         },
         j_hpr_master = {
@@ -1798,15 +1790,9 @@ local misc = {
         hpr_plus_pcard = "+1 Card",
         k_hpr_universe_pack = "Universe Pack",
         --strings used by ERROR stellar
-        k_chips = "Chips",
-        k_glop = "Glop",
         k_score = "Score",
-        k_uses = "Uses",
-        k_enhance = "Enhance",
-        k_seal = "Seal",
-        k_upgrade = "Upgrade",
-        k_debuff = "Debuff",
-        k_destroy = "Destroy",
+        k_blindsize = "Blind Size",
+        k_card = "Cards",
         k_preserved_ex = "Preserved!",
     },
     high_scores = {},
