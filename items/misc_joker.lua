@@ -1726,11 +1726,17 @@ SMODS.Joker {
                 local eaten = card.ability.extra.reduction <= 0
                 if eaten then
                     card.getting_sliced = true
-                    SMODS.destroy_cards(card, { pinch_anim = true })
                 end
                 return {
                     override_scalar = new_value,
-                    message = localize(eaten and "k_eaten_ex" or "k_preserved_ex")
+                    post = {
+                        message = localize(eaten and "k_eaten_ex" or "k_preserved_ex"),
+                        func = function ()
+                            if eaten then
+                                SMODS.destroy_cards(card, { pinch_anim = true })
+                            end
+                        end
+                    }
                 }
             end
         end
@@ -1749,11 +1755,17 @@ SMODS.Joker {
             local eaten = card.ability.extra.reduction <= 0
             if eaten then
                 card.getting_sliced = true
-                SMODS.destroy_cards(card, { pinch_anim = true })
             end
             return {
                 override_value = context.reset_value + delta*multiplier,
-                message = localize(eaten and "k_eaten_ex" or "k_preserved_ex")
+                post = {
+                    message = localize(eaten and "k_eaten_ex" or "k_preserved_ex"),
+                    func = function ()
+                        if eaten then
+                            SMODS.destroy_cards(card, { pinch_anim = true })
+                        end
+                    end
+                }
             }
         end
     end,

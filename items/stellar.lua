@@ -353,16 +353,19 @@ HPR.StellarJoker {
             return { destroy = true }
         end
         if context.individual and context.cardarea == G.play and next(SMODS.get_enhancements(context.other_card)) then
-            for c in Spectrallib.iter.areacards(G.jokers) do
-                if c:has_attribute("food") then
-                    Spectrallib.forcetrigger {
-                        card = c,
-                        context = context,
-                        colour = G.C.RARITY.hpr_stellar,
-                    }
+            return {
+                func = function ()
+                    for c in Spectrallib.iter.areacards(G.jokers) do
+                        if c:has_attribute("food") then
+                            Spectrallib.forcetrigger {
+                                card = c,
+                                context = context,
+                                colour = G.C.RARITY.hpr_stellar,
+                            }
+                        end
+                    end
                 end
-            end
-            return nil, true
+            }
         end
         if context.scaling_card and context.card:has_attribute("food") then
             if context.operation == "+" or context.operation == "-" or not context.operation then
@@ -1115,15 +1118,15 @@ HPR.StellarJoker {
     end,
     calculate = function (self, card, context)
         if context.individual and context.cardarea == G.play and context.other_card:get_id() == (SMODS.Ranks[G.GAME.current_round.hpr_payload_rank] or {}).id then
-            SMODS.scale_card(card, {
-                ref_table = card.ability.extra,
-                ref_value = "portion",
-                scalar_value = "scale",
-                no_message = true, --this is for timing purposes
-            })
             return {
-                message = localize("k_upgrade_ex"),
-                colour = G.C.MONEY,
+                func = function ()
+                    SMODS.scale_card(card, {
+                        ref_table = card.ability.extra,
+                        ref_value = "portion",
+                        scalar_value = "scale",
+                        message_colour = G.C.MONEY,
+                    })
+                end
             }
         end
     end,
