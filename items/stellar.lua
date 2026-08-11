@@ -218,7 +218,7 @@ HPR.StellarJoker {
             }
         end
     end,
-    attributes = { "space", "chips", "mult", "modify_card" },
+    attributes = { "space", "chips", "mult", "modify_card", "full_deck", },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.chips, card.ability.extra.mult, card.ability.extra.asc }}
     end,
@@ -1578,7 +1578,8 @@ HPR.StellarJoker {
                 end
             }
         end
-    end
+    end,
+    attributes = { "hand_type", "discard", }
 }
 
 HPR.StellarJoker {
@@ -1634,7 +1635,8 @@ HPR.StellarJoker {
                 no_retrigger = true,
             }
         end
-    end
+    end,
+    attributes = { "rank", "suit", "hand_type", "emult", "economy", "balance", }
 }
 
 HPR.StellarJoker {
@@ -1686,5 +1688,6 @@ HPR.StellarJoker {
             end
             return { message = localize("k_reset" ) }
         end
-    end
+    end,
+    attributes = { "xchips", "emult", "scaling", "reset", "face", }
 }
