@@ -1126,14 +1126,18 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "ascendant",
-    config = { extra = { xchips = 0.025, xmult = 0.05 } },
+    config = { extra = { xchips = 0.05, dollars = 3, } },
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra.xchips, card.ability.extra.xmult }}
+        return { vars = { card.ability.extra.xchips, card.ability.extra.dollars }}
     end,
     calculate = function (self, card, context)
         if context.individual and context.cardarea == G.play then
             context.other_card.ability.perma_x_chips = context.other_card.ability.perma_x_chips + card.ability.extra.xchips
             return { message = localize("k_upgrade_ex"), colour = G.C.BLUE }
+        end
+        if context.individual and context.end_of_round and context.cardarea == G.hand then
+            context.other_card.ability.perma_p_dollars = context.other_card.ability.perma_p_dollars + card.ability.extra.dollars
+            return { message = localize("k_upgrade_ex"), colour = G.C.MONEY }
         end
         if context.before and #context.full_hand == 1 and G.GAME.current_round.hands_played == 0 then
             local c = context.full_hand[1]
@@ -1143,12 +1147,12 @@ HPR.StellarJoker {
                 message_card = c
             }
         end
-        if context.discard then
-            context.other_card.ability.perma_x_mult = context.other_card.ability.perma_x_mult + card.ability.extra.xmult
-            return { message = localize("k_upgrade_ex"), colour = G.C.RED }
+        if context.first_hand_drawn and not context.blueprint then
+            local eval = function() return G.GAME.current_round.hands_played == 0 and not G.RESET_JIGGLES end
+            juice_card_until(card, eval, true)
         end
     end,
-    attributes = { "modify_card", "retrigger", "xmult", "xchips", "perma_bonus", },
+    attributes = { "modify_card", "retrigger", "economy", "xchips", "perma_bonus", },
 }
 
 HPR.StellarJoker {

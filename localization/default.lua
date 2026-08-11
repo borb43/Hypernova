@@ -655,7 +655,10 @@ local descriptions = {
             text = {
                 {
                     "All {C:attention}scored{} cards gain {X:chips,C:white}X#1#{} Chips",
-                    "All {C:attention}discarded{} cards gain {X:mult,C:white}X#2#{} Mult",
+                },
+                {
+                    "Cards {C:attention}held in hand{} at end of round",
+                    "permanently earn {C:money}$#2#{} when scored"
                 },
                 {
                     "If {C:attention}first{} hand of round has",
