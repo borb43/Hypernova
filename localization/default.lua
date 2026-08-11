@@ -620,10 +620,16 @@ local descriptions = {
         j_hpr_numeric = {
             name = "NUMERIC",
             text = {
-                "When any non-{C:attention}face{} card is scored",
-                "all other {C:attention}played{} cards permanently",
-                "gain {C:chips}Chips{} and {C:mult}Mult{} equal to the",
-                "scored card's {C:attention}base {C:chips}Chips"
+                {
+                    "Non-{C:attention}face{} cards each give",
+                    "{X:chips,C:white}X#1#{} Chips when scored",
+                },
+                {
+                    "This Joker gains {X:chips,C:white}X#2#{} Chips",
+                    "for each {C:attention}scoring{} card if all",
+                    "scoring cards are {C:attention}prime numbers",
+                    "{C:inactive}(2, 3, 5, 7, A)"
+                }
             }
         },
         j_hpr_payload = {

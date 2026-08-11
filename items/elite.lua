@@ -67,7 +67,8 @@ SMODS.Joker {
             }
         end
     end,
-    attributes = { "ace", "six", "eight", "economy", "rank" }
+    attributes = { "ace", "six", "eight", "economy", "rank" },
+    hpr_ascension_key = "j_hpr_numeric",
 }
 
 SMODS.Joker {
@@ -85,7 +86,8 @@ SMODS.Joker {
             return { xchips = card.ability.extra }
         end
     end,
-    attributes = { "xchips", "three", "ace", "four", "rank" }
+    attributes = { "xchips", "three", "ace", "four", "rank" },
+    hpr_ascension_key = "j_hpr_numeric",
 }
 
 SMODS.Joker {

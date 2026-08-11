@@ -1084,20 +1084,36 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "numeric",
+    config = { extra = { xchips = 1.25, gain = 0.05, } },
+    loc_vars = function (self, iq, card)
+        return { vars = { card.ability.extra.xchips, card.ability.extra.gain }}
+    end,
     calculate = function (self, card, context)
-        if context.individual and context.cardarea == G.play and not context.other_card:is_face() and not SMODS.has_no_rank(context.other_card) then
-            local base_chips = HPR.get_base_chips(context.other_card)
-            for _, c in ipairs(context.full_hand) do
-                if c ~= context.other_card and base_chips then
-                    c.ability.perma_bonus = c.ability.perma_bonus + base_chips
-                    c.ability.perma_mult = c.ability.perma_mult + base_chips
-                    SMODS.calculate_effect({ message = localize("k_upgrade_ex"), message_card = c }, card)
+        if context.individual and context.cardarea == G.play and not context.other_card:is_face() then
+            return {
+                xchips = card.ability.extra.xchips
+            }
+        end
+        if context.before then
+            local check = true
+            for v in Spectrallib.iter.areacards(context.scoring_hand) do
+                if not ({[2]=true,[3]=true,[5]=true,[7]=true,[14]=true})[v:get_id()] then
+                    check = false
+                    break
                 end
             end
-            return nil, true
+            if check then
+                SMODS.scale_card(card, {
+                    ref_table = card.ability.extra,
+                    ref_value = "xchips",
+                    scalar_value = "gain",
+                    scalar_factor = #context.scoring_hand,
+                    message_key = "a_xchips",
+                })
+            end
         end
     end,
-    attributes = { "chips", "mult", "modify_card", },
+    attributes = { "xchips", "scaling", "two", "three", "five", "seven", "ace", },
 }
 
 HPR.StellarJoker {
