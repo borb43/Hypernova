@@ -119,7 +119,7 @@ HPR.StellarJoker {
                 config = {
                     object = DynaText({
                         string = HPR.error_numbers,
-                        colours = { HPR.gay },
+                        colours = { G.C.DARK_EDITION },
                         pop_in_rate = 9999999,
                         silent = true,
                         random_element = true,
