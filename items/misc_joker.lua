@@ -947,7 +947,7 @@ SMODS.Joker {
     inversion = "j_oops",
     blueprint_compat = false,
 }
-
+--[[
 SMODS.Joker {
     key = "blue_wee",
     pos = { x = 7, y = 10 },
@@ -980,7 +980,7 @@ SMODS.Joker {
     attributes = { "chips", "full_deck", "two", "rank", "wee" },
     forcetrigger_compat = true,
 }
---[[
+
 SMODS.Joker {
     key = "petit_michel",
     eternal_compat = false,
@@ -1079,7 +1079,7 @@ SMODS.Joker {
     attributes = { "food", "mult", "discard", "modify_card", "perma_bonus"},
     hpr_ascension_key = "j_hpr_ascendant"
 }
-
+--[[
 SMODS.Joker {
     key = "2_ball",
     rarity = 2,
@@ -1122,7 +1122,7 @@ SMODS.Joker {
     forcetrigger_compat = true,
     hpr_ascension_key = "j_hpr_master",
 }
-
+]]
 SMODS.Joker {
     key = "apostrophe_m",
     rarity = 3,
@@ -1304,7 +1304,7 @@ SMODS.Joker {
     end,
     attributes = { "modify_card", "perma_bonus" },
 }
-
+--[[
 SMODS.Joker {
     key = "cloud_2",
     rarity = 2,
@@ -1361,7 +1361,7 @@ SMODS.Joker {
     attributes = { "two", "rank", "xchips", "xmult", "wee" },
     forcetrigger_compat = true,
 }
-
+]]
 SMODS.Joker {
     key = "night",
     rarity = 3,
