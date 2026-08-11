@@ -10,17 +10,17 @@ SMODS.Rarity {
 }
 
 HPR.STELLAR_INDEX = 0
-function HPR.StellarJoker(args)
-    args.stellar_num = HPR.STELLAR_INDEX
-    HPR.STELLAR_INDEX = HPR.STELLAR_INDEX + 1
-    return HPR.new_stellar(args)
-end
-HPR.new_stellar = SMODS.Joker:extend({
+HPR.StellarJoker = SMODS.Joker:extend({
     atlas = "hpr_stellar",
     pos = { x = 0, y = 0 },
     soul_pos = { x = 1, y = 0 },
     rarity = "hpr_stellar",
     cost = 30,
+    inject = function (self, i)
+        SMODS.Joker.inject(self, i)
+        self.stellar_num = HPR.STELLAR_INDEX
+        HPR.STELLAR_INDEX = HPR.STELLAR_INDEX + 1
+    end
 })
 
 SMODS.Consumable {
