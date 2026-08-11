@@ -677,24 +677,17 @@ local descriptions = {
             name = "LUCKY",
             text = {
                 {
-                    "All {C:attention}listed {C:green}probabilities",
-                    "are multiplied by {X:green,C:white}X#1#",
-                    "{C:inactive}(ex: {C:green}1 in 15{C:inactive} -> {C:green}#1# in 15{C:inactive})"
+                    "{C:attention}Listed {C:green}probabilities{} of Jokers",
+                    "to the left are {C:attention}nullified{}, and",
+                    "{C:green}probabilities{} of Jokers to the",
+                    "right are {C:attention}guaranteed{}. All other",
+                    "{C:attention}listed {C:green}probabilities{} are {C:attention}doubled"
                 },
                 {
                     "All {C:attention}scoring{} effects gain a",
-                    "fixed {C:attention}#3#%{} chance to {C:attention}crit{},",
+                    "fixed {C:attention}#1#%{} chance to {C:attention}crit{},",
                     "doubling the effect"
                 },
-                {
-                    "When {C:attention}Boss Blind{} is defeated, rolls",
-                    "a {C:green}D6{} for the new probability multiplier",
-                    "and a random {C:attention}permanent benefit{}:",
-                    "1: {C:attention}+#2#{} Consumable slot#<s>2#",
-                    "2: {C:red}+#2#{} Discard#<s>2# | 3: {C:blue}+#2#{} Hand#<s>2#",
-                    "4: {C:attention}+#2#{} Hand Size | 5: {C:attention}-#2#{} Ante",
-                    "6: {C:dark_edition}+#2#{} Joker Slot"
-                }
             }
         },
         j_hpr_ult_meal = {
