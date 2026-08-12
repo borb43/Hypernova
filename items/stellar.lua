@@ -505,7 +505,7 @@ HPR.StellarJoker {
             e = 1 + card.ability.extra.emult_per*empty
             e = math.max(e, 1)
             return {
-                xlog_mult = math.max(#G.playing_cards, 2),
+                xlog_chips = math.max(#G.playing_cards, 2),
                 extra = {
                     emult = e~=1 and e or nil
                 }

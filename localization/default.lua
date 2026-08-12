@@ -370,10 +370,10 @@ local descriptions = {
             name = "VOID",
             text = {
                 {
-                    "{X:mult,C:white}Xlog(Mult){} Mult with a base",
+                    "{X:chips,C:white}Xlog(Chips){} Chips with a base",
                     "equal to the number of cards",
                     "in your full deck {C:inactive}(Min. {C:attention}2{C:inactive})",
-                    "{C:inactive}(Currently {X:mult,C:white}Xlog_#1#(Mult){C:inactive} Mult)"
+                    "{C:inactive}(Currently {X:chips,C:white}Xlog_#1#(Chips){C:inactive} Chips)"
                 },
                 {
                     "{X:slib_emult,C:white}^#2#{} Mult for each unused",
