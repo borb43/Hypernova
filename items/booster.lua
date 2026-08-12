@@ -478,7 +478,7 @@ SMODS.Booster{
     pos = { x = 0, y = 1, },
     config = { extra = 5, choose = 2, },
     group_key = "k_hpr_universe_pack",
-    --no_collection = true,
+    no_collection = true,
     ease_background_colour = function (self)
         ease_colour(G.C.DYN_UI.MAIN, HPR.stellar_gradient)
         ease_background_colour({ new_colour = HPR.stellar_gradient, special_colour = G.C.BLACK, contrast = 2 })
