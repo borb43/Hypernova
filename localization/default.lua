@@ -983,16 +983,17 @@ local descriptions = {
             name = "HUNTER",
             text = {
                 {
-                    "Disables the effect",
-                    "of every {C:attention}Boss Blind"
+                    "Earn {C:money}$#1#{} for each drawn",
+                    "{C:attention}face-down{} card and each",
+                    "played {C:attention}debuffed{} card"
                 },
                 {
-                    "When {C:attention}non-Boss{} Blind is",
-                    "selected, {X:blind,C:white}X#1#{} Blind Size"
+                    "Disables the {C:attention}Boss Blind",
+                    "on final hand of round"
                 },
                 {
-                    "Creates {C:attention}#2#{} random Tags",
-                    "when {C:attention}Boss Blind{} is defeated"
+                    "When Blind is selected,",
+                    "{X:slib_eblindsize,C:white}^#2#{} Blind Size"
                 }
             }
         },
