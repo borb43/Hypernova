@@ -545,47 +545,48 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "prideful",
-    config = { extra = 1 },
+    config = { extra = { xmult = 0.25, } },
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra }}
+        info_queue[#info_queue+1] = { key = 'e_negative_consumable', set = 'Edition', config = { extra = 1 } }
+        return { vars = { card.ability.extra.xmult }}
     end,
     calculate = function (self, card, context)
-        if context.first_hand_drawn and not context.blueprint then
-            local eval = function() return G.GAME.current_round.hands_played == 0 and not G.RESET_JIGGLES end
-            juice_card_until(card, eval, true)
-        end
-        if context.before and G.GAME.current_round.hands_played == 0 then
-            local suit_tbl = {}
-            for _, c in ipairs(context.full_hand) do
-                for _, suit in ipairs(SMODS.Suit.obj_buffer) do
-                    if not suit_tbl[suit] and c:is_suit(suit) then suit_tbl[suit] = true end
-                end
-                if not suit_tbl.suitless and Spectrallib.true_suitless(c) then suit_tbl.suitless = true end
+        if context.before and next(context.poker_hands.Flush) then
+            for c in Spectrallib.iter.areacards(context.full_hand) do
+                c.ability.perma_x_mult = c.ability.perma_x_mult + card.ability.extra.xmult
             end
             return {
-                message = localize("k_level_up_ex"),
-                func = function ()
-                    for k in pairs(suit_tbl) do
-                        Spectrallib.level_suit(k, card, 1, 0, card.ability.extra, nil, true)
-                    end
-                end
+                message = localize("k_upgrade_ex"),
+                colour = G.C.MULT,
             }
         end
-        if context.repetition then
-            local lv_total = 0
-            for _, suit in ipairs(SMODS.Suit.obj_buffer) do
-                if context.other_card:is_suit(suit) then
-                    lv_total = lv_total + (Spectrallib.safe_get(G.GAME.SuitBuffs, suit, "level") or 0)
+        if context.end_of_round and context.individual and context.cardarea == G.hand then
+            local suit = ""
+            if Spectrallib.true_suitless(context.other_card) then
+                suit = "suitless"
+            else
+                suit = context.other_card.base.suit
+            end
+            local options = {}
+            for _, v in ipairs(G.P_CENTER_POOLS.Planet) do
+                if v.config and v.config.level_suit == suit and not G.GAME.banned_keys[v.key] then
+                    options[#options+1] = v.key
                 end
             end
-            if Spectrallib.true_suitless(context.other_card) then
-                lv_total = lv_total + G.GAME.SuitBuffs.suitless.level
-            end
-            local reps = math.floor(math.log(lv_total))
-            if reps>0 then
-                return {
-                    repetitions = reps
-                }
+            local key = pseudorandom_element(options, "hpr_prideful_planet")
+            if key then
+                G.E_MANAGER:add_event(Event{
+                    func = function (n)
+                        SMODS.add_card{
+                            set = "Planet",
+                            key = key,
+                            edition = "e_negative",
+                            silent = true,
+                        }
+                        return true
+                    end
+                })
+                return { message = localize("k_plus_planet"), colour = G.C.SECONDARY_SET.Planet }
             end
         end
     end,
@@ -594,11 +595,11 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "prism",
-    config = { extra = { dollars = 0, xmult = 2, d_gain = 1 }},
+    config = { extra = { dollars = 0, emult = 1.2, d_gain = 1 }},
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.m_wild
         local suit = G.GAME.current_round.hpr_prism_suit or "Spades"
-        return { vars = { card.ability.extra.dollars, card.ability.extra.d_gain, card.ability.extra.xmult, localize(suit, "suits_singular"), colours = { G.C.SUITS[suit] } }}
+        return { vars = { card.ability.extra.dollars, card.ability.extra.d_gain, card.ability.extra.emult, localize(suit, "suits_singular"), colours = { G.C.SUITS[suit] } }}
     end,
     calculate = function (self, card, context)
         if context.individual and context.cardarea == G.play and context.other_card:is_suit(G.GAME.current_round.hpr_prism_suit) then
@@ -609,11 +610,8 @@ HPR.StellarJoker {
                 message_colour = G.C.MONEY,
             })
             return {
-                xmult = card.ability.extra.xmult
+                emult = card.ability.extra.emult
             }
-        end
-        if context.modify_scoring_hand and SMODS.has_enhancement(context.other_card, "m_wild") then
-            return { add_to_hand = true }
         end
     end,
     calc_dollar_bonus = function (self, card)

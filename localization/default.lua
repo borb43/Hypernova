@@ -1087,14 +1087,14 @@ local descriptions = {
             name = "PRIDEFUL",
             text = {
                 {
-                    "Levels up each {C:attention}suit{} played",
-                    "in the {C:attention}first hand{} of round",
-                    "{C:inactive}({C:mult}+#1#{C:inactive} Mult)"
+                    "If played hand contains a",
+                    "{C:attention}Flush{}, all played cards",
+                    "permanently gain {X:mult,C:white}X#1#{} Mult"
                 },
                 {
-                    "Retriggers played cards",
-                    "equal to {C:attention}ln(suit level)",
-                    "{C:inactive}(Rounds down)",
+                    "Creates a {C:dark_edition}Negative {C:planet}Planet{} card",
+                    "for the {C:attention}suit{} of each card held",
+                    "in hand at the end of round"
                 }
             }
         },
@@ -1103,15 +1103,11 @@ local descriptions = {
             text = {
                 {
                     "Each played {V:1}#4#{} card gives",
-                    "{X:mult,C:white}X#3#{} Mult and increases cashout",
+                    "{X:slib_emult,C:white}^#3#{} Mult and increases cashout",
                     "this round by {C:money}$#2#{} when scored",
                     "{C:inactive}(Currently {C:money}$#1#{C:inactive})",
                     "{s:0.8}suit changes at end of round",
                 },
-                {
-                    "{C:attention}Wild Cards{} always score",
-                    "if played or held in hand",
-                }
             }
         },
         j_hpr_boosted = {
