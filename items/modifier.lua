@@ -3,22 +3,29 @@ SMODS.Enhancement {
     key = "ripple",
     atlas = "enhancers",
     pos = { x = 0, y = 0 },
-    config = { extra = 20 },
+    config = { extra = 5 },
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra }}
     end,
     calculate = function (self, card, context)
         if context.before and context.cardarea == G.play then
-            for _, c in ipairs(context.scoring_hand) do
-                if c ~= card then
-                    c.ability.perma_bonus = c.ability.perma_bonus + card.ability.extra
-                    SMODS.calculate_effect({ message = localize("k_upgrade_ex"), message_card = c, colour = G.C.CHIPS })
+            return {
+                message = localize("k_upgrade_ex"),
+                colour = G.C.CHIPS,
+                func = function ()
+                    SMODS.upgrade_poker_hands{
+                        from = card,
+                        parameters = {"chips"},
+                        level_up = false,
+                        hands = context.scoring_name,
+                        func = function (base, hand, param, level_up)
+                            return base + card.ability.extra
+                        end
+                    }
                 end
-            end
-            return nil, true
+            }
         end
     end,
-    weight = 1.5,
     attributes = { "chips", "perma_bonus", "modify_card", }
 }
 
@@ -31,17 +38,11 @@ SMODS.Enhancement {
         return { vars = { card.ability.extra }}
     end,
     calculate = function (self, card, context)
-        if context.before and context.cardarea == G.play then
-            for _, c in ipairs(context.scoring_hand) do
-                if c ~= card then
-                    c.ability.perma_mult = c.ability.perma_mult + card.ability.extra
-                    SMODS.calculate_effect({ message = localize("k_upgrade_ex"), message_card = c, colour = G.C.MULT })
-                end
-            end
-            return nil, true
+        if context.main_scoring and context.cardarea == G.play then
+            card.ability.perma_mult = card.ability.perma_mult + card.ability.extra
+            return { message = localize("k_upgrade_ex"), colour = G.C.MULT }
         end
     end,
-    weight = 1.5,
     attributes = { "mult", "perma_bonus", "modify_card", }
 }
 

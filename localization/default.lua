@@ -96,16 +96,14 @@ local descriptions = {
             name = "Ripple Card",
             text = {
                 "When played and {C:attention}scoring{},",
-                "all other {C:attention}scoring{} cards",
-                "{C:attention}permanently{} gain {C:chips}+#1#{} Chip#<s>1#"
+                "played hand gains {C:chips}+#1#{} Chips"
             }
         },
         m_hpr_storm = {
             name = "Storm Card",
             text = {
-                "When played and {C:attention}scoring{},",
-                "all other {C:attention}scoring{} cards",
-                "{C:attention}permanently{} gain {C:mult}+#1#{} Mult"
+                "This card gains",
+                "{C:mult}+#1#{} Mult when scored"
             }
         },
         m_hpr_relic = {
