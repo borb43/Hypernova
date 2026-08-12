@@ -104,4 +104,5 @@ HPR.vanilla_ascensions = { --ASCENSION LIST
     j_todo_list = "j_hpr_mark",
     j_idol = "j_hpr_mark",
     j_campfire = "j_hpr_destroyer",
+    j_midas_mask = "j_hpr_royalty", --king midas
 }

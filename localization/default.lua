@@ -499,14 +499,16 @@ local descriptions = {
             name = "CONJURER",
             text = {
                 {
-                    "If played hand is only {C:attention}1{} card,",
-                    "adds a {C:dark_edition}Negative{} copy to hand",
+                    "When round begins, add a",
+                    "{C:dark_edition}Negative {C:attention}playing card{} with",
+                    "a random {C:attention}enhancement{} and",
+                    "{C:attention}seal{} to your hand"
                 },
                 {
-                    "If played hand is {C:attention}not{} 1 card,",
-                    "all {C:attention}scored{} cards gain a random",
-                    "{C:attention}enhancement{}, {C:attention}seal{} and {C:dark_edition}edition{} if",
-                    "they do not have one"
+                    "{X:chips,C:white}X#1#{} Chips for each",
+                    "{C:dark_edition}Negative {C:attention}playing card",
+                    "in your {C:attention}full deck",
+                    "{C:inactive}(Currently {X:chips,C:white}X#2#{C:inactive} Chips)"
                 }
             }
         },

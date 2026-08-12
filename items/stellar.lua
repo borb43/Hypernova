@@ -779,70 +779,54 @@ HPR.StellarJoker {
 ]]
 HPR.StellarJoker {
     key = "conjurer",
+    config = { extra = { xchips = 0.2 } },
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = { set = "Edition", key = "e_negative_playing_card", config = { extra = 1 } }
-    end,
-    calculate = function (self, card, context)
-        if context.before then
-            if #context.full_hand == 1 then
-                local card_copied = SMODS.copy_card(context.full_hand[1], { area = G.hand })
-                card_copied:set_edition("e_negative", true, true)
-                card_copied.states.visible = nil
-
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        card_copied:start_materialize()
-                        return true
-                    end
-                }))
-                return {
-                    message = localize('k_copied_ex'),
-                    colour = G.C.DARK_EDITION,
-                    func = function() -- This is for timing purposes, it runs after the message
-                        G.E_MANAGER:add_event(Event({
-                            func = function()
-                                SMODS.calculate_context({ playing_card_added = true, cards = { card_copied } })
-                                return true
-                            end
-                        }))
-                    end
-                }
-            else
-                local did_stuff = false
-                for c in Spectrallib.iter.areacards(context.scoring_hand) do
-                    local this_did_stuff = false
-                    if c.config.center_key == "c_base" then
-                        did_stuff, this_did_stuff = true, true
-                        c:set_ability(SMODS.poll_enhancement{ guaranteed = true, type_key = "hpr_conjurer_enh" }, nil, true)
-                    end
-                    if not c.seal then
-                        did_stuff, this_did_stuff = true, true
-                        c:set_seal(SMODS.poll_seal{ guaranteed = true, type_key = "hpr_conjurer_seal" })
-                    end
-                    if not c.edition then
-                        did_stuff, this_did_stuff = true, true
-                        c:set_edition(SMODS.poll_edition{ guaranteed = true, type_key = "hpr_conjurer_ed", no_negative = true, })
-                    end
-                    if this_did_stuff then
-                        G.E_MANAGER:add_event(Event{
-                            func = function (n)
-                                c:juice_up()
-                                return true
-                            end
-                        })
-                    end
-                end
-                if did_stuff then
-                    return {
-                        message = localize("k_enhanced_ex"),
-                        colour = G.C.DARK_EDITION,
-                        no_retrigger = true,
-                    }
+        local count = 0
+        if G.playing_cards then
+            for c in Spectrallib.iter.areacards(G.playing_cards) do
+                if c.edition and c.edition.negative then
+                    count = count + 1
                 end
             end
         end
+        return { vars = { card.ability.extra.xchips, 1 + card.ability.extra.xchips*count }}
     end,
-    attributes = { "generation", "playing_card", "editions", "enhancements", "seals", "modify_card" },
+    calculate = function (self, card, context)
+        if context.first_hand_drawn then
+            local _card = SMODS.create_card { set = "Enhanced", seal = SMODS.poll_seal({ guaranteed = true, type_key = "hpr_conjurer_sl" }), area = G.discard, key_append = "hpr_conjurer_card", edition = "e_negative" }
+            G.playing_card = (G.playing_card and G.playing_card + 1) or 1
+            _card.playing_card = G.playing_card
+            table.insert(G.playing_cards, _card)
+
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    G.hand:emplace(_card)
+                    _card:start_materialize()
+                    G.GAME.blind:debuff_card(_card)
+                    G.hand:sort();
+                    (context.blueprint_card or card):juice_up()
+                    SMODS.calculate_context({ playing_card_added = true, cards = { _card } })
+                    save_run()
+                    return true
+                end
+            }))
+
+            return nil, true
+        end
+        if context.joker_main then
+            local count = 0
+            for c in Spectrallib.iter.areacards(G.playing_cards) do
+                if c.edition and c.edition.negative then
+                    count = count + 1
+                end
+            end
+            if count ~= 0 then
+                return { xchips = 1 + card.ability.extra.xchips*count }
+            end
+        end
+    end,
+    attributes = { "generation", "playing_card", "editions", "enhancements", "seals", "full_deck" },
     forcetrigger_compat = true,
 }
 
