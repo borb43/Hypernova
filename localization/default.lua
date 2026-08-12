@@ -369,13 +369,18 @@ local descriptions = {
         j_hpr_void = {
             name = "VOID",
             text = {
-                {"{X:mult,C:white}X#1#{} Mult for each card",
-                "below {C:attention}#3#{} in your full deck",
-                "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)"},
-                {"{X:slib_emult,C:white}^#4#{} Mult for each unused",
-                "space in {C:attention}Joker{} slots, {C:attention}played",
-                "{C:attention}hand{}, and {C:attention}Consumable{} slots",
-                "{C:inactive}(Currently {X:slib_emult,C:white}^#5#{C:inactive} Mult)"}
+                {
+                    "{X:mult,C:white}Xlog(Mult){} Mult with a base",
+                    "equal to the number of cards",
+                    "in your full deck {C:inactive}(Min. {C:attention}2{C:inactive})",
+                    "{C:inactive}(Currently {X:mult,C:white}Xlog_#1#(Mult){C:inactive} Mult)"
+                },
+                {
+                    "{X:slib_emult,C:white}^#2#{} Mult for each unused",
+                    "space in {C:attention}Joker{} slots, {C:attention}played",
+                    "{C:attention}hand{}, and {C:attention}Consumable{} slots",
+                    "{C:inactive}(Currently {X:slib_emult,C:white}^#3#{C:inactive} Mult)"
+                }
             }
         },
         j_hpr_nimbus = {
