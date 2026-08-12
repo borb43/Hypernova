@@ -26,7 +26,7 @@ SMODS.Enhancement {
             }
         end
     end,
-    attributes = { "chips", "perma_bonus", "modify_card", }
+    attributes = { "hand_type", }
 }
 
 SMODS.Enhancement {
