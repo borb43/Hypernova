@@ -353,19 +353,6 @@ local descriptions = {
                 }
             }
         },
-        j_hpr_straightaway = {
-            name = "STRAIGHTAWAY",
-            text = {
-                {"If played hand contains a {C:attention}Straight",
-                "this Joker gains {X:mult,C:white}X#2#{} Mult and",
-                "creates a {C:dark_edition}Negative {C:attention}Consumable{} card",
-                "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"},
-                {"If played hand contains a {C:attention}Straight",
-                "{C:attention}Flush{}, increase scaling by {X:mult,C:white}X#3#{} and",
-                "create a random {C:attention}Voucher",
-                "{C:inactive}(Must have room)"}
-            }
-        },
         j_hpr_void = {
             name = "VOID",
             text = {
@@ -383,16 +370,6 @@ local descriptions = {
                 }
             }
         },
-        j_hpr_nimbus = {
-            name = "NIMBUS",
-            text = {
-                "Scored and held in hand {C:attention}9s{} gain",
-                "{C:money}$#1#{} respective to their {C:attention}area{}",
-                "Earn the {C:money}net value{} of all {C:attention}9s{} in",
-                "your {C:attention}full deck{} at the end of round",
-                "{C:inactive}(Currently {C:money}$#2#{C:inactive})"
-            }
-        },
         j_hpr_shorthand = {
             name = "UNITY",
             text = {
@@ -406,40 +383,6 @@ local descriptions = {
                     "cards cannot be {C:red}debuffed",
                     "or drawn {C:attention}face down"
                 },
-            }
-        },
-        j_hpr_diamond = {
-            name = "DIAMOND",
-            text = {
-                {"Each played {C:diamonds}Diamond{} card",
-                "gives {X:mult,C:white}X#1#{} Mult when scored"},
-                {"Earn {C:money}$#2#{} at end of round for",
-                "every {C:diamonds}Diamond{} card in full deck",
-                "{C:inactive}(Currently {C:money}$#3#{C:inactive})"}
-            }
-        },
-        j_hpr_heart = {
-            name = "HEART",
-            text = {
-                "Each scored {C:hearts}Heart{} card",
-                "has a {C:green}#1# in #2#{} chance to",
-                "give {X:slib_emult,C:white}^#4#{} Mult, else {X:mult,C:white}X#3#{} Mult"
-            }
-        },
-        j_hpr_spade = {
-            name = "SPADE",
-            text = {
-                "Each scored {C:spades}Spade{} card gives",
-                "{X:purple,C:white}X#3#{} Chips and Mult and",
-                "gains {C:mult}+#1#{} Mult and {C:chips}+#2#{} Chips"
-            }
-        },
-        j_hpr_club = {
-            name = "CLUB",
-            text = {
-                "Played {C:clubs}Clubs{} level up {C:clubs}Clubs",
-                "with {C:chips}+#1#{} Chip#<s>1# and {C:mult}+#2#{} Mult",
-                "Scored {C:clubs}Clubs{} give {X:mult,C:white}X#3#{} Mult"
             }
         },
         j_hpr_executive_card = {
@@ -487,15 +430,6 @@ local descriptions = {
             text = {
                 "Creates a {C:dark_edition}Negative{C:attention} Food Joker",
                 "when {C:attention}Boss Blind{} is defeated"
-            }
-        },
-        j_hpr_wild = {
-            name = "WILD",
-            text = {
-                "Each played {V:1}#2#{} card becomes",
-                "{C:attention}Wild{} and {C:dark_edition}Polychrome{} and gives",
-                "{X:mult,C:white}X#1#{} Mult when scored",
-                "{s:0.8}suit changes at end of round",
             }
         },
         j_hpr_conjurer = {
