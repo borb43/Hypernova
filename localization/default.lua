@@ -866,14 +866,19 @@ local descriptions = {
         j_hpr_guardian = {
             name = "FINALE",
             text = {
-                {"{C:attention}Prevents death{} once",
-                "per {C:attention}Ante{} if no blinds",
-                "were {C:attention}skipped{}, granting",
-                "{C:blue}+#2#{} Hand#<s>2# permanently",
-                "{C:inactive}(Currently #1#)"},
-                {"{X:slib_emult,C:white}^#4#{} Mult per hand",
-                "played this round",
-                "{C:inactive}(Currently {X:slib_emult,C:white}^#3#{C:inactive} Mult)"}
+                {
+                    "{C:attention}Prevents death{} once",
+                    "per {C:attention}Ante{} if no blinds",
+                    "were {C:attention}skipped{}, granting",
+                    "{C:blue}+#2#{} Hand#<s>2# permanently",
+                    "{C:inactive}(Currently #1#)"
+                },
+                {
+                    "This Joker gains",
+                    "{X:slib_emult,C:white}^#4#{} Mult per hand",
+                    "played this round",
+                    "{C:inactive}(Currently {X:slib_emult,C:white}^#3#{C:inactive} Mult)"
+                }
             }
         },
         j_hpr_hurtbreak = {
