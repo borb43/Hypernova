@@ -1291,7 +1291,7 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "hunter",
-    config = { extra = { dollars = 5, eblindsize = 0.75 } },
+    config = { extra = { dollars = 5, eblindsize = 0.8 } },
     forcetrigger_compat = true,
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.dollars, card.ability.extra.eblindsize }}
