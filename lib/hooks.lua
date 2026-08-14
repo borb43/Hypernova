@@ -340,3 +340,9 @@ function get_blind_amount(ante)
 	end
 	return gba(ante)
 end
+
+local init_prototypes_ref = Game.init_item_prototypes --bit stupid but everything gets re-injected at profile change
+function Game:init_item_prototypes()
+	HPR.STELLAR_INDEX = 0
+	return init_prototypes_ref(self)
+end

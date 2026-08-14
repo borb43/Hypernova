@@ -10,14 +10,14 @@ pattern = "for _, v in ipairs(info_queue) do"
 position = 'before'
 target = 'functions/common_events.lua'
 payload = '''
-    if HPR.card_active('c_hpr_ascender') then
-        local asc = HPR.get_ascension(_c)
-        if asc and G.P_CENTERS[asc] then
-            if G.P_CENTERS[asc].discovered then --replace with actual discovery condition
-                info_queue[#info_queue+1] = G.P_CENTERS[asc]
-            else
-                info_queue[#info_queue+1] = { key = "hpr_undiscovered_stellar", set = 'Other' }
-            end
+if HPR.card_active('c_hpr_ascender') then
+    local asc = HPR.get_ascension(_c)
+    if asc and G.P_CENTERS[asc] then
+        local asc_name = "?????"
+        if G.P_CENTERS[asc].discovered then
+            asc_name = localize{ type = "name_text", set = "Joker", key = asc, }
         end
+        info_queue[#info_queue+1] = { set = "Other", key = "hpr_ascension_tooltip", vars = { asc_name } }
     end
+end
 '''

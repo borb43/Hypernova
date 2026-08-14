@@ -1226,12 +1226,12 @@ local descriptions = {
                 "learn what it does"
             }
         },
-        hpr_undiscovered_stellar = {
-            name = "Not Discovered",
+        hpr_ascension_tooltip = {
+            name = "Divinity",
             text = {
-                "Obtain this {C:hpr_stellar}Ascension{}",
-                "in an unseeded run",
-                "to learn what it does"
+                "This Joker can be",
+                "{C:hpr_steller}ascended{} into",
+                "{C:hpr_stellar}#1#{}"
             }
         },
         hpr_num_bonus = {
