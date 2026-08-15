@@ -41,6 +41,9 @@ SMODS.Consumable {
             return false
         end
         local highlighted = Spectrallib.get_highlighted_cards({ G.jokers }, card, 1, 1, blacklist, self.key.."_forcetrigger")
+        local target = highlighted[1]
+        local asc = HPR.get_ascension(target)
+        local edition = target.edition and target.edition.key or nil
         G.E_MANAGER:add_event(Event{
             trigger = 'after',
             delay = 0.4,
@@ -50,25 +53,13 @@ SMODS.Consumable {
                 return true
             end
         })
-        G.E_MANAGER:add_event(Event{
-            trigger = 'after',
-            delay = 0.15,
-            func = function ()
-                highlighted[1]:flip()
-                play_sound('card1')
-                return true
-            end
-        })
         delay(0.2)
         G.E_MANAGER:add_event(Event{
             trigger = 'after',
             delay = 0.15,
             func = function ()
-                highlighted[1]:remove_from_deck()
-                highlighted[1]:set_ability(HPR.get_ascension(G.jokers.highlighted[1]))
-                highlighted[1]:add_to_deck()
-                highlighted[1]:set_cost()
-                highlighted[1]:flip()
+                SMODS.destroy_cards(target, { immediate = true, bypass_eternal = true, })
+                SMODS.add_card{ set = "Joker", rarity = "hpr_stellar", key = asc, edition = edition, no_edition = true, silent = true, }
                 return true
             end
         })
