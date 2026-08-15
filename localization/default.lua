@@ -1736,14 +1736,14 @@ local misc = {
     labels = {
         hpr_moons = "Moon",
         hpr_diy = "DIY",
-        hpr_stellar = "Stellar",
+        k_hpr_stellar = "Stellar",
         hpr_negative_seal = "Negative Seal",
         hpr_awesome = "Awesome",
         hpr_green = "Green",
         hpr_dual_seal = "Dual Seal",
         hpr_bronze_seal = "Copper Seal",
         hpr_void_seal = "Void Seal",
-        hpr_elite = "Elite", --according to the wiki its k_hpr_elite but ive literally never had to do that so idk
+        k_hpr_elite = "Elite", --according to the wiki its k_hpr_elite but ive literally never had to do that so idk
     },
     poker_hand_descriptions = {},
     poker_hands = {},
