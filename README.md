@@ -2,7 +2,7 @@
 
 This is my silly little mod where i add basically whatever i feel like!
 
-If you run into any issues, check if the issue is already known below, and if not create an issue about it on the Issues page
+If you run into any issues, see the information at the bottom of this page for reporting issues.
 
 # IMPORTANT:
 This mod REQUIRES [SpectralLib](https://github.com/SpectralPack/Spectrallib/releases/latest), make sure to download it here.
