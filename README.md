@@ -25,6 +25,11 @@ The mod currently adds:
 
 # Known issues
 ## Crash along the lines of "attempt to compare number with table"
-This is an incompatibility crash with the Talisman mod. Uninstall it if possible, otherwise replace it with [Amulet](https://github.com/frostice482/amulet/releases/tag/3.4.1), which has the exact same functionality without this crash.
+This is an incompatibility crash with the Talisman mod. If you need Talisman, replace it with [Amulet](https://github.com/frostice482/amulet/releases/latest), which has the exact same functionality without this crash. If you do not need Talisman, uninstall it.
 
-Do note that Amulet is incompatible with the Multiplayer mod.
+# Reporting issues
+Before you report an issue, it is important that you ensure the following things:
+- Are all your mod installs correct? If Spectrallib (or any other mod) is nested, lovely patches will fail which may cause crashes on load or other issues.
+- Is the issue still present on the development version? (Code->Download Zip on this page)
+- Is this not a duplicate github issue? This includes closed issues. If what you are reporting is a duplicate of a closed issue, please reopen that issue instead.
+- If this issue is caused by another mod in combination with Hypernova, please include the relevant mods in the issue report.

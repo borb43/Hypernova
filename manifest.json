@@ -1,0 +1,7 @@
+{
+    "name": "Hypernova",
+    "description": "A personal content mod where I just do whatever I want. I dont really have a good descriptor for the mod idk its funny and silly",
+    "version_number": "1.2.0",
+    "dependencies": ["spectralpack-Spectrallib-1.3.0"],
+    "website_url": "https://github.com/borb43/hypernova"
+}
