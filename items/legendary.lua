@@ -30,8 +30,4 @@ SMODS.Joker {
             end
         end
     end,
-    slib_credits = {
-        code = {"Eris"},
-        art = {"Eris"},
-    }
 }

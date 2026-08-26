@@ -3,11 +3,6 @@ SMODS.Voucher { --stacking, gives cards a chance to spawn with perma chips and m
     key = "stacking",
     atlas = "voucher",
     pos = { x = 0, y = 0 },
-    hpr_badge_info = {
-        { key = "credits_code", vars = {"Eris"} },
-        { key = "credits_art", vars = {"Eris"}},
-        { key = "credits_idea", vars = {"Eris"}},
-    },
     attributes = { "shop", "perma_bonus", "chips", "mult", "playing_card" },
 }
 
@@ -16,10 +11,6 @@ SMODS.Voucher { --mass production, lets xmult and xchip bonuses spawn
     atlas = "placeholder",
     pos = { x = 4, y = 1 },
     requires = { "v_hpr_stacking" },
-    hpr_badge_info = {
-        { key = "credits_code", vars = {"Eris"} },
-        { key = "credits_idea", vars = {"Eris"}},
-    },
     attributes = { "shop", "perma_bonus", "xchips", "xmult", "playing_card" },
 }
 
@@ -27,10 +18,6 @@ SMODS.Voucher {
     key = "recursion",
     atlas = "placeholder",
     pos = { x = 3, y = 1 },
-    hpr_badge_info = {
-        { key = "credits_code", vars = {"Eris"} },
-        { key = "credits_idea", vars = {"Eris"}},
-    },
     attributes = { "booster", }
 }
 
@@ -39,10 +26,6 @@ SMODS.Voucher {
     atlas = "placeholder",
     pos = { x = 4, y = 1 },
     requires = { "v_hpr_recursion" },
-    hpr_badge_info = {
-        { key = "credits_code", vars = {"Eris"} },
-        { key = "credits_idea", vars = {"Eris"}},
-    },
     attributes = { "booster", "consumable", "voucher" }
 }
 --#endregion

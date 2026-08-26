@@ -12,9 +12,6 @@ SMODS.Joker { --fusion reactor, balances before scoring
             }
         end
     end,
-    hpr_badge_info = {
-        { key = "credits_idea", vars = {"Eris" }},
-    },
     attributes = { "balance" }
 }
 
@@ -40,11 +37,6 @@ SMODS.Joker { --growth, increases potency of other joker effects
         end
     end,
     attributes = { "scaling", "passive" },
-    hpr_badge_info = {
-        { key = "credits_code", vars = {"Eris"} },
-        { key = "credits_art", vars = {"Eris" }},
-        { key = "credits_idea", vars = {"Eris" }},
-    },
     blueprint_compat = false,
 }
 
@@ -99,10 +91,9 @@ SMODS.Joker { -- solar flare, levels up not most played hands and destroys some 
         end
     end,
     attributes = { "space", "destroy_card" },
-    hpr_badge_info = {
-        { key = "credits_code", vars = {"Eris"} },
-        { key = "credits_art", vars = {"Codifyd"}},
-        { key = "credits_idea", vars = {"Codifyd"}},
+    slib_credits = {
+        art = {"Codifyd"},
+        idea = {"Codifyd"},
     },
     hpr_ascension_key = "j_hpr_stardust"
 }
@@ -126,10 +117,6 @@ SMODS.Joker { --tipping scales, increases numerator and denominator of probabili
         end
     end,
     attributes = { "mod_chance" },
-    hpr_badge_info = {
-        { key = "credits_code", vars = {"Eris"} },
-        { key = "credits_idea", vars = {"Eris" }},
-    },
     hpr_ascension_key = "j_hpr_lucky",
     blueprint_compat = false,
 }
@@ -175,10 +162,6 @@ SMODS.Joker { --gambling addict, scales from probability rolls
         end
     end,
     attributes = { "chips", "mult", "scaling" },
-    hpr_badge_info = {
-        { key = "credits_code", vars = {"Eris"} },
-        { key = "credits_idea", vars = {"Eris" }},
-    },
 }
 
 SMODS.Joker { --fortune cookie, guarantees 6 probabilities and then creates a negative tarot
@@ -222,10 +205,6 @@ SMODS.Joker { --fortune cookie, guarantees 6 probabilities and then creates a ne
         end
     end,
     attributes = { "mod_chance", "food", "generation" },
-    hpr_badge_info = {
-        { key = "credits_code", vars = {"Eris"} },
-        { key = "credits_idea", vars = {"Eris" }},
-    },
     hpr_ascension_key = "j_hpr_lucky",
     blueprint_compat = false,
 }
@@ -256,10 +235,6 @@ SMODS.Joker {
         end
     end,
     attributes = { "modify_card" },
-    hpr_badge_info = {
-        { key = "credits_code", vars = {"Eris"} },
-        { key = "credits_idea", vars = {"Eris" }},
-    },
 }
 
 SMODS.Joker {
@@ -275,9 +250,6 @@ SMODS.Joker {
         G.GAME.modifiers.booster_choice_mod = (G.GAME.modifiers.booster_choice_mod or 0) - 1000
     end,
     attributes = { "passive" },
-    hpr_badge_info = {
-        { key = "credits_idea", vars = {"Eris" }},
-    },
     blueprint_compat = false,
 }
 
@@ -321,9 +293,6 @@ SMODS.Joker {
         end
     end,
     attributes = { "chance", "rank", "seven", "generation" },
-    hpr_badge_info = {
-        { key = "credits_idea", vars = {"Eris" }},
-    },
     forcetrigger_compat = true,
     hpr_ascension_key = "j_hpr_master",
 }
@@ -380,11 +349,6 @@ SMODS.Joker {
         end
     end,
     attributes = { "mod_chance", "scaling" },
-    hpr_badge_info = {
-        { key = "credits_code", vars = {"Eris"} },
-        { key = "credits_art", vars = {"Eris"}},
-        { key = "credits_idea", vars = {"Eris"}},
-    },
     hpr_ascension_key = "j_hpr_lucky",
     forcetrigger_compat = true, blueprint_compat = false,
 }
@@ -414,9 +378,6 @@ SMODS.Joker {
         end
     end,
     attributes = { "generation", "spectral" },
-    hpr_badge_info = {
-        { key = "credits_idea", vars = {"Eris"}},
-    },
 }
 
 SMODS.Joker {
@@ -445,9 +406,6 @@ SMODS.Joker {
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.e_negative
     end,
-    hpr_badge_info = {
-        { key = "credits_idea", vars = {"Eris"}},
-    },
 }
 
 SMODS.Joker {
@@ -920,10 +878,6 @@ SMODS.Joker {
     end,
     attributes = { "food", "hand_size", "enhancements" },
     pools = { Food = true },
-    hpr_badge_info = {
-        { key = "credits_code", vars = {"Eris"} },
-        { key = "credits_idea", vars = {"Eris"}},
-    },
     blueprint_compat = false
 }
 

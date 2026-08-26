@@ -342,11 +342,6 @@ HPR.StellarJoker {
         end
     end,
     attributes = { "hand_type", },
-    hpr_badge_info = {
-        { key = "credits_code", vars = {"Eris"} },
-        { key = "credits_art", vars = {"Eris"}},
-        { key = "credits_idea", vars = {"Eris"}},
-    },
 }
 
 HPR.StellarJoker {
@@ -387,11 +382,6 @@ HPR.StellarJoker {
         end
     end,
     attributes = { "hand_type", },
-    hpr_badge_info = {
-        { key = "credits_code", vars = {"Eris"} },
-        { key = "credits_art", vars = {"Eris"}},
-        { key = "credits_idea", vars = {"Eris"}},
-    },
 }
 
 HPR.StellarJoker {
@@ -919,11 +909,6 @@ HPR.StellarJoker {
         end
     end,
     attributes = { "swap", "hand_type", },
-    hpr_badge_info = {
-        { key = "credits_code", vars = {"Eris"} },
-        { key = "credits_art", vars = {"Eris"}},
-        { key = "credits_idea", vars = {"Eris"}},
-    },
 }
 
 HPR.StellarJoker {

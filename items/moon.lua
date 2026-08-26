@@ -110,10 +110,8 @@ HPR.moon {
         return { vars = { card.ability.extra, card.ability.max_highlighted }}
     end,
     pos = { x = 0, y = 0 },
-    hpr_badge_info = {
-        { key = "credits_code", vars = {"Eris"} },
-        { key = "credits_art", vars = {"LFMoth"}},
-        { key = "credits_idea", vars = {"Eris"}},
+    slib_credits = {
+        art = {"LFMoth"}
     },
     apply_bonus = function (self, card, other_card)
         other_card.ability.perma_mult = other_card.ability.perma_mult + card.ability.extra
@@ -141,10 +139,8 @@ HPR.moon {
         return { vars = { card.ability.extra, card.ability.max_highlighted }}
     end,
     pos = { x = 4, y = 0 },
-    hpr_badge_info = {
-        { key = "credits_code", vars = {"Eris"} },
-        { key = "credits_art", vars = {"LFMoth"}},
-        { key = "credits_idea", vars = {"Eris"}},
+    slib_credits = {
+        art = {"LFMoth"}
     },
     apply_bonus = function (self, card, other_card)
         other_card.ability.perma_x_mult = other_card.ability.perma_x_mult + card.ability.extra
@@ -208,10 +204,8 @@ HPR.moon {
         return { vars = { card.ability.extra, card.ability.max_highlighted }}
     end,
     pos = { x = 3, y = 0 },
-    hpr_badge_info = {
-        { key = "credits_code", vars = {"Eris"} },
-        { key = "credits_art", vars = {"LFMoth"}},
-        { key = "credits_idea", vars = {"Eris"}},
+    slib_credits = {
+        art = {"LFMoth"}
     },
     apply_bonus = function (self, card, other_card)
         other_card.ability.perma_h_mult = other_card.ability.perma_h_mult + card.ability.extra
@@ -320,11 +314,6 @@ SMODS.Consumable {
     end,
     hidden = true,
     soul_set = "hpr_moons",
-    hpr_badge_info = {
-        { key = "credits_code", vars = {"Eris"} },
-        { key = "credits_art", vars = {"Eris"}},
-        { key = "credits_idea", vars = {"Eris"}},
-    },
     forcetrigger_compat = true,
     attributes = { "modify_card", "editions", "space", }
 }
