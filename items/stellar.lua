@@ -31,8 +31,15 @@ SMODS.Consumable {
     cost = 4,
     hidden = true,
     can_use = function (self, card)
-        local highlighted = Spectrallib.get_highlighted_cards({ G.jokers }, card, 1, 1)
-        return #highlighted == 1 and not not G.P_CENTERS[HPR.get_ascension(highlighted[1])]
+        local highlighted = Spectrallib.get_highlighted_cards{
+            use_condition = function (c)
+                return not not G.P_CENTERS[HPR.get_ascension(c)]
+            end,
+            seed = "hpr_ascender_forcetrigger",
+            source = card,
+            areas = { G.jokers, G.consumeables }
+        }
+        return #highlighted == 1
     end,
     use = function (self, card, area, copier)
         local function blacklist(c)
