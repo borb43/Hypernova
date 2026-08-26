@@ -10,7 +10,7 @@ SMODS.Joker {
         return { vars = { card.ability.extra.asc, card.ability.extra.xasc }}
     end,
     calculate = function (self, card, context)
-        if context.using_consumeable and HPR.is_any(context.consumeable.ability.set, "hpr_moons", "Star", "Planet") then
+        if context.using_consumeable and HPR.is_any(context.consumeable.ability.set, "hpr_moons", "Star") then
             for _, c in ipairs(G.playing_cards) do
                 if SMODS.has_no_rank(c) then
                     c.ability.entr_perma_asc = c.ability.entr_perma_asc + card.ability.extra.xasc
@@ -24,5 +24,5 @@ SMODS.Joker {
             }
         end
     end,
-    attributes = { "modify_card", "planet", "hpr_moons", "entr_star", "asc", "xasc", }, --check later for when these tags actually exist
+    attributes = { "modify_card", "hpr_moons", "entr_star", "asc", "xasc", }, --check later for when these tags actually exist
 }

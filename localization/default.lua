@@ -166,106 +166,14 @@ local descriptions = {
                 "when eaten"
             }
         },
-        --#region Eris descriptions
         j_hpr_eris = {
             name = "Eris",
             text = {
-                {
-                    "{C:attention}Rankless{} cards instead count as {C:attention}#1#s",
-                    "{C:attention}Suitless{} cards instead count as {V:1}#2#"
-                },
-                {
-                    "...",
-                    "{s:0.8}Rank, suit and effect changes at end of round"
-                }
+                "Played Aces and Stone",
+                "cards each level up",
+                "the played poker hand",
             }
         },
-        j_hpr_eris_red = {
-            name = "Eris",
-            text = {
-                {
-                    "{C:attention}Rankless{} cards instead count as {C:attention}#1#s",
-                    "{C:attention}Suitless{} cards instead count as {V:1}#2#"
-                },
-                {
-                    "Each {C:attention}#1#{} of {V:1}#2#{} gains",
-                    "{C:mult}+#3#{} Mult when scored or held",
-                    "{s:0.8}Rank, suit and effect changes at end of round"
-                }
-            }
-        },
-        j_hpr_eris_green = {
-            name = "Eris",
-            text = {
-                {
-                    "{C:attention}Rankless{} cards instead count as {C:attention}#1#s",
-                    "{C:attention}Suitless{} cards instead count as {V:1}#2#"
-                },
-                {
-                    "{C:green}Probabilities{} triggered from",
-                    "{C:attention}#1#s{} of {V:1}#2#{} are {C:green}guaranteed",
-                    "{s:0.8}Rank, suit and effect changes at end of round"
-                }
-            }
-        },
-        j_hpr_eris_blue = {
-            name = "Eris",
-            text = {
-                {
-                    "{C:attention}Rankless{} cards instead count as {C:attention}#1#s",
-                    "{C:attention}Suitless{} cards instead count as {V:1}#2#"
-                },
-                {
-                    "Each {C:attention}#1#{} of {V:1}#2#{} gains",
-                    "{C:chips}+#4#{} Chip#<s>4# when scored or held",
-                    "{s:0.8}Rank, suit and effect changes at end of round"
-                }
-            }
-        },
-        j_hpr_eris_cyan = {
-            name = "Eris",
-            text = {
-                {
-                    "{C:attention}Rankless{} cards instead count as {C:attention}#1#s",
-                    "{C:attention}Suitless{} cards instead count as {V:1}#2#"
-                },
-                {
-                    "{C:attention}#1#s{} of {V:1}#2#{} level up the last",
-                    "played hand when held in hand",
-                    "at end of round",
-                    "{s:0.8}Rank, suit and effect changes at end of round"
-                }
-            }
-        },
-        j_hpr_eris_yellow = {
-            name = "Eris",
-            text = {
-                {
-                    "{C:attention}Rankless{} cards instead count as {C:attention}#1#s",
-                    "{C:attention}Suitless{} cards instead count as {V:1}#2#"
-                },
-                {
-                    "Each played {C:attention}#1#{} of {V:1}#2#",
-                    "gives {C:money}$#5#{} when scored",
-                    "{s:0.8}Rank, suit and effect changes at end of round"
-                }
-            }
-        },
-        j_hpr_eris_magenta = {
-            name = "Eris",
-            text = {
-                {
-                    "{C:attention}Rankless{} cards instead count as {C:attention}#1#s",
-                    "{C:attention}Suitless{} cards instead count as {V:1}#2#"
-                },
-                {
-                    "{C:attention}#1#s{} of {V:1}#2#{} create a {C:dark_edition}Negative",
-                    "{C:tarot}Tarot{} card when discarded",
-                    "{s:0.8}Rank, suit and effect changes at end of round"
-                }
-            }
-        },
-        --#endregion
         j_hpr_bungus = {
             name = "Bustling Fungus",
             text = {
@@ -682,9 +590,9 @@ local descriptions = {
         j_hpr_evil_eris = {
             name = "Sire",
             text = {
-                "When a {C:planet}Planet{}, {C:hpr_moons}Moon{} or {C:star}Star",
-                "card is used, all cards in your",
-                "{C:attention}full{} deck permanently gain {C:gold}+#1#",
+                "When a {C:hpr_moons}Moon{} or {C:star}Star{} card",
+                "is used, all cards in your {C:attention}full",
+                "deck permanently gain {C:gold}+#1#",
                 "Ascension Power. {C:attention}Rankless{} cards",
                 "instead gain {X:gold,C:white}X#2#{} Ascension Power"
             }
