@@ -1048,35 +1048,22 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "destroyer",
-    config = { extra = { emult = 1, emult_mod = 0.04, }},
+    config = { extra = { emult = 1, emult_mod = 0.02, }},
     loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra.emult, card.ability.extra.emult_mod }}
+        if not card.ability.eternal then
+            info_queue[#info_queue+1] = { set = "Other", key = "eternal", config = {} }
+        end
+        return { vars = { card.ability.extra.emult, card.ability.extra.emult_mod*100 }}
     end,
     calculate = function (self, card, context)
-        if (context.setting_blind) and not context.blueprint and card.area and card.rank then
-            local target = card.area.cards[card.rank+1]
-            if target and not SMODS.is_eternal(target, card) and not target.getting_sliced then
-                target.getting_sliced = true
-                G.GAME.joker_buffer = G.GAME.joker_buffer - 1
-                G.E_MANAGER:add_event(Event {
-                    func = function()
-                        G.GAME.joker_buffer = 0
-                        SMODS.scale_card(card, {
-                            ref_table = card.ability.extra,
-                            ref_value = "emult",
-                            scalar_value = "emult_mod",
-                            scalar_factor = target.sell_cost,
-                            message_key = "a_powmult",
-                        })
-                        target:start_dissolve({ G.C.HPR_STLR }, nil, 1.6)
-                        play_sound('slice1', 0.96 + math.random() * 0.08)
-                        return true
-                    end
-                })
-                if not context.forcetrigger then
-                    return nil, true
-                end
-            end
+        if context.selling_card and context.card ~= card and not context.blueprint then
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "emult",
+                scalar_value = "emult_mod",
+                scalar_factor = context.card.sell_cost,
+            })
+            return nil, true
         end
         if (context.joker_main or context.forcetrigger) and card.ability.extra.emult ~= 1 then
             return {
@@ -1084,7 +1071,7 @@ HPR.StellarJoker {
             }
         end
     end,
-    attributes = { "destroy_card", "emult", "scaling", "position", },
+    attributes = { "emult", "scaling", "sell_value", },
     forcetrigger_compat = true,
 }
 

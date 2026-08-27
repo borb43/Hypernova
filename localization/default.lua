@@ -488,13 +488,18 @@ local descriptions = {
             }
         },
         j_hpr_destroyer = {
-            name = "HYDRA",
+            name = "INFERNO",
             text = {
-                "When {C:attention}Blind{} is selected,",
-                "destroy joker to the right",
-                "to gain {X:slib_emult,C:white}^#2#{} Mult for each",
-                "{C:money}${} of {C:attention}sell value{} it had",
-                "{C:inactive}(Currently {X:slib_emult,C:white}^#1#{C:inactive} Mult)",
+                {
+                    "When a card is {C:attention}sold{}, this",
+                    "Joker gains {X:slib_emult,C:white}^Mult{} equal to",
+                    "{C:attention}#2#%{} of the card's {C:attention}sell value",
+                    "{C:inactive}(Currently {X:slib_emult,C:white}^#1#{C:inactive} Mult)",
+                },
+                {
+                    "{C:attention}Eternal{} cards",
+                    "can be sold"
+                }
             }
         },
         j_hpr_ascendant = {
