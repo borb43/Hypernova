@@ -1064,6 +1064,14 @@ local descriptions = {
                 "for each previously scored",
                 "{C:attention}face{} card during this hand"
             }
+        },
+        j_hpr_divine_indian_food = {
+            name = "{f:hpr_papyrus}Divine Indian Food For Brilliant Minds",
+            text = {
+                "After destroying {C:attention}#1# {C:inactive}(#2#){} food",
+                "Jokers, {C:red,E:2}self destructs{} and",
+                "creates a {C:red}Temporary {C:spectral}Divinity"
+            }
         }
     },
     Other = {
@@ -1225,6 +1233,13 @@ local descriptions = {
             text = {
                 "Sell this card to",
                 "create a {C:attention}Voucher",
+            }
+        },
+        hpr_temporary = {
+            name = "Temporary",
+            text = {
+                "{C:red}Self destructs{} when",
+                "Blind is selected"
             }
         }
     },
@@ -1651,7 +1666,8 @@ local misc = {
         hpr_dual_seal = "Dual Seal",
         hpr_bronze_seal = "Copper Seal",
         hpr_void_seal = "Void Seal",
-        k_hpr_elite = "Elite", --according to the wiki its k_hpr_elite but ive literally never had to do that so idk
+        k_hpr_elite = "Elite",
+        hpr_temporary = "Temporary",
     },
     poker_hand_descriptions = {},
     poker_hands = {},

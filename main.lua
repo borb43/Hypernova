@@ -18,6 +18,22 @@ HPR.calculate = function(self, context)
             end
         end
     end
+    if context.setting_blind then
+        local temporaries = {}
+        for c in Spectrallib.iter.areacards(SMODS.get_card_areas("jokers")) do
+            if c.ability.hpr_temporary then
+                temporaries[#temporaries+1] = c
+            end
+        end
+        for c in Spectrallib.iter.areacards(SMODS.get_card_areas("playing_cards")) do
+            if c.ability.hpr_temporary then
+                temporaries[#temporaries+1] = c
+            end
+        end
+        if next(temporaries) then
+            SMODS.destroy_cards(temporaries, { immediate = true, bypass_eternal = true, silent = true, colours = {G.C.RED} })
+        end
+    end
 end
 
 HPR.menu_cards = function ()

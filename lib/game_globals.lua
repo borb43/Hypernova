@@ -125,3 +125,18 @@ HPR.dual_gradient = SMODS.Gradient{
         G.C.BLUE
     }
 }
+
+SMODS.Font{
+    key = "papyrus",
+    path = "papyrus.ttf"
+}
+
+SMODS.Sticker{
+    key = "temporary",
+    pos = { x = 10, y = 10 }, --no sprite
+    badge_colour = G.C.RED,
+    should_apply = function (self, card, center, area, bypass_roll)
+        return false
+    end,
+    rate = 0,
+}

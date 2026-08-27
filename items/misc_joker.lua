@@ -1725,3 +1725,39 @@ SMODS.Joker {
     end,
     attributes = { "food", "scaling", }
 }
+
+SMODS.Joker {
+    key = "divine_indian_food",
+    rarity = 3,
+    cost = 8,
+    atlas = "placeholder",
+    pos = { x = 2, y = 0, },
+    eternal_compat = false,
+    config = { extra = { foods = 4, current = 0, } },
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_CENTERS.c_hpr_ascender
+        info_queue[#info_queue+1] = { set = "Other", key = "hpr_temporary", config = {} }
+        return { vars = { card.ability.extra.foods, card.ability.extra.current } }
+    end,
+    calculate = function (self, card, context)
+        if context.joker_type_destroyed and context.card ~= card and context.card.ability.set == "Joker" and context.card:has_attribute("food") then
+            card.ability.extra.current = card.ability.extra.current + 1
+            if card.ability.extra.current >= card.ability.extra.foods then
+                SMODS.destroy_cards(card, { pinch_anim = true, bypass_eternal = true })
+                G.E_MANAGER:add_event(Event{
+                    func = function ()
+                        SMODS.add_card{
+                            set = "Spectral",
+                            key = "c_hpr_ascender",
+                            stickers = {"hpr_temporary"},
+                            force_stickers = true,
+                        }
+                        return true
+                    end
+                })
+            else
+                return { message = card.ability.extra.current.."/"..card.ability.extra.foods }
+            end
+        end
+    end
+}
