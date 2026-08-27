@@ -42,12 +42,14 @@ SMODS.Consumable {
         return #highlighted == 1
     end,
     use = function (self, card, area, copier)
-        local function blacklist(c)
-            local asc = HPR.get_ascension(c)
-            if asc and G.P_CENTERS[asc] then return true end
-            return false
-        end
-        local highlighted = Spectrallib.get_highlighted_cards({ G.jokers }, card, 1, 1, blacklist, self.key.."_forcetrigger")
+        local highlighted = Spectrallib.get_highlighted_cards{
+            use_condition = function (c)
+                return not not G.P_CENTERS[HPR.get_ascension(c)]
+            end,
+            seed = "hpr_ascender_forcetrigger",
+            source = card,
+            areas = { G.jokers, G.consumeables },
+        }
         local target = highlighted[1]
         local asc = HPR.get_ascension(target)
         local edition = target.edition and target.edition.key or nil
@@ -248,12 +250,18 @@ HPR.StellarJoker {
         end
     end,
     can_use = function (self, card)
-        local cards = Spectrallib.get_highlighted_cards({ G.shop_vouchers, G.shop_booster }, card, 1, 1)
+        local cards = Spectrallib.get_highlighted_cards({
+            areas = { G.shop_vouchers, G.shop_booster, },
+            source = card,
+        })
         return #cards == 1 and card.ability.extra.uses > 0 and G.consumeables.config.card_limit > #G.consumeables.cards
     end,
     use = function (self, card)
         card.ability.extra.uses = card.ability.extra.uses - 1
-        local cards = Spectrallib.get_highlighted_cards({ G.shop_vouchers, G.shop_booster }, card, 1, 1)
+        local cards = Spectrallib.get_highlighted_cards({
+            areas = { G.shop_vouchers, G.shop_booster, },
+            source = card,
+        })
         local c = cards[1]
         SMODS.copy_card(c, {
             area = G.consumeables
@@ -1366,7 +1374,12 @@ HPR.StellarJoker {
         local function blacklist(c)
             return Spectrallib.safe_get(c, "config", "center", "kind") ~= "hpr_universe"
         end
-        local cards = Spectrallib.get_highlighted_cards(areas, card, 1, card.ability.extra.max_highlighted, blacklist)
+        local cards = Spectrallib.get_highlighted_cards({
+            areas = areas,
+            source = card,
+            max = card.ability.extra.max_highlighted,
+            use_condition = blacklist,
+        })
         return #cards > 0 and #cards <= card.ability.extra.max_highlighted
     end,
     use = function (self, card)
@@ -1379,7 +1392,12 @@ HPR.StellarJoker {
         local function blacklist(c)
             return Spectrallib.safe_get(c, "config", "center", "kind") ~= "hpr_universe"
         end
-        local cards = Spectrallib.get_highlighted_cards(areas, card, 1, card.ability.extra.max_highlighted, blacklist)
+        local cards = Spectrallib.get_highlighted_cards({
+            areas = areas,
+            source = card,
+            max = card.ability.extra.max_highlighted,
+            use_condition = blacklist,
+        })
         for _, c in ipairs(cards) do
             local t = {
                 edition = c.edition and c.edition.key or nil,

@@ -21,7 +21,12 @@ HPR.moon = SMODS.Consumable:extend({
     pos = { x = 0, y = 0 },
     cost = 4,
     use = function (self, card, area, copier)
-        local highlighted = Spectrallib.get_highlighted_cards({ G.hand }, card, 1, card.ability.max_highlighted, nil, self.key.."_forcetrigger" )
+        local highlighted = Spectrallib.get_highlighted_cards({
+            areas = {G.hand},
+            source = card,
+            max = card.ability.max_highlighted,
+            seed = self.key.."_forcetrigger",
+        })
         G.E_MANAGER:add_event(Event({
             func = function()
                 play_sound("tarot1")
@@ -52,7 +57,12 @@ HPR.moon = SMODS.Consumable:extend({
         }))
     end,
     bulk_use = function (self, card, area, copier, number)
-        local highlighted = Spectrallib.get_highlighted_cards({ G.hand }, card, card.ability.max_highlighted, nil, self.key.."_forcetrigger" )
+        local highlighted = Spectrallib.get_highlighted_cards({
+            areas = {G.hand},
+            source = card,
+            max = card.ability.max_highlighted,
+            seed = self.key.."_forcetrigger",
+        })
         G.E_MANAGER:add_event(Event({
             func = function ()
                 play_sound("tarot1")
@@ -279,7 +289,12 @@ SMODS.Consumable {
         return { vars = { card.ability.max_highlighted }}
     end,
     use = function (self, card, area, copier)
-        local highlighted = Spectrallib.get_highlighted_cards({ G.hand }, card, 1, card.ability.max_highlighted, nil, self.key .. "_forcetrigger" )
+        local highlighted = Spectrallib.get_highlighted_cards({
+            areas = {G.hand},
+            source = card,
+            max = card.ability.max_highlighted,
+            seed = self.key.."_forcetrigger",
+        })
         G.E_MANAGER:add_event(Event({
             func = function()
                 play_sound("tarot1")
