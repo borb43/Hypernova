@@ -89,15 +89,18 @@ end
 
 local score_card_ref = SMODS.score_card
 function SMODS.score_card(card, context)
-	if not G.scorehand and next(SMODS.find_card("j_hpr_storm")) and (context.cardarea == G.hand or context.cardarea == G.discard) then
+	local ret = score_card_ref(card, context)
+	local storm = SMODS.find_card("j_hpr_storm")
+	if not G.scorehand and next(storm) and (context.cardarea == G.hand or context.cardarea == G.discard) then
 		G.scorehand = true
 		local old = context.cardarea
 		context.cardarea = G.play
+		SMODS.calculate_effect({ message = localize("k_splashed_ex"), message_card = card, colour = G.C.DARK_EDITION }, storm[1])
 		SMODS.score_card(card, context)
 		G.scorehand = nil
 		context.cardarea = old
 	end
-	return score_card_ref(card, context)
+	return ret
 end
 
 local fingies_ref = SMODS.four_fingers

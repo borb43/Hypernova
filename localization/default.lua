@@ -1659,6 +1659,7 @@ local misc = {
         k_blindsize = "Blind Size",
         k_card = "Cards",
         k_preserved_ex = "Preserved!",
+        k_splashed_ex = "Splashed!",
     },
     high_scores = {},
     labels = {
