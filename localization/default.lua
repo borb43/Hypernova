@@ -169,9 +169,9 @@ local descriptions = {
         j_hpr_eris = {
             name = "Eris",
             text = {
-                "Played Aces and Stone",
-                "cards each level up",
-                "the played poker hand",
+                "Played {C:attention}Aces and {C:attention}Stone",
+                "{C:attention}cards{} each level up",
+                "the played {C:attention}poker hand",
             }
         },
         j_hpr_bungus = {
