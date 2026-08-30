@@ -59,10 +59,22 @@ function HPR.poll_set(seed, opts, rare_opts, rare_rate, p_card_edition, p_card_s
     return set
 end
 
+HPR.ascension_rarity_blacklist = { --jokers that ignore the default ascension assignment
+    cry_exotic = true,
+    dcry_exotic = true,
+    [4] = true,
+    entr_reverse_legendary = true,
+    entr_entropic = true,
+}
 function HPR.get_ascension(card)
     local center = card.config and card.config.center or card
-    if center.hpr_ascension_key or HPR.vanilla_ascensions[center.key] then
-        return HPR.vanilla_ascensions[center.key] or center.hpr_ascension_key or nil
+    if center.hpr_ascension_key then
+        return center.hpr_ascension_key
+    elseif HPR.vanilla_ascensions[center.key] then
+        return HPR.vanilla_ascensions[center.key]
+    end
+    if HPR.ascension_rarity_blacklist[center.rarity] then
+        return
     end
     if MyDreamJournal and MyDreamJournal.is_grilled_chicken(center.key) then
         return "j_hpr_stellarchicken"

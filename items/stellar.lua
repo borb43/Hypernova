@@ -9,6 +9,7 @@ SMODS.Rarity {
     pools = { Joker = true }
 }
 
+HPR.vanilla_ascensions = {}
 HPR.STELLAR_INDEX = 0
 HPR.StellarJoker = SMODS.Joker:extend({
     atlas = "hpr_stellar",
@@ -20,6 +21,11 @@ HPR.StellarJoker = SMODS.Joker:extend({
         SMODS.Joker.inject(self, i)
         self.stellar_num = HPR.STELLAR_INDEX
         HPR.STELLAR_INDEX = HPR.STELLAR_INDEX + 1
+        if type(self.asc_targets) == "table" then
+            for _, key in ipairs(self.asc_targets) do
+                HPR.vanilla_ascensions[key] = self.key
+            end
+        end
     end
 })
 
@@ -190,6 +196,7 @@ HPR.StellarJoker {
     end,
     attributes = { "xchips", "xmult", "emult", "echips", "xscore", "escore", "xblindsize", "eblindsize", "economy", "generation", "consumable", "voucher", "booster", },
     forcetrigger_compat = true,
+    asc_targets = { "j_misprint", }
 }
 
 HPR.StellarJoker {
@@ -222,6 +229,7 @@ HPR.StellarJoker {
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.chips, card.ability.extra.mult, card.ability.extra.asc }}
     end,
+    asc_targets = { "j_supernova", "j_astronomer", "j_constellation", }
 }
 
 HPR.StellarJoker {
@@ -268,6 +276,7 @@ HPR.StellarJoker {
         })
     end,
     attributes = { "multiuse", "vouchers", "booster", "scaling", "consumable", },
+    asc_targets = {"j_cartomancer", "j_seance", "j_sixth_sense", "j_superposition", "j_vagabond",}
 }
 
 HPR.StellarJoker {
@@ -317,6 +326,7 @@ HPR.StellarJoker {
         end
     end,
     attributes = { "destroy_card", "chance", "food", "forcetrigger", "enhancements", },
+    --handled by automatic targeting food jokers into this
 }
 
 HPR.StellarJoker {
@@ -357,6 +367,7 @@ HPR.StellarJoker {
         end
     end,
     attributes = { "hand_type", },
+    asc_targets = { "j_jolly", "j_zany", "j_mad", "j_crazy", "j_droll", }
 }
 
 HPR.StellarJoker {
@@ -397,6 +408,7 @@ HPR.StellarJoker {
         end
     end,
     attributes = { "hand_type", },
+    asc_targets = { "j_sly", "j_wily", "j_clever", "j_devious", "j_crafty", }
 }
 
 HPR.StellarJoker {
@@ -410,6 +422,7 @@ HPR.StellarJoker {
         end
     end,
     attributes = { "passive", "retrigger", },
+    asc_targets = { "j_splash", "j_selzer", "j_mime", "j_hanging_chad", }
 }
 --[[
 HPR.StellarJoker {
@@ -510,6 +523,7 @@ HPR.StellarJoker {
     end,
     attributes = { "emult", "xmult", "joker_slot", "consumable_slot", },
     forcetrigger_compat = true,
+    asc_targets = { "j_stencil", "j_half", "j_erosion", },
 }
 
 HPR.StellarJoker {
@@ -536,6 +550,7 @@ HPR.StellarJoker {
         end
     end,
     attributes = { "passive", "hand_size", },
+    asc_targets = { "j_smeared", "j_pareidolia", "j_four_fingers", "j_shortcut", }
 }
 
 HPR.StellarJoker {
@@ -585,7 +600,8 @@ HPR.StellarJoker {
             end
         end
     end,
-    attributes = { "mult", "suit_level", "retrigger", "hands", }
+    attributes = { "mult", "suit_level", "retrigger", "hands", },
+    asc_targets = { "j_lusty_joker", "j_greedy_joker", "j_wrathful_joker", "j_gluttenous_joker", "j_flower_pot", }
 }
 
 HPR.StellarJoker {
@@ -620,156 +636,10 @@ HPR.StellarJoker {
             return d
         end
     end,
-    attributes = { "scaling", "economy", "xmult", "reset", }
+    attributes = { "scaling", "economy", "xmult", "reset", },
+    asc_targets = { "j_rough_gem", "j_bloodstone", "j_arrowhead", "j_onyx_agate", "j_ancient", }
 }
 
---[[
-HPR.StellarJoker {
-    key = "diamond",
-    pos = { x = 0, y = 1 },
-    soul_pos = {
-        x = 1, y = 1,
-        extra = { x = 2, y = 1 },
-    },
-    config = { extra = { mult = 1.5, dollars = 2 }},
-    loc_vars = function (self, info_queue, card)
-        local count = 0
-        if G.playing_cards then
-            for _, c in ipairs(G.playing_cards) do
-                if c:is_suit("Diamonds") then count = count + 1 end
-            end
-        end
-        return { vars = { card.ability.extra.mult, card.ability.extra.dollars, count * card.ability.extra.dollars }}
-    end,
-    calculate = function (self, card, context)
-        if context.individual and context.cardarea == G.play and context.other_card:is_suit("Diamonds") then
-            return {
-                xmult = card.ability.extra.mult
-            }
-        end
-    end,
-    calc_dollar_bonus = function (self, card)
-        local count = 0
-        for _, c in ipairs(G.playing_cards) do
-            if c:is_suit("Diamonds") then count = count + 1 end
-        end
-        if count > 0 then
-            return count * card.ability.extra.dollars
-        end
-    end,
-    attributes = { "economy", "suit", "diamonds", "xmult", },
-}
-
-HPR.StellarJoker {
-    key = "heart",
-    pos = { x = 3, y = 1 },
-    soul_pos = {
-        x = 4, y = 1,
-        extra = { x = 5, y = 1 }
-    },
-    config = { extra = { odds = 3, xmult = 1.5, emult = 1.1 }},
-    loc_vars = function (self, info_queue, card)
-        local n,d = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, self.key)
-        return { vars = { n, d, card.ability.extra.xmult, card.ability.extra.emult }}
-    end,
-    calculate = function (self, card, context)
-        if context.individual and context.cardarea == G.play and context.other_card:is_suit("Hearts") or context.forcetrigger then
-            if SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds) then
-                return { emult = card.ability.extra.emult }
-            else
-                return { xmult = card.ability.extra.xmult }
-            end
-        end
-    end,
-    attributes = { "emult", "xmult", "chance", "suit", "hearts" },
-    forcetrigger_compat = true,
-}
-
-HPR.StellarJoker {
-    key = "spade",
-    pos = { x = 6, y = 1 },
-    soul_pos = {
-        x = 7, y = 1,
-        extra = { x = 8, y = 1 }
-    },
-    config = { extra = { mult = 4, chips = 30, xstuff = 1.25 }},
-    loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra.mult, card.ability.extra.chips, card.ability.extra.xstuff }}
-    end,
-    calculate = function (self, card, context)
-        if context.individual and context.cardarea == G.play and context.other_card:is_suit("Spades") then
-            context.other_card.ability.perma_mult = context.other_card.ability.perma_mult + card.ability.extra.mult
-            context.other_card.ability.perma_bonus = context.other_card.ability.perma_bonus + card.ability.extra.chips
-            return {
-                message = localize("k_upgrade_ex"),
-                extra = {
-                    xchips = card.ability.extra.xstuff,
-                    xmult = card.ability.extra.xstuff
-                }
-            }
-        end
-    end,
-    attributes = { "mult", "chips", "xmult", "xchips", "suit", "spades", "modify_card", },
-}
-
-HPR.StellarJoker {
-    key = "club",
-    pos = { x = 9, y = 1 },
-    soul_pos = {
-        x = 10, y = 1,
-        extra = { x = 11, y = 1 }
-    },
-    config = { extra = { chips = 10, mult = 1, xmult = 1.5 }},
-    loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra.chips, card.ability.extra.mult, card.ability.extra.xmult }}
-    end,
-    calculate = function (self, card, context)
-        if context.individual and context.cardarea == G.play and context.other_card:is_suit("Clubs") then
-            return {
-                xmult = card.ability.extra.xmult
-            }
-        end
-        if context.before then
-            local b = false
-            for _, c in ipairs(context.full_hand) do
-                if c:is_suit("Clubs") then
-                    b = true
-                    SMODS.calculate_effect({ message = localize("k_level_up_ex"), message_card = c }, card)
-                    Spectrallib.level_suit("Clubs", card, 1, card.ability.extra.chips, card.ability.extra.mult, nil, true)
-                end
-            end
-            if b then return nil, true end
-        end
-    end,
-    attributes = { "xmult", "suit", "clubs", },
-}
-
-HPR.StellarJoker {
-    key = "wild",
-    config = { extra = 2 },
-    loc_vars = function (self, info_queue, card)
-        info_queue[#info_queue+1] = G.P_CENTERS.m_wild
-        info_queue[#info_queue+1] = G.P_CENTERS.e_polychrome
-        local suit = (G.GAME.current_round.ancient_card or {}).suit or "Spades"
-        return { vars = { card.ability.extra, localize(suit, "suits_singular"), colours = {G.C.SUITS[suit]}}}
-    end,
-    calculate = function (self, card, context)
-        if context.before then
-            for _, c in ipairs(context.full_hand) do
-                if c:is_suit(G.GAME.current_round.ancient_card.suit) then
-                    c:set_ability("m_wild", nil, true)
-                    c:set_edition("e_polychrome", nil, nil, true)
-                end
-            end
-        end
-        if context.individual and context.cardarea == G.play and context.other_card:is_suit(G.GAME.current_round.ancient_card.suit) or context.forcetrigger then
-            return { xmult = card.ability.extra }
-        end
-    end,
-    attributes = { "xmult", "enhancements", "suit", },
-    forcetrigger_compat = true,
-}
-]]
 HPR.StellarJoker {
     key = "conjurer",
     config = { extra = { xchips = 0.2 } },
@@ -821,6 +691,7 @@ HPR.StellarJoker {
     end,
     attributes = { "generation", "playing_card", "editions", "enhancements", "seals", "full_deck" },
     forcetrigger_compat = true,
+    asc_targets = {"j_marble", "j_hologram", "j_certificate", "j_blue_joker", "j_dna", },
 }
 
 HPR.StellarJoker {
@@ -865,6 +736,7 @@ HPR.StellarJoker {
     end,
     attributes = { "hand_size", "hands", "discard", "suit", },
     blueprint_compat = false,
+    asc_targets = { "j_juggler", "j_drunkard", "j_merry_andy", "j_troubadour", "j_burglar", }
 }
 
 HPR.StellarJoker {
@@ -924,6 +796,7 @@ HPR.StellarJoker {
         end
     end,
     attributes = { "swap", "hand_type", },
+    asc_targets = {"j_duo", "j_trio", "j_order", "j_tribe", "j_family"}
 }
 
 HPR.StellarJoker {
@@ -977,6 +850,7 @@ HPR.StellarJoker {
         end
     end,
     attributes = { "xmult", "econ", "face", "retrigger", "king", "queen", "jack", },
+    asc_targets = { "j_baron", "j_shoot_the_moon", "j_reserved_parking", "j_business", "j_hit_the_road", "j_midas_mask", }
 }
 
 HPR.StellarJoker {
@@ -1011,6 +885,7 @@ HPR.StellarJoker {
         end
     end,
     attributes = { "xchips", "scaling", "two", "three", "five", "seven", "ace", },
+    asc_targets = { "j_odd_todd", "j_even_steven", "j_scholar", "j_fibonacci", }
 }
 
 HPR.StellarJoker {
@@ -1052,6 +927,7 @@ HPR.StellarJoker {
     end,
     attributes = { "economy", "scaling", "rank", },
     blueprint_compat = true,
+    asc_targets = { "j_cloud_9", "j_golden", "j_satellite", "j_rocket", "j_to_the_moon" }
 }
 
 HPR.StellarJoker {
@@ -1081,6 +957,7 @@ HPR.StellarJoker {
     end,
     attributes = { "emult", "scaling", "sell_value", },
     forcetrigger_compat = true,
+    asc_targets = { "j_campfire", "j_ceremonial", "j_madness", }
 }
 
 HPR.StellarJoker {
@@ -1112,6 +989,7 @@ HPR.StellarJoker {
         end
     end,
     attributes = { "modify_card", "retrigger", "economy", "xchips", "perma_bonus", },
+    asc_targets = { "j_hiker" }
 }
 
 HPR.StellarJoker {
@@ -1137,6 +1015,7 @@ HPR.StellarJoker {
         end
     end,
     attributes = { "retrigger", "joker", "chance", "scaling", },
+    asc_targets = { "j_blueprint", "j_brainstorm", "j_invisible", }
 }
 
 HPR.StellarJoker {
@@ -1158,6 +1037,7 @@ HPR.StellarJoker {
         end
     end,
     attributes = { "mod_chance", },
+    asc_targets = { "j_oops" }
 }
 
 HPR.StellarJoker {
@@ -1223,6 +1103,7 @@ HPR.StellarJoker {
     attributes = { "prevents_death", "hands", "emult", "scaling", "reset", },
     forcetrigger_compat = true,
     blueprint_compat = false,
+    asc_targets = { "j_mr_bones", "j_dusk", "j_acrobat", "j_loyalty_card", }
 }
 
 HPR.StellarJoker {
@@ -1265,6 +1146,7 @@ HPR.StellarJoker {
         end
     end,
     attributes = { "joker", "modify_card", "generation" },
+    asc_targets = { "j_riff_raff", "j_baseball", "j_abstract", }
 }
 
 HPR.StellarJoker {
@@ -1322,7 +1204,8 @@ HPR.StellarJoker {
             end
         end
     end,
-    attributes = { "generation", "tags", "boss_blind", "xblindsize", }, --this one def needs a rework but whatever 
+    attributes = { "generation", "tags", "boss_blind", "xblindsize", },
+    asc_targets = { "j_luchador", "j_matador", "j_chicot", }
 }
 
 HPR.StellarJoker {
@@ -1419,7 +1302,8 @@ HPR.StellarJoker {
         end
         card:juice_up()
     end,
-    attributes = { "booster", }
+    attributes = { "booster", },
+    asc_targets = { "j_hallucination", "j_red_card", }
 }
 
 HPR.StellarJoker {
@@ -1471,7 +1355,8 @@ HPR.StellarJoker {
             }
         end
     end,
-    attributes = { "emult", "swap", "enhancements" }
+    attributes = { "emult", "swap", "enhancements" },
+    asc_targets = { "j_lucky_cat", "j_stone", "j_drivers_license", "j_ticket", "j_glass", "j_steel_joker" }
 }
 
 HPR.StellarJoker {
@@ -1530,7 +1415,8 @@ HPR.StellarJoker {
             }
         end
     end,
-    attributes = { "hand_type", "discard", }
+    attributes = { "hand_type", "discard", },
+    asc_targets = { "j_space", "j_burnt", }
 }
 
 HPR.StellarJoker {
@@ -1587,7 +1473,8 @@ HPR.StellarJoker {
             }
         end
     end,
-    attributes = { "rank", "suit", "hand_type", "emult", "economy", "balance", }
+    attributes = { "rank", "suit", "hand_type", "emult", "economy", "balance", },
+    asc_targets = { "j_mail", "j_todo_list", "j_castle", "j_idol", }
 }
 
 HPR.StellarJoker {
@@ -1640,5 +1527,6 @@ HPR.StellarJoker {
             return { message = localize("k_reset" ) }
         end
     end,
-    attributes = { "xchips", "emult", "scaling", "reset", "face", }
+    attributes = { "xchips", "emult", "scaling", "reset", "face", },
+    asc_targets = { "j_photograph", "j_smiley", "j_scary_face", "j_sock_and_buskin", }
 }
