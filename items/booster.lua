@@ -294,6 +294,31 @@ local update_erratic = function (self, dt)
     SMODS.Booster.update_pack(self, dt)
 end
 
+local erratic_particles = function (self)
+    G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
+        timer = 0.015,
+        scale = 0.1,
+        initialize = true,
+        lifespan = 3,
+        speed = 0.2,
+        padding = -1,
+        attach = G.ROOM_ATTACH,
+        colours = { G.C.WHITE, lighten(G.C.PURPLE, 0.4), lighten(G.C.SECONDARY_SET.Planet, 0.2), lighten(G.C.SECONDARY_SET.Spectral, 0.2) },
+        fill = true
+    })
+    G.booster_pack_sparkles.fade_alpha = 1
+    G.booster_pack_sparkles:fade(1, 0)
+    G.booster_pack_meteors = Particles(1, 1, 0, 0, {
+        timer = 2,
+        scale = 0.05,
+        lifespan = 1.5,
+        speed = 4,
+        attach = G.ROOM_ATTACH,
+        colours = { G.C.EDITION },
+        fill = true
+    })
+end
+
 SMODS.Booster {
     key = "erratic_normal_1",
     weight = 0.5,
@@ -314,21 +339,7 @@ SMODS.Booster {
         ease_colour(G.C.DYN_UI.MAIN, SMODS.Gradients.hpr_erratic_col)
         ease_background_colour({ new_colour = SMODS.Gradients.hpr_erratic_col, special_colour = G.C.BLACK, contrast = 2 })
     end,
-    particles = function(self)
-        G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
-            timer = 0.015,
-            scale = 0.1,
-            initialize = true,
-            lifespan = 3,
-            speed = 0.2,
-            padding = -1,
-            attach = G.ROOM_ATTACH,
-            colours = { G.C.BLUE, G.C.RED, G.C.FILTER, G.C.BLACK },
-            fill = true
-        })
-        G.booster_pack_sparkles.fade_alpha = 1
-        G.booster_pack_sparkles:fade(1, 0)
-    end,
+    particles = erratic_particles,
     update_pack = update_erratic,
     create_card = erratic_create_card,
     pronouns = "any_all",
@@ -357,21 +368,7 @@ SMODS.Booster {
         ease_colour(G.C.DYN_UI.MAIN, SMODS.Gradients.hpr_erratic_col)
         ease_background_colour({ new_colour = SMODS.Gradients.hpr_erratic_col, special_colour = G.C.BLACK, contrast = 2 })
     end,
-    particles = function(self)
-        G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
-            timer = 0.015,
-            scale = 0.1,
-            initialize = true,
-            lifespan = 3,
-            speed = 0.2,
-            padding = -1,
-            attach = G.ROOM_ATTACH,
-            colours = { G.C.BLUE, G.C.RED, G.C.FILTER, G.C.BLACK },
-            fill = true
-        })
-        G.booster_pack_sparkles.fade_alpha = 1
-        G.booster_pack_sparkles:fade(1, 0)
-    end,
+    particles = erratic_particles,
     update_pack = update_erratic,
     create_card = erratic_create_card,
     pronouns = "any_all",
@@ -401,21 +398,7 @@ SMODS.Booster {
         ease_colour(G.C.DYN_UI.MAIN, SMODS.Gradients.hpr_erratic_col)
         ease_background_colour({ new_colour = SMODS.Gradients.hpr_erratic_col, special_colour = G.C.BLACK, contrast = 2 })
     end,
-    particles = function(self)
-        G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
-            timer = 0.015,
-            scale = 0.1,
-            initialize = true,
-            lifespan = 3,
-            speed = 0.2,
-            padding = -1,
-            attach = G.ROOM_ATTACH,
-            colours = { G.C.BLUE, G.C.RED, G.C.FILTER, G.C.BLACK },
-            fill = true
-        })
-        G.booster_pack_sparkles.fade_alpha = 1
-        G.booster_pack_sparkles:fade(1, 0)
-    end,
+    particles = erratic_particles,
     update_pack = update_erratic,
     create_card = erratic_create_card,
     pronouns = "any_all",
@@ -445,21 +428,7 @@ SMODS.Booster {
         ease_colour(G.C.DYN_UI.MAIN, SMODS.Gradients.hpr_erratic_col)
         ease_background_colour({ new_colour = SMODS.Gradients.hpr_erratic_col, special_colour = G.C.BLACK, contrast = 2 })
     end,
-    particles = function(self)
-        G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
-            timer = 0.015,
-            scale = 0.1,
-            initialize = true,
-            lifespan = 3,
-            speed = 0.2,
-            padding = -1,
-            attach = G.ROOM_ATTACH,
-            colours = { G.C.BLUE, G.C.RED, G.C.FILTER, G.C.BLACK },
-            fill = true
-        })
-        G.booster_pack_sparkles.fade_alpha = 1
-        G.booster_pack_sparkles:fade(1, 0)
-    end,
+    particles = erratic_particles,
     update_pack = update_erratic,
     create_card = erratic_create_card,
     pronouns = "any_all",
