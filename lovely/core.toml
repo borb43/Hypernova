@@ -1,0 +1,50 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# Allow any rare consumable to be generated with set = "Consumeables" (for erratic pack and 'M)
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "if _type == 'Base' then "
+position = "before"
+payload = '''
+if not forced_key and soulable and _type == "Consumeables" and (not G.GAME.banned_keys['c_soul']) then
+    local soul_total_rate = 0
+    local non_soul_rate = 1
+    local soul_centers = {}
+    if not (G.GAME.used_jokers['c_soul'] and not SMODS.showman("c_soul")) then
+        soul_total_rate = soul_total_rate + 0.03
+        non_soul_rate = non_soul_rate * 0.997
+        non_soul_rate = math.max(non_soul_rate, 0)
+        table.insert(soul_centers, G.P_CENTERS.c_soul)
+    end
+    if not (G.GAME.used_jokers['c_black_hole'] and not SMODS.showman("c_black_hole")) then
+        soul_total_rate = soul_total_rate + 0.03
+        non_soul_rate = non_soul_rate * 0.997
+        non_soul_rate = math.max(non_soul_rate, 0)
+        table.insert(soul_centers, G.P_CENTERS.c_black_hole)
+    end
+    for _, v in ipairs(SMODS.Consumable.legendaries) do
+        if not (G.GAME.used_jokers[v.key] and not SMODS.showman(v.key) and not v.can_repeat_soul) and SMODS.add_to_pool(v) then
+            soul_total_rate = soul_total_rate + v.soul_rate
+            non_soul_rate = non_soul_rate * (1 - v.soul_rate)
+            non_soul_rate = math.max(non_soul_rate, 0)
+            table.insert(soul_centers, v)
+        end
+    end
+    if next(soul_centers) then
+        local roll = pseudorandom("soul_erratic_"..G.GAME.round_resets.ante)
+        local threshold = 1
+        for _, v in ipairs(soul_centers) do
+            threshold = threshold - (v.soul_rate or 0.03)/soul_total_rate * (1-non_soul_rate)
+            if roll > threshold then
+                forced_key = v.key
+                break
+            end
+        end
+    end
+end
+'''
+match_indent = true
