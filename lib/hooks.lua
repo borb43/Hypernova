@@ -262,3 +262,11 @@ function Game:init_item_prototypes()
 	HPR.STELLAR_INDEX = 0
 	return init_prototypes_ref(self)
 end
+
+local gnb = SMODS.get_new_blind
+function SMODS.get_new_blind(type)
+	if type == "boss" and G.GAME.modifiers.hpr_the_horse_is_here then
+		return "bl_hpr_final_horse"
+	end
+	return gnb(type)
+end

@@ -68,27 +68,31 @@ HPR.ascension_rarity_blacklist = { --jokers that ignore the default ascension as
 }
 function HPR.get_ascension(card)
     local center = card.config and card.config.center or card
+    local ret
     if center.hpr_ascension_key then
-        return center.hpr_ascension_key
+        ret = center.hpr_ascension_key
     elseif HPR.vanilla_ascensions[center.key] then
-        return HPR.vanilla_ascensions[center.key]
+        ret = HPR.vanilla_ascensions[center.key]
     end
-    if HPR.ascension_rarity_blacklist[center.rarity] then
-        return
+    if not ret and not HPR.ascension_rarity_blacklist[center.rarity] then
+        if MyDreamJournal and MyDreamJournal.is_grilled_chicken(center.key) then
+            ret = "j_hpr_stellarchicken"
+        end
+        if center.effect == "Cry Type Mult" then
+            ret = "j_hpr_crazy"
+        end
+        if center.effect == "Cry Type Chips" then
+            ret = "j_hpr_crafty"
+        end
+        if SMODS.has_attribute(center, "food") then
+            ret = "j_hpr_potassium"
+        end
     end
-    if MyDreamJournal and MyDreamJournal.is_grilled_chicken(center.key) then
-        return "j_hpr_stellarchicken"
+    if G.GAME.banned_keys[ret] then
+        return nil
+    else
+        return ret
     end
-    if center.effect == "Cry Type Mult" then
-        return "j_hpr_crazy"
-    end
-    if center.effect == "Cry Type Chips" then
-        return "j_hpr_crafty"
-    end
-    if SMODS.has_attribute(center, "food") then
-        return "j_hpr_potassium"
-    end
-    return nil
 end
 
 function HPR.findany(str, ...)

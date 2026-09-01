@@ -1599,7 +1599,9 @@ local misc = {
     achievement_descriptions = {},
     achievement_names = {},
     blind_states = {},
-    challenge_names = {},
+    challenge_names = {
+        c_hpr_horse = "Trojan Warfare"
+    },
     collabs = {},
     dictionary = {
         b_hpr_moons_cards = "Moon Cards",
@@ -1702,7 +1704,11 @@ local misc = {
         a_joker_slot = "+#1# Joker Slots",
         n_way_tie = "#1#-way tie"
     },
-    v_text = {},
+    v_text = {
+        ch_c_hpr_the_horse_is_here = {
+            "All Boss Blinds are {C:attention}Heliotrope Horse"
+        }
+    },
 }
 
 return {descriptions = descriptions, misc = misc}
