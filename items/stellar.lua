@@ -1530,3 +1530,86 @@ HPR.StellarJoker {
     attributes = { "xchips", "emult", "scaling", "reset", "face", },
     asc_targets = { "j_photograph", "j_smiley", "j_scary_face", "j_sock_and_buskin", }
 }
+
+HPR.StellarJoker {
+    key = "hatchling",
+    config = { extra = { value_ratio = 0.2, rounds = 4, immutable = 0 }},
+    loc_vars = function (self, q, card)
+        return { vars = { card.ability.extra.value_ratio*100, math.max(1, math.log(card.sell_cost or 2, 2)), card.ability.extra.rounds, math.floor(card.ability.extra.immutable/card.ability.extra.rounds), card.ability.extra.immutable }}
+    end,
+    calculate = function (self, card, context)
+        if context.end_of_round and context.main_eval and not context.blueprint then
+            local value_mod = math.floor(G.GAME.dollars * card.ability.extra.value_ratio)
+            for c in Spectrallib.iter.areacards{G.jokers, G.consumeables} do
+                if c.set_cost then --idk why this would be needed but vremade does it
+                    c.ability.extra_value = (c.ability.extra_value or 0) + value_mod
+                    c:set_cost()
+                end
+            end
+            card.ability.extra.immutable = card.ability.extra.immutable + 1
+            return {
+                message = localize("k_val_up"),
+                colour = G.C.MONEY,
+            }
+        end
+        if context.joker_main then
+            return { xmult = math.max(1, math.log(card.sell_cost, 2)) }
+        end
+        if context.selling_self then
+            local times = math.floor(card.ability.extra.immutable/card.ability.extra.rounds)
+            if times <= 0 then return nil, true end
+            -- Tags
+            for _ = 1, times do
+                G.E_MANAGER:add_event(Event{
+                    func = function ()
+                        add_tag{key = SMODS.poll_object{ type = "Tag" }}
+                        play_sound('generic1', 0.9 + math.random() * 0.1, 0.8)
+                        play_sound('holo1', 1.2 + math.random() * 0.1, 0.4)
+                        return true
+                    end
+                })
+            end
+            -- Hand Size
+            G.hand:change_size(times)
+            -- Level up hands
+            update_hand_text({ sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3 },
+                { handname = localize('k_all_hands'), chips = '...', mult = '...', level = '' })
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.2,
+                func = function()
+                    play_sound('tarot1')
+                    card:juice_up(0.8, 0.5)
+                    G.TAROT_INTERRUPT_PULSE = true
+                    return true
+                end
+            }))
+            update_hand_text({ delay = 0 }, { mult = '+', StatusText = true })
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.9,
+                func = function()
+                    play_sound('tarot1')
+                    card:juice_up(0.8, 0.5)
+                    return true
+                end
+            }))
+            update_hand_text({ delay = 0 }, { chips = '+', StatusText = true })
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.9,
+                func = function()
+                    play_sound('tarot1')
+                    card:juice_up(0.8, 0.5)
+                    G.TAROT_INTERRUPT_PULSE = nil
+                    return true
+                end
+            }))
+            update_hand_text({ sound = 'button', volume = 0.7, pitch = 0.9, delay = 0 }, { level = '+'..number_format(times) })
+            delay(1.3)
+            SMODS.upgrade_poker_hands({ instant = true, level_up = times })
+            update_hand_text({ sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 },
+                { mult = 0, chips = 0, handname = '', level = '' })
+        end
+    end
+}

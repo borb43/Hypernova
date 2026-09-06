@@ -1077,6 +1077,28 @@ local descriptions = {
                 "Jokers, {C:red,E:2}self destructs{} and",
                 "creates a {C:red}Temporary {C:spectral}Divinity"
             }
+        },
+        j_hpr_hatchling = {
+            name = "HATCHLING",
+            text = {
+                {
+                    "All held {C:attention}Jokers{} and {C:attention}Consumables",
+                    "gain {C:attention}#1#%{} of your {C:attention}current money",
+                    "as {C:attention}sell value{} at end of round",
+                    "{C:inactive}(Rounds down)"
+                },
+                {
+                    "Gives {X:mult,C:white}XMult{} equal to the {C:attention}base-2",
+                    "logarithm of own {C:attention}sell value",
+                    "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)"
+                },
+                {
+                    "When sold, gives {C:attention}+1{} hand size, a random {C:attention}Tag",
+                    "and levels up all {C:hpr_stellar}poker hands{} for every",
+                    "{C:attention}#3#{} round#<s>3# this card has been held",
+                    "{C:inactive}(Currently {C:attention}#5#{C:inactive} round#<s>5#, {C:attention}#4#{C:inactive} time#<s>4#)"
+                }
+            }
         }
     },
     Other = {
