@@ -1368,7 +1368,8 @@ SMODS.Joker {
         end
     end,
     attributes = { "hand_size", "on_sell", },
-    forcetrigger_compat = true, blueprint_compat = false
+    forcetrigger_compat = true, blueprint_compat = false,
+    hpr_ascension_key = "j_hpr_hatchling",
 }
 
 SMODS.Joker {

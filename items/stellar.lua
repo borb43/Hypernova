@@ -1611,5 +1611,6 @@ HPR.StellarJoker {
             update_hand_text({ sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 },
                 { mult = 0, chips = 0, handname = '', level = '' })
         end
-    end
+    end,
+    asc_targets = { "j_egg", "j_diet_cola", "j_gift", "j_swashbuckler", "j_bull", "j_bootstraps", }
 }
