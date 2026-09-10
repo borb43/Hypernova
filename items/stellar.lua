@@ -1477,7 +1477,7 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "hatchling",
-    config = { extra = { value_ratio = 0.2, rounds = 4, immutable = 0 }},
+    config = { extra = { value_ratio = 0.05, rounds = 4, immutable = 0 }},
     loc_vars = function (self, q, card)
         return { vars = { card.ability.extra.value_ratio*100, math.max(1, math.log(card.sell_cost or 2, 2)), card.ability.extra.rounds, math.floor(card.ability.extra.immutable/card.ability.extra.rounds), card.ability.extra.immutable }}
     end,
