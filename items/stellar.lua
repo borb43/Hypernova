@@ -92,23 +92,19 @@ HPR.error_numbers = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '21', '4
 
 HPR.StellarJoker {
     key = "missing",
-    config = { extra = { uses = 4 }},
+    config = { extra = { min = -3, max = 6 }},
     loc_vars = function (self, info_queue, card)
-        local error_other = {
-            { string = localize("k_chips"), colour = G.C.CHIPS },
-            { string = localize("k_mult"),  colour = G.C.MULT },
-            { string = localize("k_blindsize"),  colour = G.C.DYN_UI.DARK },
-            { string = localize("k_score"), colour = G.C.PURPLE },
-            { string = localize("k_card"),  colour = G.C.FILTER },
-            { string = localize("$"), colour = G.C.MONEY },
-        }
+        local nums = {}
+        for i = self.config.extra.min, self.config.extra.max do
+            nums[#nums+1] = SMODS.signed(i)
+        end
         local elements = {
             --cycling random operator
             {
                 n = G.UIT.O,
                 config = {
                     object = DynaText({
-                        string = HPR.error_ops,
+                        string = nums,
                         colours = { G.C.DARK_EDITION },
                         pop_in_rate = 9999999,
                         silent = true,
@@ -119,82 +115,30 @@ HPR.StellarJoker {
                     })
                 },
             },
-            --cycling random number
-            {
-                n = G.UIT.O,
-                config = {
-                    object = DynaText({
-                        string = HPR.error_numbers,
-                        colours = { G.C.DARK_EDITION },
-                        pop_in_rate = 9999999,
-                        silent = true,
-                        random_element = true,
-                        pop_delay = 0.351,
-                        scale = 0.32,
-                        min_cycle_time = 0
-                    })
-                },
-            },
-            --cycling random effect
-            {
-                n = G.UIT.O,
-                config = {
-                    object = DynaText({
-                        string = error_other,
-                        colours = { G.C.UI.TEXT_DARK },
-                        pop_in_rate = 9999999,
-                        silent = true,
-                        random_element = true,
-                        pop_delay = 0.299,
-                        scale = 0.32,
-                        min_cycle_time = 0
-                    })
-                },
-            },
         }
         return {
-            vars = { card.ability.extra.uses, elements = elements }
+            vars = { elements = elements }
         }
     end,
     calculate = function (self, card, context)
-        if context.individual and context.cardarea == G.play or context.forcetrigger then
-            local res = pseudorandom("hpr_error_effect", 1, 10)
-            if res == 1 then return { xchips = pseudorandom("hpr_error_amt",30,100)/10 } end
-            if res == 2 then return { xmult = pseudorandom("hpr_error_amt",30,100)/10 } end
-            if res == 3 then return { echips = pseudorandom("hpr_error_amt",110,175)/100 } end
-            if res == 4 then return { emult = pseudorandom("hpr_error_amt",120,200)/100 } end
-            if res == 5 then return { xscore = pseudorandom("hpr_error_amt",20, 30)/10 } end
-            if res == 6 then return { escore = pseudorandom("hpr_error_amt",105,130)/100} end
-            if res == 7 then return { xblindsize = pseudorandom("hpr_error_amt",3,9)/10 } end
-            if res == 8 then return { eblindsize = pseudorandom("hpr_error_amt",75,95)/100 } end
-            if res == 9 then
-                local d = pseudorandom("hpr_error_effect", 3, 20)
-                G.GAME.dollar_buffer = G.GAME.dollar_buffer + d
-                return { dollars = d, func = HPR.event_presets.reset_dollar_buffer }
-            end
-            if res == 10 then
-                if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
-                    local _type = pseudorandom_element({"Consumeables", "Voucher", "Booster"}, "hpr_error_amt")
-                    G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
-                    G.E_MANAGER:add_event(Event{
-                        func = function (n)
-                            SMODS.add_card{
-                                set = _type,
-                                key_append = "hpr_error_card",
-                                area = G.consumeables,
-                            }
-                            G.GAME.consumeable_buffer = 0
-                            return true
+        if context.end_of_round and context.main_eval or context.forcetrigger then
+            for c in Spectrallib.iter.areacards(G.jokers, G.consumeables) do
+                if c.config.center ~= self then
+                    Spectrallib.manipulate(c, {
+                        func = function(val, args, is_big, value_key)
+                            if (value_key == "x_chips" or value_key == "x_mult") and (val == 0 or val == 1) then
+                                return val
+                            end
+                            return val + pseudorandom("hpr_missing", card.ability.extra.min, card.ability.extra.max)
                         end
                     })
-                    return { message = "+1?" }
-                else
-                    return { message = localize("k_no_room_ex"), no_retrigger = true }
+                    SMODS.calculate_effect({ message = localize("k_upgrade_q"), message_card = c }, card)
                 end
             end
+            return nil, true
         end
     end,
-    attributes = { "xchips", "xmult", "emult", "echips", "xscore", "escore", "xblindsize", "eblindsize", "economy", "generation", "consumable", "voucher", "booster", },
+    attributes = { "value_manip", },
     forcetrigger_compat = true,
     asc_targets = { "j_misprint", }
 }

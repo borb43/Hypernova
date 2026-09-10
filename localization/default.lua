@@ -195,7 +195,9 @@ local descriptions = {
         j_hpr_missing = {
             name = "MISSING",
             text = {
-                "{element:1}{element:2}{element:3}",
+                "Modifies the values of all",
+                "held {C:attention}Joker{} and {C:attention}Consumable",
+                "cards by {element:1} at end of round"
             }
         },
         j_hpr_master = {
@@ -1684,6 +1686,7 @@ local misc = {
         k_card = "Cards",
         k_preserved_ex = "Preserved!",
         k_splashed_ex = "Splashed!",
+        k_upgrade_q = "Upgrade?",
     },
     high_scores = {},
     labels = {
