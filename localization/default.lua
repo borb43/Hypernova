@@ -1093,8 +1093,8 @@ local descriptions = {
                     "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)"
                 },
                 {
-                    "When sold, gives {C:attention}+1{} hand size, a random {C:attention}Tag",
-                    "and levels up all {C:hpr_stellar}poker hands{} for every",
+                    "When sold, gives {C:attention}+1{} hand size",
+                    "and a random {C:attention}Tag{} for every",
                     "{C:attention}#3#{} round#<s>3# this card has been held",
                     "{C:inactive}(Currently {C:attention}#5#{C:inactive} round#<s>5#, {C:attention}#4#{C:inactive} time#<s>4#)"
                 }
