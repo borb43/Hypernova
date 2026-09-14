@@ -179,7 +179,7 @@ SMODS.Joker {
 SMODS.Joker {
     key = "executive_card",
     atlas = "placeholder",
-    pos = { x = 2, y = 0 },
+    pos = { x = 0, y = 1 },
     rarity = "hpr_elite",
     cost = 10,
     add_to_deck = function (self, card, from_debuff)
