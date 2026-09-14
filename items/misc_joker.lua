@@ -14,7 +14,7 @@ SMODS.Joker { --fusion reactor, balances before scoring
     end,
     attributes = { "balance" }
 }
-
+--[[
 SMODS.Joker { --growth, increases potency of other joker effects
     key = "growth",
     atlas = "joker",
@@ -39,7 +39,7 @@ SMODS.Joker { --growth, increases potency of other joker effects
     attributes = { "scaling", "passive" },
     blueprint_compat = false,
 }
-
+]]
 
 SMODS.Joker { -- solar flare, levels up not most played hands and destroys some cards
     key = "solar",
@@ -391,7 +391,7 @@ SMODS.Joker {
         info_queue[#info_queue+1] = G.P_CENTERS.e_negative
     end,
 }
-
+--[[
 SMODS.Joker {
     key = "derivative",
     atlas = "placeholder",
@@ -424,7 +424,7 @@ SMODS.Joker {
     attributes = { "passive" },
     blueprint_compat = false,
 }
-
+]]
 SMODS.Joker {
     key = "new_meme",
     atlas = "placeholder",
