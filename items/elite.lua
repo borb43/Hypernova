@@ -177,6 +177,23 @@ SMODS.Joker {
 }
 
 SMODS.Joker {
+    key = "executive_card",
+    atlas = "placeholder",
+    pos = { x = 2, y = 0 },
+    rarity = "hpr_elite",
+    cost = 10,
+    add_to_deck = function (self, card, from_debuff)
+        G.GAME.modifiers.booster_choice_mod = (G.GAME.modifiers.booster_choice_mod or 0) + 1000
+    end,
+    remove_from_deck = function (self, card, from_debuff)
+        G.GAME.modifiers.booster_choice_mod = (G.GAME.modifiers.booster_choice_mod or 0) - 1000
+    end,
+    attributes = { "passive", "booster", },
+    blueprint_compat = false,
+}
+
+
+SMODS.Joker {
     key = "evil_heat",
     rarity = "hpr_elite",
     cost = 15,

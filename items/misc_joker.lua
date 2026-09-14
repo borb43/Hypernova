@@ -238,22 +238,6 @@ SMODS.Joker {
 }
 
 SMODS.Joker {
-    key = "executive_card",
-    atlas = "placeholder",
-    pos = { x = 2, y = 0 },
-    rarity = 3,
-    cost = 10,
-    add_to_deck = function (self, card, from_debuff)
-        G.GAME.modifiers.booster_choice_mod = (G.GAME.modifiers.booster_choice_mod or 0) + 1000
-    end,
-    remove_from_deck = function (self, card, from_debuff)
-        G.GAME.modifiers.booster_choice_mod = (G.GAME.modifiers.booster_choice_mod or 0) - 1000
-    end,
-    attributes = { "passive" },
-    blueprint_compat = false,
-}
-
-SMODS.Joker {
     key = "7_ball",
     atlas = "joker",
     pos = { x = 2, y = 0 },
