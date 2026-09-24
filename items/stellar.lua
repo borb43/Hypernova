@@ -959,7 +959,7 @@ HPR.StellarJoker {
         end
     end,
     attributes = { "retrigger", "joker", "chance", "scaling", },
-    asc_targets = { "j_blueprint", "j_brainstorm", "j_invisible", }
+    asc_targets = { "j_blueprint", "j_brainstorm", "j_invisible", "j_ring_master", }
 }
 
 HPR.StellarJoker {

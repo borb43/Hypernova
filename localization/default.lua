@@ -522,7 +522,7 @@ local descriptions = {
             }
         },
         j_hpr_mimic = {
-            name = "MIMIC",
+            name = "SCHEMATIC",
             text = {
                 "Retriggers Joker to the",
                 "right {C:attention}#1#{} time#<s>1#, {C:green}#3# in #4#{} chance",
