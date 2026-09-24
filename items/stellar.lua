@@ -586,51 +586,55 @@ HPR.StellarJoker {
 
 HPR.StellarJoker {
     key = "conjurer",
-    config = { extra = { xchips = 0.2 } },
+    config = { extra = { gain = 0.1, emult = 1, } },
     loc_vars = function (self, info_queue, card)
-        info_queue[#info_queue+1] = { set = "Edition", key = "e_negative_playing_card", config = { extra = 1 } }
-        local count = 0
-        if G.playing_cards then
-            for c in Spectrallib.iter.areacards(G.playing_cards) do
-                if c.edition and c.edition.negative then
-                    count = count + 1
-                end
-            end
-        end
-        return { vars = { card.ability.extra.xchips, 1 + card.ability.extra.xchips*count }}
+        info_queue[#info_queue+1] = G.P_CENTERS.p_standard_mega_1
+        return { vars = { card.ability.extra.emult, card.ability.extra.gain }}
     end,
     calculate = function (self, card, context)
-        if context.first_hand_drawn then
-            local _card = SMODS.create_card { set = "Enhanced", seal = SMODS.poll_seal({ guaranteed = true, type_key = "hpr_conjurer_sl" }), area = G.discard, key_append = "hpr_conjurer_card", edition = "e_negative" }
-            G.playing_card = (G.playing_card and G.playing_card + 1) or 1
-            _card.playing_card = G.playing_card
-            table.insert(G.playing_cards, _card)
+        if context.modify_booster_card and context.booster.config.center.kind == "Standard" and not context.blueprint and not context.retrigger_joker then
+            if not context.card.edition then
+                context.card:set_edition( SMODS.poll_edition{ guaranteed = true, key = "hpr_conjurer_ed", no_negative = true, } )
+            end
+            if not context.card.seal then
+                context.card:set_seal( SMODS.poll_seal{ guaranteed = true, type_key = "hpr_conjurer_sl" } )
+            end
+            if context.card.ability.set == "Default" then
+                context.card:set_ability( SMODS.poll_enhancement{ guaranteed = true, type_key = "hpr_conjurer_enh" } )
+            end
+        end
+        if context.before and #context.full_hand == 1 then
+            local card_copied = SMODS.copy_card(context.full_hand[1], { area = G.hand })
+            card_copied.states.visible = nil
+            local pack_copy = SMODS.copy_card(context.full_hand[1], { area = G.hand })
+            pack_copy.states.visible = nil
+            pack_copy:set_ability(G.P_CENTERS["p_standard_mega_"..math.random(1,2)])
 
             G.E_MANAGER:add_event(Event({
                 func = function()
-                    G.hand:emplace(_card)
-                    _card:start_materialize()
-                    G.GAME.blind:debuff_card(_card)
-                    G.hand:sort();
-                    (context.blueprint_card or card):juice_up()
-                    SMODS.calculate_context({ playing_card_added = true, cards = { _card } })
-                    save_run()
+                    card_copied:start_materialize()
+                    pack_copy:start_materialize()
                     return true
                 end
             }))
-
-            return nil, true
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "emult",
+                scalar_value = "gain",
+            })
+            return {
+                func = function()
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            SMODS.calculate_context({ playing_card_added = true, cards = { card_copied, pack_copy } })
+                            return true
+                        end
+                    }))
+                end
+            }
         end
         if context.joker_main then
-            local count = 0
-            for c in Spectrallib.iter.areacards(G.playing_cards) do
-                if c.edition and c.edition.negative then
-                    count = count + 1
-                end
-            end
-            if count ~= 0 then
-                return { xchips = 1 + card.ability.extra.xchips*count }
-            end
+            return { emult = card.ability.extra.emult }
         end
     end,
     attributes = { "generation", "playing_card", "editions", "enhancements", "seals", "full_deck" },

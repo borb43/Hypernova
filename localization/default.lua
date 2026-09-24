@@ -346,16 +346,14 @@ local descriptions = {
             name = "CONJURER",
             text = {
                 {
-                    "When round begins, add a",
-                    "{C:dark_edition}Negative {C:attention}playing card{} with",
-                    "a random {C:attention}enhancement{} and",
-                    "{C:attention}seal{} to your hand"
+                    "Cards in {C:attention}Standard Packs{} always have",
+                    "an {C:dark_edition}edition{}, {C:attention}seal{} and {C:attention}enhancement"
                 },
                 {
-                    "{X:chips,C:white}X#1#{} Chips for each",
-                    "{C:dark_edition}Negative {C:attention}playing card",
-                    "in your {C:attention}full deck",
-                    "{C:inactive}(Currently {X:chips,C:white}X#2#{C:inactive} Chips)"
+                    "If played hand is exactly {C:attention}1{} card,",
+                    "gains {X:slib_emult,C:white}^#2#{} Mult and adds a copy and",
+                    "{C:attention}Mega Standard Pack{} copy of it to hand",
+                    "{C:inactive}(Currently {X:slib_emult,C:white}^#1#{C:inactive} Mult)"
                 }
             }
         },
