@@ -152,7 +152,7 @@ SMODS.Joker {
                             if #SMODS.drawn_cards > 0 then
                                 SMODS.calculate_context({
                                     first_hand_drawn = not G.GAME.current_round.any_hand_drawn and G.GAME.facing_blind,
-                                    hand_drawn = G.GAME.facing_blind and SMODS.drawn_cards, --literally why the fuck does lsp say this should be a boolean when the docs say its a table
+                                    hand_drawn = G.GAME.facing_blind and SMODS.drawn_cards,
                                     other_drawn = not G.GAME.facing_blind and SMODS.drawn_cards,
                                 })
                                 SMODS.drawn_cards = {}

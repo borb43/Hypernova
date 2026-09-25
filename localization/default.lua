@@ -658,7 +658,7 @@ local descriptions = {
             text = {
                 "Discarded cards gain",
                 "{C:mult}+#1#{} Mult for the",
-                "next {C:attention}#2#{} discard#3#"
+                "next {C:attention}#2#{} discard#<s>2#"
             }
         },
         j_hpr_2_ball = {

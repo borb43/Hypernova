@@ -175,11 +175,9 @@ loc_colour()
 
 G.C.HPR_ULTRAGREEN = {0, 1, 0, 1}
 G.C.HPR_STLR = HEX("1F0D35")
-G.C.HPR_WEE = HEX("60c4a5")
 G.C.HPR_BALANCE = {0.8, 0.45, 0.85, 1}
 G.ARGS.LOC_COLOURS.hpr_ultragreen = G.C.HPR_ULTRAGREEN
 G.ARGS.LOC_COLOURS.hpr_balance = G.C.HPR_BALANCE
-G.ARGS.LOC_COLOURS.hpr_wee = G.C.HPR_WEE
 G.ARGS.LOC_COLOURS.hpr_bronze = G.C.ORANGE
 
 SMODS.ObjectType {
@@ -196,19 +194,6 @@ SMODS.ObjectType {
         j_ramen = true,
         j_selzer = true
     }
-}
-
-SMODS.ObjectType {
-    key = "wee",
-    default = "j_wee",
-    cards = {
-        j_wee = true
-    }
-}
-
-SMODS.Attribute {
-    key = "wee",
-    cards = { "j_wee" }
 }
 
 SMODS.current_mod.optional_features = {

@@ -281,7 +281,7 @@ SMODS.Joker {
     hpr_ascension_key = "j_hpr_master",
 }
 
-SMODS.Joker {
+SMODS.Joker { --TODO: idk if its just me but this feels weak
     key = "double_dice",
     atlas = "placeholder",
     pos = { x = 2, y = 0 },
@@ -378,7 +378,7 @@ SMODS.Joker {
                     SMODS.add_card{
                         attributes = { "food" },
                         edition = "e_negative",
-                        area = G.jokers, --change to poll object but idk how
+                        area = G.jokers,
                     }
                     return true
                 end
@@ -519,7 +519,7 @@ SMODS.Joker {
             }
         end
     end,
-    attributes = { "modify_card", "retrigger", "rank", "two", "hands", "wee", "perma_bonus" },
+    attributes = { "modify_card", "retrigger", "rank", "two", "hands", "perma_bonus" },
     hpr_ascension_key = "j_hpr_ascendant",
     blueprint_compat = false, forcetrigger_compat = false
 }
@@ -677,7 +677,7 @@ SMODS.Joker {
         end
         if context.forcetrigger then return { xmult = card.ability.extra } end
     end,
-    attributes = { "rank", "two", "xmult", "wee", "three", "four", "five" },
+    attributes = { "rank", "two", "xmult", "three", "four", "five" },
     forcetrigger_compat = true,
 }
 
@@ -713,7 +713,7 @@ SMODS.Joker {
     forcetrigger_compat = true,
 }
 
-SMODS.Joker {
+SMODS.Joker { --TODO: this kind of sucks maybe
     key = "rent",
     atlas = "placeholder",
     pos = { x = 1, y = 0 },
@@ -996,10 +996,10 @@ SMODS.Joker {
     pos = {x=0,y=0},
     config = { extra = { mult = 2, discards = 10 }},
     loc_vars = function (self, info_queue, card)
-        return{ vars = { card.ability.extra.mult, card.ability.extra.discards, card.ability.extra.discards ~= 1 and "s" or "" }}
+        return{ vars = { card.ability.extra.mult, card.ability.extra.discards, }}
     end,
     calculate = function (self, card, context)
-        if context.discard then
+        if context.discard then --TODO: maybe not use calculate_effect here?
             context.other_card.ability.perma_mult = context.other_card.ability.perma_mult + card.ability.extra.mult
             local c=context.other_card
             SMODS.calculate_effect({ message = localize("k_upgrade_ex"), message_card = c, juice_card = card, colour = G.C.MULT }, card)
@@ -1112,7 +1112,7 @@ SMODS.Joker {
     hpr_ascension_key = "j_hpr_missing",
     blueprint_compat = false,
 }
-
+--[[
 SMODS.Joker {
     key = "glass_shard",
     rarity = 1,
@@ -1136,8 +1136,8 @@ SMODS.Joker {
     attributes = { "chance", "xmult", "destroy_card" },
     forcetrigger_compat = true,
 }
-
-SMODS.Joker {
+]]
+SMODS.Joker { --TODO: these two should use `shatters` if it works on jokers
     key = "ceramic",
     eternal_compat = false,
     rarity = 1,
@@ -1201,7 +1201,7 @@ SMODS.Joker {
         return { vars = {card.ability.extra}}
     end,
     calculate = function (self, card, context)
-        if context.end_of_round and context.main_eval or context.forcetrigger then -- :3
+        if context.end_of_round and context.main_eval or context.forcetrigger then --TODO: this should use scale_card
             card.ability.extra = card.ability.extra + 1
             if card.ability.extra >= 5 then
                 SMODS.destroy_cards(card, { pinch_anim = true })
@@ -1371,7 +1371,7 @@ SMODS.Joker {
             end
         end
     end,
-    attributes = { "joker", "retrigger", "wee" },
+    attributes = { "joker", "retrigger", },
 }
 
 SMODS.Joker {
@@ -1464,7 +1464,7 @@ SMODS.Joker {
             end
             card.ability.prepped = nil
             if i > 0 then
-                return { modify = i }
+                return { modify = i } --TODO: test this
             end
         end
     end,
@@ -1572,7 +1572,7 @@ SMODS.Joker {
     attributes = { "hand_type", "chips", "mult", },
     hpr_ascension_key = "j_hpr_observatorium",
 }
-
+--[[
 SMODS.Joker {
     key = "execution",
     rarity = 2, --probably
@@ -1601,7 +1601,7 @@ SMODS.Joker {
     end,
     hpr_ascension_key = "j_hpr_destroyer",
 }
-
+]]
 SMODS.Joker {
     key = "shrine",
     rarity = 2,
