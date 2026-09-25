@@ -708,7 +708,7 @@ local descriptions = {
                 "All {C:attention}Straights{} and",
                 "{C:attention}Flushes{} can be made",
                 "with {C:attention}#1#{} card#<s>1#. Increases",
-                "by {C:attention}1{} at end of round"
+                "by {C:attention}#2#{} at end of round"
             }
         },
         j_hpr_superfluid = {

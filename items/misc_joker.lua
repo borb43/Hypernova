@@ -999,18 +999,17 @@ SMODS.Joker {
         return{ vars = { card.ability.extra.mult, card.ability.extra.discards, }}
     end,
     calculate = function (self, card, context)
-        if context.discard then --TODO: maybe not use calculate_effect here?
+        if context.discard then
             context.other_card.ability.perma_mult = context.other_card.ability.perma_mult + card.ability.extra.mult
-            local c=context.other_card
-            SMODS.calculate_effect({ message = localize("k_upgrade_ex"), message_card = c, juice_card = card, colour = G.C.MULT }, card)
             if context.other_card == context.full_hand[#context.full_hand] and not context.blueprint then
                 card.ability.extra.discards = card.ability.extra.discards - 1
-                if card.ability.extra.discards <= 0 then
-                    SMODS.destroy_cards(card, { pinch_anim = true })
-                    SMODS.calculate_effect({message = localize("k_eaten_ex")}, card)
-                end
             end
-            return nil, true
+            if card.ability.extra.discards <= 0 then
+                SMODS.destroy_cards(card, { pinch_anim = true })
+                return { message = localize("k_eaten_ex") }
+            else
+                return { message = localize("k_upgrade_ex"), message_card = context.other_card, colour = G.C.MULT }
+            end
         end
     end,
     pools = { Food = true },
@@ -1137,7 +1136,7 @@ SMODS.Joker {
     forcetrigger_compat = true,
 }
 ]]
-SMODS.Joker { --TODO: these two should use `shatters` if it works on jokers
+SMODS.Joker {
     key = "ceramic",
     eternal_compat = false,
     rarity = 1,
@@ -1196,20 +1195,25 @@ SMODS.Joker {
     cost = 7,
     atlas = "placeholder",
     pos = { x = 1, y = 0 },
-    config = { extra = 1 },
+    config = { extra = { cards = 1, gain = 1 } },
     loc_vars = function (self, info_queue, card)
-        return { vars = {card.ability.extra}}
+        return { vars = {card.ability.extra.cards, card.ability.extra.gain}}
     end,
     calculate = function (self, card, context)
-        if context.end_of_round and context.main_eval or context.forcetrigger then --TODO: this should use scale_card
-            card.ability.extra = card.ability.extra + 1
+        if context.end_of_round and context.main_eval or context.forcetrigger then
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "cards",
+                scalar_value = "gain",
+                no_message = true,
+            })
             if card.ability.extra >= 5 then
                 SMODS.destroy_cards(card, { pinch_anim = true })
                 return {
                     message = localize("k_eaten_ex")
                 }
             else
-                return { message = localize{ type = "variable", vars = {card.ability.extra}, key = "hpr_n_cards"}}
+                return { message = localize{ type = "variable", vars = {card.ability.extra.cards}, key = "hpr_n_cards"}}
             end
         end
     end,
@@ -1464,7 +1468,7 @@ SMODS.Joker {
             end
             card.ability.prepped = nil
             if i > 0 then
-                return { modify = i } --TODO: test this
+                return { modify = context.amount + i }
             end
         end
     end,
